@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package porter.v1;
+
+message AssumeRoleChainLink {
+  int64 project_id = 1;
+  string source_arn = 2;
+  string target_arn = 3;
+  string external_id = 4;
+}
+
+message CreateAssumeRoleChainInput {
+  int64 project_id = 1;
+  string source_arn = 2;
+  string target_access_id = 3;
+  string target_secret_key = 4;
+  string target_session_token = 5;
+}

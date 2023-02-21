@@ -1,0 +1,53 @@
+version: '3'
+
+vars:
+  CONTRACT_DIR: .
+  GENERATE_DIR: gen
+
+tasks:
+  all:
+    desc: Format, Lint, check for breaking changes, then generate all models, clients, and server stubs
+    cmds:
+    - task: format
+    - task: lint
+    - task: breaking
+    - task: generate
+
+  generate:
+    desc: Generate all proto stubs for all supported languages
+    dir: "{{.CONTRACT_DIR}}"
+    cmds:
+    - cmd: rm -rf generated
+      ignore_error: false
+    - cmd: buf generate --config buf.yaml --template buf.gen.yaml
+      ignore_error: false
+  
+  breaking:
+    desc: Check for breaking changes against main branch
+    dir: "{{.CONTRACT_DIR}}"
+    cmds:
+    - cmd: buf breaking --config buf.yaml --against .git#branch=main,subdir=porter/v1
+      ignore_error: false
+
+  lint:
+    desc: Lint proto files for consistency
+    dir: "{{.CONTRACT_DIR}}"
+    cmds:
+    - cmd: buf lint
+      ignore_error: false
+
+  format:
+    desc: Format proto files for consistency
+    dir: "{{.CONTRACT_DIR}}"
+    cmds:
+    - cmd: buf format -w
+      ignore_error: false
+  
+  install-tools:
+    desc: Install commonly used tools for gRPC
+    cmds:
+    - go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+    - go install github.com/bufbuild/buf/cmd/buf@latest
+    - go install github.com/bufbuild/connect-go/cmd/protoc-gen-connect-go@latest
+    - go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest
+

@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package porter.v1;
+
+message EKS {
+  string cluster_name = 1;
+  string cluster_version = 2;
+  string issuer_email = 3;
+  string cidr_range = 4;
+  string region = 5;
+  repeated EKSNodeGroup node_groups = 6;
+}
+
+message EKSNodeGroup {
+  string instance_type = 1;
+  uint32 min_instances = 2;
+  uint32 max_instances = 3;
+  NodeGroupType node_group_type = 4;
+  bool is_stateful = 5;
+  string name_suffix = 6;
+}
+
+enum NodeGroupType {
+  NODE_GROUP_TYPE_UNSPECIFIED = 0;
+  NODE_GROUP_TYPE_SYSTEM = 1;
+  NODE_GROUP_TYPE_MONITORING = 2;
+  NODE_GROUP_TYPE_APPLICATION = 3;
+  NODE_GROUP_TYPE_CUSTOM = 4;
+}

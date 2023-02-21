@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package porter.v1;
+
+message GKE {
+  string cluster_name = 1;
+  string cluster_version = 2;
+  string issuer_email = 3;
+  string cidr_range = 4;
+}

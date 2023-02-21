@@ -1,0 +1,17 @@
+version: v1
+managed:
+  enabled: true
+  go_package_prefix:
+    default: github.com/porter-dev/porter/gen
+    except:
+      - buf.build/googleapis/googleapis
+
+plugins:
+  - plugin: go
+    out: generated/go
+    opt: paths=source_relative
+  - plugin: connect-go
+    out: generated/go
+    opt:
+      - paths=source_relative
+      - require_unimplemented_servers=false
