@@ -15,8 +15,8 @@ message Kubernetes {
   // cloud_provider [REQUIRED] represents the provider that we will provisioning the cluster in
   EnumCloudProvider cloud_provider = 4;
   // cloud_provider_credentials_id [REQUIRED] is the Porter credentials that will be used for provisioning a cluster.
-  // These must be stored within Porter, prior to cluster creation
-  int32 cloud_provider_credentials_id = 5;
+  // These must be stored within Porter, prior to cluster creation. For AWS this refers to the last link in an assume role chain
+  string cloud_provider_credentials_id = 5;
   // kind_values are the required values, depending on the selected cloud_provider and kind
   oneof kind_values {
     EKS eks_kind = 6;
