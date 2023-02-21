@@ -21,66 +21,69 @@ import (
 const _ = connect_go.IsAtLeastVersion0_1_0
 
 const (
-	// ClusterControlPlaneName is the fully-qualified name of the ClusterControlPlane service.
-	ClusterControlPlaneName = "porter.v1.ClusterControlPlane"
+	// ClusterControlPlaneServiceName is the fully-qualified name of the ClusterControlPlaneService
+	// service.
+	ClusterControlPlaneServiceName = "porter.v1.ClusterControlPlaneService"
 )
 
-// ClusterControlPlaneClient is a client for the porter.v1.ClusterControlPlane service.
-type ClusterControlPlaneClient interface {
-	CreateAssumeRoleChain(context.Context, *connect_go.Request[v1.CreateAssumeRoleChainInput]) (*connect_go.Response[v1.AssumeRoleChainLink], error)
+// ClusterControlPlaneServiceClient is a client for the porter.v1.ClusterControlPlaneService
+// service.
+type ClusterControlPlaneServiceClient interface {
+	CreateAssumeRoleChain(context.Context, *connect_go.Request[v1.CreateAssumeRoleChainRequest]) (*connect_go.Response[v1.CreateAssumeRoleChainResponse], error)
 }
 
-// NewClusterControlPlaneClient constructs a client for the porter.v1.ClusterControlPlane service.
-// By default, it uses the Connect protocol with the binary Protobuf Codec, asks for gzipped
-// responses, and sends uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the
-// connect.WithGRPC() or connect.WithGRPCWeb() options.
+// NewClusterControlPlaneServiceClient constructs a client for the
+// porter.v1.ClusterControlPlaneService service. By default, it uses the Connect protocol with the
+// binary Protobuf Codec, asks for gzipped responses, and sends uncompressed requests. To use the
+// gRPC or gRPC-Web protocols, supply the connect.WithGRPC() or connect.WithGRPCWeb() options.
 //
 // The URL supplied here should be the base URL for the Connect or gRPC server (for example,
 // http://api.acme.com or https://acme.com/grpc).
-func NewClusterControlPlaneClient(httpClient connect_go.HTTPClient, baseURL string, opts ...connect_go.ClientOption) ClusterControlPlaneClient {
+func NewClusterControlPlaneServiceClient(httpClient connect_go.HTTPClient, baseURL string, opts ...connect_go.ClientOption) ClusterControlPlaneServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
-	return &clusterControlPlaneClient{
-		createAssumeRoleChain: connect_go.NewClient[v1.CreateAssumeRoleChainInput, v1.AssumeRoleChainLink](
+	return &clusterControlPlaneServiceClient{
+		createAssumeRoleChain: connect_go.NewClient[v1.CreateAssumeRoleChainRequest, v1.CreateAssumeRoleChainResponse](
 			httpClient,
-			baseURL+"/porter.v1.ClusterControlPlane/CreateAssumeRoleChain",
+			baseURL+"/porter.v1.ClusterControlPlaneService/CreateAssumeRoleChain",
 			opts...,
 		),
 	}
 }
 
-// clusterControlPlaneClient implements ClusterControlPlaneClient.
-type clusterControlPlaneClient struct {
-	createAssumeRoleChain *connect_go.Client[v1.CreateAssumeRoleChainInput, v1.AssumeRoleChainLink]
+// clusterControlPlaneServiceClient implements ClusterControlPlaneServiceClient.
+type clusterControlPlaneServiceClient struct {
+	createAssumeRoleChain *connect_go.Client[v1.CreateAssumeRoleChainRequest, v1.CreateAssumeRoleChainResponse]
 }
 
-// CreateAssumeRoleChain calls porter.v1.ClusterControlPlane.CreateAssumeRoleChain.
-func (c *clusterControlPlaneClient) CreateAssumeRoleChain(ctx context.Context, req *connect_go.Request[v1.CreateAssumeRoleChainInput]) (*connect_go.Response[v1.AssumeRoleChainLink], error) {
+// CreateAssumeRoleChain calls porter.v1.ClusterControlPlaneService.CreateAssumeRoleChain.
+func (c *clusterControlPlaneServiceClient) CreateAssumeRoleChain(ctx context.Context, req *connect_go.Request[v1.CreateAssumeRoleChainRequest]) (*connect_go.Response[v1.CreateAssumeRoleChainResponse], error) {
 	return c.createAssumeRoleChain.CallUnary(ctx, req)
 }
 
-// ClusterControlPlaneHandler is an implementation of the porter.v1.ClusterControlPlane service.
-type ClusterControlPlaneHandler interface {
-	CreateAssumeRoleChain(context.Context, *connect_go.Request[v1.CreateAssumeRoleChainInput]) (*connect_go.Response[v1.AssumeRoleChainLink], error)
+// ClusterControlPlaneServiceHandler is an implementation of the
+// porter.v1.ClusterControlPlaneService service.
+type ClusterControlPlaneServiceHandler interface {
+	CreateAssumeRoleChain(context.Context, *connect_go.Request[v1.CreateAssumeRoleChainRequest]) (*connect_go.Response[v1.CreateAssumeRoleChainResponse], error)
 }
 
-// NewClusterControlPlaneHandler builds an HTTP handler from the service implementation. It returns
-// the path on which to mount the handler and the handler itself.
+// NewClusterControlPlaneServiceHandler builds an HTTP handler from the service implementation. It
+// returns the path on which to mount the handler and the handler itself.
 //
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
-func NewClusterControlPlaneHandler(svc ClusterControlPlaneHandler, opts ...connect_go.HandlerOption) (string, http.Handler) {
+func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler, opts ...connect_go.HandlerOption) (string, http.Handler) {
 	mux := http.NewServeMux()
-	mux.Handle("/porter.v1.ClusterControlPlane/CreateAssumeRoleChain", connect_go.NewUnaryHandler(
-		"/porter.v1.ClusterControlPlane/CreateAssumeRoleChain",
+	mux.Handle("/porter.v1.ClusterControlPlaneService/CreateAssumeRoleChain", connect_go.NewUnaryHandler(
+		"/porter.v1.ClusterControlPlaneService/CreateAssumeRoleChain",
 		svc.CreateAssumeRoleChain,
 		opts...,
 	))
-	return "/porter.v1.ClusterControlPlane/", mux
+	return "/porter.v1.ClusterControlPlaneService/", mux
 }
 
-// UnimplementedClusterControlPlaneHandler returns CodeUnimplemented from all methods.
-type UnimplementedClusterControlPlaneHandler struct{}
+// UnimplementedClusterControlPlaneServiceHandler returns CodeUnimplemented from all methods.
+type UnimplementedClusterControlPlaneServiceHandler struct{}
 
-func (UnimplementedClusterControlPlaneHandler) CreateAssumeRoleChain(context.Context, *connect_go.Request[v1.CreateAssumeRoleChainInput]) (*connect_go.Response[v1.AssumeRoleChainLink], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlane.CreateAssumeRoleChain is not implemented"))
+func (UnimplementedClusterControlPlaneServiceHandler) CreateAssumeRoleChain(context.Context, *connect_go.Request[v1.CreateAssumeRoleChainRequest]) (*connect_go.Response[v1.CreateAssumeRoleChainResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.CreateAssumeRoleChain is not implemented"))
 }

@@ -4,6 +4,6 @@ package porter.v1;
 
 import "porter/v1/aws.proto";
 
-service ClusterControlPlane {
-  rpc CreateAssumeRoleChain(CreateAssumeRoleChainInput) returns (AssumeRoleChainLink) {}
+service ClusterControlPlaneService {
+  rpc CreateAssumeRoleChain(CreateAssumeRoleChainRequest) returns (CreateAssumeRoleChainResponse) {}
 }
