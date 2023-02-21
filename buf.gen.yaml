@@ -2,7 +2,7 @@ version: v1
 managed:
   enabled: true
   go_package_prefix:
-    default: github.com/porter-dev/porter/gen
+    default: github.com/porter-dev/api-contracts/generated/go
     except:
       - buf.build/googleapis/googleapis
 
