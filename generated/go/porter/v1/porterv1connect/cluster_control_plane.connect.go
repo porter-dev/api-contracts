@@ -33,10 +33,8 @@ type ClusterControlPlaneServiceClient interface {
 	CreateAssumeRoleChain(context.Context, *connect_go.Request[v1.CreateAssumeRoleChainRequest]) (*connect_go.Response[v1.CreateAssumeRoleChainResponse], error)
 	// AssumeRoleChainTargets gets the final destination target_arns for a given project
 	AssumeRoleChainTargets(context.Context, *connect_go.Request[v1.AssumeRoleChainTargetsRequest]) (*connect_go.Response[v1.AssumeRoleChainTargetsResponse], error)
-	// AWSCredentials gets temporary access credentials for a given AWS Assume Role Chain
-	// This should be used INCREDIBLY sparingly, and exists only to support legacy code
-	// which does not support using Assume Role Chain hopping
-	AWSCredentials(context.Context, *connect_go.Request[v1.AWSCredentialsRequest]) (*connect_go.Response[v1.AWSCredentialsResponse], error)
+	// EKSBearerToken gets a bearer token for programatic access to an EKS cluster's kubernetes API
+	EKSBearerToken(context.Context, *connect_go.Request[v1.EKSBearerTokenRequest]) (*connect_go.Response[v1.EKSBearerTokenResponse], error)
 }
 
 // NewClusterControlPlaneServiceClient constructs a client for the
@@ -59,9 +57,9 @@ func NewClusterControlPlaneServiceClient(httpClient connect_go.HTTPClient, baseU
 			baseURL+"/porter.v1.ClusterControlPlaneService/AssumeRoleChainTargets",
 			opts...,
 		),
-		aWSCredentials: connect_go.NewClient[v1.AWSCredentialsRequest, v1.AWSCredentialsResponse](
+		eKSBearerToken: connect_go.NewClient[v1.EKSBearerTokenRequest, v1.EKSBearerTokenResponse](
 			httpClient,
-			baseURL+"/porter.v1.ClusterControlPlaneService/AWSCredentials",
+			baseURL+"/porter.v1.ClusterControlPlaneService/EKSBearerToken",
 			opts...,
 		),
 	}
@@ -71,7 +69,7 @@ func NewClusterControlPlaneServiceClient(httpClient connect_go.HTTPClient, baseU
 type clusterControlPlaneServiceClient struct {
 	createAssumeRoleChain  *connect_go.Client[v1.CreateAssumeRoleChainRequest, v1.CreateAssumeRoleChainResponse]
 	assumeRoleChainTargets *connect_go.Client[v1.AssumeRoleChainTargetsRequest, v1.AssumeRoleChainTargetsResponse]
-	aWSCredentials         *connect_go.Client[v1.AWSCredentialsRequest, v1.AWSCredentialsResponse]
+	eKSBearerToken         *connect_go.Client[v1.EKSBearerTokenRequest, v1.EKSBearerTokenResponse]
 }
 
 // CreateAssumeRoleChain calls porter.v1.ClusterControlPlaneService.CreateAssumeRoleChain.
@@ -84,9 +82,9 @@ func (c *clusterControlPlaneServiceClient) AssumeRoleChainTargets(ctx context.Co
 	return c.assumeRoleChainTargets.CallUnary(ctx, req)
 }
 
-// AWSCredentials calls porter.v1.ClusterControlPlaneService.AWSCredentials.
-func (c *clusterControlPlaneServiceClient) AWSCredentials(ctx context.Context, req *connect_go.Request[v1.AWSCredentialsRequest]) (*connect_go.Response[v1.AWSCredentialsResponse], error) {
-	return c.aWSCredentials.CallUnary(ctx, req)
+// EKSBearerToken calls porter.v1.ClusterControlPlaneService.EKSBearerToken.
+func (c *clusterControlPlaneServiceClient) EKSBearerToken(ctx context.Context, req *connect_go.Request[v1.EKSBearerTokenRequest]) (*connect_go.Response[v1.EKSBearerTokenResponse], error) {
+	return c.eKSBearerToken.CallUnary(ctx, req)
 }
 
 // ClusterControlPlaneServiceHandler is an implementation of the
@@ -96,10 +94,8 @@ type ClusterControlPlaneServiceHandler interface {
 	CreateAssumeRoleChain(context.Context, *connect_go.Request[v1.CreateAssumeRoleChainRequest]) (*connect_go.Response[v1.CreateAssumeRoleChainResponse], error)
 	// AssumeRoleChainTargets gets the final destination target_arns for a given project
 	AssumeRoleChainTargets(context.Context, *connect_go.Request[v1.AssumeRoleChainTargetsRequest]) (*connect_go.Response[v1.AssumeRoleChainTargetsResponse], error)
-	// AWSCredentials gets temporary access credentials for a given AWS Assume Role Chain
-	// This should be used INCREDIBLY sparingly, and exists only to support legacy code
-	// which does not support using Assume Role Chain hopping
-	AWSCredentials(context.Context, *connect_go.Request[v1.AWSCredentialsRequest]) (*connect_go.Response[v1.AWSCredentialsResponse], error)
+	// EKSBearerToken gets a bearer token for programatic access to an EKS cluster's kubernetes API
+	EKSBearerToken(context.Context, *connect_go.Request[v1.EKSBearerTokenRequest]) (*connect_go.Response[v1.EKSBearerTokenResponse], error)
 }
 
 // NewClusterControlPlaneServiceHandler builds an HTTP handler from the service implementation. It
@@ -119,9 +115,9 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.AssumeRoleChainTargets,
 		opts...,
 	))
-	mux.Handle("/porter.v1.ClusterControlPlaneService/AWSCredentials", connect_go.NewUnaryHandler(
-		"/porter.v1.ClusterControlPlaneService/AWSCredentials",
-		svc.AWSCredentials,
+	mux.Handle("/porter.v1.ClusterControlPlaneService/EKSBearerToken", connect_go.NewUnaryHandler(
+		"/porter.v1.ClusterControlPlaneService/EKSBearerToken",
+		svc.EKSBearerToken,
 		opts...,
 	))
 	return "/porter.v1.ClusterControlPlaneService/", mux
@@ -138,6 +134,6 @@ func (UnimplementedClusterControlPlaneServiceHandler) AssumeRoleChainTargets(con
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.AssumeRoleChainTargets is not implemented"))
 }
 
-func (UnimplementedClusterControlPlaneServiceHandler) AWSCredentials(context.Context, *connect_go.Request[v1.AWSCredentialsRequest]) (*connect_go.Response[v1.AWSCredentialsResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.AWSCredentials is not implemented"))
+func (UnimplementedClusterControlPlaneServiceHandler) EKSBearerToken(context.Context, *connect_go.Request[v1.EKSBearerTokenRequest]) (*connect_go.Response[v1.EKSBearerTokenResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.EKSBearerToken is not implemented"))
 }

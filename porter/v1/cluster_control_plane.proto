@@ -17,15 +17,13 @@ message CreateAssumeRoleChainResponse {
   string target_arn = 2;
 }
 
-message AWSCredentialsRequest {
+message EKSBearerTokenRequest {
   int64 project_id = 1;
-  string aws_assume_role_chain_id = 2;
+  int64 cluster_id = 2;
 }
 
-message AWSCredentialsResponse {
-  string access_id = 1;
-  string secret_key = 2;
-  string session_token = 3;
+message EKSBearerTokenResponse {
+  string token = 1;
 }
 
 message AssumeRoleChainTargetsRequest {
@@ -43,8 +41,6 @@ service ClusterControlPlaneService {
   // AssumeRoleChainTargets gets the final destination target_arns for a given project
   rpc AssumeRoleChainTargets(AssumeRoleChainTargetsRequest) returns (AssumeRoleChainTargetsResponse) {}
 
-  // AWSCredentials gets temporary access credentials for a given AWS Assume Role Chain
-  // This should be used INCREDIBLY sparingly, and exists only to support legacy code
-  // which does not support using Assume Role Chain hopping
-  rpc AWSCredentials(AWSCredentialsRequest) returns (AWSCredentialsResponse) {}
+  // EKSBearerToken gets a bearer token for programatic access to an EKS cluster's kubernetes API
+  rpc EKSBearerToken(EKSBearerTokenRequest) returns (EKSBearerTokenResponse) {}
 }
