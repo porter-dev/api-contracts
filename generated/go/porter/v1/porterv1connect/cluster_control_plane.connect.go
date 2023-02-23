@@ -30,6 +30,7 @@ const (
 // service.
 type ClusterControlPlaneServiceClient interface {
 	CreateAssumeRoleChain(context.Context, *connect_go.Request[v1.CreateAssumeRoleChainRequest]) (*connect_go.Response[v1.CreateAssumeRoleChainResponse], error)
+	AssumeRoleChain(context.Context, *connect_go.Request[v1.AssumeRoleChainRequest]) (*connect_go.Response[v1.AssumeRoleChainResponse], error)
 }
 
 // NewClusterControlPlaneServiceClient constructs a client for the
@@ -47,12 +48,18 @@ func NewClusterControlPlaneServiceClient(httpClient connect_go.HTTPClient, baseU
 			baseURL+"/porter.v1.ClusterControlPlaneService/CreateAssumeRoleChain",
 			opts...,
 		),
+		assumeRoleChain: connect_go.NewClient[v1.AssumeRoleChainRequest, v1.AssumeRoleChainResponse](
+			httpClient,
+			baseURL+"/porter.v1.ClusterControlPlaneService/AssumeRoleChain",
+			opts...,
+		),
 	}
 }
 
 // clusterControlPlaneServiceClient implements ClusterControlPlaneServiceClient.
 type clusterControlPlaneServiceClient struct {
 	createAssumeRoleChain *connect_go.Client[v1.CreateAssumeRoleChainRequest, v1.CreateAssumeRoleChainResponse]
+	assumeRoleChain       *connect_go.Client[v1.AssumeRoleChainRequest, v1.AssumeRoleChainResponse]
 }
 
 // CreateAssumeRoleChain calls porter.v1.ClusterControlPlaneService.CreateAssumeRoleChain.
@@ -60,10 +67,16 @@ func (c *clusterControlPlaneServiceClient) CreateAssumeRoleChain(ctx context.Con
 	return c.createAssumeRoleChain.CallUnary(ctx, req)
 }
 
+// AssumeRoleChain calls porter.v1.ClusterControlPlaneService.AssumeRoleChain.
+func (c *clusterControlPlaneServiceClient) AssumeRoleChain(ctx context.Context, req *connect_go.Request[v1.AssumeRoleChainRequest]) (*connect_go.Response[v1.AssumeRoleChainResponse], error) {
+	return c.assumeRoleChain.CallUnary(ctx, req)
+}
+
 // ClusterControlPlaneServiceHandler is an implementation of the
 // porter.v1.ClusterControlPlaneService service.
 type ClusterControlPlaneServiceHandler interface {
 	CreateAssumeRoleChain(context.Context, *connect_go.Request[v1.CreateAssumeRoleChainRequest]) (*connect_go.Response[v1.CreateAssumeRoleChainResponse], error)
+	AssumeRoleChain(context.Context, *connect_go.Request[v1.AssumeRoleChainRequest]) (*connect_go.Response[v1.AssumeRoleChainResponse], error)
 }
 
 // NewClusterControlPlaneServiceHandler builds an HTTP handler from the service implementation. It
@@ -78,6 +91,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.CreateAssumeRoleChain,
 		opts...,
 	))
+	mux.Handle("/porter.v1.ClusterControlPlaneService/AssumeRoleChain", connect_go.NewUnaryHandler(
+		"/porter.v1.ClusterControlPlaneService/AssumeRoleChain",
+		svc.AssumeRoleChain,
+		opts...,
+	))
 	return "/porter.v1.ClusterControlPlaneService/", mux
 }
 
@@ -86,4 +104,8 @@ type UnimplementedClusterControlPlaneServiceHandler struct{}
 
 func (UnimplementedClusterControlPlaneServiceHandler) CreateAssumeRoleChain(context.Context, *connect_go.Request[v1.CreateAssumeRoleChainRequest]) (*connect_go.Response[v1.CreateAssumeRoleChainResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.CreateAssumeRoleChain is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) AssumeRoleChain(context.Context, *connect_go.Request[v1.AssumeRoleChainRequest]) (*connect_go.Response[v1.AssumeRoleChainResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.AssumeRoleChain is not implemented"))
 }

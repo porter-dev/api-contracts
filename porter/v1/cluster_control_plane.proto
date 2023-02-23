@@ -2,8 +2,31 @@ syntax = "proto3";
 
 package porter.v1;
 
-import "porter/v1/aws.proto";
+import "porter/v1/aws_assume_role.proto";
+
+message CreateAssumeRoleChainRequest {
+  int64 project_id = 1;
+  string source_arn = 2;
+  string target_access_id = 3;
+  string target_secret_key = 4;
+  string target_session_token = 5;
+}
+
+message CreateAssumeRoleChainResponse {
+  int64 project_id = 1;
+  string target_arn = 2;
+}
+
+message AssumeRoleChainRequest {
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+}
+
+message AssumeRoleChainResponse {
+  repeated AssumeRoleChainLink chain_links = 1;
+}
 
 service ClusterControlPlaneService {
   rpc CreateAssumeRoleChain(CreateAssumeRoleChainRequest) returns (CreateAssumeRoleChainResponse) {}
+  rpc AssumeRoleChain(AssumeRoleChainRequest) returns (AssumeRoleChainResponse) {}
 }
