@@ -29,8 +29,14 @@ const (
 // ClusterControlPlaneServiceClient is a client for the porter.v1.ClusterControlPlaneService
 // service.
 type ClusterControlPlaneServiceClient interface {
+	// CreateAssumeRoleChain creates a new assume role chain for a given project
 	CreateAssumeRoleChain(context.Context, *connect_go.Request[v1.CreateAssumeRoleChainRequest]) (*connect_go.Response[v1.CreateAssumeRoleChainResponse], error)
-	AssumeRoleChain(context.Context, *connect_go.Request[v1.AssumeRoleChainRequest]) (*connect_go.Response[v1.AssumeRoleChainResponse], error)
+	// AssumeRoleChainTargets gets the final destination target_arns for a given project
+	AssumeRoleChainTargets(context.Context, *connect_go.Request[v1.AssumeRoleChainTargetsRequest]) (*connect_go.Response[v1.AssumeRoleChainTargetsResponse], error)
+	// AWSCredentials gets temporary access credentials for a given AWS Assume Role Chain
+	// This should be used INCREDIBLY sparingly, and exists only to support legacy code
+	// which does not support using Assume Role Chain hopping
+	AWSCredentials(context.Context, *connect_go.Request[v1.AWSCredentialsRequest]) (*connect_go.Response[v1.AWSCredentialsResponse], error)
 }
 
 // NewClusterControlPlaneServiceClient constructs a client for the
@@ -48,9 +54,14 @@ func NewClusterControlPlaneServiceClient(httpClient connect_go.HTTPClient, baseU
 			baseURL+"/porter.v1.ClusterControlPlaneService/CreateAssumeRoleChain",
 			opts...,
 		),
-		assumeRoleChain: connect_go.NewClient[v1.AssumeRoleChainRequest, v1.AssumeRoleChainResponse](
+		assumeRoleChainTargets: connect_go.NewClient[v1.AssumeRoleChainTargetsRequest, v1.AssumeRoleChainTargetsResponse](
 			httpClient,
-			baseURL+"/porter.v1.ClusterControlPlaneService/AssumeRoleChain",
+			baseURL+"/porter.v1.ClusterControlPlaneService/AssumeRoleChainTargets",
+			opts...,
+		),
+		aWSCredentials: connect_go.NewClient[v1.AWSCredentialsRequest, v1.AWSCredentialsResponse](
+			httpClient,
+			baseURL+"/porter.v1.ClusterControlPlaneService/AWSCredentials",
 			opts...,
 		),
 	}
@@ -58,8 +69,9 @@ func NewClusterControlPlaneServiceClient(httpClient connect_go.HTTPClient, baseU
 
 // clusterControlPlaneServiceClient implements ClusterControlPlaneServiceClient.
 type clusterControlPlaneServiceClient struct {
-	createAssumeRoleChain *connect_go.Client[v1.CreateAssumeRoleChainRequest, v1.CreateAssumeRoleChainResponse]
-	assumeRoleChain       *connect_go.Client[v1.AssumeRoleChainRequest, v1.AssumeRoleChainResponse]
+	createAssumeRoleChain  *connect_go.Client[v1.CreateAssumeRoleChainRequest, v1.CreateAssumeRoleChainResponse]
+	assumeRoleChainTargets *connect_go.Client[v1.AssumeRoleChainTargetsRequest, v1.AssumeRoleChainTargetsResponse]
+	aWSCredentials         *connect_go.Client[v1.AWSCredentialsRequest, v1.AWSCredentialsResponse]
 }
 
 // CreateAssumeRoleChain calls porter.v1.ClusterControlPlaneService.CreateAssumeRoleChain.
@@ -67,16 +79,27 @@ func (c *clusterControlPlaneServiceClient) CreateAssumeRoleChain(ctx context.Con
 	return c.createAssumeRoleChain.CallUnary(ctx, req)
 }
 
-// AssumeRoleChain calls porter.v1.ClusterControlPlaneService.AssumeRoleChain.
-func (c *clusterControlPlaneServiceClient) AssumeRoleChain(ctx context.Context, req *connect_go.Request[v1.AssumeRoleChainRequest]) (*connect_go.Response[v1.AssumeRoleChainResponse], error) {
-	return c.assumeRoleChain.CallUnary(ctx, req)
+// AssumeRoleChainTargets calls porter.v1.ClusterControlPlaneService.AssumeRoleChainTargets.
+func (c *clusterControlPlaneServiceClient) AssumeRoleChainTargets(ctx context.Context, req *connect_go.Request[v1.AssumeRoleChainTargetsRequest]) (*connect_go.Response[v1.AssumeRoleChainTargetsResponse], error) {
+	return c.assumeRoleChainTargets.CallUnary(ctx, req)
+}
+
+// AWSCredentials calls porter.v1.ClusterControlPlaneService.AWSCredentials.
+func (c *clusterControlPlaneServiceClient) AWSCredentials(ctx context.Context, req *connect_go.Request[v1.AWSCredentialsRequest]) (*connect_go.Response[v1.AWSCredentialsResponse], error) {
+	return c.aWSCredentials.CallUnary(ctx, req)
 }
 
 // ClusterControlPlaneServiceHandler is an implementation of the
 // porter.v1.ClusterControlPlaneService service.
 type ClusterControlPlaneServiceHandler interface {
+	// CreateAssumeRoleChain creates a new assume role chain for a given project
 	CreateAssumeRoleChain(context.Context, *connect_go.Request[v1.CreateAssumeRoleChainRequest]) (*connect_go.Response[v1.CreateAssumeRoleChainResponse], error)
-	AssumeRoleChain(context.Context, *connect_go.Request[v1.AssumeRoleChainRequest]) (*connect_go.Response[v1.AssumeRoleChainResponse], error)
+	// AssumeRoleChainTargets gets the final destination target_arns for a given project
+	AssumeRoleChainTargets(context.Context, *connect_go.Request[v1.AssumeRoleChainTargetsRequest]) (*connect_go.Response[v1.AssumeRoleChainTargetsResponse], error)
+	// AWSCredentials gets temporary access credentials for a given AWS Assume Role Chain
+	// This should be used INCREDIBLY sparingly, and exists only to support legacy code
+	// which does not support using Assume Role Chain hopping
+	AWSCredentials(context.Context, *connect_go.Request[v1.AWSCredentialsRequest]) (*connect_go.Response[v1.AWSCredentialsResponse], error)
 }
 
 // NewClusterControlPlaneServiceHandler builds an HTTP handler from the service implementation. It
@@ -91,9 +114,14 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.CreateAssumeRoleChain,
 		opts...,
 	))
-	mux.Handle("/porter.v1.ClusterControlPlaneService/AssumeRoleChain", connect_go.NewUnaryHandler(
-		"/porter.v1.ClusterControlPlaneService/AssumeRoleChain",
-		svc.AssumeRoleChain,
+	mux.Handle("/porter.v1.ClusterControlPlaneService/AssumeRoleChainTargets", connect_go.NewUnaryHandler(
+		"/porter.v1.ClusterControlPlaneService/AssumeRoleChainTargets",
+		svc.AssumeRoleChainTargets,
+		opts...,
+	))
+	mux.Handle("/porter.v1.ClusterControlPlaneService/AWSCredentials", connect_go.NewUnaryHandler(
+		"/porter.v1.ClusterControlPlaneService/AWSCredentials",
+		svc.AWSCredentials,
 		opts...,
 	))
 	return "/porter.v1.ClusterControlPlaneService/", mux
@@ -106,6 +134,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) CreateAssumeRoleChain(cont
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.CreateAssumeRoleChain is not implemented"))
 }
 
-func (UnimplementedClusterControlPlaneServiceHandler) AssumeRoleChain(context.Context, *connect_go.Request[v1.AssumeRoleChainRequest]) (*connect_go.Response[v1.AssumeRoleChainResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.AssumeRoleChain is not implemented"))
+func (UnimplementedClusterControlPlaneServiceHandler) AssumeRoleChainTargets(context.Context, *connect_go.Request[v1.AssumeRoleChainTargetsRequest]) (*connect_go.Response[v1.AssumeRoleChainTargetsResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.AssumeRoleChainTargets is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) AWSCredentials(context.Context, *connect_go.Request[v1.AWSCredentialsRequest]) (*connect_go.Response[v1.AWSCredentialsResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.AWSCredentials is not implemented"))
 }
