@@ -35,6 +35,8 @@ type ClusterControlPlaneServiceClient interface {
 	AssumeRoleChainTargets(context.Context, *connect_go.Request[v1.AssumeRoleChainTargetsRequest]) (*connect_go.Response[v1.AssumeRoleChainTargetsResponse], error)
 	// EKSBearerToken gets a bearer token for programatic access to an EKS cluster's kubernetes API
 	EKSBearerToken(context.Context, *connect_go.Request[v1.EKSBearerTokenRequest]) (*connect_go.Response[v1.EKSBearerTokenResponse], error)
+	// KubeConfigForCluster gets a valid kubeconfig from the management cluster, for a given workload cluster
+	KubeConfigForCluster(context.Context, *connect_go.Request[v1.KubeConfigForClusterRequest]) (*connect_go.Response[v1.KubeConfigForClusterResponse], error)
 }
 
 // NewClusterControlPlaneServiceClient constructs a client for the
@@ -62,6 +64,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect_go.HTTPClient, baseU
 			baseURL+"/porter.v1.ClusterControlPlaneService/EKSBearerToken",
 			opts...,
 		),
+		kubeConfigForCluster: connect_go.NewClient[v1.KubeConfigForClusterRequest, v1.KubeConfigForClusterResponse](
+			httpClient,
+			baseURL+"/porter.v1.ClusterControlPlaneService/KubeConfigForCluster",
+			opts...,
+		),
 	}
 }
 
@@ -70,6 +77,7 @@ type clusterControlPlaneServiceClient struct {
 	createAssumeRoleChain  *connect_go.Client[v1.CreateAssumeRoleChainRequest, v1.CreateAssumeRoleChainResponse]
 	assumeRoleChainTargets *connect_go.Client[v1.AssumeRoleChainTargetsRequest, v1.AssumeRoleChainTargetsResponse]
 	eKSBearerToken         *connect_go.Client[v1.EKSBearerTokenRequest, v1.EKSBearerTokenResponse]
+	kubeConfigForCluster   *connect_go.Client[v1.KubeConfigForClusterRequest, v1.KubeConfigForClusterResponse]
 }
 
 // CreateAssumeRoleChain calls porter.v1.ClusterControlPlaneService.CreateAssumeRoleChain.
@@ -87,6 +95,11 @@ func (c *clusterControlPlaneServiceClient) EKSBearerToken(ctx context.Context, r
 	return c.eKSBearerToken.CallUnary(ctx, req)
 }
 
+// KubeConfigForCluster calls porter.v1.ClusterControlPlaneService.KubeConfigForCluster.
+func (c *clusterControlPlaneServiceClient) KubeConfigForCluster(ctx context.Context, req *connect_go.Request[v1.KubeConfigForClusterRequest]) (*connect_go.Response[v1.KubeConfigForClusterResponse], error) {
+	return c.kubeConfigForCluster.CallUnary(ctx, req)
+}
+
 // ClusterControlPlaneServiceHandler is an implementation of the
 // porter.v1.ClusterControlPlaneService service.
 type ClusterControlPlaneServiceHandler interface {
@@ -96,6 +109,8 @@ type ClusterControlPlaneServiceHandler interface {
 	AssumeRoleChainTargets(context.Context, *connect_go.Request[v1.AssumeRoleChainTargetsRequest]) (*connect_go.Response[v1.AssumeRoleChainTargetsResponse], error)
 	// EKSBearerToken gets a bearer token for programatic access to an EKS cluster's kubernetes API
 	EKSBearerToken(context.Context, *connect_go.Request[v1.EKSBearerTokenRequest]) (*connect_go.Response[v1.EKSBearerTokenResponse], error)
+	// KubeConfigForCluster gets a valid kubeconfig from the management cluster, for a given workload cluster
+	KubeConfigForCluster(context.Context, *connect_go.Request[v1.KubeConfigForClusterRequest]) (*connect_go.Response[v1.KubeConfigForClusterResponse], error)
 }
 
 // NewClusterControlPlaneServiceHandler builds an HTTP handler from the service implementation. It
@@ -120,6 +135,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.EKSBearerToken,
 		opts...,
 	))
+	mux.Handle("/porter.v1.ClusterControlPlaneService/KubeConfigForCluster", connect_go.NewUnaryHandler(
+		"/porter.v1.ClusterControlPlaneService/KubeConfigForCluster",
+		svc.KubeConfigForCluster,
+		opts...,
+	))
 	return "/porter.v1.ClusterControlPlaneService/", mux
 }
 
@@ -136,4 +156,8 @@ func (UnimplementedClusterControlPlaneServiceHandler) AssumeRoleChainTargets(con
 
 func (UnimplementedClusterControlPlaneServiceHandler) EKSBearerToken(context.Context, *connect_go.Request[v1.EKSBearerTokenRequest]) (*connect_go.Response[v1.EKSBearerTokenResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.EKSBearerToken is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) KubeConfigForCluster(context.Context, *connect_go.Request[v1.KubeConfigForClusterRequest]) (*connect_go.Response[v1.KubeConfigForClusterResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.KubeConfigForCluster is not implemented"))
 }

@@ -34,6 +34,15 @@ message AssumeRoleChainTargetsResponse {
   repeated AssumeRoleChainLink chain_links = 1;
 }
 
+message KubeConfigForClusterRequest {
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+}
+
+message KubeConfigForClusterResponse {
+  string kube_config = 1;
+}
+
 service ClusterControlPlaneService {
   // CreateAssumeRoleChain creates a new assume role chain for a given project
   rpc CreateAssumeRoleChain(CreateAssumeRoleChainRequest) returns (CreateAssumeRoleChainResponse) {}
@@ -43,4 +52,7 @@ service ClusterControlPlaneService {
 
   // EKSBearerToken gets a bearer token for programatic access to an EKS cluster's kubernetes API
   rpc EKSBearerToken(EKSBearerTokenRequest) returns (EKSBearerTokenResponse) {}
+
+  // KubeConfigForCluster gets a valid kubeconfig from the management cluster, for a given workload cluster
+  rpc KubeConfigForCluster(KubeConfigForClusterRequest) returns (KubeConfigForClusterResponse) {}
 }
