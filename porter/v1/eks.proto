@@ -5,10 +5,9 @@ package porter.v1;
 message EKS {
   string cluster_name = 1;
   string cluster_version = 2;
-  string issuer_email = 3;
-  string cidr_range = 4;
-  string region = 5;
-  repeated EKSNodeGroup node_groups = 6;
+  string cidr_range = 3;
+  string region = 4;
+  repeated EKSNodeGroup node_groups = 5;
 }
 
 message EKSNodeGroup {
