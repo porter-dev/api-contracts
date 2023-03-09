@@ -50,7 +50,7 @@ tasks:
       ignore_error: false
     - task: all
       ignore_error: false
-    - cmd: cd generated/js; npm version {{.CLI_ARGS}}
+    - cmd: cd generated/js; npm version {{.CLI_ARGS}}; cd ../..
       ignore_error: false
     - cmd: git commit -am "Releasing {{.CLI_ARGS}}"
       ignore_error: false
