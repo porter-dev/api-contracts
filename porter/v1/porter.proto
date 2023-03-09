@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package porter.v1;
+
+import "porter/v1/cluster.proto";
+
+message Porter {
+  Cluster cluster = 1;
+}
