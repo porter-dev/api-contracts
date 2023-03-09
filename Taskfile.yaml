@@ -47,10 +47,10 @@ tasks:
     desc: "Create and tag a release. Usage: `task release v0.0.0` where v0.0.0 is your desired tag"
     cmds:
     - task: all
+    - cmd: cd generated/js; npm version {{.CLI_ARGS}}
     - cmd: git commit -am "Releasing {{.CLI_ARGS}}"
     - cmd: git tag {{.CLI_ARGS}}
     - cmd: git push origin main
-    - cmd: cd generated/js; npm version {{.CLI_ARGS}}
   
   install-tools:
     desc: Install commonly used tools for gRPC
