@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/porter-dev/api-contracts/issues"
   },
-  "homepage": "https://github.com/porter-dev/api-contracts#readme"
+  "homepage": "https://github.com/porter-dev/api-contracts#readme",
+  "publishConfig": {
+    "@porter-dev:registry": "https://npm.pkg.github.com"
+  }
 }
