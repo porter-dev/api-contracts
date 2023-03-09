@@ -1,0 +1,22 @@
+{
+  "name": "@porter-dev/api-contracts",
+  "version": "0.0.10",
+  "description": "Typescript definitions for the Porter system",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/porter-dev/api-contracts.git"
+  },
+  "author": "Porter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/porter-dev/api-contracts/issues"
+  },
+  "homepage": "https://github.com/porter-dev/api-contracts#readme"
+}
