@@ -1,8 +1,11 @@
 name: Node.js Package
 
 on:
-  release:
-    types: [created]
+  # release:
+  #   types: [created]
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -13,7 +16,9 @@ jobs:
         with:
           node-version: 16
       - run: npm ci
+        working-directory: ./generated/js
       - run: npm test
+        working-directory: ./generated/js
 
   publish-gpr:
     needs: build
@@ -28,6 +33,8 @@ jobs:
           node-version: 16
           registry-url: https://npm.pkg.github.com/
       - run: npm ci
+        working-directory: ./generated/js
       - run: npm publish
+        working-directory: ./generated/js
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
