@@ -36,3 +36,5 @@ jobs:
         working-directory: ./generated/js
       - run: npm publish --access public
         working-directory: ./generated/js
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
