@@ -56,7 +56,7 @@ tasks:
       ignore_error: false
     - cmd: git tag {{.CLI_ARGS}}
       ignore_error: false
-    - cmd: git push origin main
+    - cmd: git push origin main --tags
       ignore_error: false
   
   install-tools:
