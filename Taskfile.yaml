@@ -46,6 +46,8 @@ tasks:
   release:
     desc: "Create and tag a release. Usage: `task release v0.0.0` where v0.0.0 is your desired tag"
     cmds:
+    - cmd: if [ -z "{{.CLI_ARGS}}" ]; then echo "missing version"; exit 1; fi
+      ignore_error: false
     - task: all
       ignore_error: false
     - cmd: cd generated/js; npm version {{.CLI_ARGS}}
