@@ -17,7 +17,7 @@ tasks:
     desc: Generate all proto stubs for all supported languages
     dir: "{{.CONTRACT_DIR}}"
     cmds:
-    - cmd: rm -rf generated
+    - cmd: rm -rf generated/go; rm -rf generated/js/src;
       ignore_error: false
     - cmd: buf generate --config buf.yaml --template buf.gen.yaml
       ignore_error: false
@@ -50,4 +50,6 @@ tasks:
     - go install github.com/bufbuild/buf/cmd/buf@latest
     - go install github.com/bufbuild/connect-go/cmd/protoc-gen-connect-go@latest
     - go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest
+    - npm install -g @bufbuild/protobuf @bufbuild/protoc-gen-es
+
 

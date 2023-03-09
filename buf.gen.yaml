@@ -10,6 +10,9 @@ plugins:
   - plugin: go
     out: generated/go
     opt: paths=source_relative
+  - name: es
+    opt: target=ts
+    out: generated/js/src
   - plugin: connect-go
     out: generated/go
     opt:
