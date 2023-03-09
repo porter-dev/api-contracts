@@ -34,7 +34,5 @@ jobs:
           registry-url: https://npm.pkg.github.com/
       - run: npm ci
         working-directory: ./generated/js
-      - run: npm publish
+      - run: npm publish --access public
         working-directory: ./generated/js
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
