@@ -1,6 +1,6 @@
 {
   "name": "@porter-dev/api-contracts",
-  "version": "0.0.28",
+  "version": "0.0.29",
   "description": "Typescript definitions for the Porter system",
   "main": "index.js",
   "directories": {
@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/porter-dev/api-contracts/issues"
   },
-  "homepage": "https://github.com/porter-dev/api-contracts#readme"
+  "homepage": "https://github.com/porter-dev/api-contracts#readme",
+  "dependencies": {
+    "@bufbuild/protobuf": "^1.1.0"
+  }
 }
