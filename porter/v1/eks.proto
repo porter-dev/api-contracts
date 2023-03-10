@@ -16,7 +16,6 @@ message EKSNodeGroup {
   uint32 max_instances = 3;
   NodeGroupType node_group_type = 4;
   bool is_stateful = 5;
-  string name_suffix = 6;
 }
 
 enum NodeGroupType {

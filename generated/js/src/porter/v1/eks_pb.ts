@@ -134,11 +134,6 @@ export class EKSNodeGroup extends Message<EKSNodeGroup> {
    */
   isStateful = false;
 
-  /**
-   * @generated from field: string name_suffix = 6;
-   */
-  nameSuffix = "";
-
   constructor(data?: PartialMessage<EKSNodeGroup>) {
     super();
     proto3.util.initPartial(data, this);
@@ -152,7 +147,6 @@ export class EKSNodeGroup extends Message<EKSNodeGroup> {
     { no: 3, name: "max_instances", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
     { no: 4, name: "node_group_type", kind: "enum", T: proto3.getEnumType(NodeGroupType) },
     { no: 5, name: "is_stateful", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 6, name: "name_suffix", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ]);
 
   static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EKSNodeGroup {
