@@ -1,6 +1,6 @@
 {
   "name": "@porter-dev/api-contracts",
-  "version": "0.0.25",
+  "version": "0.0.26",
   "description": "Typescript definitions for the Porter system",
   "main": "index.js",
   "directories": {
@@ -18,8 +18,5 @@
   "bugs": {
     "url": "https://github.com/porter-dev/api-contracts/issues"
   },
-  "homepage": "https://github.com/porter-dev/api-contracts#readme",
-  "publishConfig": {
-    "@porter-dev:registry": "https://npm.pkg.github.com"
-  }
+  "homepage": "https://github.com/porter-dev/api-contracts#readme"
 }
