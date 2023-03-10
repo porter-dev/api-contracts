@@ -34,6 +34,6 @@ jobs:
         working-directory: ./generated/js
       - name: Publish package on NPM 📦
         working-directory: ./generated/js
-        run: npm publish
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
