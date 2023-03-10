@@ -8,6 +8,8 @@ import { Message, proto3 } from "@bufbuild/protobuf";
 import { Cluster } from "./cluster_pb.js";
 
 /**
+ * Contract represents the API contract for Porter, commonly known as "porter.yaml"
+ *
  * @generated from message porter.v1.Contract
  */
 export class Contract extends Message<Contract> {
@@ -41,6 +43,59 @@ export class Contract extends Message<Contract> {
 
   static equals(a: Contract | PlainMessage<Contract> | undefined, b: Contract | PlainMessage<Contract> | undefined): boolean {
     return proto3.util.equals(Contract, a, b);
+  }
+}
+
+/**
+ * ContractRevision represents a contract revision which should be acted upon, depending on the stream
+ * that is was passed through. This approach goes against microservice architectures, by expecting every consumer
+ * to read the specific contract from the database
+ *
+ * @generated from message porter.v1.ContractRevision
+ */
+export class ContractRevision extends Message<ContractRevision> {
+  /**
+   * @generated from field: int32 cluster_id = 1;
+   */
+  clusterId = 0;
+
+  /**
+   * @generated from field: int32 project_id = 2;
+   */
+  projectId = 0;
+
+  /**
+   * @generated from field: string revision_id = 3;
+   */
+  revisionId = "";
+
+  constructor(data?: PartialMessage<ContractRevision>) {
+    super();
+    proto3.util.initPartial(data, this);
+  }
+
+  static readonly runtime: typeof proto3 = proto3;
+  static readonly typeName = "porter.v1.ContractRevision";
+  static readonly fields: FieldList = proto3.util.newFieldList(() => [
+    { no: 1, name: "cluster_id", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 2, name: "project_id", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 3, name: "revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ]);
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ContractRevision {
+    return new ContractRevision().fromBinary(bytes, options);
+  }
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ContractRevision {
+    return new ContractRevision().fromJson(jsonValue, options);
+  }
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ContractRevision {
+    return new ContractRevision().fromJsonString(jsonString, options);
+  }
+
+  static equals(a: ContractRevision | PlainMessage<ContractRevision> | undefined, b: ContractRevision | PlainMessage<ContractRevision> | undefined): boolean {
+    return proto3.util.equals(ContractRevision, a, b);
   }
 }
 
