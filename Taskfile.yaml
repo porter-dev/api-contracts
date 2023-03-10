@@ -17,7 +17,7 @@ tasks:
     desc: Generate all proto stubs for all supported languages
     dir: "{{.CONTRACT_DIR}}"
     cmds:
-    - cmd: rm -rf generated/go; rm -rf generated/js/src;
+    - cmd: rm -rf generated/go/porter; rm -rf generated/js/src;
       ignore_error: false
     - cmd: buf generate --config buf.yaml --template buf.gen.yaml
       ignore_error: false
