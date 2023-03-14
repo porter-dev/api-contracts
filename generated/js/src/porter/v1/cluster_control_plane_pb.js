@@ -5,7 +5,7 @@
 
 import { proto3 } from "@bufbuild/protobuf";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
-import { Contract } from "./contract_pb.js";
+import { Contract, ContractRevision } from "./contract_pb.js";
 
 /**
  * @generated from message porter.v1.CreateAssumeRoleChainRequest
@@ -110,9 +110,7 @@ export const UpdateContractRequest = proto3.makeMessageType(
 export const UpdateContractResponse = proto3.makeMessageType(
   "porter.v1.UpdateContractResponse",
   () => [
-    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 3, name: "contract_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "contract_revision", kind: "message", T: ContractRevision },
   ],
 );
 

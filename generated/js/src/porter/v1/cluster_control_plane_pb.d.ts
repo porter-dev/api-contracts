@@ -6,7 +6,7 @@
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
-import type { Contract } from "./contract_pb.js";
+import type { Contract, ContractRevision } from "./contract_pb.js";
 
 /**
  * @generated from message porter.v1.CreateAssumeRoleChainRequest
@@ -264,19 +264,9 @@ export declare class UpdateContractRequest extends Message<UpdateContractRequest
  */
 export declare class UpdateContractResponse extends Message<UpdateContractResponse> {
   /**
-   * @generated from field: int64 project_id = 1;
+   * @generated from field: porter.v1.ContractRevision contract_revision = 1;
    */
-  projectId: bigint;
-
-  /**
-   * @generated from field: int64 cluster_id = 2;
-   */
-  clusterId: bigint;
-
-  /**
-   * @generated from field: string contract_revision_id = 3;
-   */
-  contractRevisionId: string;
+  contractRevision?: ContractRevision;
 
   constructor(data?: PartialMessage<UpdateContractResponse>);
 
