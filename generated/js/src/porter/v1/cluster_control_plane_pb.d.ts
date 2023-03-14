@@ -6,6 +6,7 @@
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
+import type { Contract } from "./contract_pb.js";
 
 /**
  * @generated from message porter.v1.CreateAssumeRoleChainRequest
@@ -232,5 +233,63 @@ export declare class KubeConfigForClusterResponse extends Message<KubeConfigForC
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): KubeConfigForClusterResponse;
 
   static equals(a: KubeConfigForClusterResponse | PlainMessage<KubeConfigForClusterResponse> | undefined, b: KubeConfigForClusterResponse | PlainMessage<KubeConfigForClusterResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.UpdateContractRequest
+ */
+export declare class UpdateContractRequest extends Message<UpdateContractRequest> {
+  /**
+   * @generated from field: porter.v1.Contract contract = 1;
+   */
+  contract?: Contract;
+
+  constructor(data?: PartialMessage<UpdateContractRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateContractRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateContractRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateContractRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateContractRequest;
+
+  static equals(a: UpdateContractRequest | PlainMessage<UpdateContractRequest> | undefined, b: UpdateContractRequest | PlainMessage<UpdateContractRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.UpdateContractResponse
+ */
+export declare class UpdateContractResponse extends Message<UpdateContractResponse> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  /**
+   * @generated from field: string contract_revision_id = 3;
+   */
+  contractRevisionId: string;
+
+  constructor(data?: PartialMessage<UpdateContractResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateContractResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateContractResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateContractResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateContractResponse;
+
+  static equals(a: UpdateContractResponse | PlainMessage<UpdateContractResponse> | undefined, b: UpdateContractResponse | PlainMessage<UpdateContractResponse> | undefined): boolean;
 }
 

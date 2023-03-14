@@ -15,5 +15,8 @@ message Contract {
 message ContractRevision {
   int32 cluster_id = 1;
   int32 project_id = 2;
+  // revision_id is the ID of the contract revision that this message applies to.
+  // This field is a UUID represented as a string, for better compatibility.
+  // Best practice is to parse this as a uuid upon receipt
   string revision_id = 3;
 }

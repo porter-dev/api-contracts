@@ -37,6 +37,8 @@ type ClusterControlPlaneServiceClient interface {
 	EKSBearerToken(context.Context, *connect_go.Request[v1.EKSBearerTokenRequest]) (*connect_go.Response[v1.EKSBearerTokenResponse], error)
 	// KubeConfigForCluster gets a valid kubeconfig from the management cluster, for a given workload cluster
 	KubeConfigForCluster(context.Context, *connect_go.Request[v1.KubeConfigForClusterRequest]) (*connect_go.Response[v1.KubeConfigForClusterResponse], error)
+	// UpdateContract takes in a Porter Contract, actioning upon it where necessary
+	UpdateContract(context.Context, *connect_go.Request[v1.UpdateContractRequest]) (*connect_go.Response[v1.UpdateContractResponse], error)
 }
 
 // NewClusterControlPlaneServiceClient constructs a client for the
@@ -69,6 +71,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect_go.HTTPClient, baseU
 			baseURL+"/porter.v1.ClusterControlPlaneService/KubeConfigForCluster",
 			opts...,
 		),
+		updateContract: connect_go.NewClient[v1.UpdateContractRequest, v1.UpdateContractResponse](
+			httpClient,
+			baseURL+"/porter.v1.ClusterControlPlaneService/UpdateContract",
+			opts...,
+		),
 	}
 }
 
@@ -78,6 +85,7 @@ type clusterControlPlaneServiceClient struct {
 	assumeRoleChainTargets *connect_go.Client[v1.AssumeRoleChainTargetsRequest, v1.AssumeRoleChainTargetsResponse]
 	eKSBearerToken         *connect_go.Client[v1.EKSBearerTokenRequest, v1.EKSBearerTokenResponse]
 	kubeConfigForCluster   *connect_go.Client[v1.KubeConfigForClusterRequest, v1.KubeConfigForClusterResponse]
+	updateContract         *connect_go.Client[v1.UpdateContractRequest, v1.UpdateContractResponse]
 }
 
 // CreateAssumeRoleChain calls porter.v1.ClusterControlPlaneService.CreateAssumeRoleChain.
@@ -100,6 +108,11 @@ func (c *clusterControlPlaneServiceClient) KubeConfigForCluster(ctx context.Cont
 	return c.kubeConfigForCluster.CallUnary(ctx, req)
 }
 
+// UpdateContract calls porter.v1.ClusterControlPlaneService.UpdateContract.
+func (c *clusterControlPlaneServiceClient) UpdateContract(ctx context.Context, req *connect_go.Request[v1.UpdateContractRequest]) (*connect_go.Response[v1.UpdateContractResponse], error) {
+	return c.updateContract.CallUnary(ctx, req)
+}
+
 // ClusterControlPlaneServiceHandler is an implementation of the
 // porter.v1.ClusterControlPlaneService service.
 type ClusterControlPlaneServiceHandler interface {
@@ -111,6 +124,8 @@ type ClusterControlPlaneServiceHandler interface {
 	EKSBearerToken(context.Context, *connect_go.Request[v1.EKSBearerTokenRequest]) (*connect_go.Response[v1.EKSBearerTokenResponse], error)
 	// KubeConfigForCluster gets a valid kubeconfig from the management cluster, for a given workload cluster
 	KubeConfigForCluster(context.Context, *connect_go.Request[v1.KubeConfigForClusterRequest]) (*connect_go.Response[v1.KubeConfigForClusterResponse], error)
+	// UpdateContract takes in a Porter Contract, actioning upon it where necessary
+	UpdateContract(context.Context, *connect_go.Request[v1.UpdateContractRequest]) (*connect_go.Response[v1.UpdateContractResponse], error)
 }
 
 // NewClusterControlPlaneServiceHandler builds an HTTP handler from the service implementation. It
@@ -140,6 +155,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.KubeConfigForCluster,
 		opts...,
 	))
+	mux.Handle("/porter.v1.ClusterControlPlaneService/UpdateContract", connect_go.NewUnaryHandler(
+		"/porter.v1.ClusterControlPlaneService/UpdateContract",
+		svc.UpdateContract,
+		opts...,
+	))
 	return "/porter.v1.ClusterControlPlaneService/", mux
 }
 
@@ -160,4 +180,8 @@ func (UnimplementedClusterControlPlaneServiceHandler) EKSBearerToken(context.Con
 
 func (UnimplementedClusterControlPlaneServiceHandler) KubeConfigForCluster(context.Context, *connect_go.Request[v1.KubeConfigForClusterRequest]) (*connect_go.Response[v1.KubeConfigForClusterResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.KubeConfigForCluster is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) UpdateContract(context.Context, *connect_go.Request[v1.UpdateContractRequest]) (*connect_go.Response[v1.UpdateContractResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.UpdateContract is not implemented"))
 }

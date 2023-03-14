@@ -3,6 +3,7 @@ syntax = "proto3";
 package porter.v1;
 
 import "porter/v1/aws_assume_role.proto";
+import "porter/v1/contract.proto";
 
 message CreateAssumeRoleChainRequest {
   int64 project_id = 1;
@@ -43,6 +44,16 @@ message KubeConfigForClusterResponse {
   string kube_config = 1;
 }
 
+message UpdateContractRequest {
+  Contract contract = 1;
+}
+
+message UpdateContractResponse {
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+  string contract_revision_id = 3;
+}
+
 service ClusterControlPlaneService {
   // CreateAssumeRoleChain creates a new assume role chain for a given project
   rpc CreateAssumeRoleChain(CreateAssumeRoleChainRequest) returns (CreateAssumeRoleChainResponse) {}
@@ -55,4 +66,7 @@ service ClusterControlPlaneService {
 
   // KubeConfigForCluster gets a valid kubeconfig from the management cluster, for a given workload cluster
   rpc KubeConfigForCluster(KubeConfigForClusterRequest) returns (KubeConfigForClusterResponse) {}
+
+  // UpdateContract takes in a Porter Contract, actioning upon it where necessary
+  rpc UpdateContract(UpdateContractRequest) returns (UpdateContractResponse) {}
 }

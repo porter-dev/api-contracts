@@ -5,6 +5,7 @@
 
 import { proto3 } from "@bufbuild/protobuf";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
+import { Contract } from "./contract_pb.js";
 
 /**
  * @generated from message porter.v1.CreateAssumeRoleChainRequest
@@ -90,6 +91,28 @@ export const KubeConfigForClusterResponse = proto3.makeMessageType(
   "porter.v1.KubeConfigForClusterResponse",
   () => [
     { no: 1, name: "kube_config", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.UpdateContractRequest
+ */
+export const UpdateContractRequest = proto3.makeMessageType(
+  "porter.v1.UpdateContractRequest",
+  () => [
+    { no: 1, name: "contract", kind: "message", T: Contract },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.UpdateContractResponse
+ */
+export const UpdateContractResponse = proto3.makeMessageType(
+  "porter.v1.UpdateContractResponse",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "contract_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

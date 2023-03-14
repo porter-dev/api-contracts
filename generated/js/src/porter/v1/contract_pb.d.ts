@@ -52,6 +52,10 @@ export declare class ContractRevision extends Message<ContractRevision> {
   projectId: number;
 
   /**
+   * revision_id is the ID of the contract revision that this message applies to.
+   * This field is a UUID represented as a string, for better compatibility.
+   * Best practice is to parse this as a uuid upon receipt
+   *
    * @generated from field: string revision_id = 3;
    */
   revisionId: string;
