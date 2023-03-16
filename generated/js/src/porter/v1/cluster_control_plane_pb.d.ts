@@ -283,3 +283,81 @@ export declare class UpdateContractResponse extends Message<UpdateContractRespon
   static equals(a: UpdateContractResponse | PlainMessage<UpdateContractResponse> | undefined, b: UpdateContractResponse | PlainMessage<UpdateContractResponse> | undefined): boolean;
 }
 
+/**
+ * @generated from message porter.v1.ClusterStatusRequest
+ */
+export declare class ClusterStatusRequest extends Message<ClusterStatusRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  constructor(data?: PartialMessage<ClusterStatusRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ClusterStatusRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ClusterStatusRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ClusterStatusRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ClusterStatusRequest;
+
+  static equals(a: ClusterStatusRequest | PlainMessage<ClusterStatusRequest> | undefined, b: ClusterStatusRequest | PlainMessage<ClusterStatusRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.ClusterStatusResponse
+ */
+export declare class ClusterStatusResponse extends Message<ClusterStatusResponse> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  /**
+   * @generated from field: string phase = 3;
+   */
+  phase: string;
+
+  /**
+   * @generated from field: bool bootstrap_status = 4;
+   */
+  bootstrapStatus: boolean;
+
+  /**
+   * @generated from field: bool infrastructure_status = 5;
+   */
+  infrastructureStatus: boolean;
+
+  /**
+   * @generated from field: bool control_plane_status = 6;
+   */
+  controlPlaneStatus: boolean;
+
+  constructor(data?: PartialMessage<ClusterStatusResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ClusterStatusResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ClusterStatusResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ClusterStatusResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ClusterStatusResponse;
+
+  static equals(a: ClusterStatusResponse | PlainMessage<ClusterStatusResponse> | undefined, b: ClusterStatusResponse | PlainMessage<ClusterStatusResponse> | undefined): boolean;
+}
+

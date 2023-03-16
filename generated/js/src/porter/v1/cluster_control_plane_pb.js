@@ -114,3 +114,29 @@ export const UpdateContractResponse = proto3.makeMessageType(
   ],
 );
 
+/**
+ * @generated from message porter.v1.ClusterStatusRequest
+ */
+export const ClusterStatusRequest = proto3.makeMessageType(
+  "porter.v1.ClusterStatusRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.ClusterStatusResponse
+ */
+export const ClusterStatusResponse = proto3.makeMessageType(
+  "porter.v1.ClusterStatusResponse",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "phase", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "bootstrap_status", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 5, name: "infrastructure_status", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 6, name: "control_plane_status", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
