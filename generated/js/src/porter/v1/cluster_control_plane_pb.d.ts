@@ -332,17 +332,12 @@ export declare class ClusterStatusResponse extends Message<ClusterStatusResponse
   phase: string;
 
   /**
-   * @generated from field: bool bootstrap_status = 4;
-   */
-  bootstrapStatus: boolean;
-
-  /**
-   * @generated from field: bool infrastructure_status = 5;
+   * @generated from field: bool infrastructure_status = 4;
    */
   infrastructureStatus: boolean;
 
   /**
-   * @generated from field: bool control_plane_status = 6;
+   * @generated from field: bool control_plane_status = 5;
    */
   controlPlaneStatus: boolean;
 

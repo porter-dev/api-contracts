@@ -134,9 +134,8 @@ export const ClusterStatusResponse = proto3.makeMessageType(
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 3, name: "phase", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "bootstrap_status", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 5, name: "infrastructure_status", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 6, name: "control_plane_status", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 4, name: "infrastructure_status", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 5, name: "control_plane_status", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
