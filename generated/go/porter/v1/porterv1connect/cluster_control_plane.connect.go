@@ -43,6 +43,9 @@ type ClusterControlPlaneServiceClient interface {
 	UpdateContract(context.Context, *connect_go.Request[v1.UpdateContractRequest]) (*connect_go.Response[v1.UpdateContractResponse], error)
 	// ClusterStatus returns the status of a given workload cluster
 	ClusterStatus(context.Context, *connect_go.Request[v1.ClusterStatusRequest]) (*connect_go.Response[v1.ClusterStatusResponse], error)
+	// DeleteCluster uninstalls system components from a given workload cluster before deleting it.
+	// This should ultimately be wrapped into UpdateContract
+	DeleteCluster(context.Context, *connect_go.Request[v1.DeleteClusterRequest]) (*connect_go.Response[v1.DeleteClusterResponse], error)
 }
 
 // NewClusterControlPlaneServiceClient constructs a client for the
@@ -90,6 +93,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect_go.HTTPClient, baseU
 			baseURL+"/porter.v1.ClusterControlPlaneService/ClusterStatus",
 			opts...,
 		),
+		deleteCluster: connect_go.NewClient[v1.DeleteClusterRequest, v1.DeleteClusterResponse](
+			httpClient,
+			baseURL+"/porter.v1.ClusterControlPlaneService/DeleteCluster",
+			opts...,
+		),
 	}
 }
 
@@ -102,6 +110,7 @@ type clusterControlPlaneServiceClient struct {
 	kubeConfigForCluster   *connect_go.Client[v1.KubeConfigForClusterRequest, v1.KubeConfigForClusterResponse]
 	updateContract         *connect_go.Client[v1.UpdateContractRequest, v1.UpdateContractResponse]
 	clusterStatus          *connect_go.Client[v1.ClusterStatusRequest, v1.ClusterStatusResponse]
+	deleteCluster          *connect_go.Client[v1.DeleteClusterRequest, v1.DeleteClusterResponse]
 }
 
 // RolePreflightCheck calls porter.v1.ClusterControlPlaneService.RolePreflightCheck.
@@ -139,6 +148,11 @@ func (c *clusterControlPlaneServiceClient) ClusterStatus(ctx context.Context, re
 	return c.clusterStatus.CallUnary(ctx, req)
 }
 
+// DeleteCluster calls porter.v1.ClusterControlPlaneService.DeleteCluster.
+func (c *clusterControlPlaneServiceClient) DeleteCluster(ctx context.Context, req *connect_go.Request[v1.DeleteClusterRequest]) (*connect_go.Response[v1.DeleteClusterResponse], error) {
+	return c.deleteCluster.CallUnary(ctx, req)
+}
+
 // ClusterControlPlaneServiceHandler is an implementation of the
 // porter.v1.ClusterControlPlaneService service.
 type ClusterControlPlaneServiceHandler interface {
@@ -156,6 +170,9 @@ type ClusterControlPlaneServiceHandler interface {
 	UpdateContract(context.Context, *connect_go.Request[v1.UpdateContractRequest]) (*connect_go.Response[v1.UpdateContractResponse], error)
 	// ClusterStatus returns the status of a given workload cluster
 	ClusterStatus(context.Context, *connect_go.Request[v1.ClusterStatusRequest]) (*connect_go.Response[v1.ClusterStatusResponse], error)
+	// DeleteCluster uninstalls system components from a given workload cluster before deleting it.
+	// This should ultimately be wrapped into UpdateContract
+	DeleteCluster(context.Context, *connect_go.Request[v1.DeleteClusterRequest]) (*connect_go.Response[v1.DeleteClusterResponse], error)
 }
 
 // NewClusterControlPlaneServiceHandler builds an HTTP handler from the service implementation. It
@@ -200,6 +217,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.ClusterStatus,
 		opts...,
 	))
+	mux.Handle("/porter.v1.ClusterControlPlaneService/DeleteCluster", connect_go.NewUnaryHandler(
+		"/porter.v1.ClusterControlPlaneService/DeleteCluster",
+		svc.DeleteCluster,
+		opts...,
+	))
 	return "/porter.v1.ClusterControlPlaneService/", mux
 }
 
@@ -232,4 +254,8 @@ func (UnimplementedClusterControlPlaneServiceHandler) UpdateContract(context.Con
 
 func (UnimplementedClusterControlPlaneServiceHandler) ClusterStatus(context.Context, *connect_go.Request[v1.ClusterStatusRequest]) (*connect_go.Response[v1.ClusterStatusResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ClusterStatus is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) DeleteCluster(context.Context, *connect_go.Request[v1.DeleteClusterRequest]) (*connect_go.Response[v1.DeleteClusterResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.DeleteCluster is not implemented"))
 }

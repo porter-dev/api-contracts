@@ -419,3 +419,61 @@ export declare class ClusterStatusResponse extends Message<ClusterStatusResponse
   static equals(a: ClusterStatusResponse | PlainMessage<ClusterStatusResponse> | undefined, b: ClusterStatusResponse | PlainMessage<ClusterStatusResponse> | undefined): boolean;
 }
 
+/**
+ * @generated from message porter.v1.DeleteClusterRequest
+ */
+export declare class DeleteClusterRequest extends Message<DeleteClusterRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  constructor(data?: PartialMessage<DeleteClusterRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeleteClusterRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteClusterRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteClusterRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteClusterRequest;
+
+  static equals(a: DeleteClusterRequest | PlainMessage<DeleteClusterRequest> | undefined, b: DeleteClusterRequest | PlainMessage<DeleteClusterRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.DeleteClusterResponse
+ */
+export declare class DeleteClusterResponse extends Message<DeleteClusterResponse> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  constructor(data?: PartialMessage<DeleteClusterResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeleteClusterResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteClusterResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteClusterResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteClusterResponse;
+
+  static equals(a: DeleteClusterResponse | PlainMessage<DeleteClusterResponse> | undefined, b: DeleteClusterResponse | PlainMessage<DeleteClusterResponse> | undefined): boolean;
+}
+

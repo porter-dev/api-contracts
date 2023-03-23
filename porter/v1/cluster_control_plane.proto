@@ -76,6 +76,16 @@ message ClusterStatusResponse {
   bool control_plane_status = 5;
 }
 
+message DeleteClusterRequest {
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+}
+
+message DeleteClusterResponse {
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+}
+
 service ClusterControlPlaneService {
   // RolePreflightCheck returns the name and permissions attached to the requested IAM role in the target account
   rpc RolePreflightCheck(RolePreflightCheckRequest) returns (RolePreflightCheckResponse) {}
@@ -97,4 +107,8 @@ service ClusterControlPlaneService {
 
   // ClusterStatus returns the status of a given workload cluster
   rpc ClusterStatus(ClusterStatusRequest) returns (ClusterStatusResponse) {}
+
+  // DeleteCluster uninstalls system components from a given workload cluster before deleting it.
+  // This should ultimately be wrapped into UpdateContract
+  rpc DeleteCluster(DeleteClusterRequest) returns (DeleteClusterResponse) {}
 }
