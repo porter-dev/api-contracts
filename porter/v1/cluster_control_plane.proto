@@ -5,6 +5,17 @@ package porter.v1;
 import "porter/v1/aws_assume_role.proto";
 import "porter/v1/contract.proto";
 
+message RolePreflightCheckRequest {
+  int64 project_id = 1;
+  string target_arn = 2;
+  string external_id = 3;
+}
+
+message RolePreflightCheckResponse {
+  int64 project_id = 1;
+  string role_name = 2;
+}
+
 message CreateAssumeRoleChainRequest {
   int64 project_id = 1;
   string source_arn = 2;
@@ -66,6 +77,9 @@ message ClusterStatusResponse {
 }
 
 service ClusterControlPlaneService {
+  // RolePreflightCheck returns the name and permissions attached to the requested IAM role in the target account
+  rpc RolePreflightCheck(RolePreflightCheckRequest) returns (RolePreflightCheckResponse) {}
+
   // CreateAssumeRoleChain creates a new assume role chain for a given project
   rpc CreateAssumeRoleChain(CreateAssumeRoleChainRequest) returns (CreateAssumeRoleChainResponse) {}
 
