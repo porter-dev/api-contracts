@@ -77,8 +77,7 @@ message ClusterStatusResponse {
 }
 
 message DeleteClusterRequest {
-  int64 project_id = 1;
-  int64 cluster_id = 2;
+  ContractRevision contract_revision = 1;
 }
 
 message DeleteClusterResponse {

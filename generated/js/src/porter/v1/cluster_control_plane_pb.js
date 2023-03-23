@@ -168,8 +168,7 @@ export const ClusterStatusResponse = proto3.makeMessageType(
 export const DeleteClusterRequest = proto3.makeMessageType(
   "porter.v1.DeleteClusterRequest",
   () => [
-    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 1, name: "contract_revision", kind: "message", T: ContractRevision },
   ],
 );
 

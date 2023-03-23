@@ -424,14 +424,9 @@ export declare class ClusterStatusResponse extends Message<ClusterStatusResponse
  */
 export declare class DeleteClusterRequest extends Message<DeleteClusterRequest> {
   /**
-   * @generated from field: int64 project_id = 1;
+   * @generated from field: porter.v1.ContractRevision contract_revision = 1;
    */
-  projectId: bigint;
-
-  /**
-   * @generated from field: int64 cluster_id = 2;
-   */
-  clusterId: bigint;
+  contractRevision?: ContractRevision;
 
   constructor(data?: PartialMessage<DeleteClusterRequest>);
 
