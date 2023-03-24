@@ -52,9 +52,9 @@ export declare class RolePreflightCheckResponse extends Message<RolePreflightChe
   projectId: bigint;
 
   /**
-   * @generated from field: string role_name = 2;
+   * @generated from field: string target_arn = 2;
    */
-  roleName: string;
+  targetArn: string;
 
   constructor(data?: PartialMessage<RolePreflightCheckResponse>);
 
