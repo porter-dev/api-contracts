@@ -13,7 +13,7 @@ message RolePreflightCheckRequest {
 
 message RolePreflightCheckResponse {
   int64 project_id = 1;
-  string role_name = 2;
+  string target_arn = 2;
 }
 
 message CreateAssumeRoleChainRequest {
