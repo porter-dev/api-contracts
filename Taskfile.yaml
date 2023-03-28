@@ -10,7 +10,7 @@ tasks:
     cmds:
     - task: format
     - task: lint
-    # - task: breaking
+    - task: breaking
     - task: generate
 
   generate:
@@ -44,7 +44,7 @@ tasks:
       ignore_error: false
 
   release:
-    desc: "Create and tag a release. Usage: `task release v0.0.0` where v0.0.0 is your desired tag"
+    desc: "Create and tag a release. Usage: `task release -- v0.0.0` where v0.0.0 is your desired tag"
     cmds:
     - cmd: if [ -z "{{.CLI_ARGS}}" ]; then echo "missing version"; exit 1; fi
       ignore_error: false

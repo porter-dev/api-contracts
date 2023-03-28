@@ -31,6 +31,8 @@ const (
 type ClusterControlPlaneServiceClient interface {
 	// RolePreflightCheck returns the name and permissions attached to the requested IAM role in the target account
 	RolePreflightCheck(context.Context, *connect_go.Request[v1.RolePreflightCheckRequest]) (*connect_go.Response[v1.RolePreflightCheckResponse], error)
+	// QuotaPreflightCheck checks if the target account and region has sufficient resources (EIP addresses and VPCs) to provision a new cluster
+	QuotaPreflightCheck(context.Context, *connect_go.Request[v1.QuotaPreflightCheckRequest]) (*connect_go.Response[v1.QuotaPreflightCheckResponse], error)
 	// CreateAssumeRoleChain creates a new assume role chain for a given project
 	CreateAssumeRoleChain(context.Context, *connect_go.Request[v1.CreateAssumeRoleChainRequest]) (*connect_go.Response[v1.CreateAssumeRoleChainResponse], error)
 	// AssumeRoleChainTargets gets the final destination target_arns for a given project
@@ -61,6 +63,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect_go.HTTPClient, baseU
 		rolePreflightCheck: connect_go.NewClient[v1.RolePreflightCheckRequest, v1.RolePreflightCheckResponse](
 			httpClient,
 			baseURL+"/porter.v1.ClusterControlPlaneService/RolePreflightCheck",
+			opts...,
+		),
+		quotaPreflightCheck: connect_go.NewClient[v1.QuotaPreflightCheckRequest, v1.QuotaPreflightCheckResponse](
+			httpClient,
+			baseURL+"/porter.v1.ClusterControlPlaneService/QuotaPreflightCheck",
 			opts...,
 		),
 		createAssumeRoleChain: connect_go.NewClient[v1.CreateAssumeRoleChainRequest, v1.CreateAssumeRoleChainResponse](
@@ -104,6 +111,7 @@ func NewClusterControlPlaneServiceClient(httpClient connect_go.HTTPClient, baseU
 // clusterControlPlaneServiceClient implements ClusterControlPlaneServiceClient.
 type clusterControlPlaneServiceClient struct {
 	rolePreflightCheck     *connect_go.Client[v1.RolePreflightCheckRequest, v1.RolePreflightCheckResponse]
+	quotaPreflightCheck    *connect_go.Client[v1.QuotaPreflightCheckRequest, v1.QuotaPreflightCheckResponse]
 	createAssumeRoleChain  *connect_go.Client[v1.CreateAssumeRoleChainRequest, v1.CreateAssumeRoleChainResponse]
 	assumeRoleChainTargets *connect_go.Client[v1.AssumeRoleChainTargetsRequest, v1.AssumeRoleChainTargetsResponse]
 	eKSBearerToken         *connect_go.Client[v1.EKSBearerTokenRequest, v1.EKSBearerTokenResponse]
@@ -116,6 +124,11 @@ type clusterControlPlaneServiceClient struct {
 // RolePreflightCheck calls porter.v1.ClusterControlPlaneService.RolePreflightCheck.
 func (c *clusterControlPlaneServiceClient) RolePreflightCheck(ctx context.Context, req *connect_go.Request[v1.RolePreflightCheckRequest]) (*connect_go.Response[v1.RolePreflightCheckResponse], error) {
 	return c.rolePreflightCheck.CallUnary(ctx, req)
+}
+
+// QuotaPreflightCheck calls porter.v1.ClusterControlPlaneService.QuotaPreflightCheck.
+func (c *clusterControlPlaneServiceClient) QuotaPreflightCheck(ctx context.Context, req *connect_go.Request[v1.QuotaPreflightCheckRequest]) (*connect_go.Response[v1.QuotaPreflightCheckResponse], error) {
+	return c.quotaPreflightCheck.CallUnary(ctx, req)
 }
 
 // CreateAssumeRoleChain calls porter.v1.ClusterControlPlaneService.CreateAssumeRoleChain.
@@ -158,6 +171,8 @@ func (c *clusterControlPlaneServiceClient) DeleteCluster(ctx context.Context, re
 type ClusterControlPlaneServiceHandler interface {
 	// RolePreflightCheck returns the name and permissions attached to the requested IAM role in the target account
 	RolePreflightCheck(context.Context, *connect_go.Request[v1.RolePreflightCheckRequest]) (*connect_go.Response[v1.RolePreflightCheckResponse], error)
+	// QuotaPreflightCheck checks if the target account and region has sufficient resources (EIP addresses and VPCs) to provision a new cluster
+	QuotaPreflightCheck(context.Context, *connect_go.Request[v1.QuotaPreflightCheckRequest]) (*connect_go.Response[v1.QuotaPreflightCheckResponse], error)
 	// CreateAssumeRoleChain creates a new assume role chain for a given project
 	CreateAssumeRoleChain(context.Context, *connect_go.Request[v1.CreateAssumeRoleChainRequest]) (*connect_go.Response[v1.CreateAssumeRoleChainResponse], error)
 	// AssumeRoleChainTargets gets the final destination target_arns for a given project
@@ -185,6 +200,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 	mux.Handle("/porter.v1.ClusterControlPlaneService/RolePreflightCheck", connect_go.NewUnaryHandler(
 		"/porter.v1.ClusterControlPlaneService/RolePreflightCheck",
 		svc.RolePreflightCheck,
+		opts...,
+	))
+	mux.Handle("/porter.v1.ClusterControlPlaneService/QuotaPreflightCheck", connect_go.NewUnaryHandler(
+		"/porter.v1.ClusterControlPlaneService/QuotaPreflightCheck",
+		svc.QuotaPreflightCheck,
 		opts...,
 	))
 	mux.Handle("/porter.v1.ClusterControlPlaneService/CreateAssumeRoleChain", connect_go.NewUnaryHandler(
@@ -230,6 +250,10 @@ type UnimplementedClusterControlPlaneServiceHandler struct{}
 
 func (UnimplementedClusterControlPlaneServiceHandler) RolePreflightCheck(context.Context, *connect_go.Request[v1.RolePreflightCheckRequest]) (*connect_go.Response[v1.RolePreflightCheckResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.RolePreflightCheck is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) QuotaPreflightCheck(context.Context, *connect_go.Request[v1.QuotaPreflightCheckRequest]) (*connect_go.Response[v1.QuotaPreflightCheckResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.QuotaPreflightCheck is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) CreateAssumeRoleChain(context.Context, *connect_go.Request[v1.CreateAssumeRoleChainRequest]) (*connect_go.Response[v1.CreateAssumeRoleChainResponse], error) {
