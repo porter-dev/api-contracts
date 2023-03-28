@@ -16,6 +16,18 @@ message RolePreflightCheckResponse {
   string target_arn = 2;
 }
 
+message QuotaPreflightCheckRequest {
+  int64 project_id = 1;
+  string target_arn = 2;
+  string external_id = 3;
+  string region = 4;
+}
+
+message QuotaPreflightCheckResponse {
+  int64 project_id = 1;
+  string target_arn = 2;
+}
+
 message CreateAssumeRoleChainRequest {
   int64 project_id = 1;
   string source_arn = 2;
@@ -88,6 +100,9 @@ message DeleteClusterResponse {
 service ClusterControlPlaneService {
   // RolePreflightCheck returns the name and permissions attached to the requested IAM role in the target account
   rpc RolePreflightCheck(RolePreflightCheckRequest) returns (RolePreflightCheckResponse) {}
+
+  // QuotaPreflightCheck checks if the target account and region has sufficient resources (EIP addresses and VPCs) to provision a new cluster
+  rpc QuotaPreflightCheck(QuotaPreflightCheckRequest) returns (QuotaPreflightCheckResponse) {}
 
   // CreateAssumeRoleChain creates a new assume role chain for a given project
   rpc CreateAssumeRoleChain(CreateAssumeRoleChainRequest) returns (CreateAssumeRoleChainResponse) {}
