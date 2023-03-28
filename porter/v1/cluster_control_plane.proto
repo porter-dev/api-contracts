@@ -23,10 +23,7 @@ message QuotaPreflightCheckRequest {
   string region = 4;
 }
 
-message QuotaPreflightCheckResponse {
-  int64 project_id = 1;
-  string target_arn = 2;
-}
+message QuotaPreflightCheckResponse {}
 
 message CreateAssumeRoleChainRequest {
   int64 project_id = 1;

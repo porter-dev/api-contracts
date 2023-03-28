@@ -114,16 +114,6 @@ export declare class QuotaPreflightCheckRequest extends Message<QuotaPreflightCh
  * @generated from message porter.v1.QuotaPreflightCheckResponse
  */
 export declare class QuotaPreflightCheckResponse extends Message<QuotaPreflightCheckResponse> {
-  /**
-   * @generated from field: int64 project_id = 1;
-   */
-  projectId: bigint;
-
-  /**
-   * @generated from field: string target_arn = 2;
-   */
-  targetArn: string;
-
   constructor(data?: PartialMessage<QuotaPreflightCheckResponse>);
 
   static readonly runtime: typeof proto3;

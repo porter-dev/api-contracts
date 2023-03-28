@@ -48,10 +48,7 @@ export const QuotaPreflightCheckRequest = proto3.makeMessageType(
  */
 export const QuotaPreflightCheckResponse = proto3.makeMessageType(
   "porter.v1.QuotaPreflightCheckResponse",
-  () => [
-    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 2, name: "target_arn", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
+  [],
 );
 
 /**
