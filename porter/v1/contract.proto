@@ -7,6 +7,7 @@ import "porter/v1/cluster.proto";
 // Contract represents the API contract for Porter, commonly known as "porter.yaml"
 message Contract {
   Cluster cluster = 1;
+  User user = 2;
 }
 
 // ContractRevision represents a contract revision which should be acted upon, depending on the stream
@@ -19,4 +20,9 @@ message ContractRevision {
   // This field is a UUID represented as a string, for better compatibility.
   // Best practice is to parse this as a uuid upon receipt
   string revision_id = 3;
+}
+
+// User represents a user of Porter, who actioned the change to the contract
+message User {
+  int32 id = 1;
 }
