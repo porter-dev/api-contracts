@@ -6,6 +6,7 @@
 import { proto3 } from "@bufbuild/protobuf";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 import { Contract, ContractRevision } from "./contract_pb.js";
+import { Timestamp } from "./timestamp_pb.js";
 
 /**
  * @generated from message porter.v1.RolePreflightCheckRequest
@@ -201,6 +202,29 @@ export const DeleteClusterResponse = proto3.makeMessageType(
   () => [
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.ECRTokenForRegistryRequest
+ */
+export const ECRTokenForRegistryRequest = proto3.makeMessageType(
+  "porter.v1.ECRTokenForRegistryRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "region", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "aws_account_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.ECRTokenForRegistryResponse
+ */
+export const ECRTokenForRegistryResponse = proto3.makeMessageType(
+  "porter.v1.ECRTokenForRegistryResponse",
+  () => [
+    { no: 1, name: "token", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "expiry", kind: "message", T: Timestamp },
   ],
 );
 

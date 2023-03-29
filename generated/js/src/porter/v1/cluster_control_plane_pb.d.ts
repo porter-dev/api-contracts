@@ -7,6 +7,7 @@ import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialM
 import { Message, proto3 } from "@bufbuild/protobuf";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 import type { Contract, ContractRevision } from "./contract_pb.js";
+import type { Timestamp } from "./timestamp_pb.js";
 
 /**
  * @generated from message porter.v1.RolePreflightCheckRequest
@@ -528,5 +529,68 @@ export declare class DeleteClusterResponse extends Message<DeleteClusterResponse
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteClusterResponse;
 
   static equals(a: DeleteClusterResponse | PlainMessage<DeleteClusterResponse> | undefined, b: DeleteClusterResponse | PlainMessage<DeleteClusterResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.ECRTokenForRegistryRequest
+ */
+export declare class ECRTokenForRegistryRequest extends Message<ECRTokenForRegistryRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: string region = 2;
+   */
+  region: string;
+
+  /**
+   * @generated from field: string aws_account_id = 3;
+   */
+  awsAccountId: string;
+
+  constructor(data?: PartialMessage<ECRTokenForRegistryRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ECRTokenForRegistryRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ECRTokenForRegistryRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ECRTokenForRegistryRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ECRTokenForRegistryRequest;
+
+  static equals(a: ECRTokenForRegistryRequest | PlainMessage<ECRTokenForRegistryRequest> | undefined, b: ECRTokenForRegistryRequest | PlainMessage<ECRTokenForRegistryRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.ECRTokenForRegistryResponse
+ */
+export declare class ECRTokenForRegistryResponse extends Message<ECRTokenForRegistryResponse> {
+  /**
+   * @generated from field: string token = 1;
+   */
+  token: string;
+
+  /**
+   * @generated from field: porter.v1.Timestamp expiry = 2;
+   */
+  expiry?: Timestamp;
+
+  constructor(data?: PartialMessage<ECRTokenForRegistryResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ECRTokenForRegistryResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ECRTokenForRegistryResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ECRTokenForRegistryResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ECRTokenForRegistryResponse;
+
+  static equals(a: ECRTokenForRegistryResponse | PlainMessage<ECRTokenForRegistryResponse> | undefined, b: ECRTokenForRegistryResponse | PlainMessage<ECRTokenForRegistryResponse> | undefined): boolean;
 }
 

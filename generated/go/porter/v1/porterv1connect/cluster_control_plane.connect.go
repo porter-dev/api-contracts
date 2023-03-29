@@ -48,6 +48,8 @@ type ClusterControlPlaneServiceClient interface {
 	// DeleteCluster uninstalls system components from a given workload cluster before deleting it.
 	// This should ultimately be wrapped into UpdateContract
 	DeleteCluster(context.Context, *connect_go.Request[v1.DeleteClusterRequest]) (*connect_go.Response[v1.DeleteClusterResponse], error)
+	// ECRTokenForRegistry returns a docker-compatible token for accessing a given ECR registry
+	ECRTokenForRegistry(context.Context, *connect_go.Request[v1.ECRTokenForRegistryRequest]) (*connect_go.Response[v1.ECRTokenForRegistryResponse], error)
 }
 
 // NewClusterControlPlaneServiceClient constructs a client for the
@@ -105,6 +107,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect_go.HTTPClient, baseU
 			baseURL+"/porter.v1.ClusterControlPlaneService/DeleteCluster",
 			opts...,
 		),
+		eCRTokenForRegistry: connect_go.NewClient[v1.ECRTokenForRegistryRequest, v1.ECRTokenForRegistryResponse](
+			httpClient,
+			baseURL+"/porter.v1.ClusterControlPlaneService/ECRTokenForRegistry",
+			opts...,
+		),
 	}
 }
 
@@ -119,6 +126,7 @@ type clusterControlPlaneServiceClient struct {
 	updateContract         *connect_go.Client[v1.UpdateContractRequest, v1.UpdateContractResponse]
 	clusterStatus          *connect_go.Client[v1.ClusterStatusRequest, v1.ClusterStatusResponse]
 	deleteCluster          *connect_go.Client[v1.DeleteClusterRequest, v1.DeleteClusterResponse]
+	eCRTokenForRegistry    *connect_go.Client[v1.ECRTokenForRegistryRequest, v1.ECRTokenForRegistryResponse]
 }
 
 // RolePreflightCheck calls porter.v1.ClusterControlPlaneService.RolePreflightCheck.
@@ -166,6 +174,11 @@ func (c *clusterControlPlaneServiceClient) DeleteCluster(ctx context.Context, re
 	return c.deleteCluster.CallUnary(ctx, req)
 }
 
+// ECRTokenForRegistry calls porter.v1.ClusterControlPlaneService.ECRTokenForRegistry.
+func (c *clusterControlPlaneServiceClient) ECRTokenForRegistry(ctx context.Context, req *connect_go.Request[v1.ECRTokenForRegistryRequest]) (*connect_go.Response[v1.ECRTokenForRegistryResponse], error) {
+	return c.eCRTokenForRegistry.CallUnary(ctx, req)
+}
+
 // ClusterControlPlaneServiceHandler is an implementation of the
 // porter.v1.ClusterControlPlaneService service.
 type ClusterControlPlaneServiceHandler interface {
@@ -188,6 +201,8 @@ type ClusterControlPlaneServiceHandler interface {
 	// DeleteCluster uninstalls system components from a given workload cluster before deleting it.
 	// This should ultimately be wrapped into UpdateContract
 	DeleteCluster(context.Context, *connect_go.Request[v1.DeleteClusterRequest]) (*connect_go.Response[v1.DeleteClusterResponse], error)
+	// ECRTokenForRegistry returns a docker-compatible token for accessing a given ECR registry
+	ECRTokenForRegistry(context.Context, *connect_go.Request[v1.ECRTokenForRegistryRequest]) (*connect_go.Response[v1.ECRTokenForRegistryResponse], error)
 }
 
 // NewClusterControlPlaneServiceHandler builds an HTTP handler from the service implementation. It
@@ -242,6 +257,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.DeleteCluster,
 		opts...,
 	))
+	mux.Handle("/porter.v1.ClusterControlPlaneService/ECRTokenForRegistry", connect_go.NewUnaryHandler(
+		"/porter.v1.ClusterControlPlaneService/ECRTokenForRegistry",
+		svc.ECRTokenForRegistry,
+		opts...,
+	))
 	return "/porter.v1.ClusterControlPlaneService/", mux
 }
 
@@ -282,4 +302,8 @@ func (UnimplementedClusterControlPlaneServiceHandler) ClusterStatus(context.Cont
 
 func (UnimplementedClusterControlPlaneServiceHandler) DeleteCluster(context.Context, *connect_go.Request[v1.DeleteClusterRequest]) (*connect_go.Response[v1.DeleteClusterResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.DeleteCluster is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) ECRTokenForRegistry(context.Context, *connect_go.Request[v1.ECRTokenForRegistryRequest]) (*connect_go.Response[v1.ECRTokenForRegistryResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ECRTokenForRegistry is not implemented"))
 }

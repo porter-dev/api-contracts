@@ -4,6 +4,7 @@ package porter.v1;
 
 import "porter/v1/aws_assume_role.proto";
 import "porter/v1/contract.proto";
+import "porter/v1/timestamp.proto";
 
 message RolePreflightCheckRequest {
   int64 project_id = 1;
@@ -94,6 +95,17 @@ message DeleteClusterResponse {
   int64 cluster_id = 2;
 }
 
+message ECRTokenForRegistryRequest {
+  int64 project_id = 1;
+  string region = 2;
+  string aws_account_id = 3;
+}
+
+message ECRTokenForRegistryResponse {
+  string token = 1;
+  Timestamp expiry = 2;
+}
+
 service ClusterControlPlaneService {
   // RolePreflightCheck returns the name and permissions attached to the requested IAM role in the target account
   rpc RolePreflightCheck(RolePreflightCheckRequest) returns (RolePreflightCheckResponse) {}
@@ -122,4 +134,7 @@ service ClusterControlPlaneService {
   // DeleteCluster uninstalls system components from a given workload cluster before deleting it.
   // This should ultimately be wrapped into UpdateContract
   rpc DeleteCluster(DeleteClusterRequest) returns (DeleteClusterResponse) {}
+
+  // ECRTokenForRegistry returns a docker-compatible token for accessing a given ECR registry
+  rpc ECRTokenForRegistry(ECRTokenForRegistryRequest) returns (ECRTokenForRegistryResponse) {}
 }
