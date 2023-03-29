@@ -3,10 +3,9 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { proto3 } from "@bufbuild/protobuf";
+import { proto3, Timestamp } from "@bufbuild/protobuf";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 import { Contract, ContractRevision } from "./contract_pb.js";
-import { Timestamp } from "./timestamp_pb.js";
 
 /**
  * @generated from message porter.v1.RolePreflightCheckRequest

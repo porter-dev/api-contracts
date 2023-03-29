@@ -2,9 +2,9 @@ syntax = "proto3";
 
 package porter.v1;
 
+import "google/protobuf/timestamp.proto";
 import "porter/v1/aws_assume_role.proto";
 import "porter/v1/contract.proto";
-import "porter/v1/timestamp.proto";
 
 message RolePreflightCheckRequest {
   int64 project_id = 1;
@@ -103,7 +103,7 @@ message ECRTokenForRegistryRequest {
 
 message ECRTokenForRegistryResponse {
   string token = 1;
-  Timestamp expiry = 2;
+  google.protobuf.Timestamp expiry = 2;
 }
 
 service ClusterControlPlaneService {
