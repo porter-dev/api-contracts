@@ -593,3 +593,66 @@ export declare class ECRTokenForRegistryResponse extends Message<ECRTokenForRegi
   static equals(a: ECRTokenForRegistryResponse | PlainMessage<ECRTokenForRegistryResponse> | undefined, b: ECRTokenForRegistryResponse | PlainMessage<ECRTokenForRegistryResponse> | undefined): boolean;
 }
 
+/**
+ * @generated from message porter.v1.AssumeRoleCredentialsRequest
+ */
+export declare class AssumeRoleCredentialsRequest extends Message<AssumeRoleCredentialsRequest> {
+  /**
+   * @generated from field: string aws_account_id = 1;
+   */
+  awsAccountId: string;
+
+  /**
+   * @generated from field: int64 project_id = 2;
+   */
+  projectId: bigint;
+
+  constructor(data?: PartialMessage<AssumeRoleCredentialsRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AssumeRoleCredentialsRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AssumeRoleCredentialsRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AssumeRoleCredentialsRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AssumeRoleCredentialsRequest;
+
+  static equals(a: AssumeRoleCredentialsRequest | PlainMessage<AssumeRoleCredentialsRequest> | undefined, b: AssumeRoleCredentialsRequest | PlainMessage<AssumeRoleCredentialsRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.AssumeRoleCredentialsResponse
+ */
+export declare class AssumeRoleCredentialsResponse extends Message<AssumeRoleCredentialsResponse> {
+  /**
+   * @generated from field: string aws_access_id = 1;
+   */
+  awsAccessId: string;
+
+  /**
+   * @generated from field: string aws_secret_key = 2;
+   */
+  awsSecretKey: string;
+
+  /**
+   * @generated from field: string aws_session_token = 3;
+   */
+  awsSessionToken: string;
+
+  constructor(data?: PartialMessage<AssumeRoleCredentialsResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AssumeRoleCredentialsResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AssumeRoleCredentialsResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AssumeRoleCredentialsResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AssumeRoleCredentialsResponse;
+
+  static equals(a: AssumeRoleCredentialsResponse | PlainMessage<AssumeRoleCredentialsResponse> | undefined, b: AssumeRoleCredentialsResponse | PlainMessage<AssumeRoleCredentialsResponse> | undefined): boolean;
+}
+

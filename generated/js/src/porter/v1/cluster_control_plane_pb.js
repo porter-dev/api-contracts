@@ -227,3 +227,26 @@ export const ECRTokenForRegistryResponse = proto3.makeMessageType(
   ],
 );
 
+/**
+ * @generated from message porter.v1.AssumeRoleCredentialsRequest
+ */
+export const AssumeRoleCredentialsRequest = proto3.makeMessageType(
+  "porter.v1.AssumeRoleCredentialsRequest",
+  () => [
+    { no: 1, name: "aws_account_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.AssumeRoleCredentialsResponse
+ */
+export const AssumeRoleCredentialsResponse = proto3.makeMessageType(
+  "porter.v1.AssumeRoleCredentialsResponse",
+  () => [
+    { no: 1, name: "aws_access_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "aws_secret_key", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "aws_session_token", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+

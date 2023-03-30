@@ -50,6 +50,9 @@ type ClusterControlPlaneServiceClient interface {
 	DeleteCluster(context.Context, *connect_go.Request[v1.DeleteClusterRequest]) (*connect_go.Response[v1.DeleteClusterResponse], error)
 	// ECRTokenForRegistry returns a docker-compatible token for accessing a given ECR registry
 	ECRTokenForRegistry(context.Context, *connect_go.Request[v1.ECRTokenForRegistryRequest]) (*connect_go.Response[v1.ECRTokenForRegistryResponse], error)
+	// AssumeRoleCredentials should be used vary sparingly, and ONLY for replacing AWS Integrations which have no workaround on the Porter API.
+	// This endpoint returns temporary AWS credentials for a given AWS Account ID, and should not be expanded further to allow specifc role selection without being tied to a project and cluster
+	AssumeRoleCredentials(context.Context, *connect_go.Request[v1.AssumeRoleCredentialsRequest]) (*connect_go.Response[v1.AssumeRoleCredentialsResponse], error)
 }
 
 // NewClusterControlPlaneServiceClient constructs a client for the
@@ -112,6 +115,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect_go.HTTPClient, baseU
 			baseURL+"/porter.v1.ClusterControlPlaneService/ECRTokenForRegistry",
 			opts...,
 		),
+		assumeRoleCredentials: connect_go.NewClient[v1.AssumeRoleCredentialsRequest, v1.AssumeRoleCredentialsResponse](
+			httpClient,
+			baseURL+"/porter.v1.ClusterControlPlaneService/AssumeRoleCredentials",
+			opts...,
+		),
 	}
 }
 
@@ -127,6 +135,7 @@ type clusterControlPlaneServiceClient struct {
 	clusterStatus          *connect_go.Client[v1.ClusterStatusRequest, v1.ClusterStatusResponse]
 	deleteCluster          *connect_go.Client[v1.DeleteClusterRequest, v1.DeleteClusterResponse]
 	eCRTokenForRegistry    *connect_go.Client[v1.ECRTokenForRegistryRequest, v1.ECRTokenForRegistryResponse]
+	assumeRoleCredentials  *connect_go.Client[v1.AssumeRoleCredentialsRequest, v1.AssumeRoleCredentialsResponse]
 }
 
 // RolePreflightCheck calls porter.v1.ClusterControlPlaneService.RolePreflightCheck.
@@ -179,6 +188,11 @@ func (c *clusterControlPlaneServiceClient) ECRTokenForRegistry(ctx context.Conte
 	return c.eCRTokenForRegistry.CallUnary(ctx, req)
 }
 
+// AssumeRoleCredentials calls porter.v1.ClusterControlPlaneService.AssumeRoleCredentials.
+func (c *clusterControlPlaneServiceClient) AssumeRoleCredentials(ctx context.Context, req *connect_go.Request[v1.AssumeRoleCredentialsRequest]) (*connect_go.Response[v1.AssumeRoleCredentialsResponse], error) {
+	return c.assumeRoleCredentials.CallUnary(ctx, req)
+}
+
 // ClusterControlPlaneServiceHandler is an implementation of the
 // porter.v1.ClusterControlPlaneService service.
 type ClusterControlPlaneServiceHandler interface {
@@ -203,6 +217,9 @@ type ClusterControlPlaneServiceHandler interface {
 	DeleteCluster(context.Context, *connect_go.Request[v1.DeleteClusterRequest]) (*connect_go.Response[v1.DeleteClusterResponse], error)
 	// ECRTokenForRegistry returns a docker-compatible token for accessing a given ECR registry
 	ECRTokenForRegistry(context.Context, *connect_go.Request[v1.ECRTokenForRegistryRequest]) (*connect_go.Response[v1.ECRTokenForRegistryResponse], error)
+	// AssumeRoleCredentials should be used vary sparingly, and ONLY for replacing AWS Integrations which have no workaround on the Porter API.
+	// This endpoint returns temporary AWS credentials for a given AWS Account ID, and should not be expanded further to allow specifc role selection without being tied to a project and cluster
+	AssumeRoleCredentials(context.Context, *connect_go.Request[v1.AssumeRoleCredentialsRequest]) (*connect_go.Response[v1.AssumeRoleCredentialsResponse], error)
 }
 
 // NewClusterControlPlaneServiceHandler builds an HTTP handler from the service implementation. It
@@ -262,6 +279,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.ECRTokenForRegistry,
 		opts...,
 	))
+	mux.Handle("/porter.v1.ClusterControlPlaneService/AssumeRoleCredentials", connect_go.NewUnaryHandler(
+		"/porter.v1.ClusterControlPlaneService/AssumeRoleCredentials",
+		svc.AssumeRoleCredentials,
+		opts...,
+	))
 	return "/porter.v1.ClusterControlPlaneService/", mux
 }
 
@@ -306,4 +328,8 @@ func (UnimplementedClusterControlPlaneServiceHandler) DeleteCluster(context.Cont
 
 func (UnimplementedClusterControlPlaneServiceHandler) ECRTokenForRegistry(context.Context, *connect_go.Request[v1.ECRTokenForRegistryRequest]) (*connect_go.Response[v1.ECRTokenForRegistryResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ECRTokenForRegistry is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) AssumeRoleCredentials(context.Context, *connect_go.Request[v1.AssumeRoleCredentialsRequest]) (*connect_go.Response[v1.AssumeRoleCredentialsResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.AssumeRoleCredentials is not implemented"))
 }

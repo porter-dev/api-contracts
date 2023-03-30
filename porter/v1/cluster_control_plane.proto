@@ -106,6 +106,17 @@ message ECRTokenForRegistryResponse {
   google.protobuf.Timestamp expiry = 2;
 }
 
+message AssumeRoleCredentialsRequest {
+  string aws_account_id = 1;
+  int64 project_id = 2;
+}
+
+message AssumeRoleCredentialsResponse {
+  string aws_access_id = 1;
+  string aws_secret_key = 2;
+  string aws_session_token = 3;
+}
+
 service ClusterControlPlaneService {
   // RolePreflightCheck returns the name and permissions attached to the requested IAM role in the target account
   rpc RolePreflightCheck(RolePreflightCheckRequest) returns (RolePreflightCheckResponse) {}
@@ -137,4 +148,8 @@ service ClusterControlPlaneService {
 
   // ECRTokenForRegistry returns a docker-compatible token for accessing a given ECR registry
   rpc ECRTokenForRegistry(ECRTokenForRegistryRequest) returns (ECRTokenForRegistryResponse) {}
+
+  // AssumeRoleCredentials should be used vary sparingly, and ONLY for replacing AWS Integrations which have no workaround on the Porter API.
+  // This endpoint returns temporary AWS credentials for a given AWS Account ID, and should not be expanded further to allow specifc role selection without being tied to a project and cluster
+  rpc AssumeRoleCredentials(AssumeRoleCredentialsRequest) returns (AssumeRoleCredentialsResponse) {}
 }
