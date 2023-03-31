@@ -62,6 +62,8 @@ export const CreateAssumeRoleChainRequest = proto3.makeMessageType(
     { no: 3, name: "target_access_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "target_secret_key", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "target_session_token", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 6, name: "target_arn", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 7, name: "external_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

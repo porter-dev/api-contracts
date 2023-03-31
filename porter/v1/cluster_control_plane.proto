@@ -31,6 +31,8 @@ message CreateAssumeRoleChainRequest {
   string target_access_id = 3;
   string target_secret_key = 4;
   string target_session_token = 5;
+  string target_arn = 6;
+  string external_id = 7;
 }
 
 message CreateAssumeRoleChainResponse {

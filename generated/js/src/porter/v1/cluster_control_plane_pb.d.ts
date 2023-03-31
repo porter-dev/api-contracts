@@ -158,6 +158,16 @@ export declare class CreateAssumeRoleChainRequest extends Message<CreateAssumeRo
    */
   targetSessionToken: string;
 
+  /**
+   * @generated from field: string target_arn = 6;
+   */
+  targetArn: string;
+
+  /**
+   * @generated from field: string external_id = 7;
+   */
+  externalId: string;
+
   constructor(data?: PartialMessage<CreateAssumeRoleChainRequest>);
 
   static readonly runtime: typeof proto3;
