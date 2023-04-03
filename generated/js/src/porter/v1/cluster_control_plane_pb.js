@@ -8,29 +8,6 @@ import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 import { Contract, ContractRevision } from "./contract_pb.js";
 
 /**
- * @generated from message porter.v1.RolePreflightCheckRequest
- */
-export const RolePreflightCheckRequest = proto3.makeMessageType(
-  "porter.v1.RolePreflightCheckRequest",
-  () => [
-    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 2, name: "target_arn", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "external_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-);
-
-/**
- * @generated from message porter.v1.RolePreflightCheckResponse
- */
-export const RolePreflightCheckResponse = proto3.makeMessageType(
-  "porter.v1.RolePreflightCheckResponse",
-  () => [
-    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 2, name: "target_arn", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-);
-
-/**
  * @generated from message porter.v1.QuotaPreflightCheckRequest
  */
 export const QuotaPreflightCheckRequest = proto3.makeMessageType(

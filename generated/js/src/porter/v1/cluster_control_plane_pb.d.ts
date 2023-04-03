@@ -9,69 +9,6 @@ import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 import type { Contract, ContractRevision } from "./contract_pb.js";
 
 /**
- * @generated from message porter.v1.RolePreflightCheckRequest
- */
-export declare class RolePreflightCheckRequest extends Message<RolePreflightCheckRequest> {
-  /**
-   * @generated from field: int64 project_id = 1;
-   */
-  projectId: bigint;
-
-  /**
-   * @generated from field: string target_arn = 2;
-   */
-  targetArn: string;
-
-  /**
-   * @generated from field: string external_id = 3;
-   */
-  externalId: string;
-
-  constructor(data?: PartialMessage<RolePreflightCheckRequest>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.RolePreflightCheckRequest";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RolePreflightCheckRequest;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RolePreflightCheckRequest;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RolePreflightCheckRequest;
-
-  static equals(a: RolePreflightCheckRequest | PlainMessage<RolePreflightCheckRequest> | undefined, b: RolePreflightCheckRequest | PlainMessage<RolePreflightCheckRequest> | undefined): boolean;
-}
-
-/**
- * @generated from message porter.v1.RolePreflightCheckResponse
- */
-export declare class RolePreflightCheckResponse extends Message<RolePreflightCheckResponse> {
-  /**
-   * @generated from field: int64 project_id = 1;
-   */
-  projectId: bigint;
-
-  /**
-   * @generated from field: string target_arn = 2;
-   */
-  targetArn: string;
-
-  constructor(data?: PartialMessage<RolePreflightCheckResponse>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.RolePreflightCheckResponse";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RolePreflightCheckResponse;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RolePreflightCheckResponse;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RolePreflightCheckResponse;
-
-  static equals(a: RolePreflightCheckResponse | PlainMessage<RolePreflightCheckResponse> | undefined, b: RolePreflightCheckResponse | PlainMessage<RolePreflightCheckResponse> | undefined): boolean;
-}
-
-/**
  * @generated from message porter.v1.QuotaPreflightCheckRequest
  */
 export declare class QuotaPreflightCheckRequest extends Message<QuotaPreflightCheckRequest> {

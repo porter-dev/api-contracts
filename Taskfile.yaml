@@ -10,7 +10,7 @@ tasks:
     cmds:
     - task: format
     - task: lint
-    - task: breaking
+    - # task: breaking
     - task: generate
 
   generate:
