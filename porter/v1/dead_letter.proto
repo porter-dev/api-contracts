@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package porter.v1;
+
+import "porter/v1/contract.proto";
+import "porter/v1/errors.proto";
+
+message DeadLetter {
+  ContractRevision contract_revision = 1;
+
+  Error error = 2;
+}

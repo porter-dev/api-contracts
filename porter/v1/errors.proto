@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package porter.v1;
+
+// Error is a lightweight error message contract
+message Error {
+  // code is an error code which can be programatically cased on
+  string code = 1;
+  // message is a human readable error message, which should only be used in fallback cases. The caller should handle what is shown to the user
+  string message = 2;
+  // metadata is a map of additional metadata about the error
+  map<string, string> metadata = 3;
+}
