@@ -39,6 +39,15 @@ message EKSBearerTokenResponse {
   string token = 1;
 }
 
+message CertificateAuthorityDataRequest {
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+}
+
+message CertificateAuthorityDataResponse {
+  string certificate_authority_data = 1;
+}
+
 message AssumeRoleChainTargetsRequest {
   string project_id = 1;
 }
@@ -117,6 +126,9 @@ service ClusterControlPlaneService {
 
   // AssumeRoleChainTargets gets the final destination target_arns for a given project
   rpc AssumeRoleChainTargets(AssumeRoleChainTargetsRequest) returns (AssumeRoleChainTargetsResponse) {}
+
+  // CertificateAuthorityData gets the certificate authority data for a customer cluster
+  rpc CertificateAuthorityData(CertificateAuthorityDataRequest) returns (CertificateAuthorityDataResponse) {}
 
   // EKSBearerToken gets a bearer token for programatic access to an EKS cluster's kubernetes API
   rpc EKSBearerToken(EKSBearerTokenRequest) returns (EKSBearerTokenResponse) {}
