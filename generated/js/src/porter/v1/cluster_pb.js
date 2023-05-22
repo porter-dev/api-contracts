@@ -6,6 +6,7 @@
 import { proto3 } from "@bufbuild/protobuf";
 import { EKS } from "./eks_pb.js";
 import { GKE } from "./gke_pb.js";
+import { AKS } from "./aks_pb.js";
 
 /**
  * @generated from enum porter.v1.EnumKubernetesKind
@@ -16,6 +17,7 @@ export const EnumKubernetesKind = proto3.makeEnum(
     {no: 0, name: "ENUM_KUBERNETES_KIND_UNSPECIFIED", localName: "UNSPECIFIED"},
     {no: 1, name: "ENUM_KUBERNETES_KIND_EKS", localName: "EKS"},
     {no: 2, name: "ENUM_KUBERNETES_KIND_GKE", localName: "GKE"},
+    {no: 3, name: "ENUM_KUBERNETES_KIND_AKS", localName: "AKS"},
   ],
 );
 
@@ -28,6 +30,7 @@ export const EnumCloudProvider = proto3.makeEnum(
     {no: 0, name: "ENUM_CLOUD_PROVIDER_UNSPECIFIED", localName: "UNSPECIFIED"},
     {no: 1, name: "ENUM_CLOUD_PROVIDER_AWS", localName: "AWS"},
     {no: 2, name: "ENUM_CLOUD_PROVIDER_GCP", localName: "GCP"},
+    {no: 3, name: "ENUM_CLOUD_PROVIDER_AZURE", localName: "AZURE"},
   ],
 );
 
@@ -44,6 +47,7 @@ export const Cluster = proto3.makeMessageType(
     { no: 5, name: "cloud_provider_credentials_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 6, name: "eks_kind", kind: "message", T: EKS, oneof: "kind_values" },
     { no: 7, name: "gke_kind", kind: "message", T: GKE, oneof: "kind_values" },
+    { no: 8, name: "aks_kind", kind: "message", T: AKS, oneof: "kind_values" },
   ],
 );
 

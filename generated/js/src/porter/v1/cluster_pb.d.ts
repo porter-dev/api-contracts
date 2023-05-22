@@ -7,6 +7,7 @@ import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialM
 import { Message, proto3 } from "@bufbuild/protobuf";
 import type { EKS } from "./eks_pb.js";
 import type { GKE } from "./gke_pb.js";
+import type { AKS } from "./aks_pb.js";
 
 /**
  * @generated from enum porter.v1.EnumKubernetesKind
@@ -26,6 +27,11 @@ export declare enum EnumKubernetesKind {
    * @generated from enum value: ENUM_KUBERNETES_KIND_GKE = 2;
    */
   GKE = 2,
+
+  /**
+   * @generated from enum value: ENUM_KUBERNETES_KIND_AKS = 3;
+   */
+  AKS = 3,
 }
 
 /**
@@ -46,6 +52,11 @@ export declare enum EnumCloudProvider {
    * @generated from enum value: ENUM_CLOUD_PROVIDER_GCP = 2;
    */
   GCP = 2,
+
+  /**
+   * @generated from enum value: ENUM_CLOUD_PROVIDER_AZURE = 3;
+   */
+  AZURE = 3,
 }
 
 /**
@@ -105,6 +116,12 @@ export declare class Cluster extends Message<Cluster> {
      */
     value: GKE;
     case: "gkeKind";
+  } | {
+    /**
+     * @generated from field: porter.v1.AKS aks_kind = 8;
+     */
+    value: AKS;
+    case: "aksKind";
   } | { case: undefined; value?: undefined };
 
   constructor(data?: PartialMessage<Cluster>);

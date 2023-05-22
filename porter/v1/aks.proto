@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package porter.v1;
+
+message AKS {
+  string cluster_name = 1;
+  string cluster_version = 2;
+  string cidr_range = 3;
+  string location = 4;
+  repeated AKSNodePool node_pools = 5;
+}
+
+message AKSNodePool {
+  string instance_type = 1;
+  uint32 min_instances = 2;
+  uint32 max_instances = 3;
+  string mode = 4;
+  NodePoolType node_pool_type = 5;
+}
+
+enum NodePoolType {
+  NODE_POOL_TYPE_UNSPECIFIED = 0;
+  NODE_POOL_TYPE_SYSTEM = 1;
+  NODE_POOL_TYPE_MONITORING = 2;
+  NODE_POOL_TYPE_APPLICATION = 3;
+  NODE_POOL_TYPE_CUSTOM = 4;
+}

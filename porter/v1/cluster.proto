@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package porter.v1;
 
+import "porter/v1/aks.proto";
 import "porter/v1/eks.proto";
 import "porter/v1/gke.proto";
 
@@ -21,16 +22,19 @@ message Cluster {
   oneof kind_values {
     EKS eks_kind = 6;
     GKE gke_kind = 7;
+    AKS aks_kind = 8;
   }
 }
 enum EnumKubernetesKind {
   ENUM_KUBERNETES_KIND_UNSPECIFIED = 0;
   ENUM_KUBERNETES_KIND_EKS = 1;
   ENUM_KUBERNETES_KIND_GKE = 2;
+  ENUM_KUBERNETES_KIND_AKS = 3;
 }
 
 enum EnumCloudProvider {
   ENUM_CLOUD_PROVIDER_UNSPECIFIED = 0;
   ENUM_CLOUD_PROVIDER_AWS = 1;
   ENUM_CLOUD_PROVIDER_GCP = 2;
+  ENUM_CLOUD_PROVIDER_AZURE = 3;
 }
