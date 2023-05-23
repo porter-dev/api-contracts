@@ -56,6 +56,28 @@ export const CreateAssumeRoleChainResponse = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message porter.v1.CreateAzureConnectionRequest
+ */
+export const CreateAzureConnectionRequest = proto3.makeMessageType(
+  "porter.v1.CreateAzureConnectionRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "client_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "subscription_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "tenant_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "service_principal_secret", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.CreateAzureConnectionResponse
+ */
+export const CreateAzureConnectionResponse = proto3.makeMessageType(
+  "porter.v1.CreateAzureConnectionResponse",
+  [],
+);
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  */
 export const EKSBearerTokenRequest = proto3.makeMessageType(

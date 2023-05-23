@@ -150,6 +150,69 @@ export declare class CreateAssumeRoleChainResponse extends Message<CreateAssumeR
 }
 
 /**
+ * @generated from message porter.v1.CreateAzureConnectionRequest
+ */
+export declare class CreateAzureConnectionRequest extends Message<CreateAzureConnectionRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: string client_id = 2;
+   */
+  clientId: string;
+
+  /**
+   * @generated from field: string subscription_id = 3;
+   */
+  subscriptionId: string;
+
+  /**
+   * @generated from field: string tenant_id = 4;
+   */
+  tenantId: string;
+
+  /**
+   * @generated from field: bytes service_principal_secret = 5;
+   */
+  servicePrincipalSecret: Uint8Array;
+
+  constructor(data?: PartialMessage<CreateAzureConnectionRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CreateAzureConnectionRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateAzureConnectionRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateAzureConnectionRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateAzureConnectionRequest;
+
+  static equals(a: CreateAzureConnectionRequest | PlainMessage<CreateAzureConnectionRequest> | undefined, b: CreateAzureConnectionRequest | PlainMessage<CreateAzureConnectionRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.CreateAzureConnectionResponse
+ */
+export declare class CreateAzureConnectionResponse extends Message<CreateAzureConnectionResponse> {
+  constructor(data?: PartialMessage<CreateAzureConnectionResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CreateAzureConnectionResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateAzureConnectionResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateAzureConnectionResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateAzureConnectionResponse;
+
+  static equals(a: CreateAzureConnectionResponse | PlainMessage<CreateAzureConnectionResponse> | undefined, b: CreateAzureConnectionResponse | PlainMessage<CreateAzureConnectionResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  */
 export declare class EKSBearerTokenRequest extends Message<EKSBearerTokenRequest> {
