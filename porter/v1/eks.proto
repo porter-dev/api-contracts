@@ -8,6 +8,7 @@ message EKS {
   string cidr_range = 3;
   string region = 4;
   repeated EKSNodeGroup node_groups = 5;
+  LoadBalancer load_balancer = 6;
 }
 
 message EKSNodeGroup {
@@ -24,4 +25,19 @@ enum NodeGroupType {
   NODE_GROUP_TYPE_MONITORING = 2;
   NODE_GROUP_TYPE_APPLICATION = 3;
   NODE_GROUP_TYPE_CUSTOM = 4;
+}
+
+message LoadBalancer {
+  // load_balancer_type is the type of load balancer to deploy. If unspecified, this will be assumed to be NLB for AWS
+  LoadBalancerType load_balancer_type = 1;
+  // wildcard_domain is used in ALB loadbalancer deployment when allowlisting IPs. This has no effect when load_balancer_type is NLB
+  string wildcard_domain = 2;
+  // allowlist_ip_ranges are comma separated CIDRS, which are the only ranges who will be granted access to ALB ingress resources. This has no effect when load_balancer_type is NLB
+  string allowlist_ip_ranges = 3;
+}
+
+enum LoadBalancerType {
+  LOAD_BALANCER_TYPE_UNSPECIFIED = 0;
+  LOAD_BALANCER_TYPE_NLB = 1;
+  LOAD_BALANCER_TYPE_ALB = 2;
 }

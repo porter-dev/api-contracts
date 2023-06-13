@@ -26,52 +26,6 @@ const (
 	ClusterControlPlaneServiceName = "porter.v1.ClusterControlPlaneService"
 )
 
-// These constants are the fully-qualified names of the RPCs defined in this package. They're
-// exposed at runtime as Spec.Procedure and as the final two segments of the HTTP route.
-//
-// Note that these are different from the fully-qualified method names used by
-// google.golang.org/protobuf/reflect/protoreflect. To convert from these constants to
-// reflection-formatted method names, remove the leading slash and convert the remaining slash to a
-// period.
-const (
-	// ClusterControlPlaneServiceQuotaPreflightCheckProcedure is the fully-qualified name of the
-	// ClusterControlPlaneService's QuotaPreflightCheck RPC.
-	ClusterControlPlaneServiceQuotaPreflightCheckProcedure = "/porter.v1.ClusterControlPlaneService/QuotaPreflightCheck"
-	// ClusterControlPlaneServiceCreateAssumeRoleChainProcedure is the fully-qualified name of the
-	// ClusterControlPlaneService's CreateAssumeRoleChain RPC.
-	ClusterControlPlaneServiceCreateAssumeRoleChainProcedure = "/porter.v1.ClusterControlPlaneService/CreateAssumeRoleChain"
-	// ClusterControlPlaneServiceAssumeRoleChainTargetsProcedure is the fully-qualified name of the
-	// ClusterControlPlaneService's AssumeRoleChainTargets RPC.
-	ClusterControlPlaneServiceAssumeRoleChainTargetsProcedure = "/porter.v1.ClusterControlPlaneService/AssumeRoleChainTargets"
-	// ClusterControlPlaneServiceCreateAzureConnectionProcedure is the fully-qualified name of the
-	// ClusterControlPlaneService's CreateAzureConnection RPC.
-	ClusterControlPlaneServiceCreateAzureConnectionProcedure = "/porter.v1.ClusterControlPlaneService/CreateAzureConnection"
-	// ClusterControlPlaneServiceCertificateAuthorityDataProcedure is the fully-qualified name of the
-	// ClusterControlPlaneService's CertificateAuthorityData RPC.
-	ClusterControlPlaneServiceCertificateAuthorityDataProcedure = "/porter.v1.ClusterControlPlaneService/CertificateAuthorityData"
-	// ClusterControlPlaneServiceEKSBearerTokenProcedure is the fully-qualified name of the
-	// ClusterControlPlaneService's EKSBearerToken RPC.
-	ClusterControlPlaneServiceEKSBearerTokenProcedure = "/porter.v1.ClusterControlPlaneService/EKSBearerToken"
-	// ClusterControlPlaneServiceKubeConfigForClusterProcedure is the fully-qualified name of the
-	// ClusterControlPlaneService's KubeConfigForCluster RPC.
-	ClusterControlPlaneServiceKubeConfigForClusterProcedure = "/porter.v1.ClusterControlPlaneService/KubeConfigForCluster"
-	// ClusterControlPlaneServiceUpdateContractProcedure is the fully-qualified name of the
-	// ClusterControlPlaneService's UpdateContract RPC.
-	ClusterControlPlaneServiceUpdateContractProcedure = "/porter.v1.ClusterControlPlaneService/UpdateContract"
-	// ClusterControlPlaneServiceClusterStatusProcedure is the fully-qualified name of the
-	// ClusterControlPlaneService's ClusterStatus RPC.
-	ClusterControlPlaneServiceClusterStatusProcedure = "/porter.v1.ClusterControlPlaneService/ClusterStatus"
-	// ClusterControlPlaneServiceDeleteClusterProcedure is the fully-qualified name of the
-	// ClusterControlPlaneService's DeleteCluster RPC.
-	ClusterControlPlaneServiceDeleteClusterProcedure = "/porter.v1.ClusterControlPlaneService/DeleteCluster"
-	// ClusterControlPlaneServiceECRTokenForRegistryProcedure is the fully-qualified name of the
-	// ClusterControlPlaneService's ECRTokenForRegistry RPC.
-	ClusterControlPlaneServiceECRTokenForRegistryProcedure = "/porter.v1.ClusterControlPlaneService/ECRTokenForRegistry"
-	// ClusterControlPlaneServiceAssumeRoleCredentialsProcedure is the fully-qualified name of the
-	// ClusterControlPlaneService's AssumeRoleCredentials RPC.
-	ClusterControlPlaneServiceAssumeRoleCredentialsProcedure = "/porter.v1.ClusterControlPlaneService/AssumeRoleCredentials"
-)
-
 // ClusterControlPlaneServiceClient is a client for the porter.v1.ClusterControlPlaneService
 // service.
 type ClusterControlPlaneServiceClient interface {
@@ -115,62 +69,62 @@ func NewClusterControlPlaneServiceClient(httpClient connect_go.HTTPClient, baseU
 	return &clusterControlPlaneServiceClient{
 		quotaPreflightCheck: connect_go.NewClient[v1.QuotaPreflightCheckRequest, v1.QuotaPreflightCheckResponse](
 			httpClient,
-			baseURL+ClusterControlPlaneServiceQuotaPreflightCheckProcedure,
+			baseURL+"/porter.v1.ClusterControlPlaneService/QuotaPreflightCheck",
 			opts...,
 		),
 		createAssumeRoleChain: connect_go.NewClient[v1.CreateAssumeRoleChainRequest, v1.CreateAssumeRoleChainResponse](
 			httpClient,
-			baseURL+ClusterControlPlaneServiceCreateAssumeRoleChainProcedure,
+			baseURL+"/porter.v1.ClusterControlPlaneService/CreateAssumeRoleChain",
 			opts...,
 		),
 		assumeRoleChainTargets: connect_go.NewClient[v1.AssumeRoleChainTargetsRequest, v1.AssumeRoleChainTargetsResponse](
 			httpClient,
-			baseURL+ClusterControlPlaneServiceAssumeRoleChainTargetsProcedure,
+			baseURL+"/porter.v1.ClusterControlPlaneService/AssumeRoleChainTargets",
 			opts...,
 		),
 		createAzureConnection: connect_go.NewClient[v1.CreateAzureConnectionRequest, v1.CreateAzureConnectionResponse](
 			httpClient,
-			baseURL+ClusterControlPlaneServiceCreateAzureConnectionProcedure,
+			baseURL+"/porter.v1.ClusterControlPlaneService/CreateAzureConnection",
 			opts...,
 		),
 		certificateAuthorityData: connect_go.NewClient[v1.CertificateAuthorityDataRequest, v1.CertificateAuthorityDataResponse](
 			httpClient,
-			baseURL+ClusterControlPlaneServiceCertificateAuthorityDataProcedure,
+			baseURL+"/porter.v1.ClusterControlPlaneService/CertificateAuthorityData",
 			opts...,
 		),
 		eKSBearerToken: connect_go.NewClient[v1.EKSBearerTokenRequest, v1.EKSBearerTokenResponse](
 			httpClient,
-			baseURL+ClusterControlPlaneServiceEKSBearerTokenProcedure,
+			baseURL+"/porter.v1.ClusterControlPlaneService/EKSBearerToken",
 			opts...,
 		),
 		kubeConfigForCluster: connect_go.NewClient[v1.KubeConfigForClusterRequest, v1.KubeConfigForClusterResponse](
 			httpClient,
-			baseURL+ClusterControlPlaneServiceKubeConfigForClusterProcedure,
+			baseURL+"/porter.v1.ClusterControlPlaneService/KubeConfigForCluster",
 			opts...,
 		),
 		updateContract: connect_go.NewClient[v1.UpdateContractRequest, v1.UpdateContractResponse](
 			httpClient,
-			baseURL+ClusterControlPlaneServiceUpdateContractProcedure,
+			baseURL+"/porter.v1.ClusterControlPlaneService/UpdateContract",
 			opts...,
 		),
 		clusterStatus: connect_go.NewClient[v1.ClusterStatusRequest, v1.ClusterStatusResponse](
 			httpClient,
-			baseURL+ClusterControlPlaneServiceClusterStatusProcedure,
+			baseURL+"/porter.v1.ClusterControlPlaneService/ClusterStatus",
 			opts...,
 		),
 		deleteCluster: connect_go.NewClient[v1.DeleteClusterRequest, v1.DeleteClusterResponse](
 			httpClient,
-			baseURL+ClusterControlPlaneServiceDeleteClusterProcedure,
+			baseURL+"/porter.v1.ClusterControlPlaneService/DeleteCluster",
 			opts...,
 		),
 		eCRTokenForRegistry: connect_go.NewClient[v1.ECRTokenForRegistryRequest, v1.ECRTokenForRegistryResponse](
 			httpClient,
-			baseURL+ClusterControlPlaneServiceECRTokenForRegistryProcedure,
+			baseURL+"/porter.v1.ClusterControlPlaneService/ECRTokenForRegistry",
 			opts...,
 		),
 		assumeRoleCredentials: connect_go.NewClient[v1.AssumeRoleCredentialsRequest, v1.AssumeRoleCredentialsResponse](
 			httpClient,
-			baseURL+ClusterControlPlaneServiceAssumeRoleCredentialsProcedure,
+			baseURL+"/porter.v1.ClusterControlPlaneService/AssumeRoleCredentials",
 			opts...,
 		),
 	}
@@ -290,63 +244,63 @@ type ClusterControlPlaneServiceHandler interface {
 // and JSON codecs. They also support gzip compression.
 func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler, opts ...connect_go.HandlerOption) (string, http.Handler) {
 	mux := http.NewServeMux()
-	mux.Handle(ClusterControlPlaneServiceQuotaPreflightCheckProcedure, connect_go.NewUnaryHandler(
-		ClusterControlPlaneServiceQuotaPreflightCheckProcedure,
+	mux.Handle("/porter.v1.ClusterControlPlaneService/QuotaPreflightCheck", connect_go.NewUnaryHandler(
+		"/porter.v1.ClusterControlPlaneService/QuotaPreflightCheck",
 		svc.QuotaPreflightCheck,
 		opts...,
 	))
-	mux.Handle(ClusterControlPlaneServiceCreateAssumeRoleChainProcedure, connect_go.NewUnaryHandler(
-		ClusterControlPlaneServiceCreateAssumeRoleChainProcedure,
+	mux.Handle("/porter.v1.ClusterControlPlaneService/CreateAssumeRoleChain", connect_go.NewUnaryHandler(
+		"/porter.v1.ClusterControlPlaneService/CreateAssumeRoleChain",
 		svc.CreateAssumeRoleChain,
 		opts...,
 	))
-	mux.Handle(ClusterControlPlaneServiceAssumeRoleChainTargetsProcedure, connect_go.NewUnaryHandler(
-		ClusterControlPlaneServiceAssumeRoleChainTargetsProcedure,
+	mux.Handle("/porter.v1.ClusterControlPlaneService/AssumeRoleChainTargets", connect_go.NewUnaryHandler(
+		"/porter.v1.ClusterControlPlaneService/AssumeRoleChainTargets",
 		svc.AssumeRoleChainTargets,
 		opts...,
 	))
-	mux.Handle(ClusterControlPlaneServiceCreateAzureConnectionProcedure, connect_go.NewUnaryHandler(
-		ClusterControlPlaneServiceCreateAzureConnectionProcedure,
+	mux.Handle("/porter.v1.ClusterControlPlaneService/CreateAzureConnection", connect_go.NewUnaryHandler(
+		"/porter.v1.ClusterControlPlaneService/CreateAzureConnection",
 		svc.CreateAzureConnection,
 		opts...,
 	))
-	mux.Handle(ClusterControlPlaneServiceCertificateAuthorityDataProcedure, connect_go.NewUnaryHandler(
-		ClusterControlPlaneServiceCertificateAuthorityDataProcedure,
+	mux.Handle("/porter.v1.ClusterControlPlaneService/CertificateAuthorityData", connect_go.NewUnaryHandler(
+		"/porter.v1.ClusterControlPlaneService/CertificateAuthorityData",
 		svc.CertificateAuthorityData,
 		opts...,
 	))
-	mux.Handle(ClusterControlPlaneServiceEKSBearerTokenProcedure, connect_go.NewUnaryHandler(
-		ClusterControlPlaneServiceEKSBearerTokenProcedure,
+	mux.Handle("/porter.v1.ClusterControlPlaneService/EKSBearerToken", connect_go.NewUnaryHandler(
+		"/porter.v1.ClusterControlPlaneService/EKSBearerToken",
 		svc.EKSBearerToken,
 		opts...,
 	))
-	mux.Handle(ClusterControlPlaneServiceKubeConfigForClusterProcedure, connect_go.NewUnaryHandler(
-		ClusterControlPlaneServiceKubeConfigForClusterProcedure,
+	mux.Handle("/porter.v1.ClusterControlPlaneService/KubeConfigForCluster", connect_go.NewUnaryHandler(
+		"/porter.v1.ClusterControlPlaneService/KubeConfigForCluster",
 		svc.KubeConfigForCluster,
 		opts...,
 	))
-	mux.Handle(ClusterControlPlaneServiceUpdateContractProcedure, connect_go.NewUnaryHandler(
-		ClusterControlPlaneServiceUpdateContractProcedure,
+	mux.Handle("/porter.v1.ClusterControlPlaneService/UpdateContract", connect_go.NewUnaryHandler(
+		"/porter.v1.ClusterControlPlaneService/UpdateContract",
 		svc.UpdateContract,
 		opts...,
 	))
-	mux.Handle(ClusterControlPlaneServiceClusterStatusProcedure, connect_go.NewUnaryHandler(
-		ClusterControlPlaneServiceClusterStatusProcedure,
+	mux.Handle("/porter.v1.ClusterControlPlaneService/ClusterStatus", connect_go.NewUnaryHandler(
+		"/porter.v1.ClusterControlPlaneService/ClusterStatus",
 		svc.ClusterStatus,
 		opts...,
 	))
-	mux.Handle(ClusterControlPlaneServiceDeleteClusterProcedure, connect_go.NewUnaryHandler(
-		ClusterControlPlaneServiceDeleteClusterProcedure,
+	mux.Handle("/porter.v1.ClusterControlPlaneService/DeleteCluster", connect_go.NewUnaryHandler(
+		"/porter.v1.ClusterControlPlaneService/DeleteCluster",
 		svc.DeleteCluster,
 		opts...,
 	))
-	mux.Handle(ClusterControlPlaneServiceECRTokenForRegistryProcedure, connect_go.NewUnaryHandler(
-		ClusterControlPlaneServiceECRTokenForRegistryProcedure,
+	mux.Handle("/porter.v1.ClusterControlPlaneService/ECRTokenForRegistry", connect_go.NewUnaryHandler(
+		"/porter.v1.ClusterControlPlaneService/ECRTokenForRegistry",
 		svc.ECRTokenForRegistry,
 		opts...,
 	))
-	mux.Handle(ClusterControlPlaneServiceAssumeRoleCredentialsProcedure, connect_go.NewUnaryHandler(
-		ClusterControlPlaneServiceAssumeRoleCredentialsProcedure,
+	mux.Handle("/porter.v1.ClusterControlPlaneService/AssumeRoleCredentials", connect_go.NewUnaryHandler(
+		"/porter.v1.ClusterControlPlaneService/AssumeRoleCredentials",
 		svc.AssumeRoleCredentials,
 		opts...,
 	))
