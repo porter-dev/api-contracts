@@ -38,7 +38,10 @@ message CreateAzureConnectionRequest {
   bytes service_principal_secret = 5;
 }
 
-message CreateAzureConnectionResponse {}
+message CreateAzureConnectionResponse {
+  int64 project_id = 1;
+  string credentials_identifier = 2;
+}
 
 message EKSBearerTokenRequest {
   int64 project_id = 1;
@@ -127,6 +130,54 @@ message AssumeRoleCredentialsResponse {
   string aws_session_token = 3;
 }
 
+message ListRepositoriesForRegistryRequest {
+  int64 project_id = 1;
+  string registry_uri = 2;
+}
+
+message ListRepositoriesForRegistryResponse {
+  repeated Repository repositories = 1;
+}
+
+message Repository {
+  string name = 1;
+  string uri = 3;
+}
+
+message ListImagesForRepositoryRequest {
+  int64 project_id = 1;
+  string registry_uri = 2;
+  string repo_name = 3;
+}
+
+message ListImagesForRepositoryResponse {
+  repeated Image images = 1;
+}
+
+message Image {
+  string repository_name = 1;
+  string tag = 2;
+}
+
+message TokenForRegistryRequest {
+  int64 project_id = 1;
+  string registry_uri = 2;
+}
+
+message TokenForRegistryResponse {
+  string token = 1;
+  google.protobuf.Timestamp expiry = 2;
+}
+
+message DockerConfigFileForRegistryRequest {
+  int64 project_id = 1;
+  string registry_uri = 2;
+}
+
+message DockerConfigFileForRegistryResponse {
+  bytes docker_config_file = 1;
+}
+
 service ClusterControlPlaneService {
   // QuotaPreflightCheck checks if the target account and region has sufficient resources (EIP addresses and VPCs) to provision a new cluster
   rpc QuotaPreflightCheck(QuotaPreflightCheckRequest) returns (QuotaPreflightCheckResponse) {}
@@ -165,4 +216,16 @@ service ClusterControlPlaneService {
   // AssumeRoleCredentials should be used vary sparingly, and ONLY for replacing AWS Integrations which have no workaround on the Porter API.
   // This endpoint returns temporary AWS credentials for a given AWS Account ID, and should not be expanded further to allow specifc role selection without being tied to a project and cluster
   rpc AssumeRoleCredentials(AssumeRoleCredentialsRequest) returns (AssumeRoleCredentialsResponse) {}
+
+  // TokenForRegistry returns a docker-compatible token for accessing a given registry
+  rpc TokenForRegistry(TokenForRegistryRequest) returns (TokenForRegistryResponse) {}
+
+  // DockerConfigFileForRegistry returns a docker-compatible token for accessing a given registry
+  rpc DockerConfigFileForRegistry(DockerConfigFileForRegistryRequest) returns (DockerConfigFileForRegistryResponse) {}
+
+  // ListRepositoriesForRegistry lists the repositories for a given registry, provided it is in the scope of the project id
+  rpc ListRepositoriesForRegistry(ListRepositoriesForRegistryRequest) returns (ListRepositoriesForRegistryResponse) {}
+
+  // ListImagesForRepository lists the repositories for a given registry, provided it is in the scope of the project id
+  rpc ListImagesForRepository(ListImagesForRepositoryRequest) returns (ListImagesForRepositoryResponse) {}
 }
