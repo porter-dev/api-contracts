@@ -150,9 +150,9 @@ export declare class CreateAssumeRoleChainResponse extends Message<CreateAssumeR
 }
 
 /**
- * @generated from message porter.v1.CreateAzureConnectionRequest
+ * @generated from message porter.v1.SaveAzureCredentialsRequest
  */
-export declare class CreateAzureConnectionRequest extends Message<CreateAzureConnectionRequest> {
+export declare class SaveAzureCredentialsRequest extends Message<SaveAzureCredentialsRequest> {
   /**
    * @generated from field: int64 project_id = 1;
    */
@@ -178,25 +178,25 @@ export declare class CreateAzureConnectionRequest extends Message<CreateAzureCon
    */
   servicePrincipalSecret: Uint8Array;
 
-  constructor(data?: PartialMessage<CreateAzureConnectionRequest>);
+  constructor(data?: PartialMessage<SaveAzureCredentialsRequest>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.CreateAzureConnectionRequest";
+  static readonly typeName = "porter.v1.SaveAzureCredentialsRequest";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateAzureConnectionRequest;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SaveAzureCredentialsRequest;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateAzureConnectionRequest;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SaveAzureCredentialsRequest;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateAzureConnectionRequest;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SaveAzureCredentialsRequest;
 
-  static equals(a: CreateAzureConnectionRequest | PlainMessage<CreateAzureConnectionRequest> | undefined, b: CreateAzureConnectionRequest | PlainMessage<CreateAzureConnectionRequest> | undefined): boolean;
+  static equals(a: SaveAzureCredentialsRequest | PlainMessage<SaveAzureCredentialsRequest> | undefined, b: SaveAzureCredentialsRequest | PlainMessage<SaveAzureCredentialsRequest> | undefined): boolean;
 }
 
 /**
- * @generated from message porter.v1.CreateAzureConnectionResponse
+ * @generated from message porter.v1.SaveAzureCredentialsResponse
  */
-export declare class CreateAzureConnectionResponse extends Message<CreateAzureConnectionResponse> {
+export declare class SaveAzureCredentialsResponse extends Message<SaveAzureCredentialsResponse> {
   /**
    * @generated from field: int64 project_id = 1;
    */
@@ -207,19 +207,19 @@ export declare class CreateAzureConnectionResponse extends Message<CreateAzureCo
    */
   credentialsIdentifier: string;
 
-  constructor(data?: PartialMessage<CreateAzureConnectionResponse>);
+  constructor(data?: PartialMessage<SaveAzureCredentialsResponse>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.CreateAzureConnectionResponse";
+  static readonly typeName = "porter.v1.SaveAzureCredentialsResponse";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateAzureConnectionResponse;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SaveAzureCredentialsResponse;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateAzureConnectionResponse;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SaveAzureCredentialsResponse;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateAzureConnectionResponse;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SaveAzureCredentialsResponse;
 
-  static equals(a: CreateAzureConnectionResponse | PlainMessage<CreateAzureConnectionResponse> | undefined, b: CreateAzureConnectionResponse | PlainMessage<CreateAzureConnectionResponse> | undefined): boolean;
+  static equals(a: SaveAzureCredentialsResponse | PlainMessage<SaveAzureCredentialsResponse> | undefined, b: SaveAzureCredentialsResponse | PlainMessage<SaveAzureCredentialsResponse> | undefined): boolean;
 }
 
 /**

@@ -30,7 +30,7 @@ message CreateAssumeRoleChainResponse {
   string target_arn = 2;
 }
 
-message CreateAzureConnectionRequest {
+message SaveAzureCredentialsRequest {
   int64 project_id = 1;
   string client_id = 2;
   string subscription_id = 3;
@@ -38,7 +38,7 @@ message CreateAzureConnectionRequest {
   bytes service_principal_secret = 5;
 }
 
-message CreateAzureConnectionResponse {
+message SaveAzureCredentialsResponse {
   int64 project_id = 1;
   string credentials_identifier = 2;
 }
@@ -188,8 +188,8 @@ service ClusterControlPlaneService {
   // AssumeRoleChainTargets gets the final destination target_arns for a given project
   rpc AssumeRoleChainTargets(AssumeRoleChainTargetsRequest) returns (AssumeRoleChainTargetsResponse) {}
 
-  // CreateAzureConnection stores the new azure service principal credentials and creates the azure cluster identity
-  rpc CreateAzureConnection(CreateAzureConnectionRequest) returns (CreateAzureConnectionResponse) {}
+  // SaveAzureCredentials stores the new azure service principal credentials and creates the azure cluster identity
+  rpc SaveAzureCredentials(SaveAzureCredentialsRequest) returns (SaveAzureCredentialsResponse) {}
 
   // CertificateAuthorityData gets the certificate authority data for a customer cluster
   rpc CertificateAuthorityData(CertificateAuthorityDataRequest) returns (CertificateAuthorityDataResponse) {}
@@ -217,10 +217,10 @@ service ClusterControlPlaneService {
   // This endpoint returns temporary AWS credentials for a given AWS Account ID, and should not be expanded further to allow specifc role selection without being tied to a project and cluster
   rpc AssumeRoleCredentials(AssumeRoleCredentialsRequest) returns (AssumeRoleCredentialsResponse) {}
 
-  // TokenForRegistry returns a docker-compatible token for accessing a given registry
+  // TokenForRegistry returns a token for accessing a given registry
   rpc TokenForRegistry(TokenForRegistryRequest) returns (TokenForRegistryResponse) {}
 
-  // DockerConfigFileForRegistry returns a docker-compatible token for accessing a given registry
+  // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry
   rpc DockerConfigFileForRegistry(DockerConfigFileForRegistryRequest) returns (DockerConfigFileForRegistryResponse) {}
 
   // ListRepositoriesForRegistry lists the repositories for a given registry, provided it is in the scope of the project id

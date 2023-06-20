@@ -56,10 +56,10 @@ export const CreateAssumeRoleChainResponse = proto3.makeMessageType(
 );
 
 /**
- * @generated from message porter.v1.CreateAzureConnectionRequest
+ * @generated from message porter.v1.SaveAzureCredentialsRequest
  */
-export const CreateAzureConnectionRequest = proto3.makeMessageType(
-  "porter.v1.CreateAzureConnectionRequest",
+export const SaveAzureCredentialsRequest = proto3.makeMessageType(
+  "porter.v1.SaveAzureCredentialsRequest",
   () => [
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 2, name: "client_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
@@ -70,10 +70,10 @@ export const CreateAzureConnectionRequest = proto3.makeMessageType(
 );
 
 /**
- * @generated from message porter.v1.CreateAzureConnectionResponse
+ * @generated from message porter.v1.SaveAzureCredentialsResponse
  */
-export const CreateAzureConnectionResponse = proto3.makeMessageType(
-  "porter.v1.CreateAzureConnectionResponse",
+export const SaveAzureCredentialsResponse = proto3.makeMessageType(
+  "porter.v1.SaveAzureCredentialsResponse",
   () => [
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 2, name: "credentials_identifier", kind: "scalar", T: 9 /* ScalarType.STRING */ },

@@ -43,9 +43,9 @@ const (
 	// ClusterControlPlaneServiceAssumeRoleChainTargetsProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's AssumeRoleChainTargets RPC.
 	ClusterControlPlaneServiceAssumeRoleChainTargetsProcedure = "/porter.v1.ClusterControlPlaneService/AssumeRoleChainTargets"
-	// ClusterControlPlaneServiceCreateAzureConnectionProcedure is the fully-qualified name of the
-	// ClusterControlPlaneService's CreateAzureConnection RPC.
-	ClusterControlPlaneServiceCreateAzureConnectionProcedure = "/porter.v1.ClusterControlPlaneService/CreateAzureConnection"
+	// ClusterControlPlaneServiceSaveAzureCredentialsProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's SaveAzureCredentials RPC.
+	ClusterControlPlaneServiceSaveAzureCredentialsProcedure = "/porter.v1.ClusterControlPlaneService/SaveAzureCredentials"
 	// ClusterControlPlaneServiceCertificateAuthorityDataProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's CertificateAuthorityData RPC.
 	ClusterControlPlaneServiceCertificateAuthorityDataProcedure = "/porter.v1.ClusterControlPlaneService/CertificateAuthorityData"
@@ -93,8 +93,8 @@ type ClusterControlPlaneServiceClient interface {
 	CreateAssumeRoleChain(context.Context, *connect_go.Request[v1.CreateAssumeRoleChainRequest]) (*connect_go.Response[v1.CreateAssumeRoleChainResponse], error)
 	// AssumeRoleChainTargets gets the final destination target_arns for a given project
 	AssumeRoleChainTargets(context.Context, *connect_go.Request[v1.AssumeRoleChainTargetsRequest]) (*connect_go.Response[v1.AssumeRoleChainTargetsResponse], error)
-	// CreateAzureConnection stores the new azure service principal credentials and creates the azure cluster identity
-	CreateAzureConnection(context.Context, *connect_go.Request[v1.CreateAzureConnectionRequest]) (*connect_go.Response[v1.CreateAzureConnectionResponse], error)
+	// SaveAzureCredentials stores the new azure service principal credentials and creates the azure cluster identity
+	SaveAzureCredentials(context.Context, *connect_go.Request[v1.SaveAzureCredentialsRequest]) (*connect_go.Response[v1.SaveAzureCredentialsResponse], error)
 	// CertificateAuthorityData gets the certificate authority data for a customer cluster
 	CertificateAuthorityData(context.Context, *connect_go.Request[v1.CertificateAuthorityDataRequest]) (*connect_go.Response[v1.CertificateAuthorityDataResponse], error)
 	// EKSBearerToken gets a bearer token for programatic access to an EKS cluster's kubernetes API
@@ -115,7 +115,7 @@ type ClusterControlPlaneServiceClient interface {
 	AssumeRoleCredentials(context.Context, *connect_go.Request[v1.AssumeRoleCredentialsRequest]) (*connect_go.Response[v1.AssumeRoleCredentialsResponse], error)
 	// TokenForRegistry returns a docker-compatible token for accessing a given registry
 	TokenForRegistry(context.Context, *connect_go.Request[v1.TokenForRegistryRequest]) (*connect_go.Response[v1.TokenForRegistryResponse], error)
-	// DockerConfigFileForRegistry returns a docker-compatible token for accessing a given registry
+	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry
 	DockerConfigFileForRegistry(context.Context, *connect_go.Request[v1.DockerConfigFileForRegistryRequest]) (*connect_go.Response[v1.DockerConfigFileForRegistryResponse], error)
 	// ListRepositoriesForRegistry lists the repositories for a given registry, provided it is in the scope of the project id
 	ListRepositoriesForRegistry(context.Context, *connect_go.Request[v1.ListRepositoriesForRegistryRequest]) (*connect_go.Response[v1.ListRepositoriesForRegistryResponse], error)
@@ -148,9 +148,9 @@ func NewClusterControlPlaneServiceClient(httpClient connect_go.HTTPClient, baseU
 			baseURL+ClusterControlPlaneServiceAssumeRoleChainTargetsProcedure,
 			opts...,
 		),
-		createAzureConnection: connect_go.NewClient[v1.CreateAzureConnectionRequest, v1.CreateAzureConnectionResponse](
+		saveAzureCredentials: connect_go.NewClient[v1.SaveAzureCredentialsRequest, v1.SaveAzureCredentialsResponse](
 			httpClient,
-			baseURL+ClusterControlPlaneServiceCreateAzureConnectionProcedure,
+			baseURL+ClusterControlPlaneServiceSaveAzureCredentialsProcedure,
 			opts...,
 		),
 		certificateAuthorityData: connect_go.NewClient[v1.CertificateAuthorityDataRequest, v1.CertificateAuthorityDataResponse](
@@ -221,7 +221,7 @@ type clusterControlPlaneServiceClient struct {
 	quotaPreflightCheck         *connect_go.Client[v1.QuotaPreflightCheckRequest, v1.QuotaPreflightCheckResponse]
 	createAssumeRoleChain       *connect_go.Client[v1.CreateAssumeRoleChainRequest, v1.CreateAssumeRoleChainResponse]
 	assumeRoleChainTargets      *connect_go.Client[v1.AssumeRoleChainTargetsRequest, v1.AssumeRoleChainTargetsResponse]
-	createAzureConnection       *connect_go.Client[v1.CreateAzureConnectionRequest, v1.CreateAzureConnectionResponse]
+	saveAzureCredentials        *connect_go.Client[v1.SaveAzureCredentialsRequest, v1.SaveAzureCredentialsResponse]
 	certificateAuthorityData    *connect_go.Client[v1.CertificateAuthorityDataRequest, v1.CertificateAuthorityDataResponse]
 	eKSBearerToken              *connect_go.Client[v1.EKSBearerTokenRequest, v1.EKSBearerTokenResponse]
 	kubeConfigForCluster        *connect_go.Client[v1.KubeConfigForClusterRequest, v1.KubeConfigForClusterResponse]
@@ -251,9 +251,9 @@ func (c *clusterControlPlaneServiceClient) AssumeRoleChainTargets(ctx context.Co
 	return c.assumeRoleChainTargets.CallUnary(ctx, req)
 }
 
-// CreateAzureConnection calls porter.v1.ClusterControlPlaneService.CreateAzureConnection.
-func (c *clusterControlPlaneServiceClient) CreateAzureConnection(ctx context.Context, req *connect_go.Request[v1.CreateAzureConnectionRequest]) (*connect_go.Response[v1.CreateAzureConnectionResponse], error) {
-	return c.createAzureConnection.CallUnary(ctx, req)
+// SaveAzureCredentials calls porter.v1.ClusterControlPlaneService.SaveAzureCredentials.
+func (c *clusterControlPlaneServiceClient) SaveAzureCredentials(ctx context.Context, req *connect_go.Request[v1.SaveAzureCredentialsRequest]) (*connect_go.Response[v1.SaveAzureCredentialsResponse], error) {
+	return c.saveAzureCredentials.CallUnary(ctx, req)
 }
 
 // CertificateAuthorityData calls porter.v1.ClusterControlPlaneService.CertificateAuthorityData.
@@ -327,8 +327,8 @@ type ClusterControlPlaneServiceHandler interface {
 	CreateAssumeRoleChain(context.Context, *connect_go.Request[v1.CreateAssumeRoleChainRequest]) (*connect_go.Response[v1.CreateAssumeRoleChainResponse], error)
 	// AssumeRoleChainTargets gets the final destination target_arns for a given project
 	AssumeRoleChainTargets(context.Context, *connect_go.Request[v1.AssumeRoleChainTargetsRequest]) (*connect_go.Response[v1.AssumeRoleChainTargetsResponse], error)
-	// CreateAzureConnection stores the new azure service principal credentials and creates the azure cluster identity
-	CreateAzureConnection(context.Context, *connect_go.Request[v1.CreateAzureConnectionRequest]) (*connect_go.Response[v1.CreateAzureConnectionResponse], error)
+	// SaveAzureCredentials stores the new azure service principal credentials and creates the azure cluster identity
+	SaveAzureCredentials(context.Context, *connect_go.Request[v1.SaveAzureCredentialsRequest]) (*connect_go.Response[v1.SaveAzureCredentialsResponse], error)
 	// CertificateAuthorityData gets the certificate authority data for a customer cluster
 	CertificateAuthorityData(context.Context, *connect_go.Request[v1.CertificateAuthorityDataRequest]) (*connect_go.Response[v1.CertificateAuthorityDataResponse], error)
 	// EKSBearerToken gets a bearer token for programatic access to an EKS cluster's kubernetes API
@@ -349,7 +349,7 @@ type ClusterControlPlaneServiceHandler interface {
 	AssumeRoleCredentials(context.Context, *connect_go.Request[v1.AssumeRoleCredentialsRequest]) (*connect_go.Response[v1.AssumeRoleCredentialsResponse], error)
 	// TokenForRegistry returns a docker-compatible token for accessing a given registry
 	TokenForRegistry(context.Context, *connect_go.Request[v1.TokenForRegistryRequest]) (*connect_go.Response[v1.TokenForRegistryResponse], error)
-	// DockerConfigFileForRegistry returns a docker-compatible token for accessing a given registry
+	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry
 	DockerConfigFileForRegistry(context.Context, *connect_go.Request[v1.DockerConfigFileForRegistryRequest]) (*connect_go.Response[v1.DockerConfigFileForRegistryResponse], error)
 	// ListRepositoriesForRegistry lists the repositories for a given registry, provided it is in the scope of the project id
 	ListRepositoriesForRegistry(context.Context, *connect_go.Request[v1.ListRepositoriesForRegistryRequest]) (*connect_go.Response[v1.ListRepositoriesForRegistryResponse], error)
@@ -379,9 +379,9 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.AssumeRoleChainTargets,
 		opts...,
 	))
-	mux.Handle(ClusterControlPlaneServiceCreateAzureConnectionProcedure, connect_go.NewUnaryHandler(
-		ClusterControlPlaneServiceCreateAzureConnectionProcedure,
-		svc.CreateAzureConnection,
+	mux.Handle(ClusterControlPlaneServiceSaveAzureCredentialsProcedure, connect_go.NewUnaryHandler(
+		ClusterControlPlaneServiceSaveAzureCredentialsProcedure,
+		svc.SaveAzureCredentials,
 		opts...,
 	))
 	mux.Handle(ClusterControlPlaneServiceCertificateAuthorityDataProcedure, connect_go.NewUnaryHandler(
@@ -462,8 +462,8 @@ func (UnimplementedClusterControlPlaneServiceHandler) AssumeRoleChainTargets(con
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.AssumeRoleChainTargets is not implemented"))
 }
 
-func (UnimplementedClusterControlPlaneServiceHandler) CreateAzureConnection(context.Context, *connect_go.Request[v1.CreateAzureConnectionRequest]) (*connect_go.Response[v1.CreateAzureConnectionResponse], error) {
-	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.CreateAzureConnection is not implemented"))
+func (UnimplementedClusterControlPlaneServiceHandler) SaveAzureCredentials(context.Context, *connect_go.Request[v1.SaveAzureCredentialsRequest]) (*connect_go.Response[v1.SaveAzureCredentialsResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.SaveAzureCredentials is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) CertificateAuthorityData(context.Context, *connect_go.Request[v1.CertificateAuthorityDataRequest]) (*connect_go.Response[v1.CertificateAuthorityDataResponse], error) {
