@@ -15,8 +15,12 @@ message EKSNodeGroup {
   string instance_type = 1;
   uint32 min_instances = 2;
   uint32 max_instances = 3;
+  // node_group_type is used to specify the type of node group. This is used to specify what node groups are used by Porter, vs users.
   NodeGroupType node_group_type = 4;
-  bool is_stateful = 5;
+  // is_stateful is deprecated. It was initially used to specify if a nodegroup had state, and needed to be kept in a single AZ.
+  bool is_stateful = 5 [deprecated = true];
+  // additional_policies is a list of IAM policies to attach to the node group role, on top of the policies applied by Porter.
+  repeated string additional_policies = 6;
 }
 
 enum NodeGroupType {
