@@ -21,3 +21,32 @@ task release -- vX.X.X
 ## Updating message formats
 
 Please consult this guide for best practices on updating message types for backward- and forward-compatability: https://protobuf.dev/programming-guides/proto3/#updating
+
+## Local development
+
+Assuming that you use `workstation`:
+
+### Porter dashboard
+
+In the folder containing your `package.json`, run the following:
+`npm i --save --legacy-peer-deps ../../api-contracts/generated/js`
+
+## Porter server
+
+In the folder containing your `go.mod`, run the following:
+
+```bash
+go mod edit -replace github.com/porter-dev/api-contracts=../api-contracts
+go mod vendor
+go mod tidy
+```
+
+### Cluster Control Plane
+
+In the folder containing your `go.mod`, run the following:
+
+```bash
+go mod edit -replace github.com/porter-dev/api-contracts=../api-contracts
+go mod vendor
+go mod tidy
+```
