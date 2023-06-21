@@ -1009,3 +1009,51 @@ export declare class DockerConfigFileForRegistryResponse extends Message<DockerC
   static equals(a: DockerConfigFileForRegistryResponse | PlainMessage<DockerConfigFileForRegistryResponse> | undefined, b: DockerConfigFileForRegistryResponse | PlainMessage<DockerConfigFileForRegistryResponse> | undefined): boolean;
 }
 
+/**
+ * @generated from message porter.v1.ReadContractRequest
+ */
+export declare class ReadContractRequest extends Message<ReadContractRequest> {
+  /**
+   * @generated from field: porter.v1.ContractRevision contract_revision = 1;
+   */
+  contractRevision?: ContractRevision;
+
+  constructor(data?: PartialMessage<ReadContractRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ReadContractRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ReadContractRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ReadContractRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ReadContractRequest;
+
+  static equals(a: ReadContractRequest | PlainMessage<ReadContractRequest> | undefined, b: ReadContractRequest | PlainMessage<ReadContractRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.ReadContractResponse
+ */
+export declare class ReadContractResponse extends Message<ReadContractResponse> {
+  /**
+   * @generated from field: string base64_contract = 1;
+   */
+  base64Contract: string;
+
+  constructor(data?: PartialMessage<ReadContractResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ReadContractResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ReadContractResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ReadContractResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ReadContractResponse;
+
+  static equals(a: ReadContractResponse | PlainMessage<ReadContractResponse> | undefined, b: ReadContractResponse | PlainMessage<ReadContractResponse> | undefined): boolean;
+}
+

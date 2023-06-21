@@ -178,6 +178,14 @@ message DockerConfigFileForRegistryResponse {
   bytes docker_config_file = 1;
 }
 
+message ReadContractRequest {
+  ContractRevision contract_revision = 1;
+}
+
+message ReadContractResponse {
+  string base64_contract = 1;
+}
+
 service ClusterControlPlaneService {
   // QuotaPreflightCheck checks if the target account and region has sufficient resources (EIP addresses and VPCs) to provision a new cluster
   rpc QuotaPreflightCheck(QuotaPreflightCheckRequest) returns (QuotaPreflightCheckResponse) {}
@@ -202,6 +210,9 @@ service ClusterControlPlaneService {
 
   // UpdateContract takes in a Porter Contract, actioning upon it where necessary
   rpc UpdateContract(UpdateContractRequest) returns (UpdateContractResponse) {}
+
+  // ReadContract returns the base64 encoded contract for a given cluster and project
+  rpc ReadContract(ReadContractRequest) returns (ReadContractResponse) {}
 
   // ClusterStatus returns the status of a given workload cluster
   rpc ClusterStatus(ClusterStatusRequest) returns (ClusterStatusResponse) {}

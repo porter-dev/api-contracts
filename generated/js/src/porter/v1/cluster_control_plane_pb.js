@@ -383,3 +383,23 @@ export const DockerConfigFileForRegistryResponse = proto3.makeMessageType(
   ],
 );
 
+/**
+ * @generated from message porter.v1.ReadContractRequest
+ */
+export const ReadContractRequest = proto3.makeMessageType(
+  "porter.v1.ReadContractRequest",
+  () => [
+    { no: 1, name: "contract_revision", kind: "message", T: ContractRevision },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.ReadContractResponse
+ */
+export const ReadContractResponse = proto3.makeMessageType(
+  "porter.v1.ReadContractResponse",
+  () => [
+    { no: 1, name: "base64_contract", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
