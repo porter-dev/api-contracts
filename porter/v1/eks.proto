@@ -47,8 +47,8 @@ message LoadBalancer {
   // additional_certificate_arns is a list of ACM certificate ARNs to attach to the ALB. This has no effect when load_balancer_type is NLB. These will be added in order, before the ACM certificate created by Porter.
   repeated string additional_certificate_arns = 6;
 
-  // tags is a list of AWS tags to apply to the ALB. This has no effect when load_balancer_type is NLB. The format should be a list of 'key=value'.
-  repeated string tags = 7;
+  // tags is a map of AWS tags to apply to the ALB. This has no effect when load_balancer_type is NLB.
+  map<string,string> tags = 7;
 
   // enable_s3_access_logs enables S3 access logs on the ALB. This has no effect when load_balancer_type is NLB.
   bool enable_s3_access_logs = 8;

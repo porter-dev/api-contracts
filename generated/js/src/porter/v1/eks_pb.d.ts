@@ -208,11 +208,11 @@ export declare class LoadBalancer extends Message<LoadBalancer> {
   additionalCertificateArns: string[];
 
   /**
-   * tags is a list of AWS tags to apply to the ALB. This has no effect when load_balancer_type is NLB. The format should be a list of 'key=value'.
+   * tags is a map of AWS tags to apply to the ALB. This has no effect when load_balancer_type is NLB.
    *
-   * @generated from field: repeated string tags = 7;
+   * @generated from field: map<string, string> tags = 7;
    */
-  tags: string[];
+  tags: { [key: string]: string };
 
   /**
    * enable_s3_access_logs enables S3 access logs on the ALB. This has no effect when load_balancer_type is NLB.

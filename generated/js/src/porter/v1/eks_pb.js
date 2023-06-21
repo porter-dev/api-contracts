@@ -73,7 +73,7 @@ export const LoadBalancer = proto3.makeMessageType(
     { no: 4, name: "enable_wafv2", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 5, name: "wafv2_arn", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 6, name: "additional_certificate_arns", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
-    { no: 7, name: "tags", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 7, name: "tags", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "scalar", T: 9 /* ScalarType.STRING */} },
     { no: 8, name: "enable_s3_access_logs", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
