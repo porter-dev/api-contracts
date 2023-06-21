@@ -186,6 +186,41 @@ export declare class LoadBalancer extends Message<LoadBalancer> {
    */
   allowlistIpRanges: string;
 
+  /**
+   * enable_wafv2 enables WAFv2 on the ALB. This has no effect when load_balancer_type is NLB
+   *
+   * @generated from field: bool enable_wafv2 = 4;
+   */
+  enableWafv2: boolean;
+
+  /**
+   * wafv2_arn is the ARN of the WAFv2 ACL to attach to the ALB. This has no effect when load_balancer_type is NLB, or if enable_wafv2 is false
+   *
+   * @generated from field: string wafv2_arn = 5;
+   */
+  wafv2Arn: string;
+
+  /**
+   * additional_certificate_arns is a list of ACM certificate ARNs to attach to the ALB. This has no effect when load_balancer_type is NLB. These will be added in order, before the ACM certificate created by Porter.
+   *
+   * @generated from field: repeated string additional_certificate_arns = 6;
+   */
+  additionalCertificateArns: string[];
+
+  /**
+   * tags is a list of AWS tags to apply to the ALB. This has no effect when load_balancer_type is NLB. The format should be a list of 'key=value'.
+   *
+   * @generated from field: repeated string tags = 7;
+   */
+  tags: string[];
+
+  /**
+   * enable_s3_access_logs enables S3 access logs on the ALB. This has no effect when load_balancer_type is NLB.
+   *
+   * @generated from field: bool enable_s3_access_logs = 8;
+   */
+  enableS3AccessLogs: boolean;
+
   constructor(data?: PartialMessage<LoadBalancer>);
 
   static readonly runtime: typeof proto3;
