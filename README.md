@@ -7,6 +7,20 @@ API contracts for use across multiple services
 - gRPC Server using [Buf Connect](https://connect.build/docs/introduction)
 - gRPC Server generated using `task all`
 
+## Installing
+
+NPM:
+
+```bash
+npm i --legacy-peer-deps @porter-dev/api-contracts
+```
+
+Go
+
+```
+go get -u github.com/porter-dev/api-contracts
+```
+
 ## Creating a release
 
 Run the following commands, to create a release, filling out the tag field. Make sure that the tag is the next supported tag, and doesnt overwrite a previous one, or else this will cause an issue in Go and Javascript.
