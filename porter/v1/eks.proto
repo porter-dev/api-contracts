@@ -48,7 +48,7 @@ message LoadBalancer {
   repeated string additional_certificate_arns = 6;
 
   // tags is a map of AWS tags to apply to the ALB. This has no effect when load_balancer_type is NLB.
-  map<string,string> tags = 7;
+  map<string, string> tags = 7;
 
   // enable_s3_access_logs enables S3 access logs on the ALB. This has no effect when load_balancer_type is NLB.
   bool enable_s3_access_logs = 8;
