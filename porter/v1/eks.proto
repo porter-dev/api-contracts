@@ -9,6 +9,7 @@ message EKS {
   string region = 4;
   repeated EKSNodeGroup node_groups = 5;
   LoadBalancer load_balancer = 6;
+  bool enable_guard_duty = 7;
 }
 
 message EKSNodeGroup {

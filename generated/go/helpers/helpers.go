@@ -26,7 +26,7 @@ func UnmarshalContractObjectFromReader(r io.Reader, contract protoreflect.ProtoM
 func UnmarshalContractObject(by []byte, contract protoreflect.ProtoMessage) error {
 	err := protojson.Unmarshal(by, contract)
 	if err != nil {
-		return fmt.Errorf("unable to convert bytes into contract")
+		return fmt.Errorf("unable to convert bytes into contract: %w", err)
 	}
 
 	if contract == nil {
