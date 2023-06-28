@@ -10,6 +10,7 @@ message EKS {
   repeated EKSNodeGroup node_groups = 5;
   LoadBalancer load_balancer = 6;
   bool enable_guard_duty = 7;
+  EKSLogging logging = 8;
 }
 
 message EKSNodeGroup {
@@ -59,4 +60,13 @@ enum LoadBalancerType {
   LOAD_BALANCER_TYPE_UNSPECIFIED = 0;
   LOAD_BALANCER_TYPE_NLB = 1;
   LOAD_BALANCER_TYPE_ALB = 2;
+}
+
+// EKSLogging is the configuration for EKS control plane logging which is typically managed through the AWS Console. This will create a CloudWatch log group and log stream for the enabled logs.
+message EKSLogging {
+  bool enable_api_server_logs = 1;
+  bool enable_authenticator_logs = 2;
+  bool enable_scheduler_logs = 3;
+  bool enable_audit_logs = 4;
+  bool enable_controller_manager_logs = 5;
 }
