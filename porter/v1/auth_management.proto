@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package porter.v1;
+
+message PorterAgentConnectionRequest {
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+}
+
+message PorterAgentConnectionResponse {
+  string server_url = 1;
+  int64 port = 2;
+  string token = 3;
+}
+
+service AuthManagement {
+  // PorterAgentConnection gets a Porter token for programmatic access to the Porter UI along with the UI server URL
+  rpc PorterAgentConnection(PorterAgentConnectionRequest) returns (PorterAgentConnectionResponse) {}
+}
