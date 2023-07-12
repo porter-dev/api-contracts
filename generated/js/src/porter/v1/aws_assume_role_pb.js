@@ -6,7 +6,11 @@
 import { proto3 } from "@bufbuild/protobuf";
 
 /**
+ * AssumeRoleChainLink is used for hopping to a specific AWS role.
+ * Deprecated - use AssumeRoleHop instead
+ *
  * @generated from message porter.v1.AssumeRoleChainLink
+ * @deprecated
  */
 export const AssumeRoleChainLink = proto3.makeMessageType(
   "porter.v1.AssumeRoleChainLink",

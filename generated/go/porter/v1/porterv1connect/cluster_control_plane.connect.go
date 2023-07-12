@@ -29,6 +29,8 @@ const (
 // ClusterControlPlaneServiceClient is a client for the porter.v1.ClusterControlPlaneService
 // service.
 type ClusterControlPlaneServiceClient interface {
+	// UpdateCloudProviderCredentials creates or updates the credentials used for accessing the specific cloud
+	UpdateCloudProviderCredentials(context.Context, *connect_go.Request[v1.UpdateCloudProviderCredentialsRequest]) (*connect_go.Response[v1.UpdateCloudProviderCredentialsResponse], error)
 	// QuotaPreflightCheck checks if the target account and region has sufficient resources (EIP addresses and VPCs) to provision a new cluster
 	QuotaPreflightCheck(context.Context, *connect_go.Request[v1.QuotaPreflightCheckRequest]) (*connect_go.Response[v1.QuotaPreflightCheckResponse], error)
 	// CreateAssumeRoleChain creates a new assume role chain for a given project and checks if the target assumed role has sufficient permissions. Use UpdateCloudProviderCredentials instead.
@@ -61,17 +63,20 @@ type ClusterControlPlaneServiceClient interface {
 	//
 	// Deprecated: do not use.
 	DockerConfigFileForRegistry(context.Context, *connect_go.Request[v1.DockerConfigFileForRegistryRequest]) (*connect_go.Response[v1.DockerConfigFileForRegistryResponse], error)
-	// ECRTokenForRegistry returns a docker-compatible token for accessing a given ECR registry. Deprecated. Use TokenForRegistry instead.
+	// ECRTokenForRegistry returns a docker-compatible token for accessing a given ECR registry.
+	// This cannot be deleted before TokenForRegistry supports AWS and we edit RegistryGetECRTokenHandler to call that endpoint.
+	// Deprecated. Use TokenForRegistry instead.
 	//
 	// Deprecated: do not use.
 	ECRTokenForRegistry(context.Context, *connect_go.Request[v1.ECRTokenForRegistryRequest]) (*connect_go.Response[v1.ECRTokenForRegistryResponse], error)
 	// AssumeRoleCredentials should be used vary sparingly, and ONLY for replacing AWS Integrations which have no workaround on the Porter API.
 	// This endpoint returns temporary AWS credentials for a given AWS Account ID, and should not be expanded further to allow specifc role selection without being tied to a project and cluster.
-	// Deprecated. This is no longer needed once ListRepositoriesForRegistry supports AWS.
+	// Deprecated. This is no longer needed once ListRepositoriesForRegistry, ListImages, and CreateRepository supports AWS
 	//
 	// Deprecated: do not use.
 	AssumeRoleCredentials(context.Context, *connect_go.Request[v1.AssumeRoleCredentialsRequest]) (*connect_go.Response[v1.AssumeRoleCredentialsResponse], error)
-	// AssumeRoleChainTargets gets the final destination target_arns for a given project. This has been deprecated. Do not use.
+	// AssumeRoleChainTargets gets the final destination target_arns for a given project.
+	// Deprecated. Do not use.
 	//
 	// Deprecated: do not use.
 	AssumeRoleChainTargets(context.Context, *connect_go.Request[v1.AssumeRoleChainTargetsRequest]) (*connect_go.Response[v1.AssumeRoleChainTargetsResponse], error)
@@ -79,7 +84,8 @@ type ClusterControlPlaneServiceClient interface {
 	//
 	// Deprecated: do not use.
 	CertificateAuthorityData(context.Context, *connect_go.Request[v1.CertificateAuthorityDataRequest]) (*connect_go.Response[v1.CertificateAuthorityDataResponse], error)
-	// EKSBearerToken gets a bearer token for programatic access to an EKS cluster's kubernetes API. This has been deprecated. Use KubeConfigForCluster instead.
+	// EKSBearerToken gets a bearer token for programatic access to an EKS cluster's kubernetes API.
+	// Deprecated. Use KubeConfigForCluster instead.
 	//
 	// Deprecated: do not use.
 	EKSBearerToken(context.Context, *connect_go.Request[v1.EKSBearerTokenRequest]) (*connect_go.Response[v1.EKSBearerTokenResponse], error)
@@ -95,6 +101,11 @@ type ClusterControlPlaneServiceClient interface {
 func NewClusterControlPlaneServiceClient(httpClient connect_go.HTTPClient, baseURL string, opts ...connect_go.ClientOption) ClusterControlPlaneServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
 	return &clusterControlPlaneServiceClient{
+		updateCloudProviderCredentials: connect_go.NewClient[v1.UpdateCloudProviderCredentialsRequest, v1.UpdateCloudProviderCredentialsResponse](
+			httpClient,
+			baseURL+"/porter.v1.ClusterControlPlaneService/UpdateCloudProviderCredentials",
+			opts...,
+		),
 		quotaPreflightCheck: connect_go.NewClient[v1.QuotaPreflightCheckRequest, v1.QuotaPreflightCheckResponse](
 			httpClient,
 			baseURL+"/porter.v1.ClusterControlPlaneService/QuotaPreflightCheck",
@@ -185,23 +196,30 @@ func NewClusterControlPlaneServiceClient(httpClient connect_go.HTTPClient, baseU
 
 // clusterControlPlaneServiceClient implements ClusterControlPlaneServiceClient.
 type clusterControlPlaneServiceClient struct {
-	quotaPreflightCheck         *connect_go.Client[v1.QuotaPreflightCheckRequest, v1.QuotaPreflightCheckResponse]
-	createAssumeRoleChain       *connect_go.Client[v1.CreateAssumeRoleChainRequest, v1.CreateAssumeRoleChainResponse]
-	saveAzureCredentials        *connect_go.Client[v1.SaveAzureCredentialsRequest, v1.SaveAzureCredentialsResponse]
-	kubeConfigForCluster        *connect_go.Client[v1.KubeConfigForClusterRequest, v1.KubeConfigForClusterResponse]
-	updateContract              *connect_go.Client[v1.UpdateContractRequest, v1.UpdateContractResponse]
-	readContract                *connect_go.Client[v1.ReadContractRequest, v1.ReadContractResponse]
-	clusterStatus               *connect_go.Client[v1.ClusterStatusRequest, v1.ClusterStatusResponse]
-	deleteCluster               *connect_go.Client[v1.DeleteClusterRequest, v1.DeleteClusterResponse]
-	tokenForRegistry            *connect_go.Client[v1.TokenForRegistryRequest, v1.TokenForRegistryResponse]
-	listRepositoriesForRegistry *connect_go.Client[v1.ListRepositoriesForRegistryRequest, v1.ListRepositoriesForRegistryResponse]
-	listImagesForRepository     *connect_go.Client[v1.ListImagesForRepositoryRequest, v1.ListImagesForRepositoryResponse]
-	dockerConfigFileForRegistry *connect_go.Client[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse]
-	eCRTokenForRegistry         *connect_go.Client[v1.ECRTokenForRegistryRequest, v1.ECRTokenForRegistryResponse]
-	assumeRoleCredentials       *connect_go.Client[v1.AssumeRoleCredentialsRequest, v1.AssumeRoleCredentialsResponse]
-	assumeRoleChainTargets      *connect_go.Client[v1.AssumeRoleChainTargetsRequest, v1.AssumeRoleChainTargetsResponse]
-	certificateAuthorityData    *connect_go.Client[v1.CertificateAuthorityDataRequest, v1.CertificateAuthorityDataResponse]
-	eKSBearerToken              *connect_go.Client[v1.EKSBearerTokenRequest, v1.EKSBearerTokenResponse]
+	updateCloudProviderCredentials *connect_go.Client[v1.UpdateCloudProviderCredentialsRequest, v1.UpdateCloudProviderCredentialsResponse]
+	quotaPreflightCheck            *connect_go.Client[v1.QuotaPreflightCheckRequest, v1.QuotaPreflightCheckResponse]
+	createAssumeRoleChain          *connect_go.Client[v1.CreateAssumeRoleChainRequest, v1.CreateAssumeRoleChainResponse]
+	saveAzureCredentials           *connect_go.Client[v1.SaveAzureCredentialsRequest, v1.SaveAzureCredentialsResponse]
+	kubeConfigForCluster           *connect_go.Client[v1.KubeConfigForClusterRequest, v1.KubeConfigForClusterResponse]
+	updateContract                 *connect_go.Client[v1.UpdateContractRequest, v1.UpdateContractResponse]
+	readContract                   *connect_go.Client[v1.ReadContractRequest, v1.ReadContractResponse]
+	clusterStatus                  *connect_go.Client[v1.ClusterStatusRequest, v1.ClusterStatusResponse]
+	deleteCluster                  *connect_go.Client[v1.DeleteClusterRequest, v1.DeleteClusterResponse]
+	tokenForRegistry               *connect_go.Client[v1.TokenForRegistryRequest, v1.TokenForRegistryResponse]
+	listRepositoriesForRegistry    *connect_go.Client[v1.ListRepositoriesForRegistryRequest, v1.ListRepositoriesForRegistryResponse]
+	listImagesForRepository        *connect_go.Client[v1.ListImagesForRepositoryRequest, v1.ListImagesForRepositoryResponse]
+	dockerConfigFileForRegistry    *connect_go.Client[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse]
+	eCRTokenForRegistry            *connect_go.Client[v1.ECRTokenForRegistryRequest, v1.ECRTokenForRegistryResponse]
+	assumeRoleCredentials          *connect_go.Client[v1.AssumeRoleCredentialsRequest, v1.AssumeRoleCredentialsResponse]
+	assumeRoleChainTargets         *connect_go.Client[v1.AssumeRoleChainTargetsRequest, v1.AssumeRoleChainTargetsResponse]
+	certificateAuthorityData       *connect_go.Client[v1.CertificateAuthorityDataRequest, v1.CertificateAuthorityDataResponse]
+	eKSBearerToken                 *connect_go.Client[v1.EKSBearerTokenRequest, v1.EKSBearerTokenResponse]
+}
+
+// UpdateCloudProviderCredentials calls
+// porter.v1.ClusterControlPlaneService.UpdateCloudProviderCredentials.
+func (c *clusterControlPlaneServiceClient) UpdateCloudProviderCredentials(ctx context.Context, req *connect_go.Request[v1.UpdateCloudProviderCredentialsRequest]) (*connect_go.Response[v1.UpdateCloudProviderCredentialsResponse], error) {
+	return c.updateCloudProviderCredentials.CallUnary(ctx, req)
 }
 
 // QuotaPreflightCheck calls porter.v1.ClusterControlPlaneService.QuotaPreflightCheck.
@@ -310,6 +328,8 @@ func (c *clusterControlPlaneServiceClient) EKSBearerToken(ctx context.Context, r
 // ClusterControlPlaneServiceHandler is an implementation of the
 // porter.v1.ClusterControlPlaneService service.
 type ClusterControlPlaneServiceHandler interface {
+	// UpdateCloudProviderCredentials creates or updates the credentials used for accessing the specific cloud
+	UpdateCloudProviderCredentials(context.Context, *connect_go.Request[v1.UpdateCloudProviderCredentialsRequest]) (*connect_go.Response[v1.UpdateCloudProviderCredentialsResponse], error)
 	// QuotaPreflightCheck checks if the target account and region has sufficient resources (EIP addresses and VPCs) to provision a new cluster
 	QuotaPreflightCheck(context.Context, *connect_go.Request[v1.QuotaPreflightCheckRequest]) (*connect_go.Response[v1.QuotaPreflightCheckResponse], error)
 	// CreateAssumeRoleChain creates a new assume role chain for a given project and checks if the target assumed role has sufficient permissions. Use UpdateCloudProviderCredentials instead.
@@ -342,17 +362,20 @@ type ClusterControlPlaneServiceHandler interface {
 	//
 	// Deprecated: do not use.
 	DockerConfigFileForRegistry(context.Context, *connect_go.Request[v1.DockerConfigFileForRegistryRequest]) (*connect_go.Response[v1.DockerConfigFileForRegistryResponse], error)
-	// ECRTokenForRegistry returns a docker-compatible token for accessing a given ECR registry. Deprecated. Use TokenForRegistry instead.
+	// ECRTokenForRegistry returns a docker-compatible token for accessing a given ECR registry.
+	// This cannot be deleted before TokenForRegistry supports AWS and we edit RegistryGetECRTokenHandler to call that endpoint.
+	// Deprecated. Use TokenForRegistry instead.
 	//
 	// Deprecated: do not use.
 	ECRTokenForRegistry(context.Context, *connect_go.Request[v1.ECRTokenForRegistryRequest]) (*connect_go.Response[v1.ECRTokenForRegistryResponse], error)
 	// AssumeRoleCredentials should be used vary sparingly, and ONLY for replacing AWS Integrations which have no workaround on the Porter API.
 	// This endpoint returns temporary AWS credentials for a given AWS Account ID, and should not be expanded further to allow specifc role selection without being tied to a project and cluster.
-	// Deprecated. This is no longer needed once ListRepositoriesForRegistry supports AWS.
+	// Deprecated. This is no longer needed once ListRepositoriesForRegistry, ListImages, and CreateRepository supports AWS
 	//
 	// Deprecated: do not use.
 	AssumeRoleCredentials(context.Context, *connect_go.Request[v1.AssumeRoleCredentialsRequest]) (*connect_go.Response[v1.AssumeRoleCredentialsResponse], error)
-	// AssumeRoleChainTargets gets the final destination target_arns for a given project. This has been deprecated. Do not use.
+	// AssumeRoleChainTargets gets the final destination target_arns for a given project.
+	// Deprecated. Do not use.
 	//
 	// Deprecated: do not use.
 	AssumeRoleChainTargets(context.Context, *connect_go.Request[v1.AssumeRoleChainTargetsRequest]) (*connect_go.Response[v1.AssumeRoleChainTargetsResponse], error)
@@ -360,7 +383,8 @@ type ClusterControlPlaneServiceHandler interface {
 	//
 	// Deprecated: do not use.
 	CertificateAuthorityData(context.Context, *connect_go.Request[v1.CertificateAuthorityDataRequest]) (*connect_go.Response[v1.CertificateAuthorityDataResponse], error)
-	// EKSBearerToken gets a bearer token for programatic access to an EKS cluster's kubernetes API. This has been deprecated. Use KubeConfigForCluster instead.
+	// EKSBearerToken gets a bearer token for programatic access to an EKS cluster's kubernetes API.
+	// Deprecated. Use KubeConfigForCluster instead.
 	//
 	// Deprecated: do not use.
 	EKSBearerToken(context.Context, *connect_go.Request[v1.EKSBearerTokenRequest]) (*connect_go.Response[v1.EKSBearerTokenResponse], error)
@@ -373,6 +397,11 @@ type ClusterControlPlaneServiceHandler interface {
 // and JSON codecs. They also support gzip compression.
 func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler, opts ...connect_go.HandlerOption) (string, http.Handler) {
 	mux := http.NewServeMux()
+	mux.Handle("/porter.v1.ClusterControlPlaneService/UpdateCloudProviderCredentials", connect_go.NewUnaryHandler(
+		"/porter.v1.ClusterControlPlaneService/UpdateCloudProviderCredentials",
+		svc.UpdateCloudProviderCredentials,
+		opts...,
+	))
 	mux.Handle("/porter.v1.ClusterControlPlaneService/QuotaPreflightCheck", connect_go.NewUnaryHandler(
 		"/porter.v1.ClusterControlPlaneService/QuotaPreflightCheck",
 		svc.QuotaPreflightCheck,
@@ -463,6 +492,10 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 
 // UnimplementedClusterControlPlaneServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedClusterControlPlaneServiceHandler struct{}
+
+func (UnimplementedClusterControlPlaneServiceHandler) UpdateCloudProviderCredentials(context.Context, *connect_go.Request[v1.UpdateCloudProviderCredentialsRequest]) (*connect_go.Response[v1.UpdateCloudProviderCredentialsResponse], error) {
+	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.UpdateCloudProviderCredentials is not implemented"))
+}
 
 func (UnimplementedClusterControlPlaneServiceHandler) QuotaPreflightCheck(context.Context, *connect_go.Request[v1.QuotaPreflightCheckRequest]) (*connect_go.Response[v1.QuotaPreflightCheckResponse], error) {
 	return nil, connect_go.NewError(connect_go.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.QuotaPreflightCheck is not implemented"))

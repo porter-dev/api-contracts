@@ -7,7 +7,11 @@ import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialM
 import { Message, proto3 } from "@bufbuild/protobuf";
 
 /**
+ * AssumeRoleChainLink is used for hopping to a specific AWS role.
+ * Deprecated - use AssumeRoleHop instead
+ *
  * @generated from message porter.v1.AssumeRoleChainLink
+ * @deprecated
  */
 export declare class AssumeRoleChainLink extends Message<AssumeRoleChainLink> {
   /**

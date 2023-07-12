@@ -4,6 +4,7 @@ package porter.v1;
 
 import "google/protobuf/timestamp.proto";
 import "porter/v1/aws_assume_role.proto";
+import "porter/v1/cloud_provider_credentials.proto";
 import "porter/v1/contract.proto";
 
 message QuotaPreflightCheckRequest {
@@ -137,6 +138,9 @@ message ReadContractResponse {
 }
 
 service ClusterControlPlaneService {
+  // UpdateCloudProviderCredentials creates or updates the credentials used for accessing the specific cloud
+  rpc UpdateCloudProviderCredentials(UpdateCloudProviderCredentialsRequest) returns (UpdateCloudProviderCredentialsResponse) {}
+
   // QuotaPreflightCheck checks if the target account and region has sufficient resources (EIP addresses and VPCs) to provision a new cluster
   rpc QuotaPreflightCheck(QuotaPreflightCheckRequest) returns (QuotaPreflightCheckResponse) {}
 
@@ -181,9 +185,9 @@ service ClusterControlPlaneService {
     option deprecated = true;
   }
 
-  // ECRTokenForRegistry returns a docker-compatible token for accessing a given ECR registry. 
+  // ECRTokenForRegistry returns a docker-compatible token for accessing a given ECR registry.
   // This cannot be deleted before TokenForRegistry supports AWS and we edit RegistryGetECRTokenHandler to call that endpoint.
-  // Deprecated. Use TokenForRegistry instead. 
+  // Deprecated. Use TokenForRegistry instead.
   rpc ECRTokenForRegistry(ECRTokenForRegistryRequest) returns (ECRTokenForRegistryResponse) {
     option deprecated = true;
   }
@@ -195,7 +199,7 @@ service ClusterControlPlaneService {
     option deprecated = true;
   }
 
-  // AssumeRoleChainTargets gets the final destination target_arns for a given project. 
+  // AssumeRoleChainTargets gets the final destination target_arns for a given project.
   // Deprecated. Do not use.
   rpc AssumeRoleChainTargets(AssumeRoleChainTargetsRequest) returns (AssumeRoleChainTargetsResponse) {
     option deprecated = true;
@@ -206,7 +210,7 @@ service ClusterControlPlaneService {
     option deprecated = true;
   }
 
-  // EKSBearerToken gets a bearer token for programatic access to an EKS cluster's kubernetes API. 
+  // EKSBearerToken gets a bearer token for programatic access to an EKS cluster's kubernetes API.
   // Deprecated. Use KubeConfigForCluster instead.
   rpc EKSBearerToken(EKSBearerTokenRequest) returns (EKSBearerTokenResponse) {
     option deprecated = true;
