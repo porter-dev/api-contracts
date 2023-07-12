@@ -30,6 +30,7 @@ export const QuotaPreflightCheckResponse = proto3.makeMessageType(
 
 /**
  * @generated from message porter.v1.CreateAssumeRoleChainRequest
+ * @deprecated
  */
 export const CreateAssumeRoleChainRequest = proto3.makeMessageType(
   "porter.v1.CreateAssumeRoleChainRequest",
@@ -46,6 +47,7 @@ export const CreateAssumeRoleChainRequest = proto3.makeMessageType(
 
 /**
  * @generated from message porter.v1.CreateAssumeRoleChainResponse
+ * @deprecated
  */
 export const CreateAssumeRoleChainResponse = proto3.makeMessageType(
   "porter.v1.CreateAssumeRoleChainResponse",
@@ -57,6 +59,7 @@ export const CreateAssumeRoleChainResponse = proto3.makeMessageType(
 
 /**
  * @generated from message porter.v1.SaveAzureCredentialsRequest
+ * @deprecated
  */
 export const SaveAzureCredentialsRequest = proto3.makeMessageType(
   "porter.v1.SaveAzureCredentialsRequest",
@@ -71,6 +74,7 @@ export const SaveAzureCredentialsRequest = proto3.makeMessageType(
 
 /**
  * @generated from message porter.v1.SaveAzureCredentialsResponse
+ * @deprecated
  */
 export const SaveAzureCredentialsResponse = proto3.makeMessageType(
   "porter.v1.SaveAzureCredentialsResponse",

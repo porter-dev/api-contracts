@@ -31,9 +31,13 @@ const (
 type ClusterControlPlaneServiceClient interface {
 	// QuotaPreflightCheck checks if the target account and region has sufficient resources (EIP addresses and VPCs) to provision a new cluster
 	QuotaPreflightCheck(context.Context, *connect_go.Request[v1.QuotaPreflightCheckRequest]) (*connect_go.Response[v1.QuotaPreflightCheckResponse], error)
-	// CreateAssumeRoleChain creates a new assume role chain for a given project and checks if the target assumed role has sufficient permissions
+	// CreateAssumeRoleChain creates a new assume role chain for a given project and checks if the target assumed role has sufficient permissions. Use UpdateCloudProviderCredentials instead.
+	//
+	// Deprecated: do not use.
 	CreateAssumeRoleChain(context.Context, *connect_go.Request[v1.CreateAssumeRoleChainRequest]) (*connect_go.Response[v1.CreateAssumeRoleChainResponse], error)
-	// SaveAzureCredentials stores the new azure service principal credentials and creates the azure cluster identity
+	// SaveAzureCredentials stores the new azure service principal credentials and creates the azure cluster identity. Deprecated. Use UpdateCloudProviderCredentials instead.
+	//
+	// Deprecated: do not use.
 	SaveAzureCredentials(context.Context, *connect_go.Request[v1.SaveAzureCredentialsRequest]) (*connect_go.Response[v1.SaveAzureCredentialsResponse], error)
 	// KubeConfigForCluster gets a valid kubeconfig from the management cluster, for a given workload cluster
 	KubeConfigForCluster(context.Context, *connect_go.Request[v1.KubeConfigForClusterRequest]) (*connect_go.Response[v1.KubeConfigForClusterResponse], error)
@@ -206,11 +210,15 @@ func (c *clusterControlPlaneServiceClient) QuotaPreflightCheck(ctx context.Conte
 }
 
 // CreateAssumeRoleChain calls porter.v1.ClusterControlPlaneService.CreateAssumeRoleChain.
+//
+// Deprecated: do not use.
 func (c *clusterControlPlaneServiceClient) CreateAssumeRoleChain(ctx context.Context, req *connect_go.Request[v1.CreateAssumeRoleChainRequest]) (*connect_go.Response[v1.CreateAssumeRoleChainResponse], error) {
 	return c.createAssumeRoleChain.CallUnary(ctx, req)
 }
 
 // SaveAzureCredentials calls porter.v1.ClusterControlPlaneService.SaveAzureCredentials.
+//
+// Deprecated: do not use.
 func (c *clusterControlPlaneServiceClient) SaveAzureCredentials(ctx context.Context, req *connect_go.Request[v1.SaveAzureCredentialsRequest]) (*connect_go.Response[v1.SaveAzureCredentialsResponse], error) {
 	return c.saveAzureCredentials.CallUnary(ctx, req)
 }
@@ -304,9 +312,13 @@ func (c *clusterControlPlaneServiceClient) EKSBearerToken(ctx context.Context, r
 type ClusterControlPlaneServiceHandler interface {
 	// QuotaPreflightCheck checks if the target account and region has sufficient resources (EIP addresses and VPCs) to provision a new cluster
 	QuotaPreflightCheck(context.Context, *connect_go.Request[v1.QuotaPreflightCheckRequest]) (*connect_go.Response[v1.QuotaPreflightCheckResponse], error)
-	// CreateAssumeRoleChain creates a new assume role chain for a given project and checks if the target assumed role has sufficient permissions
+	// CreateAssumeRoleChain creates a new assume role chain for a given project and checks if the target assumed role has sufficient permissions. Use UpdateCloudProviderCredentials instead.
+	//
+	// Deprecated: do not use.
 	CreateAssumeRoleChain(context.Context, *connect_go.Request[v1.CreateAssumeRoleChainRequest]) (*connect_go.Response[v1.CreateAssumeRoleChainResponse], error)
-	// SaveAzureCredentials stores the new azure service principal credentials and creates the azure cluster identity
+	// SaveAzureCredentials stores the new azure service principal credentials and creates the azure cluster identity. Deprecated. Use UpdateCloudProviderCredentials instead.
+	//
+	// Deprecated: do not use.
 	SaveAzureCredentials(context.Context, *connect_go.Request[v1.SaveAzureCredentialsRequest]) (*connect_go.Response[v1.SaveAzureCredentialsResponse], error)
 	// KubeConfigForCluster gets a valid kubeconfig from the management cluster, for a given workload cluster
 	KubeConfigForCluster(context.Context, *connect_go.Request[v1.KubeConfigForClusterRequest]) (*connect_go.Response[v1.KubeConfigForClusterResponse], error)

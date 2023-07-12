@@ -16,6 +16,8 @@ message QuotaPreflightCheckRequest {
 message QuotaPreflightCheckResponse {}
 
 message CreateAssumeRoleChainRequest {
+  option deprecated = true;
+
   int64 project_id = 1;
   string source_arn = 2;
   string target_access_id = 3;
@@ -26,11 +28,14 @@ message CreateAssumeRoleChainRequest {
 }
 
 message CreateAssumeRoleChainResponse {
+  option deprecated = true;
+
   int64 project_id = 1;
   string target_arn = 2;
 }
 
 message SaveAzureCredentialsRequest {
+  option deprecated = true;
   int64 project_id = 1;
   string client_id = 2;
   string subscription_id = 3;
@@ -39,6 +44,8 @@ message SaveAzureCredentialsRequest {
 }
 
 message SaveAzureCredentialsResponse {
+  option deprecated = true;
+
   int64 project_id = 1;
   string credentials_identifier = 2;
 }
@@ -133,11 +140,15 @@ service ClusterControlPlaneService {
   // QuotaPreflightCheck checks if the target account and region has sufficient resources (EIP addresses and VPCs) to provision a new cluster
   rpc QuotaPreflightCheck(QuotaPreflightCheckRequest) returns (QuotaPreflightCheckResponse) {}
 
-  // CreateAssumeRoleChain creates a new assume role chain for a given project and checks if the target assumed role has sufficient permissions
-  rpc CreateAssumeRoleChain(CreateAssumeRoleChainRequest) returns (CreateAssumeRoleChainResponse) {}
+  // CreateAssumeRoleChain creates a new assume role chain for a given project and checks if the target assumed role has sufficient permissions. Use UpdateCloudProviderCredentials instead.
+  rpc CreateAssumeRoleChain(CreateAssumeRoleChainRequest) returns (CreateAssumeRoleChainResponse) {
+    option deprecated = true;
+  }
 
-  // SaveAzureCredentials stores the new azure service principal credentials and creates the azure cluster identity
-  rpc SaveAzureCredentials(SaveAzureCredentialsRequest) returns (SaveAzureCredentialsResponse) {}
+  // SaveAzureCredentials stores the new azure service principal credentials and creates the azure cluster identity. Deprecated. Use UpdateCloudProviderCredentials instead.
+  rpc SaveAzureCredentials(SaveAzureCredentialsRequest) returns (SaveAzureCredentialsResponse) {
+    option deprecated = true;
+  }
 
   // KubeConfigForCluster gets a valid kubeconfig from the management cluster, for a given workload cluster
   rpc KubeConfigForCluster(KubeConfigForClusterRequest) returns (KubeConfigForClusterResponse) {}

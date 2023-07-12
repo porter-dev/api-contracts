@@ -68,6 +68,7 @@ export declare class QuotaPreflightCheckResponse extends Message<QuotaPreflightC
 
 /**
  * @generated from message porter.v1.CreateAssumeRoleChainRequest
+ * @deprecated
  */
 export declare class CreateAssumeRoleChainRequest extends Message<CreateAssumeRoleChainRequest> {
   /**
@@ -122,6 +123,7 @@ export declare class CreateAssumeRoleChainRequest extends Message<CreateAssumeRo
 
 /**
  * @generated from message porter.v1.CreateAssumeRoleChainResponse
+ * @deprecated
  */
 export declare class CreateAssumeRoleChainResponse extends Message<CreateAssumeRoleChainResponse> {
   /**
@@ -151,6 +153,7 @@ export declare class CreateAssumeRoleChainResponse extends Message<CreateAssumeR
 
 /**
  * @generated from message porter.v1.SaveAzureCredentialsRequest
+ * @deprecated
  */
 export declare class SaveAzureCredentialsRequest extends Message<SaveAzureCredentialsRequest> {
   /**
@@ -195,6 +198,7 @@ export declare class SaveAzureCredentialsRequest extends Message<SaveAzureCreden
 
 /**
  * @generated from message porter.v1.SaveAzureCredentialsResponse
+ * @deprecated
  */
 export declare class SaveAzureCredentialsResponse extends Message<SaveAzureCredentialsResponse> {
   /**
