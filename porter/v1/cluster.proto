@@ -25,6 +25,7 @@ message Cluster {
     AKS aks_kind = 8;
   }
 }
+
 enum EnumKubernetesKind {
   ENUM_KUBERNETES_KIND_UNSPECIFIED = 0;
   ENUM_KUBERNETES_KIND_EKS = 1;

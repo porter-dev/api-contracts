@@ -3,7 +3,7 @@ syntax = "proto3";
 package porter.v1;
 
 import "google/protobuf/timestamp.proto";
-import "porter/v1/aws_assume_role.proto";
+import "porter/v1/cloud_provider_credentials.proto";
 import "porter/v1/contract.proto";
 
 message QuotaPreflightCheckRequest {
@@ -187,6 +187,9 @@ message ReadContractResponse {
 }
 
 service ClusterControlPlaneService {
+  // UpdateCloudProviderCredentials creates or updates the credentials used for accessing the specific cloud
+  rpc UpdateCloudProviderCredentials(UpdateCloudProviderCredentialsRequest) returns (UpdateCloudProviderCredentialsResponse) {}
+
   // QuotaPreflightCheck checks if the target account and region has sufficient resources (EIP addresses and VPCs) to provision a new cluster
   rpc QuotaPreflightCheck(QuotaPreflightCheckRequest) returns (QuotaPreflightCheckResponse) {}
 
