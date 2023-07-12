@@ -12,9 +12,9 @@ import type { EnumCloudProvider } from "./cluster_pb.js";
  */
 export declare class AWSCredentials extends Message<AWSCredentials> {
   /**
-   * @generated from field: repeated porter.v1.AssumeRoleChainLink chain = 1;
+   * @generated from field: repeated porter.v1.AssumeRoleHop chain = 1;
    */
-  chain: AssumeRoleChainLink[];
+  chain: AssumeRoleHop[];
 
   constructor(data?: PartialMessage<AWSCredentials>);
 
@@ -32,11 +32,11 @@ export declare class AWSCredentials extends Message<AWSCredentials> {
 }
 
 /**
- * AssumeRoleChainLink contains all information required for the source_arn to assume the target_arn
+ * AssumeRoleHop contains all information required for the source_arn to assume the target_arn
  *
- * @generated from message porter.v1.AssumeRoleChainLink
+ * @generated from message porter.v1.AssumeRoleHop
  */
-export declare class AssumeRoleChainLink extends Message<AssumeRoleChainLink> {
+export declare class AssumeRoleHop extends Message<AssumeRoleHop> {
   /**
    * @generated from field: string source_arn = 1;
    */
@@ -54,19 +54,19 @@ export declare class AssumeRoleChainLink extends Message<AssumeRoleChainLink> {
    */
   externalId: string;
 
-  constructor(data?: PartialMessage<AssumeRoleChainLink>);
+  constructor(data?: PartialMessage<AssumeRoleHop>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.AssumeRoleChainLink";
+  static readonly typeName = "porter.v1.AssumeRoleHop";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AssumeRoleChainLink;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AssumeRoleHop;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AssumeRoleChainLink;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AssumeRoleHop;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AssumeRoleChainLink;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AssumeRoleHop;
 
-  static equals(a: AssumeRoleChainLink | PlainMessage<AssumeRoleChainLink> | undefined, b: AssumeRoleChainLink | PlainMessage<AssumeRoleChainLink> | undefined): boolean;
+  static equals(a: AssumeRoleHop | PlainMessage<AssumeRoleHop> | undefined, b: AssumeRoleHop | PlainMessage<AssumeRoleHop> | undefined): boolean;
 }
 
 /**

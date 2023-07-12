@@ -5,8 +5,8 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage, Timestamp } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
-import type { AssumeRoleChainLink } from "./cloud_provider_credentials_pb.js";
 import type { Contract, ContractRevision } from "./contract_pb.js";
+import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
  * @generated from message porter.v1.QuotaPreflightCheckRequest
@@ -68,6 +68,7 @@ export declare class QuotaPreflightCheckResponse extends Message<QuotaPreflightC
 
 /**
  * @generated from message porter.v1.CreateAssumeRoleChainRequest
+ * @deprecated
  */
 export declare class CreateAssumeRoleChainRequest extends Message<CreateAssumeRoleChainRequest> {
   /**
@@ -122,6 +123,7 @@ export declare class CreateAssumeRoleChainRequest extends Message<CreateAssumeRo
 
 /**
  * @generated from message porter.v1.CreateAssumeRoleChainResponse
+ * @deprecated
  */
 export declare class CreateAssumeRoleChainResponse extends Message<CreateAssumeRoleChainResponse> {
   /**
@@ -151,6 +153,7 @@ export declare class CreateAssumeRoleChainResponse extends Message<CreateAssumeR
 
 /**
  * @generated from message porter.v1.SaveAzureCredentialsRequest
+ * @deprecated
  */
 export declare class SaveAzureCredentialsRequest extends Message<SaveAzureCredentialsRequest> {
   /**
@@ -195,6 +198,7 @@ export declare class SaveAzureCredentialsRequest extends Message<SaveAzureCreden
 
 /**
  * @generated from message porter.v1.SaveAzureCredentialsResponse
+ * @deprecated
  */
 export declare class SaveAzureCredentialsResponse extends Message<SaveAzureCredentialsResponse> {
   /**
@@ -220,160 +224,6 @@ export declare class SaveAzureCredentialsResponse extends Message<SaveAzureCrede
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SaveAzureCredentialsResponse;
 
   static equals(a: SaveAzureCredentialsResponse | PlainMessage<SaveAzureCredentialsResponse> | undefined, b: SaveAzureCredentialsResponse | PlainMessage<SaveAzureCredentialsResponse> | undefined): boolean;
-}
-
-/**
- * @generated from message porter.v1.EKSBearerTokenRequest
- */
-export declare class EKSBearerTokenRequest extends Message<EKSBearerTokenRequest> {
-  /**
-   * @generated from field: int64 project_id = 1;
-   */
-  projectId: bigint;
-
-  /**
-   * @generated from field: int64 cluster_id = 2;
-   */
-  clusterId: bigint;
-
-  constructor(data?: PartialMessage<EKSBearerTokenRequest>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.EKSBearerTokenRequest";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EKSBearerTokenRequest;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): EKSBearerTokenRequest;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EKSBearerTokenRequest;
-
-  static equals(a: EKSBearerTokenRequest | PlainMessage<EKSBearerTokenRequest> | undefined, b: EKSBearerTokenRequest | PlainMessage<EKSBearerTokenRequest> | undefined): boolean;
-}
-
-/**
- * @generated from message porter.v1.EKSBearerTokenResponse
- */
-export declare class EKSBearerTokenResponse extends Message<EKSBearerTokenResponse> {
-  /**
-   * @generated from field: string token = 1;
-   */
-  token: string;
-
-  constructor(data?: PartialMessage<EKSBearerTokenResponse>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.EKSBearerTokenResponse";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EKSBearerTokenResponse;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): EKSBearerTokenResponse;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EKSBearerTokenResponse;
-
-  static equals(a: EKSBearerTokenResponse | PlainMessage<EKSBearerTokenResponse> | undefined, b: EKSBearerTokenResponse | PlainMessage<EKSBearerTokenResponse> | undefined): boolean;
-}
-
-/**
- * @generated from message porter.v1.CertificateAuthorityDataRequest
- */
-export declare class CertificateAuthorityDataRequest extends Message<CertificateAuthorityDataRequest> {
-  /**
-   * @generated from field: int64 project_id = 1;
-   */
-  projectId: bigint;
-
-  /**
-   * @generated from field: int64 cluster_id = 2;
-   */
-  clusterId: bigint;
-
-  constructor(data?: PartialMessage<CertificateAuthorityDataRequest>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.CertificateAuthorityDataRequest";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CertificateAuthorityDataRequest;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CertificateAuthorityDataRequest;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CertificateAuthorityDataRequest;
-
-  static equals(a: CertificateAuthorityDataRequest | PlainMessage<CertificateAuthorityDataRequest> | undefined, b: CertificateAuthorityDataRequest | PlainMessage<CertificateAuthorityDataRequest> | undefined): boolean;
-}
-
-/**
- * @generated from message porter.v1.CertificateAuthorityDataResponse
- */
-export declare class CertificateAuthorityDataResponse extends Message<CertificateAuthorityDataResponse> {
-  /**
-   * @generated from field: string certificate_authority_data = 1;
-   */
-  certificateAuthorityData: string;
-
-  constructor(data?: PartialMessage<CertificateAuthorityDataResponse>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.CertificateAuthorityDataResponse";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CertificateAuthorityDataResponse;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CertificateAuthorityDataResponse;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CertificateAuthorityDataResponse;
-
-  static equals(a: CertificateAuthorityDataResponse | PlainMessage<CertificateAuthorityDataResponse> | undefined, b: CertificateAuthorityDataResponse | PlainMessage<CertificateAuthorityDataResponse> | undefined): boolean;
-}
-
-/**
- * @generated from message porter.v1.AssumeRoleChainTargetsRequest
- */
-export declare class AssumeRoleChainTargetsRequest extends Message<AssumeRoleChainTargetsRequest> {
-  /**
-   * @generated from field: string project_id = 1;
-   */
-  projectId: string;
-
-  constructor(data?: PartialMessage<AssumeRoleChainTargetsRequest>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.AssumeRoleChainTargetsRequest";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AssumeRoleChainTargetsRequest;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AssumeRoleChainTargetsRequest;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AssumeRoleChainTargetsRequest;
-
-  static equals(a: AssumeRoleChainTargetsRequest | PlainMessage<AssumeRoleChainTargetsRequest> | undefined, b: AssumeRoleChainTargetsRequest | PlainMessage<AssumeRoleChainTargetsRequest> | undefined): boolean;
-}
-
-/**
- * @generated from message porter.v1.AssumeRoleChainTargetsResponse
- */
-export declare class AssumeRoleChainTargetsResponse extends Message<AssumeRoleChainTargetsResponse> {
-  /**
-   * @generated from field: repeated porter.v1.AssumeRoleChainLink chain_links = 1;
-   */
-  chainLinks: AssumeRoleChainLink[];
-
-  constructor(data?: PartialMessage<AssumeRoleChainTargetsResponse>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.AssumeRoleChainTargetsResponse";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AssumeRoleChainTargetsResponse;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AssumeRoleChainTargetsResponse;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AssumeRoleChainTargetsResponse;
-
-  static equals(a: AssumeRoleChainTargetsResponse | PlainMessage<AssumeRoleChainTargetsResponse> | undefined, b: AssumeRoleChainTargetsResponse | PlainMessage<AssumeRoleChainTargetsResponse> | undefined): boolean;
 }
 
 /**
@@ -604,132 +454,6 @@ export declare class DeleteClusterResponse extends Message<DeleteClusterResponse
 }
 
 /**
- * @generated from message porter.v1.ECRTokenForRegistryRequest
- */
-export declare class ECRTokenForRegistryRequest extends Message<ECRTokenForRegistryRequest> {
-  /**
-   * @generated from field: int64 project_id = 1;
-   */
-  projectId: bigint;
-
-  /**
-   * @generated from field: string region = 2;
-   */
-  region: string;
-
-  /**
-   * @generated from field: string aws_account_id = 3;
-   */
-  awsAccountId: string;
-
-  constructor(data?: PartialMessage<ECRTokenForRegistryRequest>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.ECRTokenForRegistryRequest";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ECRTokenForRegistryRequest;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ECRTokenForRegistryRequest;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ECRTokenForRegistryRequest;
-
-  static equals(a: ECRTokenForRegistryRequest | PlainMessage<ECRTokenForRegistryRequest> | undefined, b: ECRTokenForRegistryRequest | PlainMessage<ECRTokenForRegistryRequest> | undefined): boolean;
-}
-
-/**
- * @generated from message porter.v1.ECRTokenForRegistryResponse
- */
-export declare class ECRTokenForRegistryResponse extends Message<ECRTokenForRegistryResponse> {
-  /**
-   * @generated from field: string token = 1;
-   */
-  token: string;
-
-  /**
-   * @generated from field: google.protobuf.Timestamp expiry = 2;
-   */
-  expiry?: Timestamp;
-
-  constructor(data?: PartialMessage<ECRTokenForRegistryResponse>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.ECRTokenForRegistryResponse";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ECRTokenForRegistryResponse;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ECRTokenForRegistryResponse;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ECRTokenForRegistryResponse;
-
-  static equals(a: ECRTokenForRegistryResponse | PlainMessage<ECRTokenForRegistryResponse> | undefined, b: ECRTokenForRegistryResponse | PlainMessage<ECRTokenForRegistryResponse> | undefined): boolean;
-}
-
-/**
- * @generated from message porter.v1.AssumeRoleCredentialsRequest
- */
-export declare class AssumeRoleCredentialsRequest extends Message<AssumeRoleCredentialsRequest> {
-  /**
-   * @generated from field: string aws_account_id = 1;
-   */
-  awsAccountId: string;
-
-  /**
-   * @generated from field: int64 project_id = 2;
-   */
-  projectId: bigint;
-
-  constructor(data?: PartialMessage<AssumeRoleCredentialsRequest>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.AssumeRoleCredentialsRequest";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AssumeRoleCredentialsRequest;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AssumeRoleCredentialsRequest;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AssumeRoleCredentialsRequest;
-
-  static equals(a: AssumeRoleCredentialsRequest | PlainMessage<AssumeRoleCredentialsRequest> | undefined, b: AssumeRoleCredentialsRequest | PlainMessage<AssumeRoleCredentialsRequest> | undefined): boolean;
-}
-
-/**
- * @generated from message porter.v1.AssumeRoleCredentialsResponse
- */
-export declare class AssumeRoleCredentialsResponse extends Message<AssumeRoleCredentialsResponse> {
-  /**
-   * @generated from field: string aws_access_id = 1;
-   */
-  awsAccessId: string;
-
-  /**
-   * @generated from field: string aws_secret_key = 2;
-   */
-  awsSecretKey: string;
-
-  /**
-   * @generated from field: string aws_session_token = 3;
-   */
-  awsSessionToken: string;
-
-  constructor(data?: PartialMessage<AssumeRoleCredentialsResponse>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.AssumeRoleCredentialsResponse";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AssumeRoleCredentialsResponse;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AssumeRoleCredentialsResponse;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AssumeRoleCredentialsResponse;
-
-  static equals(a: AssumeRoleCredentialsResponse | PlainMessage<AssumeRoleCredentialsResponse> | undefined, b: AssumeRoleCredentialsResponse | PlainMessage<AssumeRoleCredentialsResponse> | undefined): boolean;
-}
-
-/**
  * @generated from message porter.v1.ListRepositoriesForRegistryRequest
  */
 export declare class ListRepositoriesForRegistryRequest extends Message<ListRepositoriesForRegistryRequest> {
@@ -957,59 +681,6 @@ export declare class TokenForRegistryResponse extends Message<TokenForRegistryRe
 }
 
 /**
- * @generated from message porter.v1.DockerConfigFileForRegistryRequest
- */
-export declare class DockerConfigFileForRegistryRequest extends Message<DockerConfigFileForRegistryRequest> {
-  /**
-   * @generated from field: int64 project_id = 1;
-   */
-  projectId: bigint;
-
-  /**
-   * @generated from field: string registry_uri = 2;
-   */
-  registryUri: string;
-
-  constructor(data?: PartialMessage<DockerConfigFileForRegistryRequest>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.DockerConfigFileForRegistryRequest";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DockerConfigFileForRegistryRequest;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DockerConfigFileForRegistryRequest;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DockerConfigFileForRegistryRequest;
-
-  static equals(a: DockerConfigFileForRegistryRequest | PlainMessage<DockerConfigFileForRegistryRequest> | undefined, b: DockerConfigFileForRegistryRequest | PlainMessage<DockerConfigFileForRegistryRequest> | undefined): boolean;
-}
-
-/**
- * @generated from message porter.v1.DockerConfigFileForRegistryResponse
- */
-export declare class DockerConfigFileForRegistryResponse extends Message<DockerConfigFileForRegistryResponse> {
-  /**
-   * @generated from field: bytes docker_config_file = 1;
-   */
-  dockerConfigFile: Uint8Array;
-
-  constructor(data?: PartialMessage<DockerConfigFileForRegistryResponse>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.DockerConfigFileForRegistryResponse";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DockerConfigFileForRegistryResponse;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DockerConfigFileForRegistryResponse;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DockerConfigFileForRegistryResponse;
-
-  static equals(a: DockerConfigFileForRegistryResponse | PlainMessage<DockerConfigFileForRegistryResponse> | undefined, b: DockerConfigFileForRegistryResponse | PlainMessage<DockerConfigFileForRegistryResponse> | undefined): boolean;
-}
-
-/**
  * @generated from message porter.v1.ReadContractRequest
  */
 export declare class ReadContractRequest extends Message<ReadContractRequest> {
@@ -1055,5 +726,350 @@ export declare class ReadContractResponse extends Message<ReadContractResponse> 
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ReadContractResponse;
 
   static equals(a: ReadContractResponse | PlainMessage<ReadContractResponse> | undefined, b: ReadContractResponse | PlainMessage<ReadContractResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.EKSBearerTokenRequest
+ * @deprecated
+ */
+export declare class EKSBearerTokenRequest extends Message<EKSBearerTokenRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  constructor(data?: PartialMessage<EKSBearerTokenRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.EKSBearerTokenRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EKSBearerTokenRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): EKSBearerTokenRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EKSBearerTokenRequest;
+
+  static equals(a: EKSBearerTokenRequest | PlainMessage<EKSBearerTokenRequest> | undefined, b: EKSBearerTokenRequest | PlainMessage<EKSBearerTokenRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.EKSBearerTokenResponse
+ * @deprecated
+ */
+export declare class EKSBearerTokenResponse extends Message<EKSBearerTokenResponse> {
+  /**
+   * @generated from field: string token = 1;
+   */
+  token: string;
+
+  constructor(data?: PartialMessage<EKSBearerTokenResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.EKSBearerTokenResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EKSBearerTokenResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): EKSBearerTokenResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EKSBearerTokenResponse;
+
+  static equals(a: EKSBearerTokenResponse | PlainMessage<EKSBearerTokenResponse> | undefined, b: EKSBearerTokenResponse | PlainMessage<EKSBearerTokenResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.CertificateAuthorityDataRequest
+ * @deprecated
+ */
+export declare class CertificateAuthorityDataRequest extends Message<CertificateAuthorityDataRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  constructor(data?: PartialMessage<CertificateAuthorityDataRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CertificateAuthorityDataRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CertificateAuthorityDataRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CertificateAuthorityDataRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CertificateAuthorityDataRequest;
+
+  static equals(a: CertificateAuthorityDataRequest | PlainMessage<CertificateAuthorityDataRequest> | undefined, b: CertificateAuthorityDataRequest | PlainMessage<CertificateAuthorityDataRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.CertificateAuthorityDataResponse
+ * @deprecated
+ */
+export declare class CertificateAuthorityDataResponse extends Message<CertificateAuthorityDataResponse> {
+  /**
+   * @generated from field: string certificate_authority_data = 1;
+   */
+  certificateAuthorityData: string;
+
+  constructor(data?: PartialMessage<CertificateAuthorityDataResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CertificateAuthorityDataResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CertificateAuthorityDataResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CertificateAuthorityDataResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CertificateAuthorityDataResponse;
+
+  static equals(a: CertificateAuthorityDataResponse | PlainMessage<CertificateAuthorityDataResponse> | undefined, b: CertificateAuthorityDataResponse | PlainMessage<CertificateAuthorityDataResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.AssumeRoleChainTargetsRequest
+ * @deprecated
+ */
+export declare class AssumeRoleChainTargetsRequest extends Message<AssumeRoleChainTargetsRequest> {
+  /**
+   * @generated from field: string project_id = 1;
+   */
+  projectId: string;
+
+  constructor(data?: PartialMessage<AssumeRoleChainTargetsRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AssumeRoleChainTargetsRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AssumeRoleChainTargetsRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AssumeRoleChainTargetsRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AssumeRoleChainTargetsRequest;
+
+  static equals(a: AssumeRoleChainTargetsRequest | PlainMessage<AssumeRoleChainTargetsRequest> | undefined, b: AssumeRoleChainTargetsRequest | PlainMessage<AssumeRoleChainTargetsRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.AssumeRoleChainTargetsResponse
+ * @deprecated
+ */
+export declare class AssumeRoleChainTargetsResponse extends Message<AssumeRoleChainTargetsResponse> {
+  /**
+   * @generated from field: repeated porter.v1.AssumeRoleChainLink chain_links = 1;
+   */
+  chainLinks: AssumeRoleChainLink[];
+
+  constructor(data?: PartialMessage<AssumeRoleChainTargetsResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AssumeRoleChainTargetsResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AssumeRoleChainTargetsResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AssumeRoleChainTargetsResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AssumeRoleChainTargetsResponse;
+
+  static equals(a: AssumeRoleChainTargetsResponse | PlainMessage<AssumeRoleChainTargetsResponse> | undefined, b: AssumeRoleChainTargetsResponse | PlainMessage<AssumeRoleChainTargetsResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.ECRTokenForRegistryRequest
+ * @deprecated
+ */
+export declare class ECRTokenForRegistryRequest extends Message<ECRTokenForRegistryRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: string region = 2;
+   */
+  region: string;
+
+  /**
+   * @generated from field: string aws_account_id = 3;
+   */
+  awsAccountId: string;
+
+  constructor(data?: PartialMessage<ECRTokenForRegistryRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ECRTokenForRegistryRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ECRTokenForRegistryRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ECRTokenForRegistryRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ECRTokenForRegistryRequest;
+
+  static equals(a: ECRTokenForRegistryRequest | PlainMessage<ECRTokenForRegistryRequest> | undefined, b: ECRTokenForRegistryRequest | PlainMessage<ECRTokenForRegistryRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.ECRTokenForRegistryResponse
+ * @deprecated
+ */
+export declare class ECRTokenForRegistryResponse extends Message<ECRTokenForRegistryResponse> {
+  /**
+   * @generated from field: string token = 1;
+   */
+  token: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp expiry = 2;
+   */
+  expiry?: Timestamp;
+
+  constructor(data?: PartialMessage<ECRTokenForRegistryResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ECRTokenForRegistryResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ECRTokenForRegistryResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ECRTokenForRegistryResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ECRTokenForRegistryResponse;
+
+  static equals(a: ECRTokenForRegistryResponse | PlainMessage<ECRTokenForRegistryResponse> | undefined, b: ECRTokenForRegistryResponse | PlainMessage<ECRTokenForRegistryResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.AssumeRoleCredentialsRequest
+ * @deprecated
+ */
+export declare class AssumeRoleCredentialsRequest extends Message<AssumeRoleCredentialsRequest> {
+  /**
+   * @generated from field: string aws_account_id = 1;
+   */
+  awsAccountId: string;
+
+  /**
+   * @generated from field: int64 project_id = 2;
+   */
+  projectId: bigint;
+
+  constructor(data?: PartialMessage<AssumeRoleCredentialsRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AssumeRoleCredentialsRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AssumeRoleCredentialsRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AssumeRoleCredentialsRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AssumeRoleCredentialsRequest;
+
+  static equals(a: AssumeRoleCredentialsRequest | PlainMessage<AssumeRoleCredentialsRequest> | undefined, b: AssumeRoleCredentialsRequest | PlainMessage<AssumeRoleCredentialsRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.AssumeRoleCredentialsResponse
+ * @deprecated
+ */
+export declare class AssumeRoleCredentialsResponse extends Message<AssumeRoleCredentialsResponse> {
+  /**
+   * @generated from field: string aws_access_id = 1;
+   */
+  awsAccessId: string;
+
+  /**
+   * @generated from field: string aws_secret_key = 2;
+   */
+  awsSecretKey: string;
+
+  /**
+   * @generated from field: string aws_session_token = 3;
+   */
+  awsSessionToken: string;
+
+  constructor(data?: PartialMessage<AssumeRoleCredentialsResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AssumeRoleCredentialsResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AssumeRoleCredentialsResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AssumeRoleCredentialsResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AssumeRoleCredentialsResponse;
+
+  static equals(a: AssumeRoleCredentialsResponse | PlainMessage<AssumeRoleCredentialsResponse> | undefined, b: AssumeRoleCredentialsResponse | PlainMessage<AssumeRoleCredentialsResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.DockerConfigFileForRegistryRequest
+ * @deprecated
+ */
+export declare class DockerConfigFileForRegistryRequest extends Message<DockerConfigFileForRegistryRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: string registry_uri = 2;
+   */
+  registryUri: string;
+
+  constructor(data?: PartialMessage<DockerConfigFileForRegistryRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DockerConfigFileForRegistryRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DockerConfigFileForRegistryRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DockerConfigFileForRegistryRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DockerConfigFileForRegistryRequest;
+
+  static equals(a: DockerConfigFileForRegistryRequest | PlainMessage<DockerConfigFileForRegistryRequest> | undefined, b: DockerConfigFileForRegistryRequest | PlainMessage<DockerConfigFileForRegistryRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.DockerConfigFileForRegistryResponse
+ * @deprecated
+ */
+export declare class DockerConfigFileForRegistryResponse extends Message<DockerConfigFileForRegistryResponse> {
+  /**
+   * @generated from field: bytes docker_config_file = 1;
+   */
+  dockerConfigFile: Uint8Array;
+
+  constructor(data?: PartialMessage<DockerConfigFileForRegistryResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DockerConfigFileForRegistryResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DockerConfigFileForRegistryResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DockerConfigFileForRegistryResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DockerConfigFileForRegistryResponse;
+
+  static equals(a: DockerConfigFileForRegistryResponse | PlainMessage<DockerConfigFileForRegistryResponse> | undefined, b: DockerConfigFileForRegistryResponse | PlainMessage<DockerConfigFileForRegistryResponse> | undefined): boolean;
 }
 

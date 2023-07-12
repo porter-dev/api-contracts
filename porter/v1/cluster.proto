@@ -39,3 +39,65 @@ enum EnumCloudProvider {
   ENUM_CLOUD_PROVIDER_GCP = 2;
   ENUM_CLOUD_PROVIDER_AZURE = 3;
 }
+
+// // AWSCredentials are all the hops required to access a target account
+// message AWSCredentials {
+//     repeated AssumeRoleChainLink chain = 1;
+// }
+
+// message AssumeRoleChainLink{
+//       string source_arn = 1;
+//   string target_arn = 2;
+//     string external_id = 3;
+// }
+
+// message AWSCredentialsResponse {
+//   option deprecated = true;
+
+//   int64 project_id = 1;
+//   string target_arn = 2;
+// }
+
+// message SaveAzureCredentialsRequest {
+//   option deprecated = true;
+//   int64 project_id = 1;
+//   string client_id = 2;
+//   string subscription_id = 3;
+//   string tenant_id = 4;
+//   bytes service_principal_secret = 5;
+// }
+
+// message SaveAzureCredentialsResponse {
+//   option deprecated = true;
+
+//   int64 project_id = 1;
+//   string credentials_identifier = 2;
+// }
+
+// // message UpdateCloudProviderCredentialsRequest {
+// //     // project_id [REQUIRED] is the project that we are updating the credentials for
+// //   int64 project_id = 1;
+// //   // cloud_provider [REQUIRED] represents the provider that we will provisioning the cluster in
+// //   EnumCloudProvider cloud_provider = 2;
+
+// //     // cloud_provider_credentials are the credentials for the specified cloud provider
+// //   oneof cloud_provider_credentials {
+// //     EKS eks_kind = 6;
+// //     GKE gke_kind = 7;
+// //     AKS aks_kind = 8;
+// //   }
+// // }
+
+// // message UpdateCloudProviderCredentialsResponse {
+// //   int64 project_id = 1;
+// //   string credentials_identifier = 2;
+// // }
+
+// enum EnumCloudProvider {
+//   ENUM_CLOUD_PROVIDER_UNSPECIFIED = 0;
+//   ENUM_CLOUD_PROVIDER_AWS = 1;
+//   ENUM_CLOUD_PROVIDER_GCP = 2;
+//   ENUM_CLOUD_PROVIDER_AZURE = 3;
+// }
+//   // // UpdateCloudProviderCredentials creates or updates the credentials used for accessing the specific cloud
+//   // rpc UpdateCloudProviderCredentials(UpdateCloudProviderCredentialsRequest) returns (UpdateCloudProviderCredentialsResponse) {}

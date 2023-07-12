@@ -3,6 +3,7 @@ syntax = "proto3";
 package porter.v1;
 
 import "google/protobuf/timestamp.proto";
+import "porter/v1/aws_assume_role.proto";
 import "porter/v1/cloud_provider_credentials.proto";
 import "porter/v1/contract.proto";
 
@@ -16,6 +17,8 @@ message QuotaPreflightCheckRequest {
 message QuotaPreflightCheckResponse {}
 
 message CreateAssumeRoleChainRequest {
+  option deprecated = true;
+
   int64 project_id = 1;
   string source_arn = 2;
   string target_access_id = 3;
@@ -26,11 +29,14 @@ message CreateAssumeRoleChainRequest {
 }
 
 message CreateAssumeRoleChainResponse {
+  option deprecated = true;
+
   int64 project_id = 1;
   string target_arn = 2;
 }
 
 message SaveAzureCredentialsRequest {
+  option deprecated = true;
   int64 project_id = 1;
   string client_id = 2;
   string subscription_id = 3;
@@ -39,34 +45,10 @@ message SaveAzureCredentialsRequest {
 }
 
 message SaveAzureCredentialsResponse {
+  option deprecated = true;
+
   int64 project_id = 1;
   string credentials_identifier = 2;
-}
-
-message EKSBearerTokenRequest {
-  int64 project_id = 1;
-  int64 cluster_id = 2;
-}
-
-message EKSBearerTokenResponse {
-  string token = 1;
-}
-
-message CertificateAuthorityDataRequest {
-  int64 project_id = 1;
-  int64 cluster_id = 2;
-}
-
-message CertificateAuthorityDataResponse {
-  string certificate_authority_data = 1;
-}
-
-message AssumeRoleChainTargetsRequest {
-  string project_id = 1;
-}
-
-message AssumeRoleChainTargetsResponse {
-  repeated AssumeRoleChainLink chain_links = 1;
 }
 
 message KubeConfigForClusterRequest {
@@ -108,28 +90,6 @@ message DeleteClusterResponse {
   int64 cluster_id = 2;
 }
 
-message ECRTokenForRegistryRequest {
-  int64 project_id = 1;
-  string region = 2;
-  string aws_account_id = 3;
-}
-
-message ECRTokenForRegistryResponse {
-  string token = 1;
-  google.protobuf.Timestamp expiry = 2;
-}
-
-message AssumeRoleCredentialsRequest {
-  string aws_account_id = 1;
-  int64 project_id = 2;
-}
-
-message AssumeRoleCredentialsResponse {
-  string aws_access_id = 1;
-  string aws_secret_key = 2;
-  string aws_session_token = 3;
-}
-
 message ListRepositoriesForRegistryRequest {
   int64 project_id = 1;
   string registry_uri = 2;
@@ -169,15 +129,6 @@ message TokenForRegistryResponse {
   google.protobuf.Timestamp expiry = 2;
 }
 
-message DockerConfigFileForRegistryRequest {
-  int64 project_id = 1;
-  string registry_uri = 2;
-}
-
-message DockerConfigFileForRegistryResponse {
-  bytes docker_config_file = 1;
-}
-
 message ReadContractRequest {
   ContractRevision contract_revision = 1;
 }
@@ -193,20 +144,15 @@ service ClusterControlPlaneService {
   // QuotaPreflightCheck checks if the target account and region has sufficient resources (EIP addresses and VPCs) to provision a new cluster
   rpc QuotaPreflightCheck(QuotaPreflightCheckRequest) returns (QuotaPreflightCheckResponse) {}
 
-  // CreateAssumeRoleChain creates a new assume role chain for a given project and checks if the target assumed role has sufficient permissions
-  rpc CreateAssumeRoleChain(CreateAssumeRoleChainRequest) returns (CreateAssumeRoleChainResponse) {}
+  // CreateAssumeRoleChain creates a new assume role chain for a given project and checks if the target assumed role has sufficient permissions. Use UpdateCloudProviderCredentials instead.
+  rpc CreateAssumeRoleChain(CreateAssumeRoleChainRequest) returns (CreateAssumeRoleChainResponse) {
+    option deprecated = true;
+  }
 
-  // AssumeRoleChainTargets gets the final destination target_arns for a given project
-  rpc AssumeRoleChainTargets(AssumeRoleChainTargetsRequest) returns (AssumeRoleChainTargetsResponse) {}
-
-  // SaveAzureCredentials stores the new azure service principal credentials and creates the azure cluster identity
-  rpc SaveAzureCredentials(SaveAzureCredentialsRequest) returns (SaveAzureCredentialsResponse) {}
-
-  // CertificateAuthorityData gets the certificate authority data for a customer cluster
-  rpc CertificateAuthorityData(CertificateAuthorityDataRequest) returns (CertificateAuthorityDataResponse) {}
-
-  // EKSBearerToken gets a bearer token for programatic access to an EKS cluster's kubernetes API
-  rpc EKSBearerToken(EKSBearerTokenRequest) returns (EKSBearerTokenResponse) {}
+  // SaveAzureCredentials stores the new azure service principal credentials and creates the azure cluster identity. Deprecated. Use UpdateCloudProviderCredentials instead.
+  rpc SaveAzureCredentials(SaveAzureCredentialsRequest) returns (SaveAzureCredentialsResponse) {
+    option deprecated = true;
+  }
 
   // KubeConfigForCluster gets a valid kubeconfig from the management cluster, for a given workload cluster
   rpc KubeConfigForCluster(KubeConfigForClusterRequest) returns (KubeConfigForClusterResponse) {}
@@ -224,22 +170,118 @@ service ClusterControlPlaneService {
   // This should ultimately be wrapped into UpdateContract
   rpc DeleteCluster(DeleteClusterRequest) returns (DeleteClusterResponse) {}
 
-  // ECRTokenForRegistry returns a docker-compatible token for accessing a given ECR registry
-  rpc ECRTokenForRegistry(ECRTokenForRegistryRequest) returns (ECRTokenForRegistryResponse) {}
-
-  // AssumeRoleCredentials should be used vary sparingly, and ONLY for replacing AWS Integrations which have no workaround on the Porter API.
-  // This endpoint returns temporary AWS credentials for a given AWS Account ID, and should not be expanded further to allow specifc role selection without being tied to a project and cluster
-  rpc AssumeRoleCredentials(AssumeRoleCredentialsRequest) returns (AssumeRoleCredentialsResponse) {}
-
   // TokenForRegistry returns a token for accessing a given registry
   rpc TokenForRegistry(TokenForRegistryRequest) returns (TokenForRegistryResponse) {}
-
-  // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry
-  rpc DockerConfigFileForRegistry(DockerConfigFileForRegistryRequest) returns (DockerConfigFileForRegistryResponse) {}
 
   // ListRepositoriesForRegistry lists the repositories for a given registry, provided it is in the scope of the project id
   rpc ListRepositoriesForRegistry(ListRepositoriesForRegistryRequest) returns (ListRepositoriesForRegistryResponse) {}
 
   // ListImagesForRepository lists the repositories for a given registry, provided it is in the scope of the project id
   rpc ListImagesForRepository(ListImagesForRepositoryRequest) returns (ListImagesForRepositoryResponse) {}
+
+  // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
+  // Deprecated. Use TokenForRegistry instead.
+  rpc DockerConfigFileForRegistry(DockerConfigFileForRegistryRequest) returns (DockerConfigFileForRegistryResponse) {
+    option deprecated = true;
+  }
+
+  // ECRTokenForRegistry returns a docker-compatible token for accessing a given ECR registry.
+  // This cannot be deleted before TokenForRegistry supports AWS and we edit RegistryGetECRTokenHandler to call that endpoint.
+  // Deprecated. Use TokenForRegistry instead.
+  rpc ECRTokenForRegistry(ECRTokenForRegistryRequest) returns (ECRTokenForRegistryResponse) {
+    option deprecated = true;
+  }
+
+  // AssumeRoleCredentials should be used vary sparingly, and ONLY for replacing AWS Integrations which have no workaround on the Porter API.
+  // This endpoint returns temporary AWS credentials for a given AWS Account ID, and should not be expanded further to allow specifc role selection without being tied to a project and cluster.
+  // Deprecated. This is no longer needed once ListRepositoriesForRegistry, ListImages, and CreateRepository supports AWS
+  rpc AssumeRoleCredentials(AssumeRoleCredentialsRequest) returns (AssumeRoleCredentialsResponse) {
+    option deprecated = true;
+  }
+
+  // AssumeRoleChainTargets gets the final destination target_arns for a given project.
+  // Deprecated. Do not use.
+  rpc AssumeRoleChainTargets(AssumeRoleChainTargetsRequest) returns (AssumeRoleChainTargetsResponse) {
+    option deprecated = true;
+  }
+
+  // CertificateAuthorityData gets the certificate authority data for a customer cluster
+  rpc CertificateAuthorityData(CertificateAuthorityDataRequest) returns (CertificateAuthorityDataResponse) {
+    option deprecated = true;
+  }
+
+  // EKSBearerToken gets a bearer token for programatic access to an EKS cluster's kubernetes API.
+  // Deprecated. Use KubeConfigForCluster instead.
+  rpc EKSBearerToken(EKSBearerTokenRequest) returns (EKSBearerTokenResponse) {
+    option deprecated = true;
+  }
+}
+
+message EKSBearerTokenRequest {
+  option deprecated = true;
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+}
+
+message EKSBearerTokenResponse {
+  option deprecated = true;
+  string token = 1;
+}
+
+message CertificateAuthorityDataRequest {
+  option deprecated = true;
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+}
+
+message CertificateAuthorityDataResponse {
+  option deprecated = true;
+  string certificate_authority_data = 1;
+}
+
+message AssumeRoleChainTargetsRequest {
+  option deprecated = true;
+  string project_id = 1;
+}
+
+message AssumeRoleChainTargetsResponse {
+  option deprecated = true;
+  repeated AssumeRoleChainLink chain_links = 1;
+}
+
+message ECRTokenForRegistryRequest {
+  option deprecated = true;
+  int64 project_id = 1;
+  string region = 2;
+  string aws_account_id = 3;
+}
+
+message ECRTokenForRegistryResponse {
+  option deprecated = true;
+  string token = 1;
+  google.protobuf.Timestamp expiry = 2;
+}
+
+message AssumeRoleCredentialsRequest {
+  option deprecated = true;
+  string aws_account_id = 1;
+  int64 project_id = 2;
+}
+
+message AssumeRoleCredentialsResponse {
+  option deprecated = true;
+  string aws_access_id = 1;
+  string aws_secret_key = 2;
+  string aws_session_token = 3;
+}
+
+message DockerConfigFileForRegistryRequest {
+  option deprecated = true;
+  int64 project_id = 1;
+  string registry_uri = 2;
+}
+
+message DockerConfigFileForRegistryResponse {
+  option deprecated = true;
+  bytes docker_config_file = 1;
 }

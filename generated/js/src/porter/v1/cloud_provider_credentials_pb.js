@@ -12,17 +12,17 @@ import { EnumCloudProvider } from "./cluster_pb.js";
 export const AWSCredentials = proto3.makeMessageType(
   "porter.v1.AWSCredentials",
   () => [
-    { no: 1, name: "chain", kind: "message", T: AssumeRoleChainLink, repeated: true },
+    { no: 1, name: "chain", kind: "message", T: AssumeRoleHop, repeated: true },
   ],
 );
 
 /**
- * AssumeRoleChainLink contains all information required for the source_arn to assume the target_arn
+ * AssumeRoleHop contains all information required for the source_arn to assume the target_arn
  *
- * @generated from message porter.v1.AssumeRoleChainLink
+ * @generated from message porter.v1.AssumeRoleHop
  */
-export const AssumeRoleChainLink = proto3.makeMessageType(
-  "porter.v1.AssumeRoleChainLink",
+export const AssumeRoleHop = proto3.makeMessageType(
+  "porter.v1.AssumeRoleHop",
   () => [
     { no: 1, name: "source_arn", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "target_arn", kind: "scalar", T: 9 /* ScalarType.STRING */ },
