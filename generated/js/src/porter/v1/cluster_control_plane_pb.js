@@ -4,8 +4,8 @@
 // @ts-nocheck
 
 import { proto3, Timestamp } from "@bufbuild/protobuf";
-import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 import { Contract, ContractRevision } from "./contract_pb.js";
+import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
  * @generated from message porter.v1.QuotaPreflightCheckRequest
@@ -77,68 +77,6 @@ export const SaveAzureCredentialsResponse = proto3.makeMessageType(
   () => [
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 2, name: "credentials_identifier", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-);
-
-/**
- * @generated from message porter.v1.EKSBearerTokenRequest
- */
-export const EKSBearerTokenRequest = proto3.makeMessageType(
-  "porter.v1.EKSBearerTokenRequest",
-  () => [
-    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-  ],
-);
-
-/**
- * @generated from message porter.v1.EKSBearerTokenResponse
- */
-export const EKSBearerTokenResponse = proto3.makeMessageType(
-  "porter.v1.EKSBearerTokenResponse",
-  () => [
-    { no: 1, name: "token", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-);
-
-/**
- * @generated from message porter.v1.CertificateAuthorityDataRequest
- */
-export const CertificateAuthorityDataRequest = proto3.makeMessageType(
-  "porter.v1.CertificateAuthorityDataRequest",
-  () => [
-    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-  ],
-);
-
-/**
- * @generated from message porter.v1.CertificateAuthorityDataResponse
- */
-export const CertificateAuthorityDataResponse = proto3.makeMessageType(
-  "porter.v1.CertificateAuthorityDataResponse",
-  () => [
-    { no: 1, name: "certificate_authority_data", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-);
-
-/**
- * @generated from message porter.v1.AssumeRoleChainTargetsRequest
- */
-export const AssumeRoleChainTargetsRequest = proto3.makeMessageType(
-  "porter.v1.AssumeRoleChainTargetsRequest",
-  () => [
-    { no: 1, name: "project_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-);
-
-/**
- * @generated from message porter.v1.AssumeRoleChainTargetsResponse
- */
-export const AssumeRoleChainTargetsResponse = proto3.makeMessageType(
-  "porter.v1.AssumeRoleChainTargetsResponse",
-  () => [
-    { no: 1, name: "chain_links", kind: "message", T: AssumeRoleChainLink, repeated: true },
   ],
 );
 
@@ -230,52 +168,6 @@ export const DeleteClusterResponse = proto3.makeMessageType(
 );
 
 /**
- * @generated from message porter.v1.ECRTokenForRegistryRequest
- */
-export const ECRTokenForRegistryRequest = proto3.makeMessageType(
-  "porter.v1.ECRTokenForRegistryRequest",
-  () => [
-    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 2, name: "region", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "aws_account_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-);
-
-/**
- * @generated from message porter.v1.ECRTokenForRegistryResponse
- */
-export const ECRTokenForRegistryResponse = proto3.makeMessageType(
-  "porter.v1.ECRTokenForRegistryResponse",
-  () => [
-    { no: 1, name: "token", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "expiry", kind: "message", T: Timestamp },
-  ],
-);
-
-/**
- * @generated from message porter.v1.AssumeRoleCredentialsRequest
- */
-export const AssumeRoleCredentialsRequest = proto3.makeMessageType(
-  "porter.v1.AssumeRoleCredentialsRequest",
-  () => [
-    { no: 1, name: "aws_account_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-  ],
-);
-
-/**
- * @generated from message porter.v1.AssumeRoleCredentialsResponse
- */
-export const AssumeRoleCredentialsResponse = proto3.makeMessageType(
-  "porter.v1.AssumeRoleCredentialsResponse",
-  () => [
-    { no: 1, name: "aws_access_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "aws_secret_key", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "aws_session_token", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-);
-
-/**
  * @generated from message porter.v1.ListRepositoriesForRegistryRequest
  */
 export const ListRepositoriesForRegistryRequest = proto3.makeMessageType(
@@ -363,27 +255,6 @@ export const TokenForRegistryResponse = proto3.makeMessageType(
 );
 
 /**
- * @generated from message porter.v1.DockerConfigFileForRegistryRequest
- */
-export const DockerConfigFileForRegistryRequest = proto3.makeMessageType(
-  "porter.v1.DockerConfigFileForRegistryRequest",
-  () => [
-    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 2, name: "registry_uri", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-);
-
-/**
- * @generated from message porter.v1.DockerConfigFileForRegistryResponse
- */
-export const DockerConfigFileForRegistryResponse = proto3.makeMessageType(
-  "porter.v1.DockerConfigFileForRegistryResponse",
-  () => [
-    { no: 1, name: "docker_config_file", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
-  ],
-);
-
-/**
  * @generated from message porter.v1.ReadContractRequest
  */
 export const ReadContractRequest = proto3.makeMessageType(
@@ -400,6 +271,147 @@ export const ReadContractResponse = proto3.makeMessageType(
   "porter.v1.ReadContractResponse",
   () => [
     { no: 1, name: "base64_contract", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.EKSBearerTokenRequest
+ * @deprecated
+ */
+export const EKSBearerTokenRequest = proto3.makeMessageType(
+  "porter.v1.EKSBearerTokenRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.EKSBearerTokenResponse
+ * @deprecated
+ */
+export const EKSBearerTokenResponse = proto3.makeMessageType(
+  "porter.v1.EKSBearerTokenResponse",
+  () => [
+    { no: 1, name: "token", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.CertificateAuthorityDataRequest
+ * @deprecated
+ */
+export const CertificateAuthorityDataRequest = proto3.makeMessageType(
+  "porter.v1.CertificateAuthorityDataRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.CertificateAuthorityDataResponse
+ * @deprecated
+ */
+export const CertificateAuthorityDataResponse = proto3.makeMessageType(
+  "porter.v1.CertificateAuthorityDataResponse",
+  () => [
+    { no: 1, name: "certificate_authority_data", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.AssumeRoleChainTargetsRequest
+ * @deprecated
+ */
+export const AssumeRoleChainTargetsRequest = proto3.makeMessageType(
+  "porter.v1.AssumeRoleChainTargetsRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.AssumeRoleChainTargetsResponse
+ * @deprecated
+ */
+export const AssumeRoleChainTargetsResponse = proto3.makeMessageType(
+  "porter.v1.AssumeRoleChainTargetsResponse",
+  () => [
+    { no: 1, name: "chain_links", kind: "message", T: AssumeRoleChainLink, repeated: true },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.ECRTokenForRegistryRequest
+ * @deprecated
+ */
+export const ECRTokenForRegistryRequest = proto3.makeMessageType(
+  "porter.v1.ECRTokenForRegistryRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "region", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "aws_account_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.ECRTokenForRegistryResponse
+ * @deprecated
+ */
+export const ECRTokenForRegistryResponse = proto3.makeMessageType(
+  "porter.v1.ECRTokenForRegistryResponse",
+  () => [
+    { no: 1, name: "token", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "expiry", kind: "message", T: Timestamp },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.AssumeRoleCredentialsRequest
+ * @deprecated
+ */
+export const AssumeRoleCredentialsRequest = proto3.makeMessageType(
+  "porter.v1.AssumeRoleCredentialsRequest",
+  () => [
+    { no: 1, name: "aws_account_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.AssumeRoleCredentialsResponse
+ * @deprecated
+ */
+export const AssumeRoleCredentialsResponse = proto3.makeMessageType(
+  "porter.v1.AssumeRoleCredentialsResponse",
+  () => [
+    { no: 1, name: "aws_access_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "aws_secret_key", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "aws_session_token", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.DockerConfigFileForRegistryRequest
+ * @deprecated
+ */
+export const DockerConfigFileForRegistryRequest = proto3.makeMessageType(
+  "porter.v1.DockerConfigFileForRegistryRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "registry_uri", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.DockerConfigFileForRegistryResponse
+ * @deprecated
+ */
+export const DockerConfigFileForRegistryResponse = proto3.makeMessageType(
+  "porter.v1.DockerConfigFileForRegistryResponse",
+  () => [
+    { no: 1, name: "docker_config_file", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
   ],
 );
 
