@@ -181,7 +181,9 @@ service ClusterControlPlaneService {
     option deprecated = true;
   }
 
-  // ECRTokenForRegistry returns a docker-compatible token for accessing a given ECR registry. Deprecated. Use TokenForRegistry instead.
+  // ECRTokenForRegistry returns a docker-compatible token for accessing a given ECR registry. 
+  // This cannot be deleted before TokenForRegistry supports AWS and we edit RegistryGetECRTokenHandler to call that endpoint.
+  // Deprecated. Use TokenForRegistry instead. 
   rpc ECRTokenForRegistry(ECRTokenForRegistryRequest) returns (ECRTokenForRegistryResponse) {
     option deprecated = true;
   }
@@ -193,7 +195,8 @@ service ClusterControlPlaneService {
     option deprecated = true;
   }
 
-  // AssumeRoleChainTargets gets the final destination target_arns for a given project. This has been deprecated. Do not use.
+  // AssumeRoleChainTargets gets the final destination target_arns for a given project. 
+  // Deprecated. Do not use.
   rpc AssumeRoleChainTargets(AssumeRoleChainTargetsRequest) returns (AssumeRoleChainTargetsResponse) {
     option deprecated = true;
   }
@@ -203,7 +206,8 @@ service ClusterControlPlaneService {
     option deprecated = true;
   }
 
-  // EKSBearerToken gets a bearer token for programatic access to an EKS cluster's kubernetes API. This has been deprecated. Use KubeConfigForCluster instead.
+  // EKSBearerToken gets a bearer token for programatic access to an EKS cluster's kubernetes API. 
+  // Deprecated. Use KubeConfigForCluster instead.
   rpc EKSBearerToken(EKSBearerTokenRequest) returns (EKSBearerTokenResponse) {
     option deprecated = true;
   }
