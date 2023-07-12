@@ -11,6 +11,6 @@ message APITokenResponse {
 }
 
 service AuthManagement {
-  // APIToken gets a Porter token for programmatic access to the Porter UI
+  // APIToken gets a Porter token for programmatic access to the Porter API
   rpc APIToken(APITokenRequest) returns (APITokenResponse) {}
 }
