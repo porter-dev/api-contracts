@@ -3,11 +3,13 @@ syntax = "proto3";
 package porter.v1;
 
 message APITokenRequest {
+  // project_id is the only project which the requested token will have access to
   int64 project_id = 1;
 }
 
 message APITokenResponse {
-  string token = 3;
+  // token is a Bearer token which can be used for accessing the Porter API. This will only be able to access the given project from the request.
+  string token = 1;
 }
 
 service AuthManagement {
