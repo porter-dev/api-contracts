@@ -44,6 +44,14 @@ export const AzureCredentials = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message porter.v1.GCPCredentials
+ */
+export const GCPCredentials = proto3.makeMessageType(
+  "porter.v1.GCPCredentials",
+  [],
+);
+
+/**
  * @generated from message porter.v1.UpdateCloudProviderCredentialsRequest
  */
 export const UpdateCloudProviderCredentialsRequest = proto3.makeMessageType(
@@ -51,8 +59,9 @@ export const UpdateCloudProviderCredentialsRequest = proto3.makeMessageType(
   () => [
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 2, name: "cloud_provider", kind: "enum", T: proto3.getEnumType(EnumCloudProvider) },
-    { no: 6, name: "aws_credentials", kind: "message", T: AWSCredentials, oneof: "cloud_provider_credentials" },
-    { no: 7, name: "azure_credentials", kind: "message", T: AzureCredentials, oneof: "cloud_provider_credentials" },
+    { no: 3, name: "aws_credentials", kind: "message", T: AWSCredentials, oneof: "cloud_provider_credentials" },
+    { no: 4, name: "azure_credentials", kind: "message", T: AzureCredentials, oneof: "cloud_provider_credentials" },
+    { no: 5, name: "gcp_credentials", kind: "message", T: GCPCredentials, oneof: "cloud_provider_credentials" },
   ],
 );
 

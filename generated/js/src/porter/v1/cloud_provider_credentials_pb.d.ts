@@ -109,6 +109,25 @@ export declare class AzureCredentials extends Message<AzureCredentials> {
 }
 
 /**
+ * @generated from message porter.v1.GCPCredentials
+ */
+export declare class GCPCredentials extends Message<GCPCredentials> {
+  constructor(data?: PartialMessage<GCPCredentials>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.GCPCredentials";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GCPCredentials;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GCPCredentials;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GCPCredentials;
+
+  static equals(a: GCPCredentials | PlainMessage<GCPCredentials> | undefined, b: GCPCredentials | PlainMessage<GCPCredentials> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.UpdateCloudProviderCredentialsRequest
  */
 export declare class UpdateCloudProviderCredentialsRequest extends Message<UpdateCloudProviderCredentialsRequest> {
@@ -133,16 +152,22 @@ export declare class UpdateCloudProviderCredentialsRequest extends Message<Updat
    */
   cloudProviderCredentials: {
     /**
-     * @generated from field: porter.v1.AWSCredentials aws_credentials = 6;
+     * @generated from field: porter.v1.AWSCredentials aws_credentials = 3;
      */
     value: AWSCredentials;
     case: "awsCredentials";
   } | {
     /**
-     * @generated from field: porter.v1.AzureCredentials azure_credentials = 7;
+     * @generated from field: porter.v1.AzureCredentials azure_credentials = 4;
      */
     value: AzureCredentials;
     case: "azureCredentials";
+  } | {
+    /**
+     * @generated from field: porter.v1.GCPCredentials gcp_credentials = 5;
+     */
+    value: GCPCredentials;
+    case: "gcpCredentials";
   } | { case: undefined; value?: undefined };
 
   constructor(data?: PartialMessage<UpdateCloudProviderCredentialsRequest>);
