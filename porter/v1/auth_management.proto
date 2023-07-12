@@ -12,7 +12,7 @@ message APITokenResponse {
   string token = 1;
 }
 
-service AuthManagement {
+service AuthManagementService {
   // APIToken gets a Porter token for programmatic access to the Porter API
   rpc APIToken(APITokenRequest) returns (APITokenResponse) {}
 }
