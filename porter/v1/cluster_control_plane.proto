@@ -190,7 +190,7 @@ service ClusterControlPlaneService {
 
   // AssumeRoleCredentials should be used vary sparingly, and ONLY for replacing AWS Integrations which have no workaround on the Porter API.
   // This endpoint returns temporary AWS credentials for a given AWS Account ID, and should not be expanded further to allow specifc role selection without being tied to a project and cluster.
-  // Deprecated. This is no longer needed once ListRepositoriesForRegistry supports AWS.
+  // Deprecated. This is no longer needed once ListRepositoriesForRegistry, ListImages, and CreateRepository supports AWS
   rpc AssumeRoleCredentials(AssumeRoleCredentialsRequest) returns (AssumeRoleCredentialsResponse) {
     option deprecated = true;
   }
