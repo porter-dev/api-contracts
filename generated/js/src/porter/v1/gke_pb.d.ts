@@ -30,6 +30,11 @@ export declare class GKE extends Message<GKE> {
    */
   cidrRange: string;
 
+  /**
+   * @generated from field: string region = 5;
+   */
+  region: string;
+
   constructor(data?: PartialMessage<GKE>);
 
   static readonly runtime: typeof proto3;

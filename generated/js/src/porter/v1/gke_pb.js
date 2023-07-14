@@ -15,6 +15,7 @@ export const GKE = proto3.makeMessageType(
     { no: 2, name: "cluster_version", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "issuer_email", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "cidr_range", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "region", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

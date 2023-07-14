@@ -112,6 +112,13 @@ export declare class AzureCredentials extends Message<AzureCredentials> {
  * @generated from message porter.v1.GCPCredentials
  */
 export declare class GCPCredentials extends Message<GCPCredentials> {
+  /**
+   * service_account_json_base64 is the base64 encoded service account json which can be used to authenticate with GCP
+   *
+   * @generated from field: string service_account_json_base64 = 1;
+   */
+  serviceAccountJsonBase64: string;
+
   constructor(data?: PartialMessage<GCPCredentials>);
 
   static readonly runtime: typeof proto3;
@@ -169,6 +176,13 @@ export declare class UpdateCloudProviderCredentialsRequest extends Message<Updat
     value: GCPCredentials;
     case: "gcpCredentials";
   } | { case: undefined; value?: undefined };
+
+  /**
+   * credentials_identifier is the identifier for the credentials that we are updating. This is required during update operations, otherwise a new credential will be created
+   *
+   * @generated from field: string credentials_identifier = 6;
+   */
+  credentialsIdentifier: string;
 
   constructor(data?: PartialMessage<UpdateCloudProviderCredentialsRequest>);
 

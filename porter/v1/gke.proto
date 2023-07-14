@@ -7,4 +7,5 @@ message GKE {
   string cluster_version = 2;
   string issuer_email = 3;
   string cidr_range = 4;
+  string region = 5;
 }

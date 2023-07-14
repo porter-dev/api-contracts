@@ -48,7 +48,9 @@ export const AzureCredentials = proto3.makeMessageType(
  */
 export const GCPCredentials = proto3.makeMessageType(
   "porter.v1.GCPCredentials",
-  [],
+  () => [
+    { no: 1, name: "service_account_json_base64", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
 );
 
 /**
@@ -62,6 +64,7 @@ export const UpdateCloudProviderCredentialsRequest = proto3.makeMessageType(
     { no: 3, name: "aws_credentials", kind: "message", T: AWSCredentials, oneof: "cloud_provider_credentials" },
     { no: 4, name: "azure_credentials", kind: "message", T: AzureCredentials, oneof: "cloud_provider_credentials" },
     { no: 5, name: "gcp_credentials", kind: "message", T: GCPCredentials, oneof: "cloud_provider_credentials" },
+    { no: 6, name: "credentials_identifier", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
