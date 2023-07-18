@@ -6,6 +6,20 @@
 import { proto3 } from "@bufbuild/protobuf";
 
 /**
+ * @generated from enum porter.v1.GKENodePoolType
+ */
+export const GKENodePoolType = proto3.makeEnum(
+  "porter.v1.GKENodePoolType",
+  [
+    {no: 0, name: "GKE_NODE_POOL_TYPE_UNSPECIFIED"},
+    {no: 1, name: "GKE_NODE_POOL_TYPE_SYSTEM"},
+    {no: 2, name: "GKE_NODE_POOL_TYPE_MONITORING"},
+    {no: 3, name: "GKE_NODE_POOL_TYPE_APPLICATION"},
+    {no: 4, name: "GKE_NODE_POOL_TYPE_CUSTOM"},
+  ],
+);
+
+/**
  * @generated from message porter.v1.GKE
  */
 export const GKE = proto3.makeMessageType(
@@ -13,9 +27,22 @@ export const GKE = proto3.makeMessageType(
   () => [
     { no: 1, name: "cluster_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "cluster_version", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "issuer_email", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "cidr_range", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 5, name: "region", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "cidr_range", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "region", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "node_pools", kind: "message", T: GKENodePool, repeated: true },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.GKENodePool
+ */
+export const GKENodePool = proto3.makeMessageType(
+  "porter.v1.GKENodePool",
+  () => [
+    { no: 1, name: "instance_type", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "min_instances", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 3, name: "max_instances", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 4, name: "node_pool_type", kind: "enum", T: proto3.getEnumType(GKENodePoolType) },
   ],
 );
 

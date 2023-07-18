@@ -7,6 +7,36 @@ import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialM
 import { Message, proto3 } from "@bufbuild/protobuf";
 
 /**
+ * @generated from enum porter.v1.GKENodePoolType
+ */
+export declare enum GKENodePoolType {
+  /**
+   * @generated from enum value: GKE_NODE_POOL_TYPE_UNSPECIFIED = 0;
+   */
+  GKE_NODE_POOL_TYPE_UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: GKE_NODE_POOL_TYPE_SYSTEM = 1;
+   */
+  GKE_NODE_POOL_TYPE_SYSTEM = 1,
+
+  /**
+   * @generated from enum value: GKE_NODE_POOL_TYPE_MONITORING = 2;
+   */
+  GKE_NODE_POOL_TYPE_MONITORING = 2,
+
+  /**
+   * @generated from enum value: GKE_NODE_POOL_TYPE_APPLICATION = 3;
+   */
+  GKE_NODE_POOL_TYPE_APPLICATION = 3,
+
+  /**
+   * @generated from enum value: GKE_NODE_POOL_TYPE_CUSTOM = 4;
+   */
+  GKE_NODE_POOL_TYPE_CUSTOM = 4,
+}
+
+/**
  * @generated from message porter.v1.GKE
  */
 export declare class GKE extends Message<GKE> {
@@ -21,19 +51,19 @@ export declare class GKE extends Message<GKE> {
   clusterVersion: string;
 
   /**
-   * @generated from field: string issuer_email = 3;
-   */
-  issuerEmail: string;
-
-  /**
-   * @generated from field: string cidr_range = 4;
+   * @generated from field: string cidr_range = 3;
    */
   cidrRange: string;
 
   /**
-   * @generated from field: string region = 5;
+   * @generated from field: string region = 4;
    */
   region: string;
+
+  /**
+   * @generated from field: repeated porter.v1.GKENodePool node_pools = 5;
+   */
+  nodePools: GKENodePool[];
 
   constructor(data?: PartialMessage<GKE>);
 
@@ -48,5 +78,46 @@ export declare class GKE extends Message<GKE> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GKE;
 
   static equals(a: GKE | PlainMessage<GKE> | undefined, b: GKE | PlainMessage<GKE> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.GKENodePool
+ */
+export declare class GKENodePool extends Message<GKENodePool> {
+  /**
+   * @generated from field: string instance_type = 1;
+   */
+  instanceType: string;
+
+  /**
+   * @generated from field: uint32 min_instances = 2;
+   */
+  minInstances: number;
+
+  /**
+   * @generated from field: uint32 max_instances = 3;
+   */
+  maxInstances: number;
+
+  /**
+   * node_pool_type is used to specify the type of node group. This is used to specify what node groups are used by Porter, vs users.
+   *
+   * @generated from field: porter.v1.GKENodePoolType node_pool_type = 4;
+   */
+  nodePoolType: GKENodePoolType;
+
+  constructor(data?: PartialMessage<GKENodePool>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.GKENodePool";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GKENodePool;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GKENodePool;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GKENodePool;
+
+  static equals(a: GKENodePool | PlainMessage<GKENodePool> | undefined, b: GKENodePool | PlainMessage<GKENodePool> | undefined): boolean;
 }
 

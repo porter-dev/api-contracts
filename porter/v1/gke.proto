@@ -5,7 +5,23 @@ package porter.v1;
 message GKE {
   string cluster_name = 1;
   string cluster_version = 2;
-  string issuer_email = 3;
-  string cidr_range = 4;
-  string region = 5;
+  string cidr_range = 3;
+  string region = 4;
+  repeated GKENodePool node_pools = 5;
+}
+
+message GKENodePool {
+  string instance_type = 1;
+  uint32 min_instances = 2;
+  uint32 max_instances = 3;
+  // node_pool_type is used to specify the type of node group. This is used to specify what node groups are used by Porter, vs users.
+  GKENodePoolType node_pool_type = 4;
+}
+
+enum GKENodePoolType {
+  GKE_NODE_POOL_TYPE_UNSPECIFIED = 0;
+  GKE_NODE_POOL_TYPE_SYSTEM = 1;
+  GKE_NODE_POOL_TYPE_MONITORING = 2;
+  GKE_NODE_POOL_TYPE_APPLICATION = 3;
+  GKE_NODE_POOL_TYPE_CUSTOM = 4;
 }
