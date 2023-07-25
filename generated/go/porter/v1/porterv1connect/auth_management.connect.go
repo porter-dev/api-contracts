@@ -25,6 +25,19 @@ const (
 	AuthManagementServiceName = "porter.v1.AuthManagementService"
 )
 
+// These constants are the fully-qualified names of the RPCs defined in this package. They're
+// exposed at runtime as Spec.Procedure and as the final two segments of the HTTP route.
+//
+// Note that these are different from the fully-qualified method names used by
+// google.golang.org/protobuf/reflect/protoreflect. To convert from these constants to
+// reflection-formatted method names, remove the leading slash and convert the remaining slash to a
+// period.
+const (
+	// AuthManagementServiceAPITokenProcedure is the fully-qualified name of the AuthManagementService's
+	// APIToken RPC.
+	AuthManagementServiceAPITokenProcedure = "/porter.v1.AuthManagementService/APIToken"
+)
+
 // AuthManagementServiceClient is a client for the porter.v1.AuthManagementService service.
 type AuthManagementServiceClient interface {
 	// APIToken gets a Porter token for programmatic access to the Porter API
@@ -43,7 +56,7 @@ func NewAuthManagementServiceClient(httpClient connect_go.HTTPClient, baseURL st
 	return &authManagementServiceClient{
 		aPIToken: connect_go.NewClient[v1.APITokenRequest, v1.APITokenResponse](
 			httpClient,
-			baseURL+"/porter.v1.AuthManagementService/APIToken",
+			baseURL+AuthManagementServiceAPITokenProcedure,
 			opts...,
 		),
 	}
@@ -72,8 +85,8 @@ type AuthManagementServiceHandler interface {
 // and JSON codecs. They also support gzip compression.
 func NewAuthManagementServiceHandler(svc AuthManagementServiceHandler, opts ...connect_go.HandlerOption) (string, http.Handler) {
 	mux := http.NewServeMux()
-	mux.Handle("/porter.v1.AuthManagementService/APIToken", connect_go.NewUnaryHandler(
-		"/porter.v1.AuthManagementService/APIToken",
+	mux.Handle(AuthManagementServiceAPITokenProcedure, connect_go.NewUnaryHandler(
+		AuthManagementServiceAPITokenProcedure,
 		svc.APIToken,
 		opts...,
 	))
