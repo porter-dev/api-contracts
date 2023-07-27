@@ -1,6 +1,6 @@
 {
   "name": "@porter-dev/api-contracts",
-  "version": "0.0.74",
+  "version": "0.0.75",
   "description": "Typescript definitions for the Porter system",
   "main": "index.js",
   "type": "module",

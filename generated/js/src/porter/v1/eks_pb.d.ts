@@ -101,7 +101,7 @@ export declare class EKS extends Message<EKS> {
   logging?: EKSLogging;
 
   /**
-   * enable_kms_encryption triggers a KMS key creation and enables encryption on the EKS cluster with that key
+   * enable_kms_encryption triggers a KMS key creation and enables encryption on the EKS cluster with that key.  Once enabled, encryption can never be disabled.
    *
    * @generated from field: bool enable_kms_encryption = 9;
    */

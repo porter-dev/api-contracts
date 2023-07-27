@@ -137,7 +137,7 @@ type EKS struct {
 	LoadBalancer    *LoadBalancer   `protobuf:"bytes,6,opt,name=load_balancer,json=loadBalancer,proto3" json:"load_balancer,omitempty"`
 	EnableGuardDuty bool            `protobuf:"varint,7,opt,name=enable_guard_duty,json=enableGuardDuty,proto3" json:"enable_guard_duty,omitempty"`
 	Logging         *EKSLogging     `protobuf:"bytes,8,opt,name=logging,proto3" json:"logging,omitempty"`
-	// enable_kms_encryption triggers a KMS key creation and enables encryption on the EKS cluster with that key
+	// enable_kms_encryption triggers a KMS key creation and enables encryption on the EKS cluster with that key.  Once enabled, encryption can never be disabled.
 	EnableKmsEncryption bool `protobuf:"varint,9,opt,name=enable_kms_encryption,json=enableKmsEncryption,proto3" json:"enable_kms_encryption,omitempty"`
 }
 
