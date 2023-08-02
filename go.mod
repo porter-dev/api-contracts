@@ -2,7 +2,6 @@ module github.com/porter-dev/api-contracts
 
 go 1.20
 
-require (
-	github.com/bufbuild/connect-go v1.5.2
-	google.golang.org/protobuf v1.28.1
-)
+require google.golang.org/protobuf v1.31.0
+
+require connectrpc.com/connect v1.11.0
