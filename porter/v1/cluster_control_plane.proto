@@ -6,6 +6,7 @@ import "google/protobuf/timestamp.proto";
 import "porter/v1/aws_assume_role.proto";
 import "porter/v1/cloud_provider_credentials.proto";
 import "porter/v1/contract.proto";
+import "porter/v1/porter_app.proto";
 
 message QuotaPreflightCheckRequest {
   int64 project_id = 1;
@@ -137,6 +138,16 @@ message ReadContractResponse {
   string base64_contract = 1;
 }
 
+message ValidatePorterAppRequest {
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+  PorterApp application = 3;
+}
+
+message ValidatePorterAppResponse {
+  PorterApp application = 1;
+}
+
 service ClusterControlPlaneService {
   // UpdateCloudProviderCredentials creates or updates the credentials used for accessing the specific cloud
   rpc UpdateCloudProviderCredentials(UpdateCloudProviderCredentialsRequest) returns (UpdateCloudProviderCredentialsResponse) {}
@@ -178,6 +189,9 @@ service ClusterControlPlaneService {
 
   // ListImagesForRepository lists the repositories for a given registry, provided it is in the scope of the project id
   rpc ListImagesForRepository(ListImagesForRepositoryRequest) returns (ListImagesForRepositoryResponse) {}
+
+  // ValidatePorterApp validates and hydrates a definition of a porter app, based on the porter.yaml file
+  rpc ValidatePorterApp(ValidatePorterAppRequest) returns (ValidatePorterAppResponse) {}
 
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
   // Deprecated. Use TokenForRegistry instead.

@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package porter.v1;
+
+import "porter/v1/service.proto";
+
+message PorterApp {
+  string name = 1;
+  map<string, Service> services = 2;
+  map<string, string> env = 3;
+  Build build = 4;
+  Service release = 5;
+  AppImage image = 6;
+}
+
+message Build {
+  string context = 1;
+  string method = 2;
+  string builder = 3;
+  repeated string buildpacks = 4;
+  string dockerfile = 5;
+}
+
+message AppImage {
+  string repository = 1;
+  string tag = 2;
+}

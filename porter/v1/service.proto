@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package porter.v1;
+
+enum ServiceType {
+  SERVICE_TYPE_UNSPECIFIED = 0;
+  SERVICE_TYPE_WEB = 1;
+  SERVICE_TYPE_WORKER = 2;
+  SERVICE_TYPE_JOB = 3;
+}
+
+message Service {
+  string run = 1;
+  oneof config {
+    WebServiceConfig web_config = 2;
+    WorkerServiceConfig worker_config = 3;
+    JobServiceConfig job_config = 4;
+  }
+  ServiceType type = 5;
+}
+
+message WebServiceConfig {
+  string replica_count = 1;
+  Resources resources = 2;
+}
+
+message WorkerServiceConfig {
+  string replica_count = 1;
+  Resources resources = 2;
+}
+
+message JobServiceConfig {
+  Resources resources = 1;
+}
+
+message RequestResources {
+  string cpu = 1;
+  string memory = 2;
+}
+
+message Resources {
+  RequestResources requests = 1;
+}
