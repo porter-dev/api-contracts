@@ -739,9 +739,9 @@ export declare class ValidatePorterAppRequest extends Message<ValidatePorterAppR
   projectId: bigint;
 
   /**
-   * @generated from field: int64 cluster_id = 2;
+   * @generated from field: int64 deployment_target_id = 2;
    */
-  clusterId: bigint;
+  deploymentTargetId: bigint;
 
   /**
    * @generated from field: porter.v1.PorterApp application = 3;
