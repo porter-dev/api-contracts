@@ -97,6 +97,31 @@ export declare class WebServiceConfig extends Message<WebServiceConfig> {
    */
   resources?: Resources;
 
+  /**
+   * @generated from field: porter.v1.Container container = 3;
+   */
+  container?: Container;
+
+  /**
+   * @generated from field: porter.v1.Autoscaling autoscaling = 4;
+   */
+  autoscaling?: Autoscaling;
+
+  /**
+   * @generated from field: porter.v1.Ingress ingress = 5;
+   */
+  ingress?: Ingress;
+
+  /**
+   * @generated from field: porter.v1.Health health = 6;
+   */
+  health?: Health;
+
+  /**
+   * @generated from field: porter.v1.CloudSql cloud_sql = 7;
+   */
+  cloudSql?: CloudSql;
+
   constructor(data?: PartialMessage<WebServiceConfig>);
 
   static readonly runtime: typeof proto3;
@@ -126,6 +151,21 @@ export declare class WorkerServiceConfig extends Message<WorkerServiceConfig> {
    */
   resources?: Resources;
 
+  /**
+   * @generated from field: porter.v1.Container container = 3;
+   */
+  container?: Container;
+
+  /**
+   * @generated from field: porter.v1.Autoscaling autoscaling = 4;
+   */
+  autoscaling?: Autoscaling;
+
+  /**
+   * @generated from field: porter.v1.CloudSql cloud_sql = 5;
+   */
+  cloudSql?: CloudSql;
+
   constructor(data?: PartialMessage<WorkerServiceConfig>);
 
   static readonly runtime: typeof proto3;
@@ -146,9 +186,34 @@ export declare class WorkerServiceConfig extends Message<WorkerServiceConfig> {
  */
 export declare class JobServiceConfig extends Message<JobServiceConfig> {
   /**
-   * @generated from field: porter.v1.Resources resources = 1;
+   * @generated from field: bool allow_concurrent = 1;
+   */
+  allowConcurrent: boolean;
+
+  /**
+   * @generated from field: porter.v1.Resources resources = 2;
    */
   resources?: Resources;
+
+  /**
+   * @generated from field: porter.v1.Container container = 3;
+   */
+  container?: Container;
+
+  /**
+   * @generated from field: porter.v1.Schedule schedule = 4;
+   */
+  schedule?: Schedule;
+
+  /**
+   * @generated from field: bool paused = 5;
+   */
+  paused: boolean;
+
+  /**
+   * @generated from field: porter.v1.CloudSql cloud_sql = 6;
+   */
+  cloudSql?: CloudSql;
 
   constructor(data?: PartialMessage<JobServiceConfig>);
 
@@ -216,5 +281,302 @@ export declare class Resources extends Message<Resources> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Resources;
 
   static equals(a: Resources | PlainMessage<Resources> | undefined, b: Resources | PlainMessage<Resources> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.Schedule
+ */
+export declare class Schedule extends Message<Schedule> {
+  /**
+   * @generated from field: bool enabled = 1;
+   */
+  enabled: boolean;
+
+  /**
+   * @generated from field: string value = 2;
+   */
+  value: string;
+
+  constructor(data?: PartialMessage<Schedule>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.Schedule";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Schedule;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Schedule;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Schedule;
+
+  static equals(a: Schedule | PlainMessage<Schedule> | undefined, b: Schedule | PlainMessage<Schedule> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.Container
+ */
+export declare class Container extends Message<Container> {
+  /**
+   * @generated from field: string command = 1;
+   */
+  command: string;
+
+  /**
+   * @generated from field: string port = 2;
+   */
+  port: string;
+
+  constructor(data?: PartialMessage<Container>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.Container";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Container;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Container;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Container;
+
+  static equals(a: Container | PlainMessage<Container> | undefined, b: Container | PlainMessage<Container> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.Ingress
+ */
+export declare class Ingress extends Message<Ingress> {
+  /**
+   * @generated from field: bool enabled = 1;
+   */
+  enabled: boolean;
+
+  /**
+   * @generated from field: bool custom_domain = 2;
+   */
+  customDomain: boolean;
+
+  /**
+   * @generated from field: repeated string hosts = 3;
+   */
+  hosts: string[];
+
+  /**
+   * @generated from field: repeated string porter_hosts = 4;
+   */
+  porterHosts: string[];
+
+  /**
+   * @generated from field: map<string, string> annotations = 5;
+   */
+  annotations: { [key: string]: string };
+
+  constructor(data?: PartialMessage<Ingress>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.Ingress";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Ingress;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Ingress;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Ingress;
+
+  static equals(a: Ingress | PlainMessage<Ingress> | undefined, b: Ingress | PlainMessage<Ingress> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.Autoscaling
+ */
+export declare class Autoscaling extends Message<Autoscaling> {
+  /**
+   * @generated from field: bool enabled = 1;
+   */
+  enabled: boolean;
+
+  /**
+   * @generated from field: string min_replicas = 2;
+   */
+  minReplicas: string;
+
+  /**
+   * @generated from field: string max_replicas = 3;
+   */
+  maxReplicas: string;
+
+  /**
+   * @generated from field: string target_cpu_utilization_threshold = 4;
+   */
+  targetCpuUtilizationThreshold: string;
+
+  /**
+   * @generated from field: string target_memory_utilization_threshold = 5;
+   */
+  targetMemoryUtilizationThreshold: string;
+
+  constructor(data?: PartialMessage<Autoscaling>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.Autoscaling";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Autoscaling;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Autoscaling;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Autoscaling;
+
+  static equals(a: Autoscaling | PlainMessage<Autoscaling> | undefined, b: Autoscaling | PlainMessage<Autoscaling> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.CloudSql
+ */
+export declare class CloudSql extends Message<CloudSql> {
+  /**
+   * @generated from field: bool enabled = 1;
+   */
+  enabled: boolean;
+
+  /**
+   * @generated from field: string connection_name = 2;
+   */
+  connectionName: string;
+
+  /**
+   * @generated from field: string db_port = 3;
+   */
+  dbPort: string;
+
+  /**
+   * @generated from field: string service_account_json = 4;
+   */
+  serviceAccountJson: string;
+
+  constructor(data?: PartialMessage<CloudSql>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CloudSql";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CloudSql;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CloudSql;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CloudSql;
+
+  static equals(a: CloudSql | PlainMessage<CloudSql> | undefined, b: CloudSql | PlainMessage<CloudSql> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.LiveCheck
+ */
+export declare class LiveCheck extends Message<LiveCheck> {
+  /**
+   * @generated from field: bool enabled = 1;
+   */
+  enabled: boolean;
+
+  /**
+   * @generated from field: string failure_threshold = 2;
+   */
+  failureThreshold: string;
+
+  /**
+   * @generated from field: string path = 3;
+   */
+  path: string;
+
+  /**
+   * @generated from field: string period_seconds = 4;
+   */
+  periodSeconds: string;
+
+  constructor(data?: PartialMessage<LiveCheck>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.LiveCheck";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LiveCheck;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LiveCheck;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LiveCheck;
+
+  static equals(a: LiveCheck | PlainMessage<LiveCheck> | undefined, b: LiveCheck | PlainMessage<LiveCheck> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.ReadyCheck
+ */
+export declare class ReadyCheck extends Message<ReadyCheck> {
+  /**
+   * @generated from field: bool enabled = 1;
+   */
+  enabled: boolean;
+
+  /**
+   * @generated from field: string failure_threshold = 2;
+   */
+  failureThreshold: string;
+
+  /**
+   * @generated from field: string path = 3;
+   */
+  path: string;
+
+  /**
+   * @generated from field: string inital_delay_seconds = 4;
+   */
+  initalDelaySeconds: string;
+
+  constructor(data?: PartialMessage<ReadyCheck>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ReadyCheck";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ReadyCheck;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ReadyCheck;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ReadyCheck;
+
+  static equals(a: ReadyCheck | PlainMessage<ReadyCheck> | undefined, b: ReadyCheck | PlainMessage<ReadyCheck> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.Health
+ */
+export declare class Health extends Message<Health> {
+  /**
+   * @generated from field: porter.v1.LiveCheck startup_probe = 1;
+   */
+  startupProbe?: LiveCheck;
+
+  /**
+   * @generated from field: porter.v1.ReadyCheck readiness_probe = 2;
+   */
+  readinessProbe?: ReadyCheck;
+
+  /**
+   * @generated from field: porter.v1.LiveCheck liveness_probe = 3;
+   */
+  livenessProbe?: LiveCheck;
+
+  constructor(data?: PartialMessage<Health>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.Health";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Health;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Health;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Health;
+
+  static equals(a: Health | PlainMessage<Health> | undefined, b: Health | PlainMessage<Health> | undefined): boolean;
 }
 
