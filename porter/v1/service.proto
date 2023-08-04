@@ -20,7 +20,7 @@ message Service {
 }
 
 message WebServiceConfig {
-  string replica_count = 1;
+  int32 replica_count = 1;
   Resources resources = 2;
   Container container = 3;
   Autoscaling autoscaling = 4;
@@ -30,7 +30,7 @@ message WebServiceConfig {
 }
 
 message WorkerServiceConfig {
-  string replica_count = 1;
+  int32 replica_count = 1;
   Resources resources = 2;
   Container container = 3;
   Autoscaling autoscaling = 4;
@@ -75,10 +75,10 @@ message Ingress {
 
 message Autoscaling {
   bool enabled = 1;
-  string min_replicas = 2;
-  string max_replicas = 3;
-  string target_cpu_utilization_threshold = 4;
-  string target_memory_utilization_threshold = 5;
+  int32 min_replicas = 2;
+  int32 max_replicas = 3;
+  int32 target_cpu_utilization_threshold = 4;
+  int32 target_memory_utilization_threshold = 5;
 }
 
 message CloudSql {
@@ -90,16 +90,16 @@ message CloudSql {
 
 message LiveCheck {
   bool enabled = 1;
-  string failure_threshold = 2;
+  int32 failure_threshold = 2;
   string path = 3;
-  string period_seconds = 4;
+  int32 period_seconds = 4;
 }
 
 message ReadyCheck {
   bool enabled = 1;
-  string failure_threshold = 2;
+  int32 failure_threshold = 2;
   string path = 3;
-  string inital_delay_seconds = 4;
+  int32 initial_delay_seconds = 4;
 }
 
 message Health {

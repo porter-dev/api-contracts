@@ -38,7 +38,7 @@ export const Service = proto3.makeMessageType(
 export const WebServiceConfig = proto3.makeMessageType(
   "porter.v1.WebServiceConfig",
   () => [
-    { no: 1, name: "replica_count", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "replica_count", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
     { no: 2, name: "resources", kind: "message", T: Resources },
     { no: 3, name: "container", kind: "message", T: Container },
     { no: 4, name: "autoscaling", kind: "message", T: Autoscaling },
@@ -54,7 +54,7 @@ export const WebServiceConfig = proto3.makeMessageType(
 export const WorkerServiceConfig = proto3.makeMessageType(
   "porter.v1.WorkerServiceConfig",
   () => [
-    { no: 1, name: "replica_count", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "replica_count", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
     { no: 2, name: "resources", kind: "message", T: Resources },
     { no: 3, name: "container", kind: "message", T: Container },
     { no: 4, name: "autoscaling", kind: "message", T: Autoscaling },
@@ -141,10 +141,10 @@ export const Autoscaling = proto3.makeMessageType(
   "porter.v1.Autoscaling",
   () => [
     { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 2, name: "min_replicas", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "max_replicas", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "target_cpu_utilization_threshold", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 5, name: "target_memory_utilization_threshold", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "min_replicas", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 3, name: "max_replicas", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 4, name: "target_cpu_utilization_threshold", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 5, name: "target_memory_utilization_threshold", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
   ],
 );
 
@@ -168,9 +168,9 @@ export const LiveCheck = proto3.makeMessageType(
   "porter.v1.LiveCheck",
   () => [
     { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 2, name: "failure_threshold", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "failure_threshold", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
     { no: 3, name: "path", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "period_seconds", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "period_seconds", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
   ],
 );
 
@@ -181,9 +181,9 @@ export const ReadyCheck = proto3.makeMessageType(
   "porter.v1.ReadyCheck",
   () => [
     { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 2, name: "failure_threshold", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "failure_threshold", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
     { no: 3, name: "path", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "inital_delay_seconds", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "initial_delay_seconds", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
   ],
 );
 

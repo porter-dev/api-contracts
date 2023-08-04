@@ -88,9 +88,9 @@ export declare class Service extends Message<Service> {
  */
 export declare class WebServiceConfig extends Message<WebServiceConfig> {
   /**
-   * @generated from field: string replica_count = 1;
+   * @generated from field: int32 replica_count = 1;
    */
-  replicaCount: string;
+  replicaCount: number;
 
   /**
    * @generated from field: porter.v1.Resources resources = 2;
@@ -142,9 +142,9 @@ export declare class WebServiceConfig extends Message<WebServiceConfig> {
  */
 export declare class WorkerServiceConfig extends Message<WorkerServiceConfig> {
   /**
-   * @generated from field: string replica_count = 1;
+   * @generated from field: int32 replica_count = 1;
    */
-  replicaCount: string;
+  replicaCount: number;
 
   /**
    * @generated from field: porter.v1.Resources resources = 2;
@@ -395,24 +395,24 @@ export declare class Autoscaling extends Message<Autoscaling> {
   enabled: boolean;
 
   /**
-   * @generated from field: string min_replicas = 2;
+   * @generated from field: int32 min_replicas = 2;
    */
-  minReplicas: string;
+  minReplicas: number;
 
   /**
-   * @generated from field: string max_replicas = 3;
+   * @generated from field: int32 max_replicas = 3;
    */
-  maxReplicas: string;
+  maxReplicas: number;
 
   /**
-   * @generated from field: string target_cpu_utilization_threshold = 4;
+   * @generated from field: int32 target_cpu_utilization_threshold = 4;
    */
-  targetCpuUtilizationThreshold: string;
+  targetCpuUtilizationThreshold: number;
 
   /**
-   * @generated from field: string target_memory_utilization_threshold = 5;
+   * @generated from field: int32 target_memory_utilization_threshold = 5;
    */
-  targetMemoryUtilizationThreshold: string;
+  targetMemoryUtilizationThreshold: number;
 
   constructor(data?: PartialMessage<Autoscaling>);
 
@@ -478,9 +478,9 @@ export declare class LiveCheck extends Message<LiveCheck> {
   enabled: boolean;
 
   /**
-   * @generated from field: string failure_threshold = 2;
+   * @generated from field: int32 failure_threshold = 2;
    */
-  failureThreshold: string;
+  failureThreshold: number;
 
   /**
    * @generated from field: string path = 3;
@@ -488,9 +488,9 @@ export declare class LiveCheck extends Message<LiveCheck> {
   path: string;
 
   /**
-   * @generated from field: string period_seconds = 4;
+   * @generated from field: int32 period_seconds = 4;
    */
-  periodSeconds: string;
+  periodSeconds: number;
 
   constructor(data?: PartialMessage<LiveCheck>);
 
@@ -517,9 +517,9 @@ export declare class ReadyCheck extends Message<ReadyCheck> {
   enabled: boolean;
 
   /**
-   * @generated from field: string failure_threshold = 2;
+   * @generated from field: int32 failure_threshold = 2;
    */
-  failureThreshold: string;
+  failureThreshold: number;
 
   /**
    * @generated from field: string path = 3;
@@ -527,9 +527,9 @@ export declare class ReadyCheck extends Message<ReadyCheck> {
   path: string;
 
   /**
-   * @generated from field: string inital_delay_seconds = 4;
+   * @generated from field: int32 initial_delay_seconds = 4;
    */
-  initalDelaySeconds: string;
+  initialDelaySeconds: number;
 
   constructor(data?: PartialMessage<ReadyCheck>);
 
