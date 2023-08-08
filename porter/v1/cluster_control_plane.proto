@@ -37,10 +37,10 @@ message CreateAssumeRoleChainResponse {
 
 message DescribeInstanceTypeAWSRequest {
   int64 project_id = 1;
-  string instance_type = 2; 
+  string instance_type = 2;
 }
 
-message  DescribeInstanceTypeAWSResponse {
+message DescribeInstanceTypeAWSResponse {
   int64 ram = 1;
   int32 vcpu = 2;
 }
