@@ -149,6 +149,27 @@ message ValidatePorterAppResponse {
   PorterApp application = 1;
 }
 
+message ApplyPorterAppRequest {
+  int64 project_id = 1;
+  // deployment_target_id is the id of the deployment target where the application will be installed
+  string deployment_target_id = 2;
+  // application is the definition of the PorterApp to be applied
+  PorterApp application = 3;
+  // porter_app_revision_id is the id of the PorterAppRevision to be applied.  This is used by the CLI to provide updates to an existing application revision. If provided, application must be empty.
+  string porter_app_revision_id = 4;
+}
+
+message ApplyPorterAppResponse {
+  string porter_app_revision_id = 1;
+  EnumCLIAction cli_action = 2;
+}
+
+enum EnumCLIAction {
+  ENUM_CLI_ACTION_UNSPECIFIED = 0;
+  ENUM_CLI_ACTION_BUILD = 1;
+  ENUM_CLI_ACTION_TRACK_PREDEPLOY = 2;
+}
+
 service ClusterControlPlaneService {
   // UpdateCloudProviderCredentials creates or updates the credentials used for accessing the specific cloud
   rpc UpdateCloudProviderCredentials(UpdateCloudProviderCredentialsRequest) returns (UpdateCloudProviderCredentialsResponse) {}
@@ -193,6 +214,9 @@ service ClusterControlPlaneService {
 
   // ValidatePorterApp validates and hydrates a definition of a porter app, based on the porter.yaml file
   rpc ValidatePorterApp(ValidatePorterAppRequest) returns (ValidatePorterAppResponse) {}
+
+  // ApplyPorterApp applies a porter app as defined by the provided porter.yaml file to a given deployment id
+  rpc ApplyPorterApp(ApplyPorterAppRequest) returns (ApplyPorterAppResponse) {}
 
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
   // Deprecated. Use TokenForRegistry instead.

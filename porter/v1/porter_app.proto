@@ -25,13 +25,3 @@ message AppImage {
   string repository = 1;
   string tag = 2;
 }
-
-// PorterAppRevision represents a porter app revision to be passed to nats consumers handling deployment tasks.
-// This approach goes against microservice architectures, by expecting every consumer to read the specific contract from the database
-message PorterAppRevision {
-  int32 project_id = 1;
-  // revision_id is the ID of the porter app revision that this message applies to.
-  // This field is a UUID represented as a string, for better compatibility.
-  // Best practice is to parse this as a uuid upon receipt
-  string revision_id = 2;
-}
