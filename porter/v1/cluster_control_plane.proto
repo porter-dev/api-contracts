@@ -35,16 +35,6 @@ message CreateAssumeRoleChainResponse {
   string target_arn = 2;
 }
 
-message DescribeInstanceTypeAWSRequest {
-  int64 project_id = 1;
-  string instance_type = 2;
-}
-
-message DescribeInstanceTypeAWSResponse {
-  int64 ram = 1;
-  int32 vcpu = 2;
-}
-
 message SaveAzureCredentialsRequest {
   option deprecated = true;
   int64 project_id = 1;
@@ -226,8 +216,6 @@ service ClusterControlPlaneService {
     option deprecated = true;
   }
 
-  // DescribeInstanceTypeAWS takes in an instance type and returns the vCpus and Memory limit for that instance
-  rpc DescribeInstanceTypeAWS(DescribeInstanceTypeAWSRequest) returns (DescribeInstanceTypeAWSResponse) {}
 }
 
 message EKSBearerTokenRequest {

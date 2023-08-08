@@ -58,28 +58,6 @@ export const CreateAssumeRoleChainResponse = proto3.makeMessageType(
 );
 
 /**
- * @generated from message porter.v1.DescribeInstanceTypeAWSRequest
- */
-export const DescribeInstanceTypeAWSRequest = proto3.makeMessageType(
-  "porter.v1.DescribeInstanceTypeAWSRequest",
-  () => [
-    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 2, name: "instance_type", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-);
-
-/**
- * @generated from message porter.v1.DescribeInstanceTypeAWSResponse
- */
-export const DescribeInstanceTypeAWSResponse = proto3.makeMessageType(
-  "porter.v1.DescribeInstanceTypeAWSResponse",
-  () => [
-    { no: 1, name: "ram", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 2, name: "vcpu", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-  ],
-);
-
-/**
  * @generated from message porter.v1.SaveAzureCredentialsRequest
  * @deprecated
  */
