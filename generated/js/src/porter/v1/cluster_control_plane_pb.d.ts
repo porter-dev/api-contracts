@@ -152,64 +152,6 @@ export declare class CreateAssumeRoleChainResponse extends Message<CreateAssumeR
 }
 
 /**
- * @generated from message porter.v1.DescribeInstanceTypeAWSRequest
- */
-export declare class DescribeInstanceTypeAWSRequest extends Message<DescribeInstanceTypeAWSRequest> {
-  /**
-   * @generated from field: int64 project_id = 1;
-   */
-  projectId: bigint;
-
-  /**
-   * @generated from field: string instance_type = 2;
-   */
-  instanceType: string;
-
-  constructor(data?: PartialMessage<DescribeInstanceTypeAWSRequest>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.DescribeInstanceTypeAWSRequest";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DescribeInstanceTypeAWSRequest;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DescribeInstanceTypeAWSRequest;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DescribeInstanceTypeAWSRequest;
-
-  static equals(a: DescribeInstanceTypeAWSRequest | PlainMessage<DescribeInstanceTypeAWSRequest> | undefined, b: DescribeInstanceTypeAWSRequest | PlainMessage<DescribeInstanceTypeAWSRequest> | undefined): boolean;
-}
-
-/**
- * @generated from message porter.v1.DescribeInstanceTypeAWSResponse
- */
-export declare class DescribeInstanceTypeAWSResponse extends Message<DescribeInstanceTypeAWSResponse> {
-  /**
-   * @generated from field: int64 ram = 1;
-   */
-  ram: bigint;
-
-  /**
-   * @generated from field: int32 vcpu = 2;
-   */
-  vcpu: number;
-
-  constructor(data?: PartialMessage<DescribeInstanceTypeAWSResponse>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.DescribeInstanceTypeAWSResponse";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DescribeInstanceTypeAWSResponse;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DescribeInstanceTypeAWSResponse;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DescribeInstanceTypeAWSResponse;
-
-  static equals(a: DescribeInstanceTypeAWSResponse | PlainMessage<DescribeInstanceTypeAWSResponse> | undefined, b: DescribeInstanceTypeAWSResponse | PlainMessage<DescribeInstanceTypeAWSResponse> | undefined): boolean;
-}
-
-/**
  * @generated from message porter.v1.SaveAzureCredentialsRequest
  * @deprecated
  */

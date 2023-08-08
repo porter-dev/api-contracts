@@ -88,9 +88,6 @@ const (
 	// ClusterControlPlaneServiceEKSBearerTokenProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's EKSBearerToken RPC.
 	ClusterControlPlaneServiceEKSBearerTokenProcedure = "/porter.v1.ClusterControlPlaneService/EKSBearerToken"
-	// ClusterControlPlaneServiceDescribeInstanceTypeAWSProcedure is the fully-qualified name of the
-	// ClusterControlPlaneService's DescribeInstanceTypeAWS RPC.
-	ClusterControlPlaneServiceDescribeInstanceTypeAWSProcedure = "/porter.v1.ClusterControlPlaneService/DescribeInstanceTypeAWS"
 )
 
 // ClusterControlPlaneServiceClient is a client for the porter.v1.ClusterControlPlaneService
@@ -156,8 +153,6 @@ type ClusterControlPlaneServiceClient interface {
 	//
 	// Deprecated: do not use.
 	EKSBearerToken(context.Context, *connect.Request[v1.EKSBearerTokenRequest]) (*connect.Response[v1.EKSBearerTokenResponse], error)
-	// DescribeInstanceTypeAWS takes in an instance type and returns the vCpus and Memory limit for that instance
-	DescribeInstanceTypeAWS(context.Context, *connect.Request[v1.DescribeInstanceTypeAWSRequest]) (*connect.Response[v1.DescribeInstanceTypeAWSResponse], error)
 }
 
 // NewClusterControlPlaneServiceClient constructs a client for the
@@ -260,11 +255,6 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceEKSBearerTokenProcedure,
 			opts...,
 		),
-		describeInstanceTypeAWS: connect.NewClient[v1.DescribeInstanceTypeAWSRequest, v1.DescribeInstanceTypeAWSResponse](
-			httpClient,
-			baseURL+ClusterControlPlaneServiceDescribeInstanceTypeAWSProcedure,
-			opts...,
-		),
 	}
 }
 
@@ -288,7 +278,6 @@ type clusterControlPlaneServiceClient struct {
 	assumeRoleChainTargets         *connect.Client[v1.AssumeRoleChainTargetsRequest, v1.AssumeRoleChainTargetsResponse]
 	certificateAuthorityData       *connect.Client[v1.CertificateAuthorityDataRequest, v1.CertificateAuthorityDataResponse]
 	eKSBearerToken                 *connect.Client[v1.EKSBearerTokenRequest, v1.EKSBearerTokenResponse]
-	describeInstanceTypeAWS        *connect.Client[v1.DescribeInstanceTypeAWSRequest, v1.DescribeInstanceTypeAWSResponse]
 }
 
 // UpdateCloudProviderCredentials calls
@@ -400,11 +389,6 @@ func (c *clusterControlPlaneServiceClient) EKSBearerToken(ctx context.Context, r
 	return c.eKSBearerToken.CallUnary(ctx, req)
 }
 
-// DescribeInstanceTypeAWS calls porter.v1.ClusterControlPlaneService.DescribeInstanceTypeAWS.
-func (c *clusterControlPlaneServiceClient) DescribeInstanceTypeAWS(ctx context.Context, req *connect.Request[v1.DescribeInstanceTypeAWSRequest]) (*connect.Response[v1.DescribeInstanceTypeAWSResponse], error) {
-	return c.describeInstanceTypeAWS.CallUnary(ctx, req)
-}
-
 // ClusterControlPlaneServiceHandler is an implementation of the
 // porter.v1.ClusterControlPlaneService service.
 type ClusterControlPlaneServiceHandler interface {
@@ -468,8 +452,6 @@ type ClusterControlPlaneServiceHandler interface {
 	//
 	// Deprecated: do not use.
 	EKSBearerToken(context.Context, *connect.Request[v1.EKSBearerTokenRequest]) (*connect.Response[v1.EKSBearerTokenResponse], error)
-	// DescribeInstanceTypeAWS takes in an instance type and returns the vCpus and Memory limit for that instance
-	DescribeInstanceTypeAWS(context.Context, *connect.Request[v1.DescribeInstanceTypeAWSRequest]) (*connect.Response[v1.DescribeInstanceTypeAWSResponse], error)
 }
 
 // NewClusterControlPlaneServiceHandler builds an HTTP handler from the service implementation. It
@@ -568,11 +550,6 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.EKSBearerToken,
 		opts...,
 	)
-	clusterControlPlaneServiceDescribeInstanceTypeAWSHandler := connect.NewUnaryHandler(
-		ClusterControlPlaneServiceDescribeInstanceTypeAWSProcedure,
-		svc.DescribeInstanceTypeAWS,
-		opts...,
-	)
 	return "/porter.v1.ClusterControlPlaneService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ClusterControlPlaneServiceUpdateCloudProviderCredentialsProcedure:
@@ -611,8 +588,6 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceCertificateAuthorityDataHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceEKSBearerTokenProcedure:
 			clusterControlPlaneServiceEKSBearerTokenHandler.ServeHTTP(w, r)
-		case ClusterControlPlaneServiceDescribeInstanceTypeAWSProcedure:
-			clusterControlPlaneServiceDescribeInstanceTypeAWSHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -692,8 +667,4 @@ func (UnimplementedClusterControlPlaneServiceHandler) CertificateAuthorityData(c
 
 func (UnimplementedClusterControlPlaneServiceHandler) EKSBearerToken(context.Context, *connect.Request[v1.EKSBearerTokenRequest]) (*connect.Response[v1.EKSBearerTokenResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.EKSBearerToken is not implemented"))
-}
-
-func (UnimplementedClusterControlPlaneServiceHandler) DescribeInstanceTypeAWS(context.Context, *connect.Request[v1.DescribeInstanceTypeAWSRequest]) (*connect.Response[v1.DescribeInstanceTypeAWSResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.DescribeInstanceTypeAWS is not implemented"))
 }
