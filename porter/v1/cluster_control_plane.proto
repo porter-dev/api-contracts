@@ -227,8 +227,7 @@ service ClusterControlPlaneService {
   }
 
   // DescribeInstanceTypeAWS takes in an instance type and returns the vCpus and Memory limit for that instance
-  rpc DescribeInstanceTypeAWS(DescribeInstanceTypeAWSRequest) returns (DescribeInstanceTypeAWSResponse) {
-  }
+  rpc DescribeInstanceTypeAWS(DescribeInstanceTypeAWSRequest) returns (DescribeInstanceTypeAWSResponse) {}
 }
 
 message EKSBearerTokenRequest {
