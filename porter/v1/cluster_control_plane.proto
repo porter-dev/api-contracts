@@ -215,7 +215,6 @@ service ClusterControlPlaneService {
   rpc EKSBearerToken(EKSBearerTokenRequest) returns (EKSBearerTokenResponse) {
     option deprecated = true;
   }
-
 }
 
 message EKSBearerTokenRequest {
