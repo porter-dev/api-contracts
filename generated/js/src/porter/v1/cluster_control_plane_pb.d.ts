@@ -19,14 +19,25 @@ export declare enum EnumCLIAction {
   ENUM_CLI_ACTION_UNSPECIFIED = 0,
 
   /**
-   * @generated from enum value: ENUM_CLI_ACTION_BUILD = 1;
+   * ENUM_CLI_ACTION_NONE signals the CLI to do nothing after applying the PorterApp.
+   *
+   * @generated from enum value: ENUM_CLI_ACTION_NONE = 1;
    */
-  ENUM_CLI_ACTION_BUILD = 1,
+  ENUM_CLI_ACTION_NONE = 1,
 
   /**
-   * @generated from enum value: ENUM_CLI_ACTION_TRACK_PREDEPLOY = 2;
+   * ENUM_CLI_ACTION_BUILD signals the CLI to build the image and call ApplyPorterApp again after a successful build.
+   *
+   * @generated from enum value: ENUM_CLI_ACTION_BUILD = 2;
    */
-  ENUM_CLI_ACTION_TRACK_PREDEPLOY = 2,
+  ENUM_CLI_ACTION_BUILD = 2,
+
+  /**
+   * ENUM_CLI_ACTION_TRACK_PREDEPLOY signals the CLI to track the progress of the predeploy job and call ApplyPorterApp again after a successful run.
+   *
+   * @generated from enum value: ENUM_CLI_ACTION_TRACK_PREDEPLOY = 3;
+   */
+  ENUM_CLI_ACTION_TRACK_PREDEPLOY = 3,
 }
 
 /**
@@ -867,6 +878,8 @@ export declare class ApplyPorterAppResponse extends Message<ApplyPorterAppRespon
   porterAppRevisionId: string;
 
   /**
+   * cli_action is the action that the CLI should take after applying the PorterApp (at the time of writing, either build the image or track whether a predeploy job has completed)
+   *
    * @generated from field: porter.v1.EnumCLIAction cli_action = 2;
    */
   cliAction: EnumCLIAction;

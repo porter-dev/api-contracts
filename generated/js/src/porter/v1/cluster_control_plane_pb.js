@@ -15,8 +15,9 @@ export const EnumCLIAction = proto3.makeEnum(
   "porter.v1.EnumCLIAction",
   [
     {no: 0, name: "ENUM_CLI_ACTION_UNSPECIFIED"},
-    {no: 1, name: "ENUM_CLI_ACTION_BUILD"},
-    {no: 2, name: "ENUM_CLI_ACTION_TRACK_PREDEPLOY"},
+    {no: 1, name: "ENUM_CLI_ACTION_NONE"},
+    {no: 2, name: "ENUM_CLI_ACTION_BUILD"},
+    {no: 3, name: "ENUM_CLI_ACTION_TRACK_PREDEPLOY"},
   ],
 );
 

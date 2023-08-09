@@ -167,8 +167,12 @@ message ApplyPorterAppResponse {
 
 enum EnumCLIAction {
   ENUM_CLI_ACTION_UNSPECIFIED = 0;
-  ENUM_CLI_ACTION_BUILD = 1;
-  ENUM_CLI_ACTION_TRACK_PREDEPLOY = 2;
+  // ENUM_CLI_ACTION_NONE signals the CLI to do nothing after applying the PorterApp.
+  ENUM_CLI_ACTION_NONE = 1;
+  // ENUM_CLI_ACTION_BUILD signals the CLI to build the image and call ApplyPorterApp again after a successful build.
+  ENUM_CLI_ACTION_BUILD = 2;
+  // ENUM_CLI_ACTION_TRACK_PREDEPLOY signals the CLI to track the progress of the predeploy job and call ApplyPorterApp again after a successful run.
+  ENUM_CLI_ACTION_TRACK_PREDEPLOY = 3;
 }
 
 service ClusterControlPlaneService {
