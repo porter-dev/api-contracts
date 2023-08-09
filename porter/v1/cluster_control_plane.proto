@@ -161,6 +161,7 @@ message ApplyPorterAppRequest {
 
 message ApplyPorterAppResponse {
   string porter_app_revision_id = 1;
+  // cli_action is the action that the CLI should take after applying the PorterApp (at the time of writing, either build the image or track whether a predeploy job has completed)
   EnumCLIAction cli_action = 2;
 }
 
