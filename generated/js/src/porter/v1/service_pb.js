@@ -115,8 +115,7 @@ export const Schedule = proto3.makeMessageType(
 export const Container = proto3.makeMessageType(
   "porter.v1.Container",
   () => [
-    { no: 1, name: "command", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "port", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "port", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
   ],
 );
 

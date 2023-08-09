@@ -317,14 +317,9 @@ export declare class Schedule extends Message<Schedule> {
  */
 export declare class Container extends Message<Container> {
   /**
-   * @generated from field: string command = 1;
+   * @generated from field: int32 port = 1;
    */
-  command: string;
-
-  /**
-   * @generated from field: string port = 2;
-   */
-  port: string;
+  port: number;
 
   constructor(data?: PartialMessage<Container>);
 

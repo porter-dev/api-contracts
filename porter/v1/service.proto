@@ -61,8 +61,7 @@ message Schedule {
 }
 
 message Container {
-  string command = 1;
-  string port = 2;
+  int32 port = 1;
 }
 
 message Ingress {
