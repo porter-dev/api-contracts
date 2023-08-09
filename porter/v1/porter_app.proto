@@ -9,7 +9,7 @@ message PorterApp {
   map<string, Service> services = 2;
   map<string, string> env = 3;
   Build build = 4;
-  Service release = 5;
+  Service predeploy = 5;
   AppImage image = 6;
 }
 

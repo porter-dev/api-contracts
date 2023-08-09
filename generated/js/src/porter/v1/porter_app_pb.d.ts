@@ -32,9 +32,9 @@ export declare class PorterApp extends Message<PorterApp> {
   build?: Build;
 
   /**
-   * @generated from field: porter.v1.Service release = 5;
+   * @generated from field: porter.v1.Service predeploy = 5;
    */
-  release?: Service;
+  predeploy?: Service;
 
   /**
    * @generated from field: porter.v1.AppImage image = 6;

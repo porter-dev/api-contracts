@@ -25,10 +25,14 @@ export const Service = proto3.makeMessageType(
   "porter.v1.Service",
   () => [
     { no: 1, name: "run", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "web_config", kind: "message", T: WebServiceConfig, oneof: "config" },
-    { no: 3, name: "worker_config", kind: "message", T: WorkerServiceConfig, oneof: "config" },
-    { no: 4, name: "job_config", kind: "message", T: JobServiceConfig, oneof: "config" },
-    { no: 5, name: "type", kind: "enum", T: proto3.getEnumType(ServiceType) },
+    { no: 2, name: "instances", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 3, name: "port", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 4, name: "cpu_cores", kind: "scalar", T: 2 /* ScalarType.FLOAT */ },
+    { no: 5, name: "ram_megabytes", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 6, name: "web_config", kind: "message", T: WebServiceConfig, oneof: "config" },
+    { no: 7, name: "worker_config", kind: "message", T: WorkerServiceConfig, oneof: "config" },
+    { no: 8, name: "job_config", kind: "message", T: JobServiceConfig, oneof: "config" },
+    { no: 9, name: "type", kind: "enum", T: proto3.getEnumType(ServiceType) },
   ],
 );
 
@@ -38,13 +42,9 @@ export const Service = proto3.makeMessageType(
 export const WebServiceConfig = proto3.makeMessageType(
   "porter.v1.WebServiceConfig",
   () => [
-    { no: 1, name: "replica_count", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 2, name: "resources", kind: "message", T: Resources },
-    { no: 3, name: "container", kind: "message", T: Container },
-    { no: 4, name: "autoscaling", kind: "message", T: Autoscaling },
-    { no: 5, name: "ingress", kind: "message", T: Ingress },
-    { no: 6, name: "health", kind: "message", T: Health },
-    { no: 7, name: "cloud_sql", kind: "message", T: CloudSql },
+    { no: 1, name: "autoscaling", kind: "message", T: Autoscaling },
+    { no: 2, name: "domains", kind: "message", T: Domain, repeated: true },
+    { no: 3, name: "health_check", kind: "message", T: HealthCheck },
   ],
 );
 
@@ -54,11 +54,7 @@ export const WebServiceConfig = proto3.makeMessageType(
 export const WorkerServiceConfig = proto3.makeMessageType(
   "porter.v1.WorkerServiceConfig",
   () => [
-    { no: 1, name: "replica_count", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 2, name: "resources", kind: "message", T: Resources },
-    { no: 3, name: "container", kind: "message", T: Container },
-    { no: 4, name: "autoscaling", kind: "message", T: Autoscaling },
-    { no: 5, name: "cloud_sql", kind: "message", T: CloudSql },
+    { no: 1, name: "autoscaling", kind: "message", T: Autoscaling },
   ],
 );
 
@@ -69,67 +65,17 @@ export const JobServiceConfig = proto3.makeMessageType(
   "porter.v1.JobServiceConfig",
   () => [
     { no: 1, name: "allow_concurrent", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 2, name: "resources", kind: "message", T: Resources },
-    { no: 3, name: "container", kind: "message", T: Container },
-    { no: 4, name: "schedule", kind: "message", T: Schedule },
-    { no: 5, name: "paused", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 6, name: "cloud_sql", kind: "message", T: CloudSql },
+    { no: 2, name: "cron", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
 /**
- * @generated from message porter.v1.RequestResources
+ * @generated from message porter.v1.Domain
  */
-export const RequestResources = proto3.makeMessageType(
-  "porter.v1.RequestResources",
+export const Domain = proto3.makeMessageType(
+  "porter.v1.Domain",
   () => [
-    { no: 1, name: "cpu", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "memory", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-);
-
-/**
- * @generated from message porter.v1.Resources
- */
-export const Resources = proto3.makeMessageType(
-  "porter.v1.Resources",
-  () => [
-    { no: 1, name: "requests", kind: "message", T: RequestResources },
-  ],
-);
-
-/**
- * @generated from message porter.v1.Schedule
- */
-export const Schedule = proto3.makeMessageType(
-  "porter.v1.Schedule",
-  () => [
-    { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 2, name: "value", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-);
-
-/**
- * @generated from message porter.v1.Container
- */
-export const Container = proto3.makeMessageType(
-  "porter.v1.Container",
-  () => [
-    { no: 1, name: "port", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-  ],
-);
-
-/**
- * @generated from message porter.v1.Ingress
- */
-export const Ingress = proto3.makeMessageType(
-  "porter.v1.Ingress",
-  () => [
-    { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 2, name: "custom_domain", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 3, name: "hosts", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
-    { no: 4, name: "porter_hosts", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
-    { no: 5, name: "annotations", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "scalar", T: 9 /* ScalarType.STRING */} },
+    { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -139,62 +85,20 @@ export const Ingress = proto3.makeMessageType(
 export const Autoscaling = proto3.makeMessageType(
   "porter.v1.Autoscaling",
   () => [
-    { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 2, name: "min_replicas", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 3, name: "max_replicas", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 4, name: "target_cpu_utilization_threshold", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 5, name: "target_memory_utilization_threshold", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 1, name: "min_instances", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 2, name: "max_instances", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 3, name: "cpu_threshold_percent", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 4, name: "memory_threshold_percent", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
   ],
 );
 
 /**
- * @generated from message porter.v1.CloudSql
+ * @generated from message porter.v1.HealthCheck
  */
-export const CloudSql = proto3.makeMessageType(
-  "porter.v1.CloudSql",
+export const HealthCheck = proto3.makeMessageType(
+  "porter.v1.HealthCheck",
   () => [
-    { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 2, name: "connection_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "db_port", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "service_account_json", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-);
-
-/**
- * @generated from message porter.v1.LiveCheck
- */
-export const LiveCheck = proto3.makeMessageType(
-  "porter.v1.LiveCheck",
-  () => [
-    { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 2, name: "failure_threshold", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 3, name: "path", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "period_seconds", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-  ],
-);
-
-/**
- * @generated from message porter.v1.ReadyCheck
- */
-export const ReadyCheck = proto3.makeMessageType(
-  "porter.v1.ReadyCheck",
-  () => [
-    { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 2, name: "failure_threshold", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 3, name: "path", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "initial_delay_seconds", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-  ],
-);
-
-/**
- * @generated from message porter.v1.Health
- */
-export const Health = proto3.makeMessageType(
-  "porter.v1.Health",
-  () => [
-    { no: 1, name: "startup_probe", kind: "message", T: LiveCheck },
-    { no: 2, name: "readiness_probe", kind: "message", T: ReadyCheck },
-    { no: 3, name: "liveness_probe", kind: "message", T: LiveCheck },
+    { no: 1, name: "http_path", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

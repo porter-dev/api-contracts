@@ -16,7 +16,7 @@ export const PorterApp = proto3.makeMessageType(
     { no: 2, name: "services", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Service} },
     { no: 3, name: "env", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "scalar", T: 9 /* ScalarType.STRING */} },
     { no: 4, name: "build", kind: "message", T: Build },
-    { no: 5, name: "release", kind: "message", T: Service },
+    { no: 5, name: "predeploy", kind: "message", T: Service },
     { no: 6, name: "image", kind: "message", T: AppImage },
   ],
 );

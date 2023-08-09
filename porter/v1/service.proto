@@ -11,98 +11,44 @@ enum ServiceType {
 
 message Service {
   string run = 1;
+  int32 instances = 2;
+  int32 port = 3;
+  float cpu_cores = 4;
+  int32 ram_megabytes = 5;
   oneof config {
-    WebServiceConfig web_config = 2;
-    WorkerServiceConfig worker_config = 3;
-    JobServiceConfig job_config = 4;
+    WebServiceConfig web_config = 6;
+    WorkerServiceConfig worker_config = 7;
+    JobServiceConfig job_config = 8;
   }
-  ServiceType type = 5;
+  ServiceType type = 9;
 }
 
 message WebServiceConfig {
-  int32 replica_count = 1;
-  Resources resources = 2;
-  Container container = 3;
-  Autoscaling autoscaling = 4;
-  Ingress ingress = 5;
-  Health health = 6;
-  CloudSql cloud_sql = 7;
+  Autoscaling autoscaling = 1;
+  repeated Domain domains = 2;
+  HealthCheck health_check = 3;
 }
 
 message WorkerServiceConfig {
-  int32 replica_count = 1;
-  Resources resources = 2;
-  Container container = 3;
-  Autoscaling autoscaling = 4;
-  CloudSql cloud_sql = 5;
+  Autoscaling autoscaling = 1;
 }
 
 message JobServiceConfig {
   bool allow_concurrent = 1;
-  Resources resources = 2;
-  Container container = 3;
-  Schedule schedule = 4;
-  bool paused = 5;
-  CloudSql cloud_sql = 6;
+  string cron = 2;
 }
 
-message RequestResources {
-  string cpu = 1;
-  string memory = 2;
-}
-
-message Resources {
-  RequestResources requests = 1;
-}
-
-message Schedule {
-  bool enabled = 1;
-  string value = 2;
-}
-
-message Container {
-  int32 port = 1;
-}
-
-message Ingress {
-  bool enabled = 1;
-  bool custom_domain = 2;
-  repeated string hosts = 3;
-  repeated string porter_hosts = 4;
-  map<string, string> annotations = 5;
+message Domain {
+  string name = 1;
 }
 
 message Autoscaling {
-  bool enabled = 1;
-  int32 min_replicas = 2;
-  int32 max_replicas = 3;
-  int32 target_cpu_utilization_threshold = 4;
-  int32 target_memory_utilization_threshold = 5;
+  int32 min_instances = 1;
+  int32 max_instances = 2;
+  int32 cpu_threshold_percent = 3;
+  int32 memory_threshold_percent = 4;
 }
 
-message CloudSql {
-  bool enabled = 1;
-  string connection_name = 2;
-  string db_port = 3;
-  string service_account_json = 4;
-}
-
-message LiveCheck {
-  bool enabled = 1;
-  int32 failure_threshold = 2;
-  string path = 3;
-  int32 period_seconds = 4;
-}
-
-message ReadyCheck {
-  bool enabled = 1;
-  int32 failure_threshold = 2;
-  string path = 3;
-  int32 initial_delay_seconds = 4;
-}
-
-message Health {
-  LiveCheck startup_probe = 1;
-  ReadyCheck readiness_probe = 2;
-  LiveCheck liveness_probe = 3;
+message HealthCheck {
+  string http_path = 1;
 }
