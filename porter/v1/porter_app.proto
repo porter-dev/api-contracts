@@ -4,24 +4,40 @@ package porter.v1;
 
 import "porter/v1/service.proto";
 
+// PorterApp is the top-level configuration for a Porter application, usually found in porter.yaml
 message PorterApp {
+  // name is the name of the application
   string name = 1;
+  // services is a map of service names to service configurations
   map<string, Service> services = 2;
+  // env is a map of environment variable names to values
   map<string, string> env = 3;
+  // build is the build settings for the application
   Build build = 4;
-  Service release = 5;
+  // predeploy is a job service to run before deploying the application
+  Service predeploy = 5;
+  // image is the image to use for a given revision of the application
   AppImage image = 6;
 }
 
+// Build is the build settings for the application
 message Build {
+  // context is the path to the build context
   string context = 1;
+  // method is the build method to use, being one of "pack", "docker", or "registry"
   string method = 2;
+  // builder is the builder to use for the "pack" build method
   string builder = 3;
+  // buildpacks is a list of buildpacks to use for the "pack" build method
   repeated string buildpacks = 4;
+  // dockerfile is the path to the Dockerfile to use for the "docker" build method
   string dockerfile = 5;
 }
 
+// AppImage is the image to use for a given revision of the application
 message AppImage {
+  // repository is the repository to use for the image
   string repository = 1;
+  // tag is the tag to use for the image
   string tag = 2;
 }

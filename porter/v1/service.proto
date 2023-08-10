@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package porter.v1;
 
+// ServiceType is used to categorize services, being one of web, worker, or job
 enum ServiceType {
   SERVICE_TYPE_UNSPECIFIED = 0;
   SERVICE_TYPE_WEB = 1;
@@ -9,101 +10,70 @@ enum ServiceType {
   SERVICE_TYPE_JOB = 3;
 }
 
+// Service is the top-level configuration for a service
 message Service {
+  // run is the command to start the service
   string run = 1;
+  // instances is the number of instances, or replicas, to run
+  int32 instances = 2;
+  // port is the port the service listens on
+  int32 port = 3;
+  // cpu_cores is the number of CPU cores to allocate to the service
+  float cpu_cores = 4;
+  // ram_megabytes is the amount of memory to allocate to the service
+  int32 ram_megabytes = 5;
+  // config is the service-specific configuration
   oneof config {
-    WebServiceConfig web_config = 2;
-    WorkerServiceConfig worker_config = 3;
-    JobServiceConfig job_config = 4;
+    WebServiceConfig web_config = 6;
+    WorkerServiceConfig worker_config = 7;
+    JobServiceConfig job_config = 8;
   }
-  ServiceType type = 5;
+  // type is the type of service
+  ServiceType type = 9;
 }
 
+// WebServiceConfig is the configuration for a web service
 message WebServiceConfig {
-  int32 replica_count = 1;
-  Resources resources = 2;
-  Container container = 3;
-  Autoscaling autoscaling = 4;
-  Ingress ingress = 5;
-  Health health = 6;
-  CloudSql cloud_sql = 7;
+  // autoscaling is the autoscaling configuration
+  Autoscaling autoscaling = 1;
+  // domains is the list of custom domains for this service
+  repeated Domain domains = 2;
+  // health_check is the health check configuration, used for liveness and readiness probes
+  HealthCheck health_check = 3;
 }
 
+// WorkerServiceConfig is the configuration for a worker service
 message WorkerServiceConfig {
-  int32 replica_count = 1;
-  Resources resources = 2;
-  Container container = 3;
-  Autoscaling autoscaling = 4;
-  CloudSql cloud_sql = 5;
+  Autoscaling autoscaling = 1;
 }
 
+// JobServiceConfig is the configuration for a job service
 message JobServiceConfig {
+  // allow_concurrent indicates whether or not runs of the job can be processed concurrently
   bool allow_concurrent = 1;
-  Resources resources = 2;
-  Container container = 3;
-  Schedule schedule = 4;
-  bool paused = 5;
-  CloudSql cloud_sql = 6;
+  // cron is the cron expression for the job
+  string cron = 2;
 }
 
-message RequestResources {
-  string cpu = 1;
-  string memory = 2;
+// Domain is the configuration for a custom domain for a web service
+message Domain {
+  string name = 1;
 }
 
-message Resources {
-  RequestResources requests = 1;
-}
-
-message Schedule {
-  bool enabled = 1;
-  string value = 2;
-}
-
-message Container {
-  string command = 1;
-  string port = 2;
-}
-
-message Ingress {
-  bool enabled = 1;
-  bool custom_domain = 2;
-  repeated string hosts = 3;
-  repeated string porter_hosts = 4;
-  map<string, string> annotations = 5;
-}
-
+// Autoscaling is the autoscaling configuration
 message Autoscaling {
-  bool enabled = 1;
-  int32 min_replicas = 2;
-  int32 max_replicas = 3;
-  int32 target_cpu_utilization_threshold = 4;
-  int32 target_memory_utilization_threshold = 5;
+  // min_instances is the minimum number of instances to run
+  int32 min_instances = 1;
+  // max_instances is the maximum number of instances to run
+  int32 max_instances = 2;
+  // cpu_threshold_percent is the CPU threshold percentage to trigger scaling
+  int32 cpu_threshold_percent = 3;
+  // memory_threshold_percent is the memory threshold percentage to trigger scaling
+  int32 memory_threshold_percent = 4;
 }
 
-message CloudSql {
-  bool enabled = 1;
-  string connection_name = 2;
-  string db_port = 3;
-  string service_account_json = 4;
-}
-
-message LiveCheck {
-  bool enabled = 1;
-  int32 failure_threshold = 2;
-  string path = 3;
-  int32 period_seconds = 4;
-}
-
-message ReadyCheck {
-  bool enabled = 1;
-  int32 failure_threshold = 2;
-  string path = 3;
-  int32 initial_delay_seconds = 4;
-}
-
-message Health {
-  LiveCheck startup_probe = 1;
-  ReadyCheck readiness_probe = 2;
-  LiveCheck liveness_probe = 3;
+// HealthCheck is the health check configuration
+message HealthCheck {
+  // http_path is the HTTP path to use for the health check
+  string http_path = 1;
 }
