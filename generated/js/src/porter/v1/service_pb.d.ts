@@ -7,6 +7,8 @@ import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialM
 import { Message, proto3 } from "@bufbuild/protobuf";
 
 /**
+ * Service type is used to categorize services, being one of web, worker, or job
+ *
  * @generated from enum porter.v1.ServiceType
  */
 export declare enum ServiceType {
@@ -32,35 +34,49 @@ export declare enum ServiceType {
 }
 
 /**
+ * Service is the top-level configuration for a service
+ *
  * @generated from message porter.v1.Service
  */
 export declare class Service extends Message<Service> {
   /**
+   * Run is the command to start the service
+   *
    * @generated from field: string run = 1;
    */
   run: string;
 
   /**
+   * Instances is the number of instances, or replicas, to run
+   *
    * @generated from field: int32 instances = 2;
    */
   instances: number;
 
   /**
+   * Port is the port the service listens on
+   *
    * @generated from field: int32 port = 3;
    */
   port: number;
 
   /**
+   * CPU cores is the number of CPU cores to allocate to the service
+   *
    * @generated from field: float cpu_cores = 4;
    */
   cpuCores: number;
 
   /**
+   * RAM megabytes is the amount of memory to allocate to the service
+   *
    * @generated from field: int32 ram_megabytes = 5;
    */
   ramMegabytes: number;
 
   /**
+   * Config is the service-specific configuration
+   *
    * @generated from oneof porter.v1.Service.config
    */
   config: {
@@ -84,6 +100,8 @@ export declare class Service extends Message<Service> {
   } | { case: undefined; value?: undefined };
 
   /**
+   * Type is the type of service
+   *
    * @generated from field: porter.v1.ServiceType type = 9;
    */
   type: ServiceType;
@@ -104,20 +122,28 @@ export declare class Service extends Message<Service> {
 }
 
 /**
+ * WebServiceConfig is the configuration for a web service
+ *
  * @generated from message porter.v1.WebServiceConfig
  */
 export declare class WebServiceConfig extends Message<WebServiceConfig> {
   /**
+   * Autoscaling is the autoscaling configuration
+   *
    * @generated from field: porter.v1.Autoscaling autoscaling = 1;
    */
   autoscaling?: Autoscaling;
 
   /**
+   * Domains is the list of custom domains for this service
+   *
    * @generated from field: repeated porter.v1.Domain domains = 2;
    */
   domains: Domain[];
 
   /**
+   * HealthCheck is the health check configuration, used for liveness and readiness probes
+   *
    * @generated from field: porter.v1.HealthCheck health_check = 3;
    */
   healthCheck?: HealthCheck;
@@ -138,6 +164,8 @@ export declare class WebServiceConfig extends Message<WebServiceConfig> {
 }
 
 /**
+ * WorkerServiceConfig is the configuration for a worker service
+ *
  * @generated from message porter.v1.WorkerServiceConfig
  */
 export declare class WorkerServiceConfig extends Message<WorkerServiceConfig> {
@@ -162,15 +190,21 @@ export declare class WorkerServiceConfig extends Message<WorkerServiceConfig> {
 }
 
 /**
+ * JobServiceConfig is the configuration for a job service
+ *
  * @generated from message porter.v1.JobServiceConfig
  */
 export declare class JobServiceConfig extends Message<JobServiceConfig> {
   /**
+   * AllowConcurrent indicates whether or not runs of the job can be processed concurrently
+   *
    * @generated from field: bool allow_concurrent = 1;
    */
   allowConcurrent: boolean;
 
   /**
+   * Cron is the cron expression for the job
+   *
    * @generated from field: string cron = 2;
    */
   cron: string;
@@ -191,6 +225,8 @@ export declare class JobServiceConfig extends Message<JobServiceConfig> {
 }
 
 /**
+ * Domain is the configuration for a custom domain for a web service
+ *
  * @generated from message porter.v1.Domain
  */
 export declare class Domain extends Message<Domain> {
@@ -215,25 +251,35 @@ export declare class Domain extends Message<Domain> {
 }
 
 /**
+ * Autoscaling is the autoscaling configuration
+ *
  * @generated from message porter.v1.Autoscaling
  */
 export declare class Autoscaling extends Message<Autoscaling> {
   /**
+   * MinInstances is the minimum number of instances to run
+   *
    * @generated from field: int32 min_instances = 1;
    */
   minInstances: number;
 
   /**
+   * MaxInstances is the maximum number of instances to run
+   *
    * @generated from field: int32 max_instances = 2;
    */
   maxInstances: number;
 
   /**
+   * CPUThresholdPercent is the CPU threshold percentage to trigger scaling
+   *
    * @generated from field: int32 cpu_threshold_percent = 3;
    */
   cpuThresholdPercent: number;
 
   /**
+   * MemoryThresholdPercent is the memory threshold percentage to trigger scaling
+   *
    * @generated from field: int32 memory_threshold_percent = 4;
    */
   memoryThresholdPercent: number;
@@ -254,10 +300,14 @@ export declare class Autoscaling extends Message<Autoscaling> {
 }
 
 /**
+ * HealthCheck is the health check configuration
+ *
  * @generated from message porter.v1.HealthCheck
  */
 export declare class HealthCheck extends Message<HealthCheck> {
   /**
+   * HTTPPath is the HTTP path to use for the health check
+   *
    * @generated from field: string http_path = 1;
    */
   httpPath: string;

@@ -20,6 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Service type is used to categorize services, being one of web, worker, or job
 type ServiceType int32
 
 const (
@@ -72,23 +73,32 @@ func (ServiceType) EnumDescriptor() ([]byte, []int) {
 	return file_porter_v1_service_proto_rawDescGZIP(), []int{0}
 }
 
+// Service is the top-level configuration for a service
 type Service struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Run          string  `protobuf:"bytes,1,opt,name=run,proto3" json:"run,omitempty"`
-	Instances    int32   `protobuf:"varint,2,opt,name=instances,proto3" json:"instances,omitempty"`
-	Port         int32   `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
-	CpuCores     float32 `protobuf:"fixed32,4,opt,name=cpu_cores,json=cpuCores,proto3" json:"cpu_cores,omitempty"`
-	RamMegabytes int32   `protobuf:"varint,5,opt,name=ram_megabytes,json=ramMegabytes,proto3" json:"ram_megabytes,omitempty"`
+	// Run is the command to start the service
+	Run string `protobuf:"bytes,1,opt,name=run,proto3" json:"run,omitempty"`
+	// Instances is the number of instances, or replicas, to run
+	Instances int32 `protobuf:"varint,2,opt,name=instances,proto3" json:"instances,omitempty"`
+	// Port is the port the service listens on
+	Port int32 `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
+	// CPU cores is the number of CPU cores to allocate to the service
+	CpuCores float32 `protobuf:"fixed32,4,opt,name=cpu_cores,json=cpuCores,proto3" json:"cpu_cores,omitempty"`
+	// RAM megabytes is the amount of memory to allocate to the service
+	RamMegabytes int32 `protobuf:"varint,5,opt,name=ram_megabytes,json=ramMegabytes,proto3" json:"ram_megabytes,omitempty"`
+	// Config is the service-specific configuration
+	//
 	// Types that are assignable to Config:
 	//
 	//	*Service_WebConfig
 	//	*Service_WorkerConfig
 	//	*Service_JobConfig
 	Config isService_Config `protobuf_oneof:"config"`
-	Type   ServiceType      `protobuf:"varint,9,opt,name=type,proto3,enum=porter.v1.ServiceType" json:"type,omitempty"`
+	// Type is the type of service
+	Type ServiceType `protobuf:"varint,9,opt,name=type,proto3,enum=porter.v1.ServiceType" json:"type,omitempty"`
 }
 
 func (x *Service) Reset() {
@@ -215,13 +225,17 @@ func (*Service_WorkerConfig) isService_Config() {}
 
 func (*Service_JobConfig) isService_Config() {}
 
+// WebServiceConfig is the configuration for a web service
 type WebServiceConfig struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Autoscaling is the autoscaling configuration
 	Autoscaling *Autoscaling `protobuf:"bytes,1,opt,name=autoscaling,proto3" json:"autoscaling,omitempty"`
-	Domains     []*Domain    `protobuf:"bytes,2,rep,name=domains,proto3" json:"domains,omitempty"`
+	// Domains is the list of custom domains for this service
+	Domains []*Domain `protobuf:"bytes,2,rep,name=domains,proto3" json:"domains,omitempty"`
+	// HealthCheck is the health check configuration, used for liveness and readiness probes
 	HealthCheck *HealthCheck `protobuf:"bytes,3,opt,name=health_check,json=healthCheck,proto3" json:"health_check,omitempty"`
 }
 
@@ -278,6 +292,7 @@ func (x *WebServiceConfig) GetHealthCheck() *HealthCheck {
 	return nil
 }
 
+// WorkerServiceConfig is the configuration for a worker service
 type WorkerServiceConfig struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -325,13 +340,16 @@ func (x *WorkerServiceConfig) GetAutoscaling() *Autoscaling {
 	return nil
 }
 
+// JobServiceConfig is the configuration for a job service
 type JobServiceConfig struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AllowConcurrent bool   `protobuf:"varint,1,opt,name=allow_concurrent,json=allowConcurrent,proto3" json:"allow_concurrent,omitempty"`
-	Cron            string `protobuf:"bytes,2,opt,name=cron,proto3" json:"cron,omitempty"`
+	// AllowConcurrent indicates whether or not runs of the job can be processed concurrently
+	AllowConcurrent bool `protobuf:"varint,1,opt,name=allow_concurrent,json=allowConcurrent,proto3" json:"allow_concurrent,omitempty"`
+	// Cron is the cron expression for the job
+	Cron string `protobuf:"bytes,2,opt,name=cron,proto3" json:"cron,omitempty"`
 }
 
 func (x *JobServiceConfig) Reset() {
@@ -380,6 +398,7 @@ func (x *JobServiceConfig) GetCron() string {
 	return ""
 }
 
+// Domain is the configuration for a custom domain for a web service
 type Domain struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -427,14 +446,19 @@ func (x *Domain) GetName() string {
 	return ""
 }
 
+// Autoscaling is the autoscaling configuration
 type Autoscaling struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	MinInstances           int32 `protobuf:"varint,1,opt,name=min_instances,json=minInstances,proto3" json:"min_instances,omitempty"`
-	MaxInstances           int32 `protobuf:"varint,2,opt,name=max_instances,json=maxInstances,proto3" json:"max_instances,omitempty"`
-	CpuThresholdPercent    int32 `protobuf:"varint,3,opt,name=cpu_threshold_percent,json=cpuThresholdPercent,proto3" json:"cpu_threshold_percent,omitempty"`
+	// MinInstances is the minimum number of instances to run
+	MinInstances int32 `protobuf:"varint,1,opt,name=min_instances,json=minInstances,proto3" json:"min_instances,omitempty"`
+	// MaxInstances is the maximum number of instances to run
+	MaxInstances int32 `protobuf:"varint,2,opt,name=max_instances,json=maxInstances,proto3" json:"max_instances,omitempty"`
+	// CPUThresholdPercent is the CPU threshold percentage to trigger scaling
+	CpuThresholdPercent int32 `protobuf:"varint,3,opt,name=cpu_threshold_percent,json=cpuThresholdPercent,proto3" json:"cpu_threshold_percent,omitempty"`
+	// MemoryThresholdPercent is the memory threshold percentage to trigger scaling
 	MemoryThresholdPercent int32 `protobuf:"varint,4,opt,name=memory_threshold_percent,json=memoryThresholdPercent,proto3" json:"memory_threshold_percent,omitempty"`
 }
 
@@ -498,11 +522,13 @@ func (x *Autoscaling) GetMemoryThresholdPercent() int32 {
 	return 0
 }
 
+// HealthCheck is the health check configuration
 type HealthCheck struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// HTTPPath is the HTTP path to use for the health check
 	HttpPath string `protobuf:"bytes,1,opt,name=http_path,json=httpPath,proto3" json:"http_path,omitempty"`
 }
 

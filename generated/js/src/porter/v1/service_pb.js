@@ -6,6 +6,8 @@
 import { proto3 } from "@bufbuild/protobuf";
 
 /**
+ * Service type is used to categorize services, being one of web, worker, or job
+ *
  * @generated from enum porter.v1.ServiceType
  */
 export const ServiceType = proto3.makeEnum(
@@ -19,6 +21,8 @@ export const ServiceType = proto3.makeEnum(
 );
 
 /**
+ * Service is the top-level configuration for a service
+ *
  * @generated from message porter.v1.Service
  */
 export const Service = proto3.makeMessageType(
@@ -37,6 +41,8 @@ export const Service = proto3.makeMessageType(
 );
 
 /**
+ * WebServiceConfig is the configuration for a web service
+ *
  * @generated from message porter.v1.WebServiceConfig
  */
 export const WebServiceConfig = proto3.makeMessageType(
@@ -49,6 +55,8 @@ export const WebServiceConfig = proto3.makeMessageType(
 );
 
 /**
+ * WorkerServiceConfig is the configuration for a worker service
+ *
  * @generated from message porter.v1.WorkerServiceConfig
  */
 export const WorkerServiceConfig = proto3.makeMessageType(
@@ -59,6 +67,8 @@ export const WorkerServiceConfig = proto3.makeMessageType(
 );
 
 /**
+ * JobServiceConfig is the configuration for a job service
+ *
  * @generated from message porter.v1.JobServiceConfig
  */
 export const JobServiceConfig = proto3.makeMessageType(
@@ -70,6 +80,8 @@ export const JobServiceConfig = proto3.makeMessageType(
 );
 
 /**
+ * Domain is the configuration for a custom domain for a web service
+ *
  * @generated from message porter.v1.Domain
  */
 export const Domain = proto3.makeMessageType(
@@ -80,6 +92,8 @@ export const Domain = proto3.makeMessageType(
 );
 
 /**
+ * Autoscaling is the autoscaling configuration
+ *
  * @generated from message porter.v1.Autoscaling
  */
 export const Autoscaling = proto3.makeMessageType(
@@ -93,6 +107,8 @@ export const Autoscaling = proto3.makeMessageType(
 );
 
 /**
+ * HealthCheck is the health check configuration
+ *
  * @generated from message porter.v1.HealthCheck
  */
 export const HealthCheck = proto3.makeMessageType(

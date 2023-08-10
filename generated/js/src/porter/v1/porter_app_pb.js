@@ -7,6 +7,8 @@ import { proto3 } from "@bufbuild/protobuf";
 import { Service } from "./service_pb.js";
 
 /**
+ * PorterApp is the top-level configuration for a Porter application, usually found in porter.yaml
+ *
  * @generated from message porter.v1.PorterApp
  */
 export const PorterApp = proto3.makeMessageType(
@@ -22,6 +24,8 @@ export const PorterApp = proto3.makeMessageType(
 );
 
 /**
+ * Build is the build settings for the application
+ *
  * @generated from message porter.v1.Build
  */
 export const Build = proto3.makeMessageType(
@@ -36,6 +40,8 @@ export const Build = proto3.makeMessageType(
 );
 
 /**
+ * AppImage is the image to use for a given revision of the application
+ *
  * @generated from message porter.v1.AppImage
  */
 export const AppImage = proto3.makeMessageType(

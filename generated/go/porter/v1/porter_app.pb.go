@@ -20,17 +20,24 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// PorterApp is the top-level configuration for a Porter application, usually found in porter.yaml
 type PorterApp struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name      string              `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Services  map[string]*Service `protobuf:"bytes,2,rep,name=services,proto3" json:"services,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Env       map[string]string   `protobuf:"bytes,3,rep,name=env,proto3" json:"env,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Build     *Build              `protobuf:"bytes,4,opt,name=build,proto3" json:"build,omitempty"`
-	Predeploy *Service            `protobuf:"bytes,5,opt,name=predeploy,proto3" json:"predeploy,omitempty"`
-	Image     *AppImage           `protobuf:"bytes,6,opt,name=image,proto3" json:"image,omitempty"`
+	// Name is the name of the application
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// Services is a map of service names to service configurations
+	Services map[string]*Service `protobuf:"bytes,2,rep,name=services,proto3" json:"services,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Environ is a map of environment variable names to values
+	Env map[string]string `protobuf:"bytes,3,rep,name=env,proto3" json:"env,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	// Build is the build settings for the application
+	Build *Build `protobuf:"bytes,4,opt,name=build,proto3" json:"build,omitempty"`
+	// Predeploy is a job service to run before deploying the application
+	Predeploy *Service `protobuf:"bytes,5,opt,name=predeploy,proto3" json:"predeploy,omitempty"`
+	// Image is the image to use for a given revision of the application
+	Image *AppImage `protobuf:"bytes,6,opt,name=image,proto3" json:"image,omitempty"`
 }
 
 func (x *PorterApp) Reset() {
@@ -107,16 +114,22 @@ func (x *PorterApp) GetImage() *AppImage {
 	return nil
 }
 
+// Build is the build settings for the application
 type Build struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Context    string   `protobuf:"bytes,1,opt,name=context,proto3" json:"context,omitempty"`
-	Method     string   `protobuf:"bytes,2,opt,name=method,proto3" json:"method,omitempty"`
-	Builder    string   `protobuf:"bytes,3,opt,name=builder,proto3" json:"builder,omitempty"`
+	// Context is the path to the build context
+	Context string `protobuf:"bytes,1,opt,name=context,proto3" json:"context,omitempty"`
+	// Method is the build method to use, being one of "pack", "docker", or "registry"
+	Method string `protobuf:"bytes,2,opt,name=method,proto3" json:"method,omitempty"`
+	// Builder is the builder to use for the "pack" build method
+	Builder string `protobuf:"bytes,3,opt,name=builder,proto3" json:"builder,omitempty"`
+	// Buildpacks is a list of buildpacks to use for the "pack" build method
 	Buildpacks []string `protobuf:"bytes,4,rep,name=buildpacks,proto3" json:"buildpacks,omitempty"`
-	Dockerfile string   `protobuf:"bytes,5,opt,name=dockerfile,proto3" json:"dockerfile,omitempty"`
+	// Dockerfile is the path to the Dockerfile to use for the "docker" build method
+	Dockerfile string `protobuf:"bytes,5,opt,name=dockerfile,proto3" json:"dockerfile,omitempty"`
 }
 
 func (x *Build) Reset() {
@@ -186,13 +199,16 @@ func (x *Build) GetDockerfile() string {
 	return ""
 }
 
+// AppImage is the image to use for a given revision of the application
 type AppImage struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Repository is the repository to use for the image
 	Repository string `protobuf:"bytes,1,opt,name=repository,proto3" json:"repository,omitempty"`
-	Tag        string `protobuf:"bytes,2,opt,name=tag,proto3" json:"tag,omitempty"`
+	// Tag is the tag to use for the image
+	Tag string `protobuf:"bytes,2,opt,name=tag,proto3" json:"tag,omitempty"`
 }
 
 func (x *AppImage) Reset() {
