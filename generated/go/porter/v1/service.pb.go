@@ -20,7 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Service type is used to categorize services, being one of web, worker, or job
+// ServiceType is used to categorize services, being one of web, worker, or job
 type ServiceType int32
 
 const (
@@ -79,17 +79,17 @@ type Service struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Run is the command to start the service
+	// run is the command to start the service
 	Run string `protobuf:"bytes,1,opt,name=run,proto3" json:"run,omitempty"`
-	// Instances is the number of instances, or replicas, to run
+	// instances is the number of instances, or replicas, to run
 	Instances int32 `protobuf:"varint,2,opt,name=instances,proto3" json:"instances,omitempty"`
-	// Port is the port the service listens on
+	// port is the port the service listens on
 	Port int32 `protobuf:"varint,3,opt,name=port,proto3" json:"port,omitempty"`
-	// CPU cores is the number of CPU cores to allocate to the service
+	// cpu_cores is the number of CPU cores to allocate to the service
 	CpuCores float32 `protobuf:"fixed32,4,opt,name=cpu_cores,json=cpuCores,proto3" json:"cpu_cores,omitempty"`
-	// RAM megabytes is the amount of memory to allocate to the service
+	// ram_megabytes is the amount of memory to allocate to the service
 	RamMegabytes int32 `protobuf:"varint,5,opt,name=ram_megabytes,json=ramMegabytes,proto3" json:"ram_megabytes,omitempty"`
-	// Config is the service-specific configuration
+	// config is the service-specific configuration
 	//
 	// Types that are assignable to Config:
 	//
@@ -97,7 +97,7 @@ type Service struct {
 	//	*Service_WorkerConfig
 	//	*Service_JobConfig
 	Config isService_Config `protobuf_oneof:"config"`
-	// Type is the type of service
+	// type is the type of service
 	Type ServiceType `protobuf:"varint,9,opt,name=type,proto3,enum=porter.v1.ServiceType" json:"type,omitempty"`
 }
 
@@ -231,11 +231,11 @@ type WebServiceConfig struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Autoscaling is the autoscaling configuration
+	// autoscaling is the autoscaling configuration
 	Autoscaling *Autoscaling `protobuf:"bytes,1,opt,name=autoscaling,proto3" json:"autoscaling,omitempty"`
-	// Domains is the list of custom domains for this service
+	// domains is the list of custom domains for this service
 	Domains []*Domain `protobuf:"bytes,2,rep,name=domains,proto3" json:"domains,omitempty"`
-	// HealthCheck is the health check configuration, used for liveness and readiness probes
+	// health_check is the health check configuration, used for liveness and readiness probes
 	HealthCheck *HealthCheck `protobuf:"bytes,3,opt,name=health_check,json=healthCheck,proto3" json:"health_check,omitempty"`
 }
 
@@ -346,9 +346,9 @@ type JobServiceConfig struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// AllowConcurrent indicates whether or not runs of the job can be processed concurrently
+	// allow_concurrent indicates whether or not runs of the job can be processed concurrently
 	AllowConcurrent bool `protobuf:"varint,1,opt,name=allow_concurrent,json=allowConcurrent,proto3" json:"allow_concurrent,omitempty"`
-	// Cron is the cron expression for the job
+	// cron is the cron expression for the job
 	Cron string `protobuf:"bytes,2,opt,name=cron,proto3" json:"cron,omitempty"`
 }
 
@@ -452,13 +452,13 @@ type Autoscaling struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// MinInstances is the minimum number of instances to run
+	// min_instances is the minimum number of instances to run
 	MinInstances int32 `protobuf:"varint,1,opt,name=min_instances,json=minInstances,proto3" json:"min_instances,omitempty"`
-	// MaxInstances is the maximum number of instances to run
+	// max_instances is the maximum number of instances to run
 	MaxInstances int32 `protobuf:"varint,2,opt,name=max_instances,json=maxInstances,proto3" json:"max_instances,omitempty"`
-	// CPUThresholdPercent is the CPU threshold percentage to trigger scaling
+	// cpu_threshold_percent is the CPU threshold percentage to trigger scaling
 	CpuThresholdPercent int32 `protobuf:"varint,3,opt,name=cpu_threshold_percent,json=cpuThresholdPercent,proto3" json:"cpu_threshold_percent,omitempty"`
-	// MemoryThresholdPercent is the memory threshold percentage to trigger scaling
+	// memory_threshold_percent is the memory threshold percentage to trigger scaling
 	MemoryThresholdPercent int32 `protobuf:"varint,4,opt,name=memory_threshold_percent,json=memoryThresholdPercent,proto3" json:"memory_threshold_percent,omitempty"`
 }
 
@@ -528,7 +528,7 @@ type HealthCheck struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// HTTPPath is the HTTP path to use for the health check
+	// http_path is the HTTP path to use for the health check
 	HttpPath string `protobuf:"bytes,1,opt,name=http_path,json=httpPath,proto3" json:"http_path,omitempty"`
 }
 

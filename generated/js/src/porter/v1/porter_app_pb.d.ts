@@ -14,42 +14,42 @@ import type { Service } from "./service_pb.js";
  */
 export declare class PorterApp extends Message<PorterApp> {
   /**
-   * Name is the name of the application
+   * name is the name of the application
    *
    * @generated from field: string name = 1;
    */
   name: string;
 
   /**
-   * Services is a map of service names to service configurations
+   * services is a map of service names to service configurations
    *
    * @generated from field: map<string, porter.v1.Service> services = 2;
    */
   services: { [key: string]: Service };
 
   /**
-   * Environ is a map of environment variable names to values
+   * env is a map of environment variable names to values
    *
    * @generated from field: map<string, string> env = 3;
    */
   env: { [key: string]: string };
 
   /**
-   * Build is the build settings for the application
+   * build is the build settings for the application
    *
    * @generated from field: porter.v1.Build build = 4;
    */
   build?: Build;
 
   /**
-   * Predeploy is a job service to run before deploying the application
+   * predeploy is a job service to run before deploying the application
    *
    * @generated from field: porter.v1.Service predeploy = 5;
    */
   predeploy?: Service;
 
   /**
-   * Image is the image to use for a given revision of the application
+   * image is the image to use for a given revision of the application
    *
    * @generated from field: porter.v1.AppImage image = 6;
    */
@@ -77,35 +77,35 @@ export declare class PorterApp extends Message<PorterApp> {
  */
 export declare class Build extends Message<Build> {
   /**
-   * Context is the path to the build context
+   * context is the path to the build context
    *
    * @generated from field: string context = 1;
    */
   context: string;
 
   /**
-   * Method is the build method to use, being one of "pack", "docker", or "registry"
+   * method is the build method to use, being one of "pack", "docker", or "registry"
    *
    * @generated from field: string method = 2;
    */
   method: string;
 
   /**
-   * Builder is the builder to use for the "pack" build method
+   * builder is the builder to use for the "pack" build method
    *
    * @generated from field: string builder = 3;
    */
   builder: string;
 
   /**
-   * Buildpacks is a list of buildpacks to use for the "pack" build method
+   * buildpacks is a list of buildpacks to use for the "pack" build method
    *
    * @generated from field: repeated string buildpacks = 4;
    */
   buildpacks: string[];
 
   /**
-   * Dockerfile is the path to the Dockerfile to use for the "docker" build method
+   * dockerfile is the path to the Dockerfile to use for the "docker" build method
    *
    * @generated from field: string dockerfile = 5;
    */
@@ -133,14 +133,14 @@ export declare class Build extends Message<Build> {
  */
 export declare class AppImage extends Message<AppImage> {
   /**
-   * Repository is the repository to use for the image
+   * repository is the repository to use for the image
    *
    * @generated from field: string repository = 1;
    */
   repository: string;
 
   /**
-   * Tag is the tag to use for the image
+   * tag is the tag to use for the image
    *
    * @generated from field: string tag = 2;
    */

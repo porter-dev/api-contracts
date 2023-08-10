@@ -6,7 +6,7 @@
 import { proto3 } from "@bufbuild/protobuf";
 
 /**
- * Service type is used to categorize services, being one of web, worker, or job
+ * ServiceType is used to categorize services, being one of web, worker, or job
  *
  * @generated from enum porter.v1.ServiceType
  */
