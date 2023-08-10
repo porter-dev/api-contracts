@@ -70,6 +70,12 @@ const (
 	// ClusterControlPlaneServiceListImagesForRepositoryProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's ListImagesForRepository RPC.
 	ClusterControlPlaneServiceListImagesForRepositoryProcedure = "/porter.v1.ClusterControlPlaneService/ListImagesForRepository"
+	// ClusterControlPlaneServiceValidatePorterAppProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's ValidatePorterApp RPC.
+	ClusterControlPlaneServiceValidatePorterAppProcedure = "/porter.v1.ClusterControlPlaneService/ValidatePorterApp"
+	// ClusterControlPlaneServiceApplyPorterAppProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's ApplyPorterApp RPC.
+	ClusterControlPlaneServiceApplyPorterAppProcedure = "/porter.v1.ClusterControlPlaneService/ApplyPorterApp"
 	// ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DockerConfigFileForRegistry RPC.
 	ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure = "/porter.v1.ClusterControlPlaneService/DockerConfigFileForRegistry"
@@ -122,6 +128,10 @@ type ClusterControlPlaneServiceClient interface {
 	ListRepositoriesForRegistry(context.Context, *connect.Request[v1.ListRepositoriesForRegistryRequest]) (*connect.Response[v1.ListRepositoriesForRegistryResponse], error)
 	// ListImagesForRepository lists the repositories for a given registry, provided it is in the scope of the project id
 	ListImagesForRepository(context.Context, *connect.Request[v1.ListImagesForRepositoryRequest]) (*connect.Response[v1.ListImagesForRepositoryResponse], error)
+	// ValidatePorterApp validates and hydrates a definition of a porter app, based on the porter.yaml file
+	ValidatePorterApp(context.Context, *connect.Request[v1.ValidatePorterAppRequest]) (*connect.Response[v1.ValidatePorterAppResponse], error)
+	// ApplyPorterApp applies a porter app as defined by the provided porter.yaml file to a given deployment id
+	ApplyPorterApp(context.Context, *connect.Request[v1.ApplyPorterAppRequest]) (*connect.Response[v1.ApplyPorterAppResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -225,6 +235,16 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceListImagesForRepositoryProcedure,
 			opts...,
 		),
+		validatePorterApp: connect.NewClient[v1.ValidatePorterAppRequest, v1.ValidatePorterAppResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceValidatePorterAppProcedure,
+			opts...,
+		),
+		applyPorterApp: connect.NewClient[v1.ApplyPorterAppRequest, v1.ApplyPorterAppResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceApplyPorterAppProcedure,
+			opts...,
+		),
 		dockerConfigFileForRegistry: connect.NewClient[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
@@ -272,6 +292,8 @@ type clusterControlPlaneServiceClient struct {
 	tokenForRegistry               *connect.Client[v1.TokenForRegistryRequest, v1.TokenForRegistryResponse]
 	listRepositoriesForRegistry    *connect.Client[v1.ListRepositoriesForRegistryRequest, v1.ListRepositoriesForRegistryResponse]
 	listImagesForRepository        *connect.Client[v1.ListImagesForRepositoryRequest, v1.ListImagesForRepositoryResponse]
+	validatePorterApp              *connect.Client[v1.ValidatePorterAppRequest, v1.ValidatePorterAppResponse]
+	applyPorterApp                 *connect.Client[v1.ApplyPorterAppRequest, v1.ApplyPorterAppResponse]
 	dockerConfigFileForRegistry    *connect.Client[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse]
 	eCRTokenForRegistry            *connect.Client[v1.ECRTokenForRegistryRequest, v1.ECRTokenForRegistryResponse]
 	assumeRoleCredentials          *connect.Client[v1.AssumeRoleCredentialsRequest, v1.AssumeRoleCredentialsResponse]
@@ -344,6 +366,16 @@ func (c *clusterControlPlaneServiceClient) ListRepositoriesForRegistry(ctx conte
 // ListImagesForRepository calls porter.v1.ClusterControlPlaneService.ListImagesForRepository.
 func (c *clusterControlPlaneServiceClient) ListImagesForRepository(ctx context.Context, req *connect.Request[v1.ListImagesForRepositoryRequest]) (*connect.Response[v1.ListImagesForRepositoryResponse], error) {
 	return c.listImagesForRepository.CallUnary(ctx, req)
+}
+
+// ValidatePorterApp calls porter.v1.ClusterControlPlaneService.ValidatePorterApp.
+func (c *clusterControlPlaneServiceClient) ValidatePorterApp(ctx context.Context, req *connect.Request[v1.ValidatePorterAppRequest]) (*connect.Response[v1.ValidatePorterAppResponse], error) {
+	return c.validatePorterApp.CallUnary(ctx, req)
+}
+
+// ApplyPorterApp calls porter.v1.ClusterControlPlaneService.ApplyPorterApp.
+func (c *clusterControlPlaneServiceClient) ApplyPorterApp(ctx context.Context, req *connect.Request[v1.ApplyPorterAppRequest]) (*connect.Response[v1.ApplyPorterAppResponse], error) {
+	return c.applyPorterApp.CallUnary(ctx, req)
 }
 
 // DockerConfigFileForRegistry calls
@@ -421,6 +453,10 @@ type ClusterControlPlaneServiceHandler interface {
 	ListRepositoriesForRegistry(context.Context, *connect.Request[v1.ListRepositoriesForRegistryRequest]) (*connect.Response[v1.ListRepositoriesForRegistryResponse], error)
 	// ListImagesForRepository lists the repositories for a given registry, provided it is in the scope of the project id
 	ListImagesForRepository(context.Context, *connect.Request[v1.ListImagesForRepositoryRequest]) (*connect.Response[v1.ListImagesForRepositoryResponse], error)
+	// ValidatePorterApp validates and hydrates a definition of a porter app, based on the porter.yaml file
+	ValidatePorterApp(context.Context, *connect.Request[v1.ValidatePorterAppRequest]) (*connect.Response[v1.ValidatePorterAppResponse], error)
+	// ApplyPorterApp applies a porter app as defined by the provided porter.yaml file to a given deployment id
+	ApplyPorterApp(context.Context, *connect.Request[v1.ApplyPorterAppRequest]) (*connect.Response[v1.ApplyPorterAppResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -520,6 +556,16 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.ListImagesForRepository,
 		opts...,
 	)
+	clusterControlPlaneServiceValidatePorterAppHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceValidatePorterAppProcedure,
+		svc.ValidatePorterApp,
+		opts...,
+	)
+	clusterControlPlaneServiceApplyPorterAppHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceApplyPorterAppProcedure,
+		svc.ApplyPorterApp,
+		opts...,
+	)
 	clusterControlPlaneServiceDockerConfigFileForRegistryHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
 		svc.DockerConfigFileForRegistry,
@@ -576,6 +622,10 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceListRepositoriesForRegistryHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceListImagesForRepositoryProcedure:
 			clusterControlPlaneServiceListImagesForRepositoryHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceValidatePorterAppProcedure:
+			clusterControlPlaneServiceValidatePorterAppHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceApplyPorterAppProcedure:
+			clusterControlPlaneServiceApplyPorterAppHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure:
 			clusterControlPlaneServiceDockerConfigFileForRegistryHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceECRTokenForRegistryProcedure:
@@ -643,6 +693,14 @@ func (UnimplementedClusterControlPlaneServiceHandler) ListRepositoriesForRegistr
 
 func (UnimplementedClusterControlPlaneServiceHandler) ListImagesForRepository(context.Context, *connect.Request[v1.ListImagesForRepositoryRequest]) (*connect.Response[v1.ListImagesForRepositoryResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ListImagesForRepository is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) ValidatePorterApp(context.Context, *connect.Request[v1.ValidatePorterAppRequest]) (*connect.Response[v1.ValidatePorterAppResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ValidatePorterApp is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) ApplyPorterApp(context.Context, *connect.Request[v1.ApplyPorterAppRequest]) (*connect.Response[v1.ApplyPorterAppResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ApplyPorterApp is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) DockerConfigFileForRegistry(context.Context, *connect.Request[v1.DockerConfigFileForRegistryRequest]) (*connect.Response[v1.DockerConfigFileForRegistryResponse], error) {
