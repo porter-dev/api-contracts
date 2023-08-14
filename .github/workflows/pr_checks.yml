@@ -15,5 +15,6 @@ jobs:
         uses: arduino/setup-task@v1
       - name: Lint
         run: task lint
-      - name: Breaking change detector
-        run: task breaking
+      - uses: bufbuild/buf-breaking-action@v1
+        with:
+          against: "https://github.com/porter-dev/api-contracts.git#branch=main"
