@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package porter.v1;
+
+// ServiceType is used to categorize services, being one of web, worker, or job
+enum ServiceType {
+  SERVICE_TYPE_UNSPECIFIED = 0;
+  SERVICE_TYPE_WEB = 1;
+  SERVICE_TYPE_WORKER = 2;
+  SERVICE_TYPE_JOB = 3;
+}
+
+// Service is the top-level configuration for a service
+message Service {
+  // run is the command to start the service
+  string run = 1;
+  // instances is the number of instances, or replicas, to run
+  int32 instances = 2;
+  // port is the port the service listens on
+  int32 port = 3;
+  // cpu_cores is the number of CPU cores to allocate to the service
+  float cpu_cores = 4;
+  // ram_megabytes is the amount of memory to allocate to the service
+  int32 ram_megabytes = 5;
+  // config is the service-specific configuration
+  oneof config {
+    WebServiceConfig web_config = 6;
+    WorkerServiceConfig worker_config = 7;
+    JobServiceConfig job_config = 8;
+  }
+  // type is the type of service
+  ServiceType type = 9;
+}
+
+// WebServiceConfig is the configuration for a web service
+message WebServiceConfig {
+  // autoscaling is the autoscaling configuration
+  Autoscaling autoscaling = 1;
+  // domains is the list of custom domains for this service
+  repeated Domain domains = 2;
+  // health_check is the health check configuration, used for liveness and readiness probes
+  HealthCheck health_check = 3;
+}
+
+// WorkerServiceConfig is the configuration for a worker service
+message WorkerServiceConfig {
+  Autoscaling autoscaling = 1;
+}
+
+// JobServiceConfig is the configuration for a job service
+message JobServiceConfig {
+  // allow_concurrent indicates whether or not runs of the job can be processed concurrently
+  bool allow_concurrent = 1;
+  // cron is the cron expression for the job
+  string cron = 2;
+}
+
+// Domain is the configuration for a custom domain for a web service
+message Domain {
+  string name = 1;
+}
+
+// Autoscaling is the autoscaling configuration
+message Autoscaling {
+  // min_instances is the minimum number of instances to run
+  int32 min_instances = 1;
+  // max_instances is the maximum number of instances to run
+  int32 max_instances = 2;
+  // cpu_threshold_percent is the CPU threshold percentage to trigger scaling
+  int32 cpu_threshold_percent = 3;
+  // memory_threshold_percent is the memory threshold percentage to trigger scaling
+  int32 memory_threshold_percent = 4;
+}
+
+// HealthCheck is the health check configuration
+message HealthCheck {
+  // http_path is the HTTP path to use for the health check
+  string http_path = 1;
+}

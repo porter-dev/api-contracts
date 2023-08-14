@@ -6,6 +6,7 @@ import "google/protobuf/timestamp.proto";
 import "porter/v1/aws_assume_role.proto";
 import "porter/v1/cloud_provider_credentials.proto";
 import "porter/v1/contract.proto";
+import "porter/v1/porter_app.proto";
 
 message QuotaPreflightCheckRequest {
   int64 project_id = 1;
@@ -137,6 +138,43 @@ message ReadContractResponse {
   string base64_contract = 1;
 }
 
+message ValidatePorterAppRequest {
+  int64 project_id = 1;
+  string deployment_target_id = 2;
+  string commit_sha = 3;
+  PorterApp application = 4;
+}
+
+message ValidatePorterAppResponse {
+  PorterApp application = 1;
+}
+
+message ApplyPorterAppRequest {
+  int64 project_id = 1;
+  // deployment_target_id is the id of the deployment target where the application will be installed
+  string deployment_target_id = 2;
+  // application is the definition of the PorterApp to be applied
+  PorterApp application = 3;
+  // porter_app_revision_id is the id of the PorterAppRevision to be applied.  This is used by the CLI to provide updates to an existing application revision. If provided, application must be empty.
+  string porter_app_revision_id = 4;
+}
+
+message ApplyPorterAppResponse {
+  string porter_app_revision_id = 1;
+  // cli_action is the action that the CLI should take after applying the PorterApp (at the time of writing, either build the image or track whether a predeploy job has completed)
+  EnumCLIAction cli_action = 2;
+}
+
+enum EnumCLIAction {
+  ENUM_CLI_ACTION_UNSPECIFIED = 0;
+  // ENUM_CLI_ACTION_NONE signals the CLI to do nothing after applying the PorterApp.
+  ENUM_CLI_ACTION_NONE = 1;
+  // ENUM_CLI_ACTION_BUILD signals the CLI to build the image and call ApplyPorterApp again after a successful build.
+  ENUM_CLI_ACTION_BUILD = 2;
+  // ENUM_CLI_ACTION_TRACK_PREDEPLOY signals the CLI to track the progress of the predeploy job and call ApplyPorterApp again after a successful run.
+  ENUM_CLI_ACTION_TRACK_PREDEPLOY = 3;
+}
+
 service ClusterControlPlaneService {
   // UpdateCloudProviderCredentials creates or updates the credentials used for accessing the specific cloud
   rpc UpdateCloudProviderCredentials(UpdateCloudProviderCredentialsRequest) returns (UpdateCloudProviderCredentialsResponse) {}
@@ -178,6 +216,12 @@ service ClusterControlPlaneService {
 
   // ListImagesForRepository lists the repositories for a given registry, provided it is in the scope of the project id
   rpc ListImagesForRepository(ListImagesForRepositoryRequest) returns (ListImagesForRepositoryResponse) {}
+
+  // ValidatePorterApp validates and hydrates a definition of a porter app, based on the porter.yaml file
+  rpc ValidatePorterApp(ValidatePorterAppRequest) returns (ValidatePorterAppResponse) {}
+
+  // ApplyPorterApp applies a porter app as defined by the provided porter.yaml file to a given deployment id
+  rpc ApplyPorterApp(ApplyPorterAppRequest) returns (ApplyPorterAppResponse) {}
 
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
   // Deprecated. Use TokenForRegistry instead.
