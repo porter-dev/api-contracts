@@ -8,6 +8,7 @@ jobs:
     name: Tests and Linter
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Setup Buf
         uses: bufbuild/buf-setup-action@v1
       - name: Setup Task
