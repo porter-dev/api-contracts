@@ -42,22 +42,6 @@ tasks:
     cmds:
     - cmd: buf format -w
       ignore_error: false
-
-  release:
-    desc: "Create and tag a release. Usage: `task release -- v0.0.0` where v0.0.0 is your desired tag"
-    cmds:
-    - cmd: if [ -z "{{.CLI_ARGS}}" ]; then echo "missing version"; exit 1; fi
-      ignore_error: false
-    - task: all
-      ignore_error: false
-    - cmd: cd generated/js; npm version {{.CLI_ARGS}}; cd ../..
-      ignore_error: false
-    - cmd: git add .; git commit -m "Releasing {{.CLI_ARGS}}"
-      ignore_error: false
-    - cmd: git tag {{.CLI_ARGS}}
-      ignore_error: false
-    - cmd: git push origin main --tags
-      ignore_error: false
   
   install-tools:
     desc: Install commonly used tools for gRPC

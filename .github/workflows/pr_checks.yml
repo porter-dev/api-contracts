@@ -1,0 +1,16 @@
+name: Format, Lint, Test
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  golangci:
+    name: Tests and Linter
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Buf
+        uses: bufbuild/buf-setup-action@v1
+      - name: Setup Task
+        uses: arduino/setup-task@v1
+      - name: Run Buf Checks
+        run: task all

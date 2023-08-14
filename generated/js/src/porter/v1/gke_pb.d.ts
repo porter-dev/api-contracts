@@ -51,9 +51,9 @@ export declare class GKE extends Message<GKE> {
   clusterVersion: string;
 
   /**
-   * @generated from field: string cidr_range = 3;
+   * @generated from field: porter.v1.GKENetwork network = 3;
    */
-  cidrRange: string;
+  network?: GKENetwork;
 
   /**
    * @generated from field: string region = 4;
@@ -119,5 +119,54 @@ export declare class GKENodePool extends Message<GKENodePool> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GKENodePool;
 
   static equals(a: GKENodePool | PlainMessage<GKENodePool> | undefined, b: GKENodePool | PlainMessage<GKENodePool> | undefined): boolean;
+}
+
+/**
+ * GKENetwork contains all information required to configure the GKE cluster's network
+ *
+ * @generated from message porter.v1.GKENetwork
+ */
+export declare class GKENetwork extends Message<GKENetwork> {
+  /**
+   * cidr_range is the range of the network. This is used to specify the network that Porter will use.
+   *
+   * @generated from field: string cidr_range = 1;
+   */
+  cidrRange: string;
+
+  /**
+   * control_plane_cidr is a range reserved by GKE for control plane functions such as running a global load balancer.
+   *
+   * @generated from field: string control_plane_cidr = 2;
+   */
+  controlPlaneCidr: string;
+
+  /**
+   * pod_cidr is the range of the network that pods will be assigned IPs from, on the GCP subnet.
+   *
+   * @generated from field: string pod_cidr = 3;
+   */
+  podCidr: string;
+
+  /**
+   * service_cidr is the range of the network that services will be assigned IPs from, on the GCP subnet.
+   *
+   * @generated from field: string service_cidr = 4;
+   */
+  serviceCidr: string;
+
+  constructor(data?: PartialMessage<GKENetwork>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.GKENetwork";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GKENetwork;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GKENetwork;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GKENetwork;
+
+  static equals(a: GKENetwork | PlainMessage<GKENetwork> | undefined, b: GKENetwork | PlainMessage<GKENetwork> | undefined): boolean;
 }
 
