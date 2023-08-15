@@ -62,18 +62,22 @@ message Domain {
 
 // Autoscaling is the autoscaling configuration
 message Autoscaling {
+  // enabled explicitly enables or disables autoscaling
+  bool enabled = 1;
   // min_instances is the minimum number of instances to run
-  int32 min_instances = 1;
+  int32 min_instances = 2;
   // max_instances is the maximum number of instances to run
-  int32 max_instances = 2;
+  int32 max_instances = 3;
   // cpu_threshold_percent is the CPU threshold percentage to trigger scaling
-  int32 cpu_threshold_percent = 3;
+  int32 cpu_threshold_percent = 4;
   // memory_threshold_percent is the memory threshold percentage to trigger scaling
-  int32 memory_threshold_percent = 4;
+  int32 memory_threshold_percent = 5;
 }
 
 // HealthCheck is the health check configuration
 message HealthCheck {
+  // enabled explicitly enables or disables health checks
+  bool enabled = 1;
   // http_path is the HTTP path to use for the health check
-  string http_path = 1;
+  string http_path = 2;
 }
