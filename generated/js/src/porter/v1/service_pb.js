@@ -99,10 +99,11 @@ export const Domain = proto3.makeMessageType(
 export const Autoscaling = proto3.makeMessageType(
   "porter.v1.Autoscaling",
   () => [
-    { no: 1, name: "min_instances", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 2, name: "max_instances", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 3, name: "cpu_threshold_percent", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 4, name: "memory_threshold_percent", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 2, name: "min_instances", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 3, name: "max_instances", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 4, name: "cpu_threshold_percent", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 5, name: "memory_threshold_percent", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
   ],
 );
 
@@ -114,7 +115,8 @@ export const Autoscaling = proto3.makeMessageType(
 export const HealthCheck = proto3.makeMessageType(
   "porter.v1.HealthCheck",
   () => [
-    { no: 1, name: "http_path", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 2, name: "http_path", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
