@@ -780,9 +780,9 @@ export declare class ValidatePorterAppRequest extends Message<ValidatePorterAppR
   commitSha: string;
 
   /**
-   * @generated from field: porter.v1.PorterApp application = 4;
+   * @generated from field: porter.v1.PorterApp app = 4;
    */
-  application?: PorterApp;
+  app?: PorterApp;
 
   constructor(data?: PartialMessage<ValidatePorterAppRequest>);
 
@@ -804,9 +804,9 @@ export declare class ValidatePorterAppRequest extends Message<ValidatePorterAppR
  */
 export declare class ValidatePorterAppResponse extends Message<ValidatePorterAppResponse> {
   /**
-   * @generated from field: porter.v1.PorterApp application = 1;
+   * @generated from field: porter.v1.PorterApp app = 1;
    */
-  application?: PorterApp;
+  app?: PorterApp;
 
   constructor(data?: PartialMessage<ValidatePorterAppResponse>);
 
@@ -833,21 +833,21 @@ export declare class ApplyPorterAppRequest extends Message<ApplyPorterAppRequest
   projectId: bigint;
 
   /**
-   * deployment_target_id is the id of the deployment target where the application will be installed
+   * deployment_target_id is the id of the deployment target where the app will be installed
    *
    * @generated from field: string deployment_target_id = 2;
    */
   deploymentTargetId: string;
 
   /**
-   * application is the definition of the PorterApp to be applied
+   * app is the definition of the PorterApp to be applied
    *
-   * @generated from field: porter.v1.PorterApp application = 3;
+   * @generated from field: porter.v1.PorterApp app = 3;
    */
-  application?: PorterApp;
+  app?: PorterApp;
 
   /**
-   * porter_app_revision_id is the id of the PorterAppRevision to be applied.  This is used by the CLI to provide updates to an existing application revision. If provided, application must be empty.
+   * porter_app_revision_id is the id of the PorterAppRevision to be applied.  This is used by the CLI to provide updates to an existing app revision. If provided, app must be empty.
    *
    * @generated from field: string porter_app_revision_id = 4;
    */
