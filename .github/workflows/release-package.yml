@@ -29,7 +29,11 @@ jobs:
         with:
           node-version: 18
           registry-url: https://registry.npmjs.org
-      - run: npm ci
+      - name: NPM clean install
+        run: npm ci
+        working-directory: ./generated/js
+      - name: Update NPM version to tag
+        run: npm version ${{github.ref_name}}
         working-directory: ./generated/js
       - name: Publish package on NPM 📦
         working-directory: ./generated/js
