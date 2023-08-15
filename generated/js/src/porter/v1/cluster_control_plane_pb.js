@@ -301,7 +301,7 @@ export const ValidatePorterAppRequest = proto3.makeMessageType(
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 2, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "commit_sha", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "application", kind: "message", T: PorterApp },
+    { no: 4, name: "app", kind: "message", T: PorterApp },
   ],
 );
 
@@ -311,7 +311,7 @@ export const ValidatePorterAppRequest = proto3.makeMessageType(
 export const ValidatePorterAppResponse = proto3.makeMessageType(
   "porter.v1.ValidatePorterAppResponse",
   () => [
-    { no: 1, name: "application", kind: "message", T: PorterApp },
+    { no: 1, name: "app", kind: "message", T: PorterApp },
   ],
 );
 
@@ -323,7 +323,7 @@ export const ApplyPorterAppRequest = proto3.makeMessageType(
   () => [
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 2, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "application", kind: "message", T: PorterApp },
+    { no: 3, name: "app", kind: "message", T: PorterApp },
     { no: 4, name: "porter_app_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
