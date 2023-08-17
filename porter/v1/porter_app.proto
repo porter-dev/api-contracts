@@ -32,6 +32,8 @@ message Build {
   repeated string buildpacks = 4;
   // dockerfile is the path to the Dockerfile to use for the "docker" build method
   string dockerfile = 5;
+  // commit_sha is the commit SHA at which to build the application
+  string commit_sha = 6;
 }
 
 // AppImage is the image to use for a given revision of the application
