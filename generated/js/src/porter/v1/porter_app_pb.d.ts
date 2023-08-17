@@ -111,6 +111,13 @@ export declare class Build extends Message<Build> {
    */
   dockerfile: string;
 
+  /**
+   * commit_sha is the commit SHA at which to build the application
+   *
+   * @generated from field: string commit_sha = 6;
+   */
+  commitSha: string;
+
   constructor(data?: PartialMessage<Build>);
 
   static readonly runtime: typeof proto3;
