@@ -40,6 +40,9 @@ const (
 	// ClusterControlPlaneServiceQuotaPreflightCheckProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's QuotaPreflightCheck RPC.
 	ClusterControlPlaneServiceQuotaPreflightCheckProcedure = "/porter.v1.ClusterControlPlaneService/QuotaPreflightCheck"
+	// ClusterControlPlaneServicePreflightCheckProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's PreflightCheck RPC.
+	ClusterControlPlaneServicePreflightCheckProcedure = "/porter.v1.ClusterControlPlaneService/PreflightCheck"
 	// ClusterControlPlaneServiceCreateAssumeRoleChainProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's CreateAssumeRoleChain RPC.
 	ClusterControlPlaneServiceCreateAssumeRoleChainProcedure = "/porter.v1.ClusterControlPlaneService/CreateAssumeRoleChain"
@@ -102,7 +105,11 @@ type ClusterControlPlaneServiceClient interface {
 	// UpdateCloudProviderCredentials creates or updates the credentials used for accessing the specific cloud
 	UpdateCloudProviderCredentials(context.Context, *connect.Request[v1.UpdateCloudProviderCredentialsRequest]) (*connect.Response[v1.UpdateCloudProviderCredentialsResponse], error)
 	// QuotaPreflightCheck checks if the target account and region has sufficient resources (EIP addresses and VPCs) to provision a new cluster
+	//
+	// Deprecated: do not use.
 	QuotaPreflightCheck(context.Context, *connect.Request[v1.QuotaPreflightCheckRequest]) (*connect.Response[v1.QuotaPreflightCheckResponse], error)
+	// PreflightCheck checks if the target account is able to provision a cluster
+	PreflightCheck(context.Context, *connect.Request[v1.PreflightCheckRequest]) (*connect.Response[v1.PreflightCheckResponse], error)
 	// CreateAssumeRoleChain creates a new assume role chain for a given project and checks if the target assumed role has sufficient permissions. Use UpdateCloudProviderCredentials instead.
 	//
 	// Deprecated: do not use.
@@ -183,6 +190,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 		quotaPreflightCheck: connect.NewClient[v1.QuotaPreflightCheckRequest, v1.QuotaPreflightCheckResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceQuotaPreflightCheckProcedure,
+			opts...,
+		),
+		preflightCheck: connect.NewClient[v1.PreflightCheckRequest, v1.PreflightCheckResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServicePreflightCheckProcedure,
 			opts...,
 		),
 		createAssumeRoleChain: connect.NewClient[v1.CreateAssumeRoleChainRequest, v1.CreateAssumeRoleChainResponse](
@@ -282,6 +294,7 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 type clusterControlPlaneServiceClient struct {
 	updateCloudProviderCredentials *connect.Client[v1.UpdateCloudProviderCredentialsRequest, v1.UpdateCloudProviderCredentialsResponse]
 	quotaPreflightCheck            *connect.Client[v1.QuotaPreflightCheckRequest, v1.QuotaPreflightCheckResponse]
+	preflightCheck                 *connect.Client[v1.PreflightCheckRequest, v1.PreflightCheckResponse]
 	createAssumeRoleChain          *connect.Client[v1.CreateAssumeRoleChainRequest, v1.CreateAssumeRoleChainResponse]
 	saveAzureCredentials           *connect.Client[v1.SaveAzureCredentialsRequest, v1.SaveAzureCredentialsResponse]
 	kubeConfigForCluster           *connect.Client[v1.KubeConfigForClusterRequest, v1.KubeConfigForClusterResponse]
@@ -309,8 +322,15 @@ func (c *clusterControlPlaneServiceClient) UpdateCloudProviderCredentials(ctx co
 }
 
 // QuotaPreflightCheck calls porter.v1.ClusterControlPlaneService.QuotaPreflightCheck.
+//
+// Deprecated: do not use.
 func (c *clusterControlPlaneServiceClient) QuotaPreflightCheck(ctx context.Context, req *connect.Request[v1.QuotaPreflightCheckRequest]) (*connect.Response[v1.QuotaPreflightCheckResponse], error) {
 	return c.quotaPreflightCheck.CallUnary(ctx, req)
+}
+
+// PreflightCheck calls porter.v1.ClusterControlPlaneService.PreflightCheck.
+func (c *clusterControlPlaneServiceClient) PreflightCheck(ctx context.Context, req *connect.Request[v1.PreflightCheckRequest]) (*connect.Response[v1.PreflightCheckResponse], error) {
+	return c.preflightCheck.CallUnary(ctx, req)
 }
 
 // CreateAssumeRoleChain calls porter.v1.ClusterControlPlaneService.CreateAssumeRoleChain.
@@ -427,7 +447,11 @@ type ClusterControlPlaneServiceHandler interface {
 	// UpdateCloudProviderCredentials creates or updates the credentials used for accessing the specific cloud
 	UpdateCloudProviderCredentials(context.Context, *connect.Request[v1.UpdateCloudProviderCredentialsRequest]) (*connect.Response[v1.UpdateCloudProviderCredentialsResponse], error)
 	// QuotaPreflightCheck checks if the target account and region has sufficient resources (EIP addresses and VPCs) to provision a new cluster
+	//
+	// Deprecated: do not use.
 	QuotaPreflightCheck(context.Context, *connect.Request[v1.QuotaPreflightCheckRequest]) (*connect.Response[v1.QuotaPreflightCheckResponse], error)
+	// PreflightCheck checks if the target account is able to provision a cluster
+	PreflightCheck(context.Context, *connect.Request[v1.PreflightCheckRequest]) (*connect.Response[v1.PreflightCheckResponse], error)
 	// CreateAssumeRoleChain creates a new assume role chain for a given project and checks if the target assumed role has sufficient permissions. Use UpdateCloudProviderCredentials instead.
 	//
 	// Deprecated: do not use.
@@ -504,6 +528,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 	clusterControlPlaneServiceQuotaPreflightCheckHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceQuotaPreflightCheckProcedure,
 		svc.QuotaPreflightCheck,
+		opts...,
+	)
+	clusterControlPlaneServicePreflightCheckHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServicePreflightCheckProcedure,
+		svc.PreflightCheck,
 		opts...,
 	)
 	clusterControlPlaneServiceCreateAssumeRoleChainHandler := connect.NewUnaryHandler(
@@ -602,6 +631,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceUpdateCloudProviderCredentialsHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceQuotaPreflightCheckProcedure:
 			clusterControlPlaneServiceQuotaPreflightCheckHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServicePreflightCheckProcedure:
+			clusterControlPlaneServicePreflightCheckHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceCreateAssumeRoleChainProcedure:
 			clusterControlPlaneServiceCreateAssumeRoleChainHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceSaveAzureCredentialsProcedure:
@@ -653,6 +684,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) UpdateCloudProviderCredent
 
 func (UnimplementedClusterControlPlaneServiceHandler) QuotaPreflightCheck(context.Context, *connect.Request[v1.QuotaPreflightCheckRequest]) (*connect.Response[v1.QuotaPreflightCheckResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.QuotaPreflightCheck is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) PreflightCheck(context.Context, *connect.Request[v1.PreflightCheckRequest]) (*connect.Response[v1.PreflightCheckResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.PreflightCheck is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) CreateAssumeRoleChain(context.Context, *connect.Request[v1.CreateAssumeRoleChainRequest]) (*connect.Response[v1.CreateAssumeRoleChainResponse], error) {

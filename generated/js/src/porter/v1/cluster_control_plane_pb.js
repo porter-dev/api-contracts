@@ -4,6 +4,8 @@
 // @ts-nocheck
 
 import { proto3, Timestamp } from "@bufbuild/protobuf";
+import { EnumCloudProvider } from "./cluster_pb.js";
+import { Error } from "./errors_pb.js";
 import { Contract, ContractRevision } from "./contract_pb.js";
 import { PorterApp } from "./porter_app_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
@@ -22,7 +24,30 @@ export const EnumCLIAction = proto3.makeEnum(
 );
 
 /**
+ * @generated from message porter.v1.PreflightCheckRequest
+ */
+export const PreflightCheckRequest = proto3.makeMessageType(
+  "porter.v1.PreflightCheckRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cloud_provider", kind: "enum", T: proto3.getEnumType(EnumCloudProvider) },
+    { no: 3, name: "cloud_provider_credentials_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.PreflightCheckResponse
+ */
+export const PreflightCheckResponse = proto3.makeMessageType(
+  "porter.v1.PreflightCheckResponse",
+  () => [
+    { no: 1, name: "error", kind: "message", T: Error },
+  ],
+);
+
+/**
  * @generated from message porter.v1.QuotaPreflightCheckRequest
+ * @deprecated
  */
 export const QuotaPreflightCheckRequest = proto3.makeMessageType(
   "porter.v1.QuotaPreflightCheckRequest",
@@ -36,6 +61,7 @@ export const QuotaPreflightCheckRequest = proto3.makeMessageType(
 
 /**
  * @generated from message porter.v1.QuotaPreflightCheckResponse
+ * @deprecated
  */
 export const QuotaPreflightCheckResponse = proto3.makeMessageType(
   "porter.v1.QuotaPreflightCheckResponse",

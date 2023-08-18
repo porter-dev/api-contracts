@@ -7,15 +7,35 @@ import "porter/v1/aws_assume_role.proto";
 import "porter/v1/cloud_provider_credentials.proto";
 import "porter/v1/contract.proto";
 import "porter/v1/porter_app.proto";
+import "porter/v1/cluster.proto";
+import "porter/v1/errors.proto";
+
+message PreflightCheckRequest {
+  int64 project_id = 1;
+  // cloud_provider [REQUIRED] represents the provider that we will provisioning the cluster in
+  EnumCloudProvider cloud_provider = 2;
+  // cloud_provider_credentials_id [REQUIRED] is the Porter credentials that will be used for provisioning a cluster.
+  // These must be stored within Porter, prior to cluster creation. For AWS this refers to the last link in an assume role chain
+  string cloud_provider_credentials_id = 3;
+}
+
+message PreflightCheckResponse {
+
+  Error error = 1 ; 
+}
+
 
 message QuotaPreflightCheckRequest {
+  option deprecated = true;
   int64 project_id = 1;
   string target_arn = 2;
   string external_id = 3;
   string region = 4;
 }
 
-message QuotaPreflightCheckResponse {}
+message QuotaPreflightCheckResponse {
+    option deprecated = true;
+}
 
 message CreateAssumeRoleChainRequest {
   option deprecated = true;
@@ -180,7 +200,13 @@ service ClusterControlPlaneService {
   rpc UpdateCloudProviderCredentials(UpdateCloudProviderCredentialsRequest) returns (UpdateCloudProviderCredentialsResponse) {}
 
   // QuotaPreflightCheck checks if the target account and region has sufficient resources (EIP addresses and VPCs) to provision a new cluster
-  rpc QuotaPreflightCheck(QuotaPreflightCheckRequest) returns (QuotaPreflightCheckResponse) {}
+  rpc QuotaPreflightCheck(QuotaPreflightCheckRequest) returns (QuotaPreflightCheckResponse) {
+    option deprecated = true;
+  }
+
+  // PreflightCheck checks if the target account is able to provision a cluster
+  rpc PreflightCheck(PreflightCheckRequest) returns (PreflightCheckResponse) {}
+
 
   // CreateAssumeRoleChain creates a new assume role chain for a given project and checks if the target assumed role has sufficient permissions. Use UpdateCloudProviderCredentials instead.
   rpc CreateAssumeRoleChain(CreateAssumeRoleChainRequest) returns (CreateAssumeRoleChainResponse) {
