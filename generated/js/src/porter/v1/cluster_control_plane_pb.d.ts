@@ -86,9 +86,11 @@ export declare class PreflightCheckRequest extends Message<PreflightCheckRequest
  */
 export declare class PreflightCheckResponse extends Message<PreflightCheckResponse> {
   /**
-   * @generated from field: repeated porter.v1.Error error = 1;
+   * preflight_checks keys are name of preflight check and error will be if the preflight checks fails, nil if it passes
+   *
+   * @generated from field: map<string, porter.v1.Error> preflight_checks = 1;
    */
-  error: Error[];
+  preflightChecks: { [key: string]: Error };
 
   constructor(data?: PartialMessage<PreflightCheckResponse>);
 

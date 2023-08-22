@@ -21,7 +21,8 @@ message PreflightCheckRequest {
 
 message PreflightCheckResponse {
 
-  repeated Error error = 1;
+  // preflight_checks keys are name of preflight check and error will be if the preflight checks fails, nil if it passes
+  map<string, Error> preflight_checks = 1;
 }
 
 
