@@ -21,7 +21,7 @@ message PreflightCheckRequest {
 
 message PreflightCheckResponse {
 
-  Error error = 1 ; 
+  repeated Error error = 1;
 }
 
 

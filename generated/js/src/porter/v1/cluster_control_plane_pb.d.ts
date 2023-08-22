@@ -86,9 +86,9 @@ export declare class PreflightCheckRequest extends Message<PreflightCheckRequest
  */
 export declare class PreflightCheckResponse extends Message<PreflightCheckResponse> {
   /**
-   * @generated from field: porter.v1.Error error = 1;
+   * @generated from field: repeated porter.v1.Error error = 1;
    */
-  error?: Error;
+  error: Error[];
 
   constructor(data?: PartialMessage<PreflightCheckResponse>);
 
