@@ -900,6 +900,70 @@ export declare class ApplyPorterAppResponse extends Message<ApplyPorterAppRespon
 }
 
 /**
+ * @generated from message porter.v1.CurrentAppRevisionRequest
+ */
+export declare class CurrentAppRevisionRequest extends Message<CurrentAppRevisionRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * porter_app_id is the id of the PorterApp that is currently installed
+   *
+   * @generated from field: int64 porter_app_id = 2;
+   */
+  porterAppId: bigint;
+
+  /**
+   * deployment_target_id is the id of the deployment target where the app is installed
+   *
+   * @generated from field: string deployment_target_id = 3;
+   */
+  deploymentTargetId: string;
+
+  constructor(data?: PartialMessage<CurrentAppRevisionRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CurrentAppRevisionRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CurrentAppRevisionRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CurrentAppRevisionRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CurrentAppRevisionRequest;
+
+  static equals(a: CurrentAppRevisionRequest | PlainMessage<CurrentAppRevisionRequest> | undefined, b: CurrentAppRevisionRequest | PlainMessage<CurrentAppRevisionRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.CurrentAppRevisionResponse
+ */
+export declare class CurrentAppRevisionResponse extends Message<CurrentAppRevisionResponse> {
+  /**
+   * app is the definition of the PorterApp that is currently installed
+   *
+   * @generated from field: porter.v1.PorterApp app = 1;
+   */
+  app?: PorterApp;
+
+  constructor(data?: PartialMessage<CurrentAppRevisionResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CurrentAppRevisionResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CurrentAppRevisionResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CurrentAppRevisionResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CurrentAppRevisionResponse;
+
+  static equals(a: CurrentAppRevisionResponse | PlainMessage<CurrentAppRevisionResponse> | undefined, b: CurrentAppRevisionResponse | PlainMessage<CurrentAppRevisionResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  * @deprecated
  */
