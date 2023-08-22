@@ -21,7 +21,7 @@ message PreflightCheckRequest {
 
 message PreflightCheckResponse {
 
-  repeated Error error = 1;
+  map<string, Error> preflight_checks = 1;
 }
 
 
