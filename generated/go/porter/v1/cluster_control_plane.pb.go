@@ -147,6 +147,7 @@ type PreflightCheckResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// preflight_checks keys are name of preflight check and error will be if the preflight checks fails, nil if it passes
 	PreflightChecks map[string]*Error `protobuf:"bytes,1,rep,name=preflight_checks,json=preflightChecks,proto3" json:"preflight_checks,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
