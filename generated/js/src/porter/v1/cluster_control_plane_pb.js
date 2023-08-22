@@ -340,6 +340,28 @@ export const ApplyPorterAppResponse = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message porter.v1.CurrentAppRevisionRequest
+ */
+export const CurrentAppRevisionRequest = proto3.makeMessageType(
+  "porter.v1.CurrentAppRevisionRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "app_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.CurrentAppRevisionResponse
+ */
+export const CurrentAppRevisionResponse = proto3.makeMessageType(
+  "porter.v1.CurrentAppRevisionResponse",
+  () => [
+    { no: 1, name: "app", kind: "message", T: PorterApp },
+  ],
+);
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  * @deprecated
  */

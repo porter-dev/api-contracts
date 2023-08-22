@@ -165,6 +165,19 @@ message ApplyPorterAppResponse {
   EnumCLIAction cli_action = 2;
 }
 
+message CurrentAppRevisionRequest {
+  int64 project_id = 1;
+  // app_id is the id of the PorterApp that is currently installed
+  int64 app_id = 2;
+  // deployment_target_id is the id of the deployment target where the app is installed
+  string deployment_target_id = 3;
+}
+
+message CurrentAppRevisionResponse {
+  // app is the definition of the PorterApp that is currently installed
+  PorterApp app = 1;
+}
+
 enum EnumCLIAction {
   ENUM_CLI_ACTION_UNSPECIFIED = 0;
   // ENUM_CLI_ACTION_NONE signals the CLI to do nothing after applying the PorterApp.
@@ -222,6 +235,9 @@ service ClusterControlPlaneService {
 
   // ApplyPorterApp applies a porter app as defined by the provided porter.yaml file to a given deployment id
   rpc ApplyPorterApp(ApplyPorterAppRequest) returns (ApplyPorterAppResponse) {}
+
+  // CurrentAppRevision returns the currently deployed app revision for a given porter_app and deployment_target
+  rpc CurrentAppRevision(CurrentAppRevisionRequest) returns (CurrentAppRevisionResponse) {}
 
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
   // Deprecated. Use TokenForRegistry instead.
