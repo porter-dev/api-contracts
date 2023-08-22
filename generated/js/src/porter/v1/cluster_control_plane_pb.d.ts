@@ -5,6 +5,8 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage, Timestamp } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
+import type { EnumCloudProvider } from "./cluster_pb.js";
+import type { Error } from "./errors_pb.js";
 import type { Contract, ContractRevision } from "./contract_pb.js";
 import type { PorterApp } from "./porter_app_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
@@ -41,7 +43,71 @@ export declare enum EnumCLIAction {
 }
 
 /**
+ * @generated from message porter.v1.PreflightCheckRequest
+ */
+export declare class PreflightCheckRequest extends Message<PreflightCheckRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * cloud_provider [REQUIRED] represents the provider that we will provisioning the cluster in
+   *
+   * @generated from field: porter.v1.EnumCloudProvider cloud_provider = 2;
+   */
+  cloudProvider: EnumCloudProvider;
+
+  /**
+   * cloud_provider_credentials_id [REQUIRED] is the Porter credentials that will be used for provisioning a cluster.
+   * These must be stored within Porter, prior to cluster creation. For AWS this refers to the last link in an assume role chain
+   *
+   * @generated from field: string cloud_provider_credentials_id = 3;
+   */
+  cloudProviderCredentialsId: string;
+
+  constructor(data?: PartialMessage<PreflightCheckRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.PreflightCheckRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PreflightCheckRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PreflightCheckRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PreflightCheckRequest;
+
+  static equals(a: PreflightCheckRequest | PlainMessage<PreflightCheckRequest> | undefined, b: PreflightCheckRequest | PlainMessage<PreflightCheckRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.PreflightCheckResponse
+ */
+export declare class PreflightCheckResponse extends Message<PreflightCheckResponse> {
+  /**
+   * @generated from field: repeated porter.v1.Error error = 1;
+   */
+  error: Error[];
+
+  constructor(data?: PartialMessage<PreflightCheckResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.PreflightCheckResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PreflightCheckResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PreflightCheckResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PreflightCheckResponse;
+
+  static equals(a: PreflightCheckResponse | PlainMessage<PreflightCheckResponse> | undefined, b: PreflightCheckResponse | PlainMessage<PreflightCheckResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.QuotaPreflightCheckRequest
+ * @deprecated
  */
 export declare class QuotaPreflightCheckRequest extends Message<QuotaPreflightCheckRequest> {
   /**
@@ -81,6 +147,7 @@ export declare class QuotaPreflightCheckRequest extends Message<QuotaPreflightCh
 
 /**
  * @generated from message porter.v1.QuotaPreflightCheckResponse
+ * @deprecated
  */
 export declare class QuotaPreflightCheckResponse extends Message<QuotaPreflightCheckResponse> {
   constructor(data?: PartialMessage<QuotaPreflightCheckResponse>);
