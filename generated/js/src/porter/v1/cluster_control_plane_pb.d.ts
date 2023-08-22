@@ -909,11 +909,11 @@ export declare class CurrentAppRevisionRequest extends Message<CurrentAppRevisio
   projectId: bigint;
 
   /**
-   * porter_app_id is the id of the PorterApp that is currently installed
+   * app_id is the id of the PorterApp that is currently installed
    *
-   * @generated from field: int64 porter_app_id = 2;
+   * @generated from field: int64 app_id = 2;
    */
-  porterAppId: bigint;
+  appId: bigint;
 
   /**
    * deployment_target_id is the id of the deployment target where the app is installed

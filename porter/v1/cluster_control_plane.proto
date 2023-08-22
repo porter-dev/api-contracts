@@ -167,8 +167,8 @@ message ApplyPorterAppResponse {
 
 message CurrentAppRevisionRequest {
   int64 project_id = 1;
-  // porter_app_id is the id of the PorterApp that is currently installed
-  int64 porter_app_id = 2;
+  // app_id is the id of the PorterApp that is currently installed
+  int64 app_id = 2;
   // deployment_target_id is the id of the deployment target where the app is installed
   string deployment_target_id = 3;
 }
