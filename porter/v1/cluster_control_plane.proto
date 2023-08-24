@@ -8,11 +8,8 @@ import "porter/v1/cloud_provider_credentials.proto";
 import "porter/v1/cluster.proto";
 import "porter/v1/contract.proto";
 import "porter/v1/errors.proto";
-<<<<<<< HEAD
 import "porter/v1/gke.proto";
-=======
 import "porter/v1/porter_app.proto";
->>>>>>> 6995621d672df1f35d23840f170db2ca94b5c70f
 
 message PreflightCheckRequest {
   int64 project_id = 1;
