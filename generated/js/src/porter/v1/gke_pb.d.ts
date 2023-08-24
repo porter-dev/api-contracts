@@ -170,3 +170,31 @@ export declare class GKENetwork extends Message<GKENetwork> {
   static equals(a: GKENetwork | PlainMessage<GKENetwork> | undefined, b: GKENetwork | PlainMessage<GKENetwork> | undefined): boolean;
 }
 
+/**
+ * GKEPreflightValues is cidr ranges needed for PreflightChecks
+ *
+ * @generated from message porter.v1.GKEPreflightValues
+ */
+export declare class GKEPreflightValues extends Message<GKEPreflightValues> {
+  /**
+   * //Network contains all information required to configure the GKE cluster's network
+   *
+   * @generated from field: porter.v1.GKENetwork network = 1;
+   */
+  network?: GKENetwork;
+
+  constructor(data?: PartialMessage<GKEPreflightValues>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.GKEPreflightValues";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GKEPreflightValues;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GKEPreflightValues;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GKEPreflightValues;
+
+  static equals(a: GKEPreflightValues | PlainMessage<GKEPreflightValues> | undefined, b: GKEPreflightValues | PlainMessage<GKEPreflightValues> | undefined): boolean;
+}
+
