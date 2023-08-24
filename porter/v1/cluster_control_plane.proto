@@ -5,11 +5,14 @@ package porter.v1;
 import "google/protobuf/timestamp.proto";
 import "porter/v1/aws_assume_role.proto";
 import "porter/v1/cloud_provider_credentials.proto";
-import "porter/v1/contract.proto";
-import "porter/v1/porter_app.proto";
 import "porter/v1/cluster.proto";
+import "porter/v1/contract.proto";
 import "porter/v1/errors.proto";
+<<<<<<< HEAD
 import "porter/v1/gke.proto";
+=======
+import "porter/v1/porter_app.proto";
+>>>>>>> 6995621d672df1f35d23840f170db2ca94b5c70f
 
 message PreflightCheckRequest {
   int64 project_id = 1;
@@ -29,11 +32,9 @@ message PreflightCheckRequest {
 }
 
 message PreflightCheckResponse {
-
   // preflight_checks keys are name of preflight check and error will be if the preflight checks fails, nil if it passes
   map<string, Error> preflight_checks = 1;
 }
-
 
 message QuotaPreflightCheckRequest {
   option deprecated = true;
@@ -44,7 +45,7 @@ message QuotaPreflightCheckRequest {
 }
 
 message QuotaPreflightCheckResponse {
-    option deprecated = true;
+  option deprecated = true;
 }
 
 message CreateAssumeRoleChainRequest {
@@ -206,6 +207,10 @@ message CurrentAppRevisionRequest {
 message CurrentAppRevisionResponse {
   // app is the definition of the PorterApp that is currently installed
   PorterApp app = 1;
+  // status is the status of the revision
+  string status = 2;
+  // revision_number is the revision number respective to the application and deployment target
+  uint64 revision_number = 3;
 }
 
 enum EnumCLIAction {
@@ -229,7 +234,6 @@ service ClusterControlPlaneService {
 
   // PreflightCheck checks if the target account is able to provision a cluster
   rpc PreflightCheck(PreflightCheckRequest) returns (PreflightCheckResponse) {}
-
 
   // CreateAssumeRoleChain creates a new assume role chain for a given project and checks if the target assumed role has sufficient permissions. Use UpdateCloudProviderCredentials instead.
   rpc CreateAssumeRoleChain(CreateAssumeRoleChainRequest) returns (CreateAssumeRoleChainResponse) {
