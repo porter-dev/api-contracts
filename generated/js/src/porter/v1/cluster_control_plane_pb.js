@@ -384,6 +384,8 @@ export const CurrentAppRevisionResponse = proto3.makeMessageType(
   "porter.v1.CurrentAppRevisionResponse",
   () => [
     { no: 1, name: "app", kind: "message", T: PorterApp },
+    { no: 2, name: "status", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "revision_number", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
   ],
 );
 

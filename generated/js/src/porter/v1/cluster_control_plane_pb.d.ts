@@ -1017,6 +1017,20 @@ export declare class CurrentAppRevisionResponse extends Message<CurrentAppRevisi
    */
   app?: PorterApp;
 
+  /**
+   * status is the status of the revision
+   *
+   * @generated from field: string status = 2;
+   */
+  status: string;
+
+  /**
+   * revision_number is the revision number respective to the application and deployment target
+   *
+   * @generated from field: uint64 revision_number = 3;
+   */
+  revisionNumber: bigint;
+
   constructor(data?: PartialMessage<CurrentAppRevisionResponse>);
 
   static readonly runtime: typeof proto3;
