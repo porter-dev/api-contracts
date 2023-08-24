@@ -9,6 +9,7 @@ import "porter/v1/contract.proto";
 import "porter/v1/porter_app.proto";
 import "porter/v1/cluster.proto";
 import "porter/v1/errors.proto";
+import "porter/v1/gke.proto";
 
 message PreflightCheckRequest {
   int64 project_id = 1;
@@ -17,6 +18,14 @@ message PreflightCheckRequest {
   // cloud_provider_credentials_id [REQUIRED] is the Porter credentials that will be used for provisioning a cluster.
   // These must be stored within Porter, prior to cluster creation. For AWS this refers to the last link in an assume role chain
   string cloud_provider_credentials_id = 3;
+
+  oneof preflight_values {
+    //gke_preflight_values the values that GKE will use to perform preflight checks
+    GKEPreflightValues gke_preflight_values = 4;
+    //EKS eks_kind = 5;
+  
+    //AKS aks_kind = 6;
+  }
 }
 
 message PreflightCheckResponse {
