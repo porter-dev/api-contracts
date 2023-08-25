@@ -82,6 +82,9 @@ const (
 	// ClusterControlPlaneServiceCurrentAppRevisionProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's CurrentAppRevision RPC.
 	ClusterControlPlaneServiceCurrentAppRevisionProcedure = "/porter.v1.ClusterControlPlaneService/CurrentAppRevision"
+	// ClusterControlPlaneServiceListAppRevisionsProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's ListAppRevisions RPC.
+	ClusterControlPlaneServiceListAppRevisionsProcedure = "/porter.v1.ClusterControlPlaneService/ListAppRevisions"
 	// ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DockerConfigFileForRegistry RPC.
 	ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure = "/porter.v1.ClusterControlPlaneService/DockerConfigFileForRegistry"
@@ -144,6 +147,7 @@ type ClusterControlPlaneServiceClient interface {
 	ApplyPorterApp(context.Context, *connect.Request[v1.ApplyPorterAppRequest]) (*connect.Response[v1.ApplyPorterAppResponse], error)
 	// CurrentAppRevision returns the currently deployed app revision for a given porter_app and deployment_target
 	CurrentAppRevision(context.Context, *connect.Request[v1.CurrentAppRevisionRequest]) (*connect.Response[v1.CurrentAppRevisionResponse], error)
+	ListAppRevisions(context.Context, *connect.Request[v1.ListAppRevisionsRequest]) (*connect.Response[v1.ListAppRevisionsResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -267,6 +271,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceCurrentAppRevisionProcedure,
 			opts...,
 		),
+		listAppRevisions: connect.NewClient[v1.ListAppRevisionsRequest, v1.ListAppRevisionsResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceListAppRevisionsProcedure,
+			opts...,
+		),
 		dockerConfigFileForRegistry: connect.NewClient[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
@@ -318,6 +327,7 @@ type clusterControlPlaneServiceClient struct {
 	validatePorterApp              *connect.Client[v1.ValidatePorterAppRequest, v1.ValidatePorterAppResponse]
 	applyPorterApp                 *connect.Client[v1.ApplyPorterAppRequest, v1.ApplyPorterAppResponse]
 	currentAppRevision             *connect.Client[v1.CurrentAppRevisionRequest, v1.CurrentAppRevisionResponse]
+	listAppRevisions               *connect.Client[v1.ListAppRevisionsRequest, v1.ListAppRevisionsResponse]
 	dockerConfigFileForRegistry    *connect.Client[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse]
 	eCRTokenForRegistry            *connect.Client[v1.ECRTokenForRegistryRequest, v1.ECRTokenForRegistryResponse]
 	assumeRoleCredentials          *connect.Client[v1.AssumeRoleCredentialsRequest, v1.AssumeRoleCredentialsResponse]
@@ -414,6 +424,11 @@ func (c *clusterControlPlaneServiceClient) CurrentAppRevision(ctx context.Contex
 	return c.currentAppRevision.CallUnary(ctx, req)
 }
 
+// ListAppRevisions calls porter.v1.ClusterControlPlaneService.ListAppRevisions.
+func (c *clusterControlPlaneServiceClient) ListAppRevisions(ctx context.Context, req *connect.Request[v1.ListAppRevisionsRequest]) (*connect.Response[v1.ListAppRevisionsResponse], error) {
+	return c.listAppRevisions.CallUnary(ctx, req)
+}
+
 // DockerConfigFileForRegistry calls
 // porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry.
 //
@@ -499,6 +514,7 @@ type ClusterControlPlaneServiceHandler interface {
 	ApplyPorterApp(context.Context, *connect.Request[v1.ApplyPorterAppRequest]) (*connect.Response[v1.ApplyPorterAppResponse], error)
 	// CurrentAppRevision returns the currently deployed app revision for a given porter_app and deployment_target
 	CurrentAppRevision(context.Context, *connect.Request[v1.CurrentAppRevisionRequest]) (*connect.Response[v1.CurrentAppRevisionResponse], error)
+	ListAppRevisions(context.Context, *connect.Request[v1.ListAppRevisionsRequest]) (*connect.Response[v1.ListAppRevisionsResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -618,6 +634,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.CurrentAppRevision,
 		opts...,
 	)
+	clusterControlPlaneServiceListAppRevisionsHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceListAppRevisionsProcedure,
+		svc.ListAppRevisions,
+		opts...,
+	)
 	clusterControlPlaneServiceDockerConfigFileForRegistryHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
 		svc.DockerConfigFileForRegistry,
@@ -682,6 +703,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceApplyPorterAppHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceCurrentAppRevisionProcedure:
 			clusterControlPlaneServiceCurrentAppRevisionHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceListAppRevisionsProcedure:
+			clusterControlPlaneServiceListAppRevisionsHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure:
 			clusterControlPlaneServiceDockerConfigFileForRegistryHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceECRTokenForRegistryProcedure:
@@ -765,6 +788,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) ApplyPorterApp(context.Con
 
 func (UnimplementedClusterControlPlaneServiceHandler) CurrentAppRevision(context.Context, *connect.Request[v1.CurrentAppRevisionRequest]) (*connect.Response[v1.CurrentAppRevisionResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.CurrentAppRevision is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) ListAppRevisions(context.Context, *connect.Request[v1.ListAppRevisionsRequest]) (*connect.Response[v1.ListAppRevisionsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ListAppRevisions is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) DockerConfigFileForRegistry(context.Context, *connect.Request[v1.DockerConfigFileForRegistryRequest]) (*connect.Response[v1.DockerConfigFileForRegistryResponse], error) {

@@ -8,8 +8,8 @@ import "porter/v1/cloud_provider_credentials.proto";
 import "porter/v1/cluster.proto";
 import "porter/v1/contract.proto";
 import "porter/v1/errors.proto";
-import "porter/v1/porter_app.proto";
 import "porter/v1/gke.proto";
+import "porter/v1/porter_app.proto";
 
 message PreflightCheckRequest {
   int64 project_id = 1;
@@ -208,6 +208,23 @@ message CurrentAppRevisionResponse {
   string status = 2;
   // revision_number is the revision number respective to the application and deployment target
   uint64 revision_number = 3;
+  // created_at is the time the revision was created
+  google.protobuf.Timestamp created_at = 4;
+  // updated_at is the time the revision was last updated
+  google.protobuf.Timestamp updated_at = 5;
+}
+
+message ListAppRevisionsRequest {
+  int64 project_id = 1;
+  // app_id is the id of the PorterApp that is currently installed
+  int64 app_id = 2;
+  // deployment_target_id is the id of the deployment target where the app is installed
+  string deployment_target_id = 3;
+}
+
+message ListAppRevisionsResponse {
+  // revisions is the list of revisions for the given app and deployment target
+  repeated CurrentAppRevisionResponse revisions = 1;
 }
 
 enum EnumCLIAction {
@@ -275,6 +292,8 @@ service ClusterControlPlaneService {
 
   // CurrentAppRevision returns the currently deployed app revision for a given porter_app and deployment_target
   rpc CurrentAppRevision(CurrentAppRevisionRequest) returns (CurrentAppRevisionResponse) {}
+
+  rpc ListAppRevisions(ListAppRevisionsRequest) returns (ListAppRevisionsResponse) {}
 
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
   // Deprecated. Use TokenForRegistry instead.

@@ -1047,6 +1047,20 @@ export declare class CurrentAppRevisionResponse extends Message<CurrentAppRevisi
    */
   revisionNumber: bigint;
 
+  /**
+   * created_at is the time the revision was created
+   *
+   * @generated from field: google.protobuf.Timestamp created_at = 4;
+   */
+  createdAt?: Timestamp;
+
+  /**
+   * updated_at is the time the revision was last updated
+   *
+   * @generated from field: google.protobuf.Timestamp updated_at = 5;
+   */
+  updatedAt?: Timestamp;
+
   constructor(data?: PartialMessage<CurrentAppRevisionResponse>);
 
   static readonly runtime: typeof proto3;
@@ -1060,6 +1074,70 @@ export declare class CurrentAppRevisionResponse extends Message<CurrentAppRevisi
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CurrentAppRevisionResponse;
 
   static equals(a: CurrentAppRevisionResponse | PlainMessage<CurrentAppRevisionResponse> | undefined, b: CurrentAppRevisionResponse | PlainMessage<CurrentAppRevisionResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.ListAppRevisionsRequest
+ */
+export declare class ListAppRevisionsRequest extends Message<ListAppRevisionsRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * app_id is the id of the PorterApp that is currently installed
+   *
+   * @generated from field: int64 app_id = 2;
+   */
+  appId: bigint;
+
+  /**
+   * deployment_target_id is the id of the deployment target where the app is installed
+   *
+   * @generated from field: string deployment_target_id = 3;
+   */
+  deploymentTargetId: string;
+
+  constructor(data?: PartialMessage<ListAppRevisionsRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ListAppRevisionsRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListAppRevisionsRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListAppRevisionsRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListAppRevisionsRequest;
+
+  static equals(a: ListAppRevisionsRequest | PlainMessage<ListAppRevisionsRequest> | undefined, b: ListAppRevisionsRequest | PlainMessage<ListAppRevisionsRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.ListAppRevisionsResponse
+ */
+export declare class ListAppRevisionsResponse extends Message<ListAppRevisionsResponse> {
+  /**
+   * revisions is the list of revisions for the given app and deployment target
+   *
+   * @generated from field: repeated porter.v1.CurrentAppRevisionResponse revisions = 1;
+   */
+  revisions: CurrentAppRevisionResponse[];
+
+  constructor(data?: PartialMessage<ListAppRevisionsResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ListAppRevisionsResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListAppRevisionsResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListAppRevisionsResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListAppRevisionsResponse;
+
+  static equals(a: ListAppRevisionsResponse | PlainMessage<ListAppRevisionsResponse> | undefined, b: ListAppRevisionsResponse | PlainMessage<ListAppRevisionsResponse> | undefined): boolean;
 }
 
 /**
