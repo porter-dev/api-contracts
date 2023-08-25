@@ -37,3 +37,9 @@ message GKENetwork {
   // service_cidr is the range of the network that services will be assigned IPs from, on the GCP subnet.
   string service_cidr = 4;
 }
+
+//GKEPreflightValues is cidr ranges needed for PreflightChecks
+message GKEPreflightValues {
+  ////Network contains all information required to configure the GKE cluster's network
+  GKENetwork network = 1;
+}

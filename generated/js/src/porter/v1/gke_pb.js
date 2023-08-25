@@ -61,3 +61,15 @@ export const GKENetwork = proto3.makeMessageType(
   ],
 );
 
+/**
+ * GKEPreflightValues is cidr ranges needed for PreflightChecks
+ *
+ * @generated from message porter.v1.GKEPreflightValues
+ */
+export const GKEPreflightValues = proto3.makeMessageType(
+  "porter.v1.GKEPreflightValues",
+  () => [
+    { no: 1, name: "network", kind: "message", T: GKENetwork },
+  ],
+);
+
