@@ -148,6 +148,13 @@ export declare class WebServiceConfig extends Message<WebServiceConfig> {
    */
   healthCheck?: HealthCheck;
 
+  /**
+   * private indicates whether or not the web service should be private (not publicly accessible)
+   *
+   * @generated from field: bool private = 4;
+   */
+  private: boolean;
+
   constructor(data?: PartialMessage<WebServiceConfig>);
 
   static readonly runtime: typeof proto3;
