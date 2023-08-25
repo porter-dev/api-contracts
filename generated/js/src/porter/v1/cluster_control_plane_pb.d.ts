@@ -1023,9 +1023,9 @@ export declare class CurrentAppRevisionRequest extends Message<CurrentAppRevisio
 }
 
 /**
- * @generated from message porter.v1.CurrentAppRevisionResponse
+ * @generated from message porter.v1.AppRevision
  */
-export declare class CurrentAppRevisionResponse extends Message<CurrentAppRevisionResponse> {
+export declare class AppRevision extends Message<AppRevision> {
   /**
    * app is the definition of the PorterApp that is currently installed
    *
@@ -1060,6 +1060,32 @@ export declare class CurrentAppRevisionResponse extends Message<CurrentAppRevisi
    * @generated from field: google.protobuf.Timestamp updated_at = 5;
    */
   updatedAt?: Timestamp;
+
+  constructor(data?: PartialMessage<AppRevision>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AppRevision";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AppRevision;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AppRevision;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AppRevision;
+
+  static equals(a: AppRevision | PlainMessage<AppRevision> | undefined, b: AppRevision | PlainMessage<AppRevision> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.CurrentAppRevisionResponse
+ */
+export declare class CurrentAppRevisionResponse extends Message<CurrentAppRevisionResponse> {
+  /**
+   * revision is the currently deployed app revision for a given porter_app and deployment_target
+   *
+   * @generated from field: porter.v1.AppRevision app_revision = 1;
+   */
+  appRevision?: AppRevision;
 
   constructor(data?: PartialMessage<CurrentAppRevisionResponse>);
 
@@ -1119,11 +1145,11 @@ export declare class ListAppRevisionsRequest extends Message<ListAppRevisionsReq
  */
 export declare class ListAppRevisionsResponse extends Message<ListAppRevisionsResponse> {
   /**
-   * revisions is the list of revisions for the given app and deployment target
+   * app_revisions is the list of app revisions for the given app and deployment target
    *
-   * @generated from field: repeated porter.v1.CurrentAppRevisionResponse revisions = 1;
+   * @generated from field: repeated porter.v1.AppRevision app_revisions = 1;
    */
-  revisions: CurrentAppRevisionResponse[];
+  appRevisions: AppRevision[];
 
   constructor(data?: PartialMessage<ListAppRevisionsResponse>);
 

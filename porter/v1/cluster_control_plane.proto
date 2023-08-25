@@ -201,7 +201,7 @@ message CurrentAppRevisionRequest {
   string deployment_target_id = 3;
 }
 
-message CurrentAppRevisionResponse {
+message AppRevision {
   // app is the definition of the PorterApp that is currently installed
   PorterApp app = 1;
   // status is the status of the revision
@@ -214,6 +214,11 @@ message CurrentAppRevisionResponse {
   google.protobuf.Timestamp updated_at = 5;
 }
 
+message CurrentAppRevisionResponse {
+  // revision is the currently deployed app revision for a given porter_app and deployment_target
+  AppRevision app_revision = 1;
+}
+
 message ListAppRevisionsRequest {
   int64 project_id = 1;
   // app_id is the id of the PorterApp that is currently installed
@@ -223,8 +228,8 @@ message ListAppRevisionsRequest {
 }
 
 message ListAppRevisionsResponse {
-  // revisions is the list of revisions for the given app and deployment target
-  repeated CurrentAppRevisionResponse revisions = 1;
+  // app_revisions is the list of app revisions for the given app and deployment target
+  repeated AppRevision app_revisions = 1;
 }
 
 enum EnumCLIAction {

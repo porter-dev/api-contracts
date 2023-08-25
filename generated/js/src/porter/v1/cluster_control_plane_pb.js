@@ -380,16 +380,26 @@ export const CurrentAppRevisionRequest = proto3.makeMessageType(
 );
 
 /**
- * @generated from message porter.v1.CurrentAppRevisionResponse
+ * @generated from message porter.v1.AppRevision
  */
-export const CurrentAppRevisionResponse = proto3.makeMessageType(
-  "porter.v1.CurrentAppRevisionResponse",
+export const AppRevision = proto3.makeMessageType(
+  "porter.v1.AppRevision",
   () => [
     { no: 1, name: "app", kind: "message", T: PorterApp },
     { no: 2, name: "status", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "revision_number", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
     { no: 4, name: "created_at", kind: "message", T: Timestamp },
     { no: 5, name: "updated_at", kind: "message", T: Timestamp },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.CurrentAppRevisionResponse
+ */
+export const CurrentAppRevisionResponse = proto3.makeMessageType(
+  "porter.v1.CurrentAppRevisionResponse",
+  () => [
+    { no: 1, name: "app_revision", kind: "message", T: AppRevision },
   ],
 );
 
@@ -411,7 +421,7 @@ export const ListAppRevisionsRequest = proto3.makeMessageType(
 export const ListAppRevisionsResponse = proto3.makeMessageType(
   "porter.v1.ListAppRevisionsResponse",
   () => [
-    { no: 1, name: "revisions", kind: "message", T: CurrentAppRevisionResponse, repeated: true },
+    { no: 1, name: "app_revisions", kind: "message", T: AppRevision, repeated: true },
   ],
 );
 
