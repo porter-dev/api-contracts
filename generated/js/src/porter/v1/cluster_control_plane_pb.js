@@ -380,14 +380,48 @@ export const CurrentAppRevisionRequest = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message porter.v1.AppRevision
+ */
+export const AppRevision = proto3.makeMessageType(
+  "porter.v1.AppRevision",
+  () => [
+    { no: 1, name: "app", kind: "message", T: PorterApp },
+    { no: 2, name: "status", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "revision_number", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 4, name: "created_at", kind: "message", T: Timestamp },
+    { no: 5, name: "updated_at", kind: "message", T: Timestamp },
+  ],
+);
+
+/**
  * @generated from message porter.v1.CurrentAppRevisionResponse
  */
 export const CurrentAppRevisionResponse = proto3.makeMessageType(
   "porter.v1.CurrentAppRevisionResponse",
   () => [
-    { no: 1, name: "app", kind: "message", T: PorterApp },
-    { no: 2, name: "status", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "revision_number", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
+    { no: 1, name: "app_revision", kind: "message", T: AppRevision },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.ListAppRevisionsRequest
+ */
+export const ListAppRevisionsRequest = proto3.makeMessageType(
+  "porter.v1.ListAppRevisionsRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "app_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.ListAppRevisionsResponse
+ */
+export const ListAppRevisionsResponse = proto3.makeMessageType(
+  "porter.v1.ListAppRevisionsResponse",
+  () => [
+    { no: 1, name: "app_revisions", kind: "message", T: AppRevision, repeated: true },
   ],
 );
 
