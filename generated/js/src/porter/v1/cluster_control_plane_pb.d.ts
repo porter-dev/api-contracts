@@ -13,6 +13,37 @@ import type { PorterApp } from "./porter_app_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
+ * @generated from enum porter.v1.EnumPredeployStatus
+ */
+export declare enum EnumPredeployStatus {
+  /**
+   * @generated from enum value: ENUM_PREDEPLOY_STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * ENUM_PREDEPLOY_STATUS_RUNNING signifies the predeploy is still running.
+   *
+   * @generated from enum value: ENUM_PREDEPLOY_STATUS_RUNNING = 1;
+   */
+  RUNNING = 1,
+
+  /**
+   * ENUM_PREDEPLOY_STATUS_FAILED signifies the predeploy job failed.
+   *
+   * @generated from enum value: ENUM_PREDEPLOY_STATUS_FAILED = 2;
+   */
+  FAILED = 2,
+
+  /**
+   * ENUM_PREDEPLOY_STATUS_SUCCESSFUL signifies the predeploy job was successful.
+   *
+   * @generated from enum value: ENUM_PREDEPLOY_STATUS_SUCCESSFUL = 3;
+   */
+  SUCCESSFUL = 3,
+}
+
+/**
  * @generated from enum porter.v1.EnumCLIAction
  */
 export declare enum EnumCLIAction {
@@ -1164,6 +1195,63 @@ export declare class ListAppRevisionsResponse extends Message<ListAppRevisionsRe
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListAppRevisionsResponse;
 
   static equals(a: ListAppRevisionsResponse | PlainMessage<ListAppRevisionsResponse> | undefined, b: ListAppRevisionsResponse | PlainMessage<ListAppRevisionsResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.PredeployStatusRequest
+ */
+export declare class PredeployStatusRequest extends Message<PredeployStatusRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * app_revision_id is the id of the PorterApp that is currently installed
+   *
+   * @generated from field: string app_revision_id = 2;
+   */
+  appRevisionId: string;
+
+  constructor(data?: PartialMessage<PredeployStatusRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.PredeployStatusRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PredeployStatusRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PredeployStatusRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PredeployStatusRequest;
+
+  static equals(a: PredeployStatusRequest | PlainMessage<PredeployStatusRequest> | undefined, b: PredeployStatusRequest | PlainMessage<PredeployStatusRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.PredeployStatusResponse
+ */
+export declare class PredeployStatusResponse extends Message<PredeployStatusResponse> {
+  /**
+   * predeploy_status is the status of the predeploy job
+   *
+   * @generated from field: porter.v1.EnumPredeployStatus predeploy_status = 1;
+   */
+  predeployStatus: EnumPredeployStatus;
+
+  constructor(data?: PartialMessage<PredeployStatusResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.PredeployStatusResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PredeployStatusResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PredeployStatusResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PredeployStatusResponse;
+
+  static equals(a: PredeployStatusResponse | PlainMessage<PredeployStatusResponse> | undefined, b: PredeployStatusResponse | PlainMessage<PredeployStatusResponse> | undefined): boolean;
 }
 
 /**
