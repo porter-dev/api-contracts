@@ -232,6 +232,27 @@ message ListAppRevisionsResponse {
   repeated AppRevision app_revisions = 1;
 }
 
+message PredeployStatusRequest {
+  int64 project_id = 1;
+  // app_revision_id is the id of the PorterApp that is currently installed
+  string app_revision_id = 2;
+}
+
+message PredeployStatusResponse {
+  // predeploy_status is the status of the predeploy job
+  EnumPredeployStatus predeploy_status = 1;
+}
+
+enum EnumPredeployStatus {
+  ENUM_PREDEPLOY_STATUS_UNSPECIFIED = 0;
+  // ENUM_PREDEPLOY_STATUS_RUNNING signifies the predeploy is still running.
+  ENUM_PREDEPLOY_STATUS_RUNNING = 1;
+  // ENUM_PREDEPLOY_STATUS_FAILED signifies the predeploy job failed.
+  ENUM_PREDEPLOY_STATUS_FAILED = 2;
+  // ENUM_PREDEPLOY_STATUS_SUCCESSFUL signifies the predeploy job was successful.
+  ENUM_PREDEPLOY_STATUS_SUCCESSFUL = 3;
+}
+
 enum EnumCLIAction {
   ENUM_CLI_ACTION_UNSPECIFIED = 0;
   // ENUM_CLI_ACTION_NONE signals the CLI to do nothing after applying the PorterApp.
@@ -299,6 +320,9 @@ service ClusterControlPlaneService {
   rpc CurrentAppRevision(CurrentAppRevisionRequest) returns (CurrentAppRevisionResponse) {}
 
   rpc ListAppRevisions(ListAppRevisionsRequest) returns (ListAppRevisionsResponse) {}
+
+  // PredeployStatus returns the status of the predeploy job for a given app revision
+  rpc PredeployStatus(PredeployStatusRequest) returns (PredeployStatusResponse) {}
 
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
   // Deprecated. Use TokenForRegistry instead.
