@@ -12,6 +12,19 @@ import { PorterApp } from "./porter_app_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
+ * @generated from enum porter.v1.EnumPredeployStatus
+ */
+export const EnumPredeployStatus = proto3.makeEnum(
+  "porter.v1.EnumPredeployStatus",
+  [
+    {no: 0, name: "ENUM_PREDEPLOY_STATUS_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "ENUM_PREDEPLOY_STATUS_IN_PROGRESS", localName: "IN_PROGRESS"},
+    {no: 2, name: "ENUM_PREDEPLOY_STATUS_FAILED", localName: "FAILED"},
+    {no: 3, name: "ENUM_PREDEPLOY_STATUS_SUCCESSFUL", localName: "SUCCESSFUL"},
+  ],
+);
+
+/**
  * @generated from enum porter.v1.EnumCLIAction
  */
 export const EnumCLIAction = proto3.makeEnum(
@@ -422,6 +435,27 @@ export const ListAppRevisionsResponse = proto3.makeMessageType(
   "porter.v1.ListAppRevisionsResponse",
   () => [
     { no: 1, name: "app_revisions", kind: "message", T: AppRevision, repeated: true },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.PredeployStatusRequest
+ */
+export const PredeployStatusRequest = proto3.makeMessageType(
+  "porter.v1.PredeployStatusRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "app_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.PredeployStatusResponse
+ */
+export const PredeployStatusResponse = proto3.makeMessageType(
+  "porter.v1.PredeployStatusResponse",
+  () => [
+    { no: 1, name: "predeploy_status", kind: "enum", T: proto3.getEnumType(EnumPredeployStatus) },
   ],
 );
 
