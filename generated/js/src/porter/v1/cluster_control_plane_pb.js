@@ -18,7 +18,7 @@ export const EnumPredeployStatus = proto3.makeEnum(
   "porter.v1.EnumPredeployStatus",
   [
     {no: 0, name: "ENUM_PREDEPLOY_STATUS_UNSPECIFIED", localName: "UNSPECIFIED"},
-    {no: 1, name: "ENUM_PREDEPLOY_STATUS_RUNNING", localName: "RUNNING"},
+    {no: 1, name: "ENUM_PREDEPLOY_STATUS_IN_PROGRESS", localName: "IN_PROGRESS"},
     {no: 2, name: "ENUM_PREDEPLOY_STATUS_FAILED", localName: "FAILED"},
     {no: 3, name: "ENUM_PREDEPLOY_STATUS_SUCCESSFUL", localName: "SUCCESSFUL"},
   ],

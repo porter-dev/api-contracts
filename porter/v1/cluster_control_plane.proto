@@ -245,8 +245,8 @@ message PredeployStatusResponse {
 
 enum EnumPredeployStatus {
   ENUM_PREDEPLOY_STATUS_UNSPECIFIED = 0;
-  // ENUM_PREDEPLOY_STATUS_RUNNING signifies the predeploy is still running.
-  ENUM_PREDEPLOY_STATUS_RUNNING = 1;
+  // ENUM_PREDEPLOY_STATUS_IN_PROGRESS signifies the predeploy is still in progress.
+  ENUM_PREDEPLOY_STATUS_IN_PROGRESS = 1;
   // ENUM_PREDEPLOY_STATUS_FAILED signifies the predeploy job failed.
   ENUM_PREDEPLOY_STATUS_FAILED = 2;
   // ENUM_PREDEPLOY_STATUS_SUCCESSFUL signifies the predeploy job was successful.

@@ -22,11 +22,11 @@ export declare enum EnumPredeployStatus {
   UNSPECIFIED = 0,
 
   /**
-   * ENUM_PREDEPLOY_STATUS_RUNNING signifies the predeploy is still running.
+   * ENUM_PREDEPLOY_STATUS_IN_PROGRESS signifies the predeploy is still in progress.
    *
-   * @generated from enum value: ENUM_PREDEPLOY_STATUS_RUNNING = 1;
+   * @generated from enum value: ENUM_PREDEPLOY_STATUS_IN_PROGRESS = 1;
    */
-  RUNNING = 1,
+  IN_PROGRESS = 1,
 
   /**
    * ENUM_PREDEPLOY_STATUS_FAILED signifies the predeploy job failed.
