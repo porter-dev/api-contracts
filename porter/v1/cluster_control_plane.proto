@@ -193,6 +193,32 @@ message ApplyPorterAppResponse {
   EnumCLIAction cli_action = 2;
 }
 
+// DeletePorterAppRequest is the request object when deleting a porter app from a given project
+message DeletePorterAppRequest {
+  // project_id is the id of the project that the PorterApp belongs to
+  int64 project_id = 1;
+  // app_name is the name of the porter app to be deleted
+  string app_name = 2;
+}
+
+// DeletePorterAppResponse is the response object when deleting a porter app from a given project
+message DeletePorterAppResponse {
+  // app_id is the id of the PorterApp that was deleted
+  int64 app_id = 1;
+}
+
+// DeleteAppDeploymentRequest is the request object when removing a porter app from a given deployment target
+message DeleteAppDeploymentRequest {
+  int64 project_id = 1;
+  // deployment_target_id is the id of the deployment target where the app is being uninstalled from
+  string deployment_target_id = 2;
+  // app_name is the name of the porter app to be uninstalled
+  string app_name = 3;
+}
+
+// DeleteAppDeploymentResponse is the response object when removing a porter app from a given deployment target
+message DeleteAppDeploymentResponse {}
+
 message CurrentAppRevisionRequest {
   int64 project_id = 1;
   // app_id is the id of the PorterApp that is currently installed
@@ -315,6 +341,12 @@ service ClusterControlPlaneService {
 
   // ApplyPorterApp applies a porter app as defined by the provided porter.yaml file to a given deployment id
   rpc ApplyPorterApp(ApplyPorterAppRequest) returns (ApplyPorterAppResponse) {}
+
+  // DeletePorterApp deletes all instances of a porter app across deployment targets in a given project
+  rpc DeletePorterApp(DeletePorterAppRequest) returns (DeletePorterAppResponse) {}
+
+  // DeleteAppDeployment deletes a porter app from a given deployment target
+  rpc DeleteAppDeployment(DeleteAppDeploymentRequest) returns (DeleteAppDeploymentResponse) {}
 
   // CurrentAppRevision returns the currently deployed app revision for a given porter_app and deployment_target
   rpc CurrentAppRevision(CurrentAppRevisionRequest) returns (CurrentAppRevisionResponse) {}

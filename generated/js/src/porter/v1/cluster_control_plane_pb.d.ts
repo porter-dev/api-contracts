@@ -1016,6 +1016,130 @@ export declare class ApplyPorterAppResponse extends Message<ApplyPorterAppRespon
 }
 
 /**
+ * DeletePorterAppRequest is the request object when deleting a porter app from a given project
+ *
+ * @generated from message porter.v1.DeletePorterAppRequest
+ */
+export declare class DeletePorterAppRequest extends Message<DeletePorterAppRequest> {
+  /**
+   * project_id is the id of the project that the PorterApp belongs to
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * app_name is the name of the porter app to be deleted
+   *
+   * @generated from field: string app_name = 2;
+   */
+  appName: string;
+
+  constructor(data?: PartialMessage<DeletePorterAppRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeletePorterAppRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeletePorterAppRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeletePorterAppRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeletePorterAppRequest;
+
+  static equals(a: DeletePorterAppRequest | PlainMessage<DeletePorterAppRequest> | undefined, b: DeletePorterAppRequest | PlainMessage<DeletePorterAppRequest> | undefined): boolean;
+}
+
+/**
+ * DeletePorterAppResponse is the response object when deleting a porter app from a given project
+ *
+ * @generated from message porter.v1.DeletePorterAppResponse
+ */
+export declare class DeletePorterAppResponse extends Message<DeletePorterAppResponse> {
+  /**
+   * app_id is the id of the PorterApp that was deleted
+   *
+   * @generated from field: int64 app_id = 1;
+   */
+  appId: bigint;
+
+  constructor(data?: PartialMessage<DeletePorterAppResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeletePorterAppResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeletePorterAppResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeletePorterAppResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeletePorterAppResponse;
+
+  static equals(a: DeletePorterAppResponse | PlainMessage<DeletePorterAppResponse> | undefined, b: DeletePorterAppResponse | PlainMessage<DeletePorterAppResponse> | undefined): boolean;
+}
+
+/**
+ * DeleteAppDeploymentRequest is the request object when removing a porter app from a given deployment target
+ *
+ * @generated from message porter.v1.DeleteAppDeploymentRequest
+ */
+export declare class DeleteAppDeploymentRequest extends Message<DeleteAppDeploymentRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * deployment_target_id is the id of the deployment target where the app is being uninstalled from
+   *
+   * @generated from field: string deployment_target_id = 2;
+   */
+  deploymentTargetId: string;
+
+  /**
+   * app_name is the name of the porter app to be uninstalled
+   *
+   * @generated from field: string app_name = 3;
+   */
+  appName: string;
+
+  constructor(data?: PartialMessage<DeleteAppDeploymentRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeleteAppDeploymentRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteAppDeploymentRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteAppDeploymentRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteAppDeploymentRequest;
+
+  static equals(a: DeleteAppDeploymentRequest | PlainMessage<DeleteAppDeploymentRequest> | undefined, b: DeleteAppDeploymentRequest | PlainMessage<DeleteAppDeploymentRequest> | undefined): boolean;
+}
+
+/**
+ * DeleteAppDeploymentResponse is the response object when removing a porter app from a given deployment target
+ *
+ * @generated from message porter.v1.DeleteAppDeploymentResponse
+ */
+export declare class DeleteAppDeploymentResponse extends Message<DeleteAppDeploymentResponse> {
+  constructor(data?: PartialMessage<DeleteAppDeploymentResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeleteAppDeploymentResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteAppDeploymentResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteAppDeploymentResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteAppDeploymentResponse;
+
+  static equals(a: DeleteAppDeploymentResponse | PlainMessage<DeleteAppDeploymentResponse> | undefined, b: DeleteAppDeploymentResponse | PlainMessage<DeleteAppDeploymentResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.CurrentAppRevisionRequest
  */
 export declare class CurrentAppRevisionRequest extends Message<CurrentAppRevisionRequest> {

@@ -1879,6 +1879,218 @@ func (x *ApplyPorterAppResponse) GetCliAction() EnumCLIAction {
 	return EnumCLIAction_ENUM_CLI_ACTION_UNSPECIFIED
 }
 
+// DeletePorterAppRequest is the request object when deleting a porter app from a given project
+type DeletePorterAppRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// project_id is the id of the project that the PorterApp belongs to
+	ProjectId int64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	// app_name is the name of the porter app to be deleted
+	AppName string `protobuf:"bytes,2,opt,name=app_name,json=appName,proto3" json:"app_name,omitempty"`
+}
+
+func (x *DeletePorterAppRequest) Reset() {
+	*x = DeletePorterAppRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[30]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeletePorterAppRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeletePorterAppRequest) ProtoMessage() {}
+
+func (x *DeletePorterAppRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[30]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeletePorterAppRequest.ProtoReflect.Descriptor instead.
+func (*DeletePorterAppRequest) Descriptor() ([]byte, []int) {
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *DeletePorterAppRequest) GetProjectId() int64 {
+	if x != nil {
+		return x.ProjectId
+	}
+	return 0
+}
+
+func (x *DeletePorterAppRequest) GetAppName() string {
+	if x != nil {
+		return x.AppName
+	}
+	return ""
+}
+
+// DeletePorterAppResponse is the response object when deleting a porter app from a given project
+type DeletePorterAppResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// app_id is the id of the PorterApp that was deleted
+	AppId int64 `protobuf:"varint,1,opt,name=app_id,json=appId,proto3" json:"app_id,omitempty"`
+}
+
+func (x *DeletePorterAppResponse) Reset() {
+	*x = DeletePorterAppResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[31]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeletePorterAppResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeletePorterAppResponse) ProtoMessage() {}
+
+func (x *DeletePorterAppResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[31]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeletePorterAppResponse.ProtoReflect.Descriptor instead.
+func (*DeletePorterAppResponse) Descriptor() ([]byte, []int) {
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *DeletePorterAppResponse) GetAppId() int64 {
+	if x != nil {
+		return x.AppId
+	}
+	return 0
+}
+
+// DeleteAppDeploymentRequest is the request object when removing a porter app from a given deployment target
+type DeleteAppDeploymentRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ProjectId int64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	// deployment_target_id is the id of the deployment target where the app is being uninstalled from
+	DeploymentTargetId string `protobuf:"bytes,2,opt,name=deployment_target_id,json=deploymentTargetId,proto3" json:"deployment_target_id,omitempty"`
+	// app_name is the name of the porter app to be uninstalled
+	AppName string `protobuf:"bytes,3,opt,name=app_name,json=appName,proto3" json:"app_name,omitempty"`
+}
+
+func (x *DeleteAppDeploymentRequest) Reset() {
+	*x = DeleteAppDeploymentRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[32]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteAppDeploymentRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteAppDeploymentRequest) ProtoMessage() {}
+
+func (x *DeleteAppDeploymentRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[32]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteAppDeploymentRequest.ProtoReflect.Descriptor instead.
+func (*DeleteAppDeploymentRequest) Descriptor() ([]byte, []int) {
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *DeleteAppDeploymentRequest) GetProjectId() int64 {
+	if x != nil {
+		return x.ProjectId
+	}
+	return 0
+}
+
+func (x *DeleteAppDeploymentRequest) GetDeploymentTargetId() string {
+	if x != nil {
+		return x.DeploymentTargetId
+	}
+	return ""
+}
+
+func (x *DeleteAppDeploymentRequest) GetAppName() string {
+	if x != nil {
+		return x.AppName
+	}
+	return ""
+}
+
+// DeleteAppDeploymentResponse is the response object when removing a porter app from a given deployment target
+type DeleteAppDeploymentResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *DeleteAppDeploymentResponse) Reset() {
+	*x = DeleteAppDeploymentResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[33]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteAppDeploymentResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteAppDeploymentResponse) ProtoMessage() {}
+
+func (x *DeleteAppDeploymentResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[33]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteAppDeploymentResponse.ProtoReflect.Descriptor instead.
+func (*DeleteAppDeploymentResponse) Descriptor() ([]byte, []int) {
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{33}
+}
+
 type CurrentAppRevisionRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1894,7 +2106,7 @@ type CurrentAppRevisionRequest struct {
 func (x *CurrentAppRevisionRequest) Reset() {
 	*x = CurrentAppRevisionRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[30]
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[34]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1907,7 +2119,7 @@ func (x *CurrentAppRevisionRequest) String() string {
 func (*CurrentAppRevisionRequest) ProtoMessage() {}
 
 func (x *CurrentAppRevisionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[30]
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[34]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1920,7 +2132,7 @@ func (x *CurrentAppRevisionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CurrentAppRevisionRequest.ProtoReflect.Descriptor instead.
 func (*CurrentAppRevisionRequest) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{30}
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *CurrentAppRevisionRequest) GetProjectId() int64 {
@@ -1964,7 +2176,7 @@ type AppRevision struct {
 func (x *AppRevision) Reset() {
 	*x = AppRevision{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[31]
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[35]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1977,7 +2189,7 @@ func (x *AppRevision) String() string {
 func (*AppRevision) ProtoMessage() {}
 
 func (x *AppRevision) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[31]
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[35]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1990,7 +2202,7 @@ func (x *AppRevision) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AppRevision.ProtoReflect.Descriptor instead.
 func (*AppRevision) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{31}
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *AppRevision) GetApp() *PorterApp {
@@ -2040,7 +2252,7 @@ type CurrentAppRevisionResponse struct {
 func (x *CurrentAppRevisionResponse) Reset() {
 	*x = CurrentAppRevisionResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[32]
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[36]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2053,7 +2265,7 @@ func (x *CurrentAppRevisionResponse) String() string {
 func (*CurrentAppRevisionResponse) ProtoMessage() {}
 
 func (x *CurrentAppRevisionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[32]
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[36]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2066,7 +2278,7 @@ func (x *CurrentAppRevisionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CurrentAppRevisionResponse.ProtoReflect.Descriptor instead.
 func (*CurrentAppRevisionResponse) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{32}
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *CurrentAppRevisionResponse) GetAppRevision() *AppRevision {
@@ -2091,7 +2303,7 @@ type ListAppRevisionsRequest struct {
 func (x *ListAppRevisionsRequest) Reset() {
 	*x = ListAppRevisionsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[33]
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[37]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2104,7 +2316,7 @@ func (x *ListAppRevisionsRequest) String() string {
 func (*ListAppRevisionsRequest) ProtoMessage() {}
 
 func (x *ListAppRevisionsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[33]
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[37]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2117,7 +2329,7 @@ func (x *ListAppRevisionsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAppRevisionsRequest.ProtoReflect.Descriptor instead.
 func (*ListAppRevisionsRequest) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{33}
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *ListAppRevisionsRequest) GetProjectId() int64 {
@@ -2153,7 +2365,7 @@ type ListAppRevisionsResponse struct {
 func (x *ListAppRevisionsResponse) Reset() {
 	*x = ListAppRevisionsResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[34]
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[38]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2166,7 +2378,7 @@ func (x *ListAppRevisionsResponse) String() string {
 func (*ListAppRevisionsResponse) ProtoMessage() {}
 
 func (x *ListAppRevisionsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[34]
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[38]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2179,7 +2391,7 @@ func (x *ListAppRevisionsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAppRevisionsResponse.ProtoReflect.Descriptor instead.
 func (*ListAppRevisionsResponse) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{34}
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *ListAppRevisionsResponse) GetAppRevisions() []*AppRevision {
@@ -2202,7 +2414,7 @@ type PredeployStatusRequest struct {
 func (x *PredeployStatusRequest) Reset() {
 	*x = PredeployStatusRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[35]
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[39]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2215,7 +2427,7 @@ func (x *PredeployStatusRequest) String() string {
 func (*PredeployStatusRequest) ProtoMessage() {}
 
 func (x *PredeployStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[35]
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[39]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2228,7 +2440,7 @@ func (x *PredeployStatusRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PredeployStatusRequest.ProtoReflect.Descriptor instead.
 func (*PredeployStatusRequest) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{35}
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *PredeployStatusRequest) GetProjectId() int64 {
@@ -2257,7 +2469,7 @@ type PredeployStatusResponse struct {
 func (x *PredeployStatusResponse) Reset() {
 	*x = PredeployStatusResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[36]
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[40]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2270,7 +2482,7 @@ func (x *PredeployStatusResponse) String() string {
 func (*PredeployStatusResponse) ProtoMessage() {}
 
 func (x *PredeployStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[36]
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[40]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2283,7 +2495,7 @@ func (x *PredeployStatusResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use PredeployStatusResponse.ProtoReflect.Descriptor instead.
 func (*PredeployStatusResponse) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{36}
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *PredeployStatusResponse) GetPredeployStatus() EnumPredeployStatus {
@@ -2306,7 +2518,7 @@ type EKSBearerTokenRequest struct {
 func (x *EKSBearerTokenRequest) Reset() {
 	*x = EKSBearerTokenRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[37]
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[41]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2319,7 +2531,7 @@ func (x *EKSBearerTokenRequest) String() string {
 func (*EKSBearerTokenRequest) ProtoMessage() {}
 
 func (x *EKSBearerTokenRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[37]
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[41]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2332,7 +2544,7 @@ func (x *EKSBearerTokenRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EKSBearerTokenRequest.ProtoReflect.Descriptor instead.
 func (*EKSBearerTokenRequest) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{37}
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *EKSBearerTokenRequest) GetProjectId() int64 {
@@ -2361,7 +2573,7 @@ type EKSBearerTokenResponse struct {
 func (x *EKSBearerTokenResponse) Reset() {
 	*x = EKSBearerTokenResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[38]
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[42]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2374,7 +2586,7 @@ func (x *EKSBearerTokenResponse) String() string {
 func (*EKSBearerTokenResponse) ProtoMessage() {}
 
 func (x *EKSBearerTokenResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[38]
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[42]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2387,7 +2599,7 @@ func (x *EKSBearerTokenResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use EKSBearerTokenResponse.ProtoReflect.Descriptor instead.
 func (*EKSBearerTokenResponse) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{38}
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *EKSBearerTokenResponse) GetToken() string {
@@ -2410,7 +2622,7 @@ type CertificateAuthorityDataRequest struct {
 func (x *CertificateAuthorityDataRequest) Reset() {
 	*x = CertificateAuthorityDataRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[39]
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[43]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2423,7 +2635,7 @@ func (x *CertificateAuthorityDataRequest) String() string {
 func (*CertificateAuthorityDataRequest) ProtoMessage() {}
 
 func (x *CertificateAuthorityDataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[39]
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[43]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2436,7 +2648,7 @@ func (x *CertificateAuthorityDataRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CertificateAuthorityDataRequest.ProtoReflect.Descriptor instead.
 func (*CertificateAuthorityDataRequest) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{39}
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *CertificateAuthorityDataRequest) GetProjectId() int64 {
@@ -2465,7 +2677,7 @@ type CertificateAuthorityDataResponse struct {
 func (x *CertificateAuthorityDataResponse) Reset() {
 	*x = CertificateAuthorityDataResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[40]
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[44]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2478,7 +2690,7 @@ func (x *CertificateAuthorityDataResponse) String() string {
 func (*CertificateAuthorityDataResponse) ProtoMessage() {}
 
 func (x *CertificateAuthorityDataResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[40]
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[44]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2491,7 +2703,7 @@ func (x *CertificateAuthorityDataResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CertificateAuthorityDataResponse.ProtoReflect.Descriptor instead.
 func (*CertificateAuthorityDataResponse) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{40}
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *CertificateAuthorityDataResponse) GetCertificateAuthorityData() string {
@@ -2513,7 +2725,7 @@ type AssumeRoleChainTargetsRequest struct {
 func (x *AssumeRoleChainTargetsRequest) Reset() {
 	*x = AssumeRoleChainTargetsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[41]
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[45]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2526,7 +2738,7 @@ func (x *AssumeRoleChainTargetsRequest) String() string {
 func (*AssumeRoleChainTargetsRequest) ProtoMessage() {}
 
 func (x *AssumeRoleChainTargetsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[41]
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[45]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2539,7 +2751,7 @@ func (x *AssumeRoleChainTargetsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AssumeRoleChainTargetsRequest.ProtoReflect.Descriptor instead.
 func (*AssumeRoleChainTargetsRequest) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{41}
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *AssumeRoleChainTargetsRequest) GetProjectId() string {
@@ -2561,7 +2773,7 @@ type AssumeRoleChainTargetsResponse struct {
 func (x *AssumeRoleChainTargetsResponse) Reset() {
 	*x = AssumeRoleChainTargetsResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[42]
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[46]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2574,7 +2786,7 @@ func (x *AssumeRoleChainTargetsResponse) String() string {
 func (*AssumeRoleChainTargetsResponse) ProtoMessage() {}
 
 func (x *AssumeRoleChainTargetsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[42]
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[46]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2587,7 +2799,7 @@ func (x *AssumeRoleChainTargetsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AssumeRoleChainTargetsResponse.ProtoReflect.Descriptor instead.
 func (*AssumeRoleChainTargetsResponse) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{42}
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{46}
 }
 
 func (x *AssumeRoleChainTargetsResponse) GetChainLinks() []*AssumeRoleChainLink {
@@ -2611,7 +2823,7 @@ type ECRTokenForRegistryRequest struct {
 func (x *ECRTokenForRegistryRequest) Reset() {
 	*x = ECRTokenForRegistryRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[43]
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[47]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2624,7 +2836,7 @@ func (x *ECRTokenForRegistryRequest) String() string {
 func (*ECRTokenForRegistryRequest) ProtoMessage() {}
 
 func (x *ECRTokenForRegistryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[43]
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[47]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2637,7 +2849,7 @@ func (x *ECRTokenForRegistryRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ECRTokenForRegistryRequest.ProtoReflect.Descriptor instead.
 func (*ECRTokenForRegistryRequest) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{43}
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{47}
 }
 
 func (x *ECRTokenForRegistryRequest) GetProjectId() int64 {
@@ -2674,7 +2886,7 @@ type ECRTokenForRegistryResponse struct {
 func (x *ECRTokenForRegistryResponse) Reset() {
 	*x = ECRTokenForRegistryResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[44]
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[48]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2687,7 +2899,7 @@ func (x *ECRTokenForRegistryResponse) String() string {
 func (*ECRTokenForRegistryResponse) ProtoMessage() {}
 
 func (x *ECRTokenForRegistryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[44]
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[48]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2700,7 +2912,7 @@ func (x *ECRTokenForRegistryResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ECRTokenForRegistryResponse.ProtoReflect.Descriptor instead.
 func (*ECRTokenForRegistryResponse) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{44}
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{48}
 }
 
 func (x *ECRTokenForRegistryResponse) GetToken() string {
@@ -2730,7 +2942,7 @@ type AssumeRoleCredentialsRequest struct {
 func (x *AssumeRoleCredentialsRequest) Reset() {
 	*x = AssumeRoleCredentialsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[45]
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[49]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2743,7 +2955,7 @@ func (x *AssumeRoleCredentialsRequest) String() string {
 func (*AssumeRoleCredentialsRequest) ProtoMessage() {}
 
 func (x *AssumeRoleCredentialsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[45]
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[49]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2756,7 +2968,7 @@ func (x *AssumeRoleCredentialsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AssumeRoleCredentialsRequest.ProtoReflect.Descriptor instead.
 func (*AssumeRoleCredentialsRequest) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{45}
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{49}
 }
 
 func (x *AssumeRoleCredentialsRequest) GetAwsAccountId() string {
@@ -2787,7 +2999,7 @@ type AssumeRoleCredentialsResponse struct {
 func (x *AssumeRoleCredentialsResponse) Reset() {
 	*x = AssumeRoleCredentialsResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[46]
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[50]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2800,7 +3012,7 @@ func (x *AssumeRoleCredentialsResponse) String() string {
 func (*AssumeRoleCredentialsResponse) ProtoMessage() {}
 
 func (x *AssumeRoleCredentialsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[46]
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[50]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2813,7 +3025,7 @@ func (x *AssumeRoleCredentialsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AssumeRoleCredentialsResponse.ProtoReflect.Descriptor instead.
 func (*AssumeRoleCredentialsResponse) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{46}
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{50}
 }
 
 func (x *AssumeRoleCredentialsResponse) GetAwsAccessId() string {
@@ -2850,7 +3062,7 @@ type DockerConfigFileForRegistryRequest struct {
 func (x *DockerConfigFileForRegistryRequest) Reset() {
 	*x = DockerConfigFileForRegistryRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[47]
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[51]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2863,7 +3075,7 @@ func (x *DockerConfigFileForRegistryRequest) String() string {
 func (*DockerConfigFileForRegistryRequest) ProtoMessage() {}
 
 func (x *DockerConfigFileForRegistryRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[47]
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[51]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2876,7 +3088,7 @@ func (x *DockerConfigFileForRegistryRequest) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use DockerConfigFileForRegistryRequest.ProtoReflect.Descriptor instead.
 func (*DockerConfigFileForRegistryRequest) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{47}
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{51}
 }
 
 func (x *DockerConfigFileForRegistryRequest) GetProjectId() int64 {
@@ -2905,7 +3117,7 @@ type DockerConfigFileForRegistryResponse struct {
 func (x *DockerConfigFileForRegistryResponse) Reset() {
 	*x = DockerConfigFileForRegistryResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[48]
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[52]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2918,7 +3130,7 @@ func (x *DockerConfigFileForRegistryResponse) String() string {
 func (*DockerConfigFileForRegistryResponse) ProtoMessage() {}
 
 func (x *DockerConfigFileForRegistryResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[48]
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[52]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2931,7 +3143,7 @@ func (x *DockerConfigFileForRegistryResponse) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use DockerConfigFileForRegistryResponse.ProtoReflect.Descriptor instead.
 func (*DockerConfigFileForRegistryResponse) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{48}
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{52}
 }
 
 func (x *DockerConfigFileForRegistryResponse) GetDockerConfigFile() []byte {
@@ -3194,7 +3406,26 @@ var file_porter_v1_cluster_control_plane_proto_rawDesc = []byte{
 	0x6f, 0x6e, 0x49, 0x64, 0x12, 0x37, 0x0a, 0x0a, 0x63, 0x6c, 0x69, 0x5f, 0x61, 0x63, 0x74, 0x69,
 	0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x18, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65,
 	0x72, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x6e, 0x75, 0x6d, 0x43, 0x4c, 0x49, 0x41, 0x63, 0x74, 0x69,
-	0x6f, 0x6e, 0x52, 0x09, 0x63, 0x6c, 0x69, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x83, 0x01,
+	0x6f, 0x6e, 0x52, 0x09, 0x63, 0x6c, 0x69, 0x41, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x52, 0x0a,
+	0x16, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x41, 0x70, 0x70,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x72, 0x6f, 0x6a, 0x65,
+	0x63, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x70, 0x72, 0x6f,
+	0x6a, 0x65, 0x63, 0x74, 0x49, 0x64, 0x12, 0x19, 0x0a, 0x08, 0x61, 0x70, 0x70, 0x5f, 0x6e, 0x61,
+	0x6d, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x70, 0x70, 0x4e, 0x61, 0x6d,
+	0x65, 0x22, 0x30, 0x0a, 0x17, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x6f, 0x72, 0x74, 0x65,
+	0x72, 0x41, 0x70, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x15, 0x0a, 0x06,
+	0x61, 0x70, 0x70, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x61, 0x70,
+	0x70, 0x49, 0x64, 0x22, 0x88, 0x01, 0x0a, 0x1a, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x41, 0x70,
+	0x70, 0x44, 0x65, 0x70, 0x6c, 0x6f, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x5f, 0x69, 0x64,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49,
+	0x64, 0x12, 0x30, 0x0a, 0x14, 0x64, 0x65, 0x70, 0x6c, 0x6f, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x5f,
+	0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x12, 0x64, 0x65, 0x70, 0x6c, 0x6f, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x54, 0x61, 0x72, 0x67, 0x65,
+	0x74, 0x49, 0x64, 0x12, 0x19, 0x0a, 0x08, 0x61, 0x70, 0x70, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x18,
+	0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x70, 0x70, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0x1d,
+	0x0a, 0x1b, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x41, 0x70, 0x70, 0x44, 0x65, 0x70, 0x6c, 0x6f,
+	0x79, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x83, 0x01,
 	0x0a, 0x19, 0x43, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x74, 0x41, 0x70, 0x70, 0x52, 0x65, 0x76, 0x69,
 	0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x70,
 	0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52,
@@ -3345,7 +3576,7 @@ var file_porter_v1_cluster_control_plane_proto_rawDesc = []byte{
 	0x49, 0x5f, 0x41, 0x43, 0x54, 0x49, 0x4f, 0x4e, 0x5f, 0x42, 0x55, 0x49, 0x4c, 0x44, 0x10, 0x02,
 	0x12, 0x23, 0x0a, 0x1f, 0x45, 0x4e, 0x55, 0x4d, 0x5f, 0x43, 0x4c, 0x49, 0x5f, 0x41, 0x43, 0x54,
 	0x49, 0x4f, 0x4e, 0x5f, 0x54, 0x52, 0x41, 0x43, 0x4b, 0x5f, 0x50, 0x52, 0x45, 0x44, 0x45, 0x50,
-	0x4c, 0x4f, 0x59, 0x10, 0x03, 0x32, 0xe4, 0x13, 0x0a, 0x1a, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65,
+	0x4c, 0x4f, 0x59, 0x10, 0x03, 0x32, 0xa8, 0x15, 0x0a, 0x1a, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65,
 	0x72, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x50, 0x6c, 0x61, 0x6e, 0x65, 0x53, 0x65, 0x72,
 	0x76, 0x69, 0x63, 0x65, 0x12, 0x87, 0x01, 0x0a, 0x1e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43,
 	0x6c, 0x6f, 0x75, 0x64, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x43, 0x72, 0x65, 0x64,
@@ -3443,79 +3674,91 @@ var file_porter_v1_cluster_control_plane_proto_rawDesc = []byte{
 	0x74, 0x65, 0x72, 0x41, 0x70, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e,
 	0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x70, 0x70, 0x6c, 0x79, 0x50,
 	0x6f, 0x72, 0x74, 0x65, 0x72, 0x41, 0x70, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
-	0x22, 0x00, 0x12, 0x63, 0x0a, 0x12, 0x43, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x74, 0x41, 0x70, 0x70,
-	0x52, 0x65, 0x76, 0x69, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x24, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65,
-	0x72, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x74, 0x41, 0x70, 0x70, 0x52,
-	0x65, 0x76, 0x69, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x25,
-	0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x75, 0x72, 0x72, 0x65,
-	0x6e, 0x74, 0x41, 0x70, 0x70, 0x52, 0x65, 0x76, 0x69, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x5d, 0x0a, 0x10, 0x4c, 0x69, 0x73, 0x74, 0x41,
-	0x70, 0x70, 0x52, 0x65, 0x76, 0x69, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x22, 0x2e, 0x70, 0x6f,
-	0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x41, 0x70, 0x70, 0x52,
-	0x65, 0x76, 0x69, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
-	0x23, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74,
-	0x41, 0x70, 0x70, 0x52, 0x65, 0x76, 0x69, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x5a, 0x0a, 0x0f, 0x50, 0x72, 0x65, 0x64, 0x65, 0x70,
-	0x6c, 0x6f, 0x79, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x21, 0x2e, 0x70, 0x6f, 0x72, 0x74,
-	0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x72, 0x65, 0x64, 0x65, 0x70, 0x6c, 0x6f, 0x79, 0x53,
-	0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x22, 0x2e, 0x70,
-	0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x72, 0x65, 0x64, 0x65, 0x70, 0x6c,
-	0x6f, 0x79, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
-	0x22, 0x00, 0x12, 0x81, 0x01, 0x0a, 0x1b, 0x44, 0x6f, 0x63, 0x6b, 0x65, 0x72, 0x43, 0x6f, 0x6e,
-	0x66, 0x69, 0x67, 0x46, 0x69, 0x6c, 0x65, 0x46, 0x6f, 0x72, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74,
-	0x72, 0x79, 0x12, 0x2d, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x44,
-	0x6f, 0x63, 0x6b, 0x65, 0x72, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x46, 0x69, 0x6c, 0x65, 0x46,
-	0x6f, 0x72, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x1a, 0x2e, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x6f,
-	0x63, 0x6b, 0x65, 0x72, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x46, 0x69, 0x6c, 0x65, 0x46, 0x6f,
-	0x72, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x22, 0x03, 0x88, 0x02, 0x01, 0x12, 0x69, 0x0a, 0x13, 0x45, 0x43, 0x52, 0x54, 0x6f, 0x6b,
-	0x65, 0x6e, 0x46, 0x6f, 0x72, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x12, 0x25, 0x2e,
-	0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x43, 0x52, 0x54, 0x6f, 0x6b,
-	0x65, 0x6e, 0x46, 0x6f, 0x72, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x52, 0x65, 0x71,
-	0x75, 0x65, 0x73, 0x74, 0x1a, 0x26, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31,
-	0x2e, 0x45, 0x43, 0x52, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x46, 0x6f, 0x72, 0x52, 0x65, 0x67, 0x69,
-	0x73, 0x74, 0x72, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x03, 0x88, 0x02,
-	0x01, 0x12, 0x6f, 0x0a, 0x15, 0x41, 0x73, 0x73, 0x75, 0x6d, 0x65, 0x52, 0x6f, 0x6c, 0x65, 0x43,
-	0x72, 0x65, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x61, 0x6c, 0x73, 0x12, 0x27, 0x2e, 0x70, 0x6f, 0x72,
+	0x22, 0x00, 0x12, 0x5a, 0x0a, 0x0f, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x6f, 0x72, 0x74,
+	0x65, 0x72, 0x41, 0x70, 0x70, 0x12, 0x21, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76,
+	0x31, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x41, 0x70,
+	0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x22, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65,
+	0x72, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x6f, 0x72, 0x74, 0x65,
+	0x72, 0x41, 0x70, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x66,
+	0x0a, 0x13, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x41, 0x70, 0x70, 0x44, 0x65, 0x70, 0x6c, 0x6f,
+	0x79, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x25, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76,
+	0x31, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x41, 0x70, 0x70, 0x44, 0x65, 0x70, 0x6c, 0x6f,
+	0x79, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x26, 0x2e, 0x70,
+	0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x41,
+	0x70, 0x70, 0x44, 0x65, 0x70, 0x6c, 0x6f, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x63, 0x0a, 0x12, 0x43, 0x75, 0x72, 0x72, 0x65, 0x6e,
+	0x74, 0x41, 0x70, 0x70, 0x52, 0x65, 0x76, 0x69, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x24, 0x2e, 0x70,
+	0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x74,
+	0x41, 0x70, 0x70, 0x52, 0x65, 0x76, 0x69, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x1a, 0x25, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x43,
+	0x75, 0x72, 0x72, 0x65, 0x6e, 0x74, 0x41, 0x70, 0x70, 0x52, 0x65, 0x76, 0x69, 0x73, 0x69, 0x6f,
+	0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x5d, 0x0a, 0x10, 0x4c,
+	0x69, 0x73, 0x74, 0x41, 0x70, 0x70, 0x52, 0x65, 0x76, 0x69, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x12,
+	0x22, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74,
+	0x41, 0x70, 0x70, 0x52, 0x65, 0x76, 0x69, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x1a, 0x23, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e,
+	0x4c, 0x69, 0x73, 0x74, 0x41, 0x70, 0x70, 0x52, 0x65, 0x76, 0x69, 0x73, 0x69, 0x6f, 0x6e, 0x73,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x5a, 0x0a, 0x0f, 0x50, 0x72,
+	0x65, 0x64, 0x65, 0x70, 0x6c, 0x6f, 0x79, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x21, 0x2e,
+	0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x72, 0x65, 0x64, 0x65, 0x70,
+	0x6c, 0x6f, 0x79, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x22, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x72, 0x65,
+	0x64, 0x65, 0x70, 0x6c, 0x6f, 0x79, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x81, 0x01, 0x0a, 0x1b, 0x44, 0x6f, 0x63, 0x6b, 0x65,
+	0x72, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x46, 0x69, 0x6c, 0x65, 0x46, 0x6f, 0x72, 0x52, 0x65,
+	0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x12, 0x2d, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e,
+	0x76, 0x31, 0x2e, 0x44, 0x6f, 0x63, 0x6b, 0x65, 0x72, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x46,
+	0x69, 0x6c, 0x65, 0x46, 0x6f, 0x72, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2e, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76,
+	0x31, 0x2e, 0x44, 0x6f, 0x63, 0x6b, 0x65, 0x72, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x46, 0x69,
+	0x6c, 0x65, 0x46, 0x6f, 0x72, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x03, 0x88, 0x02, 0x01, 0x12, 0x69, 0x0a, 0x13, 0x45, 0x43,
+	0x52, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x46, 0x6f, 0x72, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72,
+	0x79, 0x12, 0x25, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x43,
+	0x52, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x46, 0x6f, 0x72, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72,
+	0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x26, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65,
+	0x72, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x43, 0x52, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x46, 0x6f, 0x72,
+	0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x22, 0x03, 0x88, 0x02, 0x01, 0x12, 0x6f, 0x0a, 0x15, 0x41, 0x73, 0x73, 0x75, 0x6d, 0x65, 0x52,
+	0x6f, 0x6c, 0x65, 0x43, 0x72, 0x65, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x61, 0x6c, 0x73, 0x12, 0x27,
+	0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x73, 0x73, 0x75, 0x6d,
+	0x65, 0x52, 0x6f, 0x6c, 0x65, 0x43, 0x72, 0x65, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x61, 0x6c, 0x73,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x28, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72,
+	0x2e, 0x76, 0x31, 0x2e, 0x41, 0x73, 0x73, 0x75, 0x6d, 0x65, 0x52, 0x6f, 0x6c, 0x65, 0x43, 0x72,
+	0x65, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x61, 0x6c, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x22, 0x03, 0x88, 0x02, 0x01, 0x12, 0x72, 0x0a, 0x16, 0x41, 0x73, 0x73, 0x75, 0x6d, 0x65,
+	0x52, 0x6f, 0x6c, 0x65, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x73,
+	0x12, 0x28, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x73, 0x73,
+	0x75, 0x6d, 0x65, 0x52, 0x6f, 0x6c, 0x65, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x54, 0x61, 0x72, 0x67,
+	0x65, 0x74, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x29, 0x2e, 0x70, 0x6f, 0x72,
 	0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x73, 0x73, 0x75, 0x6d, 0x65, 0x52, 0x6f, 0x6c,
-	0x65, 0x43, 0x72, 0x65, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x61, 0x6c, 0x73, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x1a, 0x28, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e,
-	0x41, 0x73, 0x73, 0x75, 0x6d, 0x65, 0x52, 0x6f, 0x6c, 0x65, 0x43, 0x72, 0x65, 0x64, 0x65, 0x6e,
-	0x74, 0x69, 0x61, 0x6c, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x03, 0x88,
-	0x02, 0x01, 0x12, 0x72, 0x0a, 0x16, 0x41, 0x73, 0x73, 0x75, 0x6d, 0x65, 0x52, 0x6f, 0x6c, 0x65,
-	0x43, 0x68, 0x61, 0x69, 0x6e, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x73, 0x12, 0x28, 0x2e, 0x70,
-	0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x73, 0x73, 0x75, 0x6d, 0x65, 0x52,
-	0x6f, 0x6c, 0x65, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x73, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x29, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e,
-	0x76, 0x31, 0x2e, 0x41, 0x73, 0x73, 0x75, 0x6d, 0x65, 0x52, 0x6f, 0x6c, 0x65, 0x43, 0x68, 0x61,
-	0x69, 0x6e, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x22, 0x03, 0x88, 0x02, 0x01, 0x12, 0x78, 0x0a, 0x18, 0x43, 0x65, 0x72, 0x74, 0x69, 0x66,
-	0x69, 0x63, 0x61, 0x74, 0x65, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x44, 0x61,
-	0x74, 0x61, 0x12, 0x2a, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x43,
+	0x65, 0x43, 0x68, 0x61, 0x69, 0x6e, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x73, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x03, 0x88, 0x02, 0x01, 0x12, 0x78, 0x0a, 0x18, 0x43, 0x65,
+	0x72, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x65, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69,
+	0x74, 0x79, 0x44, 0x61, 0x74, 0x61, 0x12, 0x2a, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e,
+	0x76, 0x31, 0x2e, 0x43, 0x65, 0x72, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x65, 0x41, 0x75,
+	0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x44, 0x61, 0x74, 0x61, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x1a, 0x2b, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x43,
 	0x65, 0x72, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x65, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72,
-	0x69, 0x74, 0x79, 0x44, 0x61, 0x74, 0x61, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2b,
-	0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x65, 0x72, 0x74, 0x69,
-	0x66, 0x69, 0x63, 0x61, 0x74, 0x65, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x74, 0x79, 0x44,
-	0x61, 0x74, 0x61, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x03, 0x88, 0x02, 0x01,
-	0x12, 0x5a, 0x0a, 0x0e, 0x45, 0x4b, 0x53, 0x42, 0x65, 0x61, 0x72, 0x65, 0x72, 0x54, 0x6f, 0x6b,
-	0x65, 0x6e, 0x12, 0x20, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x45,
-	0x4b, 0x53, 0x42, 0x65, 0x61, 0x72, 0x65, 0x72, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x52, 0x65, 0x71,
-	0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31,
-	0x2e, 0x45, 0x4b, 0x53, 0x42, 0x65, 0x61, 0x72, 0x65, 0x72, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x52,
-	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x03, 0x88, 0x02, 0x01, 0x42, 0xb3, 0x01, 0x0a,
-	0x0d, 0x63, 0x6f, 0x6d, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x42, 0x18,
-	0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x50, 0x6c,
-	0x61, 0x6e, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x43, 0x67, 0x69, 0x74, 0x68,
-	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2d, 0x64, 0x65,
-	0x76, 0x2f, 0x61, 0x70, 0x69, 0x2d, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x73, 0x2f,
-	0x67, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x65, 0x64, 0x2f, 0x67, 0x6f, 0x2f, 0x70, 0x6f, 0x72,
-	0x74, 0x65, 0x72, 0x2f, 0x76, 0x31, 0x3b, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x76, 0x31, 0xa2,
-	0x02, 0x03, 0x50, 0x58, 0x58, 0xaa, 0x02, 0x09, 0x50, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x56,
-	0x31, 0xca, 0x02, 0x09, 0x50, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x15,
-	0x50, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74,
-	0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0a, 0x50, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x3a, 0x3a,
-	0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x69, 0x74, 0x79, 0x44, 0x61, 0x74, 0x61, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22,
+	0x03, 0x88, 0x02, 0x01, 0x12, 0x5a, 0x0a, 0x0e, 0x45, 0x4b, 0x53, 0x42, 0x65, 0x61, 0x72, 0x65,
+	0x72, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x12, 0x20, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e,
+	0x76, 0x31, 0x2e, 0x45, 0x4b, 0x53, 0x42, 0x65, 0x61, 0x72, 0x65, 0x72, 0x54, 0x6f, 0x6b, 0x65,
+	0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65,
+	0x72, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x4b, 0x53, 0x42, 0x65, 0x61, 0x72, 0x65, 0x72, 0x54, 0x6f,
+	0x6b, 0x65, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x03, 0x88, 0x02, 0x01,
+	0x42, 0xb3, 0x01, 0x0a, 0x0d, 0x63, 0x6f, 0x6d, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e,
+	0x76, 0x31, 0x42, 0x18, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x43, 0x6f, 0x6e, 0x74, 0x72,
+	0x6f, 0x6c, 0x50, 0x6c, 0x61, 0x6e, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x43,
+	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x70, 0x6f, 0x72, 0x74, 0x65,
+	0x72, 0x2d, 0x64, 0x65, 0x76, 0x2f, 0x61, 0x70, 0x69, 0x2d, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61,
+	0x63, 0x74, 0x73, 0x2f, 0x67, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x65, 0x64, 0x2f, 0x67, 0x6f,
+	0x2f, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2f, 0x76, 0x31, 0x3b, 0x70, 0x6f, 0x72, 0x74, 0x65,
+	0x72, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x50, 0x58, 0x58, 0xaa, 0x02, 0x09, 0x50, 0x6f, 0x72, 0x74,
+	0x65, 0x72, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x09, 0x50, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x5c, 0x56,
+	0x31, 0xe2, 0x02, 0x15, 0x50, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50,
+	0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0a, 0x50, 0x6f, 0x72, 0x74,
+	0x65, 0x72, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -3531,7 +3774,7 @@ func file_porter_v1_cluster_control_plane_proto_rawDescGZIP() []byte {
 }
 
 var file_porter_v1_cluster_control_plane_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_porter_v1_cluster_control_plane_proto_msgTypes = make([]protoimpl.MessageInfo, 50)
+var file_porter_v1_cluster_control_plane_proto_msgTypes = make([]protoimpl.MessageInfo, 54)
 var file_porter_v1_cluster_control_plane_proto_goTypes = []interface{}{
 	(EnumPredeployStatus)(0),                    // 0: porter.v1.EnumPredeployStatus
 	(EnumCLIAction)(0),                          // 1: porter.v1.EnumCLIAction
@@ -3565,62 +3808,66 @@ var file_porter_v1_cluster_control_plane_proto_goTypes = []interface{}{
 	(*ValidatePorterAppResponse)(nil),           // 29: porter.v1.ValidatePorterAppResponse
 	(*ApplyPorterAppRequest)(nil),               // 30: porter.v1.ApplyPorterAppRequest
 	(*ApplyPorterAppResponse)(nil),              // 31: porter.v1.ApplyPorterAppResponse
-	(*CurrentAppRevisionRequest)(nil),           // 32: porter.v1.CurrentAppRevisionRequest
-	(*AppRevision)(nil),                         // 33: porter.v1.AppRevision
-	(*CurrentAppRevisionResponse)(nil),          // 34: porter.v1.CurrentAppRevisionResponse
-	(*ListAppRevisionsRequest)(nil),             // 35: porter.v1.ListAppRevisionsRequest
-	(*ListAppRevisionsResponse)(nil),            // 36: porter.v1.ListAppRevisionsResponse
-	(*PredeployStatusRequest)(nil),              // 37: porter.v1.PredeployStatusRequest
-	(*PredeployStatusResponse)(nil),             // 38: porter.v1.PredeployStatusResponse
-	(*EKSBearerTokenRequest)(nil),               // 39: porter.v1.EKSBearerTokenRequest
-	(*EKSBearerTokenResponse)(nil),              // 40: porter.v1.EKSBearerTokenResponse
-	(*CertificateAuthorityDataRequest)(nil),     // 41: porter.v1.CertificateAuthorityDataRequest
-	(*CertificateAuthorityDataResponse)(nil),    // 42: porter.v1.CertificateAuthorityDataResponse
-	(*AssumeRoleChainTargetsRequest)(nil),       // 43: porter.v1.AssumeRoleChainTargetsRequest
-	(*AssumeRoleChainTargetsResponse)(nil),      // 44: porter.v1.AssumeRoleChainTargetsResponse
-	(*ECRTokenForRegistryRequest)(nil),          // 45: porter.v1.ECRTokenForRegistryRequest
-	(*ECRTokenForRegistryResponse)(nil),         // 46: porter.v1.ECRTokenForRegistryResponse
-	(*AssumeRoleCredentialsRequest)(nil),        // 47: porter.v1.AssumeRoleCredentialsRequest
-	(*AssumeRoleCredentialsResponse)(nil),       // 48: porter.v1.AssumeRoleCredentialsResponse
-	(*DockerConfigFileForRegistryRequest)(nil),  // 49: porter.v1.DockerConfigFileForRegistryRequest
-	(*DockerConfigFileForRegistryResponse)(nil), // 50: porter.v1.DockerConfigFileForRegistryResponse
-	nil,                           // 51: porter.v1.PreflightCheckResponse.PreflightChecksEntry
-	(EnumCloudProvider)(0),        // 52: porter.v1.EnumCloudProvider
-	(*GKEPreflightValues)(nil),    // 53: porter.v1.GKEPreflightValues
-	(*Contract)(nil),              // 54: porter.v1.Contract
-	(*ContractRevision)(nil),      // 55: porter.v1.ContractRevision
-	(*timestamppb.Timestamp)(nil), // 56: google.protobuf.Timestamp
-	(*PorterApp)(nil),             // 57: porter.v1.PorterApp
-	(*AssumeRoleChainLink)(nil),   // 58: porter.v1.AssumeRoleChainLink
-	(*Error)(nil),                 // 59: porter.v1.Error
-	(*UpdateCloudProviderCredentialsRequest)(nil),  // 60: porter.v1.UpdateCloudProviderCredentialsRequest
-	(*UpdateCloudProviderCredentialsResponse)(nil), // 61: porter.v1.UpdateCloudProviderCredentialsResponse
+	(*DeletePorterAppRequest)(nil),              // 32: porter.v1.DeletePorterAppRequest
+	(*DeletePorterAppResponse)(nil),             // 33: porter.v1.DeletePorterAppResponse
+	(*DeleteAppDeploymentRequest)(nil),          // 34: porter.v1.DeleteAppDeploymentRequest
+	(*DeleteAppDeploymentResponse)(nil),         // 35: porter.v1.DeleteAppDeploymentResponse
+	(*CurrentAppRevisionRequest)(nil),           // 36: porter.v1.CurrentAppRevisionRequest
+	(*AppRevision)(nil),                         // 37: porter.v1.AppRevision
+	(*CurrentAppRevisionResponse)(nil),          // 38: porter.v1.CurrentAppRevisionResponse
+	(*ListAppRevisionsRequest)(nil),             // 39: porter.v1.ListAppRevisionsRequest
+	(*ListAppRevisionsResponse)(nil),            // 40: porter.v1.ListAppRevisionsResponse
+	(*PredeployStatusRequest)(nil),              // 41: porter.v1.PredeployStatusRequest
+	(*PredeployStatusResponse)(nil),             // 42: porter.v1.PredeployStatusResponse
+	(*EKSBearerTokenRequest)(nil),               // 43: porter.v1.EKSBearerTokenRequest
+	(*EKSBearerTokenResponse)(nil),              // 44: porter.v1.EKSBearerTokenResponse
+	(*CertificateAuthorityDataRequest)(nil),     // 45: porter.v1.CertificateAuthorityDataRequest
+	(*CertificateAuthorityDataResponse)(nil),    // 46: porter.v1.CertificateAuthorityDataResponse
+	(*AssumeRoleChainTargetsRequest)(nil),       // 47: porter.v1.AssumeRoleChainTargetsRequest
+	(*AssumeRoleChainTargetsResponse)(nil),      // 48: porter.v1.AssumeRoleChainTargetsResponse
+	(*ECRTokenForRegistryRequest)(nil),          // 49: porter.v1.ECRTokenForRegistryRequest
+	(*ECRTokenForRegistryResponse)(nil),         // 50: porter.v1.ECRTokenForRegistryResponse
+	(*AssumeRoleCredentialsRequest)(nil),        // 51: porter.v1.AssumeRoleCredentialsRequest
+	(*AssumeRoleCredentialsResponse)(nil),       // 52: porter.v1.AssumeRoleCredentialsResponse
+	(*DockerConfigFileForRegistryRequest)(nil),  // 53: porter.v1.DockerConfigFileForRegistryRequest
+	(*DockerConfigFileForRegistryResponse)(nil), // 54: porter.v1.DockerConfigFileForRegistryResponse
+	nil,                           // 55: porter.v1.PreflightCheckResponse.PreflightChecksEntry
+	(EnumCloudProvider)(0),        // 56: porter.v1.EnumCloudProvider
+	(*GKEPreflightValues)(nil),    // 57: porter.v1.GKEPreflightValues
+	(*Contract)(nil),              // 58: porter.v1.Contract
+	(*ContractRevision)(nil),      // 59: porter.v1.ContractRevision
+	(*timestamppb.Timestamp)(nil), // 60: google.protobuf.Timestamp
+	(*PorterApp)(nil),             // 61: porter.v1.PorterApp
+	(*AssumeRoleChainLink)(nil),   // 62: porter.v1.AssumeRoleChainLink
+	(*Error)(nil),                 // 63: porter.v1.Error
+	(*UpdateCloudProviderCredentialsRequest)(nil),  // 64: porter.v1.UpdateCloudProviderCredentialsRequest
+	(*UpdateCloudProviderCredentialsResponse)(nil), // 65: porter.v1.UpdateCloudProviderCredentialsResponse
 }
 var file_porter_v1_cluster_control_plane_proto_depIdxs = []int32{
-	52, // 0: porter.v1.PreflightCheckRequest.cloud_provider:type_name -> porter.v1.EnumCloudProvider
-	53, // 1: porter.v1.PreflightCheckRequest.gke_preflight_values:type_name -> porter.v1.GKEPreflightValues
-	51, // 2: porter.v1.PreflightCheckResponse.preflight_checks:type_name -> porter.v1.PreflightCheckResponse.PreflightChecksEntry
-	54, // 3: porter.v1.UpdateContractRequest.contract:type_name -> porter.v1.Contract
-	55, // 4: porter.v1.UpdateContractResponse.contract_revision:type_name -> porter.v1.ContractRevision
-	55, // 5: porter.v1.DeleteClusterRequest.contract_revision:type_name -> porter.v1.ContractRevision
+	56, // 0: porter.v1.PreflightCheckRequest.cloud_provider:type_name -> porter.v1.EnumCloudProvider
+	57, // 1: porter.v1.PreflightCheckRequest.gke_preflight_values:type_name -> porter.v1.GKEPreflightValues
+	55, // 2: porter.v1.PreflightCheckResponse.preflight_checks:type_name -> porter.v1.PreflightCheckResponse.PreflightChecksEntry
+	58, // 3: porter.v1.UpdateContractRequest.contract:type_name -> porter.v1.Contract
+	59, // 4: porter.v1.UpdateContractResponse.contract_revision:type_name -> porter.v1.ContractRevision
+	59, // 5: porter.v1.DeleteClusterRequest.contract_revision:type_name -> porter.v1.ContractRevision
 	20, // 6: porter.v1.ListRepositoriesForRegistryResponse.repositories:type_name -> porter.v1.Repository
 	23, // 7: porter.v1.ListImagesForRepositoryResponse.images:type_name -> porter.v1.Image
-	56, // 8: porter.v1.TokenForRegistryResponse.expiry:type_name -> google.protobuf.Timestamp
-	55, // 9: porter.v1.ReadContractRequest.contract_revision:type_name -> porter.v1.ContractRevision
-	57, // 10: porter.v1.ValidatePorterAppRequest.app:type_name -> porter.v1.PorterApp
-	57, // 11: porter.v1.ValidatePorterAppResponse.app:type_name -> porter.v1.PorterApp
-	57, // 12: porter.v1.ApplyPorterAppRequest.app:type_name -> porter.v1.PorterApp
+	60, // 8: porter.v1.TokenForRegistryResponse.expiry:type_name -> google.protobuf.Timestamp
+	59, // 9: porter.v1.ReadContractRequest.contract_revision:type_name -> porter.v1.ContractRevision
+	61, // 10: porter.v1.ValidatePorterAppRequest.app:type_name -> porter.v1.PorterApp
+	61, // 11: porter.v1.ValidatePorterAppResponse.app:type_name -> porter.v1.PorterApp
+	61, // 12: porter.v1.ApplyPorterAppRequest.app:type_name -> porter.v1.PorterApp
 	1,  // 13: porter.v1.ApplyPorterAppResponse.cli_action:type_name -> porter.v1.EnumCLIAction
-	57, // 14: porter.v1.AppRevision.app:type_name -> porter.v1.PorterApp
-	56, // 15: porter.v1.AppRevision.created_at:type_name -> google.protobuf.Timestamp
-	56, // 16: porter.v1.AppRevision.updated_at:type_name -> google.protobuf.Timestamp
-	33, // 17: porter.v1.CurrentAppRevisionResponse.app_revision:type_name -> porter.v1.AppRevision
-	33, // 18: porter.v1.ListAppRevisionsResponse.app_revisions:type_name -> porter.v1.AppRevision
+	61, // 14: porter.v1.AppRevision.app:type_name -> porter.v1.PorterApp
+	60, // 15: porter.v1.AppRevision.created_at:type_name -> google.protobuf.Timestamp
+	60, // 16: porter.v1.AppRevision.updated_at:type_name -> google.protobuf.Timestamp
+	37, // 17: porter.v1.CurrentAppRevisionResponse.app_revision:type_name -> porter.v1.AppRevision
+	37, // 18: porter.v1.ListAppRevisionsResponse.app_revisions:type_name -> porter.v1.AppRevision
 	0,  // 19: porter.v1.PredeployStatusResponse.predeploy_status:type_name -> porter.v1.EnumPredeployStatus
-	58, // 20: porter.v1.AssumeRoleChainTargetsResponse.chain_links:type_name -> porter.v1.AssumeRoleChainLink
-	56, // 21: porter.v1.ECRTokenForRegistryResponse.expiry:type_name -> google.protobuf.Timestamp
-	59, // 22: porter.v1.PreflightCheckResponse.PreflightChecksEntry.value:type_name -> porter.v1.Error
-	60, // 23: porter.v1.ClusterControlPlaneService.UpdateCloudProviderCredentials:input_type -> porter.v1.UpdateCloudProviderCredentialsRequest
+	62, // 20: porter.v1.AssumeRoleChainTargetsResponse.chain_links:type_name -> porter.v1.AssumeRoleChainLink
+	60, // 21: porter.v1.ECRTokenForRegistryResponse.expiry:type_name -> google.protobuf.Timestamp
+	63, // 22: porter.v1.PreflightCheckResponse.PreflightChecksEntry.value:type_name -> porter.v1.Error
+	64, // 23: porter.v1.ClusterControlPlaneService.UpdateCloudProviderCredentials:input_type -> porter.v1.UpdateCloudProviderCredentialsRequest
 	4,  // 24: porter.v1.ClusterControlPlaneService.QuotaPreflightCheck:input_type -> porter.v1.QuotaPreflightCheckRequest
 	2,  // 25: porter.v1.ClusterControlPlaneService.PreflightCheck:input_type -> porter.v1.PreflightCheckRequest
 	6,  // 26: porter.v1.ClusterControlPlaneService.CreateAssumeRoleChain:input_type -> porter.v1.CreateAssumeRoleChainRequest
@@ -3635,41 +3882,45 @@ var file_porter_v1_cluster_control_plane_proto_depIdxs = []int32{
 	21, // 35: porter.v1.ClusterControlPlaneService.ListImagesForRepository:input_type -> porter.v1.ListImagesForRepositoryRequest
 	28, // 36: porter.v1.ClusterControlPlaneService.ValidatePorterApp:input_type -> porter.v1.ValidatePorterAppRequest
 	30, // 37: porter.v1.ClusterControlPlaneService.ApplyPorterApp:input_type -> porter.v1.ApplyPorterAppRequest
-	32, // 38: porter.v1.ClusterControlPlaneService.CurrentAppRevision:input_type -> porter.v1.CurrentAppRevisionRequest
-	35, // 39: porter.v1.ClusterControlPlaneService.ListAppRevisions:input_type -> porter.v1.ListAppRevisionsRequest
-	37, // 40: porter.v1.ClusterControlPlaneService.PredeployStatus:input_type -> porter.v1.PredeployStatusRequest
-	49, // 41: porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry:input_type -> porter.v1.DockerConfigFileForRegistryRequest
-	45, // 42: porter.v1.ClusterControlPlaneService.ECRTokenForRegistry:input_type -> porter.v1.ECRTokenForRegistryRequest
-	47, // 43: porter.v1.ClusterControlPlaneService.AssumeRoleCredentials:input_type -> porter.v1.AssumeRoleCredentialsRequest
-	43, // 44: porter.v1.ClusterControlPlaneService.AssumeRoleChainTargets:input_type -> porter.v1.AssumeRoleChainTargetsRequest
-	41, // 45: porter.v1.ClusterControlPlaneService.CertificateAuthorityData:input_type -> porter.v1.CertificateAuthorityDataRequest
-	39, // 46: porter.v1.ClusterControlPlaneService.EKSBearerToken:input_type -> porter.v1.EKSBearerTokenRequest
-	61, // 47: porter.v1.ClusterControlPlaneService.UpdateCloudProviderCredentials:output_type -> porter.v1.UpdateCloudProviderCredentialsResponse
-	5,  // 48: porter.v1.ClusterControlPlaneService.QuotaPreflightCheck:output_type -> porter.v1.QuotaPreflightCheckResponse
-	3,  // 49: porter.v1.ClusterControlPlaneService.PreflightCheck:output_type -> porter.v1.PreflightCheckResponse
-	7,  // 50: porter.v1.ClusterControlPlaneService.CreateAssumeRoleChain:output_type -> porter.v1.CreateAssumeRoleChainResponse
-	9,  // 51: porter.v1.ClusterControlPlaneService.SaveAzureCredentials:output_type -> porter.v1.SaveAzureCredentialsResponse
-	11, // 52: porter.v1.ClusterControlPlaneService.KubeConfigForCluster:output_type -> porter.v1.KubeConfigForClusterResponse
-	13, // 53: porter.v1.ClusterControlPlaneService.UpdateContract:output_type -> porter.v1.UpdateContractResponse
-	27, // 54: porter.v1.ClusterControlPlaneService.ReadContract:output_type -> porter.v1.ReadContractResponse
-	15, // 55: porter.v1.ClusterControlPlaneService.ClusterStatus:output_type -> porter.v1.ClusterStatusResponse
-	17, // 56: porter.v1.ClusterControlPlaneService.DeleteCluster:output_type -> porter.v1.DeleteClusterResponse
-	25, // 57: porter.v1.ClusterControlPlaneService.TokenForRegistry:output_type -> porter.v1.TokenForRegistryResponse
-	19, // 58: porter.v1.ClusterControlPlaneService.ListRepositoriesForRegistry:output_type -> porter.v1.ListRepositoriesForRegistryResponse
-	22, // 59: porter.v1.ClusterControlPlaneService.ListImagesForRepository:output_type -> porter.v1.ListImagesForRepositoryResponse
-	29, // 60: porter.v1.ClusterControlPlaneService.ValidatePorterApp:output_type -> porter.v1.ValidatePorterAppResponse
-	31, // 61: porter.v1.ClusterControlPlaneService.ApplyPorterApp:output_type -> porter.v1.ApplyPorterAppResponse
-	34, // 62: porter.v1.ClusterControlPlaneService.CurrentAppRevision:output_type -> porter.v1.CurrentAppRevisionResponse
-	36, // 63: porter.v1.ClusterControlPlaneService.ListAppRevisions:output_type -> porter.v1.ListAppRevisionsResponse
-	38, // 64: porter.v1.ClusterControlPlaneService.PredeployStatus:output_type -> porter.v1.PredeployStatusResponse
-	50, // 65: porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry:output_type -> porter.v1.DockerConfigFileForRegistryResponse
-	46, // 66: porter.v1.ClusterControlPlaneService.ECRTokenForRegistry:output_type -> porter.v1.ECRTokenForRegistryResponse
-	48, // 67: porter.v1.ClusterControlPlaneService.AssumeRoleCredentials:output_type -> porter.v1.AssumeRoleCredentialsResponse
-	44, // 68: porter.v1.ClusterControlPlaneService.AssumeRoleChainTargets:output_type -> porter.v1.AssumeRoleChainTargetsResponse
-	42, // 69: porter.v1.ClusterControlPlaneService.CertificateAuthorityData:output_type -> porter.v1.CertificateAuthorityDataResponse
-	40, // 70: porter.v1.ClusterControlPlaneService.EKSBearerToken:output_type -> porter.v1.EKSBearerTokenResponse
-	47, // [47:71] is the sub-list for method output_type
-	23, // [23:47] is the sub-list for method input_type
+	32, // 38: porter.v1.ClusterControlPlaneService.DeletePorterApp:input_type -> porter.v1.DeletePorterAppRequest
+	34, // 39: porter.v1.ClusterControlPlaneService.DeleteAppDeployment:input_type -> porter.v1.DeleteAppDeploymentRequest
+	36, // 40: porter.v1.ClusterControlPlaneService.CurrentAppRevision:input_type -> porter.v1.CurrentAppRevisionRequest
+	39, // 41: porter.v1.ClusterControlPlaneService.ListAppRevisions:input_type -> porter.v1.ListAppRevisionsRequest
+	41, // 42: porter.v1.ClusterControlPlaneService.PredeployStatus:input_type -> porter.v1.PredeployStatusRequest
+	53, // 43: porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry:input_type -> porter.v1.DockerConfigFileForRegistryRequest
+	49, // 44: porter.v1.ClusterControlPlaneService.ECRTokenForRegistry:input_type -> porter.v1.ECRTokenForRegistryRequest
+	51, // 45: porter.v1.ClusterControlPlaneService.AssumeRoleCredentials:input_type -> porter.v1.AssumeRoleCredentialsRequest
+	47, // 46: porter.v1.ClusterControlPlaneService.AssumeRoleChainTargets:input_type -> porter.v1.AssumeRoleChainTargetsRequest
+	45, // 47: porter.v1.ClusterControlPlaneService.CertificateAuthorityData:input_type -> porter.v1.CertificateAuthorityDataRequest
+	43, // 48: porter.v1.ClusterControlPlaneService.EKSBearerToken:input_type -> porter.v1.EKSBearerTokenRequest
+	65, // 49: porter.v1.ClusterControlPlaneService.UpdateCloudProviderCredentials:output_type -> porter.v1.UpdateCloudProviderCredentialsResponse
+	5,  // 50: porter.v1.ClusterControlPlaneService.QuotaPreflightCheck:output_type -> porter.v1.QuotaPreflightCheckResponse
+	3,  // 51: porter.v1.ClusterControlPlaneService.PreflightCheck:output_type -> porter.v1.PreflightCheckResponse
+	7,  // 52: porter.v1.ClusterControlPlaneService.CreateAssumeRoleChain:output_type -> porter.v1.CreateAssumeRoleChainResponse
+	9,  // 53: porter.v1.ClusterControlPlaneService.SaveAzureCredentials:output_type -> porter.v1.SaveAzureCredentialsResponse
+	11, // 54: porter.v1.ClusterControlPlaneService.KubeConfigForCluster:output_type -> porter.v1.KubeConfigForClusterResponse
+	13, // 55: porter.v1.ClusterControlPlaneService.UpdateContract:output_type -> porter.v1.UpdateContractResponse
+	27, // 56: porter.v1.ClusterControlPlaneService.ReadContract:output_type -> porter.v1.ReadContractResponse
+	15, // 57: porter.v1.ClusterControlPlaneService.ClusterStatus:output_type -> porter.v1.ClusterStatusResponse
+	17, // 58: porter.v1.ClusterControlPlaneService.DeleteCluster:output_type -> porter.v1.DeleteClusterResponse
+	25, // 59: porter.v1.ClusterControlPlaneService.TokenForRegistry:output_type -> porter.v1.TokenForRegistryResponse
+	19, // 60: porter.v1.ClusterControlPlaneService.ListRepositoriesForRegistry:output_type -> porter.v1.ListRepositoriesForRegistryResponse
+	22, // 61: porter.v1.ClusterControlPlaneService.ListImagesForRepository:output_type -> porter.v1.ListImagesForRepositoryResponse
+	29, // 62: porter.v1.ClusterControlPlaneService.ValidatePorterApp:output_type -> porter.v1.ValidatePorterAppResponse
+	31, // 63: porter.v1.ClusterControlPlaneService.ApplyPorterApp:output_type -> porter.v1.ApplyPorterAppResponse
+	33, // 64: porter.v1.ClusterControlPlaneService.DeletePorterApp:output_type -> porter.v1.DeletePorterAppResponse
+	35, // 65: porter.v1.ClusterControlPlaneService.DeleteAppDeployment:output_type -> porter.v1.DeleteAppDeploymentResponse
+	38, // 66: porter.v1.ClusterControlPlaneService.CurrentAppRevision:output_type -> porter.v1.CurrentAppRevisionResponse
+	40, // 67: porter.v1.ClusterControlPlaneService.ListAppRevisions:output_type -> porter.v1.ListAppRevisionsResponse
+	42, // 68: porter.v1.ClusterControlPlaneService.PredeployStatus:output_type -> porter.v1.PredeployStatusResponse
+	54, // 69: porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry:output_type -> porter.v1.DockerConfigFileForRegistryResponse
+	50, // 70: porter.v1.ClusterControlPlaneService.ECRTokenForRegistry:output_type -> porter.v1.ECRTokenForRegistryResponse
+	52, // 71: porter.v1.ClusterControlPlaneService.AssumeRoleCredentials:output_type -> porter.v1.AssumeRoleCredentialsResponse
+	48, // 72: porter.v1.ClusterControlPlaneService.AssumeRoleChainTargets:output_type -> porter.v1.AssumeRoleChainTargetsResponse
+	46, // 73: porter.v1.ClusterControlPlaneService.CertificateAuthorityData:output_type -> porter.v1.CertificateAuthorityDataResponse
+	44, // 74: porter.v1.ClusterControlPlaneService.EKSBearerToken:output_type -> porter.v1.EKSBearerTokenResponse
+	49, // [49:75] is the sub-list for method output_type
+	23, // [23:49] is the sub-list for method input_type
 	23, // [23:23] is the sub-list for extension type_name
 	23, // [23:23] is the sub-list for extension extendee
 	0,  // [0:23] is the sub-list for field type_name
@@ -4049,7 +4300,7 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			}
 		}
 		file_porter_v1_cluster_control_plane_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CurrentAppRevisionRequest); i {
+			switch v := v.(*DeletePorterAppRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4061,7 +4312,7 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			}
 		}
 		file_porter_v1_cluster_control_plane_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AppRevision); i {
+			switch v := v.(*DeletePorterAppResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4073,7 +4324,7 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			}
 		}
 		file_porter_v1_cluster_control_plane_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CurrentAppRevisionResponse); i {
+			switch v := v.(*DeleteAppDeploymentRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4085,7 +4336,7 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			}
 		}
 		file_porter_v1_cluster_control_plane_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListAppRevisionsRequest); i {
+			switch v := v.(*DeleteAppDeploymentResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4097,7 +4348,7 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			}
 		}
 		file_porter_v1_cluster_control_plane_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListAppRevisionsResponse); i {
+			switch v := v.(*CurrentAppRevisionRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4109,7 +4360,7 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			}
 		}
 		file_porter_v1_cluster_control_plane_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PredeployStatusRequest); i {
+			switch v := v.(*AppRevision); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4121,7 +4372,7 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			}
 		}
 		file_porter_v1_cluster_control_plane_proto_msgTypes[36].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*PredeployStatusResponse); i {
+			switch v := v.(*CurrentAppRevisionResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4133,7 +4384,7 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			}
 		}
 		file_porter_v1_cluster_control_plane_proto_msgTypes[37].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*EKSBearerTokenRequest); i {
+			switch v := v.(*ListAppRevisionsRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4145,7 +4396,7 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			}
 		}
 		file_porter_v1_cluster_control_plane_proto_msgTypes[38].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*EKSBearerTokenResponse); i {
+			switch v := v.(*ListAppRevisionsResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4157,7 +4408,7 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			}
 		}
 		file_porter_v1_cluster_control_plane_proto_msgTypes[39].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CertificateAuthorityDataRequest); i {
+			switch v := v.(*PredeployStatusRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4169,7 +4420,7 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			}
 		}
 		file_porter_v1_cluster_control_plane_proto_msgTypes[40].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CertificateAuthorityDataResponse); i {
+			switch v := v.(*PredeployStatusResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4181,7 +4432,7 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			}
 		}
 		file_porter_v1_cluster_control_plane_proto_msgTypes[41].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AssumeRoleChainTargetsRequest); i {
+			switch v := v.(*EKSBearerTokenRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4193,7 +4444,7 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			}
 		}
 		file_porter_v1_cluster_control_plane_proto_msgTypes[42].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AssumeRoleChainTargetsResponse); i {
+			switch v := v.(*EKSBearerTokenResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4205,7 +4456,7 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			}
 		}
 		file_porter_v1_cluster_control_plane_proto_msgTypes[43].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ECRTokenForRegistryRequest); i {
+			switch v := v.(*CertificateAuthorityDataRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4217,7 +4468,7 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			}
 		}
 		file_porter_v1_cluster_control_plane_proto_msgTypes[44].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ECRTokenForRegistryResponse); i {
+			switch v := v.(*CertificateAuthorityDataResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4229,7 +4480,7 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			}
 		}
 		file_porter_v1_cluster_control_plane_proto_msgTypes[45].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AssumeRoleCredentialsRequest); i {
+			switch v := v.(*AssumeRoleChainTargetsRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4241,7 +4492,7 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			}
 		}
 		file_porter_v1_cluster_control_plane_proto_msgTypes[46].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AssumeRoleCredentialsResponse); i {
+			switch v := v.(*AssumeRoleChainTargetsResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4253,7 +4504,7 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			}
 		}
 		file_porter_v1_cluster_control_plane_proto_msgTypes[47].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DockerConfigFileForRegistryRequest); i {
+			switch v := v.(*ECRTokenForRegistryRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4265,6 +4516,54 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			}
 		}
 		file_porter_v1_cluster_control_plane_proto_msgTypes[48].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ECRTokenForRegistryResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_porter_v1_cluster_control_plane_proto_msgTypes[49].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AssumeRoleCredentialsRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_porter_v1_cluster_control_plane_proto_msgTypes[50].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AssumeRoleCredentialsResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_porter_v1_cluster_control_plane_proto_msgTypes[51].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DockerConfigFileForRegistryRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_porter_v1_cluster_control_plane_proto_msgTypes[52].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DockerConfigFileForRegistryResponse); i {
 			case 0:
 				return &v.state
@@ -4286,7 +4585,7 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_porter_v1_cluster_control_plane_proto_rawDesc,
 			NumEnums:      2,
-			NumMessages:   50,
+			NumMessages:   54,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
