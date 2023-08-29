@@ -1207,7 +1207,7 @@ export declare class PredeployStatusRequest extends Message<PredeployStatusReque
   projectId: bigint;
 
   /**
-   * app_revision_id is the id of the PorterApp that is currently installed
+   * app_revision_id is the revision id of the PorterApp which should have its predeploy status checked
    *
    * @generated from field: string app_revision_id = 2;
    */
