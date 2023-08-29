@@ -381,6 +381,55 @@ export const ApplyPorterAppResponse = proto3.makeMessageType(
 );
 
 /**
+ * DeletePorterAppRequest is the request object when deleting a porter app from a given project
+ *
+ * @generated from message porter.v1.DeletePorterAppRequest
+ */
+export const DeletePorterAppRequest = proto3.makeMessageType(
+  "porter.v1.DeletePorterAppRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * DeletePorterAppResponse is the response object when deleting a porter app from a given project
+ *
+ * @generated from message porter.v1.DeletePorterAppResponse
+ */
+export const DeletePorterAppResponse = proto3.makeMessageType(
+  "porter.v1.DeletePorterAppResponse",
+  () => [
+    { no: 1, name: "app_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * DeleteAppDeploymentRequest is the request object when removing a porter app from a given deployment target
+ *
+ * @generated from message porter.v1.DeleteAppDeploymentRequest
+ */
+export const DeleteAppDeploymentRequest = proto3.makeMessageType(
+  "porter.v1.DeleteAppDeploymentRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * DeleteAppDeploymentResponse is the response object when removing a porter app from a given deployment target
+ *
+ * @generated from message porter.v1.DeleteAppDeploymentResponse
+ */
+export const DeleteAppDeploymentResponse = proto3.makeMessageType(
+  "porter.v1.DeleteAppDeploymentResponse",
+  [],
+);
+
+/**
  * @generated from message porter.v1.CurrentAppRevisionRequest
  */
 export const CurrentAppRevisionRequest = proto3.makeMessageType(
