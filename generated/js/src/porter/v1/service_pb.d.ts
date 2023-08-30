@@ -106,6 +106,13 @@ export declare class Service extends Message<Service> {
    */
   type: ServiceType;
 
+  /**
+   * absolute_name is the name that should be used verbatim on the cluster. If not specified, a name is generated from the app, service and service type.
+   *
+   * @generated from field: string absolute_name = 10;
+   */
+  absoluteName: string;
+
   constructor(data?: PartialMessage<Service>);
 
   static readonly runtime: typeof proto3;
