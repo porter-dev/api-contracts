@@ -30,6 +30,8 @@ message Service {
   }
   // type is the type of service
   ServiceType type = 9;
+  // absolute_name is the name that should be used verbatim on the cluster. If not specified, a name is generated from the app, service and service type.
+  string absolute_name = 10;
 }
 
 // WebServiceConfig is the configuration for a web service
