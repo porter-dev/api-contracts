@@ -8,7 +8,7 @@ import { EnumCloudProvider } from "./cluster_pb.js";
 import { GKEPreflightValues } from "./gke_pb.js";
 import { Error } from "./errors_pb.js";
 import { Contract, ContractRevision } from "./contract_pb.js";
-import { PorterApp } from "./porter_app_pb.js";
+import { Deletions, PorterApp } from "./porter_app_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
@@ -343,6 +343,7 @@ export const ValidatePorterAppRequest = proto3.makeMessageType(
     { no: 2, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "commit_sha", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "app", kind: "message", T: PorterApp },
+    { no: 5, name: "deletions", kind: "message", T: Deletions },
   ],
 );
 

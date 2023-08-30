@@ -71,6 +71,41 @@ export declare class PorterApp extends Message<PorterApp> {
 }
 
 /**
+ * Deletions contains all explicit deletions from a PorterApp
+ *
+ * @generated from message porter.v1.Deletions
+ */
+export declare class Deletions extends Message<Deletions> {
+  /**
+   * service_names is a list of service names to delete
+   *
+   * @generated from field: repeated string service_names = 1;
+   */
+  serviceNames: string[];
+
+  /**
+   * env_variable_names is a list of environment variable names to delete
+   *
+   * @generated from field: repeated string env_variable_names = 4;
+   */
+  envVariableNames: string[];
+
+  constructor(data?: PartialMessage<Deletions>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.Deletions";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Deletions;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Deletions;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Deletions;
+
+  static equals(a: Deletions | PlainMessage<Deletions> | undefined, b: Deletions | PlainMessage<Deletions> | undefined): boolean;
+}
+
+/**
  * Build is the build settings for the application
  *
  * @generated from message porter.v1.Build

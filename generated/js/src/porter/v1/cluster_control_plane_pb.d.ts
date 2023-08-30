@@ -9,7 +9,7 @@ import type { EnumCloudProvider } from "./cluster_pb.js";
 import type { GKEPreflightValues } from "./gke_pb.js";
 import type { Error } from "./errors_pb.js";
 import type { Contract, ContractRevision } from "./contract_pb.js";
-import type { PorterApp } from "./porter_app_pb.js";
+import type { Deletions, PorterApp } from "./porter_app_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
@@ -899,6 +899,11 @@ export declare class ValidatePorterAppRequest extends Message<ValidatePorterAppR
    * @generated from field: porter.v1.PorterApp app = 4;
    */
   app?: PorterApp;
+
+  /**
+   * @generated from field: porter.v1.Deletions deletions = 5;
+   */
+  deletions?: Deletions;
 
   constructor(data?: PartialMessage<ValidatePorterAppRequest>);
 

@@ -171,6 +171,7 @@ message ValidatePorterAppRequest {
   string deployment_target_id = 2;
   string commit_sha = 3;
   PorterApp app = 4;
+  Deletions deletions = 5;
 }
 
 message ValidatePorterAppResponse {
