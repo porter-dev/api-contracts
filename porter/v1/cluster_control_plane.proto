@@ -280,6 +280,16 @@ enum EnumPredeployStatus {
   ENUM_PREDEPLOY_STATUS_SUCCESSFUL = 3;
 }
 
+message DeploymentTargetDetailsRequest {
+  int64 project_id = 1;
+  string deployment_target_id = 2;
+}
+
+message DeploymentTargetDetailsResponse {
+  string namespace = 1;
+  int64 cluster_id = 2;
+}
+
 enum EnumCLIAction {
   ENUM_CLI_ACTION_UNSPECIFIED = 0;
   // ENUM_CLI_ACTION_NONE signals the CLI to do nothing after applying the PorterApp.
@@ -356,6 +366,10 @@ service ClusterControlPlaneService {
 
   // PredeployStatus returns the status of the predeploy job for a given app revision
   rpc PredeployStatus(PredeployStatusRequest) returns (PredeployStatusResponse) {}
+
+  // DeploymentTargetDetails returns the details of a deployment target job given the id.  This is a work-around to moving all namespace-related
+  // logic to CCP and should only be used to support metrics and logging (and confirming cluster RBAC).
+  rpc DeploymentTargetDetails(DeploymentTargetDetailsRequest) returns (DeploymentTargetDetailsResponse) {}
 
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
   // Deprecated. Use TokenForRegistry instead.

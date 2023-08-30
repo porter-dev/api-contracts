@@ -94,6 +94,9 @@ const (
 	// ClusterControlPlaneServicePredeployStatusProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's PredeployStatus RPC.
 	ClusterControlPlaneServicePredeployStatusProcedure = "/porter.v1.ClusterControlPlaneService/PredeployStatus"
+	// ClusterControlPlaneServiceDeploymentTargetDetailsProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's DeploymentTargetDetails RPC.
+	ClusterControlPlaneServiceDeploymentTargetDetailsProcedure = "/porter.v1.ClusterControlPlaneService/DeploymentTargetDetails"
 	// ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DockerConfigFileForRegistry RPC.
 	ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure = "/porter.v1.ClusterControlPlaneService/DockerConfigFileForRegistry"
@@ -163,6 +166,9 @@ type ClusterControlPlaneServiceClient interface {
 	ListAppRevisions(context.Context, *connect.Request[v1.ListAppRevisionsRequest]) (*connect.Response[v1.ListAppRevisionsResponse], error)
 	// PredeployStatus returns the status of the predeploy job for a given app revision
 	PredeployStatus(context.Context, *connect.Request[v1.PredeployStatusRequest]) (*connect.Response[v1.PredeployStatusResponse], error)
+	// DeploymentTargetDetails returns the details of a deployment target job given the id.  This is a work-around to moving all namespace-related
+	// logic to CCP and should only be used to support metrics and logging (and confirming cluster RBAC).
+	DeploymentTargetDetails(context.Context, *connect.Request[v1.DeploymentTargetDetailsRequest]) (*connect.Response[v1.DeploymentTargetDetailsResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -306,6 +312,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServicePredeployStatusProcedure,
 			opts...,
 		),
+		deploymentTargetDetails: connect.NewClient[v1.DeploymentTargetDetailsRequest, v1.DeploymentTargetDetailsResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceDeploymentTargetDetailsProcedure,
+			opts...,
+		),
 		dockerConfigFileForRegistry: connect.NewClient[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
@@ -361,6 +372,7 @@ type clusterControlPlaneServiceClient struct {
 	currentAppRevision             *connect.Client[v1.CurrentAppRevisionRequest, v1.CurrentAppRevisionResponse]
 	listAppRevisions               *connect.Client[v1.ListAppRevisionsRequest, v1.ListAppRevisionsResponse]
 	predeployStatus                *connect.Client[v1.PredeployStatusRequest, v1.PredeployStatusResponse]
+	deploymentTargetDetails        *connect.Client[v1.DeploymentTargetDetailsRequest, v1.DeploymentTargetDetailsResponse]
 	dockerConfigFileForRegistry    *connect.Client[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse]
 	eCRTokenForRegistry            *connect.Client[v1.ECRTokenForRegistryRequest, v1.ECRTokenForRegistryResponse]
 	assumeRoleCredentials          *connect.Client[v1.AssumeRoleCredentialsRequest, v1.AssumeRoleCredentialsResponse]
@@ -477,6 +489,11 @@ func (c *clusterControlPlaneServiceClient) PredeployStatus(ctx context.Context, 
 	return c.predeployStatus.CallUnary(ctx, req)
 }
 
+// DeploymentTargetDetails calls porter.v1.ClusterControlPlaneService.DeploymentTargetDetails.
+func (c *clusterControlPlaneServiceClient) DeploymentTargetDetails(ctx context.Context, req *connect.Request[v1.DeploymentTargetDetailsRequest]) (*connect.Response[v1.DeploymentTargetDetailsResponse], error) {
+	return c.deploymentTargetDetails.CallUnary(ctx, req)
+}
+
 // DockerConfigFileForRegistry calls
 // porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry.
 //
@@ -569,6 +586,9 @@ type ClusterControlPlaneServiceHandler interface {
 	ListAppRevisions(context.Context, *connect.Request[v1.ListAppRevisionsRequest]) (*connect.Response[v1.ListAppRevisionsResponse], error)
 	// PredeployStatus returns the status of the predeploy job for a given app revision
 	PredeployStatus(context.Context, *connect.Request[v1.PredeployStatusRequest]) (*connect.Response[v1.PredeployStatusResponse], error)
+	// DeploymentTargetDetails returns the details of a deployment target job given the id.  This is a work-around to moving all namespace-related
+	// logic to CCP and should only be used to support metrics and logging (and confirming cluster RBAC).
+	DeploymentTargetDetails(context.Context, *connect.Request[v1.DeploymentTargetDetailsRequest]) (*connect.Response[v1.DeploymentTargetDetailsResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -708,6 +728,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.PredeployStatus,
 		opts...,
 	)
+	clusterControlPlaneServiceDeploymentTargetDetailsHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceDeploymentTargetDetailsProcedure,
+		svc.DeploymentTargetDetails,
+		opts...,
+	)
 	clusterControlPlaneServiceDockerConfigFileForRegistryHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
 		svc.DockerConfigFileForRegistry,
@@ -780,6 +805,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceListAppRevisionsHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServicePredeployStatusProcedure:
 			clusterControlPlaneServicePredeployStatusHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceDeploymentTargetDetailsProcedure:
+			clusterControlPlaneServiceDeploymentTargetDetailsHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure:
 			clusterControlPlaneServiceDockerConfigFileForRegistryHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceECRTokenForRegistryProcedure:
@@ -879,6 +906,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) ListAppRevisions(context.C
 
 func (UnimplementedClusterControlPlaneServiceHandler) PredeployStatus(context.Context, *connect.Request[v1.PredeployStatusRequest]) (*connect.Response[v1.PredeployStatusResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.PredeployStatus is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) DeploymentTargetDetails(context.Context, *connect.Request[v1.DeploymentTargetDetailsRequest]) (*connect.Response[v1.DeploymentTargetDetailsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.DeploymentTargetDetails is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) DockerConfigFileForRegistry(context.Context, *connect.Request[v1.DockerConfigFileForRegistryRequest]) (*connect.Response[v1.DockerConfigFileForRegistryResponse], error) {
