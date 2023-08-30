@@ -24,6 +24,19 @@ export const PorterApp = proto3.makeMessageType(
 );
 
 /**
+ * Deletions contains all explicit deletions from a PorterApp
+ *
+ * @generated from message porter.v1.Deletions
+ */
+export const Deletions = proto3.makeMessageType(
+  "porter.v1.Deletions",
+  () => [
+    { no: 1, name: "service_names", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 4, name: "env_variable_names", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+  ],
+);
+
+/**
  * Build is the build settings for the application
  *
  * @generated from message porter.v1.Build

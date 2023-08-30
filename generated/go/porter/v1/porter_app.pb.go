@@ -114,6 +114,64 @@ func (x *PorterApp) GetImage() *AppImage {
 	return nil
 }
 
+// Deletions contains all explicit deletions from a PorterApp
+type Deletions struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// service_names is a list of service names to delete
+	ServiceNames []string `protobuf:"bytes,1,rep,name=service_names,json=serviceNames,proto3" json:"service_names,omitempty"`
+	// env_variable_names is a list of environment variable names to delete
+	EnvVariableNames []string `protobuf:"bytes,4,rep,name=env_variable_names,json=envVariableNames,proto3" json:"env_variable_names,omitempty"`
+}
+
+func (x *Deletions) Reset() {
+	*x = Deletions{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_porter_v1_porter_app_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Deletions) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Deletions) ProtoMessage() {}
+
+func (x *Deletions) ProtoReflect() protoreflect.Message {
+	mi := &file_porter_v1_porter_app_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Deletions.ProtoReflect.Descriptor instead.
+func (*Deletions) Descriptor() ([]byte, []int) {
+	return file_porter_v1_porter_app_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *Deletions) GetServiceNames() []string {
+	if x != nil {
+		return x.ServiceNames
+	}
+	return nil
+}
+
+func (x *Deletions) GetEnvVariableNames() []string {
+	if x != nil {
+		return x.EnvVariableNames
+	}
+	return nil
+}
+
 // Build is the build settings for the application
 type Build struct {
 	state         protoimpl.MessageState
@@ -137,7 +195,7 @@ type Build struct {
 func (x *Build) Reset() {
 	*x = Build{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_porter_app_proto_msgTypes[1]
+		mi := &file_porter_v1_porter_app_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -150,7 +208,7 @@ func (x *Build) String() string {
 func (*Build) ProtoMessage() {}
 
 func (x *Build) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_porter_app_proto_msgTypes[1]
+	mi := &file_porter_v1_porter_app_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -163,7 +221,7 @@ func (x *Build) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Build.ProtoReflect.Descriptor instead.
 func (*Build) Descriptor() ([]byte, []int) {
-	return file_porter_v1_porter_app_proto_rawDescGZIP(), []int{1}
+	return file_porter_v1_porter_app_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *Build) GetContext() string {
@@ -223,7 +281,7 @@ type AppImage struct {
 func (x *AppImage) Reset() {
 	*x = AppImage{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_porter_app_proto_msgTypes[2]
+		mi := &file_porter_v1_porter_app_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -236,7 +294,7 @@ func (x *AppImage) String() string {
 func (*AppImage) ProtoMessage() {}
 
 func (x *AppImage) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_porter_app_proto_msgTypes[2]
+	mi := &file_porter_v1_porter_app_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -249,7 +307,7 @@ func (x *AppImage) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AppImage.ProtoReflect.Descriptor instead.
 func (*AppImage) Descriptor() ([]byte, []int) {
-	return file_porter_v1_porter_app_proto_rawDescGZIP(), []int{2}
+	return file_porter_v1_porter_app_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *AppImage) GetRepository() string {
@@ -299,7 +357,13 @@ var file_porter_v1_porter_app_proto_rawDesc = []byte{
 	0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01,
 	0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65,
 	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a, 0x02, 0x38,
-	0x01, 0x22, 0xb2, 0x01, 0x0a, 0x05, 0x42, 0x75, 0x69, 0x6c, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x63,
+	0x01, 0x22, 0x5e, 0x0a, 0x09, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x23,
+	0x0a, 0x0d, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x18,
+	0x01, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0c, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x4e, 0x61,
+	0x6d, 0x65, 0x73, 0x12, 0x2c, 0x0a, 0x12, 0x65, 0x6e, 0x76, 0x5f, 0x76, 0x61, 0x72, 0x69, 0x61,
+	0x62, 0x6c, 0x65, 0x5f, 0x6e, 0x61, 0x6d, 0x65, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x09, 0x52,
+	0x10, 0x65, 0x6e, 0x76, 0x56, 0x61, 0x72, 0x69, 0x61, 0x62, 0x6c, 0x65, 0x4e, 0x61, 0x6d, 0x65,
+	0x73, 0x22, 0xb2, 0x01, 0x0a, 0x05, 0x42, 0x75, 0x69, 0x6c, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x63,
 	0x6f, 0x6e, 0x74, 0x65, 0x78, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6f,
 	0x6e, 0x74, 0x65, 0x78, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x6d, 0x65, 0x74, 0x68, 0x6f, 0x64, 0x18,
 	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x6d, 0x65, 0x74, 0x68, 0x6f, 0x64, 0x12, 0x18, 0x0a,
@@ -340,22 +404,23 @@ func file_porter_v1_porter_app_proto_rawDescGZIP() []byte {
 	return file_porter_v1_porter_app_proto_rawDescData
 }
 
-var file_porter_v1_porter_app_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_porter_v1_porter_app_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_porter_v1_porter_app_proto_goTypes = []interface{}{
 	(*PorterApp)(nil), // 0: porter.v1.PorterApp
-	(*Build)(nil),     // 1: porter.v1.Build
-	(*AppImage)(nil),  // 2: porter.v1.AppImage
-	nil,               // 3: porter.v1.PorterApp.ServicesEntry
-	nil,               // 4: porter.v1.PorterApp.EnvEntry
-	(*Service)(nil),   // 5: porter.v1.Service
+	(*Deletions)(nil), // 1: porter.v1.Deletions
+	(*Build)(nil),     // 2: porter.v1.Build
+	(*AppImage)(nil),  // 3: porter.v1.AppImage
+	nil,               // 4: porter.v1.PorterApp.ServicesEntry
+	nil,               // 5: porter.v1.PorterApp.EnvEntry
+	(*Service)(nil),   // 6: porter.v1.Service
 }
 var file_porter_v1_porter_app_proto_depIdxs = []int32{
-	3, // 0: porter.v1.PorterApp.services:type_name -> porter.v1.PorterApp.ServicesEntry
-	4, // 1: porter.v1.PorterApp.env:type_name -> porter.v1.PorterApp.EnvEntry
-	1, // 2: porter.v1.PorterApp.build:type_name -> porter.v1.Build
-	5, // 3: porter.v1.PorterApp.predeploy:type_name -> porter.v1.Service
-	2, // 4: porter.v1.PorterApp.image:type_name -> porter.v1.AppImage
-	5, // 5: porter.v1.PorterApp.ServicesEntry.value:type_name -> porter.v1.Service
+	4, // 0: porter.v1.PorterApp.services:type_name -> porter.v1.PorterApp.ServicesEntry
+	5, // 1: porter.v1.PorterApp.env:type_name -> porter.v1.PorterApp.EnvEntry
+	2, // 2: porter.v1.PorterApp.build:type_name -> porter.v1.Build
+	6, // 3: porter.v1.PorterApp.predeploy:type_name -> porter.v1.Service
+	3, // 4: porter.v1.PorterApp.image:type_name -> porter.v1.AppImage
+	6, // 5: porter.v1.PorterApp.ServicesEntry.value:type_name -> porter.v1.Service
 	6, // [6:6] is the sub-list for method output_type
 	6, // [6:6] is the sub-list for method input_type
 	6, // [6:6] is the sub-list for extension type_name
@@ -383,7 +448,7 @@ func file_porter_v1_porter_app_proto_init() {
 			}
 		}
 		file_porter_v1_porter_app_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Build); i {
+			switch v := v.(*Deletions); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -395,6 +460,18 @@ func file_porter_v1_porter_app_proto_init() {
 			}
 		}
 		file_porter_v1_porter_app_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Build); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_porter_v1_porter_app_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AppImage); i {
 			case 0:
 				return &v.state
@@ -413,7 +490,7 @@ func file_porter_v1_porter_app_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_porter_v1_porter_app_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

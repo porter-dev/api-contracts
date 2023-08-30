@@ -20,6 +20,14 @@ message PorterApp {
   AppImage image = 6;
 }
 
+// Deletions contains all explicit deletions from a PorterApp
+message Deletions {
+  // service_names is a list of service names to delete
+  repeated string service_names = 1;
+  // env_variable_names is a list of environment variable names to delete
+  repeated string env_variable_names = 4;
+}
+
 // Build is the build settings for the application
 message Build {
   // context is the path to the build context
