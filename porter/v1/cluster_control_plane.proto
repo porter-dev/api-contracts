@@ -286,7 +286,9 @@ message DeploymentTargetDetailsRequest {
 }
 
 message DeploymentTargetDetailsResponse {
+  // namespace is the namespace that the deployment target points to
   string namespace = 1;
+  // cluster_id is the id of the cluster that the deployment target points to
   int64 cluster_id = 2;
 }
 
@@ -368,7 +370,8 @@ service ClusterControlPlaneService {
   rpc PredeployStatus(PredeployStatusRequest) returns (PredeployStatusResponse) {}
 
   // DeploymentTargetDetails returns the details of a deployment target job given the id.  This is a work-around to moving all namespace-related
-  // logic to CCP and should only be used to support metrics and logging (and confirming cluster RBAC).
+  // logic to CCP and should only be used to support metrics and logging (and confirming cluster RBAC). This will fail once
+  // we start using deployment targets that do not have a selector kind of "namespace"
   rpc DeploymentTargetDetails(DeploymentTargetDetailsRequest) returns (DeploymentTargetDetailsResponse) {}
 
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
