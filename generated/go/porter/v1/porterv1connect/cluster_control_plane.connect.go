@@ -167,7 +167,8 @@ type ClusterControlPlaneServiceClient interface {
 	// PredeployStatus returns the status of the predeploy job for a given app revision
 	PredeployStatus(context.Context, *connect.Request[v1.PredeployStatusRequest]) (*connect.Response[v1.PredeployStatusResponse], error)
 	// DeploymentTargetDetails returns the details of a deployment target job given the id.  This is a work-around to moving all namespace-related
-	// logic to CCP and should only be used to support metrics and logging (and confirming cluster RBAC).
+	// logic to CCP and should only be used to support metrics and logging (and confirming cluster RBAC). This will fail once
+	// we start using deployment targets that do not have a selector kind of "namespace"
 	DeploymentTargetDetails(context.Context, *connect.Request[v1.DeploymentTargetDetailsRequest]) (*connect.Response[v1.DeploymentTargetDetailsResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
@@ -587,7 +588,8 @@ type ClusterControlPlaneServiceHandler interface {
 	// PredeployStatus returns the status of the predeploy job for a given app revision
 	PredeployStatus(context.Context, *connect.Request[v1.PredeployStatusRequest]) (*connect.Response[v1.PredeployStatusResponse], error)
 	// DeploymentTargetDetails returns the details of a deployment target job given the id.  This is a work-around to moving all namespace-related
-	// logic to CCP and should only be used to support metrics and logging (and confirming cluster RBAC).
+	// logic to CCP and should only be used to support metrics and logging (and confirming cluster RBAC). This will fail once
+	// we start using deployment targets that do not have a selector kind of "namespace"
 	DeploymentTargetDetails(context.Context, *connect.Request[v1.DeploymentTargetDetailsRequest]) (*connect.Response[v1.DeploymentTargetDetailsResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.

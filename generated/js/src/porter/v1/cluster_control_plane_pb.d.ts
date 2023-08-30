@@ -1417,11 +1417,15 @@ export declare class DeploymentTargetDetailsRequest extends Message<DeploymentTa
  */
 export declare class DeploymentTargetDetailsResponse extends Message<DeploymentTargetDetailsResponse> {
   /**
+   * namespace is the namespace that the deployment target points to
+   *
    * @generated from field: string namespace = 1;
    */
   namespace: string;
 
   /**
+   * cluster_id is the id of the cluster that the deployment target points to
+   *
    * @generated from field: int64 cluster_id = 2;
    */
   clusterId: bigint;

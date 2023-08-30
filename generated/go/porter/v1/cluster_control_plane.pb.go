@@ -2573,8 +2573,10 @@ type DeploymentTargetDetailsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// namespace is the namespace that the deployment target points to
 	Namespace string `protobuf:"bytes,1,opt,name=namespace,proto3" json:"namespace,omitempty"`
-	ClusterId int64  `protobuf:"varint,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// cluster_id is the id of the cluster that the deployment target points to
+	ClusterId int64 `protobuf:"varint,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 }
 
 func (x *DeploymentTargetDetailsResponse) Reset() {
