@@ -510,6 +510,28 @@ export const PredeployStatusResponse = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message porter.v1.DeploymentTargetDetailsRequest
+ */
+export const DeploymentTargetDetailsRequest = proto3.makeMessageType(
+  "porter.v1.DeploymentTargetDetailsRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.DeploymentTargetDetailsResponse
+ */
+export const DeploymentTargetDetailsResponse = proto3.makeMessageType(
+  "porter.v1.DeploymentTargetDetailsResponse",
+  () => [
+    { no: 1, name: "namespace", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  * @deprecated
  */

@@ -1384,6 +1384,68 @@ export declare class PredeployStatusResponse extends Message<PredeployStatusResp
 }
 
 /**
+ * @generated from message porter.v1.DeploymentTargetDetailsRequest
+ */
+export declare class DeploymentTargetDetailsRequest extends Message<DeploymentTargetDetailsRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: string deployment_target_id = 2;
+   */
+  deploymentTargetId: string;
+
+  constructor(data?: PartialMessage<DeploymentTargetDetailsRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeploymentTargetDetailsRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeploymentTargetDetailsRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeploymentTargetDetailsRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeploymentTargetDetailsRequest;
+
+  static equals(a: DeploymentTargetDetailsRequest | PlainMessage<DeploymentTargetDetailsRequest> | undefined, b: DeploymentTargetDetailsRequest | PlainMessage<DeploymentTargetDetailsRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.DeploymentTargetDetailsResponse
+ */
+export declare class DeploymentTargetDetailsResponse extends Message<DeploymentTargetDetailsResponse> {
+  /**
+   * namespace is the namespace that the deployment target points to
+   *
+   * @generated from field: string namespace = 1;
+   */
+  namespace: string;
+
+  /**
+   * cluster_id is the id of the cluster that the deployment target points to
+   *
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  constructor(data?: PartialMessage<DeploymentTargetDetailsResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeploymentTargetDetailsResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeploymentTargetDetailsResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeploymentTargetDetailsResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeploymentTargetDetailsResponse;
+
+  static equals(a: DeploymentTargetDetailsResponse | PlainMessage<DeploymentTargetDetailsResponse> | undefined, b: DeploymentTargetDetailsResponse | PlainMessage<DeploymentTargetDetailsResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  * @deprecated
  */
