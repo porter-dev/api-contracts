@@ -1221,6 +1221,13 @@ export declare class AppRevision extends Message<AppRevision> {
    */
   updatedAt?: Timestamp;
 
+  /**
+   * revision_id is the id of the revision
+   *
+   * @generated from field: string revision_id = 6;
+   */
+  revisionId: string;
+
   constructor(data?: PartialMessage<AppRevision>);
 
   static readonly runtime: typeof proto3;
