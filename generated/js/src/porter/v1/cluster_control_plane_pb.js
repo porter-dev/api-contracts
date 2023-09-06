@@ -453,7 +453,7 @@ export const AppRevision = proto3.makeMessageType(
     { no: 3, name: "revision_number", kind: "scalar", T: 4 /* ScalarType.UINT64 */ },
     { no: 4, name: "created_at", kind: "message", T: Timestamp },
     { no: 5, name: "updated_at", kind: "message", T: Timestamp },
-    { no: 6, name: "revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 6, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

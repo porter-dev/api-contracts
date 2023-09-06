@@ -1222,11 +1222,11 @@ export declare class AppRevision extends Message<AppRevision> {
   updatedAt?: Timestamp;
 
   /**
-   * revision_id is the id of the revision
+   * id is the id of the revision
    *
-   * @generated from field: string revision_id = 6;
+   * @generated from field: string id = 6;
    */
-  revisionId: string;
+  id: string;
 
   constructor(data?: PartialMessage<AppRevision>);
 

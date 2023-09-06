@@ -239,8 +239,8 @@ message AppRevision {
   google.protobuf.Timestamp created_at = 4;
   // updated_at is the time the revision was last updated
   google.protobuf.Timestamp updated_at = 5;
-  // revision_id is the id of the revision
-  string revision_id = 6;
+  // id is the id of the revision
+  string id = 6;
 }
 
 message CurrentAppRevisionResponse {
