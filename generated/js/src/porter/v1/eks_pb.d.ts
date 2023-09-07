@@ -107,20 +107,6 @@ export declare class EKS extends Message<EKS> {
    */
   enableKmsEncryption: boolean;
 
-  /**
-   * target_arn ARN of the eks cluster
-   *
-   * @generated from field: string target_arn = 10;
-   */
-  targetArn: string;
-
-  /**
-   * extrnal_id of the eks cluster
-   *
-   * @generated from field: string external_id = 11;
-   */
-  externalId: string;
-
   constructor(data?: PartialMessage<EKS>);
 
   static readonly runtime: typeof proto3;
@@ -325,6 +311,20 @@ export declare class EKSPreflightValues extends Message<EKSPreflightValues> {
    * @generated from field: porter.v1.EKS eks = 1;
    */
   eks?: EKS;
+
+  /**
+   * target_arn ARN of the eks cluster
+   *
+   * @generated from field: string target_arn = 2;
+   */
+  targetArn: string;
+
+  /**
+   * extrnal_id of the eks cluster
+   *
+   * @generated from field: string external_id = 3;
+   */
+  externalId: string;
 
   constructor(data?: PartialMessage<EKSPreflightValues>);
 

@@ -13,10 +13,6 @@ message EKS {
   EKSLogging logging = 8;
   // enable_kms_encryption triggers a KMS key creation and enables encryption on the EKS cluster with that key.  Once enabled, encryption can never be disabled.
   bool enable_kms_encryption = 9;
-  //target_arn ARN of the eks cluster
-  string target_arn = 10;
-  //extrnal_id of the eks cluster
-  string external_id = 11;
 }
 
 message EKSNodeGroup {
@@ -81,4 +77,8 @@ message EKSLogging {
 message EKSPreflightValues {
   ////EKS contains all information required to configure the EKS cluster's preflight checks
   EKS eks = 1;
+  //target_arn ARN of the eks cluster
+  string target_arn = 2;
+  //extrnal_id of the eks cluster
+  string external_id = 3;
 }
