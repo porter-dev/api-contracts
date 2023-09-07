@@ -105,9 +105,7 @@ export const EKSLogging = proto3.makeMessageType(
 export const EKSPreflightValues = proto3.makeMessageType(
   "porter.v1.EKSPreflightValues",
   () => [
-    { no: 1, name: "eks", kind: "message", T: EKS },
-    { no: 2, name: "target_arn", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "external_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "region", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

@@ -308,23 +308,9 @@ export declare class EKSPreflightValues extends Message<EKSPreflightValues> {
   /**
    * //EKS contains all information required to configure the EKS cluster's preflight checks
    *
-   * @generated from field: porter.v1.EKS eks = 1;
+   * @generated from field: string region = 1;
    */
-  eks?: EKS;
-
-  /**
-   * target_arn ARN of the eks cluster
-   *
-   * @generated from field: string target_arn = 2;
-   */
-  targetArn: string;
-
-  /**
-   * extrnal_id of the eks cluster
-   *
-   * @generated from field: string external_id = 3;
-   */
-  externalId: string;
+  region: string;
 
   constructor(data?: PartialMessage<EKSPreflightValues>);
 

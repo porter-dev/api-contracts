@@ -76,9 +76,5 @@ message EKSLogging {
 //EKSPreflightValues contains all needed values to perform EKS Preflight Checks
 message EKSPreflightValues {
   ////EKS contains all information required to configure the EKS cluster's preflight checks
-  EKS eks = 1;
-  //target_arn ARN of the eks cluster
-  string target_arn = 2;
-  //extrnal_id of the eks cluster
-  string external_id = 3;
+  string region = 1;
 }
