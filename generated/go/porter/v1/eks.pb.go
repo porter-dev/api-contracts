@@ -526,7 +526,7 @@ type EKSPreflightValues struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// //EKS contains all information required to configure the EKS cluster's preflight checks
+	// region the region to perform the preflight checks in
 	Region string `protobuf:"bytes,1,opt,name=region,proto3" json:"region,omitempty"`
 }
 

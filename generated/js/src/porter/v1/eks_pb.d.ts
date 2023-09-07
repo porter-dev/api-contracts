@@ -306,7 +306,7 @@ export declare class EKSLogging extends Message<EKSLogging> {
  */
 export declare class EKSPreflightValues extends Message<EKSPreflightValues> {
   /**
-   * //EKS contains all information required to configure the EKS cluster's preflight checks
+   * region the region to perform the preflight checks in
    *
    * @generated from field: string region = 1;
    */
