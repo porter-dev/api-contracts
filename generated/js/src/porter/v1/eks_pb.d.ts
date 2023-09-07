@@ -107,6 +107,20 @@ export declare class EKS extends Message<EKS> {
    */
   enableKmsEncryption: boolean;
 
+  /**
+   * target_arn ARN of the eks cluster
+   *
+   * @generated from field: string target_arn = 10;
+   */
+  targetArn: string;
+
+  /**
+   * extrnal_id of the eks cluster
+   *
+   * @generated from field: string external_id = 11;
+   */
+  externalId: string;
+
   constructor(data?: PartialMessage<EKS>);
 
   static readonly runtime: typeof proto3;
@@ -297,5 +311,33 @@ export declare class EKSLogging extends Message<EKSLogging> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EKSLogging;
 
   static equals(a: EKSLogging | PlainMessage<EKSLogging> | undefined, b: EKSLogging | PlainMessage<EKSLogging> | undefined): boolean;
+}
+
+/**
+ * EKSPreflightValues contains all needed values to perform EKS Preflight Checks
+ *
+ * @generated from message porter.v1.EKSPreflightValues
+ */
+export declare class EKSPreflightValues extends Message<EKSPreflightValues> {
+  /**
+   * //EKS contains all information required to configure the EKS cluster's preflight checks
+   *
+   * @generated from field: porter.v1.EKS eks = 1;
+   */
+  eks?: EKS;
+
+  constructor(data?: PartialMessage<EKSPreflightValues>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.EKSPreflightValues";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EKSPreflightValues;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): EKSPreflightValues;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EKSPreflightValues;
+
+  static equals(a: EKSPreflightValues | PlainMessage<EKSPreflightValues> | undefined, b: EKSPreflightValues | PlainMessage<EKSPreflightValues> | undefined): boolean;
 }
 

@@ -6,6 +6,7 @@
 import { proto3, Timestamp } from "@bufbuild/protobuf";
 import { EnumCloudProvider } from "./cluster_pb.js";
 import { GKEPreflightValues } from "./gke_pb.js";
+import { EKSPreflightValues } from "./eks_pb.js";
 import { Error } from "./errors_pb.js";
 import { Contract, ContractRevision } from "./contract_pb.js";
 import { Deletions, PorterApp } from "./porter_app_pb.js";
@@ -47,6 +48,7 @@ export const PreflightCheckRequest = proto3.makeMessageType(
     { no: 2, name: "cloud_provider", kind: "enum", T: proto3.getEnumType(EnumCloudProvider) },
     { no: 3, name: "cloud_provider_credentials_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "gke_preflight_values", kind: "message", T: GKEPreflightValues, oneof: "preflight_values" },
+    { no: 5, name: "eks_preflight_values", kind: "message", T: EKSPreflightValues, oneof: "preflight_values" },
   ],
 );
 

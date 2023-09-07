@@ -7,6 +7,7 @@ import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialM
 import { Message, proto3 } from "@bufbuild/protobuf";
 import type { EnumCloudProvider } from "./cluster_pb.js";
 import type { GKEPreflightValues } from "./gke_pb.js";
+import type { EKSPreflightValues } from "./eks_pb.js";
 import type { Error } from "./errors_pb.js";
 import type { Contract, ContractRevision } from "./contract_pb.js";
 import type { Deletions, PorterApp } from "./porter_app_pb.js";
@@ -105,12 +106,18 @@ export declare class PreflightCheckRequest extends Message<PreflightCheckRequest
     /**
      * gke_preflight_values the values that GKE will use to perform preflight checks
      *
-     * EKS eks_kind = 5;
-     *
      * @generated from field: porter.v1.GKEPreflightValues gke_preflight_values = 4;
      */
     value: GKEPreflightValues;
     case: "gkePreflightValues";
+  } | {
+    /**
+     * eks_preflight_values the values that AWS will use to perform preflight checks
+     *
+     * @generated from field: porter.v1.EKSPreflightValues eks_preflight_values = 5;
+     */
+    value: EKSPreflightValues;
+    case: "eksPreflightValues";
   } | { case: undefined; value?: undefined };
 
   constructor(data?: PartialMessage<PreflightCheckRequest>);

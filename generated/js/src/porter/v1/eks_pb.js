@@ -46,6 +46,8 @@ export const EKS = proto3.makeMessageType(
     { no: 7, name: "enable_guard_duty", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 8, name: "logging", kind: "message", T: EKSLogging },
     { no: 9, name: "enable_kms_encryption", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 10, name: "target_arn", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 11, name: "external_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -94,6 +96,18 @@ export const EKSLogging = proto3.makeMessageType(
     { no: 3, name: "enable_scheduler_logs", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 4, name: "enable_audit_logs", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 5, name: "enable_controller_manager_logs", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
+/**
+ * EKSPreflightValues contains all needed values to perform EKS Preflight Checks
+ *
+ * @generated from message porter.v1.EKSPreflightValues
+ */
+export const EKSPreflightValues = proto3.makeMessageType(
+  "porter.v1.EKSPreflightValues",
+  () => [
+    { no: 1, name: "eks", kind: "message", T: EKS },
   ],
 );
 
