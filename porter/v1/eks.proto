@@ -75,6 +75,6 @@ message EKSLogging {
 
 //EKSPreflightValues contains all needed values to perform EKS Preflight Checks
 message EKSPreflightValues {
-  ////EKS contains all information required to configure the EKS cluster's preflight checks
+  //region the region to perform the preflight checks in
   string region = 1;
 }
