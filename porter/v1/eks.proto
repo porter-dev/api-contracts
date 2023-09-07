@@ -72,3 +72,9 @@ message EKSLogging {
   bool enable_audit_logs = 4;
   bool enable_controller_manager_logs = 5;
 }
+
+//EKSPreflightValues contains all needed values to perform EKS Preflight Checks
+message EKSPreflightValues {
+  //region the region to perform the preflight checks in
+  string region = 1;
+}

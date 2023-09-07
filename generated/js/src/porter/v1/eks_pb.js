@@ -97,3 +97,15 @@ export const EKSLogging = proto3.makeMessageType(
   ],
 );
 
+/**
+ * EKSPreflightValues contains all needed values to perform EKS Preflight Checks
+ *
+ * @generated from message porter.v1.EKSPreflightValues
+ */
+export const EKSPreflightValues = proto3.makeMessageType(
+  "porter.v1.EKSPreflightValues",
+  () => [
+    { no: 1, name: "region", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+

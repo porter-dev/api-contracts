@@ -299,3 +299,31 @@ export declare class EKSLogging extends Message<EKSLogging> {
   static equals(a: EKSLogging | PlainMessage<EKSLogging> | undefined, b: EKSLogging | PlainMessage<EKSLogging> | undefined): boolean;
 }
 
+/**
+ * EKSPreflightValues contains all needed values to perform EKS Preflight Checks
+ *
+ * @generated from message porter.v1.EKSPreflightValues
+ */
+export declare class EKSPreflightValues extends Message<EKSPreflightValues> {
+  /**
+   * region the region to perform the preflight checks in
+   *
+   * @generated from field: string region = 1;
+   */
+  region: string;
+
+  constructor(data?: PartialMessage<EKSPreflightValues>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.EKSPreflightValues";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EKSPreflightValues;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): EKSPreflightValues;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EKSPreflightValues;
+
+  static equals(a: EKSPreflightValues | PlainMessage<EKSPreflightValues> | undefined, b: EKSPreflightValues | PlainMessage<EKSPreflightValues> | undefined): boolean;
+}
+
