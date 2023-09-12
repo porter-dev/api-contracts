@@ -7,10 +7,10 @@ import "porter/v1/aws_assume_role.proto";
 import "porter/v1/cloud_provider_credentials.proto";
 import "porter/v1/cluster.proto";
 import "porter/v1/contract.proto";
+import "porter/v1/eks.proto";
 import "porter/v1/errors.proto";
 import "porter/v1/gke.proto";
 import "porter/v1/porter_app.proto";
-import "porter/v1/eks.proto";
 
 message PreflightCheckRequest {
   int64 project_id = 1;
@@ -263,6 +263,17 @@ message ListAppRevisionsResponse {
   repeated AppRevision app_revisions = 1;
 }
 
+message LatestAppRevisionsRequest {
+  int64 project_id = 1;
+  // deployment_target_id is the id of the deployment target to retrieve revisions from
+  string deployment_target_id = 3;
+}
+
+message LatestAppRevisionsResponse {
+  // app_revisions is the list of app revisions for the given deployment target
+  repeated AppRevision app_revisions = 1;
+}
+
 message PredeployStatusRequest {
   int64 project_id = 1;
   // app_revision_id is the revision id of the PorterApp which should have its predeploy status checked
@@ -369,6 +380,9 @@ service ClusterControlPlaneService {
   rpc CurrentAppRevision(CurrentAppRevisionRequest) returns (CurrentAppRevisionResponse) {}
 
   rpc ListAppRevisions(ListAppRevisionsRequest) returns (ListAppRevisionsResponse) {}
+
+  // LatestAppRevisions returns the currently deployed app revisions for a given deployment_target
+  rpc LatestAppRevisions(LatestAppRevisionsRequest) returns (LatestAppRevisionsResponse) {}
 
   // PredeployStatus returns the status of the predeploy job for a given app revision
   rpc PredeployStatus(PredeployStatusRequest) returns (PredeployStatusResponse) {}
