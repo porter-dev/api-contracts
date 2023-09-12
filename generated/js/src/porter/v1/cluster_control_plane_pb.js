@@ -492,6 +492,27 @@ export const ListAppRevisionsResponse = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message porter.v1.LatestAppRevisionsRequest
+ */
+export const LatestAppRevisionsRequest = proto3.makeMessageType(
+  "porter.v1.LatestAppRevisionsRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.LatestAppRevisionsResponse
+ */
+export const LatestAppRevisionsResponse = proto3.makeMessageType(
+  "porter.v1.LatestAppRevisionsResponse",
+  () => [
+    { no: 1, name: "app_revisions", kind: "message", T: AppRevision, repeated: true },
+  ],
+);
+
+/**
  * @generated from message porter.v1.PredeployStatusRequest
  */
 export const PredeployStatusRequest = proto3.makeMessageType(

@@ -1341,6 +1341,63 @@ export declare class ListAppRevisionsResponse extends Message<ListAppRevisionsRe
 }
 
 /**
+ * @generated from message porter.v1.LatestAppRevisionsRequest
+ */
+export declare class LatestAppRevisionsRequest extends Message<LatestAppRevisionsRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * deployment_target_id is the id of the deployment target to retrieve revisions from
+   *
+   * @generated from field: string deployment_target_id = 3;
+   */
+  deploymentTargetId: string;
+
+  constructor(data?: PartialMessage<LatestAppRevisionsRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.LatestAppRevisionsRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LatestAppRevisionsRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LatestAppRevisionsRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LatestAppRevisionsRequest;
+
+  static equals(a: LatestAppRevisionsRequest | PlainMessage<LatestAppRevisionsRequest> | undefined, b: LatestAppRevisionsRequest | PlainMessage<LatestAppRevisionsRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.LatestAppRevisionsResponse
+ */
+export declare class LatestAppRevisionsResponse extends Message<LatestAppRevisionsResponse> {
+  /**
+   * app_revisions is the list of app revisions for the given deployment target
+   *
+   * @generated from field: repeated porter.v1.AppRevision app_revisions = 1;
+   */
+  appRevisions: AppRevision[];
+
+  constructor(data?: PartialMessage<LatestAppRevisionsResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.LatestAppRevisionsResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LatestAppRevisionsResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LatestAppRevisionsResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LatestAppRevisionsResponse;
+
+  static equals(a: LatestAppRevisionsResponse | PlainMessage<LatestAppRevisionsResponse> | undefined, b: LatestAppRevisionsResponse | PlainMessage<LatestAppRevisionsResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.PredeployStatusRequest
  */
 export declare class PredeployStatusRequest extends Message<PredeployStatusRequest> {

@@ -91,6 +91,9 @@ const (
 	// ClusterControlPlaneServiceListAppRevisionsProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's ListAppRevisions RPC.
 	ClusterControlPlaneServiceListAppRevisionsProcedure = "/porter.v1.ClusterControlPlaneService/ListAppRevisions"
+	// ClusterControlPlaneServiceLatestAppRevisionsProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's LatestAppRevisions RPC.
+	ClusterControlPlaneServiceLatestAppRevisionsProcedure = "/porter.v1.ClusterControlPlaneService/LatestAppRevisions"
 	// ClusterControlPlaneServicePredeployStatusProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's PredeployStatus RPC.
 	ClusterControlPlaneServicePredeployStatusProcedure = "/porter.v1.ClusterControlPlaneService/PredeployStatus"
@@ -164,6 +167,8 @@ type ClusterControlPlaneServiceClient interface {
 	// CurrentAppRevision returns the currently deployed app revision for a given porter_app and deployment_target
 	CurrentAppRevision(context.Context, *connect.Request[v1.CurrentAppRevisionRequest]) (*connect.Response[v1.CurrentAppRevisionResponse], error)
 	ListAppRevisions(context.Context, *connect.Request[v1.ListAppRevisionsRequest]) (*connect.Response[v1.ListAppRevisionsResponse], error)
+	// LatestAppRevisions returns the currently deployed app revisions for a given deployment_target
+	LatestAppRevisions(context.Context, *connect.Request[v1.LatestAppRevisionsRequest]) (*connect.Response[v1.LatestAppRevisionsResponse], error)
 	// PredeployStatus returns the status of the predeploy job for a given app revision
 	PredeployStatus(context.Context, *connect.Request[v1.PredeployStatusRequest]) (*connect.Response[v1.PredeployStatusResponse], error)
 	// DeploymentTargetDetails returns the details of a deployment target job given the id.  This is a work-around to moving all namespace-related
@@ -308,6 +313,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceListAppRevisionsProcedure,
 			opts...,
 		),
+		latestAppRevisions: connect.NewClient[v1.LatestAppRevisionsRequest, v1.LatestAppRevisionsResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceLatestAppRevisionsProcedure,
+			opts...,
+		),
 		predeployStatus: connect.NewClient[v1.PredeployStatusRequest, v1.PredeployStatusResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServicePredeployStatusProcedure,
@@ -372,6 +382,7 @@ type clusterControlPlaneServiceClient struct {
 	deleteAppDeployment            *connect.Client[v1.DeleteAppDeploymentRequest, v1.DeleteAppDeploymentResponse]
 	currentAppRevision             *connect.Client[v1.CurrentAppRevisionRequest, v1.CurrentAppRevisionResponse]
 	listAppRevisions               *connect.Client[v1.ListAppRevisionsRequest, v1.ListAppRevisionsResponse]
+	latestAppRevisions             *connect.Client[v1.LatestAppRevisionsRequest, v1.LatestAppRevisionsResponse]
 	predeployStatus                *connect.Client[v1.PredeployStatusRequest, v1.PredeployStatusResponse]
 	deploymentTargetDetails        *connect.Client[v1.DeploymentTargetDetailsRequest, v1.DeploymentTargetDetailsResponse]
 	dockerConfigFileForRegistry    *connect.Client[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse]
@@ -485,6 +496,11 @@ func (c *clusterControlPlaneServiceClient) ListAppRevisions(ctx context.Context,
 	return c.listAppRevisions.CallUnary(ctx, req)
 }
 
+// LatestAppRevisions calls porter.v1.ClusterControlPlaneService.LatestAppRevisions.
+func (c *clusterControlPlaneServiceClient) LatestAppRevisions(ctx context.Context, req *connect.Request[v1.LatestAppRevisionsRequest]) (*connect.Response[v1.LatestAppRevisionsResponse], error) {
+	return c.latestAppRevisions.CallUnary(ctx, req)
+}
+
 // PredeployStatus calls porter.v1.ClusterControlPlaneService.PredeployStatus.
 func (c *clusterControlPlaneServiceClient) PredeployStatus(ctx context.Context, req *connect.Request[v1.PredeployStatusRequest]) (*connect.Response[v1.PredeployStatusResponse], error) {
 	return c.predeployStatus.CallUnary(ctx, req)
@@ -585,6 +601,8 @@ type ClusterControlPlaneServiceHandler interface {
 	// CurrentAppRevision returns the currently deployed app revision for a given porter_app and deployment_target
 	CurrentAppRevision(context.Context, *connect.Request[v1.CurrentAppRevisionRequest]) (*connect.Response[v1.CurrentAppRevisionResponse], error)
 	ListAppRevisions(context.Context, *connect.Request[v1.ListAppRevisionsRequest]) (*connect.Response[v1.ListAppRevisionsResponse], error)
+	// LatestAppRevisions returns the currently deployed app revisions for a given deployment_target
+	LatestAppRevisions(context.Context, *connect.Request[v1.LatestAppRevisionsRequest]) (*connect.Response[v1.LatestAppRevisionsResponse], error)
 	// PredeployStatus returns the status of the predeploy job for a given app revision
 	PredeployStatus(context.Context, *connect.Request[v1.PredeployStatusRequest]) (*connect.Response[v1.PredeployStatusResponse], error)
 	// DeploymentTargetDetails returns the details of a deployment target job given the id.  This is a work-around to moving all namespace-related
@@ -725,6 +743,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.ListAppRevisions,
 		opts...,
 	)
+	clusterControlPlaneServiceLatestAppRevisionsHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceLatestAppRevisionsProcedure,
+		svc.LatestAppRevisions,
+		opts...,
+	)
 	clusterControlPlaneServicePredeployStatusHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServicePredeployStatusProcedure,
 		svc.PredeployStatus,
@@ -805,6 +828,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceCurrentAppRevisionHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceListAppRevisionsProcedure:
 			clusterControlPlaneServiceListAppRevisionsHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceLatestAppRevisionsProcedure:
+			clusterControlPlaneServiceLatestAppRevisionsHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServicePredeployStatusProcedure:
 			clusterControlPlaneServicePredeployStatusHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDeploymentTargetDetailsProcedure:
@@ -904,6 +929,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) CurrentAppRevision(context
 
 func (UnimplementedClusterControlPlaneServiceHandler) ListAppRevisions(context.Context, *connect.Request[v1.ListAppRevisionsRequest]) (*connect.Response[v1.ListAppRevisionsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ListAppRevisions is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) LatestAppRevisions(context.Context, *connect.Request[v1.LatestAppRevisionsRequest]) (*connect.Response[v1.LatestAppRevisionsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.LatestAppRevisions is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) PredeployStatus(context.Context, *connect.Request[v1.PredeployStatusRequest]) (*connect.Response[v1.PredeployStatusResponse], error) {
