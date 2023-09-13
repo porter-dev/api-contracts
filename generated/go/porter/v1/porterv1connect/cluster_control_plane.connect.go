@@ -178,6 +178,8 @@ type ClusterControlPlaneServiceClient interface {
 	// logic to CCP and should only be used to support metrics and logging (and confirming cluster RBAC). This will fail once
 	// we start using deployment targets that do not have a selector kind of "namespace"
 	DeploymentTargetDetails(context.Context, *connect.Request[v1.DeploymentTargetDetailsRequest]) (*connect.Response[v1.DeploymentTargetDetailsResponse], error)
+	// SeedAppRevision seeds app revisions for a given project id, cluster id, release name, namespace.  It should only be called
+	// from the Cluster Control Plane CLI and should be removed once all legacy users are migrated to the new apply validate.
 	SeedAppRevisions(context.Context, *connect.Request[v1.SeedAppRevisionsRequest]) (*connect.Response[v1.SeedAppRevisionsResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
@@ -624,6 +626,8 @@ type ClusterControlPlaneServiceHandler interface {
 	// logic to CCP and should only be used to support metrics and logging (and confirming cluster RBAC). This will fail once
 	// we start using deployment targets that do not have a selector kind of "namespace"
 	DeploymentTargetDetails(context.Context, *connect.Request[v1.DeploymentTargetDetailsRequest]) (*connect.Response[v1.DeploymentTargetDetailsResponse], error)
+	// SeedAppRevision seeds app revisions for a given project id, cluster id, release name, namespace.  It should only be called
+	// from the Cluster Control Plane CLI and should be removed once all legacy users are migrated to the new apply validate.
 	SeedAppRevisions(context.Context, *connect.Request[v1.SeedAppRevisionsRequest]) (*connect.Response[v1.SeedAppRevisionsResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
