@@ -100,6 +100,9 @@ const (
 	// ClusterControlPlaneServiceDeploymentTargetDetailsProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DeploymentTargetDetails RPC.
 	ClusterControlPlaneServiceDeploymentTargetDetailsProcedure = "/porter.v1.ClusterControlPlaneService/DeploymentTargetDetails"
+	// ClusterControlPlaneServiceSeedAppRevisionsProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's SeedAppRevisions RPC.
+	ClusterControlPlaneServiceSeedAppRevisionsProcedure = "/porter.v1.ClusterControlPlaneService/SeedAppRevisions"
 	// ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DockerConfigFileForRegistry RPC.
 	ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure = "/porter.v1.ClusterControlPlaneService/DockerConfigFileForRegistry"
@@ -175,6 +178,7 @@ type ClusterControlPlaneServiceClient interface {
 	// logic to CCP and should only be used to support metrics and logging (and confirming cluster RBAC). This will fail once
 	// we start using deployment targets that do not have a selector kind of "namespace"
 	DeploymentTargetDetails(context.Context, *connect.Request[v1.DeploymentTargetDetailsRequest]) (*connect.Response[v1.DeploymentTargetDetailsResponse], error)
+	SeedAppRevisions(context.Context, *connect.Request[v1.SeedAppRevisionsRequest]) (*connect.Response[v1.SeedAppRevisionsResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -328,6 +332,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceDeploymentTargetDetailsProcedure,
 			opts...,
 		),
+		seedAppRevisions: connect.NewClient[v1.SeedAppRevisionsRequest, v1.SeedAppRevisionsResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceSeedAppRevisionsProcedure,
+			opts...,
+		),
 		dockerConfigFileForRegistry: connect.NewClient[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
@@ -385,6 +394,7 @@ type clusterControlPlaneServiceClient struct {
 	latestAppRevisions             *connect.Client[v1.LatestAppRevisionsRequest, v1.LatestAppRevisionsResponse]
 	predeployStatus                *connect.Client[v1.PredeployStatusRequest, v1.PredeployStatusResponse]
 	deploymentTargetDetails        *connect.Client[v1.DeploymentTargetDetailsRequest, v1.DeploymentTargetDetailsResponse]
+	seedAppRevisions               *connect.Client[v1.SeedAppRevisionsRequest, v1.SeedAppRevisionsResponse]
 	dockerConfigFileForRegistry    *connect.Client[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse]
 	eCRTokenForRegistry            *connect.Client[v1.ECRTokenForRegistryRequest, v1.ECRTokenForRegistryResponse]
 	assumeRoleCredentials          *connect.Client[v1.AssumeRoleCredentialsRequest, v1.AssumeRoleCredentialsResponse]
@@ -511,6 +521,11 @@ func (c *clusterControlPlaneServiceClient) DeploymentTargetDetails(ctx context.C
 	return c.deploymentTargetDetails.CallUnary(ctx, req)
 }
 
+// SeedAppRevisions calls porter.v1.ClusterControlPlaneService.SeedAppRevisions.
+func (c *clusterControlPlaneServiceClient) SeedAppRevisions(ctx context.Context, req *connect.Request[v1.SeedAppRevisionsRequest]) (*connect.Response[v1.SeedAppRevisionsResponse], error) {
+	return c.seedAppRevisions.CallUnary(ctx, req)
+}
+
 // DockerConfigFileForRegistry calls
 // porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry.
 //
@@ -609,6 +624,7 @@ type ClusterControlPlaneServiceHandler interface {
 	// logic to CCP and should only be used to support metrics and logging (and confirming cluster RBAC). This will fail once
 	// we start using deployment targets that do not have a selector kind of "namespace"
 	DeploymentTargetDetails(context.Context, *connect.Request[v1.DeploymentTargetDetailsRequest]) (*connect.Response[v1.DeploymentTargetDetailsResponse], error)
+	SeedAppRevisions(context.Context, *connect.Request[v1.SeedAppRevisionsRequest]) (*connect.Response[v1.SeedAppRevisionsResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -758,6 +774,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.DeploymentTargetDetails,
 		opts...,
 	)
+	clusterControlPlaneServiceSeedAppRevisionsHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceSeedAppRevisionsProcedure,
+		svc.SeedAppRevisions,
+		opts...,
+	)
 	clusterControlPlaneServiceDockerConfigFileForRegistryHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
 		svc.DockerConfigFileForRegistry,
@@ -834,6 +855,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServicePredeployStatusHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDeploymentTargetDetailsProcedure:
 			clusterControlPlaneServiceDeploymentTargetDetailsHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceSeedAppRevisionsProcedure:
+			clusterControlPlaneServiceSeedAppRevisionsHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure:
 			clusterControlPlaneServiceDockerConfigFileForRegistryHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceECRTokenForRegistryProcedure:
@@ -941,6 +964,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) PredeployStatus(context.Co
 
 func (UnimplementedClusterControlPlaneServiceHandler) DeploymentTargetDetails(context.Context, *connect.Request[v1.DeploymentTargetDetailsRequest]) (*connect.Response[v1.DeploymentTargetDetailsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.DeploymentTargetDetails is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) SeedAppRevisions(context.Context, *connect.Request[v1.SeedAppRevisionsRequest]) (*connect.Response[v1.SeedAppRevisionsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.SeedAppRevisions is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) DockerConfigFileForRegistry(context.Context, *connect.Request[v1.DockerConfigFileForRegistryRequest]) (*connect.Response[v1.DockerConfigFileForRegistryResponse], error) {

@@ -1517,6 +1517,64 @@ export declare class DeploymentTargetDetailsResponse extends Message<DeploymentT
 }
 
 /**
+ * @generated from message porter.v1.SeedAppRevisionsRequest
+ */
+export declare class SeedAppRevisionsRequest extends Message<SeedAppRevisionsRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  /**
+   * @generated from field: string release_name = 3;
+   */
+  releaseName: string;
+
+  /**
+   * @generated from field: string namespace = 4;
+   */
+  namespace: string;
+
+  constructor(data?: PartialMessage<SeedAppRevisionsRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.SeedAppRevisionsRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SeedAppRevisionsRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SeedAppRevisionsRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SeedAppRevisionsRequest;
+
+  static equals(a: SeedAppRevisionsRequest | PlainMessage<SeedAppRevisionsRequest> | undefined, b: SeedAppRevisionsRequest | PlainMessage<SeedAppRevisionsRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.SeedAppRevisionsResponse
+ */
+export declare class SeedAppRevisionsResponse extends Message<SeedAppRevisionsResponse> {
+  constructor(data?: PartialMessage<SeedAppRevisionsResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.SeedAppRevisionsResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SeedAppRevisionsResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SeedAppRevisionsResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SeedAppRevisionsResponse;
+
+  static equals(a: SeedAppRevisionsResponse | PlainMessage<SeedAppRevisionsResponse> | undefined, b: SeedAppRevisionsResponse | PlainMessage<SeedAppRevisionsResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  * @deprecated
  */

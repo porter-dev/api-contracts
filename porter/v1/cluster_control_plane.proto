@@ -322,7 +322,6 @@ message SeedAppRevisionsRequest {
   int64 cluster_id = 2;
   string release_name = 3;
   string namespace = 4;
-  Build build = 5;
 }
 
 message SeedAppRevisionsResponse {}
