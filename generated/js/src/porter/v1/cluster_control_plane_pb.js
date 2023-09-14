@@ -382,6 +382,7 @@ export const ApplyPorterAppRequest = proto3.makeMessageType(
     { no: 2, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "app", kind: "message", T: PorterApp },
     { no: 4, name: "porter_app_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "force_build", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 

@@ -1012,6 +1012,13 @@ export declare class ApplyPorterAppRequest extends Message<ApplyPorterAppRequest
    */
   porterAppRevisionId: string;
 
+  /**
+   * force_build is a flag that forces the app to rebuild, regardless of the existing tag. This is used on initial apply by the CLI.
+   *
+   * @generated from field: bool force_build = 5;
+   */
+  forceBuild: boolean;
+
   constructor(data?: PartialMessage<ApplyPorterAppRequest>);
 
   static readonly runtime: typeof proto3;
