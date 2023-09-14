@@ -9,7 +9,7 @@ import { GKEPreflightValues } from "./gke_pb.js";
 import { EKSPreflightValues } from "./eks_pb.js";
 import { Error } from "./errors_pb.js";
 import { Contract, ContractRevision } from "./contract_pb.js";
-import { Deletions, PorterApp } from "./porter_app_pb.js";
+import { Deletions, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
@@ -607,6 +607,59 @@ export const SeedAppRevisionsRequest = proto3.makeMessageType(
 export const SeedAppRevisionsResponse = proto3.makeMessageType(
   "porter.v1.SeedAppRevisionsResponse",
   [],
+);
+
+/**
+ * EnvGroupVariablesRequest is the request object when retrieving the variables for a given EnvGroup
+ *
+ * @generated from message porter.v1.EnvGroupVariablesRequest
+ */
+export const EnvGroupVariablesRequest = proto3.makeMessageType(
+  "porter.v1.EnvGroupVariablesRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "env_group", kind: "message", T: EnvGroup },
+  ],
+);
+
+/**
+ * EnvGroupVariablesResponse is the response object when retrieving the variables for a given EnvGroup
+ *
+ * @generated from message porter.v1.EnvGroupVariablesResponse
+ */
+export const EnvGroupVariablesResponse = proto3.makeMessageType(
+  "porter.v1.EnvGroupVariablesResponse",
+  () => [
+    { no: 1, name: "env_group_variables", kind: "message", T: EnvGroupVariables },
+  ],
+);
+
+/**
+ * LatestEnvGroupWithVariablesRequest is the request object when retrieving the latest EnvGroup and its variables for a given deployment target
+ *
+ * @generated from message porter.v1.LatestEnvGroupWithVariablesRequest
+ */
+export const LatestEnvGroupWithVariablesRequest = proto3.makeMessageType(
+  "porter.v1.LatestEnvGroupWithVariablesRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "env_group_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * LatestEnvGroupWithVariablesResponse is the response object when retrieving the latest EnvGroup and its variables for a given deployment target
+ *
+ * @generated from message porter.v1.LatestEnvGroupWithVariablesResponse
+ */
+export const LatestEnvGroupWithVariablesResponse = proto3.makeMessageType(
+  "porter.v1.LatestEnvGroupWithVariablesResponse",
+  () => [
+    { no: 1, name: "env_group", kind: "message", T: EnvGroup },
+    { no: 2, name: "env_group_variables", kind: "message", T: EnvGroupVariables },
+  ],
 );
 
 /**

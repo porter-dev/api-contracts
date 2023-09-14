@@ -10,22 +10,42 @@ message PorterApp {
   string name = 1;
   // services is a map of service names to service configurations
   map<string, Service> services = 2;
-  // env is a map of environment variable names to values
-  map<string, string> env = 3;
+  // env is deprecated in favor of env groups. It was a map of environment variable names to values
+  map<string, string> env = 3 [deprecated = true];
   // build is the build settings for the application
   Build build = 4;
   // predeploy is a job service to run before deploying the application
   Service predeploy = 5;
   // image is the image to use for a given revision of the application
   AppImage image = 6;
+  // env_groups is a map of environment variable group names to environment variable group configurations
+  repeated EnvGroup env_groups = 7;
+}
+
+// EnvGroup represents the metadata for an env group. We do not want to store the actual variables with the PorterApp.
+message EnvGroup {
+  // name is the name of the environment variable group
+  string name = 1;
+  // version is the version of the environment variable group
+  int64 version = 2;
+}
+
+// EnvGroupVariables represents the variables for an env group.
+message EnvGroupVariables {
+  // normal is a map of non-sensitive variable names to values
+  map<string, string> normal = 1;
+  // secret is a map of sensitive variable names to values
+  map<string, string> secret = 2;
 }
 
 // Deletions contains all explicit deletions from a PorterApp
 message Deletions {
   // service_names is a list of service names to delete
   repeated string service_names = 1;
-  // env_variable_names is a list of environment variable names to delete
-  repeated string env_variable_names = 4;
+  // env_group_names is a list of environment variable group names to delete
+  repeated string env_group_names = 2;
+  // env_variable_names is deprecated in favor of env_group_names. It was a list of environment variable names to delete
+  repeated string env_variable_names = 4 [deprecated = true];
 }
 
 // Build is the build settings for the application

@@ -106,6 +106,12 @@ const (
 	// ClusterControlPlaneServiceSeedAppRevisionsProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's SeedAppRevisions RPC.
 	ClusterControlPlaneServiceSeedAppRevisionsProcedure = "/porter.v1.ClusterControlPlaneService/SeedAppRevisions"
+	// ClusterControlPlaneServiceEnvGroupVariablesProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's EnvGroupVariables RPC.
+	ClusterControlPlaneServiceEnvGroupVariablesProcedure = "/porter.v1.ClusterControlPlaneService/EnvGroupVariables"
+	// ClusterControlPlaneServiceLatestEnvGroupWithVariablesProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's LatestEnvGroupWithVariables RPC.
+	ClusterControlPlaneServiceLatestEnvGroupWithVariablesProcedure = "/porter.v1.ClusterControlPlaneService/LatestEnvGroupWithVariables"
 	// ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DockerConfigFileForRegistry RPC.
 	ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure = "/porter.v1.ClusterControlPlaneService/DockerConfigFileForRegistry"
@@ -186,6 +192,10 @@ type ClusterControlPlaneServiceClient interface {
 	// SeedAppRevision seeds app revisions for a given project id, cluster id, release name, namespace.  It should only be called
 	// from the Cluster Control Plane CLI and should be removed once all legacy users are migrated to the new apply validate.
 	SeedAppRevisions(context.Context, *connect.Request[v1.SeedAppRevisionsRequest]) (*connect.Response[v1.SeedAppRevisionsResponse], error)
+	// EnvGroupVariables returns the variables for a given env group name and version
+	EnvGroupVariables(context.Context, *connect.Request[v1.EnvGroupVariablesRequest]) (*connect.Response[v1.EnvGroupVariablesResponse], error)
+	// LatestEnvGroupWithVariables returns the latest env group and variables for a given env group name in the given deployment target
+	LatestEnvGroupWithVariables(context.Context, *connect.Request[v1.LatestEnvGroupWithVariablesRequest]) (*connect.Response[v1.LatestEnvGroupWithVariablesResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -349,6 +359,16 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceSeedAppRevisionsProcedure,
 			opts...,
 		),
+		envGroupVariables: connect.NewClient[v1.EnvGroupVariablesRequest, v1.EnvGroupVariablesResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceEnvGroupVariablesProcedure,
+			opts...,
+		),
+		latestEnvGroupWithVariables: connect.NewClient[v1.LatestEnvGroupWithVariablesRequest, v1.LatestEnvGroupWithVariablesResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceLatestEnvGroupWithVariablesProcedure,
+			opts...,
+		),
 		dockerConfigFileForRegistry: connect.NewClient[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
@@ -408,6 +428,8 @@ type clusterControlPlaneServiceClient struct {
 	predeployStatus                *connect.Client[v1.PredeployStatusRequest, v1.PredeployStatusResponse]
 	deploymentTargetDetails        *connect.Client[v1.DeploymentTargetDetailsRequest, v1.DeploymentTargetDetailsResponse]
 	seedAppRevisions               *connect.Client[v1.SeedAppRevisionsRequest, v1.SeedAppRevisionsResponse]
+	envGroupVariables              *connect.Client[v1.EnvGroupVariablesRequest, v1.EnvGroupVariablesResponse]
+	latestEnvGroupWithVariables    *connect.Client[v1.LatestEnvGroupWithVariablesRequest, v1.LatestEnvGroupWithVariablesResponse]
 	dockerConfigFileForRegistry    *connect.Client[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse]
 	eCRTokenForRegistry            *connect.Client[v1.ECRTokenForRegistryRequest, v1.ECRTokenForRegistryResponse]
 	assumeRoleCredentials          *connect.Client[v1.AssumeRoleCredentialsRequest, v1.AssumeRoleCredentialsResponse]
@@ -544,6 +566,17 @@ func (c *clusterControlPlaneServiceClient) SeedAppRevisions(ctx context.Context,
 	return c.seedAppRevisions.CallUnary(ctx, req)
 }
 
+// EnvGroupVariables calls porter.v1.ClusterControlPlaneService.EnvGroupVariables.
+func (c *clusterControlPlaneServiceClient) EnvGroupVariables(ctx context.Context, req *connect.Request[v1.EnvGroupVariablesRequest]) (*connect.Response[v1.EnvGroupVariablesResponse], error) {
+	return c.envGroupVariables.CallUnary(ctx, req)
+}
+
+// LatestEnvGroupWithVariables calls
+// porter.v1.ClusterControlPlaneService.LatestEnvGroupWithVariables.
+func (c *clusterControlPlaneServiceClient) LatestEnvGroupWithVariables(ctx context.Context, req *connect.Request[v1.LatestEnvGroupWithVariablesRequest]) (*connect.Response[v1.LatestEnvGroupWithVariablesResponse], error) {
+	return c.latestEnvGroupWithVariables.CallUnary(ctx, req)
+}
+
 // DockerConfigFileForRegistry calls
 // porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry.
 //
@@ -647,6 +680,10 @@ type ClusterControlPlaneServiceHandler interface {
 	// SeedAppRevision seeds app revisions for a given project id, cluster id, release name, namespace.  It should only be called
 	// from the Cluster Control Plane CLI and should be removed once all legacy users are migrated to the new apply validate.
 	SeedAppRevisions(context.Context, *connect.Request[v1.SeedAppRevisionsRequest]) (*connect.Response[v1.SeedAppRevisionsResponse], error)
+	// EnvGroupVariables returns the variables for a given env group name and version
+	EnvGroupVariables(context.Context, *connect.Request[v1.EnvGroupVariablesRequest]) (*connect.Response[v1.EnvGroupVariablesResponse], error)
+	// LatestEnvGroupWithVariables returns the latest env group and variables for a given env group name in the given deployment target
+	LatestEnvGroupWithVariables(context.Context, *connect.Request[v1.LatestEnvGroupWithVariablesRequest]) (*connect.Response[v1.LatestEnvGroupWithVariablesResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -806,6 +843,16 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.SeedAppRevisions,
 		opts...,
 	)
+	clusterControlPlaneServiceEnvGroupVariablesHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceEnvGroupVariablesProcedure,
+		svc.EnvGroupVariables,
+		opts...,
+	)
+	clusterControlPlaneServiceLatestEnvGroupWithVariablesHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceLatestEnvGroupWithVariablesProcedure,
+		svc.LatestEnvGroupWithVariables,
+		opts...,
+	)
 	clusterControlPlaneServiceDockerConfigFileForRegistryHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
 		svc.DockerConfigFileForRegistry,
@@ -886,6 +933,10 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceDeploymentTargetDetailsHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceSeedAppRevisionsProcedure:
 			clusterControlPlaneServiceSeedAppRevisionsHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceEnvGroupVariablesProcedure:
+			clusterControlPlaneServiceEnvGroupVariablesHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceLatestEnvGroupWithVariablesProcedure:
+			clusterControlPlaneServiceLatestEnvGroupWithVariablesHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure:
 			clusterControlPlaneServiceDockerConfigFileForRegistryHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceECRTokenForRegistryProcedure:
@@ -1001,6 +1052,14 @@ func (UnimplementedClusterControlPlaneServiceHandler) DeploymentTargetDetails(co
 
 func (UnimplementedClusterControlPlaneServiceHandler) SeedAppRevisions(context.Context, *connect.Request[v1.SeedAppRevisionsRequest]) (*connect.Response[v1.SeedAppRevisionsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.SeedAppRevisions is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) EnvGroupVariables(context.Context, *connect.Request[v1.EnvGroupVariablesRequest]) (*connect.Response[v1.EnvGroupVariablesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.EnvGroupVariables is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) LatestEnvGroupWithVariables(context.Context, *connect.Request[v1.LatestEnvGroupWithVariablesRequest]) (*connect.Response[v1.LatestEnvGroupWithVariablesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.LatestEnvGroupWithVariables is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) DockerConfigFileForRegistry(context.Context, *connect.Request[v1.DockerConfigFileForRegistryRequest]) (*connect.Response[v1.DockerConfigFileForRegistryResponse], error) {

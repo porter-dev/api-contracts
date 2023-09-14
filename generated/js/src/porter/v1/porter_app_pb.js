@@ -20,6 +20,33 @@ export const PorterApp = proto3.makeMessageType(
     { no: 4, name: "build", kind: "message", T: Build },
     { no: 5, name: "predeploy", kind: "message", T: Service },
     { no: 6, name: "image", kind: "message", T: AppImage },
+    { no: 7, name: "env_groups", kind: "message", T: EnvGroup, repeated: true },
+  ],
+);
+
+/**
+ * EnvGroup represents the metadata for an env group. We do not want to store the actual variables with the PorterApp.
+ *
+ * @generated from message porter.v1.EnvGroup
+ */
+export const EnvGroup = proto3.makeMessageType(
+  "porter.v1.EnvGroup",
+  () => [
+    { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "version", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * EnvGroupVariables represents the variables for an env group.
+ *
+ * @generated from message porter.v1.EnvGroupVariables
+ */
+export const EnvGroupVariables = proto3.makeMessageType(
+  "porter.v1.EnvGroupVariables",
+  () => [
+    { no: 1, name: "normal", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "scalar", T: 9 /* ScalarType.STRING */} },
+    { no: 2, name: "secret", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "scalar", T: 9 /* ScalarType.STRING */} },
   ],
 );
 
@@ -32,6 +59,7 @@ export const Deletions = proto3.makeMessageType(
   "porter.v1.Deletions",
   () => [
     { no: 1, name: "service_names", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 2, name: "env_group_names", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 4, name: "env_variable_names", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
   ],
 );
