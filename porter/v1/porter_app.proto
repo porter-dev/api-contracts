@@ -31,9 +31,9 @@ message EnvGroup {
 
 message EnvGroupVariables {
   // normal is a map of non-sensitive variable names to values
-  map<string, string> normal = 2;
+  map<string, string> normal = 1;
   // secret is a map of sensitive variable names to values
-  map<string, string> secret = 3;
+  map<string, string> secret = 2;
 }
 
 // Deletions contains all explicit deletions from a PorterApp

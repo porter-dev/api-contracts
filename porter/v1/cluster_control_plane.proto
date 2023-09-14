@@ -353,7 +353,7 @@ message EnvGroupVariablesRequest {
 }
 
 message EnvGroupVariablesResponse {
-  EnvGroupVariables env_group_variables = 2;
+  EnvGroupVariables env_group_variables = 1;
 }
 
 message LatestEnvGroupWithVariablesRequest {

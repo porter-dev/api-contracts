@@ -627,7 +627,7 @@ export const EnvGroupVariablesRequest = proto3.makeMessageType(
 export const EnvGroupVariablesResponse = proto3.makeMessageType(
   "porter.v1.EnvGroupVariablesResponse",
   () => [
-    { no: 2, name: "env_group_variables", kind: "message", T: EnvGroupVariables },
+    { no: 1, name: "env_group_variables", kind: "message", T: EnvGroupVariables },
   ],
 );
 

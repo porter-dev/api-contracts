@@ -1701,7 +1701,7 @@ export declare class EnvGroupVariablesRequest extends Message<EnvGroupVariablesR
  */
 export declare class EnvGroupVariablesResponse extends Message<EnvGroupVariablesResponse> {
   /**
-   * @generated from field: porter.v1.EnvGroupVariables env_group_variables = 2;
+   * @generated from field: porter.v1.EnvGroupVariables env_group_variables = 1;
    */
   envGroupVariables?: EnvGroupVariables;
 

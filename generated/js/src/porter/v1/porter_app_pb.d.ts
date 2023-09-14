@@ -118,14 +118,14 @@ export declare class EnvGroupVariables extends Message<EnvGroupVariables> {
   /**
    * normal is a map of non-sensitive variable names to values
    *
-   * @generated from field: map<string, string> normal = 2;
+   * @generated from field: map<string, string> normal = 1;
    */
   normal: { [key: string]: string };
 
   /**
    * secret is a map of sensitive variable names to values
    *
-   * @generated from field: map<string, string> secret = 3;
+   * @generated from field: map<string, string> secret = 2;
    */
   secret: { [key: string]: string };
 
