@@ -76,6 +76,37 @@ export declare enum EnumCLIAction {
 }
 
 /**
+ * @generated from enum porter.v1.EnumRevisionStatus
+ */
+export declare enum EnumRevisionStatus {
+  /**
+   * @generated from enum value: ENUM_REVISION_STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * ENUM_REVISION_STATUS_PREDEPLOY signifies the predeploy job failed.
+   *
+   * @generated from enum value: ENUM_REVISION_STATUS_PREDEPLOY_FAILED = 1;
+   */
+  PREDEPLOY_FAILED = 1,
+
+  /**
+   * ENUM_REVISION_STATUS_DEPLOY_FAILED signifies the deploy job failed.
+   *
+   * @generated from enum value: ENUM_REVISION_STATUS_DEPLOY_FAILED = 2;
+   */
+  DEPLOY_FAILED = 2,
+
+  /**
+   * ENUM_REVISION_STATUS_BUILD_FAILED signifies the build failed.
+   *
+   * @generated from enum value: ENUM_REVISION_STATUS_BUILD_FAILED = 3;
+   */
+  BUILD_FAILED = 3,
+}
+
+/**
  * @generated from message porter.v1.PreflightCheckRequest
  */
 export declare class PreflightCheckRequest extends Message<PreflightCheckRequest> {
@@ -1025,6 +1056,63 @@ export declare class ApplyPorterAppResponse extends Message<ApplyPorterAppRespon
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ApplyPorterAppResponse;
 
   static equals(a: ApplyPorterAppResponse | PlainMessage<ApplyPorterAppResponse> | undefined, b: ApplyPorterAppResponse | PlainMessage<ApplyPorterAppResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.UpdateRevisionStatusRequest
+ */
+export declare class UpdateRevisionStatusRequest extends Message<UpdateRevisionStatusRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * app_revision_id is the id of the PorterAppRevision
+   *
+   * @generated from field: string app_revision_id = 2;
+   */
+  appRevisionId: string;
+
+  /**
+   * revision_status is the new status of the revision
+   *
+   * @generated from field: porter.v1.EnumRevisionStatus revision_status = 3;
+   */
+  revisionStatus: EnumRevisionStatus;
+
+  constructor(data?: PartialMessage<UpdateRevisionStatusRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateRevisionStatusRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateRevisionStatusRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateRevisionStatusRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateRevisionStatusRequest;
+
+  static equals(a: UpdateRevisionStatusRequest | PlainMessage<UpdateRevisionStatusRequest> | undefined, b: UpdateRevisionStatusRequest | PlainMessage<UpdateRevisionStatusRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.UpdateRevisionStatusResponse
+ */
+export declare class UpdateRevisionStatusResponse extends Message<UpdateRevisionStatusResponse> {
+  constructor(data?: PartialMessage<UpdateRevisionStatusResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateRevisionStatusResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateRevisionStatusResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateRevisionStatusResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateRevisionStatusResponse;
+
+  static equals(a: UpdateRevisionStatusResponse | PlainMessage<UpdateRevisionStatusResponse> | undefined, b: UpdateRevisionStatusResponse | PlainMessage<UpdateRevisionStatusResponse> | undefined): boolean;
 }
 
 /**

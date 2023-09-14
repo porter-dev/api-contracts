@@ -39,6 +39,19 @@ export const EnumCLIAction = proto3.makeEnum(
 );
 
 /**
+ * @generated from enum porter.v1.EnumRevisionStatus
+ */
+export const EnumRevisionStatus = proto3.makeEnum(
+  "porter.v1.EnumRevisionStatus",
+  [
+    {no: 0, name: "ENUM_REVISION_STATUS_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "ENUM_REVISION_STATUS_PREDEPLOY_FAILED", localName: "PREDEPLOY_FAILED"},
+    {no: 2, name: "ENUM_REVISION_STATUS_DEPLOY_FAILED", localName: "DEPLOY_FAILED"},
+    {no: 3, name: "ENUM_REVISION_STATUS_BUILD_FAILED", localName: "BUILD_FAILED"},
+  ],
+);
+
+/**
  * @generated from message porter.v1.PreflightCheckRequest
  */
 export const PreflightCheckRequest = proto3.makeMessageType(
@@ -381,6 +394,26 @@ export const ApplyPorterAppResponse = proto3.makeMessageType(
     { no: 1, name: "porter_app_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "cli_action", kind: "enum", T: proto3.getEnumType(EnumCLIAction) },
   ],
+);
+
+/**
+ * @generated from message porter.v1.UpdateRevisionStatusRequest
+ */
+export const UpdateRevisionStatusRequest = proto3.makeMessageType(
+  "porter.v1.UpdateRevisionStatusRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "app_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "revision_status", kind: "enum", T: proto3.getEnumType(EnumRevisionStatus) },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.UpdateRevisionStatusResponse
+ */
+export const UpdateRevisionStatusResponse = proto3.makeMessageType(
+  "porter.v1.UpdateRevisionStatusResponse",
+  [],
 );
 
 /**

@@ -196,6 +196,16 @@ message ApplyPorterAppResponse {
   EnumCLIAction cli_action = 2;
 }
 
+message UpdateRevisionStatusRequest {
+  int64 project_id = 1;
+  // app_revision_id is the id of the PorterAppRevision
+  string app_revision_id = 2;
+  // revision_status is the new status of the revision
+  EnumRevisionStatus revision_status = 3;
+}
+
+message UpdateRevisionStatusResponse {}
+
 // DeletePorterAppRequest is the request object when deleting a porter app from a given project
 message DeletePorterAppRequest {
   // project_id is the id of the project that the PorterApp belongs to
@@ -317,6 +327,16 @@ enum EnumCLIAction {
   ENUM_CLI_ACTION_TRACK_PREDEPLOY = 3;
 }
 
+enum EnumRevisionStatus {
+  ENUM_REVISION_STATUS_UNSPECIFIED = 0;
+  // ENUM_REVISION_STATUS_PREDEPLOY signifies the predeploy job failed.
+  ENUM_REVISION_STATUS_PREDEPLOY_FAILED = 1;
+  // ENUM_REVISION_STATUS_DEPLOY_FAILED signifies the deploy job failed.
+  ENUM_REVISION_STATUS_DEPLOY_FAILED = 2;
+  // ENUM_REVISION_STATUS_BUILD_FAILED signifies the build failed.
+  ENUM_REVISION_STATUS_BUILD_FAILED = 3;
+}
+
 message SeedAppRevisionsRequest {
   int64 project_id = 1;
   int64 cluster_id = 2;
@@ -378,6 +398,9 @@ service ClusterControlPlaneService {
 
   // ApplyPorterApp applies a porter app as defined by the provided porter.yaml file to a given deployment id
   rpc ApplyPorterApp(ApplyPorterAppRequest) returns (ApplyPorterAppResponse) {}
+
+  // UpdateRevisionStatus updates the status of a revision
+  rpc UpdateRevisionStatus(UpdateRevisionStatusRequest) returns (UpdateRevisionStatusResponse) {}
 
   // DeletePorterApp deletes all instances of a porter app across deployment targets in a given project
   rpc DeletePorterApp(DeletePorterAppRequest) returns (DeletePorterAppResponse) {}
