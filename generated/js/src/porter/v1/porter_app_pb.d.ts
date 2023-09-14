@@ -28,9 +28,10 @@ export declare class PorterApp extends Message<PorterApp> {
   services: { [key: string]: Service };
 
   /**
-   * env is a map of environment variable names to values
+   * env is deprecated in favor of env groups. It was a map of environment variable names to values
    *
-   * @generated from field: map<string, string> env = 3;
+   * @generated from field: map<string, string> env = 3 [deprecated = true];
+   * @deprecated
    */
   env: { [key: string]: string };
 
@@ -55,6 +56,13 @@ export declare class PorterApp extends Message<PorterApp> {
    */
   image?: AppImage;
 
+  /**
+   * env_groups is a map of environment variable group names to environment variable group configurations
+   *
+   * @generated from field: repeated porter.v1.EnvGroup env_groups = 7;
+   */
+  envGroups: EnvGroup[];
+
   constructor(data?: PartialMessage<PorterApp>);
 
   static readonly runtime: typeof proto3;
@@ -71,6 +79,72 @@ export declare class PorterApp extends Message<PorterApp> {
 }
 
 /**
+ * @generated from message porter.v1.EnvGroup
+ */
+export declare class EnvGroup extends Message<EnvGroup> {
+  /**
+   * name is the name of the environment variable group
+   *
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * version is the version of the environment variable group
+   *
+   * @generated from field: int64 version = 2;
+   */
+  version: bigint;
+
+  constructor(data?: PartialMessage<EnvGroup>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.EnvGroup";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EnvGroup;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): EnvGroup;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EnvGroup;
+
+  static equals(a: EnvGroup | PlainMessage<EnvGroup> | undefined, b: EnvGroup | PlainMessage<EnvGroup> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.EnvGroupVariables
+ */
+export declare class EnvGroupVariables extends Message<EnvGroupVariables> {
+  /**
+   * normal is a map of non-sensitive variable names to values
+   *
+   * @generated from field: map<string, string> normal = 2;
+   */
+  normal: { [key: string]: string };
+
+  /**
+   * secret is a map of sensitive variable names to values
+   *
+   * @generated from field: map<string, string> secret = 3;
+   */
+  secret: { [key: string]: string };
+
+  constructor(data?: PartialMessage<EnvGroupVariables>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.EnvGroupVariables";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EnvGroupVariables;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): EnvGroupVariables;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EnvGroupVariables;
+
+  static equals(a: EnvGroupVariables | PlainMessage<EnvGroupVariables> | undefined, b: EnvGroupVariables | PlainMessage<EnvGroupVariables> | undefined): boolean;
+}
+
+/**
  * Deletions contains all explicit deletions from a PorterApp
  *
  * @generated from message porter.v1.Deletions
@@ -84,9 +158,17 @@ export declare class Deletions extends Message<Deletions> {
   serviceNames: string[];
 
   /**
-   * env_variable_names is a list of environment variable names to delete
+   * env_group_names is a list of environment variable group names to delete
    *
-   * @generated from field: repeated string env_variable_names = 4;
+   * @generated from field: repeated string env_group_names = 2;
+   */
+  envGroupNames: string[];
+
+  /**
+   * env_variable_names is deprecated in favor of env_group_names. It was a list of environment variable names to delete
+   *
+   * @generated from field: repeated string env_variable_names = 4 [deprecated = true];
+   * @deprecated
    */
   envVariableNames: string[];
 

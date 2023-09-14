@@ -346,6 +346,27 @@ message SeedAppRevisionsRequest {
 
 message SeedAppRevisionsResponse {}
 
+message EnvGroupVariablesRequest {
+  int64 project_id = 1;
+  string deployment_target_id = 2;
+  EnvGroup env_group = 3;
+}
+
+message EnvGroupVariablesResponse {
+  EnvGroupVariables env_group_variables = 2;
+}
+
+message LatestEnvGroupWithVariablesRequest {
+  int64 project_id = 1;
+  string deployment_target_id = 2;
+  string env_group_name = 3;
+}
+
+message LatestEnvGroupWithVariablesResponse {
+  EnvGroup env_group = 1;
+  EnvGroupVariables env_group_variables = 2;
+}
+
 service ClusterControlPlaneService {
   // UpdateCloudProviderCredentials creates or updates the credentials used for accessing the specific cloud
   rpc UpdateCloudProviderCredentials(UpdateCloudProviderCredentialsRequest) returns (UpdateCloudProviderCredentialsResponse) {}
@@ -427,6 +448,12 @@ service ClusterControlPlaneService {
   // SeedAppRevision seeds app revisions for a given project id, cluster id, release name, namespace.  It should only be called
   // from the Cluster Control Plane CLI and should be removed once all legacy users are migrated to the new apply validate.
   rpc SeedAppRevisions(SeedAppRevisionsRequest) returns (SeedAppRevisionsResponse) {}
+
+  // EnvGroupVariables returns the variables for a given env group
+  rpc EnvGroupVariables(EnvGroupVariablesRequest) returns (EnvGroupVariablesResponse) {}
+
+  // LatestEnvGroupWithVariables returns the latest env group and variables for a given env group name
+  rpc LatestEnvGroupWithVariables(LatestEnvGroupWithVariablesRequest) returns (LatestEnvGroupWithVariablesResponse) {}
 
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
   // Deprecated. Use TokenForRegistry instead.

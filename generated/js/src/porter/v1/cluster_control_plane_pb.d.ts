@@ -10,7 +10,7 @@ import type { GKEPreflightValues } from "./gke_pb.js";
 import type { EKSPreflightValues } from "./eks_pb.js";
 import type { Error } from "./errors_pb.js";
 import type { Contract, ContractRevision } from "./contract_pb.js";
-import type { Deletions, PorterApp } from "./porter_app_pb.js";
+import type { Deletions, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
@@ -1660,6 +1660,127 @@ export declare class SeedAppRevisionsResponse extends Message<SeedAppRevisionsRe
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SeedAppRevisionsResponse;
 
   static equals(a: SeedAppRevisionsResponse | PlainMessage<SeedAppRevisionsResponse> | undefined, b: SeedAppRevisionsResponse | PlainMessage<SeedAppRevisionsResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.EnvGroupVariablesRequest
+ */
+export declare class EnvGroupVariablesRequest extends Message<EnvGroupVariablesRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: string deployment_target_id = 2;
+   */
+  deploymentTargetId: string;
+
+  /**
+   * @generated from field: porter.v1.EnvGroup env_group = 3;
+   */
+  envGroup?: EnvGroup;
+
+  constructor(data?: PartialMessage<EnvGroupVariablesRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.EnvGroupVariablesRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EnvGroupVariablesRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): EnvGroupVariablesRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EnvGroupVariablesRequest;
+
+  static equals(a: EnvGroupVariablesRequest | PlainMessage<EnvGroupVariablesRequest> | undefined, b: EnvGroupVariablesRequest | PlainMessage<EnvGroupVariablesRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.EnvGroupVariablesResponse
+ */
+export declare class EnvGroupVariablesResponse extends Message<EnvGroupVariablesResponse> {
+  /**
+   * @generated from field: porter.v1.EnvGroupVariables env_group_variables = 2;
+   */
+  envGroupVariables?: EnvGroupVariables;
+
+  constructor(data?: PartialMessage<EnvGroupVariablesResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.EnvGroupVariablesResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EnvGroupVariablesResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): EnvGroupVariablesResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EnvGroupVariablesResponse;
+
+  static equals(a: EnvGroupVariablesResponse | PlainMessage<EnvGroupVariablesResponse> | undefined, b: EnvGroupVariablesResponse | PlainMessage<EnvGroupVariablesResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.LatestEnvGroupWithVariablesRequest
+ */
+export declare class LatestEnvGroupWithVariablesRequest extends Message<LatestEnvGroupWithVariablesRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: string deployment_target_id = 2;
+   */
+  deploymentTargetId: string;
+
+  /**
+   * @generated from field: string env_group_name = 3;
+   */
+  envGroupName: string;
+
+  constructor(data?: PartialMessage<LatestEnvGroupWithVariablesRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.LatestEnvGroupWithVariablesRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LatestEnvGroupWithVariablesRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LatestEnvGroupWithVariablesRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LatestEnvGroupWithVariablesRequest;
+
+  static equals(a: LatestEnvGroupWithVariablesRequest | PlainMessage<LatestEnvGroupWithVariablesRequest> | undefined, b: LatestEnvGroupWithVariablesRequest | PlainMessage<LatestEnvGroupWithVariablesRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.LatestEnvGroupWithVariablesResponse
+ */
+export declare class LatestEnvGroupWithVariablesResponse extends Message<LatestEnvGroupWithVariablesResponse> {
+  /**
+   * @generated from field: porter.v1.EnvGroup env_group = 1;
+   */
+  envGroup?: EnvGroup;
+
+  /**
+   * @generated from field: porter.v1.EnvGroupVariables env_group_variables = 2;
+   */
+  envGroupVariables?: EnvGroupVariables;
+
+  constructor(data?: PartialMessage<LatestEnvGroupWithVariablesResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.LatestEnvGroupWithVariablesResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LatestEnvGroupWithVariablesResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LatestEnvGroupWithVariablesResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LatestEnvGroupWithVariablesResponse;
+
+  static equals(a: LatestEnvGroupWithVariablesResponse | PlainMessage<LatestEnvGroupWithVariablesResponse> | undefined, b: LatestEnvGroupWithVariablesResponse | PlainMessage<LatestEnvGroupWithVariablesResponse> | undefined): boolean;
 }
 
 /**
