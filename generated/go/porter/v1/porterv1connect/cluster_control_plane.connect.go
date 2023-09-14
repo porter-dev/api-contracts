@@ -192,9 +192,9 @@ type ClusterControlPlaneServiceClient interface {
 	// SeedAppRevision seeds app revisions for a given project id, cluster id, release name, namespace.  It should only be called
 	// from the Cluster Control Plane CLI and should be removed once all legacy users are migrated to the new apply validate.
 	SeedAppRevisions(context.Context, *connect.Request[v1.SeedAppRevisionsRequest]) (*connect.Response[v1.SeedAppRevisionsResponse], error)
-	// EnvGroupVariables returns the variables for a given env group
+	// EnvGroupVariables returns the variables for a given env group name and version
 	EnvGroupVariables(context.Context, *connect.Request[v1.EnvGroupVariablesRequest]) (*connect.Response[v1.EnvGroupVariablesResponse], error)
-	// LatestEnvGroupWithVariables returns the latest env group and variables for a given env group name
+	// LatestEnvGroupWithVariables returns the latest env group and variables for a given env group name in the given deployment target
 	LatestEnvGroupWithVariables(context.Context, *connect.Request[v1.LatestEnvGroupWithVariablesRequest]) (*connect.Response[v1.LatestEnvGroupWithVariablesResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
@@ -680,9 +680,9 @@ type ClusterControlPlaneServiceHandler interface {
 	// SeedAppRevision seeds app revisions for a given project id, cluster id, release name, namespace.  It should only be called
 	// from the Cluster Control Plane CLI and should be removed once all legacy users are migrated to the new apply validate.
 	SeedAppRevisions(context.Context, *connect.Request[v1.SeedAppRevisionsRequest]) (*connect.Response[v1.SeedAppRevisionsResponse], error)
-	// EnvGroupVariables returns the variables for a given env group
+	// EnvGroupVariables returns the variables for a given env group name and version
 	EnvGroupVariables(context.Context, *connect.Request[v1.EnvGroupVariablesRequest]) (*connect.Response[v1.EnvGroupVariablesResponse], error)
-	// LatestEnvGroupWithVariables returns the latest env group and variables for a given env group name
+	// LatestEnvGroupWithVariables returns the latest env group and variables for a given env group name in the given deployment target
 	LatestEnvGroupWithVariables(context.Context, *connect.Request[v1.LatestEnvGroupWithVariablesRequest]) (*connect.Response[v1.LatestEnvGroupWithVariablesResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.

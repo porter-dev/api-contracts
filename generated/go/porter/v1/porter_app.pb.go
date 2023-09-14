@@ -126,6 +126,7 @@ func (x *PorterApp) GetEnvGroups() []*EnvGroup {
 	return nil
 }
 
+// EnvGroup represents the metadata for an env group. We do not want to store the actual variables with the PorterApp.
 type EnvGroup struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -183,6 +184,7 @@ func (x *EnvGroup) GetVersion() int64 {
 	return 0
 }
 
+// EnvGroupVariables represents the variables for an env group.
 type EnvGroupVariables struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

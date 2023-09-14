@@ -3020,6 +3020,7 @@ func (*SeedAppRevisionsResponse) Descriptor() ([]byte, []int) {
 	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{48}
 }
 
+// EnvGroupVariablesRequest is the request object when retrieving the variables for a given EnvGroup
 type EnvGroupVariablesRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3083,6 +3084,7 @@ func (x *EnvGroupVariablesRequest) GetEnvGroup() *EnvGroup {
 	return nil
 }
 
+// EnvGroupVariablesResponse is the response object when retrieving the variables for a given EnvGroup
 type EnvGroupVariablesResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3130,6 +3132,7 @@ func (x *EnvGroupVariablesResponse) GetEnvGroupVariables() *EnvGroupVariables {
 	return nil
 }
 
+// LatestEnvGroupWithVariablesRequest is the request object when retrieving the latest EnvGroup and its variables for a given deployment target
 type LatestEnvGroupWithVariablesRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3193,6 +3196,7 @@ func (x *LatestEnvGroupWithVariablesRequest) GetEnvGroupName() string {
 	return ""
 }
 
+// LatestEnvGroupWithVariablesResponse is the response object when retrieving the latest EnvGroup and its variables for a given deployment target
 type LatestEnvGroupWithVariablesResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

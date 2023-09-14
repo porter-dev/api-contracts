@@ -79,6 +79,8 @@ export declare class PorterApp extends Message<PorterApp> {
 }
 
 /**
+ * EnvGroup represents the metadata for an env group. We do not want to store the actual variables with the PorterApp.
+ *
  * @generated from message porter.v1.EnvGroup
  */
 export declare class EnvGroup extends Message<EnvGroup> {
@@ -112,6 +114,8 @@ export declare class EnvGroup extends Message<EnvGroup> {
 }
 
 /**
+ * EnvGroupVariables represents the variables for an env group.
+ *
  * @generated from message porter.v1.EnvGroupVariables
  */
 export declare class EnvGroupVariables extends Message<EnvGroupVariables> {

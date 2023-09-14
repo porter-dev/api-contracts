@@ -1663,6 +1663,8 @@ export declare class SeedAppRevisionsResponse extends Message<SeedAppRevisionsRe
 }
 
 /**
+ * EnvGroupVariablesRequest is the request object when retrieving the variables for a given EnvGroup
+ *
  * @generated from message porter.v1.EnvGroupVariablesRequest
  */
 export declare class EnvGroupVariablesRequest extends Message<EnvGroupVariablesRequest> {
@@ -1697,6 +1699,8 @@ export declare class EnvGroupVariablesRequest extends Message<EnvGroupVariablesR
 }
 
 /**
+ * EnvGroupVariablesResponse is the response object when retrieving the variables for a given EnvGroup
+ *
  * @generated from message porter.v1.EnvGroupVariablesResponse
  */
 export declare class EnvGroupVariablesResponse extends Message<EnvGroupVariablesResponse> {
@@ -1721,6 +1725,8 @@ export declare class EnvGroupVariablesResponse extends Message<EnvGroupVariables
 }
 
 /**
+ * LatestEnvGroupWithVariablesRequest is the request object when retrieving the latest EnvGroup and its variables for a given deployment target
+ *
  * @generated from message porter.v1.LatestEnvGroupWithVariablesRequest
  */
 export declare class LatestEnvGroupWithVariablesRequest extends Message<LatestEnvGroupWithVariablesRequest> {
@@ -1755,6 +1761,8 @@ export declare class LatestEnvGroupWithVariablesRequest extends Message<LatestEn
 }
 
 /**
+ * LatestEnvGroupWithVariablesResponse is the response object when retrieving the latest EnvGroup and its variables for a given deployment target
+ *
  * @generated from message porter.v1.LatestEnvGroupWithVariablesResponse
  */
 export declare class LatestEnvGroupWithVariablesResponse extends Message<LatestEnvGroupWithVariablesResponse> {

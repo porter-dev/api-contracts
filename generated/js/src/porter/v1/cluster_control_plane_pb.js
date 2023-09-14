@@ -610,6 +610,8 @@ export const SeedAppRevisionsResponse = proto3.makeMessageType(
 );
 
 /**
+ * EnvGroupVariablesRequest is the request object when retrieving the variables for a given EnvGroup
+ *
  * @generated from message porter.v1.EnvGroupVariablesRequest
  */
 export const EnvGroupVariablesRequest = proto3.makeMessageType(
@@ -622,6 +624,8 @@ export const EnvGroupVariablesRequest = proto3.makeMessageType(
 );
 
 /**
+ * EnvGroupVariablesResponse is the response object when retrieving the variables for a given EnvGroup
+ *
  * @generated from message porter.v1.EnvGroupVariablesResponse
  */
 export const EnvGroupVariablesResponse = proto3.makeMessageType(
@@ -632,6 +636,8 @@ export const EnvGroupVariablesResponse = proto3.makeMessageType(
 );
 
 /**
+ * LatestEnvGroupWithVariablesRequest is the request object when retrieving the latest EnvGroup and its variables for a given deployment target
+ *
  * @generated from message porter.v1.LatestEnvGroupWithVariablesRequest
  */
 export const LatestEnvGroupWithVariablesRequest = proto3.makeMessageType(
@@ -644,6 +650,8 @@ export const LatestEnvGroupWithVariablesRequest = proto3.makeMessageType(
 );
 
 /**
+ * LatestEnvGroupWithVariablesResponse is the response object when retrieving the latest EnvGroup and its variables for a given deployment target
+ *
  * @generated from message porter.v1.LatestEnvGroupWithVariablesResponse
  */
 export const LatestEnvGroupWithVariablesResponse = proto3.makeMessageType(

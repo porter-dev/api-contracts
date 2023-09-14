@@ -25,6 +25,8 @@ export const PorterApp = proto3.makeMessageType(
 );
 
 /**
+ * EnvGroup represents the metadata for an env group. We do not want to store the actual variables with the PorterApp.
+ *
  * @generated from message porter.v1.EnvGroup
  */
 export const EnvGroup = proto3.makeMessageType(
@@ -36,6 +38,8 @@ export const EnvGroup = proto3.makeMessageType(
 );
 
 /**
+ * EnvGroupVariables represents the variables for an env group.
+ *
  * @generated from message porter.v1.EnvGroupVariables
  */
 export const EnvGroupVariables = proto3.makeMessageType(
