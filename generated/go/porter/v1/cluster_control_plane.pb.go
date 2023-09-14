@@ -1965,7 +1965,7 @@ type UpdateRevisionStatusRequest struct {
 	ProjectId int64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	// app_revision_id is the id of the PorterAppRevision
 	AppRevisionId string `protobuf:"bytes,2,opt,name=app_revision_id,json=appRevisionId,proto3" json:"app_revision_id,omitempty"`
-	// revision_status is the fled status of the revision
+	// revision_status is the new status of the revision
 	RevisionStatus EnumRevisionStatus `protobuf:"varint,3,opt,name=revision_status,json=revisionStatus,proto3,enum=porter.v1.EnumRevisionStatus" json:"revision_status,omitempty"`
 }
 

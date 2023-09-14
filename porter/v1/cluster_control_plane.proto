@@ -200,7 +200,7 @@ message UpdateRevisionStatusRequest {
   int64 project_id = 1;
   // app_revision_id is the id of the PorterAppRevision
   string app_revision_id = 2;
-  // revision_status is the fled status of the revision
+  // revision_status is the new status of the revision
   EnumRevisionStatus revision_status = 3;
 }
 

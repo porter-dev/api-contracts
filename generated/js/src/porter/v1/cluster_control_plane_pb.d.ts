@@ -1075,7 +1075,7 @@ export declare class UpdateRevisionStatusRequest extends Message<UpdateRevisionS
   appRevisionId: string;
 
   /**
-   * revision_status is the fled status of the revision
+   * revision_status is the new status of the revision
    *
    * @generated from field: porter.v1.EnumRevisionStatus revision_status = 3;
    */
