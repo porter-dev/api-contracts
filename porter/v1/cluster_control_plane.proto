@@ -188,6 +188,8 @@ message ApplyPorterAppRequest {
   PorterApp app = 3;
   // porter_app_revision_id is the id of the PorterAppRevision to be applied.  This is used by the CLI to provide updates to an existing app revision. If provided, app must be empty.
   string porter_app_revision_id = 4;
+  // force_build is a flag that forces the app to rebuild, regardless of the existing tag. This is used on initial apply by the CLI.
+  bool force_build = 5;
 }
 
 message ApplyPorterAppResponse {
