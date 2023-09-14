@@ -346,22 +346,26 @@ message SeedAppRevisionsRequest {
 
 message SeedAppRevisionsResponse {}
 
+// EnvGroupVariablesRequest is the request object when retrieving the variables for a given EnvGroup
 message EnvGroupVariablesRequest {
   int64 project_id = 1;
   string deployment_target_id = 2;
   EnvGroup env_group = 3;
 }
 
+// EnvGroupVariablesResponse is the response object when retrieving the variables for a given EnvGroup
 message EnvGroupVariablesResponse {
   EnvGroupVariables env_group_variables = 1;
 }
 
+// LatestEnvGroupWithVariablesRequest is the request object when retrieving the latest EnvGroup and its variables for a given deployment target
 message LatestEnvGroupWithVariablesRequest {
   int64 project_id = 1;
   string deployment_target_id = 2;
   string env_group_name = 3;
 }
 
+// LatestEnvGroupWithVariablesResponse is the response object when retrieving the latest EnvGroup and its variables for a given deployment target
 message LatestEnvGroupWithVariablesResponse {
   EnvGroup env_group = 1;
   EnvGroupVariables env_group_variables = 2;
@@ -449,10 +453,10 @@ service ClusterControlPlaneService {
   // from the Cluster Control Plane CLI and should be removed once all legacy users are migrated to the new apply validate.
   rpc SeedAppRevisions(SeedAppRevisionsRequest) returns (SeedAppRevisionsResponse) {}
 
-  // EnvGroupVariables returns the variables for a given env group
+  // EnvGroupVariables returns the variables for a given env group name and version
   rpc EnvGroupVariables(EnvGroupVariablesRequest) returns (EnvGroupVariablesResponse) {}
 
-  // LatestEnvGroupWithVariables returns the latest env group and variables for a given env group name
+  // LatestEnvGroupWithVariables returns the latest env group and variables for a given env group name in the given deployment target
   rpc LatestEnvGroupWithVariables(LatestEnvGroupWithVariablesRequest) returns (LatestEnvGroupWithVariablesResponse) {}
 
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
