@@ -286,6 +286,17 @@ message LatestAppRevisionsResponse {
   repeated AppRevision app_revisions = 1;
 }
 
+message GetAppRevisionRequest {
+  int64 project_id = 1;
+  // app_revision_id is the id of the PorterAppRevision to return
+  string app_revision_id = 2;
+}
+
+message GetAppRevisionResponse {
+  // app_revision is the PorterAppRevision that was requested
+  AppRevision app_revision = 1;
+}
+
 message PredeployStatusRequest {
   int64 project_id = 1;
   // app_revision_id is the revision id of the PorterApp which should have its predeploy status checked
@@ -442,6 +453,9 @@ service ClusterControlPlaneService {
 
   // LatestAppRevisions returns the currently deployed app revisions for a given deployment_target
   rpc LatestAppRevisions(LatestAppRevisionsRequest) returns (LatestAppRevisionsResponse) {}
+
+  // GetAppRevision returns the app revision for a given app revision id
+  rpc GetAppRevision(GetAppRevisionRequest) returns (GetAppRevisionResponse) {}
 
   // PredeployStatus returns the status of the predeploy job for a given app revision
   rpc PredeployStatus(PredeployStatusRequest) returns (PredeployStatusResponse) {}

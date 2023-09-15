@@ -1493,6 +1493,63 @@ export declare class LatestAppRevisionsResponse extends Message<LatestAppRevisio
 }
 
 /**
+ * @generated from message porter.v1.GetAppRevisionRequest
+ */
+export declare class GetAppRevisionRequest extends Message<GetAppRevisionRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * app_revision_id is the id of the PorterAppRevision to return
+   *
+   * @generated from field: string app_revision_id = 2;
+   */
+  appRevisionId: string;
+
+  constructor(data?: PartialMessage<GetAppRevisionRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.GetAppRevisionRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetAppRevisionRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetAppRevisionRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetAppRevisionRequest;
+
+  static equals(a: GetAppRevisionRequest | PlainMessage<GetAppRevisionRequest> | undefined, b: GetAppRevisionRequest | PlainMessage<GetAppRevisionRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.GetAppRevisionResponse
+ */
+export declare class GetAppRevisionResponse extends Message<GetAppRevisionResponse> {
+  /**
+   * app_revision is the PorterAppRevision that was requested
+   *
+   * @generated from field: porter.v1.AppRevision app_revision = 1;
+   */
+  appRevision?: AppRevision;
+
+  constructor(data?: PartialMessage<GetAppRevisionResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.GetAppRevisionResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetAppRevisionResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetAppRevisionResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetAppRevisionResponse;
+
+  static equals(a: GetAppRevisionResponse | PlainMessage<GetAppRevisionResponse> | undefined, b: GetAppRevisionResponse | PlainMessage<GetAppRevisionResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.PredeployStatusRequest
  */
 export declare class PredeployStatusRequest extends Message<PredeployStatusRequest> {
