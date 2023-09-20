@@ -303,6 +303,8 @@ export const Image = proto3.makeMessageType(
   () => [
     { no: 1, name: "repository_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "tag", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "digest", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "updated_at", kind: "message", T: Timestamp },
   ],
 );
 

@@ -793,6 +793,16 @@ export declare class Image extends Message<Image> {
    */
   tag: string;
 
+  /**
+   * @generated from field: string digest = 3;
+   */
+  digest: string;
+
+  /**
+   * @generated from field: google.protobuf.Timestamp updated_at = 4;
+   */
+  updatedAt?: Timestamp;
+
   constructor(data?: PartialMessage<Image>);
 
   static readonly runtime: typeof proto3;
