@@ -158,9 +158,9 @@ export declare class WebServiceConfig extends Message<WebServiceConfig> {
   /**
    * private indicates whether or not the web service should be private (not publicly accessible)
    *
-   * @generated from field: bool private = 4;
+   * @generated from field: optional bool private = 4;
    */
-  private: boolean;
+  private?: boolean;
 
   constructor(data?: PartialMessage<WebServiceConfig>);
 
