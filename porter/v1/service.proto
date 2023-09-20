@@ -43,7 +43,7 @@ message WebServiceConfig {
   // health_check is the health check configuration, used for liveness and readiness probes
   HealthCheck health_check = 3;
   // private indicates whether or not the web service should be private (not publicly accessible)
-  bool private = 4;
+  optional bool private = 4;
 }
 
 // WorkerServiceConfig is the configuration for a worker service

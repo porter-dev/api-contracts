@@ -52,7 +52,7 @@ export const WebServiceConfig = proto3.makeMessageType(
     { no: 1, name: "autoscaling", kind: "message", T: Autoscaling },
     { no: 2, name: "domains", kind: "message", T: Domain, repeated: true },
     { no: 3, name: "health_check", kind: "message", T: HealthCheck },
-    { no: 4, name: "private", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 4, name: "private", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
   ],
 );
 
