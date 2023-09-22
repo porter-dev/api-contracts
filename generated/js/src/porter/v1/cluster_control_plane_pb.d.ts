@@ -1873,6 +1873,79 @@ export declare class LatestEnvGroupWithVariablesResponse extends Message<LatestE
 }
 
 /**
+ * @generated from message porter.v1.UpdateAppImageRequest
+ */
+export declare class UpdateAppImageRequest extends Message<UpdateAppImageRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: string app_name = 2;
+   */
+  appName: string;
+
+  /**
+   * @generated from field: string deployment_target_id = 3;
+   */
+  deploymentTargetId: string;
+
+  /**
+   * @generated from field: string repository_url = 4;
+   */
+  repositoryUrl: string;
+
+  /**
+   * @generated from field: string tag = 5;
+   */
+  tag: string;
+
+  constructor(data?: PartialMessage<UpdateAppImageRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateAppImageRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateAppImageRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateAppImageRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateAppImageRequest;
+
+  static equals(a: UpdateAppImageRequest | PlainMessage<UpdateAppImageRequest> | undefined, b: UpdateAppImageRequest | PlainMessage<UpdateAppImageRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.UpdateAppImageResponse
+ */
+export declare class UpdateAppImageResponse extends Message<UpdateAppImageResponse> {
+  /**
+   * @generated from field: string repository_url = 1;
+   */
+  repositoryUrl: string;
+
+  /**
+   * @generated from field: string tag = 2;
+   */
+  tag: string;
+
+  constructor(data?: PartialMessage<UpdateAppImageResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateAppImageResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateAppImageResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateAppImageResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateAppImageResponse;
+
+  static equals(a: UpdateAppImageResponse | PlainMessage<UpdateAppImageResponse> | undefined, b: UpdateAppImageResponse | PlainMessage<UpdateAppImageResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  * @deprecated
  */

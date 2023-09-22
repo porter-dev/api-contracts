@@ -388,6 +388,19 @@ message LatestEnvGroupWithVariablesResponse {
   EnvGroupVariables env_group_variables = 2;
 }
 
+message UpdateAppImageRequest {
+  int64 project_id = 1;
+  string app_name = 2;
+  string deployment_target_id = 3;
+  string repository_url = 4;
+  string tag = 5;
+}
+
+message UpdateAppImageResponse {
+  string repository_url = 1;
+  string tag = 2;
+}
+
 service ClusterControlPlaneService {
   // UpdateCloudProviderCredentials creates or updates the credentials used for accessing the specific cloud
   rpc UpdateCloudProviderCredentials(UpdateCloudProviderCredentialsRequest) returns (UpdateCloudProviderCredentialsResponse) {}
@@ -478,6 +491,9 @@ service ClusterControlPlaneService {
 
   // LatestEnvGroupWithVariables returns the latest env group and variables for a given env group name in the given deployment target
   rpc LatestEnvGroupWithVariables(LatestEnvGroupWithVariablesRequest) returns (LatestEnvGroupWithVariablesResponse) {}
+
+  // UpdateAppImage updates the image of a porter app and applies the new app revision to the deployment target.
+  rpc UpdateAppImage(UpdateAppImageRequest) returns (UpdateAppImageResponse) {}
 
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
   // Deprecated. Use TokenForRegistry instead.
