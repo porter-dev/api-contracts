@@ -115,6 +115,9 @@ const (
 	// ClusterControlPlaneServiceLatestEnvGroupWithVariablesProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's LatestEnvGroupWithVariables RPC.
 	ClusterControlPlaneServiceLatestEnvGroupWithVariablesProcedure = "/porter.v1.ClusterControlPlaneService/LatestEnvGroupWithVariables"
+	// ClusterControlPlaneServiceUpdateAppImageProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's UpdateAppImage RPC.
+	ClusterControlPlaneServiceUpdateAppImageProcedure = "/porter.v1.ClusterControlPlaneService/UpdateAppImage"
 	// ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DockerConfigFileForRegistry RPC.
 	ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure = "/porter.v1.ClusterControlPlaneService/DockerConfigFileForRegistry"
@@ -201,6 +204,8 @@ type ClusterControlPlaneServiceClient interface {
 	EnvGroupVariables(context.Context, *connect.Request[v1.EnvGroupVariablesRequest]) (*connect.Response[v1.EnvGroupVariablesResponse], error)
 	// LatestEnvGroupWithVariables returns the latest env group and variables for a given env group name in the given deployment target
 	LatestEnvGroupWithVariables(context.Context, *connect.Request[v1.LatestEnvGroupWithVariablesRequest]) (*connect.Response[v1.LatestEnvGroupWithVariablesResponse], error)
+	// UpdateAppImage updates the image of a porter app and applies the new app revision to the deployment target.
+	UpdateAppImage(context.Context, *connect.Request[v1.UpdateAppImageRequest]) (*connect.Response[v1.UpdateAppImageResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -379,6 +384,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceLatestEnvGroupWithVariablesProcedure,
 			opts...,
 		),
+		updateAppImage: connect.NewClient[v1.UpdateAppImageRequest, v1.UpdateAppImageResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceUpdateAppImageProcedure,
+			opts...,
+		),
 		dockerConfigFileForRegistry: connect.NewClient[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
@@ -441,6 +451,7 @@ type clusterControlPlaneServiceClient struct {
 	seedAppRevisions               *connect.Client[v1.SeedAppRevisionsRequest, v1.SeedAppRevisionsResponse]
 	envGroupVariables              *connect.Client[v1.EnvGroupVariablesRequest, v1.EnvGroupVariablesResponse]
 	latestEnvGroupWithVariables    *connect.Client[v1.LatestEnvGroupWithVariablesRequest, v1.LatestEnvGroupWithVariablesResponse]
+	updateAppImage                 *connect.Client[v1.UpdateAppImageRequest, v1.UpdateAppImageResponse]
 	dockerConfigFileForRegistry    *connect.Client[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse]
 	eCRTokenForRegistry            *connect.Client[v1.ECRTokenForRegistryRequest, v1.ECRTokenForRegistryResponse]
 	assumeRoleCredentials          *connect.Client[v1.AssumeRoleCredentialsRequest, v1.AssumeRoleCredentialsResponse]
@@ -593,6 +604,11 @@ func (c *clusterControlPlaneServiceClient) LatestEnvGroupWithVariables(ctx conte
 	return c.latestEnvGroupWithVariables.CallUnary(ctx, req)
 }
 
+// UpdateAppImage calls porter.v1.ClusterControlPlaneService.UpdateAppImage.
+func (c *clusterControlPlaneServiceClient) UpdateAppImage(ctx context.Context, req *connect.Request[v1.UpdateAppImageRequest]) (*connect.Response[v1.UpdateAppImageResponse], error) {
+	return c.updateAppImage.CallUnary(ctx, req)
+}
+
 // DockerConfigFileForRegistry calls
 // porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry.
 //
@@ -702,6 +718,8 @@ type ClusterControlPlaneServiceHandler interface {
 	EnvGroupVariables(context.Context, *connect.Request[v1.EnvGroupVariablesRequest]) (*connect.Response[v1.EnvGroupVariablesResponse], error)
 	// LatestEnvGroupWithVariables returns the latest env group and variables for a given env group name in the given deployment target
 	LatestEnvGroupWithVariables(context.Context, *connect.Request[v1.LatestEnvGroupWithVariablesRequest]) (*connect.Response[v1.LatestEnvGroupWithVariablesResponse], error)
+	// UpdateAppImage updates the image of a porter app and applies the new app revision to the deployment target.
+	UpdateAppImage(context.Context, *connect.Request[v1.UpdateAppImageRequest]) (*connect.Response[v1.UpdateAppImageResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -876,6 +894,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.LatestEnvGroupWithVariables,
 		opts...,
 	)
+	clusterControlPlaneServiceUpdateAppImageHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceUpdateAppImageProcedure,
+		svc.UpdateAppImage,
+		opts...,
+	)
 	clusterControlPlaneServiceDockerConfigFileForRegistryHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
 		svc.DockerConfigFileForRegistry,
@@ -962,6 +985,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceEnvGroupVariablesHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceLatestEnvGroupWithVariablesProcedure:
 			clusterControlPlaneServiceLatestEnvGroupWithVariablesHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceUpdateAppImageProcedure:
+			clusterControlPlaneServiceUpdateAppImageHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure:
 			clusterControlPlaneServiceDockerConfigFileForRegistryHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceECRTokenForRegistryProcedure:
@@ -1089,6 +1114,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) EnvGroupVariables(context.
 
 func (UnimplementedClusterControlPlaneServiceHandler) LatestEnvGroupWithVariables(context.Context, *connect.Request[v1.LatestEnvGroupWithVariablesRequest]) (*connect.Response[v1.LatestEnvGroupWithVariablesResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.LatestEnvGroupWithVariables is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) UpdateAppImage(context.Context, *connect.Request[v1.UpdateAppImageRequest]) (*connect.Response[v1.UpdateAppImageResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.UpdateAppImage is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) DockerConfigFileForRegistry(context.Context, *connect.Request[v1.DockerConfigFileForRegistryRequest]) (*connect.Response[v1.DockerConfigFileForRegistryResponse], error) {

@@ -688,6 +688,31 @@ export const LatestEnvGroupWithVariablesResponse = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message porter.v1.UpdateAppImageRequest
+ */
+export const UpdateAppImageRequest = proto3.makeMessageType(
+  "porter.v1.UpdateAppImageRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "repository_url", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "tag", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.UpdateAppImageResponse
+ */
+export const UpdateAppImageResponse = proto3.makeMessageType(
+  "porter.v1.UpdateAppImageResponse",
+  () => [
+    { no: 1, name: "repository_url", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "tag", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  * @deprecated
  */
