@@ -257,6 +257,8 @@ message AppRevision {
   google.protobuf.Timestamp updated_at = 5;
   // id is the id of the revision
   string id = 6;
+  // deployment_target_id is the id of the deployment target where the revision occurs
+  string deployment_target_id = 7;
 }
 
 message CurrentAppRevisionResponse {
