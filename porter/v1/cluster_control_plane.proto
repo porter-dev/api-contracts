@@ -12,6 +12,23 @@ import "porter/v1/errors.proto";
 import "porter/v1/gke.proto";
 import "porter/v1/porter_app.proto";
 
+message QuotaIncreaseRequest {
+
+      int64 project_id = 1;
+      //eks_preflight_values the values that AWS will use to make quota increases
+      EKSPreflightValues eks_preflight_values = 2;
+
+      //list of quota increases to be requsted 
+      repeated string quota_increases = 3;
+
+}
+
+message QuotaIncreaseResponse {
+  //Error if any of quota increases failed 
+  Error error = 1;
+}
+
+
 message PreflightCheckRequest {
   int64 project_id = 1;
   // cloud_provider [REQUIRED] represents the provider that we will provisioning the cluster in
@@ -402,6 +419,9 @@ message UpdateAppImageResponse {
 }
 
 service ClusterControlPlaneService {
+  // PreflightCheck will auto request increases to the quota if needed
+  rpc QuotaIncrease(QuotaIncreaseRequest) returns (QuotaIncreaseResponse) {}
+
   // UpdateCloudProviderCredentials creates or updates the credentials used for accessing the specific cloud
   rpc UpdateCloudProviderCredentials(UpdateCloudProviderCredentialsRequest) returns (UpdateCloudProviderCredentialsResponse) {}
 

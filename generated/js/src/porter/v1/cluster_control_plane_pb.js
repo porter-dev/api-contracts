@@ -4,10 +4,10 @@
 // @ts-nocheck
 
 import { proto3, Timestamp } from "@bufbuild/protobuf";
-import { EnumCloudProvider } from "./cluster_pb.js";
-import { GKEPreflightValues } from "./gke_pb.js";
 import { EKSPreflightValues } from "./eks_pb.js";
 import { Error } from "./errors_pb.js";
+import { EnumCloudProvider } from "./cluster_pb.js";
+import { GKEPreflightValues } from "./gke_pb.js";
 import { Contract, ContractRevision } from "./contract_pb.js";
 import { Deletions, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
@@ -48,6 +48,28 @@ export const EnumRevisionStatus = proto3.makeEnum(
     {no: 1, name: "ENUM_REVISION_STATUS_PREDEPLOY_FAILED", localName: "PREDEPLOY_FAILED"},
     {no: 2, name: "ENUM_REVISION_STATUS_DEPLOY_FAILED", localName: "DEPLOY_FAILED"},
     {no: 3, name: "ENUM_REVISION_STATUS_BUILD_FAILED", localName: "BUILD_FAILED"},
+  ],
+);
+
+/**
+ * @generated from message porter.v1.QuotaIncreaseRequest
+ */
+export const QuotaIncreaseRequest = proto3.makeMessageType(
+  "porter.v1.QuotaIncreaseRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "eks_preflight_values", kind: "message", T: EKSPreflightValues },
+    { no: 3, name: "quota_increases", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.QuotaIncreaseResponse
+ */
+export const QuotaIncreaseResponse = proto3.makeMessageType(
+  "porter.v1.QuotaIncreaseResponse",
+  () => [
+    { no: 1, name: "error", kind: "message", T: Error },
   ],
 );
 

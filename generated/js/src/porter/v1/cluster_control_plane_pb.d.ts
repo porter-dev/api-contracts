@@ -5,10 +5,10 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage, Timestamp } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
-import type { EnumCloudProvider } from "./cluster_pb.js";
-import type { GKEPreflightValues } from "./gke_pb.js";
 import type { EKSPreflightValues } from "./eks_pb.js";
 import type { Error } from "./errors_pb.js";
+import type { EnumCloudProvider } from "./cluster_pb.js";
+import type { GKEPreflightValues } from "./gke_pb.js";
 import type { Contract, ContractRevision } from "./contract_pb.js";
 import type { Deletions, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
@@ -104,6 +104,70 @@ export declare enum EnumRevisionStatus {
    * @generated from enum value: ENUM_REVISION_STATUS_BUILD_FAILED = 3;
    */
   BUILD_FAILED = 3,
+}
+
+/**
+ * @generated from message porter.v1.QuotaIncreaseRequest
+ */
+export declare class QuotaIncreaseRequest extends Message<QuotaIncreaseRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * eks_preflight_values the values that AWS will use to make quota increases
+   *
+   * @generated from field: porter.v1.EKSPreflightValues eks_preflight_values = 2;
+   */
+  eksPreflightValues?: EKSPreflightValues;
+
+  /**
+   * list of quota increases to be requsted 
+   *
+   * @generated from field: repeated string quota_increases = 3;
+   */
+  quotaIncreases: string[];
+
+  constructor(data?: PartialMessage<QuotaIncreaseRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.QuotaIncreaseRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): QuotaIncreaseRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): QuotaIncreaseRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): QuotaIncreaseRequest;
+
+  static equals(a: QuotaIncreaseRequest | PlainMessage<QuotaIncreaseRequest> | undefined, b: QuotaIncreaseRequest | PlainMessage<QuotaIncreaseRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.QuotaIncreaseResponse
+ */
+export declare class QuotaIncreaseResponse extends Message<QuotaIncreaseResponse> {
+  /**
+   * Error if any of quota increases failed 
+   *
+   * @generated from field: porter.v1.Error error = 1;
+   */
+  error?: Error;
+
+  constructor(data?: PartialMessage<QuotaIncreaseResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.QuotaIncreaseResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): QuotaIncreaseResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): QuotaIncreaseResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): QuotaIncreaseResponse;
+
+  static equals(a: QuotaIncreaseResponse | PlainMessage<QuotaIncreaseResponse> | undefined, b: QuotaIncreaseResponse | PlainMessage<QuotaIncreaseResponse> | undefined): boolean;
 }
 
 /**
