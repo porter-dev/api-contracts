@@ -20,7 +20,7 @@ message QuotaIncreaseRequest {
   // These must be stored within Porter, prior to cluster creation. For AWS this refers to the last link in an assume role chain
   string cloud_provider_credentials_id = 3;
   //quota_increases list of quota increases to be requsted 
-  EnumQuotaIncrease quota_increases = 4;
+  repeated EnumQuotaIncrease quota_increases = 4;
 
   oneof preflight_values {
     //gke_preflight_values the values that GKE will use to perform quota increases

@@ -60,7 +60,7 @@ export const QuotaIncreaseRequest = proto3.makeMessageType(
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 2, name: "cloud_provider", kind: "enum", T: proto3.getEnumType(EnumCloudProvider) },
     { no: 3, name: "cloud_provider_credentials_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "quota_increases", kind: "enum", T: proto3.getEnumType(EnumQuotaIncrease) },
+    { no: 4, name: "quota_increases", kind: "enum", T: proto3.getEnumType(EnumQuotaIncrease), repeated: true },
     { no: 5, name: "gke_preflight_values", kind: "message", T: GKEPreflightValues, oneof: "preflight_values" },
     { no: 6, name: "eks_preflight_values", kind: "message", T: EKSPreflightValues, oneof: "preflight_values" },
   ],

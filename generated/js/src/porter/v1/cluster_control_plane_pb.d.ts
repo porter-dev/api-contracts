@@ -133,9 +133,9 @@ export declare class QuotaIncreaseRequest extends Message<QuotaIncreaseRequest> 
   /**
    * quota_increases list of quota increases to be requsted 
    *
-   * @generated from field: porter.v1.EnumQuotaIncrease quota_increases = 4;
+   * @generated from field: repeated porter.v1.EnumQuotaIncrease quota_increases = 4;
    */
-  quotaIncreases: EnumQuotaIncrease;
+  quotaIncreases: EnumQuotaIncrease[];
 
   /**
    * @generated from oneof porter.v1.QuotaIncreaseRequest.preflight_values
