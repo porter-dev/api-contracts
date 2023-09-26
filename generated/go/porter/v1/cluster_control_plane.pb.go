@@ -197,7 +197,7 @@ type QuotaIncreaseRequest struct {
 	// cloud_provider_credentials_id [REQUIRED] is the Porter credentials that will be used for provisioning a cluster.
 	// These must be stored within Porter, prior to cluster creation. For AWS this refers to the last link in an assume role chain
 	CloudProviderCredentialsId string `protobuf:"bytes,3,opt,name=cloud_provider_credentials_id,json=cloudProviderCredentialsId,proto3" json:"cloud_provider_credentials_id,omitempty"`
-	// list of quota increases to be requsted
+	// quota_increases list of quota increases to be requsted
 	QuotaIncreases []string `protobuf:"bytes,4,rep,name=quota_increases,json=quotaIncreases,proto3" json:"quota_increases,omitempty"`
 }
 
@@ -266,7 +266,7 @@ type QuotaIncreaseResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Error if any of quota increases failed
+	// error if any of quota increases failed
 	Error *Error `protobuf:"bytes,1,opt,name=error,proto3" json:"error,omitempty"`
 }
 

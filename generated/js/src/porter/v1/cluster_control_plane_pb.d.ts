@@ -131,7 +131,7 @@ export declare class QuotaIncreaseRequest extends Message<QuotaIncreaseRequest> 
   cloudProviderCredentialsId: string;
 
   /**
-   * list of quota increases to be requsted 
+   * quota_increases list of quota increases to be requsted 
    *
    * @generated from field: repeated string quota_increases = 4;
    */
@@ -157,7 +157,7 @@ export declare class QuotaIncreaseRequest extends Message<QuotaIncreaseRequest> 
  */
 export declare class QuotaIncreaseResponse extends Message<QuotaIncreaseResponse> {
   /**
-   * Error if any of quota increases failed 
+   * error if any of quota increases failed 
    *
    * @generated from field: porter.v1.Error error = 1;
    */
