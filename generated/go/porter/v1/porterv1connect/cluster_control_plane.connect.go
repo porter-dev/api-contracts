@@ -144,7 +144,7 @@ const (
 // ClusterControlPlaneServiceClient is a client for the porter.v1.ClusterControlPlaneService
 // service.
 type ClusterControlPlaneServiceClient interface {
-	// PreflightCheck will auto request increases to the quota if needed
+	// QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas
 	QuotaIncrease(context.Context, *connect.Request[v1.QuotaIncreaseRequest]) (*connect.Response[v1.QuotaIncreaseResponse], error)
 	// UpdateCloudProviderCredentials creates or updates the credentials used for accessing the specific cloud
 	UpdateCloudProviderCredentials(context.Context, *connect.Request[v1.UpdateCloudProviderCredentialsRequest]) (*connect.Response[v1.UpdateCloudProviderCredentialsResponse], error)
@@ -671,7 +671,7 @@ func (c *clusterControlPlaneServiceClient) EKSBearerToken(ctx context.Context, r
 // ClusterControlPlaneServiceHandler is an implementation of the
 // porter.v1.ClusterControlPlaneService service.
 type ClusterControlPlaneServiceHandler interface {
-	// PreflightCheck will auto request increases to the quota if needed
+	// QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas
 	QuotaIncrease(context.Context, *connect.Request[v1.QuotaIncreaseRequest]) (*connect.Response[v1.QuotaIncreaseResponse], error)
 	// UpdateCloudProviderCredentials creates or updates the credentials used for accessing the specific cloud
 	UpdateCloudProviderCredentials(context.Context, *connect.Request[v1.UpdateCloudProviderCredentialsRequest]) (*connect.Response[v1.UpdateCloudProviderCredentialsResponse], error)

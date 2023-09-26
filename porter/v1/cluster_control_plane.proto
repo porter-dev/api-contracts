@@ -16,7 +16,7 @@ message QuotaIncreaseRequest {
   int64 project_id = 1;
   //eks_preflight_values the values that AWS will use to make quota increases
   EKSPreflightValues eks_preflight_values = 2;
-    // cloud_provider_credentials_id [REQUIRED] is the Porter credentials that will be used for provisioning a cluster.
+  // cloud_provider_credentials_id [REQUIRED] is the Porter credentials that will be used for provisioning a cluster.
   // These must be stored within Porter, prior to cluster creation. For AWS this refers to the last link in an assume role chain
   string cloud_provider_credentials_id = 3;
   //list of quota increases to be requsted 
@@ -419,7 +419,7 @@ message UpdateAppImageResponse {
 }
 
 service ClusterControlPlaneService {
-  // PreflightCheck will auto request increases to the quota if needed
+  // QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas 
   rpc QuotaIncrease(QuotaIncreaseRequest) returns (QuotaIncreaseResponse) {}
 
   // UpdateCloudProviderCredentials creates or updates the credentials used for accessing the specific cloud
