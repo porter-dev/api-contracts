@@ -54,16 +54,22 @@ export declare enum EnumQuotaIncrease {
   UNSPECIFIED = 0,
 
   /**
+   * ENUM_QUOTA_INCREASE_AWS signifies the quota increase is for AWS
+   *
    * @generated from enum value: ENUM_QUOTA_INCREASE_AWS = 1;
    */
   AWS = 1,
 
   /**
+   * ENUM_QUOTA_INCREASE_GCP signifies the quota increase is for GCP
+   *
    * @generated from enum value: ENUM_QUOTA_INCREASE_GCP = 2;
    */
   GCP = 2,
 
   /**
+   * ENUM_QUOTA_INCREASE_AZURE signifies the quota increase is for Azure
+   *
    * @generated from enum value: ENUM_QUOTA_INCREASE_AZURE = 3;
    */
   AZURE = 3,

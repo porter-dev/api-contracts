@@ -80,9 +80,12 @@ type EnumQuotaIncrease int32
 
 const (
 	EnumQuotaIncrease_ENUM_QUOTA_INCREASE_UNSPECIFIED EnumQuotaIncrease = 0
-	EnumQuotaIncrease_ENUM_QUOTA_INCREASE_AWS         EnumQuotaIncrease = 1
-	EnumQuotaIncrease_ENUM_QUOTA_INCREASE_GCP         EnumQuotaIncrease = 2
-	EnumQuotaIncrease_ENUM_QUOTA_INCREASE_AZURE       EnumQuotaIncrease = 3
+	// ENUM_QUOTA_INCREASE_AWS signifies the quota increase is for AWS
+	EnumQuotaIncrease_ENUM_QUOTA_INCREASE_AWS EnumQuotaIncrease = 1
+	// ENUM_QUOTA_INCREASE_GCP signifies the quota increase is for GCP
+	EnumQuotaIncrease_ENUM_QUOTA_INCREASE_GCP EnumQuotaIncrease = 2
+	// ENUM_QUOTA_INCREASE_AZURE signifies the quota increase is for Azure
+	EnumQuotaIncrease_ENUM_QUOTA_INCREASE_AZURE EnumQuotaIncrease = 3
 )
 
 // Enum value maps for EnumQuotaIncrease.
