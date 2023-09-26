@@ -32,9 +32,12 @@ export const EnumQuotaIncrease = proto3.makeEnum(
   "porter.v1.EnumQuotaIncrease",
   [
     {no: 0, name: "ENUM_QUOTA_INCREASE_UNSPECIFIED", localName: "UNSPECIFIED"},
-    {no: 1, name: "ENUM_QUOTA_INCREASE_AWS", localName: "AWS"},
-    {no: 2, name: "ENUM_QUOTA_INCREASE_GCP", localName: "GCP"},
-    {no: 3, name: "ENUM_QUOTA_INCREASE_AZURE", localName: "AZURE"},
+    {no: 1, name: "ENUM_QUOTA_INCREASE_AWS_VPC", localName: "AWS_VPC"},
+    {no: 2, name: "ENUM_QUOTA_INCREASE_AWS_VCPU", localName: "AWS_VCPU"},
+    {no: 3, name: "ENUM_QUOTA_INCREASE_AWS_EIP", localName: "AWS_EIP"},
+    {no: 4, name: "ENUM_QUOTA_INCREASE_AWS_NAT", localName: "AWS_NAT"},
+    {no: 5, name: "ENUM_QUOTA_INCREASE_GCP", localName: "GCP"},
+    {no: 6, name: "ENUM_QUOTA_INCREASE_AZURE", localName: "AZURE"},
   ],
 );
 
