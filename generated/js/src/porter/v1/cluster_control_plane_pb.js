@@ -18,10 +18,10 @@ import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 export const EnumPredeployStatus = proto3.makeEnum(
   "porter.v1.EnumPredeployStatus",
   [
-    { no: 0, name: "ENUM_PREDEPLOY_STATUS_UNSPECIFIED", localName: "UNSPECIFIED" },
-    { no: 1, name: "ENUM_PREDEPLOY_STATUS_IN_PROGRESS", localName: "IN_PROGRESS" },
-    { no: 2, name: "ENUM_PREDEPLOY_STATUS_FAILED", localName: "FAILED" },
-    { no: 3, name: "ENUM_PREDEPLOY_STATUS_SUCCESSFUL", localName: "SUCCESSFUL" },
+    {no: 0, name: "ENUM_PREDEPLOY_STATUS_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "ENUM_PREDEPLOY_STATUS_IN_PROGRESS", localName: "IN_PROGRESS"},
+    {no: 2, name: "ENUM_PREDEPLOY_STATUS_FAILED", localName: "FAILED"},
+    {no: 3, name: "ENUM_PREDEPLOY_STATUS_SUCCESSFUL", localName: "SUCCESSFUL"},
   ],
 );
 
@@ -31,13 +31,13 @@ export const EnumPredeployStatus = proto3.makeEnum(
 export const EnumQuotaIncrease = proto3.makeEnum(
   "porter.v1.EnumQuotaIncrease",
   [
-    { no: 0, name: "ENUM_QUOTA_INCREASE_UNSPECIFIED", localName: "UNSPECIFIED" },
-    { no: 1, name: "ENUM_QUOTA_INCREASE_AWS_VPC", localName: "AWS_VPC" },
-    { no: 2, name: "ENUM_QUOTA_INCREASE_AWS_VCPU", localName: "AWS_VCPU" },
-    { no: 3, name: "ENUM_QUOTA_INCREASE_AWS_EIP", localName: "AWS_EIP" },
-    { no: 4, name: "ENUM_QUOTA_INCREASE_AWS_NAT", localName: "AWS_NAT" },
-    { no: 5, name: "ENUM_QUOTA_INCREASE_GCP", localName: "GCP" },
-    { no: 6, name: "ENUM_QUOTA_INCREASE_AZURE", localName: "AZURE" },
+    {no: 0, name: "ENUM_QUOTA_INCREASE_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "ENUM_QUOTA_INCREASE_AWS_VPC", localName: "AWS_VPC"},
+    {no: 2, name: "ENUM_QUOTA_INCREASE_AWS_VCPU", localName: "AWS_VCPU"},
+    {no: 3, name: "ENUM_QUOTA_INCREASE_AWS_EIP", localName: "AWS_EIP"},
+    {no: 4, name: "ENUM_QUOTA_INCREASE_AWS_NAT", localName: "AWS_NAT"},
+    {no: 5, name: "ENUM_QUOTA_INCREASE_GCP", localName: "GCP"},
+    {no: 6, name: "ENUM_QUOTA_INCREASE_AZURE", localName: "AZURE"},
   ],
 );
 
@@ -47,10 +47,10 @@ export const EnumQuotaIncrease = proto3.makeEnum(
 export const EnumCLIAction = proto3.makeEnum(
   "porter.v1.EnumCLIAction",
   [
-    { no: 0, name: "ENUM_CLI_ACTION_UNSPECIFIED" },
-    { no: 1, name: "ENUM_CLI_ACTION_NONE" },
-    { no: 2, name: "ENUM_CLI_ACTION_BUILD" },
-    { no: 3, name: "ENUM_CLI_ACTION_TRACK_PREDEPLOY" },
+    {no: 0, name: "ENUM_CLI_ACTION_UNSPECIFIED"},
+    {no: 1, name: "ENUM_CLI_ACTION_NONE"},
+    {no: 2, name: "ENUM_CLI_ACTION_BUILD"},
+    {no: 3, name: "ENUM_CLI_ACTION_TRACK_PREDEPLOY"},
   ],
 );
 
@@ -60,10 +60,10 @@ export const EnumCLIAction = proto3.makeEnum(
 export const EnumRevisionStatus = proto3.makeEnum(
   "porter.v1.EnumRevisionStatus",
   [
-    { no: 0, name: "ENUM_REVISION_STATUS_UNSPECIFIED", localName: "UNSPECIFIED" },
-    { no: 1, name: "ENUM_REVISION_STATUS_PREDEPLOY_FAILED", localName: "PREDEPLOY_FAILED" },
-    { no: 2, name: "ENUM_REVISION_STATUS_DEPLOY_FAILED", localName: "DEPLOY_FAILED" },
-    { no: 3, name: "ENUM_REVISION_STATUS_BUILD_FAILED", localName: "BUILD_FAILED" },
+    {no: 0, name: "ENUM_REVISION_STATUS_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "ENUM_REVISION_STATUS_PREDEPLOY_FAILED", localName: "PREDEPLOY_FAILED"},
+    {no: 2, name: "ENUM_REVISION_STATUS_DEPLOY_FAILED", localName: "DEPLOY_FAILED"},
+    {no: 3, name: "ENUM_REVISION_STATUS_BUILD_FAILED", localName: "BUILD_FAILED"},
   ],
 );
 
@@ -112,7 +112,7 @@ export const PreflightCheckRequest = proto3.makeMessageType(
 export const PreflightCheckResponse = proto3.makeMessageType(
   "porter.v1.PreflightCheckResponse",
   () => [
-    { no: 1, name: "preflight_checks", kind: "map", K: 9 /* ScalarType.STRING */, V: { kind: "message", T: Error } },
+    { no: 1, name: "preflight_checks", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Error} },
   ],
 );
 
