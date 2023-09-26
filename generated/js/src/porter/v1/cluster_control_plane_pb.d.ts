@@ -54,25 +54,46 @@ export declare enum EnumQuotaIncrease {
   UNSPECIFIED = 0,
 
   /**
-   * ENUM_QUOTA_INCREASE_AWS signifies the quota increase is for AWS
+   * ENUM_QUOTA_INCREASE_AWS_VPC signifies the quota increase is for AWS VPC
    *
-   * @generated from enum value: ENUM_QUOTA_INCREASE_AWS = 1;
+   * @generated from enum value: ENUM_QUOTA_INCREASE_AWS_VPC = 1;
    */
-  AWS = 1,
+  AWS_VPC = 1,
+
+  /**
+   * ENUM_QUOTA_INCREASE_AWS_VCPU signifies the quota increase is for AWS VCPU
+   *
+   * @generated from enum value: ENUM_QUOTA_INCREASE_AWS_VCPU = 2;
+   */
+  AWS_VCPU = 2,
+
+  /**
+   * ENUM_QUOTA_INCREASE_AWS_EIP signifies the quota increase is for AWS EIP
+   *
+   * @generated from enum value: ENUM_QUOTA_INCREASE_AWS_EIP = 3;
+   */
+  AWS_EIP = 3,
+
+  /**
+   * ENUM_QUOTA_INCREASE_AWS_NAT signifies the quota increase is for AWS NAT
+   *
+   * @generated from enum value: ENUM_QUOTA_INCREASE_AWS_NAT = 4;
+   */
+  AWS_NAT = 4,
 
   /**
    * ENUM_QUOTA_INCREASE_GCP signifies the quota increase is for GCP
    *
-   * @generated from enum value: ENUM_QUOTA_INCREASE_GCP = 2;
+   * @generated from enum value: ENUM_QUOTA_INCREASE_GCP = 5;
    */
-  GCP = 2,
+  GCP = 5,
 
   /**
    * ENUM_QUOTA_INCREASE_AZURE signifies the quota increase is for Azure
    *
-   * @generated from enum value: ENUM_QUOTA_INCREASE_AZURE = 3;
+   * @generated from enum value: ENUM_QUOTA_INCREASE_AZURE = 6;
    */
-  AZURE = 3,
+  AZURE = 6,
 }
 
 /**
