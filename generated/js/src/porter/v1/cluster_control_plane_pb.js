@@ -59,7 +59,8 @@ export const QuotaIncreaseRequest = proto3.makeMessageType(
   () => [
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 2, name: "eks_preflight_values", kind: "message", T: EKSPreflightValues },
-    { no: 3, name: "quota_increases", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 3, name: "cloud_provider_credentials_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "quota_increases", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
   ],
 );
 

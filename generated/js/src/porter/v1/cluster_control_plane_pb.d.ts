@@ -123,9 +123,17 @@ export declare class QuotaIncreaseRequest extends Message<QuotaIncreaseRequest> 
   eksPreflightValues?: EKSPreflightValues;
 
   /**
+   * cloud_provider_credentials_id [REQUIRED] is the Porter credentials that will be used for provisioning a cluster.
+   * These must be stored within Porter, prior to cluster creation. For AWS this refers to the last link in an assume role chain
+   *
+   * @generated from field: string cloud_provider_credentials_id = 3;
+   */
+  cloudProviderCredentialsId: string;
+
+  /**
    * list of quota increases to be requsted 
    *
-   * @generated from field: repeated string quota_increases = 3;
+   * @generated from field: repeated string quota_increases = 4;
    */
   quotaIncreases: string[];
 
