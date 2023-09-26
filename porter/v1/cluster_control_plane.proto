@@ -14,13 +14,21 @@ import "porter/v1/porter_app.proto";
 
 message QuotaIncreaseRequest {
   int64 project_id = 1;
-  //eks_preflight_values the values that AWS will use to make quota increases
-  EKSPreflightValues eks_preflight_values = 2;
+  //cloud_provider the given cloud provider will use to make quota increases
+  EnumCloudProvider cloud_provider = 2;
   // cloud_provider_credentials_id [REQUIRED] is the Porter credentials that will be used for provisioning a cluster.
   // These must be stored within Porter, prior to cluster creation. For AWS this refers to the last link in an assume role chain
   string cloud_provider_credentials_id = 3;
   //quota_increases list of quota increases to be requsted 
   repeated string quota_increases = 4;
+
+  oneof preflight_values {
+    //gke_preflight_values the values that GKE will use to perform quota increases
+    GKEPreflightValues gke_preflight_values = 5;
+    //eks_preflight_values the values that AWS will use to perform quota increases
+    EKSPreflightValues eks_preflight_values = 6;
+    //AKS aks_kind = 6;
+  }
 }
 
 message QuotaIncreaseResponse {

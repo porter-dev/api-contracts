@@ -5,10 +5,10 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage, Timestamp } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
-import type { EKSPreflightValues } from "./eks_pb.js";
-import type { Error } from "./errors_pb.js";
 import type { EnumCloudProvider } from "./cluster_pb.js";
 import type { GKEPreflightValues } from "./gke_pb.js";
+import type { EKSPreflightValues } from "./eks_pb.js";
+import type { Error } from "./errors_pb.js";
 import type { Contract, ContractRevision } from "./contract_pb.js";
 import type { Deletions, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
@@ -116,11 +116,11 @@ export declare class QuotaIncreaseRequest extends Message<QuotaIncreaseRequest> 
   projectId: bigint;
 
   /**
-   * eks_preflight_values the values that AWS will use to make quota increases
+   * cloud_provider the given cloud provider will use to make quota increases
    *
-   * @generated from field: porter.v1.EKSPreflightValues eks_preflight_values = 2;
+   * @generated from field: porter.v1.EnumCloudProvider cloud_provider = 2;
    */
-  eksPreflightValues?: EKSPreflightValues;
+  cloudProvider: EnumCloudProvider;
 
   /**
    * cloud_provider_credentials_id [REQUIRED] is the Porter credentials that will be used for provisioning a cluster.
@@ -136,6 +136,29 @@ export declare class QuotaIncreaseRequest extends Message<QuotaIncreaseRequest> 
    * @generated from field: repeated string quota_increases = 4;
    */
   quotaIncreases: string[];
+
+  /**
+   * @generated from oneof porter.v1.QuotaIncreaseRequest.preflight_values
+   */
+  preflightValues: {
+    /**
+     * gke_preflight_values the values that GKE will use to perform quota increases
+     *
+     * @generated from field: porter.v1.GKEPreflightValues gke_preflight_values = 5;
+     */
+    value: GKEPreflightValues;
+    case: "gkePreflightValues";
+  } | {
+    /**
+     * eks_preflight_values the values that AWS will use to perform quota increases
+     *
+     * AKS aks_kind = 6;
+     *
+     * @generated from field: porter.v1.EKSPreflightValues eks_preflight_values = 6;
+     */
+    value: EKSPreflightValues;
+    case: "eksPreflightValues";
+  } | { case: undefined; value?: undefined };
 
   constructor(data?: PartialMessage<QuotaIncreaseRequest>);
 
