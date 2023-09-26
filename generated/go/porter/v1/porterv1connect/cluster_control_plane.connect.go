@@ -34,6 +34,9 @@ const (
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
+	// ClusterControlPlaneServiceQuotaIncreaseProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's QuotaIncrease RPC.
+	ClusterControlPlaneServiceQuotaIncreaseProcedure = "/porter.v1.ClusterControlPlaneService/QuotaIncrease"
 	// ClusterControlPlaneServiceUpdateCloudProviderCredentialsProcedure is the fully-qualified name of
 	// the ClusterControlPlaneService's UpdateCloudProviderCredentials RPC.
 	ClusterControlPlaneServiceUpdateCloudProviderCredentialsProcedure = "/porter.v1.ClusterControlPlaneService/UpdateCloudProviderCredentials"
@@ -141,6 +144,8 @@ const (
 // ClusterControlPlaneServiceClient is a client for the porter.v1.ClusterControlPlaneService
 // service.
 type ClusterControlPlaneServiceClient interface {
+	// QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas
+	QuotaIncrease(context.Context, *connect.Request[v1.QuotaIncreaseRequest]) (*connect.Response[v1.QuotaIncreaseResponse], error)
 	// UpdateCloudProviderCredentials creates or updates the credentials used for accessing the specific cloud
 	UpdateCloudProviderCredentials(context.Context, *connect.Request[v1.UpdateCloudProviderCredentialsRequest]) (*connect.Response[v1.UpdateCloudProviderCredentialsResponse], error)
 	// QuotaPreflightCheck checks if the target account and region has sufficient resources (EIP addresses and VPCs) to provision a new cluster
@@ -249,6 +254,11 @@ type ClusterControlPlaneServiceClient interface {
 func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) ClusterControlPlaneServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
 	return &clusterControlPlaneServiceClient{
+		quotaIncrease: connect.NewClient[v1.QuotaIncreaseRequest, v1.QuotaIncreaseResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceQuotaIncreaseProcedure,
+			opts...,
+		),
 		updateCloudProviderCredentials: connect.NewClient[v1.UpdateCloudProviderCredentialsRequest, v1.UpdateCloudProviderCredentialsResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceUpdateCloudProviderCredentialsProcedure,
@@ -424,6 +434,7 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 
 // clusterControlPlaneServiceClient implements ClusterControlPlaneServiceClient.
 type clusterControlPlaneServiceClient struct {
+	quotaIncrease                  *connect.Client[v1.QuotaIncreaseRequest, v1.QuotaIncreaseResponse]
 	updateCloudProviderCredentials *connect.Client[v1.UpdateCloudProviderCredentialsRequest, v1.UpdateCloudProviderCredentialsResponse]
 	quotaPreflightCheck            *connect.Client[v1.QuotaPreflightCheckRequest, v1.QuotaPreflightCheckResponse]
 	preflightCheck                 *connect.Client[v1.PreflightCheckRequest, v1.PreflightCheckResponse]
@@ -458,6 +469,11 @@ type clusterControlPlaneServiceClient struct {
 	assumeRoleChainTargets         *connect.Client[v1.AssumeRoleChainTargetsRequest, v1.AssumeRoleChainTargetsResponse]
 	certificateAuthorityData       *connect.Client[v1.CertificateAuthorityDataRequest, v1.CertificateAuthorityDataResponse]
 	eKSBearerToken                 *connect.Client[v1.EKSBearerTokenRequest, v1.EKSBearerTokenResponse]
+}
+
+// QuotaIncrease calls porter.v1.ClusterControlPlaneService.QuotaIncrease.
+func (c *clusterControlPlaneServiceClient) QuotaIncrease(ctx context.Context, req *connect.Request[v1.QuotaIncreaseRequest]) (*connect.Response[v1.QuotaIncreaseResponse], error) {
+	return c.quotaIncrease.CallUnary(ctx, req)
 }
 
 // UpdateCloudProviderCredentials calls
@@ -655,6 +671,8 @@ func (c *clusterControlPlaneServiceClient) EKSBearerToken(ctx context.Context, r
 // ClusterControlPlaneServiceHandler is an implementation of the
 // porter.v1.ClusterControlPlaneService service.
 type ClusterControlPlaneServiceHandler interface {
+	// QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas
+	QuotaIncrease(context.Context, *connect.Request[v1.QuotaIncreaseRequest]) (*connect.Response[v1.QuotaIncreaseResponse], error)
 	// UpdateCloudProviderCredentials creates or updates the credentials used for accessing the specific cloud
 	UpdateCloudProviderCredentials(context.Context, *connect.Request[v1.UpdateCloudProviderCredentialsRequest]) (*connect.Response[v1.UpdateCloudProviderCredentialsResponse], error)
 	// QuotaPreflightCheck checks if the target account and region has sufficient resources (EIP addresses and VPCs) to provision a new cluster
@@ -759,6 +777,11 @@ type ClusterControlPlaneServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	clusterControlPlaneServiceQuotaIncreaseHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceQuotaIncreaseProcedure,
+		svc.QuotaIncrease,
+		opts...,
+	)
 	clusterControlPlaneServiceUpdateCloudProviderCredentialsHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceUpdateCloudProviderCredentialsProcedure,
 		svc.UpdateCloudProviderCredentials,
@@ -931,6 +954,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 	)
 	return "/porter.v1.ClusterControlPlaneService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
+		case ClusterControlPlaneServiceQuotaIncreaseProcedure:
+			clusterControlPlaneServiceQuotaIncreaseHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceUpdateCloudProviderCredentialsProcedure:
 			clusterControlPlaneServiceUpdateCloudProviderCredentialsHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceQuotaPreflightCheckProcedure:
@@ -1007,6 +1032,10 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 
 // UnimplementedClusterControlPlaneServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedClusterControlPlaneServiceHandler struct{}
+
+func (UnimplementedClusterControlPlaneServiceHandler) QuotaIncrease(context.Context, *connect.Request[v1.QuotaIncreaseRequest]) (*connect.Response[v1.QuotaIncreaseResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.QuotaIncrease is not implemented"))
+}
 
 func (UnimplementedClusterControlPlaneServiceHandler) UpdateCloudProviderCredentials(context.Context, *connect.Request[v1.UpdateCloudProviderCredentialsRequest]) (*connect.Response[v1.UpdateCloudProviderCredentialsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.UpdateCloudProviderCredentials is not implemented"))

@@ -12,6 +12,31 @@ import "porter/v1/errors.proto";
 import "porter/v1/gke.proto";
 import "porter/v1/porter_app.proto";
 
+message QuotaIncreaseRequest {
+  int64 project_id = 1;
+  //cloud_provider the given cloud provider will use to make quota increases
+  EnumCloudProvider cloud_provider = 2;
+  // cloud_provider_credentials_id [REQUIRED] is the Porter credentials that will be used for provisioning a cluster.
+  // These must be stored within Porter, prior to cluster creation. For AWS this refers to the last link in an assume role chain
+  string cloud_provider_credentials_id = 3;
+  //quota_increases list of quota increases to be requsted 
+  repeated EnumQuotaIncrease quota_increases = 4;
+
+  oneof preflight_values {
+    //gke_preflight_values the values that GKE will use to perform quota increases
+    GKEPreflightValues gke_preflight_values = 5;
+    //eks_preflight_values the values that AWS will use to perform quota increases
+    EKSPreflightValues eks_preflight_values = 6;
+    //AKS aks_kind = 6;
+  }
+}
+
+message QuotaIncreaseResponse {
+  //error if any of quota increases failed 
+  Error error = 1;
+}
+
+
 message PreflightCheckRequest {
   int64 project_id = 1;
   // cloud_provider [REQUIRED] represents the provider that we will provisioning the cluster in
@@ -322,6 +347,16 @@ enum EnumPredeployStatus {
   ENUM_PREDEPLOY_STATUS_SUCCESSFUL = 3;
 }
 
+enum EnumQuotaIncrease {
+  ENUM_QUOTA_INCREASE_UNSPECIFIED = 0;
+  // ENUM_QUOTA_INCREASE_AWS signifies the quota increase is for AWS
+  ENUM_QUOTA_INCREASE_AWS = 1;
+  // ENUM_QUOTA_INCREASE_GCP signifies the quota increase is for GCP
+  ENUM_QUOTA_INCREASE_GCP = 2;
+  // ENUM_QUOTA_INCREASE_AZURE signifies the quota increase is for Azure
+  ENUM_QUOTA_INCREASE_AZURE = 3;
+}
+
 message DeploymentTargetDetailsRequest {
   int64 project_id = 1;
   string deployment_target_id = 2;
@@ -402,6 +437,9 @@ message UpdateAppImageResponse {
 }
 
 service ClusterControlPlaneService {
+  // QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas 
+  rpc QuotaIncrease(QuotaIncreaseRequest) returns (QuotaIncreaseResponse) {}
+
   // UpdateCloudProviderCredentials creates or updates the credentials used for accessing the specific cloud
   rpc UpdateCloudProviderCredentials(UpdateCloudProviderCredentialsRequest) returns (UpdateCloudProviderCredentialsResponse) {}
 

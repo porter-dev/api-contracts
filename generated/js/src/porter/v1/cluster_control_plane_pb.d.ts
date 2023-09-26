@@ -45,6 +45,37 @@ export declare enum EnumPredeployStatus {
 }
 
 /**
+ * @generated from enum porter.v1.EnumQuotaIncrease
+ */
+export declare enum EnumQuotaIncrease {
+  /**
+   * @generated from enum value: ENUM_QUOTA_INCREASE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * ENUM_QUOTA_INCREASE_AWS signifies the quota increase is for AWS
+   *
+   * @generated from enum value: ENUM_QUOTA_INCREASE_AWS = 1;
+   */
+  AWS = 1,
+
+  /**
+   * ENUM_QUOTA_INCREASE_GCP signifies the quota increase is for GCP
+   *
+   * @generated from enum value: ENUM_QUOTA_INCREASE_GCP = 2;
+   */
+  GCP = 2,
+
+  /**
+   * ENUM_QUOTA_INCREASE_AZURE signifies the quota increase is for Azure
+   *
+   * @generated from enum value: ENUM_QUOTA_INCREASE_AZURE = 3;
+   */
+  AZURE = 3,
+}
+
+/**
  * @generated from enum porter.v1.EnumCLIAction
  */
 export declare enum EnumCLIAction {
@@ -104,6 +135,101 @@ export declare enum EnumRevisionStatus {
    * @generated from enum value: ENUM_REVISION_STATUS_BUILD_FAILED = 3;
    */
   BUILD_FAILED = 3,
+}
+
+/**
+ * @generated from message porter.v1.QuotaIncreaseRequest
+ */
+export declare class QuotaIncreaseRequest extends Message<QuotaIncreaseRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * cloud_provider the given cloud provider will use to make quota increases
+   *
+   * @generated from field: porter.v1.EnumCloudProvider cloud_provider = 2;
+   */
+  cloudProvider: EnumCloudProvider;
+
+  /**
+   * cloud_provider_credentials_id [REQUIRED] is the Porter credentials that will be used for provisioning a cluster.
+   * These must be stored within Porter, prior to cluster creation. For AWS this refers to the last link in an assume role chain
+   *
+   * @generated from field: string cloud_provider_credentials_id = 3;
+   */
+  cloudProviderCredentialsId: string;
+
+  /**
+   * quota_increases list of quota increases to be requsted 
+   *
+   * @generated from field: repeated porter.v1.EnumQuotaIncrease quota_increases = 4;
+   */
+  quotaIncreases: EnumQuotaIncrease[];
+
+  /**
+   * @generated from oneof porter.v1.QuotaIncreaseRequest.preflight_values
+   */
+  preflightValues: {
+    /**
+     * gke_preflight_values the values that GKE will use to perform quota increases
+     *
+     * @generated from field: porter.v1.GKEPreflightValues gke_preflight_values = 5;
+     */
+    value: GKEPreflightValues;
+    case: "gkePreflightValues";
+  } | {
+    /**
+     * eks_preflight_values the values that AWS will use to perform quota increases
+     *
+     * AKS aks_kind = 6;
+     *
+     * @generated from field: porter.v1.EKSPreflightValues eks_preflight_values = 6;
+     */
+    value: EKSPreflightValues;
+    case: "eksPreflightValues";
+  } | { case: undefined; value?: undefined };
+
+  constructor(data?: PartialMessage<QuotaIncreaseRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.QuotaIncreaseRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): QuotaIncreaseRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): QuotaIncreaseRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): QuotaIncreaseRequest;
+
+  static equals(a: QuotaIncreaseRequest | PlainMessage<QuotaIncreaseRequest> | undefined, b: QuotaIncreaseRequest | PlainMessage<QuotaIncreaseRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.QuotaIncreaseResponse
+ */
+export declare class QuotaIncreaseResponse extends Message<QuotaIncreaseResponse> {
+  /**
+   * error if any of quota increases failed 
+   *
+   * @generated from field: porter.v1.Error error = 1;
+   */
+  error?: Error;
+
+  constructor(data?: PartialMessage<QuotaIncreaseResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.QuotaIncreaseResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): QuotaIncreaseResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): QuotaIncreaseResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): QuotaIncreaseResponse;
+
+  static equals(a: QuotaIncreaseResponse | PlainMessage<QuotaIncreaseResponse> | undefined, b: QuotaIncreaseResponse | PlainMessage<QuotaIncreaseResponse> | undefined): boolean;
 }
 
 /**

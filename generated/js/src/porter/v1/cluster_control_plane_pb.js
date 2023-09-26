@@ -26,6 +26,19 @@ export const EnumPredeployStatus = proto3.makeEnum(
 );
 
 /**
+ * @generated from enum porter.v1.EnumQuotaIncrease
+ */
+export const EnumQuotaIncrease = proto3.makeEnum(
+  "porter.v1.EnumQuotaIncrease",
+  [
+    {no: 0, name: "ENUM_QUOTA_INCREASE_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "ENUM_QUOTA_INCREASE_AWS", localName: "AWS"},
+    {no: 2, name: "ENUM_QUOTA_INCREASE_GCP", localName: "GCP"},
+    {no: 3, name: "ENUM_QUOTA_INCREASE_AZURE", localName: "AZURE"},
+  ],
+);
+
+/**
  * @generated from enum porter.v1.EnumCLIAction
  */
 export const EnumCLIAction = proto3.makeEnum(
@@ -48,6 +61,31 @@ export const EnumRevisionStatus = proto3.makeEnum(
     {no: 1, name: "ENUM_REVISION_STATUS_PREDEPLOY_FAILED", localName: "PREDEPLOY_FAILED"},
     {no: 2, name: "ENUM_REVISION_STATUS_DEPLOY_FAILED", localName: "DEPLOY_FAILED"},
     {no: 3, name: "ENUM_REVISION_STATUS_BUILD_FAILED", localName: "BUILD_FAILED"},
+  ],
+);
+
+/**
+ * @generated from message porter.v1.QuotaIncreaseRequest
+ */
+export const QuotaIncreaseRequest = proto3.makeMessageType(
+  "porter.v1.QuotaIncreaseRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cloud_provider", kind: "enum", T: proto3.getEnumType(EnumCloudProvider) },
+    { no: 3, name: "cloud_provider_credentials_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "quota_increases", kind: "enum", T: proto3.getEnumType(EnumQuotaIncrease), repeated: true },
+    { no: 5, name: "gke_preflight_values", kind: "message", T: GKEPreflightValues, oneof: "preflight_values" },
+    { no: 6, name: "eks_preflight_values", kind: "message", T: EKSPreflightValues, oneof: "preflight_values" },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.QuotaIncreaseResponse
+ */
+export const QuotaIncreaseResponse = proto3.makeMessageType(
+  "porter.v1.QuotaIncreaseResponse",
+  () => [
+    { no: 1, name: "error", kind: "message", T: Error },
   ],
 );
 
