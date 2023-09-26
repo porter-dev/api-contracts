@@ -347,6 +347,14 @@ enum EnumPredeployStatus {
   ENUM_PREDEPLOY_STATUS_SUCCESSFUL = 3;
 }
 
+enum EnumQuotaIncrease {
+  ENUM_QUOTA_INCREASE_UNSPECIFIED = 0;
+  ENUM_QUOTA_INCREASE_AWS = 1;
+  ENUM_QUOTA_INCREASE_GCP = 2;
+  ENUM_QUOTA_INCREASE_AZURE = 3;
+}
+
+
 message DeploymentTargetDetailsRequest {
   int64 project_id = 1;
   string deployment_target_id = 2;

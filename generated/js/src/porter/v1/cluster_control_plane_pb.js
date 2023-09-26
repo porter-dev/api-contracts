@@ -4,7 +4,7 @@
 // @ts-nocheck
 
 import { proto3, Timestamp } from "@bufbuild/protobuf";
-import { EnumCloudProvider, EnumQuotaIncrease } from "./cluster_pb.js";
+import { EnumCloudProvider } from "./cluster_pb.js";
 import { GKEPreflightValues } from "./gke_pb.js";
 import { EKSPreflightValues } from "./eks_pb.js";
 import { Error } from "./errors_pb.js";
@@ -22,6 +22,19 @@ export const EnumPredeployStatus = proto3.makeEnum(
     {no: 1, name: "ENUM_PREDEPLOY_STATUS_IN_PROGRESS", localName: "IN_PROGRESS"},
     {no: 2, name: "ENUM_PREDEPLOY_STATUS_FAILED", localName: "FAILED"},
     {no: 3, name: "ENUM_PREDEPLOY_STATUS_SUCCESSFUL", localName: "SUCCESSFUL"},
+  ],
+);
+
+/**
+ * @generated from enum porter.v1.EnumQuotaIncrease
+ */
+export const EnumQuotaIncrease = proto3.makeEnum(
+  "porter.v1.EnumQuotaIncrease",
+  [
+    {no: 0, name: "ENUM_QUOTA_INCREASE_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "ENUM_QUOTA_INCREASE_AWS", localName: "AWS"},
+    {no: 2, name: "ENUM_QUOTA_INCREASE_GCP", localName: "GCP"},
+    {no: 3, name: "ENUM_QUOTA_INCREASE_AZURE", localName: "AZURE"},
   ],
 );
 

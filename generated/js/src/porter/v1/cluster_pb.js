@@ -35,19 +35,6 @@ export const EnumCloudProvider = proto3.makeEnum(
 );
 
 /**
- * @generated from enum porter.v1.EnumQuotaIncrease
- */
-export const EnumQuotaIncrease = proto3.makeEnum(
-  "porter.v1.EnumQuotaIncrease",
-  [
-    {no: 0, name: "ENUM_QUOTA_INCREASE_UNSPECIFIED", localName: "UNSPECIFIED"},
-    {no: 1, name: "ENUM_QUOTA_INCREASE_AWS", localName: "AWS"},
-    {no: 2, name: "ENUM_QUOTA_INCREASE_GCP", localName: "GCP"},
-    {no: 3, name: "ENUM_QUOTA_INCREASE_AZURE", localName: "AZURE"},
-  ],
-);
-
-/**
  * @generated from message porter.v1.Cluster
  */
 export const Cluster = proto3.makeMessageType(

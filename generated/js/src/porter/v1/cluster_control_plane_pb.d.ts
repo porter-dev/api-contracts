@@ -5,7 +5,7 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage, Timestamp } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
-import type { EnumCloudProvider, EnumQuotaIncrease } from "./cluster_pb.js";
+import type { EnumCloudProvider } from "./cluster_pb.js";
 import type { GKEPreflightValues } from "./gke_pb.js";
 import type { EKSPreflightValues } from "./eks_pb.js";
 import type { Error } from "./errors_pb.js";
@@ -42,6 +42,31 @@ export declare enum EnumPredeployStatus {
    * @generated from enum value: ENUM_PREDEPLOY_STATUS_SUCCESSFUL = 3;
    */
   SUCCESSFUL = 3,
+}
+
+/**
+ * @generated from enum porter.v1.EnumQuotaIncrease
+ */
+export declare enum EnumQuotaIncrease {
+  /**
+   * @generated from enum value: ENUM_QUOTA_INCREASE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: ENUM_QUOTA_INCREASE_AWS = 1;
+   */
+  AWS = 1,
+
+  /**
+   * @generated from enum value: ENUM_QUOTA_INCREASE_GCP = 2;
+   */
+  GCP = 2,
+
+  /**
+   * @generated from enum value: ENUM_QUOTA_INCREASE_AZURE = 3;
+   */
+  AZURE = 3,
 }
 
 /**

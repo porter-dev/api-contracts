@@ -60,31 +60,6 @@ export declare enum EnumCloudProvider {
 }
 
 /**
- * @generated from enum porter.v1.EnumQuotaIncrease
- */
-export declare enum EnumQuotaIncrease {
-  /**
-   * @generated from enum value: ENUM_QUOTA_INCREASE_UNSPECIFIED = 0;
-   */
-  UNSPECIFIED = 0,
-
-  /**
-   * @generated from enum value: ENUM_QUOTA_INCREASE_AWS = 1;
-   */
-  AWS = 1,
-
-  /**
-   * @generated from enum value: ENUM_QUOTA_INCREASE_GCP = 2;
-   */
-  GCP = 2,
-
-  /**
-   * @generated from enum value: ENUM_QUOTA_INCREASE_AZURE = 3;
-   */
-  AZURE = 3,
-}
-
-/**
  * @generated from message porter.v1.Cluster
  */
 export declare class Cluster extends Message<Cluster> {
