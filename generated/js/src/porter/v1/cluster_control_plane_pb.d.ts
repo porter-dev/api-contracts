@@ -5,7 +5,7 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage, Timestamp } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
-import type { EnumCloudProvider } from "./cluster_pb.js";
+import type { EnumCloudProvider, EnumQuotaIncrease } from "./cluster_pb.js";
 import type { GKEPreflightValues } from "./gke_pb.js";
 import type { EKSPreflightValues } from "./eks_pb.js";
 import type { Error } from "./errors_pb.js";
@@ -133,9 +133,9 @@ export declare class QuotaIncreaseRequest extends Message<QuotaIncreaseRequest> 
   /**
    * quota_increases list of quota increases to be requsted 
    *
-   * @generated from field: repeated string quota_increases = 4;
+   * @generated from field: porter.v1.EnumQuotaIncrease quota_increases = 4;
    */
-  quotaIncreases: string[];
+  quotaIncreases: EnumQuotaIncrease;
 
   /**
    * @generated from oneof porter.v1.QuotaIncreaseRequest.preflight_values
