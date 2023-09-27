@@ -183,7 +183,7 @@ export declare class QuotaIncreaseRequest extends Message<QuotaIncreaseRequest> 
   cloudProviderCredentialsId: string;
 
   /**
-   * quota_increases list of quota increases to be requsted 
+   * quota_increases list of quota increases to be requsted
    *
    * @generated from field: repeated porter.v1.EnumQuotaIncrease quota_increases = 4;
    */
@@ -232,7 +232,7 @@ export declare class QuotaIncreaseRequest extends Message<QuotaIncreaseRequest> 
  */
 export declare class QuotaIncreaseResponse extends Message<QuotaIncreaseResponse> {
   /**
-   * error if any of quota increases failed 
+   * error if any of quota increases failed
    *
    * @generated from field: porter.v1.Error error = 1;
    */
@@ -1081,24 +1081,39 @@ export declare class ValidatePorterAppRequest extends Message<ValidatePorterAppR
   projectId: bigint;
 
   /**
+   * deployment_target_id is the id of the deployment target where the app will be installed
+   *
    * @generated from field: string deployment_target_id = 2;
    */
   deploymentTargetId: string;
 
   /**
+   * commit_sha is the current commit sha to be built and applied
+   *
    * @generated from field: string commit_sha = 3;
    */
   commitSha: string;
 
   /**
+   * app is the definition of the PorterApp to be applied
+   *
    * @generated from field: porter.v1.PorterApp app = 4;
    */
   app?: PorterApp;
 
   /**
+   * deletions is an object containing the names of fields to be deleted from the app
+   *
    * @generated from field: porter.v1.Deletions deletions = 5;
    */
   deletions?: Deletions;
+
+  /**
+   * app_overrides contains environment specific overrides if they exist, applied depending on the deployment target
+   *
+   * @generated from field: porter.v1.PorterApp app_overrides = 6;
+   */
+  appOverrides?: PorterApp;
 
   constructor(data?: PartialMessage<ValidatePorterAppRequest>);
 

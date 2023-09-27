@@ -402,6 +402,7 @@ export const ValidatePorterAppRequest = proto3.makeMessageType(
     { no: 3, name: "commit_sha", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "app", kind: "message", T: PorterApp },
     { no: 5, name: "deletions", kind: "message", T: Deletions },
+    { no: 6, name: "app_overrides", kind: "message", T: PorterApp },
   ],
 );
 
