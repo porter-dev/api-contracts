@@ -196,10 +196,16 @@ message ReadContractResponse {
 
 message ValidatePorterAppRequest {
   int64 project_id = 1;
+  // deployment_target_id is the id of the deployment target where the app will be installed
   string deployment_target_id = 2;
+  // commit_sha is the current commit sha to be built and applied
   string commit_sha = 3;
+  // app is the definition of the PorterApp to be applied
   PorterApp app = 4;
+  // deletions is an object containing the names of fields to be deleted from the app
   Deletions deletions = 5;
+  // app_overrides contains environment specific overrides if they exist, applied depending on the deployment target
+  PorterApp app_overrides = 6;
 }
 
 message ValidatePorterAppResponse {
