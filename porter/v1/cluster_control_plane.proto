@@ -19,7 +19,7 @@ message QuotaIncreaseRequest {
   // cloud_provider_credentials_id [REQUIRED] is the Porter credentials that will be used for provisioning a cluster.
   // These must be stored within Porter, prior to cluster creation. For AWS this refers to the last link in an assume role chain
   string cloud_provider_credentials_id = 3;
-  //quota_increases list of quota increases to be requsted 
+  //quota_increases list of quota increases to be requsted
   repeated EnumQuotaIncrease quota_increases = 4;
 
   oneof preflight_values {
@@ -32,7 +32,7 @@ message QuotaIncreaseRequest {
 }
 
 message QuotaIncreaseResponse {
-  //error if any of quota increases failed 
+  //error if any of quota increases failed
   Error error = 1;
 }
 
@@ -355,7 +355,7 @@ enum EnumQuotaIncrease {
   // ENUM_QUOTA_INCREASE_AWS_EIP signifies the quota increase is for AWS EIP
   ENUM_QUOTA_INCREASE_AWS_EIP = 3;
   // ENUM_QUOTA_INCREASE_AWS_NAT signifies the quota increase is for AWS NAT
-  ENUM_QUOTA_INCREASE_AWS_NAT = 4; 
+  ENUM_QUOTA_INCREASE_AWS_NAT = 4;
   // ENUM_QUOTA_INCREASE_GCP signifies the quota increase is for GCP
   ENUM_QUOTA_INCREASE_GCP = 5;
   // ENUM_QUOTA_INCREASE_AZURE signifies the quota increase is for Azure
@@ -442,7 +442,7 @@ message UpdateAppImageResponse {
 }
 
 service ClusterControlPlaneService {
-  // QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas 
+  // QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas
   rpc QuotaIncrease(QuotaIncreaseRequest) returns (QuotaIncreaseResponse) {}
 
   // UpdateCloudProviderCredentials creates or updates the credentials used for accessing the specific cloud

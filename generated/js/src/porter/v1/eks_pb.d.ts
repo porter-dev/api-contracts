@@ -71,7 +71,10 @@ export declare class EKS extends Message<EKS> {
   clusterVersion: string;
 
   /**
-   * @generated from field: string cidr_range = 3;
+   * use network.vpc_cidr instead
+   *
+   * @generated from field: string cidr_range = 3 [deprecated = true];
+   * @deprecated
    */
   cidrRange: string;
 
@@ -107,6 +110,14 @@ export declare class EKS extends Message<EKS> {
    */
   enableKmsEncryption: boolean;
 
+  /**
+   * network is the network configuration for the EKS cluster.
+   * If both cidr_range and network.vpc_cidr are set, network.vpc_cidr will be used.
+   *
+   * @generated from field: porter.v1.AWSClusterNetwork network = 10;
+   */
+  network?: AWSClusterNetwork;
+
   constructor(data?: PartialMessage<EKS>);
 
   static readonly runtime: typeof proto3;
@@ -123,6 +134,43 @@ export declare class EKS extends Message<EKS> {
 }
 
 /**
+ * AWSClusterNetwork contains all information required to configure the AWS cluster's network
+ *
+ * @generated from message porter.v1.AWSClusterNetwork
+ */
+export declare class AWSClusterNetwork extends Message<AWSClusterNetwork> {
+  /**
+   * vpc_cidr is the range of the VPC network. This is used to specify the network that Porter will use.
+   *
+   * @generated from field: string vpc_cidr = 1;
+   */
+  vpcCidr: string;
+
+  /**
+   * service_cidr is the range of the network that services will be assigned IPs from, on the AWS vpc.
+   *
+   * @generated from field: string service_cidr = 2;
+   */
+  serviceCidr: string;
+
+  constructor(data?: PartialMessage<AWSClusterNetwork>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AWSClusterNetwork";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AWSClusterNetwork;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AWSClusterNetwork;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AWSClusterNetwork;
+
+  static equals(a: AWSClusterNetwork | PlainMessage<AWSClusterNetwork> | undefined, b: AWSClusterNetwork | PlainMessage<AWSClusterNetwork> | undefined): boolean;
+}
+
+/**
+ * EKSNodeGroup is the configuration for an EKS node group/auto scaling group
+ *
  * @generated from message porter.v1.EKSNodeGroup
  */
 export declare class EKSNodeGroup extends Message<EKSNodeGroup> {
