@@ -46,6 +46,20 @@ export const EKS = proto3.makeMessageType(
     { no: 7, name: "enable_guard_duty", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 8, name: "logging", kind: "message", T: EKSLogging },
     { no: 9, name: "enable_kms_encryption", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 10, name: "network", kind: "message", T: AWSClusterNetwork },
+  ],
+);
+
+/**
+ * AWSClusterNetwork contains all information required to configure the AWS cluster's network
+ *
+ * @generated from message porter.v1.AWSClusterNetwork
+ */
+export const AWSClusterNetwork = proto3.makeMessageType(
+  "porter.v1.AWSClusterNetwork",
+  () => [
+    { no: 1, name: "cidr_range", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "service_cidr", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

@@ -71,7 +71,10 @@ export declare class EKS extends Message<EKS> {
   clusterVersion: string;
 
   /**
-   * @generated from field: string cidr_range = 3;
+   * use network.cidr_range instead
+   *
+   * @generated from field: string cidr_range = 3 [deprecated = true];
+   * @deprecated
    */
   cidrRange: string;
 
@@ -107,6 +110,14 @@ export declare class EKS extends Message<EKS> {
    */
   enableKmsEncryption: boolean;
 
+  /**
+   * network is the network configuration for the EKS cluster.
+   * If both cidr_range and network.cidr_range are set, network.cidr_range will be used.
+   *
+   * @generated from field: porter.v1.AWSClusterNetwork network = 10;
+   */
+  network?: AWSClusterNetwork;
+
   constructor(data?: PartialMessage<EKS>);
 
   static readonly runtime: typeof proto3;
@@ -120,6 +131,45 @@ export declare class EKS extends Message<EKS> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EKS;
 
   static equals(a: EKS | PlainMessage<EKS> | undefined, b: EKS | PlainMessage<EKS> | undefined): boolean;
+}
+
+/**
+ * AWSClusterNetwork contains all information required to configure the AWS cluster's network
+ *
+ * @generated from message porter.v1.AWSClusterNetwork
+ */
+export declare class AWSClusterNetwork extends Message<AWSClusterNetwork> {
+  /**
+   * cidr_range is the range of the network. This is used to specify the network that Porter will use.
+   *
+   * @generated from field: string cidr_range = 1;
+   */
+  cidrRange: string;
+
+  /**
+   * control_plane_cidr is a range reserved by GKE for control plane functions such as running a global load balancer.
+   * string control_plane_cidr = 2;
+   * // pod_cidr is the range of the network that pods will be assigned IPs from, on the GCP subnet.
+   * string pod_cidr = 3;
+   * service_cidr is the range of the network that services will be assigned IPs from, on the AWS vpc.
+   *
+   * @generated from field: string service_cidr = 4;
+   */
+  serviceCidr: string;
+
+  constructor(data?: PartialMessage<AWSClusterNetwork>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AWSClusterNetwork";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AWSClusterNetwork;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AWSClusterNetwork;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AWSClusterNetwork;
+
+  static equals(a: AWSClusterNetwork | PlainMessage<AWSClusterNetwork> | undefined, b: AWSClusterNetwork | PlainMessage<AWSClusterNetwork> | undefined): boolean;
 }
 
 /**
