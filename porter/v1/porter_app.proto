@@ -44,8 +44,17 @@ message Deletions {
   repeated string service_names = 1;
   // env_group_names is a list of environment variable group names to delete
   repeated string env_group_names = 2;
+  // predeploy is a boolean indicating whether to delete the predeploy job
+  bool predeploy = 3;
   // env_variable_names is deprecated in favor of env_group_names. It was a list of environment variable names to delete
   repeated string env_variable_names = 4 [deprecated = true];
+  // service_domains is a map of service names to a list of domains to delete
+  map<string, DomainNameList> service_domains = 5;
+}
+
+message DomainNameList {
+  // domain_names is a list of domain names
+  repeated string domain_names = 1;
 }
 
 // Build is the build settings for the application
