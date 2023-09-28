@@ -58,12 +58,14 @@ export const EKS = proto3.makeMessageType(
 export const AWSClusterNetwork = proto3.makeMessageType(
   "porter.v1.AWSClusterNetwork",
   () => [
-    { no: 1, name: "cidr_range", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "service_cidr", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "vpc_cidr", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "service_cidr", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
 /**
+ * EKSNodeGroup is the configuration for an EKS node group/auto scaling group
+ *
  * @generated from message porter.v1.EKSNodeGroup
  */
 export const EKSNodeGroup = proto3.makeMessageType(

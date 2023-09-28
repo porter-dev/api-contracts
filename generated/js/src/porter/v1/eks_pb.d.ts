@@ -71,7 +71,7 @@ export declare class EKS extends Message<EKS> {
   clusterVersion: string;
 
   /**
-   * use network.cidr_range instead
+   * use network.vpc_cidr instead
    *
    * @generated from field: string cidr_range = 3 [deprecated = true];
    * @deprecated
@@ -112,7 +112,7 @@ export declare class EKS extends Message<EKS> {
 
   /**
    * network is the network configuration for the EKS cluster.
-   * If both cidr_range and network.cidr_range are set, network.cidr_range will be used.
+   * If both cidr_range and network.vpc_cidr are set, network.vpc_cidr will be used.
    *
    * @generated from field: porter.v1.AWSClusterNetwork network = 10;
    */
@@ -140,20 +140,16 @@ export declare class EKS extends Message<EKS> {
  */
 export declare class AWSClusterNetwork extends Message<AWSClusterNetwork> {
   /**
-   * cidr_range is the range of the network. This is used to specify the network that Porter will use.
+   * vpc_cidr is the range of the VPC network. This is used to specify the network that Porter will use.
    *
-   * @generated from field: string cidr_range = 1;
+   * @generated from field: string vpc_cidr = 1;
    */
-  cidrRange: string;
+  vpcCidr: string;
 
   /**
-   * control_plane_cidr is a range reserved by GKE for control plane functions such as running a global load balancer.
-   * string control_plane_cidr = 2;
-   * // pod_cidr is the range of the network that pods will be assigned IPs from, on the GCP subnet.
-   * string pod_cidr = 3;
    * service_cidr is the range of the network that services will be assigned IPs from, on the AWS vpc.
    *
-   * @generated from field: string service_cidr = 4;
+   * @generated from field: string service_cidr = 2;
    */
   serviceCidr: string;
 
@@ -173,6 +169,8 @@ export declare class AWSClusterNetwork extends Message<AWSClusterNetwork> {
 }
 
 /**
+ * EKSNodeGroup is the configuration for an EKS node group/auto scaling group
+ *
  * @generated from message porter.v1.EKSNodeGroup
  */
 export declare class EKSNodeGroup extends Message<EKSNodeGroup> {
