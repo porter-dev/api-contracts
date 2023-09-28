@@ -116,9 +116,9 @@ export declare class Service extends Message<Service> {
   /**
    * smart_optimization is to toggle the smart optimization feature
    *
-   * @generated from field: bool smart_optimization = 11;
+   * @generated from field: optional bool smart_optimization = 11;
    */
-  smartOptimization: boolean;
+  smartOptimization?: boolean;
 
   constructor(data?: PartialMessage<Service>);
 

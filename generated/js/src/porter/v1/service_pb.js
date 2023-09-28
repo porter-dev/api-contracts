@@ -38,7 +38,7 @@ export const Service = proto3.makeMessageType(
     { no: 8, name: "job_config", kind: "message", T: JobServiceConfig, oneof: "config" },
     { no: 9, name: "type", kind: "enum", T: proto3.getEnumType(ServiceType) },
     { no: 10, name: "absolute_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 11, name: "smart_optimization", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 11, name: "smart_optimization", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
   ],
 );
 
