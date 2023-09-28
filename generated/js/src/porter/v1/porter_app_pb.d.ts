@@ -169,12 +169,26 @@ export declare class Deletions extends Message<Deletions> {
   envGroupNames: string[];
 
   /**
+   * predeploy_names is a list of predeploy jobs to delete. Even though there is only one predeploy job, it is a list to be consistent with the service deletions.
+   *
+   * @generated from field: repeated string predeploy_names = 3;
+   */
+  predeployNames: string[];
+
+  /**
    * env_variable_names is deprecated in favor of env_group_names. It was a list of environment variable names to delete
    *
    * @generated from field: repeated string env_variable_names = 4 [deprecated = true];
    * @deprecated
    */
   envVariableNames: string[];
+
+  /**
+   * service_domains is a map of service names to a list of domains to delete
+   *
+   * @generated from field: map<string, porter.v1.DomainNameList> service_domains = 5;
+   */
+  serviceDomains: { [key: string]: DomainNameList };
 
   constructor(data?: PartialMessage<Deletions>);
 
@@ -189,6 +203,32 @@ export declare class Deletions extends Message<Deletions> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Deletions;
 
   static equals(a: Deletions | PlainMessage<Deletions> | undefined, b: Deletions | PlainMessage<Deletions> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.DomainNameList
+ */
+export declare class DomainNameList extends Message<DomainNameList> {
+  /**
+   * domain_names is a list of domain names
+   *
+   * @generated from field: repeated string domain_names = 1;
+   */
+  domainNames: string[];
+
+  constructor(data?: PartialMessage<DomainNameList>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DomainNameList";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DomainNameList;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DomainNameList;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DomainNameList;
+
+  static equals(a: DomainNameList | PlainMessage<DomainNameList> | undefined, b: DomainNameList | PlainMessage<DomainNameList> | undefined): boolean;
 }
 
 /**
