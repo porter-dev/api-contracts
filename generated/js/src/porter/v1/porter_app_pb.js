@@ -60,7 +60,7 @@ export const Deletions = proto3.makeMessageType(
   () => [
     { no: 1, name: "service_names", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 2, name: "env_group_names", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
-    { no: 3, name: "predeploy", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 3, name: "predeploy_names", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 4, name: "env_variable_names", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 5, name: "service_domains", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: DomainNameList} },
   ],

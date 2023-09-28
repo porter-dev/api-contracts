@@ -169,11 +169,11 @@ export declare class Deletions extends Message<Deletions> {
   envGroupNames: string[];
 
   /**
-   * predeploy is a boolean indicating whether to delete the predeploy job
+   * predeploy_names is a list of predeploy jobs to delete. Even though there is only one predeploy job, it is a list to be consistent with the service deletions.
    *
-   * @generated from field: bool predeploy = 3;
+   * @generated from field: repeated string predeploy_names = 3;
    */
-  predeploy: boolean;
+  predeployNames: string[];
 
   /**
    * env_variable_names is deprecated in favor of env_group_names. It was a list of environment variable names to delete

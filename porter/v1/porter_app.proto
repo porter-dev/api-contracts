@@ -44,8 +44,8 @@ message Deletions {
   repeated string service_names = 1;
   // env_group_names is a list of environment variable group names to delete
   repeated string env_group_names = 2;
-  // predeploy is a boolean indicating whether to delete the predeploy job
-  bool predeploy = 3;
+  // predeploy_names is a list of predeploy jobs to delete. Even though there is only one predeploy job, it is a list to be consistent with the service deletions.
+  repeated string predeploy_names = 3;
   // env_variable_names is deprecated in favor of env_group_names. It was a list of environment variable names to delete
   repeated string env_variable_names = 4 [deprecated = true];
   // service_domains is a map of service names to a list of domains to delete
