@@ -113,6 +113,13 @@ export declare class Service extends Message<Service> {
    */
   absoluteName: string;
 
+  /**
+   * smart_optimization is to toggle the smart optimization feature
+   *
+   * @generated from field: bool smart_optimization = 11;
+   */
+  smartOptimization: boolean;
+
   constructor(data?: PartialMessage<Service>);
 
   static readonly runtime: typeof proto3;
