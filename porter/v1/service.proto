@@ -32,6 +32,9 @@ message Service {
   ServiceType type = 9;
   // absolute_name is the name that should be used verbatim on the cluster. If not specified, a name is generated from the app, service and service type.
   string absolute_name = 10;
+
+  // smart_optimization is to toggle the smart optimization feature
+  optional bool smart_optimization = 11;
 }
 
 // WebServiceConfig is the configuration for a web service
