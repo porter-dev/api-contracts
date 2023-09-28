@@ -34,7 +34,7 @@ message Service {
   string absolute_name = 10;
 
   // smart_optimization is to toggle the smart optimization feature
-  bool smart_optimization = 11;
+  optional bool smart_optimization = 11;
 }
 
 // WebServiceConfig is the configuration for a web service
