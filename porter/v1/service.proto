@@ -60,6 +60,8 @@ message JobServiceConfig {
   bool allow_concurrent = 1;
   // cron is the cron expression for the job
   string cron = 2;
+  // timeout_seconds is the number of seconds to allow the job to run before timing out
+  int64 timeout_seconds = 3;
 }
 
 // Domain is the configuration for a custom domain for a web service

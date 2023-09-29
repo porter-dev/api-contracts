@@ -79,6 +79,7 @@ export const JobServiceConfig = proto3.makeMessageType(
   () => [
     { no: 1, name: "allow_concurrent", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 2, name: "cron", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "timeout_seconds", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ],
 );
 

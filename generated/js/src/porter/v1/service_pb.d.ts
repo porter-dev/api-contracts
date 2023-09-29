@@ -230,6 +230,13 @@ export declare class JobServiceConfig extends Message<JobServiceConfig> {
    */
   cron: string;
 
+  /**
+   * timeout_seconds is the number of seconds to allow the job to run before timing out
+   *
+   * @generated from field: int64 timeout_seconds = 3;
+   */
+  timeoutSeconds: bigint;
+
   constructor(data?: PartialMessage<JobServiceConfig>);
 
   static readonly runtime: typeof proto3;
