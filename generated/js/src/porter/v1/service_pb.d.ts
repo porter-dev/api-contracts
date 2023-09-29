@@ -217,7 +217,7 @@ export declare class WorkerServiceConfig extends Message<WorkerServiceConfig> {
  */
 export declare class JobServiceConfig extends Message<JobServiceConfig> {
   /**
-   * allow_concurrent indicates whether or not runs of the job can be processed concurrently.  Deprecated: use allow_concurrent_optional instead.
+   * allow_concurrent indicates whether or not runs of the job can be processed concurrently.  Deprecated: use allow_concurrent_optional instead, as this allows us to tell if the field was set in porter.yaml or not.
    *
    * @generated from field: bool allow_concurrent = 1 [deprecated = true];
    * @deprecated

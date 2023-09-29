@@ -373,7 +373,7 @@ type JobServiceConfig struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// allow_concurrent indicates whether or not runs of the job can be processed concurrently.  Deprecated: use allow_concurrent_optional instead.
+	// allow_concurrent indicates whether or not runs of the job can be processed concurrently.  Deprecated: use allow_concurrent_optional instead, as this allows us to tell if the field was set in porter.yaml or not.
 	//
 	// Deprecated: Marked as deprecated in porter/v1/service.proto.
 	AllowConcurrent bool `protobuf:"varint,1,opt,name=allow_concurrent,json=allowConcurrent,proto3" json:"allow_concurrent,omitempty"`

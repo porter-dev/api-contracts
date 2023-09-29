@@ -56,7 +56,7 @@ message WorkerServiceConfig {
 
 // JobServiceConfig is the configuration for a job service
 message JobServiceConfig {
-  // allow_concurrent indicates whether or not runs of the job can be processed concurrently.  Deprecated: use allow_concurrent_optional instead.
+  // allow_concurrent indicates whether or not runs of the job can be processed concurrently.  Deprecated: use allow_concurrent_optional instead, as this allows us to tell if the field was set in porter.yaml or not.
   bool allow_concurrent = 1 [deprecated = true];
   // cron is the cron expression for the job
   string cron = 2;
