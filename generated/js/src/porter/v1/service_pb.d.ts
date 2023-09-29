@@ -217,9 +217,10 @@ export declare class WorkerServiceConfig extends Message<WorkerServiceConfig> {
  */
 export declare class JobServiceConfig extends Message<JobServiceConfig> {
   /**
-   * allow_concurrent indicates whether or not runs of the job can be processed concurrently
+   * allow_concurrent indicates whether or not runs of the job can be processed concurrently.  Deprecated: use allow_concurrent_optional instead.
    *
-   * @generated from field: bool allow_concurrent = 1;
+   * @generated from field: bool allow_concurrent = 1 [deprecated = true];
+   * @deprecated
    */
   allowConcurrent: boolean;
 
@@ -229,6 +230,27 @@ export declare class JobServiceConfig extends Message<JobServiceConfig> {
    * @generated from field: string cron = 2;
    */
   cron: string;
+
+  /**
+   * suspend_cron indicates whether or not the cron should be suspended
+   *
+   * @generated from field: optional bool suspend_cron = 3;
+   */
+  suspendCron?: boolean;
+
+  /**
+   * allow_concurrent_optional indicates whether or not runs of the job can be processed concurrently
+   *
+   * @generated from field: optional bool allow_concurrent_optional = 4;
+   */
+  allowConcurrentOptional?: boolean;
+
+  /**
+   * timeout_seconds is the number of seconds to wait before timing out the job
+   *
+   * @generated from field: int64 timeout_seconds = 5;
+   */
+  timeoutSeconds: bigint;
 
   constructor(data?: PartialMessage<JobServiceConfig>);
 
