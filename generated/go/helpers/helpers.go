@@ -24,7 +24,7 @@ func UnmarshalContractObjectFromReader(r io.Reader, contract protoreflect.ProtoM
 // UnmarshalContractObject is a convenience method for returning a protobuf contract object from bytes
 // and will work for any part of a contract, or contract revision
 func UnmarshalContractObject(by []byte, contract protoreflect.ProtoMessage) error {
-	err := protojson.Unmarshal(by, contract)
+	err := protojson.UnmarshalOptions{DiscardUnknown: true}.Unmarshal(by, contract)
 	if err != nil {
 		return fmt.Errorf("unable to convert bytes into contract: %w", err)
 	}
