@@ -1832,6 +1832,13 @@ export declare class DeploymentTargetDetailsResponse extends Message<DeploymentT
    */
   clusterId: bigint;
 
+  /**
+   * is_preview indicates whether this is a preview deployment target or not
+   *
+   * @generated from field: bool is_preview = 3;
+   */
+  isPreview: boolean;
+
   constructor(data?: PartialMessage<DeploymentTargetDetailsResponse>);
 
   static readonly runtime: typeof proto3;

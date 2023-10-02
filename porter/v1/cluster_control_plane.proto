@@ -378,6 +378,8 @@ message DeploymentTargetDetailsResponse {
   string namespace = 1;
   // cluster_id is the id of the cluster that the deployment target points to
   int64 cluster_id = 2;
+  // is_preview indicates whether this is a preview deployment target or not
+  bool is_preview = 3;
 }
 
 enum EnumCLIAction {

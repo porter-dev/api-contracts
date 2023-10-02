@@ -652,6 +652,7 @@ export const DeploymentTargetDetailsResponse = proto3.makeMessageType(
   () => [
     { no: 1, name: "namespace", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "is_preview", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
