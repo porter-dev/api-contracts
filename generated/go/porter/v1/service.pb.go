@@ -79,7 +79,7 @@ type Service struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// run is the command to start the service. Deprecated: use run_optional instead, as this allows us to tell if the field was explicitly or not.
+	// run is the command to start the service. Deprecated: use run_optional instead, as this allows us to tell if the field was explicitly set or not.
 	//
 	// Deprecated: Marked as deprecated in porter/v1/service.proto.
 	Run string `protobuf:"bytes,1,opt,name=run,proto3" json:"run,omitempty"`
