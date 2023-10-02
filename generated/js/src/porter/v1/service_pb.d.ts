@@ -40,9 +40,10 @@ export declare enum ServiceType {
  */
 export declare class Service extends Message<Service> {
   /**
-   * run is the command to start the service
+   * run is the command to start the service. Deprecated: use run_optional instead, as this allows us to tell if the field was explicitly or not.
    *
-   * @generated from field: string run = 1;
+   * @generated from field: string run = 1 [deprecated = true];
+   * @deprecated
    */
   run: string;
 
@@ -119,6 +120,13 @@ export declare class Service extends Message<Service> {
    * @generated from field: optional bool smart_optimization = 11;
    */
   smartOptimization?: boolean;
+
+  /**
+   * run_optional is the command to start the service
+   *
+   * @generated from field: optional string run_optional = 12;
+   */
+  runOptional?: string;
 
   constructor(data?: PartialMessage<Service>);
 

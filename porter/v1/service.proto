@@ -12,8 +12,8 @@ enum ServiceType {
 
 // Service is the top-level configuration for a service
 message Service {
-  // run is the command to start the service
-  string run = 1;
+  // run is the command to start the service. Deprecated: use run_optional instead, as this allows us to tell if the field was explicitly or not.
+  string run = 1 [deprecated = true];
   // instances is the number of instances, or replicas, to run
   int32 instances = 2;
   // port is the port the service listens on
@@ -35,6 +35,9 @@ message Service {
 
   // smart_optimization is to toggle the smart optimization feature
   optional bool smart_optimization = 11;
+
+  // run_optional is the command to start the service
+  optional string run_optional = 12;
 }
 
 // WebServiceConfig is the configuration for a web service
