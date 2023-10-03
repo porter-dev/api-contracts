@@ -1874,9 +1874,18 @@ export declare class SeedAppRevisionsRequest extends Message<SeedAppRevisionsReq
   releaseName: string;
 
   /**
-   * @generated from field: string namespace = 4;
+   * source_namespace is the namespace where the app to be migrated is currently installed
+   *
+   * @generated from field: string source_namespace = 4;
    */
-  namespace: string;
+  sourceNamespace: string;
+
+  /**
+   * target_namespace is the namespace where the app will be installed. This will determine where the env groups are seeded.
+   *
+   * @generated from field: string target_namespace = 5;
+   */
+  targetNamespace: string;
 
   constructor(data?: PartialMessage<SeedAppRevisionsRequest>);
 
