@@ -406,7 +406,10 @@ message SeedAppRevisionsRequest {
   int64 project_id = 1;
   int64 cluster_id = 2;
   string release_name = 3;
-  string namespace = 4;
+  // source_namespace is the namespace where the app to be migrated is currently installed
+  string source_namespace = 4;
+  // target_namespace is the namespace where the app will be installed. This will determine where the env groups are seeded.
+  string target_namespace = 5;
 }
 
 message SeedAppRevisionsResponse {}

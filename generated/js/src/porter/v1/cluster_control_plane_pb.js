@@ -665,7 +665,8 @@ export const SeedAppRevisionsRequest = proto3.makeMessageType(
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 3, name: "release_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "namespace", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "source_namespace", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "target_namespace", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
