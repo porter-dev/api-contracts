@@ -511,6 +511,30 @@ export const DeleteAppDeploymentResponse = proto3.makeMessageType(
 );
 
 /**
+ * DeleteDeploymentTargetRequest is the request object when removing a deployment target from a given cluster
+ *
+ * @generated from message porter.v1.DeleteDeploymentTargetRequest
+ */
+export const DeleteDeploymentTargetRequest = proto3.makeMessageType(
+  "porter.v1.DeleteDeploymentTargetRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * DeleteDeploymentTargetResponse is the response object when removing a deployment target from a given cluster
+ *
+ * @generated from message porter.v1.DeleteDeploymentTargetResponse
+ */
+export const DeleteDeploymentTargetResponse = proto3.makeMessageType(
+  "porter.v1.DeleteDeploymentTargetResponse",
+  [],
+);
+
+/**
  * @generated from message porter.v1.CurrentAppRevisionRequest
  */
 export const CurrentAppRevisionRequest = proto3.makeMessageType(
