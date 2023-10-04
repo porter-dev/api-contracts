@@ -91,6 +91,9 @@ const (
 	// ClusterControlPlaneServiceDeleteAppDeploymentProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DeleteAppDeployment RPC.
 	ClusterControlPlaneServiceDeleteAppDeploymentProcedure = "/porter.v1.ClusterControlPlaneService/DeleteAppDeployment"
+	// ClusterControlPlaneServiceDeleteDeploymentTargetProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's DeleteDeploymentTarget RPC.
+	ClusterControlPlaneServiceDeleteDeploymentTargetProcedure = "/porter.v1.ClusterControlPlaneService/DeleteDeploymentTarget"
 	// ClusterControlPlaneServiceCurrentAppRevisionProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's CurrentAppRevision RPC.
 	ClusterControlPlaneServiceCurrentAppRevisionProcedure = "/porter.v1.ClusterControlPlaneService/CurrentAppRevision"
@@ -189,6 +192,8 @@ type ClusterControlPlaneServiceClient interface {
 	DeletePorterApp(context.Context, *connect.Request[v1.DeletePorterAppRequest]) (*connect.Response[v1.DeletePorterAppResponse], error)
 	// DeleteAppDeployment deletes a porter app from a given deployment target
 	DeleteAppDeployment(context.Context, *connect.Request[v1.DeleteAppDeploymentRequest]) (*connect.Response[v1.DeleteAppDeploymentResponse], error)
+	// DeleteDeploymentTarget deletes a deployment target from a given cluster
+	DeleteDeploymentTarget(context.Context, *connect.Request[v1.DeleteDeploymentTargetRequest]) (*connect.Response[v1.DeleteDeploymentTargetResponse], error)
 	// CurrentAppRevision returns the currently deployed app revision for a given porter_app and deployment_target
 	CurrentAppRevision(context.Context, *connect.Request[v1.CurrentAppRevisionRequest]) (*connect.Response[v1.CurrentAppRevisionResponse], error)
 	ListAppRevisions(context.Context, *connect.Request[v1.ListAppRevisionsRequest]) (*connect.Response[v1.ListAppRevisionsResponse], error)
@@ -349,6 +354,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceDeleteAppDeploymentProcedure,
 			opts...,
 		),
+		deleteDeploymentTarget: connect.NewClient[v1.DeleteDeploymentTargetRequest, v1.DeleteDeploymentTargetResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceDeleteDeploymentTargetProcedure,
+			opts...,
+		),
 		currentAppRevision: connect.NewClient[v1.CurrentAppRevisionRequest, v1.CurrentAppRevisionResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceCurrentAppRevisionProcedure,
@@ -453,6 +463,7 @@ type clusterControlPlaneServiceClient struct {
 	updateRevisionStatus           *connect.Client[v1.UpdateRevisionStatusRequest, v1.UpdateRevisionStatusResponse]
 	deletePorterApp                *connect.Client[v1.DeletePorterAppRequest, v1.DeletePorterAppResponse]
 	deleteAppDeployment            *connect.Client[v1.DeleteAppDeploymentRequest, v1.DeleteAppDeploymentResponse]
+	deleteDeploymentTarget         *connect.Client[v1.DeleteDeploymentTargetRequest, v1.DeleteDeploymentTargetResponse]
 	currentAppRevision             *connect.Client[v1.CurrentAppRevisionRequest, v1.CurrentAppRevisionResponse]
 	listAppRevisions               *connect.Client[v1.ListAppRevisionsRequest, v1.ListAppRevisionsResponse]
 	latestAppRevisions             *connect.Client[v1.LatestAppRevisionsRequest, v1.LatestAppRevisionsResponse]
@@ -572,6 +583,11 @@ func (c *clusterControlPlaneServiceClient) DeletePorterApp(ctx context.Context, 
 // DeleteAppDeployment calls porter.v1.ClusterControlPlaneService.DeleteAppDeployment.
 func (c *clusterControlPlaneServiceClient) DeleteAppDeployment(ctx context.Context, req *connect.Request[v1.DeleteAppDeploymentRequest]) (*connect.Response[v1.DeleteAppDeploymentResponse], error) {
 	return c.deleteAppDeployment.CallUnary(ctx, req)
+}
+
+// DeleteDeploymentTarget calls porter.v1.ClusterControlPlaneService.DeleteDeploymentTarget.
+func (c *clusterControlPlaneServiceClient) DeleteDeploymentTarget(ctx context.Context, req *connect.Request[v1.DeleteDeploymentTargetRequest]) (*connect.Response[v1.DeleteDeploymentTargetResponse], error) {
+	return c.deleteDeploymentTarget.CallUnary(ctx, req)
 }
 
 // CurrentAppRevision calls porter.v1.ClusterControlPlaneService.CurrentAppRevision.
@@ -716,6 +732,8 @@ type ClusterControlPlaneServiceHandler interface {
 	DeletePorterApp(context.Context, *connect.Request[v1.DeletePorterAppRequest]) (*connect.Response[v1.DeletePorterAppResponse], error)
 	// DeleteAppDeployment deletes a porter app from a given deployment target
 	DeleteAppDeployment(context.Context, *connect.Request[v1.DeleteAppDeploymentRequest]) (*connect.Response[v1.DeleteAppDeploymentResponse], error)
+	// DeleteDeploymentTarget deletes a deployment target from a given cluster
+	DeleteDeploymentTarget(context.Context, *connect.Request[v1.DeleteDeploymentTargetRequest]) (*connect.Response[v1.DeleteDeploymentTargetResponse], error)
 	// CurrentAppRevision returns the currently deployed app revision for a given porter_app and deployment_target
 	CurrentAppRevision(context.Context, *connect.Request[v1.CurrentAppRevisionRequest]) (*connect.Response[v1.CurrentAppRevisionResponse], error)
 	ListAppRevisions(context.Context, *connect.Request[v1.ListAppRevisionsRequest]) (*connect.Response[v1.ListAppRevisionsResponse], error)
@@ -872,6 +890,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.DeleteAppDeployment,
 		opts...,
 	)
+	clusterControlPlaneServiceDeleteDeploymentTargetHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceDeleteDeploymentTargetProcedure,
+		svc.DeleteDeploymentTarget,
+		opts...,
+	)
 	clusterControlPlaneServiceCurrentAppRevisionHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceCurrentAppRevisionProcedure,
 		svc.CurrentAppRevision,
@@ -992,6 +1015,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceDeletePorterAppHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDeleteAppDeploymentProcedure:
 			clusterControlPlaneServiceDeleteAppDeploymentHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceDeleteDeploymentTargetProcedure:
+			clusterControlPlaneServiceDeleteDeploymentTargetHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceCurrentAppRevisionProcedure:
 			clusterControlPlaneServiceCurrentAppRevisionHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceListAppRevisionsProcedure:
@@ -1107,6 +1132,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) DeletePorterApp(context.Co
 
 func (UnimplementedClusterControlPlaneServiceHandler) DeleteAppDeployment(context.Context, *connect.Request[v1.DeleteAppDeploymentRequest]) (*connect.Response[v1.DeleteAppDeploymentResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.DeleteAppDeployment is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) DeleteDeploymentTarget(context.Context, *connect.Request[v1.DeleteDeploymentTargetRequest]) (*connect.Response[v1.DeleteDeploymentTargetResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.DeleteDeploymentTarget is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) CurrentAppRevision(context.Context, *connect.Request[v1.CurrentAppRevisionRequest]) (*connect.Response[v1.CurrentAppRevisionResponse], error) {

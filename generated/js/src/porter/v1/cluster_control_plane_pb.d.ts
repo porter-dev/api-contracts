@@ -1419,6 +1419,60 @@ export declare class DeleteAppDeploymentResponse extends Message<DeleteAppDeploy
 }
 
 /**
+ * DeleteDeploymentTargetRequest is the request object when removing a deployment target from a given cluster
+ *
+ * @generated from message porter.v1.DeleteDeploymentTargetRequest
+ */
+export declare class DeleteDeploymentTargetRequest extends Message<DeleteDeploymentTargetRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * deployment_target_id is the id of the deployment target to be deleted
+   *
+   * @generated from field: string deployment_target_id = 2;
+   */
+  deploymentTargetId: string;
+
+  constructor(data?: PartialMessage<DeleteDeploymentTargetRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeleteDeploymentTargetRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteDeploymentTargetRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteDeploymentTargetRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteDeploymentTargetRequest;
+
+  static equals(a: DeleteDeploymentTargetRequest | PlainMessage<DeleteDeploymentTargetRequest> | undefined, b: DeleteDeploymentTargetRequest | PlainMessage<DeleteDeploymentTargetRequest> | undefined): boolean;
+}
+
+/**
+ * DeleteDeploymentTargetResponse is the response object when removing a deployment target from a given cluster
+ *
+ * @generated from message porter.v1.DeleteDeploymentTargetResponse
+ */
+export declare class DeleteDeploymentTargetResponse extends Message<DeleteDeploymentTargetResponse> {
+  constructor(data?: PartialMessage<DeleteDeploymentTargetResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeleteDeploymentTargetResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteDeploymentTargetResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteDeploymentTargetResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteDeploymentTargetResponse;
+
+  static equals(a: DeleteDeploymentTargetResponse | PlainMessage<DeleteDeploymentTargetResponse> | undefined, b: DeleteDeploymentTargetResponse | PlainMessage<DeleteDeploymentTargetResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.CurrentAppRevisionRequest
  */
 export declare class CurrentAppRevisionRequest extends Message<CurrentAppRevisionRequest> {
