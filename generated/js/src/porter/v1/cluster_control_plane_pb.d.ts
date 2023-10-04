@@ -1430,14 +1430,9 @@ export declare class DeleteDeploymentTargetRequest extends Message<DeleteDeploym
   projectId: bigint;
 
   /**
-   * @generated from field: int64 cluster_id = 2;
-   */
-  clusterId: bigint;
-
-  /**
    * deployment_target_id is the id of the deployment target to be deleted
    *
-   * @generated from field: string deployment_target_id = 3;
+   * @generated from field: string deployment_target_id = 2;
    */
   deploymentTargetId: string;
 

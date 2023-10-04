@@ -269,9 +269,8 @@ message DeleteAppDeploymentResponse {}
 // DeleteDeploymentTargetRequest is the request object when removing a deployment target from a given cluster
 message DeleteDeploymentTargetRequest {
   int64 project_id = 1;
-  int64 cluster_id = 2;
   // deployment_target_id is the id of the deployment target to be deleted
-  string deployment_target_id = 3;
+  string deployment_target_id = 2;
 }
 
 // DeleteDeploymentTargetResponse is the response object when removing a deployment target from a given cluster
