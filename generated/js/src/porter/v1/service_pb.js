@@ -55,6 +55,7 @@ export const WebServiceConfig = proto3.makeMessageType(
     { no: 2, name: "domains", kind: "message", T: Domain, repeated: true },
     { no: 3, name: "health_check", kind: "message", T: HealthCheck },
     { no: 4, name: "private", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
+    { no: 5, name: "ingress_annotations", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "scalar", T: 9 /* ScalarType.STRING */} },
   ],
 );
 

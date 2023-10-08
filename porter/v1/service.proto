@@ -50,6 +50,8 @@ message WebServiceConfig {
   HealthCheck health_check = 3;
   // private indicates whether or not the web service should be private (not publicly accessible)
   optional bool private = 4;
+  // ingress_annotations is a map of annotations to apply to the ingress resource
+  map<string, string> ingress_annotations = 5;
 }
 
 // WorkerServiceConfig is the configuration for a worker service
