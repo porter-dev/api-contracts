@@ -177,6 +177,13 @@ export declare class WebServiceConfig extends Message<WebServiceConfig> {
    */
   private?: boolean;
 
+  /**
+   * ingress_annotations is a map of annotations to apply to the ingress resource
+   *
+   * @generated from field: map<string, string> ingress_annotations = 5;
+   */
+  ingressAnnotations: { [key: string]: string };
+
   constructor(data?: PartialMessage<WebServiceConfig>);
 
   static readonly runtime: typeof proto3;
