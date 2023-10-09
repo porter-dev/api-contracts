@@ -462,6 +462,16 @@ message UpdateAppImageResponse {
   string tag = 2;
 }
 
+// UpdateAppsLinkedToEnvGroupRequest is the request object for UpdateAppsLinkedToEnvGroup
+message UpdateAppsLinkedToEnvGroupRequest {
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+  string env_group_name = 3;
+}
+
+// UpdateAppsLinkedToEnvGroupResponse is the response object for UpdateAppsLinkedToEnvGroup
+message UpdateAppsLinkedToEnvGroupResponse {}
+
 service ClusterControlPlaneService {
   // QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas
   rpc QuotaIncrease(QuotaIncreaseRequest) returns (QuotaIncreaseResponse) {}
@@ -561,6 +571,9 @@ service ClusterControlPlaneService {
 
   // UpdateAppImage updates the image of a porter app and applies the new app revision to the deployment target.
   rpc UpdateAppImage(UpdateAppImageRequest) returns (UpdateAppImageResponse) {}
+
+  // UpdateAppsLinkedToEnvGroup updates all apps that are linked to a given env group
+  rpc UpdateAppsLinkedToEnvGroup(UpdateAppsLinkedToEnvGroupRequest) returns (UpdateAppsLinkedToEnvGroupResponse) {}
 
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
   // Deprecated. Use TokenForRegistry instead.

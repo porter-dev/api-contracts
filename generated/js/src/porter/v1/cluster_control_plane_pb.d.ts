@@ -2178,6 +2178,63 @@ export declare class UpdateAppImageResponse extends Message<UpdateAppImageRespon
 }
 
 /**
+ * UpdateAppsLinkedToEnvGroupRequest is the request object for UpdateAppsLinkedToEnvGroup
+ *
+ * @generated from message porter.v1.UpdateAppsLinkedToEnvGroupRequest
+ */
+export declare class UpdateAppsLinkedToEnvGroupRequest extends Message<UpdateAppsLinkedToEnvGroupRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  /**
+   * @generated from field: string env_group_name = 3;
+   */
+  envGroupName: string;
+
+  constructor(data?: PartialMessage<UpdateAppsLinkedToEnvGroupRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateAppsLinkedToEnvGroupRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateAppsLinkedToEnvGroupRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateAppsLinkedToEnvGroupRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateAppsLinkedToEnvGroupRequest;
+
+  static equals(a: UpdateAppsLinkedToEnvGroupRequest | PlainMessage<UpdateAppsLinkedToEnvGroupRequest> | undefined, b: UpdateAppsLinkedToEnvGroupRequest | PlainMessage<UpdateAppsLinkedToEnvGroupRequest> | undefined): boolean;
+}
+
+/**
+ * UpdateAppsLinkedToEnvGroupResponse is the response object for UpdateAppsLinkedToEnvGroup
+ *
+ * @generated from message porter.v1.UpdateAppsLinkedToEnvGroupResponse
+ */
+export declare class UpdateAppsLinkedToEnvGroupResponse extends Message<UpdateAppsLinkedToEnvGroupResponse> {
+  constructor(data?: PartialMessage<UpdateAppsLinkedToEnvGroupResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateAppsLinkedToEnvGroupResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateAppsLinkedToEnvGroupResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateAppsLinkedToEnvGroupResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateAppsLinkedToEnvGroupResponse;
+
+  static equals(a: UpdateAppsLinkedToEnvGroupResponse | PlainMessage<UpdateAppsLinkedToEnvGroupResponse> | undefined, b: UpdateAppsLinkedToEnvGroupResponse | PlainMessage<UpdateAppsLinkedToEnvGroupResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  * @deprecated
  */
