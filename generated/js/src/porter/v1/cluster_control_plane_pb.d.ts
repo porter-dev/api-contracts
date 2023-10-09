@@ -2178,6 +2178,8 @@ export declare class UpdateAppImageResponse extends Message<UpdateAppImageRespon
 }
 
 /**
+ * UpdateAppsLinkedToEnvGroupRequest is the request object for UpdateAppsLinkedToEnvGroup
+ *
  * @generated from message porter.v1.UpdateAppsLinkedToEnvGroupRequest
  */
 export declare class UpdateAppsLinkedToEnvGroupRequest extends Message<UpdateAppsLinkedToEnvGroupRequest> {
@@ -2212,6 +2214,8 @@ export declare class UpdateAppsLinkedToEnvGroupRequest extends Message<UpdateApp
 }
 
 /**
+ * UpdateAppsLinkedToEnvGroupResponse is the response object for UpdateAppsLinkedToEnvGroup
+ *
  * @generated from message porter.v1.UpdateAppsLinkedToEnvGroupResponse
  */
 export declare class UpdateAppsLinkedToEnvGroupResponse extends Message<UpdateAppsLinkedToEnvGroupResponse> {

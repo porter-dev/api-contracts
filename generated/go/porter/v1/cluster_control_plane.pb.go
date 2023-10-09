@@ -3886,6 +3886,7 @@ func (x *UpdateAppImageResponse) GetTag() string {
 	return ""
 }
 
+// UpdateAppsLinkedToEnvGroupRequest is the request object for UpdateAppsLinkedToEnvGroup
 type UpdateAppsLinkedToEnvGroupRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3949,6 +3950,7 @@ func (x *UpdateAppsLinkedToEnvGroupRequest) GetEnvGroupName() string {
 	return ""
 }
 
+// UpdateAppsLinkedToEnvGroupResponse is the response object for UpdateAppsLinkedToEnvGroup
 type UpdateAppsLinkedToEnvGroupResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

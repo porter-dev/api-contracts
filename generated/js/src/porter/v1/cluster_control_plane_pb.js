@@ -780,6 +780,8 @@ export const UpdateAppImageResponse = proto3.makeMessageType(
 );
 
 /**
+ * UpdateAppsLinkedToEnvGroupRequest is the request object for UpdateAppsLinkedToEnvGroup
+ *
  * @generated from message porter.v1.UpdateAppsLinkedToEnvGroupRequest
  */
 export const UpdateAppsLinkedToEnvGroupRequest = proto3.makeMessageType(
@@ -792,6 +794,8 @@ export const UpdateAppsLinkedToEnvGroupRequest = proto3.makeMessageType(
 );
 
 /**
+ * UpdateAppsLinkedToEnvGroupResponse is the response object for UpdateAppsLinkedToEnvGroup
+ *
  * @generated from message porter.v1.UpdateAppsLinkedToEnvGroupResponse
  */
 export const UpdateAppsLinkedToEnvGroupResponse = proto3.makeMessageType(
