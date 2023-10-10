@@ -51,6 +51,19 @@ export const EnvGroupVariables = proto3.makeMessageType(
 );
 
 /**
+ * ServiceDeletions contains all explicit deletions from a service
+ *
+ * @generated from message porter.v1.ServiceDeletions
+ */
+export const ServiceDeletions = proto3.makeMessageType(
+  "porter.v1.ServiceDeletions",
+  () => [
+    { no: 1, name: "domain_names", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 2, name: "ingress_annotations", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+  ],
+);
+
+/**
  * Deletions contains all explicit deletions from a PorterApp
  *
  * @generated from message porter.v1.Deletions
@@ -63,6 +76,7 @@ export const Deletions = proto3.makeMessageType(
     { no: 3, name: "predeploy_names", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 4, name: "env_variable_names", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 5, name: "service_domains", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: DomainNameList} },
+    { no: 6, name: "service_deletions", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: ServiceDeletions} },
   ],
 );
 

@@ -149,6 +149,41 @@ export declare class EnvGroupVariables extends Message<EnvGroupVariables> {
 }
 
 /**
+ * ServiceDeletions contains all explicit deletions from a service
+ *
+ * @generated from message porter.v1.ServiceDeletions
+ */
+export declare class ServiceDeletions extends Message<ServiceDeletions> {
+  /**
+   * domain_names is a list of domain names to delete
+   *
+   * @generated from field: repeated string domain_names = 1;
+   */
+  domainNames: string[];
+
+  /**
+   * ingress_annotations is a list of ingress annotation keys to delete
+   *
+   * @generated from field: repeated string ingress_annotations = 2;
+   */
+  ingressAnnotations: string[];
+
+  constructor(data?: PartialMessage<ServiceDeletions>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ServiceDeletions";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ServiceDeletions;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ServiceDeletions;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ServiceDeletions;
+
+  static equals(a: ServiceDeletions | PlainMessage<ServiceDeletions> | undefined, b: ServiceDeletions | PlainMessage<ServiceDeletions> | undefined): boolean;
+}
+
+/**
  * Deletions contains all explicit deletions from a PorterApp
  *
  * @generated from message porter.v1.Deletions
@@ -186,9 +221,17 @@ export declare class Deletions extends Message<Deletions> {
   /**
    * service_domains is a map of service names to a list of domains to delete
    *
-   * @generated from field: map<string, porter.v1.DomainNameList> service_domains = 5;
+   * @generated from field: map<string, porter.v1.DomainNameList> service_domains = 5 [deprecated = true];
+   * @deprecated
    */
   serviceDomains: { [key: string]: DomainNameList };
+
+  /**
+   * service_deletions is a map of service names to a list of deletions to perform on the service
+   *
+   * @generated from field: map<string, porter.v1.ServiceDeletions> service_deletions = 6;
+   */
+  serviceDeletions: { [key: string]: ServiceDeletions };
 
   constructor(data?: PartialMessage<Deletions>);
 
