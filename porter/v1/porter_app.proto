@@ -38,6 +38,14 @@ message EnvGroupVariables {
   map<string, string> secret = 2;
 }
 
+// ServiceDeletions contains all explicit deletions from a service
+message ServiceDeletions {
+  // domain_names is a list of domain names to delete
+  repeated string domain_names = 1;
+  // ingress_annotations is a list of ingress annotation keys to delete
+  repeated string ingress_annotations = 2;
+}
+
 // Deletions contains all explicit deletions from a PorterApp
 message Deletions {
   // service_names is a list of service names to delete
@@ -49,7 +57,9 @@ message Deletions {
   // env_variable_names is deprecated in favor of env_group_names. It was a list of environment variable names to delete
   repeated string env_variable_names = 4 [deprecated = true];
   // service_domains is a map of service names to a list of domains to delete
-  map<string, DomainNameList> service_domains = 5;
+  map<string, DomainNameList> service_domains = 5 [deprecated = true];
+  // service_deletions is a map of service names to a list of deletions to perform on the service
+  map<string, ServiceDeletions> service_deletions = 6;
 }
 
 message DomainNameList {
