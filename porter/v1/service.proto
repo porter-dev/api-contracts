@@ -38,6 +38,9 @@ message Service {
 
   // run_optional is the command to start the service
   optional string run_optional = 12;
+
+  // gpu_cores_nvidia is the number of GPU cores to allocate to the service. This is only used for nvidia-backed GPU's at present. If set to a non-zero value, this service will only be scheduled if a GPU node with the specified number of cores is available.
+  float gpu_cores_nvidia = 13;
 }
 
 // WebServiceConfig is the configuration for a web service
