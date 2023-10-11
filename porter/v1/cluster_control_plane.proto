@@ -483,8 +483,8 @@ message AppHelmValuesRequest {
 
 // AppHelmValuesResponse is the response object when retrieving the helm values for a given app
 message AppHelmValuesResponse {
-  // values is stringified json of the latest helm values for the app
-  string values = 1;
+  // values is base64-encoded, stringified json of the latest helm values for the app
+  string b64_values = 1;
 }
 
 service ClusterControlPlaneService {

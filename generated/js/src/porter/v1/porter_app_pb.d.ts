@@ -92,11 +92,11 @@ export declare class PorterApp extends Message<PorterApp> {
  */
 export declare class HelmOverrides extends Message<HelmOverrides> {
   /**
-   * Values is the raw Helm overrides. We use a string because Typescript does not have a native bytes type.
+   * Values is base64-encoded, stringified json of Helm values. We use a string because Typescript does not have a native bytes type.
    *
-   * @generated from field: string values = 1;
+   * @generated from field: string b64_values = 1;
    */
-  values: string;
+  b64Values: string;
 
   constructor(data?: PartialMessage<HelmOverrides>);
 

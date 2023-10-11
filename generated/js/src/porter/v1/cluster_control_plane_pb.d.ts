@@ -2284,11 +2284,11 @@ export declare class AppHelmValuesRequest extends Message<AppHelmValuesRequest> 
  */
 export declare class AppHelmValuesResponse extends Message<AppHelmValuesResponse> {
   /**
-   * values is stringified json of the latest helm values for the app
+   * values is base64-encoded, stringified json of the latest helm values for the app
    *
-   * @generated from field: string values = 1;
+   * @generated from field: string b64_values = 1;
    */
-  values: string;
+  b64Values: string;
 
   constructor(data?: PartialMessage<AppHelmValuesResponse>);
 

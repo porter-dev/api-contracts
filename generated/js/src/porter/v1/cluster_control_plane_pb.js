@@ -826,7 +826,7 @@ export const AppHelmValuesRequest = proto3.makeMessageType(
 export const AppHelmValuesResponse = proto3.makeMessageType(
   "porter.v1.AppHelmValuesResponse",
   () => [
-    { no: 1, name: "values", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "b64_values", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

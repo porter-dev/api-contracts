@@ -33,7 +33,7 @@ export const PorterApp = proto3.makeMessageType(
 export const HelmOverrides = proto3.makeMessageType(
   "porter.v1.HelmOverrides",
   () => [
-    { no: 1, name: "values", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "b64_values", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
