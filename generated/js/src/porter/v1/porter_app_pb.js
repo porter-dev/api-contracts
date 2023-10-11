@@ -21,6 +21,19 @@ export const PorterApp = proto3.makeMessageType(
     { no: 5, name: "predeploy", kind: "message", T: Service },
     { no: 6, name: "image", kind: "message", T: AppImage },
     { no: 7, name: "env_groups", kind: "message", T: EnvGroup, repeated: true },
+    { no: 8, name: "helm_overrides", kind: "message", T: HelmOverrides },
+  ],
+);
+
+/**
+ * HelmOverrides is a wrapper over stringified json of raw Helm overrides to use for the application. HelmOverrides will only be removed if values is explicitly set to an empty string.
+ *
+ * @generated from message porter.v1.HelmOverrides
+ */
+export const HelmOverrides = proto3.makeMessageType(
+  "porter.v1.HelmOverrides",
+  () => [
+    { no: 1, name: "b64_values", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

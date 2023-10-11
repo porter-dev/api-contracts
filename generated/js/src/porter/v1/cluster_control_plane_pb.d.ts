@@ -2235,6 +2235,77 @@ export declare class UpdateAppsLinkedToEnvGroupResponse extends Message<UpdateAp
 }
 
 /**
+ * AppHelmValuesRequest is the request object when retrieving the helm values for a given app
+ *
+ * @generated from message porter.v1.AppHelmValuesRequest
+ */
+export declare class AppHelmValuesRequest extends Message<AppHelmValuesRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 app_id = 2;
+   */
+  appId: bigint;
+
+  /**
+   * @generated from field: string deployment_target_id = 3;
+   */
+  deploymentTargetId: string;
+
+  /**
+   * with_defaults indicates whether to merge the default Helm values with the explicitly provided values
+   *
+   * @generated from field: bool with_defaults = 4;
+   */
+  withDefaults: boolean;
+
+  constructor(data?: PartialMessage<AppHelmValuesRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AppHelmValuesRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AppHelmValuesRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AppHelmValuesRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AppHelmValuesRequest;
+
+  static equals(a: AppHelmValuesRequest | PlainMessage<AppHelmValuesRequest> | undefined, b: AppHelmValuesRequest | PlainMessage<AppHelmValuesRequest> | undefined): boolean;
+}
+
+/**
+ * AppHelmValuesResponse is the response object when retrieving the helm values for a given app
+ *
+ * @generated from message porter.v1.AppHelmValuesResponse
+ */
+export declare class AppHelmValuesResponse extends Message<AppHelmValuesResponse> {
+  /**
+   * values is base64-encoded, stringified json of the latest helm values for the app
+   *
+   * @generated from field: string b64_values = 1;
+   */
+  b64Values: string;
+
+  constructor(data?: PartialMessage<AppHelmValuesResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AppHelmValuesResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AppHelmValuesResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AppHelmValuesResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AppHelmValuesResponse;
+
+  static equals(a: AppHelmValuesResponse | PlainMessage<AppHelmValuesResponse> | undefined, b: AppHelmValuesResponse | PlainMessage<AppHelmValuesResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  * @deprecated
  */

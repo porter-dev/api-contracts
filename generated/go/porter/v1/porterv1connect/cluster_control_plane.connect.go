@@ -127,6 +127,9 @@ const (
 	// ClusterControlPlaneServiceUpdateAppsLinkedToEnvGroupProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's UpdateAppsLinkedToEnvGroup RPC.
 	ClusterControlPlaneServiceUpdateAppsLinkedToEnvGroupProcedure = "/porter.v1.ClusterControlPlaneService/UpdateAppsLinkedToEnvGroup"
+	// ClusterControlPlaneServiceAppHelmValuesProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's AppHelmValues RPC.
+	ClusterControlPlaneServiceAppHelmValuesProcedure = "/porter.v1.ClusterControlPlaneService/AppHelmValues"
 	// ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DockerConfigFileForRegistry RPC.
 	ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure = "/porter.v1.ClusterControlPlaneService/DockerConfigFileForRegistry"
@@ -221,6 +224,8 @@ type ClusterControlPlaneServiceClient interface {
 	UpdateAppImage(context.Context, *connect.Request[v1.UpdateAppImageRequest]) (*connect.Response[v1.UpdateAppImageResponse], error)
 	// UpdateAppsLinkedToEnvGroup updates all apps that are linked to a given env group
 	UpdateAppsLinkedToEnvGroup(context.Context, *connect.Request[v1.UpdateAppsLinkedToEnvGroupRequest]) (*connect.Response[v1.UpdateAppsLinkedToEnvGroupResponse], error)
+	// AppHelmValues retrieves the raw helm values used to install an app on the cluster.
+	AppHelmValues(context.Context, *connect.Request[v1.AppHelmValuesRequest]) (*connect.Response[v1.AppHelmValuesResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -419,6 +424,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceUpdateAppsLinkedToEnvGroupProcedure,
 			opts...,
 		),
+		appHelmValues: connect.NewClient[v1.AppHelmValuesRequest, v1.AppHelmValuesResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceAppHelmValuesProcedure,
+			opts...,
+		),
 		dockerConfigFileForRegistry: connect.NewClient[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
@@ -485,6 +495,7 @@ type clusterControlPlaneServiceClient struct {
 	latestEnvGroupWithVariables    *connect.Client[v1.LatestEnvGroupWithVariablesRequest, v1.LatestEnvGroupWithVariablesResponse]
 	updateAppImage                 *connect.Client[v1.UpdateAppImageRequest, v1.UpdateAppImageResponse]
 	updateAppsLinkedToEnvGroup     *connect.Client[v1.UpdateAppsLinkedToEnvGroupRequest, v1.UpdateAppsLinkedToEnvGroupResponse]
+	appHelmValues                  *connect.Client[v1.AppHelmValuesRequest, v1.AppHelmValuesResponse]
 	dockerConfigFileForRegistry    *connect.Client[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse]
 	eCRTokenForRegistry            *connect.Client[v1.ECRTokenForRegistryRequest, v1.ECRTokenForRegistryResponse]
 	assumeRoleCredentials          *connect.Client[v1.AssumeRoleCredentialsRequest, v1.AssumeRoleCredentialsResponse]
@@ -657,6 +668,11 @@ func (c *clusterControlPlaneServiceClient) UpdateAppsLinkedToEnvGroup(ctx contex
 	return c.updateAppsLinkedToEnvGroup.CallUnary(ctx, req)
 }
 
+// AppHelmValues calls porter.v1.ClusterControlPlaneService.AppHelmValues.
+func (c *clusterControlPlaneServiceClient) AppHelmValues(ctx context.Context, req *connect.Request[v1.AppHelmValuesRequest]) (*connect.Response[v1.AppHelmValuesResponse], error) {
+	return c.appHelmValues.CallUnary(ctx, req)
+}
+
 // DockerConfigFileForRegistry calls
 // porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry.
 //
@@ -774,6 +790,8 @@ type ClusterControlPlaneServiceHandler interface {
 	UpdateAppImage(context.Context, *connect.Request[v1.UpdateAppImageRequest]) (*connect.Response[v1.UpdateAppImageResponse], error)
 	// UpdateAppsLinkedToEnvGroup updates all apps that are linked to a given env group
 	UpdateAppsLinkedToEnvGroup(context.Context, *connect.Request[v1.UpdateAppsLinkedToEnvGroupRequest]) (*connect.Response[v1.UpdateAppsLinkedToEnvGroupResponse], error)
+	// AppHelmValues retrieves the raw helm values used to install an app on the cluster.
+	AppHelmValues(context.Context, *connect.Request[v1.AppHelmValuesRequest]) (*connect.Response[v1.AppHelmValuesResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -968,6 +986,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.UpdateAppsLinkedToEnvGroup,
 		opts...,
 	)
+	clusterControlPlaneServiceAppHelmValuesHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceAppHelmValuesProcedure,
+		svc.AppHelmValues,
+		opts...,
+	)
 	clusterControlPlaneServiceDockerConfigFileForRegistryHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
 		svc.DockerConfigFileForRegistry,
@@ -1062,6 +1085,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceUpdateAppImageHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceUpdateAppsLinkedToEnvGroupProcedure:
 			clusterControlPlaneServiceUpdateAppsLinkedToEnvGroupHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceAppHelmValuesProcedure:
+			clusterControlPlaneServiceAppHelmValuesHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure:
 			clusterControlPlaneServiceDockerConfigFileForRegistryHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceECRTokenForRegistryProcedure:
@@ -1205,6 +1230,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) UpdateAppImage(context.Con
 
 func (UnimplementedClusterControlPlaneServiceHandler) UpdateAppsLinkedToEnvGroup(context.Context, *connect.Request[v1.UpdateAppsLinkedToEnvGroupRequest]) (*connect.Response[v1.UpdateAppsLinkedToEnvGroupResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.UpdateAppsLinkedToEnvGroup is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) AppHelmValues(context.Context, *connect.Request[v1.AppHelmValuesRequest]) (*connect.Response[v1.AppHelmValuesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.AppHelmValues is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) DockerConfigFileForRegistry(context.Context, *connect.Request[v1.DockerConfigFileForRegistryRequest]) (*connect.Response[v1.DockerConfigFileForRegistryResponse], error) {

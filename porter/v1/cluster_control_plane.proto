@@ -472,6 +472,21 @@ message UpdateAppsLinkedToEnvGroupRequest {
 // UpdateAppsLinkedToEnvGroupResponse is the response object for UpdateAppsLinkedToEnvGroup
 message UpdateAppsLinkedToEnvGroupResponse {}
 
+// AppHelmValuesRequest is the request object when retrieving the helm values for a given app
+message AppHelmValuesRequest {
+  int64 project_id = 1;
+  int64 app_id = 2;
+  string deployment_target_id = 3;
+  // with_defaults indicates whether to merge the default Helm values with the explicitly provided values
+  bool with_defaults = 4;
+}
+
+// AppHelmValuesResponse is the response object when retrieving the helm values for a given app
+message AppHelmValuesResponse {
+  // values is base64-encoded, stringified json of the latest helm values for the app
+  string b64_values = 1;
+}
+
 service ClusterControlPlaneService {
   // QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas
   rpc QuotaIncrease(QuotaIncreaseRequest) returns (QuotaIncreaseResponse) {}
@@ -574,6 +589,9 @@ service ClusterControlPlaneService {
 
   // UpdateAppsLinkedToEnvGroup updates all apps that are linked to a given env group
   rpc UpdateAppsLinkedToEnvGroup(UpdateAppsLinkedToEnvGroupRequest) returns (UpdateAppsLinkedToEnvGroupResponse) {}
+
+  // AppHelmValues retrieves the raw helm values used to install an app on the cluster.
+  rpc AppHelmValues(AppHelmValuesRequest) returns (AppHelmValuesResponse) {}
 
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
   // Deprecated. Use TokenForRegistry instead.
