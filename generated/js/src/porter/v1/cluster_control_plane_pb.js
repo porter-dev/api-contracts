@@ -804,6 +804,33 @@ export const UpdateAppsLinkedToEnvGroupResponse = proto3.makeMessageType(
 );
 
 /**
+ * AppHelmValuesRequest is the request object when retrieving the helm values for a given app
+ *
+ * @generated from message porter.v1.AppHelmValuesRequest
+ */
+export const AppHelmValuesRequest = proto3.makeMessageType(
+  "porter.v1.AppHelmValuesRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "app_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "with_defaults", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
+/**
+ * AppHelmValuesResponse is the response object when retrieving the helm values for a given app
+ *
+ * @generated from message porter.v1.AppHelmValuesResponse
+ */
+export const AppHelmValuesResponse = proto3.makeMessageType(
+  "porter.v1.AppHelmValuesResponse",
+  () => [
+    { no: 1, name: "values", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  * @deprecated
  */
