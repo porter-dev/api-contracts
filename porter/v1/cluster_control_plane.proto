@@ -240,6 +240,23 @@ message UpdateRevisionStatusRequest {
 
 message UpdateRevisionStatusResponse {}
 
+message RollbackRevisionRequest {
+  int64 project_id = 1;
+  // app_id is the id of the PorterApp to roll back
+  int64 app_id = 2;
+  // deployment_target_id is the id of the deployment target where the app is installed
+  string deployment_target_id = 3;
+  // app_revision_id is the id of the PorterAppRevision
+  string app_revision_id = 4;
+}
+
+message RollbackRevisionResponse {
+  // target_revision_number is the revision number of the revision that was rolled back to
+  int32 target_revision_number = 1;
+  // app_revision_id is the id of the newly created PorterAppRevision
+  string app_revision_id = 2;
+}
+
 // DeletePorterAppRequest is the request object when deleting a porter app from a given project
 message DeletePorterAppRequest {
   // project_id is the id of the project that the PorterApp belongs to
@@ -542,6 +559,9 @@ service ClusterControlPlaneService {
 
   // ApplyPorterApp applies a porter app as defined by the provided porter.yaml file to a given deployment id
   rpc ApplyPorterApp(ApplyPorterAppRequest) returns (ApplyPorterAppResponse) {}
+
+  // RollbackRevision reverts an app to the previous revision, or optionally to the revision specified
+  rpc RollbackRevision(RollbackRevisionRequest) returns (RollbackRevisionResponse) {}
 
   // UpdateRevisionStatus updates the status of a revision
   rpc UpdateRevisionStatus(UpdateRevisionStatusRequest) returns (UpdateRevisionStatusResponse) {}
