@@ -1295,6 +1295,84 @@ export declare class UpdateRevisionStatusResponse extends Message<UpdateRevision
 }
 
 /**
+ * @generated from message porter.v1.RollbackRevisionRequest
+ */
+export declare class RollbackRevisionRequest extends Message<RollbackRevisionRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * app_id is the id of the PorterApp to roll back
+   *
+   * @generated from field: int64 app_id = 2;
+   */
+  appId: bigint;
+
+  /**
+   * deployment_target_id is the id of the deployment target where the app will be installed
+   *
+   * @generated from field: string deployment_target_id = 3;
+   */
+  deploymentTargetId: string;
+
+  /**
+   * app_revision_id is the id of the PorterAppRevision
+   *
+   * @generated from field: string app_revision_id = 4;
+   */
+  appRevisionId: string;
+
+  constructor(data?: PartialMessage<RollbackRevisionRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.RollbackRevisionRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RollbackRevisionRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RollbackRevisionRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RollbackRevisionRequest;
+
+  static equals(a: RollbackRevisionRequest | PlainMessage<RollbackRevisionRequest> | undefined, b: RollbackRevisionRequest | PlainMessage<RollbackRevisionRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.RollbackRevisionResponse
+ */
+export declare class RollbackRevisionResponse extends Message<RollbackRevisionResponse> {
+  /**
+   * target_revision_number is the revision number of the revision that was rolled back to
+   *
+   * @generated from field: int32 target_revision_number = 1;
+   */
+  targetRevisionNumber: number;
+
+  /**
+   * app_revision_id is the id of the newly created PorterAppRevision
+   *
+   * @generated from field: string app_revision_id = 2;
+   */
+  appRevisionId: string;
+
+  constructor(data?: PartialMessage<RollbackRevisionResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.RollbackRevisionResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RollbackRevisionResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RollbackRevisionResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RollbackRevisionResponse;
+
+  static equals(a: RollbackRevisionResponse | PlainMessage<RollbackRevisionResponse> | undefined, b: RollbackRevisionResponse | PlainMessage<RollbackRevisionResponse> | undefined): boolean;
+}
+
+/**
  * DeletePorterAppRequest is the request object when deleting a porter app from a given project
  *
  * @generated from message porter.v1.DeletePorterAppRequest

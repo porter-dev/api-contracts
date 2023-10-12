@@ -462,6 +462,30 @@ export const UpdateRevisionStatusResponse = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message porter.v1.RollbackRevisionRequest
+ */
+export const RollbackRevisionRequest = proto3.makeMessageType(
+  "porter.v1.RollbackRevisionRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "app_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "app_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.RollbackRevisionResponse
+ */
+export const RollbackRevisionResponse = proto3.makeMessageType(
+  "porter.v1.RollbackRevisionResponse",
+  () => [
+    { no: 1, name: "target_revision_number", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 2, name: "app_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
  * DeletePorterAppRequest is the request object when deleting a porter app from a given project
  *
  * @generated from message porter.v1.DeletePorterAppRequest
