@@ -103,6 +103,7 @@ export const PreflightCheckRequest = proto3.makeMessageType(
     { no: 3, name: "cloud_provider_credentials_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "gke_preflight_values", kind: "message", T: GKEPreflightValues, oneof: "preflight_values" },
     { no: 5, name: "eks_preflight_values", kind: "message", T: EKSPreflightValues, oneof: "preflight_values" },
+    { no: 6, name: "contract", kind: "message", T: Contract },
   ],
 );
 
