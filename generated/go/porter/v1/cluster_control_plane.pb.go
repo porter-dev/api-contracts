@@ -2340,7 +2340,7 @@ type RollbackRevisionRequest struct {
 	ProjectId int64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
 	// app_id is the id of the PorterApp to roll back
 	AppId int64 `protobuf:"varint,2,opt,name=app_id,json=appId,proto3" json:"app_id,omitempty"`
-	// deployment_target_id is the id of the deployment target where the app will be installed
+	// deployment_target_id is the id of the deployment target where the app is installed
 	DeploymentTargetId string `protobuf:"bytes,3,opt,name=deployment_target_id,json=deploymentTargetId,proto3" json:"deployment_target_id,omitempty"`
 	// app_revision_id is the id of the PorterAppRevision
 	AppRevisionId string `protobuf:"bytes,4,opt,name=app_revision_id,json=appRevisionId,proto3" json:"app_revision_id,omitempty"`

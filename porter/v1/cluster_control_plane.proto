@@ -244,7 +244,7 @@ message RollbackRevisionRequest {
   int64 project_id = 1;
   // app_id is the id of the PorterApp to roll back
   int64 app_id = 2;
-  // deployment_target_id is the id of the deployment target where the app will be installed
+  // deployment_target_id is the id of the deployment target where the app is installed
   string deployment_target_id = 3;
   // app_revision_id is the id of the PorterAppRevision
   string app_revision_id = 4;

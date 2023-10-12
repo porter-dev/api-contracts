@@ -1311,7 +1311,7 @@ export declare class RollbackRevisionRequest extends Message<RollbackRevisionReq
   appId: bigint;
 
   /**
-   * deployment_target_id is the id of the deployment target where the app will be installed
+   * deployment_target_id is the id of the deployment target where the app is installed
    *
    * @generated from field: string deployment_target_id = 3;
    */
