@@ -258,22 +258,29 @@ export declare class QuotaIncreaseResponse extends Message<QuotaIncreaseResponse
  */
 export declare class PreflightCheckRequest extends Message<PreflightCheckRequest> {
   /**
-   * @generated from field: int64 project_id = 1;
+   * Deprecated: use contract instead
+   *
+   * @generated from field: int64 project_id = 1 [deprecated = true];
+   * @deprecated
    */
   projectId: bigint;
 
   /**
    * cloud_provider [REQUIRED] represents the provider that we will provisioning the cluster in
+   * Deprecated: use contract instead
    *
-   * @generated from field: porter.v1.EnumCloudProvider cloud_provider = 2;
+   * @generated from field: porter.v1.EnumCloudProvider cloud_provider = 2 [deprecated = true];
+   * @deprecated
    */
   cloudProvider: EnumCloudProvider;
 
   /**
    * cloud_provider_credentials_id [REQUIRED] is the Porter credentials that will be used for provisioning a cluster.
    * These must be stored within Porter, prior to cluster creation. For AWS this refers to the last link in an assume role chain
+   * Deprecated: use contract instead
    *
-   * @generated from field: string cloud_provider_credentials_id = 3;
+   * @generated from field: string cloud_provider_credentials_id = 3 [deprecated = true];
+   * @deprecated
    */
   cloudProviderCredentialsId: string;
 
@@ -283,20 +290,29 @@ export declare class PreflightCheckRequest extends Message<PreflightCheckRequest
   preflightValues: {
     /**
      * gke_preflight_values the values that GKE will use to perform preflight checks
+     * Deprecated: use contract instead
      *
-     * @generated from field: porter.v1.GKEPreflightValues gke_preflight_values = 4;
+     * @generated from field: porter.v1.GKEPreflightValues gke_preflight_values = 4 [deprecated = true];
+     * @deprecated
      */
     value: GKEPreflightValues;
     case: "gkePreflightValues";
   } | {
     /**
      * eks_preflight_values the values that AWS will use to perform preflight checks
+     * Deprecated: use contract instead
      *
-     * @generated from field: porter.v1.EKSPreflightValues eks_preflight_values = 5;
+     * @generated from field: porter.v1.EKSPreflightValues eks_preflight_values = 5 [deprecated = true];
+     * @deprecated
      */
     value: EKSPreflightValues;
     case: "eksPreflightValues";
   } | { case: undefined; value?: undefined };
+
+  /**
+   * @generated from field: porter.v1.Contract contract = 6;
+   */
+  contract?: Contract;
 
   constructor(data?: PartialMessage<PreflightCheckRequest>);
 

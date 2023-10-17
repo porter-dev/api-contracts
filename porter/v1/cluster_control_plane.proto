@@ -37,21 +37,27 @@ message QuotaIncreaseResponse {
 }
 
 message PreflightCheckRequest {
-  int64 project_id = 1;
+  // Deprecated: use contract instead
+  int64 project_id = 1 [deprecated = true];
   // cloud_provider [REQUIRED] represents the provider that we will provisioning the cluster in
-  EnumCloudProvider cloud_provider = 2;
+  // Deprecated: use contract instead
+  EnumCloudProvider cloud_provider = 2 [deprecated = true];
   // cloud_provider_credentials_id [REQUIRED] is the Porter credentials that will be used for provisioning a cluster.
   // These must be stored within Porter, prior to cluster creation. For AWS this refers to the last link in an assume role chain
-  string cloud_provider_credentials_id = 3;
+  // Deprecated: use contract instead
+  string cloud_provider_credentials_id = 3 [deprecated = true];
 
   oneof preflight_values {
-    //gke_preflight_values the values that GKE will use to perform preflight checks
-    GKEPreflightValues gke_preflight_values = 4;
-    //eks_preflight_values the values that AWS will use to perform preflight checks
-    EKSPreflightValues eks_preflight_values = 5;
+    // gke_preflight_values the values that GKE will use to perform preflight checks
+    // Deprecated: use contract instead
+    GKEPreflightValues gke_preflight_values = 4 [deprecated = true];
+    // eks_preflight_values the values that AWS will use to perform preflight checks
+    // Deprecated: use contract instead
+    EKSPreflightValues eks_preflight_values = 5 [deprecated = true];
 
     //AKS aks_kind = 6;
   }
+  Contract contract = 6;
 }
 
 message PreflightCheckResponse {
