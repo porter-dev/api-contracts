@@ -856,6 +856,32 @@ export const AppHelmValuesResponse = proto3.makeMessageType(
 );
 
 /**
+ * ManualServiceRunRequest is the request object for ManualServiceRun
+ *
+ * @generated from message porter.v1.ManualServiceRunRequest
+ */
+export const ManualServiceRunRequest = proto3.makeMessageType(
+  "porter.v1.ManualServiceRunRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "service_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "command", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+  ],
+);
+
+/**
+ * ManualServiceRunResponse is the response object for ManualServiceRun
+ *
+ * @generated from message porter.v1.ManualServiceRunResponse
+ */
+export const ManualServiceRunResponse = proto3.makeMessageType(
+  "porter.v1.ManualServiceRunResponse",
+  [],
+);
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  * @deprecated
  */

@@ -2400,6 +2400,75 @@ export declare class AppHelmValuesResponse extends Message<AppHelmValuesResponse
 }
 
 /**
+ * ManualServiceRunRequest is the request object for ManualServiceRun
+ *
+ * @generated from message porter.v1.ManualServiceRunRequest
+ */
+export declare class ManualServiceRunRequest extends Message<ManualServiceRunRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: string app_name = 2;
+   */
+  appName: string;
+
+  /**
+   * @generated from field: string deployment_target_id = 3;
+   */
+  deploymentTargetId: string;
+
+  /**
+   * @generated from field: string service_name = 4;
+   */
+  serviceName: string;
+
+  /**
+   * Command is the command to run on the service.  If not specified, the run command for the service will be used, as defined in the latest app revision.
+   *
+   * @generated from field: optional string command = 5;
+   */
+  command?: string;
+
+  constructor(data?: PartialMessage<ManualServiceRunRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ManualServiceRunRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ManualServiceRunRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ManualServiceRunRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ManualServiceRunRequest;
+
+  static equals(a: ManualServiceRunRequest | PlainMessage<ManualServiceRunRequest> | undefined, b: ManualServiceRunRequest | PlainMessage<ManualServiceRunRequest> | undefined): boolean;
+}
+
+/**
+ * ManualServiceRunResponse is the response object for ManualServiceRun
+ *
+ * @generated from message porter.v1.ManualServiceRunResponse
+ */
+export declare class ManualServiceRunResponse extends Message<ManualServiceRunResponse> {
+  constructor(data?: PartialMessage<ManualServiceRunResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ManualServiceRunResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ManualServiceRunResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ManualServiceRunResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ManualServiceRunResponse;
+
+  static equals(a: ManualServiceRunResponse | PlainMessage<ManualServiceRunResponse> | undefined, b: ManualServiceRunResponse | PlainMessage<ManualServiceRunResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  * @deprecated
  */

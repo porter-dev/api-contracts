@@ -133,6 +133,9 @@ const (
 	// ClusterControlPlaneServiceAppHelmValuesProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's AppHelmValues RPC.
 	ClusterControlPlaneServiceAppHelmValuesProcedure = "/porter.v1.ClusterControlPlaneService/AppHelmValues"
+	// ClusterControlPlaneServiceManualServiceRunProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's ManualServiceRun RPC.
+	ClusterControlPlaneServiceManualServiceRunProcedure = "/porter.v1.ClusterControlPlaneService/ManualServiceRun"
 	// ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DockerConfigFileForRegistry RPC.
 	ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure = "/porter.v1.ClusterControlPlaneService/DockerConfigFileForRegistry"
@@ -231,6 +234,9 @@ type ClusterControlPlaneServiceClient interface {
 	UpdateAppsLinkedToEnvGroup(context.Context, *connect.Request[v1.UpdateAppsLinkedToEnvGroupRequest]) (*connect.Response[v1.UpdateAppsLinkedToEnvGroupResponse], error)
 	// AppHelmValues retrieves the raw helm values used to install an app on the cluster.
 	AppHelmValues(context.Context, *connect.Request[v1.AppHelmValuesRequest]) (*connect.Response[v1.AppHelmValuesResponse], error)
+	// ManualServiceRun creates a pod/job with the same spec as the provided service (as defined in the latest app revision)
+	// and runs the provided command, or if no command is provided, runs the command defined for the service.
+	ManualServiceRun(context.Context, *connect.Request[v1.ManualServiceRunRequest]) (*connect.Response[v1.ManualServiceRunResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -439,6 +445,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceAppHelmValuesProcedure,
 			opts...,
 		),
+		manualServiceRun: connect.NewClient[v1.ManualServiceRunRequest, v1.ManualServiceRunResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceManualServiceRunProcedure,
+			opts...,
+		),
 		dockerConfigFileForRegistry: connect.NewClient[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
@@ -507,6 +518,7 @@ type clusterControlPlaneServiceClient struct {
 	updateAppImage                 *connect.Client[v1.UpdateAppImageRequest, v1.UpdateAppImageResponse]
 	updateAppsLinkedToEnvGroup     *connect.Client[v1.UpdateAppsLinkedToEnvGroupRequest, v1.UpdateAppsLinkedToEnvGroupResponse]
 	appHelmValues                  *connect.Client[v1.AppHelmValuesRequest, v1.AppHelmValuesResponse]
+	manualServiceRun               *connect.Client[v1.ManualServiceRunRequest, v1.ManualServiceRunResponse]
 	dockerConfigFileForRegistry    *connect.Client[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse]
 	eCRTokenForRegistry            *connect.Client[v1.ECRTokenForRegistryRequest, v1.ECRTokenForRegistryResponse]
 	assumeRoleCredentials          *connect.Client[v1.AssumeRoleCredentialsRequest, v1.AssumeRoleCredentialsResponse]
@@ -689,6 +701,11 @@ func (c *clusterControlPlaneServiceClient) AppHelmValues(ctx context.Context, re
 	return c.appHelmValues.CallUnary(ctx, req)
 }
 
+// ManualServiceRun calls porter.v1.ClusterControlPlaneService.ManualServiceRun.
+func (c *clusterControlPlaneServiceClient) ManualServiceRun(ctx context.Context, req *connect.Request[v1.ManualServiceRunRequest]) (*connect.Response[v1.ManualServiceRunResponse], error) {
+	return c.manualServiceRun.CallUnary(ctx, req)
+}
+
 // DockerConfigFileForRegistry calls
 // porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry.
 //
@@ -810,6 +827,9 @@ type ClusterControlPlaneServiceHandler interface {
 	UpdateAppsLinkedToEnvGroup(context.Context, *connect.Request[v1.UpdateAppsLinkedToEnvGroupRequest]) (*connect.Response[v1.UpdateAppsLinkedToEnvGroupResponse], error)
 	// AppHelmValues retrieves the raw helm values used to install an app on the cluster.
 	AppHelmValues(context.Context, *connect.Request[v1.AppHelmValuesRequest]) (*connect.Response[v1.AppHelmValuesResponse], error)
+	// ManualServiceRun creates a pod/job with the same spec as the provided service (as defined in the latest app revision)
+	// and runs the provided command, or if no command is provided, runs the command defined for the service.
+	ManualServiceRun(context.Context, *connect.Request[v1.ManualServiceRunRequest]) (*connect.Response[v1.ManualServiceRunResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -1014,6 +1034,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.AppHelmValues,
 		opts...,
 	)
+	clusterControlPlaneServiceManualServiceRunHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceManualServiceRunProcedure,
+		svc.ManualServiceRun,
+		opts...,
+	)
 	clusterControlPlaneServiceDockerConfigFileForRegistryHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
 		svc.DockerConfigFileForRegistry,
@@ -1112,6 +1137,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceUpdateAppsLinkedToEnvGroupHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceAppHelmValuesProcedure:
 			clusterControlPlaneServiceAppHelmValuesHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceManualServiceRunProcedure:
+			clusterControlPlaneServiceManualServiceRunHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure:
 			clusterControlPlaneServiceDockerConfigFileForRegistryHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceECRTokenForRegistryProcedure:
@@ -1263,6 +1290,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) UpdateAppsLinkedToEnvGroup
 
 func (UnimplementedClusterControlPlaneServiceHandler) AppHelmValues(context.Context, *connect.Request[v1.AppHelmValuesRequest]) (*connect.Response[v1.AppHelmValuesResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.AppHelmValues is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) ManualServiceRun(context.Context, *connect.Request[v1.ManualServiceRunRequest]) (*connect.Response[v1.ManualServiceRunResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ManualServiceRun is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) DockerConfigFileForRegistry(context.Context, *connect.Request[v1.DockerConfigFileForRegistryRequest]) (*connect.Response[v1.DockerConfigFileForRegistryResponse], error) {

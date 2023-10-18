@@ -510,6 +510,19 @@ message AppHelmValuesResponse {
   string b64_values = 1;
 }
 
+// ManualServiceRunRequest is the request object for ManualServiceRun
+message ManualServiceRunRequest {
+  int64 project_id = 1;
+  string app_name = 2;
+  string deployment_target_id = 3;
+  string service_name = 4;
+  // Command is the command to run on the service.  If not specified, the run command for the service will be used, as defined in the latest app revision.
+  optional string command = 5;
+}
+
+// ManualServiceRunResponse is the response object for ManualServiceRun
+message ManualServiceRunResponse {}
+
 service ClusterControlPlaneService {
   // QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas
   rpc QuotaIncrease(QuotaIncreaseRequest) returns (QuotaIncreaseResponse) {}
@@ -618,6 +631,10 @@ service ClusterControlPlaneService {
 
   // AppHelmValues retrieves the raw helm values used to install an app on the cluster.
   rpc AppHelmValues(AppHelmValuesRequest) returns (AppHelmValuesResponse) {}
+
+  // ManualServiceRun creates a pod/job with the same spec as the provided service (as defined in the latest app revision)
+  // and runs the provided command, or if no command is provided, runs the command defined for the service.
+  rpc ManualServiceRun(ManualServiceRunRequest) returns (ManualServiceRunResponse) {}
 
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
   // Deprecated. Use TokenForRegistry instead.
