@@ -22,6 +22,7 @@ export const PorterApp = proto3.makeMessageType(
     { no: 6, name: "image", kind: "message", T: AppImage },
     { no: 7, name: "env_groups", kind: "message", T: EnvGroup, repeated: true },
     { no: 8, name: "helm_overrides", kind: "message", T: HelmOverrides },
+    { no: 9, name: "service_list", kind: "message", T: Service, repeated: true },
   ],
 );
 

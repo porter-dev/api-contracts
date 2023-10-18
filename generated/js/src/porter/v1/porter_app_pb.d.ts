@@ -23,7 +23,8 @@ export declare class PorterApp extends Message<PorterApp> {
   /**
    * services is a map of service names to service configurations
    *
-   * @generated from field: map<string, porter.v1.Service> services = 2;
+   * @generated from field: map<string, porter.v1.Service> services = 2 [deprecated = true];
+   * @deprecated
    */
   services: { [key: string]: Service };
 
@@ -69,6 +70,13 @@ export declare class PorterApp extends Message<PorterApp> {
    * @generated from field: porter.v1.HelmOverrides helm_overrides = 8;
    */
   helmOverrides?: HelmOverrides;
+
+  /**
+   * service_list is a list of service configurations
+   *
+   * @generated from field: repeated porter.v1.Service service_list = 9;
+   */
+  serviceList: Service[];
 
   constructor(data?: PartialMessage<PorterApp>);
 

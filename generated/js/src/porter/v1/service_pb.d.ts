@@ -135,6 +135,13 @@ export declare class Service extends Message<Service> {
    */
   gpuCoresNvidia: number;
 
+  /**
+   * name is the user-defined name for the service
+   *
+   * @generated from field: string name = 14;
+   */
+  name: string;
+
   constructor(data?: PartialMessage<Service>);
 
   static readonly runtime: typeof proto3;
