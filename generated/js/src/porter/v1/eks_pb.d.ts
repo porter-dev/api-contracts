@@ -375,3 +375,31 @@ export declare class EKSPreflightValues extends Message<EKSPreflightValues> {
   static equals(a: EKSPreflightValues | PlainMessage<EKSPreflightValues> | undefined, b: EKSPreflightValues | PlainMessage<EKSPreflightValues> | undefined): boolean;
 }
 
+/**
+ * AWSVpc contains all the properties representing an AWS VPC
+ *
+ * @generated from message porter.v1.AWSVpc
+ */
+export declare class AWSVpc extends Message<AWSVpc> {
+  /**
+   * id is a unique vpc identifier for an AWS VPC and can be used to reference the VPC in api calls
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  constructor(data?: PartialMessage<AWSVpc>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AWSVpc";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AWSVpc;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AWSVpc;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AWSVpc;
+
+  static equals(a: AWSVpc | PlainMessage<AWSVpc> | undefined, b: AWSVpc | PlainMessage<AWSVpc> | undefined): boolean;
+}
+

@@ -136,6 +136,9 @@ const (
 	// ClusterControlPlaneServiceManualServiceRunProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's ManualServiceRun RPC.
 	ClusterControlPlaneServiceManualServiceRunProcedure = "/porter.v1.ClusterControlPlaneService/ManualServiceRun"
+	// ClusterControlPlaneServiceClusterNetworkSettingsProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's ClusterNetworkSettings RPC.
+	ClusterControlPlaneServiceClusterNetworkSettingsProcedure = "/porter.v1.ClusterControlPlaneService/ClusterNetworkSettings"
 	// ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DockerConfigFileForRegistry RPC.
 	ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure = "/porter.v1.ClusterControlPlaneService/DockerConfigFileForRegistry"
@@ -237,6 +240,8 @@ type ClusterControlPlaneServiceClient interface {
 	// ManualServiceRun creates a pod/job with the same spec as the provided service (as defined in the latest app revision)
 	// and runs the provided command, or if no command is provided, runs the command defined for the service.
 	ManualServiceRun(context.Context, *connect.Request[v1.ManualServiceRunRequest]) (*connect.Response[v1.ManualServiceRunResponse], error)
+	// ClusterNetworkSettings gets the network settings (region, subnets, vpc) for a given project/cluster combination
+	ClusterNetworkSettings(context.Context, *connect.Request[v1.ClusterNetworkSettingsRequest]) (*connect.Response[v1.ClusterNetworkSettingsResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -450,6 +455,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceManualServiceRunProcedure,
 			opts...,
 		),
+		clusterNetworkSettings: connect.NewClient[v1.ClusterNetworkSettingsRequest, v1.ClusterNetworkSettingsResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceClusterNetworkSettingsProcedure,
+			opts...,
+		),
 		dockerConfigFileForRegistry: connect.NewClient[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
@@ -519,6 +529,7 @@ type clusterControlPlaneServiceClient struct {
 	updateAppsLinkedToEnvGroup     *connect.Client[v1.UpdateAppsLinkedToEnvGroupRequest, v1.UpdateAppsLinkedToEnvGroupResponse]
 	appHelmValues                  *connect.Client[v1.AppHelmValuesRequest, v1.AppHelmValuesResponse]
 	manualServiceRun               *connect.Client[v1.ManualServiceRunRequest, v1.ManualServiceRunResponse]
+	clusterNetworkSettings         *connect.Client[v1.ClusterNetworkSettingsRequest, v1.ClusterNetworkSettingsResponse]
 	dockerConfigFileForRegistry    *connect.Client[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse]
 	eCRTokenForRegistry            *connect.Client[v1.ECRTokenForRegistryRequest, v1.ECRTokenForRegistryResponse]
 	assumeRoleCredentials          *connect.Client[v1.AssumeRoleCredentialsRequest, v1.AssumeRoleCredentialsResponse]
@@ -706,6 +717,11 @@ func (c *clusterControlPlaneServiceClient) ManualServiceRun(ctx context.Context,
 	return c.manualServiceRun.CallUnary(ctx, req)
 }
 
+// ClusterNetworkSettings calls porter.v1.ClusterControlPlaneService.ClusterNetworkSettings.
+func (c *clusterControlPlaneServiceClient) ClusterNetworkSettings(ctx context.Context, req *connect.Request[v1.ClusterNetworkSettingsRequest]) (*connect.Response[v1.ClusterNetworkSettingsResponse], error) {
+	return c.clusterNetworkSettings.CallUnary(ctx, req)
+}
+
 // DockerConfigFileForRegistry calls
 // porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry.
 //
@@ -830,6 +846,8 @@ type ClusterControlPlaneServiceHandler interface {
 	// ManualServiceRun creates a pod/job with the same spec as the provided service (as defined in the latest app revision)
 	// and runs the provided command, or if no command is provided, runs the command defined for the service.
 	ManualServiceRun(context.Context, *connect.Request[v1.ManualServiceRunRequest]) (*connect.Response[v1.ManualServiceRunResponse], error)
+	// ClusterNetworkSettings gets the network settings (region, subnets, vpc) for a given project/cluster combination
+	ClusterNetworkSettings(context.Context, *connect.Request[v1.ClusterNetworkSettingsRequest]) (*connect.Response[v1.ClusterNetworkSettingsResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -1039,6 +1057,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.ManualServiceRun,
 		opts...,
 	)
+	clusterControlPlaneServiceClusterNetworkSettingsHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceClusterNetworkSettingsProcedure,
+		svc.ClusterNetworkSettings,
+		opts...,
+	)
 	clusterControlPlaneServiceDockerConfigFileForRegistryHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
 		svc.DockerConfigFileForRegistry,
@@ -1139,6 +1162,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceAppHelmValuesHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceManualServiceRunProcedure:
 			clusterControlPlaneServiceManualServiceRunHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceClusterNetworkSettingsProcedure:
+			clusterControlPlaneServiceClusterNetworkSettingsHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure:
 			clusterControlPlaneServiceDockerConfigFileForRegistryHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceECRTokenForRegistryProcedure:
@@ -1294,6 +1319,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) AppHelmValues(context.Cont
 
 func (UnimplementedClusterControlPlaneServiceHandler) ManualServiceRun(context.Context, *connect.Request[v1.ManualServiceRunRequest]) (*connect.Response[v1.ManualServiceRunResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ManualServiceRun is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) ClusterNetworkSettings(context.Context, *connect.Request[v1.ClusterNetworkSettingsRequest]) (*connect.Response[v1.ClusterNetworkSettingsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ClusterNetworkSettings is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) DockerConfigFileForRegistry(context.Context, *connect.Request[v1.DockerConfigFileForRegistryRequest]) (*connect.Response[v1.DockerConfigFileForRegistryResponse], error) {

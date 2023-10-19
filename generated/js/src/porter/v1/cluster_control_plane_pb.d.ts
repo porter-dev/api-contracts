@@ -7,7 +7,7 @@ import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialM
 import { Message, proto3 } from "@bufbuild/protobuf";
 import type { EnumCloudProvider } from "./cluster_pb.js";
 import type { GKEPreflightValues } from "./gke_pb.js";
-import type { EKSPreflightValues } from "./eks_pb.js";
+import type { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import type { Error } from "./errors_pb.js";
 import type { Contract, ContractRevision } from "./contract_pb.js";
 import type { Deletions, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
@@ -2811,5 +2811,93 @@ export declare class DockerConfigFileForRegistryResponse extends Message<DockerC
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DockerConfigFileForRegistryResponse;
 
   static equals(a: DockerConfigFileForRegistryResponse | PlainMessage<DockerConfigFileForRegistryResponse> | undefined, b: DockerConfigFileForRegistryResponse | PlainMessage<DockerConfigFileForRegistryResponse> | undefined): boolean;
+}
+
+/**
+ * ClusterNetworkSettingsRequest is the request object for fetching cloud provider network settings for a cluster
+ *
+ * @generated from message porter.v1.ClusterNetworkSettingsRequest
+ */
+export declare class ClusterNetworkSettingsRequest extends Message<ClusterNetworkSettingsRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  constructor(data?: PartialMessage<ClusterNetworkSettingsRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ClusterNetworkSettingsRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ClusterNetworkSettingsRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ClusterNetworkSettingsRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ClusterNetworkSettingsRequest;
+
+  static equals(a: ClusterNetworkSettingsRequest | PlainMessage<ClusterNetworkSettingsRequest> | undefined, b: ClusterNetworkSettingsRequest | PlainMessage<ClusterNetworkSettingsRequest> | undefined): boolean;
+}
+
+/**
+ * ClusterNetworkSettingsResponse is the response object containing cloud provider network settings for a cluster
+ *
+ * @generated from message porter.v1.ClusterNetworkSettingsResponse
+ */
+export declare class ClusterNetworkSettingsResponse extends Message<ClusterNetworkSettingsResponse> {
+  /**
+   * region is the cloud provider region in which the cluster is located
+   *
+   * @generated from field: string region = 1;
+   */
+  region: string;
+
+  /**
+   * subnet_ids contains a string list of cloud provider subnets associated with the cluster
+   *
+   * @generated from field: repeated string subnet_ids = 2;
+   */
+  subnetIds: string[];
+
+  /**
+   * cloud_provider the given cloud provider for the cluster being queried
+   *
+   * @generated from field: porter.v1.EnumCloudProvider cloud_provider = 3;
+   */
+  cloudProvider: EnumCloudProvider;
+
+  /**
+   * cloud_provider_network contains the relevant cluster network config for the cloud provider on which the cluster exists
+   *
+   * @generated from oneof porter.v1.ClusterNetworkSettingsResponse.cloud_provider_network
+   */
+  cloudProviderNetwork: {
+    /**
+     * eks_cloud_provider_network is the aws vpc for the cluster
+     *
+     * @generated from field: porter.v1.AWSVpc eks_cloud_provider_network = 4;
+     */
+    value: AWSVpc;
+    case: "eksCloudProviderNetwork";
+  } | { case: undefined; value?: undefined };
+
+  constructor(data?: PartialMessage<ClusterNetworkSettingsResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ClusterNetworkSettingsResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ClusterNetworkSettingsResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ClusterNetworkSettingsResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ClusterNetworkSettingsResponse;
+
+  static equals(a: ClusterNetworkSettingsResponse | PlainMessage<ClusterNetworkSettingsResponse> | undefined, b: ClusterNetworkSettingsResponse | PlainMessage<ClusterNetworkSettingsResponse> | undefined): boolean;
 }
 
