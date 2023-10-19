@@ -125,3 +125,15 @@ export const EKSPreflightValues = proto3.makeMessageType(
   ],
 );
 
+/**
+ * AWSVpc contains all the properties representing an AWS VPC
+ *
+ * @generated from message porter.v1.AWSVpc
+ */
+export const AWSVpc = proto3.makeMessageType(
+  "porter.v1.AWSVpc",
+  () => [
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+

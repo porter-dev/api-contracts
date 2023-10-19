@@ -91,3 +91,9 @@ message EKSPreflightValues {
   //region the region to perform the preflight checks in
   string region = 1;
 }
+
+//AWSVpc contains all the properties representing an AWS VPC
+message AWSVpc {
+  //id is a unique vpc identifier for an AWS VPC and can be used to reference the VPC in api calls
+  string id = 1;
+}

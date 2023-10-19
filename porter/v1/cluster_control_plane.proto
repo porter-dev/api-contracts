@@ -636,6 +636,9 @@ service ClusterControlPlaneService {
   // and runs the provided command, or if no command is provided, runs the command defined for the service.
   rpc ManualServiceRun(ManualServiceRunRequest) returns (ManualServiceRunResponse) {}
 
+  // ClusterNetworkSettings gets the network settings (region, subnets, vpc) for a given project/cluster combination
+  rpc ClusterNetworkSettings(ClusterNetworkSettingsRequest) returns (ClusterNetworkSettingsResponse) {}
+
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
   // Deprecated. Use TokenForRegistry instead.
   rpc DockerConfigFileForRegistry(DockerConfigFileForRegistryRequest) returns (DockerConfigFileForRegistryResponse) {
@@ -741,4 +744,25 @@ message DockerConfigFileForRegistryRequest {
 message DockerConfigFileForRegistryResponse {
   option deprecated = true;
   bytes docker_config_file = 1;
+}
+
+// ClusterNetworkSettingsRequest is the request object for fetching cloud provider network settings for a cluster
+message ClusterNetworkSettingsRequest {
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+}
+
+//ClusterNetworkSettingsResponse is the response object containing cloud provider network settings for a cluster
+message ClusterNetworkSettingsResponse {
+  //region is the cloud provider region in which the cluster is located
+  string region = 1;
+  //subnet_ids contains a string list of cloud provider subnets associated with the cluster
+  repeated string subnet_ids = 2;
+  //cloud_provider the given cloud provider for the cluster being queried
+  EnumCloudProvider cloud_provider = 3;
+  //cloud_provider_network contains the relevant cluster network config for the cloud provider on which the cluster exists
+  oneof cloud_provider_network {
+    //eks_cloud_provider_network is the aws vpc for the cluster
+    AWSVpc eks_cloud_provider_network = 4;
+  }
 }

@@ -6,7 +6,7 @@
 import { proto3, Timestamp } from "@bufbuild/protobuf";
 import { EnumCloudProvider } from "./cluster_pb.js";
 import { GKEPreflightValues } from "./gke_pb.js";
-import { EKSPreflightValues } from "./eks_pb.js";
+import { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import { Error } from "./errors_pb.js";
 import { Contract, ContractRevision } from "./contract_pb.js";
 import { Deletions, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
@@ -1019,6 +1019,34 @@ export const DockerConfigFileForRegistryResponse = proto3.makeMessageType(
   "porter.v1.DockerConfigFileForRegistryResponse",
   () => [
     { no: 1, name: "docker_config_file", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+  ],
+);
+
+/**
+ * ClusterNetworkSettingsRequest is the request object for fetching cloud provider network settings for a cluster
+ *
+ * @generated from message porter.v1.ClusterNetworkSettingsRequest
+ */
+export const ClusterNetworkSettingsRequest = proto3.makeMessageType(
+  "porter.v1.ClusterNetworkSettingsRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * ClusterNetworkSettingsResponse is the response object containing cloud provider network settings for a cluster
+ *
+ * @generated from message porter.v1.ClusterNetworkSettingsResponse
+ */
+export const ClusterNetworkSettingsResponse = proto3.makeMessageType(
+  "porter.v1.ClusterNetworkSettingsResponse",
+  () => [
+    { no: 1, name: "region", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "subnet_ids", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 3, name: "cloud_provider", kind: "enum", T: proto3.getEnumType(EnumCloudProvider) },
+    { no: 4, name: "eks_cloud_provider_network", kind: "message", T: AWSVpc, oneof: "cloud_provider_network" },
   ],
 );
 
