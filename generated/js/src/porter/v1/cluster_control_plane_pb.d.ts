@@ -2010,6 +2010,86 @@ export declare class DeploymentTargetDetailsResponse extends Message<DeploymentT
 }
 
 /**
+ * CreateDeploymentTargetRequest is the request object for CreateDeploymentTarget
+ *
+ * @generated from message porter.v1.CreateDeploymentTargetRequest
+ */
+export declare class CreateDeploymentTargetRequest extends Message<CreateDeploymentTargetRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * name is the name of the deployment target
+   *
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * namespace is the namespace that the deployment target points to
+   *
+   * @generated from field: string namespace = 3;
+   */
+  namespace: string;
+
+  /**
+   * cluster_id is the id of the cluster that the deployment target points to
+   *
+   * @generated from field: int64 cluster_id = 4;
+   */
+  clusterId: bigint;
+
+  /**
+   * is_preview indicates whether this is a preview deployment target or not
+   *
+   * @generated from field: bool is_preview = 5;
+   */
+  isPreview: boolean;
+
+  constructor(data?: PartialMessage<CreateDeploymentTargetRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CreateDeploymentTargetRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateDeploymentTargetRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateDeploymentTargetRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateDeploymentTargetRequest;
+
+  static equals(a: CreateDeploymentTargetRequest | PlainMessage<CreateDeploymentTargetRequest> | undefined, b: CreateDeploymentTargetRequest | PlainMessage<CreateDeploymentTargetRequest> | undefined): boolean;
+}
+
+/**
+ * CreateDeploymentTargetResponse is the response object for CreateDeploymentTarget
+ *
+ * @generated from message porter.v1.CreateDeploymentTargetResponse
+ */
+export declare class CreateDeploymentTargetResponse extends Message<CreateDeploymentTargetResponse> {
+  /**
+   * @generated from field: string deployment_target_id = 1;
+   */
+  deploymentTargetId: string;
+
+  constructor(data?: PartialMessage<CreateDeploymentTargetResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CreateDeploymentTargetResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateDeploymentTargetResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateDeploymentTargetResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateDeploymentTargetResponse;
+
+  static equals(a: CreateDeploymentTargetResponse | PlainMessage<CreateDeploymentTargetResponse> | undefined, b: CreateDeploymentTargetResponse | PlainMessage<CreateDeploymentTargetResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.SeedAppRevisionsRequest
  */
 export declare class SeedAppRevisionsRequest extends Message<SeedAppRevisionsRequest> {
