@@ -1131,6 +1131,13 @@ export declare class ValidatePorterAppRequest extends Message<ValidatePorterAppR
    */
   appOverrides?: PorterApp;
 
+  /**
+   * base_deployment_target_id is used to find a revision of the app in the base deployment target, which hydrates the preview app template
+   *
+   * @generated from field: string base_deployment_target_id = 7;
+   */
+  baseDeploymentTargetId: string;
+
   constructor(data?: PartialMessage<ValidatePorterAppRequest>);
 
   static readonly runtime: typeof proto3;

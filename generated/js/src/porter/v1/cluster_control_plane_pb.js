@@ -404,6 +404,7 @@ export const ValidatePorterAppRequest = proto3.makeMessageType(
     { no: 4, name: "app", kind: "message", T: PorterApp },
     { no: 5, name: "deletions", kind: "message", T: Deletions },
     { no: 6, name: "app_overrides", kind: "message", T: PorterApp },
+    { no: 7, name: "base_deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
