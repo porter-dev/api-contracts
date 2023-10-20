@@ -1132,7 +1132,7 @@ export declare class ValidatePorterAppRequest extends Message<ValidatePorterAppR
   appOverrides?: PorterApp;
 
   /**
-   * base_deployment_target_id is the id of the deployment target which new deployments of the app will be based on
+   * base_deployment_target_id is used to find a revision of the app in the base deployment target, which hydrates the preview app template
    *
    * @generated from field: string base_deployment_target_id = 7;
    */

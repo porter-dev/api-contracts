@@ -1995,7 +1995,7 @@ type ValidatePorterAppRequest struct {
 	Deletions *Deletions `protobuf:"bytes,5,opt,name=deletions,proto3" json:"deletions,omitempty"`
 	// app_overrides contains environment specific overrides if they exist, applied depending on the deployment target
 	AppOverrides *PorterApp `protobuf:"bytes,6,opt,name=app_overrides,json=appOverrides,proto3" json:"app_overrides,omitempty"`
-	// base_deployment_target_id is the id of the deployment target which new deployments of the app will be based on
+	// base_deployment_target_id is used to find a revision of the app in the base deployment target, which hydrates the preview app template
 	BaseDeploymentTargetId string `protobuf:"bytes,7,opt,name=base_deployment_target_id,json=baseDeploymentTargetId,proto3" json:"base_deployment_target_id,omitempty"`
 }
 
