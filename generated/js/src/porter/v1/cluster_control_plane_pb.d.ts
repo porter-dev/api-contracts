@@ -1131,6 +1131,13 @@ export declare class ValidatePorterAppRequest extends Message<ValidatePorterAppR
    */
   appOverrides?: PorterApp;
 
+  /**
+   * base_deployment_target_id is the id of the deployment target which new deployments of the app will be based on
+   *
+   * @generated from field: string base_deployment_target_id = 7;
+   */
+  baseDeploymentTargetId: string;
+
   constructor(data?: PartialMessage<ValidatePorterAppRequest>);
 
   static readonly runtime: typeof proto3;

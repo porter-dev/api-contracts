@@ -212,6 +212,8 @@ message ValidatePorterAppRequest {
   Deletions deletions = 5;
   // app_overrides contains environment specific overrides if they exist, applied depending on the deployment target
   PorterApp app_overrides = 6;
+  // base_deployment_target_id is the id of the deployment target which new deployments of the app will be based on
+  string base_deployment_target_id = 7;
 }
 
 message ValidatePorterAppResponse {
