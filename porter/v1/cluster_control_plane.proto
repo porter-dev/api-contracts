@@ -417,6 +417,24 @@ message DeploymentTargetDetailsResponse {
   bool is_preview = 3;
 }
 
+// CreateDeploymentTargetRequest is the request object for CreateDeploymentTarget
+message CreateDeploymentTargetRequest {
+  int64 project_id = 1;
+  // name is the name of the deployment target
+  string name = 2;
+  // namespace is the namespace that the deployment target points to
+  string namespace = 3;
+  // cluster_id is the id of the cluster that the deployment target points to
+  int64 cluster_id = 4;
+  // is_preview indicates whether this is a preview deployment target or not
+  bool is_preview = 5;
+}
+
+// CreateDeploymentTargetResponse is the response object for CreateDeploymentTarget
+message CreateDeploymentTargetResponse {
+  string deployment_target_id = 1;
+}
+
 enum EnumCLIAction {
   ENUM_CLI_ACTION_UNSPECIFIED = 0;
   // ENUM_CLI_ACTION_NONE signals the CLI to do nothing after applying the PorterApp.
@@ -614,6 +632,10 @@ service ClusterControlPlaneService {
   // logic to CCP and should only be used to support metrics and logging (and confirming cluster RBAC). This will fail once
   // we start using deployment targets that do not have a selector kind of "namespace"
   rpc DeploymentTargetDetails(DeploymentTargetDetailsRequest) returns (DeploymentTargetDetailsResponse) {}
+
+  // CreateDeploymentTarget creates a new deployment target for a given cluster, returning the deployment target id. If a deployment target with the same name already exists with
+  // the same namespace, cluster and preview status, the existing deployment target ID will be returned. Otherwise, an error will be returned.
+  rpc CreateDeploymentTarget(CreateDeploymentTargetRequest) returns (CreateDeploymentTargetResponse) {}
 
   // SeedAppRevision seeds app revisions for a given project id, cluster id, release name, namespace.  It should only be called
   // from the Cluster Control Plane CLI and should be removed once all legacy users are migrated to the new apply validate.
