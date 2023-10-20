@@ -706,6 +706,34 @@ export const DeploymentTargetDetailsResponse = proto3.makeMessageType(
 );
 
 /**
+ * CreateDeploymentTargetRequest is the request object for CreateDeploymentTarget
+ *
+ * @generated from message porter.v1.CreateDeploymentTargetRequest
+ */
+export const CreateDeploymentTargetRequest = proto3.makeMessageType(
+  "porter.v1.CreateDeploymentTargetRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "namespace", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 5, name: "is_preview", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
+/**
+ * CreateDeploymentTargetResponse is the response object for CreateDeploymentTarget
+ *
+ * @generated from message porter.v1.CreateDeploymentTargetResponse
+ */
+export const CreateDeploymentTargetResponse = proto3.makeMessageType(
+  "porter.v1.CreateDeploymentTargetResponse",
+  () => [
+    { no: 1, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
  * @generated from message porter.v1.SeedAppRevisionsRequest
  */
 export const SeedAppRevisionsRequest = proto3.makeMessageType(
