@@ -230,6 +230,10 @@ message ApplyPorterAppRequest {
   string porter_app_revision_id = 4;
   // force_build is a flag that forces the app to rebuild, regardless of the existing tag. This is used on initial apply by the CLI.
   bool force_build = 5;
+  // app_env is the current set of environment variables for the upcoming app revision
+  EnvGroupVariables app_env = 6;
+  // env_hard_update is a flag that indicates whether the app environment should be fully overwritten, or if the new app env variables should be merged with the existing
+  bool env_hard_update = 7;
 }
 
 message ApplyPorterAppResponse {
