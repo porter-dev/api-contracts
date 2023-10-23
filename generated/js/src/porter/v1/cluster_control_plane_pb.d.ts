@@ -1222,11 +1222,11 @@ export declare class ApplyPorterAppRequest extends Message<ApplyPorterAppRequest
   appEnv?: EnvGroupVariables;
 
   /**
-   * env_hard_update is a flag that indicates whether the app environment should be fully overwritten, or if the new app env variables should be merged with the existing
+   * is_hard_env_update is a flag that indicates whether the app environment should be fully overwritten, or if the new app env variables should be merged with the existing
    *
-   * @generated from field: bool env_hard_update = 7;
+   * @generated from field: bool is_hard_env_update = 7;
    */
-  envHardUpdate: boolean;
+  isHardEnvUpdate: boolean;
 
   constructor(data?: PartialMessage<ApplyPorterAppRequest>);
 
