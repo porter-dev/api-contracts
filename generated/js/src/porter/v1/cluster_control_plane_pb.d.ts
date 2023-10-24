@@ -1703,14 +1703,14 @@ export declare class AppRevisionMetadata extends Message<AppRevisionMetadata> {
   /**
    * id is the id of the revision
    *
-   * @generated from field: string id = 6;
+   * @generated from field: string id = 1;
    */
   id: string;
 
   /**
    * project_id is the id of the project that the revision belongs to
    *
-   * @generated from field: int64 project_id = 8;
+   * @generated from field: int64 project_id = 2;
    */
   projectId: bigint;
 
