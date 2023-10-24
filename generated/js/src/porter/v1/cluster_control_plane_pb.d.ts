@@ -1694,6 +1694,42 @@ export declare class AppRevision extends Message<AppRevision> {
 }
 
 /**
+ * AppRevisionMetadata is the metadata for a given app revision. It is a lightweight version of the AppRevision object
+ * used to send messages via nats
+ *
+ * @generated from message porter.v1.AppRevisionMetadata
+ */
+export declare class AppRevisionMetadata extends Message<AppRevisionMetadata> {
+  /**
+   * project_id is the id of the project that the revision belongs to
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * id is the id of the revision
+   *
+   * @generated from field: string id = 2;
+   */
+  id: string;
+
+  constructor(data?: PartialMessage<AppRevisionMetadata>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AppRevisionMetadata";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AppRevisionMetadata;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AppRevisionMetadata;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AppRevisionMetadata;
+
+  static equals(a: AppRevisionMetadata | PlainMessage<AppRevisionMetadata> | undefined, b: AppRevisionMetadata | PlainMessage<AppRevisionMetadata> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.CurrentAppRevisionResponse
  */
 export declare class CurrentAppRevisionResponse extends Message<CurrentAppRevisionResponse> {

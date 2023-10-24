@@ -330,6 +330,15 @@ message AppRevision {
   string deployment_target_id = 7;
 }
 
+// AppRevisionMetadata is the metadata for a given app revision. It is a lightweight version of the AppRevision object
+// used to send messages via nats
+message AppRevisionMetadata {
+  // project_id is the id of the project that the revision belongs to
+  int64 project_id = 1;
+  // id is the id of the revision
+  string id = 2;
+}
+
 message CurrentAppRevisionResponse {
   // revision is the currently deployed app revision for a given porter_app and deployment_target
   AppRevision app_revision = 1;

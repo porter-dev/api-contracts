@@ -590,6 +590,20 @@ export const AppRevision = proto3.makeMessageType(
 );
 
 /**
+ * AppRevisionMetadata is the metadata for a given app revision. It is a lightweight version of the AppRevision object
+ * used to send messages via nats
+ *
+ * @generated from message porter.v1.AppRevisionMetadata
+ */
+export const AppRevisionMetadata = proto3.makeMessageType(
+  "porter.v1.AppRevisionMetadata",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
  * @generated from message porter.v1.CurrentAppRevisionResponse
  */
 export const CurrentAppRevisionResponse = proto3.makeMessageType(
