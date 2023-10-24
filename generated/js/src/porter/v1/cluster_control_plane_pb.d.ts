@@ -1678,6 +1678,13 @@ export declare class AppRevision extends Message<AppRevision> {
    */
   deploymentTargetId: string;
 
+  /**
+   * project_id is the id of the project that the revision belongs to
+   *
+   * @generated from field: int64 project_id = 8;
+   */
+  projectId: bigint;
+
   constructor(data?: PartialMessage<AppRevision>);
 
   static readonly runtime: typeof proto3;
