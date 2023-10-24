@@ -446,6 +446,30 @@ export const ApplyPorterAppResponse = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message porter.v1.UpdateAppRequest
+ */
+export const UpdateAppRequest = proto3.makeMessageType(
+  "porter.v1.UpdateAppRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "app", kind: "message", T: PorterApp },
+    { no: 6, name: "app_env", kind: "message", T: EnvGroupVariables },
+    { no: 7, name: "is_hard_env_update", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.UpdateAppResponse
+ */
+export const UpdateAppResponse = proto3.makeMessageType(
+  "porter.v1.UpdateAppResponse",
+  () => [
+    { no: 1, name: "app_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
  * @generated from message porter.v1.UpdateRevisionStatusRequest
  */
 export const UpdateRevisionStatusRequest = proto3.makeMessageType(

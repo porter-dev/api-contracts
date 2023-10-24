@@ -1275,6 +1275,84 @@ export declare class ApplyPorterAppResponse extends Message<ApplyPorterAppRespon
 }
 
 /**
+ * @generated from message porter.v1.UpdateAppRequest
+ */
+export declare class UpdateAppRequest extends Message<UpdateAppRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * deployment_target_id is the id of the deployment target where the app will be installed
+   *
+   * @generated from field: string deployment_target_id = 2;
+   */
+  deploymentTargetId: string;
+
+  /**
+   * app is the (potentially partial) definition of the PorterApp to be applied
+   *
+   * @generated from field: porter.v1.PorterApp app = 3;
+   */
+  app?: PorterApp;
+
+  /**
+   * app_env is the current set of environment variables for the upcoming app revision
+   *
+   * @generated from field: porter.v1.EnvGroupVariables app_env = 6;
+   */
+  appEnv?: EnvGroupVariables;
+
+  /**
+   * is_hard_env_update is a flag that indicates whether the app environment should be fully overwritten, or if the new app env variables should be merged with the existing
+   *
+   * @generated from field: bool is_hard_env_update = 7;
+   */
+  isHardEnvUpdate: boolean;
+
+  constructor(data?: PartialMessage<UpdateAppRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateAppRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateAppRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateAppRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateAppRequest;
+
+  static equals(a: UpdateAppRequest | PlainMessage<UpdateAppRequest> | undefined, b: UpdateAppRequest | PlainMessage<UpdateAppRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.UpdateAppResponse
+ */
+export declare class UpdateAppResponse extends Message<UpdateAppResponse> {
+  /**
+   * app_revision_id is the id of the PorterAppRevision that was updated
+   *
+   * @generated from field: string app_revision_id = 1;
+   */
+  appRevisionId: string;
+
+  constructor(data?: PartialMessage<UpdateAppResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateAppResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateAppResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateAppResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateAppResponse;
+
+  static equals(a: UpdateAppResponse | PlainMessage<UpdateAppResponse> | undefined, b: UpdateAppResponse | PlainMessage<UpdateAppResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.UpdateRevisionStatusRequest
  */
 export declare class UpdateRevisionStatusRequest extends Message<UpdateRevisionStatusRequest> {

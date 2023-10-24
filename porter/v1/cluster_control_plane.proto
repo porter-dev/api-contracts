@@ -242,6 +242,23 @@ message ApplyPorterAppResponse {
   EnumCLIAction cli_action = 2;
 }
 
+message UpdateAppRequest {
+  int64 project_id = 1;
+  // deployment_target_id is the id of the deployment target where the app will be installed
+  string deployment_target_id = 2;
+  // app is the (potentially partial) definition of the PorterApp to be applied
+  PorterApp app = 3;
+  // app_env is the current set of environment variables for the upcoming app revision
+  EnvGroupVariables app_env = 6;
+  // is_hard_env_update is a flag that indicates whether the app environment should be fully overwritten, or if the new app env variables should be merged with the existing
+  bool is_hard_env_update = 7;
+}
+
+message UpdateAppResponse {
+  // app_revision_id is the id of the PorterAppRevision that was updated
+  string app_revision_id = 1;
+}
+
 message UpdateRevisionStatusRequest {
   int64 project_id = 1;
   // app_revision_id is the id of the PorterAppRevision
@@ -611,6 +628,9 @@ service ClusterControlPlaneService {
 
   // ApplyPorterApp applies a porter app as defined by the provided porter.yaml file to a given deployment id
   rpc ApplyPorterApp(ApplyPorterAppRequest) returns (ApplyPorterAppResponse) {}
+
+  // UpdateApp updates an app as defined by the provided (potentially partial) app definition
+  rpc UpdateApp(UpdateAppRequest) returns (UpdateAppResponse) {}
 
   // RollbackRevision reverts an app to the previous revision, or optionally to the revision specified
   rpc RollbackRevision(RollbackRevisionRequest) returns (RollbackRevisionResponse) {}
