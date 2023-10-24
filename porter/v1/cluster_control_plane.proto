@@ -328,8 +328,6 @@ message AppRevision {
   string id = 6;
   // deployment_target_id is the id of the deployment target where the revision occurs
   string deployment_target_id = 7;
-  // project_id is the id of the project that the revision belongs to
-  int64 project_id = 8;
 }
 
 // AppRevisionMetadata is the metadata for a given app revision. It is a lightweight version of the AppRevision object
