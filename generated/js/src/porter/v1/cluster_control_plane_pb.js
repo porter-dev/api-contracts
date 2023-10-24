@@ -598,8 +598,8 @@ export const AppRevision = proto3.makeMessageType(
 export const AppRevisionMetadata = proto3.makeMessageType(
   "porter.v1.AppRevisionMetadata",
   () => [
-    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
