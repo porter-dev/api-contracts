@@ -429,6 +429,8 @@ export const ApplyPorterAppRequest = proto3.makeMessageType(
     { no: 3, name: "app", kind: "message", T: PorterApp },
     { no: 4, name: "porter_app_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "force_build", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 6, name: "app_env", kind: "message", T: EnvGroupVariables },
+    { no: 7, name: "is_hard_env_update", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 

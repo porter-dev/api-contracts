@@ -1214,6 +1214,20 @@ export declare class ApplyPorterAppRequest extends Message<ApplyPorterAppRequest
    */
   forceBuild: boolean;
 
+  /**
+   * app_env is the current set of environment variables for the upcoming app revision
+   *
+   * @generated from field: porter.v1.EnvGroupVariables app_env = 6;
+   */
+  appEnv?: EnvGroupVariables;
+
+  /**
+   * is_hard_env_update is a flag that indicates whether the app environment should be fully overwritten, or if the new app env variables should be merged with the existing
+   *
+   * @generated from field: bool is_hard_env_update = 7;
+   */
+  isHardEnvUpdate: boolean;
+
   constructor(data?: PartialMessage<ApplyPorterAppRequest>);
 
   static readonly runtime: typeof proto3;
