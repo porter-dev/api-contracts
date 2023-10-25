@@ -213,7 +213,8 @@ message ValidatePorterAppRequest {
   // app_overrides contains environment specific overrides if they exist, applied depending on the deployment target
   PorterApp app_overrides = 6;
   // base_deployment_target_id is used to find a revision of the app in the base deployment target, which hydrates the preview app template
-  string base_deployment_target_id = 7;
+  // deprecated: use the base deployment target directly on the template instead
+  string base_deployment_target_id = 7 [deprecated = true];
 }
 
 message ValidatePorterAppResponse {
