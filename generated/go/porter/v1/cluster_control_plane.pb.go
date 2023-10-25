@@ -1996,6 +1996,7 @@ type ValidatePorterAppRequest struct {
 	// app_overrides contains environment specific overrides if they exist, applied depending on the deployment target
 	AppOverrides *PorterApp `protobuf:"bytes,6,opt,name=app_overrides,json=appOverrides,proto3" json:"app_overrides,omitempty"`
 	// base_deployment_target_id is used to find a revision of the app in the base deployment target, which hydrates the preview app template
+	// deprecated: use the base deployment target directly on the template instead
 	//
 	// Deprecated: Marked as deprecated in porter/v1/cluster_control_plane.proto.
 	BaseDeploymentTargetId string `protobuf:"bytes,7,opt,name=base_deployment_target_id,json=baseDeploymentTargetId,proto3" json:"base_deployment_target_id,omitempty"`

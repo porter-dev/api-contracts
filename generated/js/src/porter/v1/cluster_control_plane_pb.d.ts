@@ -1133,6 +1133,7 @@ export declare class ValidatePorterAppRequest extends Message<ValidatePorterAppR
 
   /**
    * base_deployment_target_id is used to find a revision of the app in the base deployment target, which hydrates the preview app template
+   * deprecated: use the base deployment target directly on the template instead
    *
    * @generated from field: string base_deployment_target_id = 7 [deprecated = true];
    * @deprecated
