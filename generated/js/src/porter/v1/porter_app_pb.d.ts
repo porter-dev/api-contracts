@@ -78,6 +78,13 @@ export declare class PorterApp extends Message<PorterApp> {
    */
   serviceList: Service[];
 
+  /**
+   * efs_storage shared storage across service
+   *
+   * @generated from field: porter.v1.EFS efs_storage = 10;
+   */
+  efsStorage?: EFS;
+
   constructor(data?: PartialMessage<PorterApp>);
 
   static readonly runtime: typeof proto3;
@@ -413,5 +420,33 @@ export declare class AppImage extends Message<AppImage> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AppImage;
 
   static equals(a: AppImage | PlainMessage<AppImage> | undefined, b: AppImage | PlainMessage<AppImage> | undefined): boolean;
+}
+
+/**
+ * EFS is the values to configure EFS settings 
+ *
+ * @generated from message porter.v1.EFS
+ */
+export declare class EFS extends Message<EFS> {
+  /**
+   * enabled enabes shared storage across services 
+   *
+   * @generated from field: bool enabled = 1;
+   */
+  enabled: boolean;
+
+  constructor(data?: PartialMessage<EFS>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.EFS";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EFS;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): EFS;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EFS;
+
+  static equals(a: EFS | PlainMessage<EFS> | undefined, b: EFS | PlainMessage<EFS> | undefined): boolean;
 }
 

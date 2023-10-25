@@ -23,6 +23,7 @@ export const PorterApp = proto3.makeMessageType(
     { no: 7, name: "env_groups", kind: "message", T: EnvGroup, repeated: true },
     { no: 8, name: "helm_overrides", kind: "message", T: HelmOverrides },
     { no: 9, name: "service_list", kind: "message", T: Service, repeated: true },
+    { no: 10, name: "efs_storage", kind: "message", T: EFS },
   ],
 );
 
@@ -131,6 +132,18 @@ export const AppImage = proto3.makeMessageType(
   () => [
     { no: 1, name: "repository", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "tag", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * EFS is the values to configure EFS settings 
+ *
+ * @generated from message porter.v1.EFS
+ */
+export const EFS = proto3.makeMessageType(
+  "porter.v1.EFS",
+  () => [
+    { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 

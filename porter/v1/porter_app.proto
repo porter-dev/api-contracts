@@ -24,6 +24,8 @@ message PorterApp {
   HelmOverrides helm_overrides = 8;
   // service_list is a list of service configurations
   repeated Service service_list = 9;
+  //efs_storage shared storage across service
+  EFS efs_storage = 10;
 }
 
 // HelmOverrides is a wrapper over stringified json of raw Helm overrides to use for the application. HelmOverrides will only be removed if values is explicitly set to an empty string.
@@ -99,4 +101,10 @@ message AppImage {
   string repository = 1;
   // tag is the tag to use for the image
   string tag = 2;
+}
+
+// EFS is the values to configure EFS settings 
+message EFS {
+    //enabled enabes shared storage across services 
+    bool enabled = 1;
 }
