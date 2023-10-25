@@ -105,6 +105,6 @@ message AppImage {
 
 // EFS is the values to configure EFS settings 
 message EFS {
-    //enable_efs enabes shared storage across services 
-    bool enable_efs = 1;
+    //enabled enabes shared storage across services 
+    bool enabled = 1;
 }

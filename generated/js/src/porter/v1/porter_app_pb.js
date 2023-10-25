@@ -143,7 +143,7 @@ export const AppImage = proto3.makeMessageType(
 export const EFS = proto3.makeMessageType(
   "porter.v1.EFS",
   () => [
-    { no: 1, name: "enable_efs", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 

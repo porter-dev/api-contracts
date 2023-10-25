@@ -429,11 +429,11 @@ export declare class AppImage extends Message<AppImage> {
  */
 export declare class EFS extends Message<EFS> {
   /**
-   * enable_efs enabes shared storage across services 
+   * enabled enabes shared storage across services 
    *
-   * @generated from field: bool enable_efs = 1;
+   * @generated from field: bool enabled = 1;
    */
-  enableEfs: boolean;
+  enabled: boolean;
 
   constructor(data?: PartialMessage<EFS>);
 
