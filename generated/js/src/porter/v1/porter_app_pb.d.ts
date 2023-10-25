@@ -423,6 +423,8 @@ export declare class AppImage extends Message<AppImage> {
 }
 
 /**
+ * EFS is the values to configure EFS settings 
+ *
  * @generated from message porter.v1.EFS
  */
 export declare class EFS extends Message<EFS> {

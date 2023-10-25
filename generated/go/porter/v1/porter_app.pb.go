@@ -679,6 +679,7 @@ func (x *AppImage) GetTag() string {
 	return ""
 }
 
+// EFS is the values to configure EFS settings
 type EFS struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

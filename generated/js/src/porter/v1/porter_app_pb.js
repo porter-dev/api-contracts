@@ -136,6 +136,8 @@ export const AppImage = proto3.makeMessageType(
 );
 
 /**
+ * EFS is the values to configure EFS settings 
+ *
  * @generated from message porter.v1.EFS
  */
 export const EFS = proto3.makeMessageType(
