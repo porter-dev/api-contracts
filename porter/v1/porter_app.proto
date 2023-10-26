@@ -103,8 +103,8 @@ message AppImage {
   string tag = 2;
 }
 
-// EFS is the values to configure EFS settings 
+// EFS is the values to configure EFS settings
 message EFS {
-    //enabled enabes shared storage across services 
-    bool enabled = 1;
+  //enabled enabes shared storage across services
+  bool enabled = 1;
 }

@@ -423,13 +423,13 @@ export declare class AppImage extends Message<AppImage> {
 }
 
 /**
- * EFS is the values to configure EFS settings 
+ * EFS is the values to configure EFS settings
  *
  * @generated from message porter.v1.EFS
  */
 export declare class EFS extends Message<EFS> {
   /**
-   * enabled enabes shared storage across services 
+   * enabled enabes shared storage across services
    *
    * @generated from field: bool enabled = 1;
    */

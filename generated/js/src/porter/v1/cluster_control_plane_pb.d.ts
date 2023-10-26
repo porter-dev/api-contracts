@@ -947,6 +947,8 @@ export declare class ListImagesForRepositoryResponse extends Message<ListImagesF
  */
 export declare class Image extends Message<Image> {
   /**
+   * Deprecated: use ImageInfo instead
+   *
    * @generated from field: string repository_name = 1;
    */
   repositoryName: string;
@@ -979,6 +981,74 @@ export declare class Image extends Message<Image> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Image;
 
   static equals(a: Image | PlainMessage<Image> | undefined, b: Image | PlainMessage<Image> | undefined): boolean;
+}
+
+/**
+ * ImageInfo describes everything related to a cloud-agnostic Docker image
+ *
+ * @generated from message porter.v1.ImageInfo
+ */
+export declare class ImageInfo extends Message<ImageInfo> {
+  /**
+   * uri the uri of an image. A valid image pull will use this uri suffixed by a tag
+   *
+   * @generated from field: string uri = 1;
+   */
+  uri: string;
+
+  /**
+   * artifacts refers to the instances of an image in an image repository, each sharing the same uri
+   *
+   * @generated from field: repeated porter.v1.ImageArtifact artifacts = 2;
+   */
+  artifacts: ImageArtifact[];
+
+  constructor(data?: PartialMessage<ImageInfo>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ImageInfo";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ImageInfo;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ImageInfo;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ImageInfo;
+
+  static equals(a: ImageInfo | PlainMessage<ImageInfo> | undefined, b: ImageInfo | PlainMessage<ImageInfo> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.ImageArtifact
+ */
+export declare class ImageArtifact extends Message<ImageArtifact> {
+  /**
+   * tag is the tag associated with the artifact
+   *
+   * @generated from field: string tag = 1;
+   */
+  tag: string;
+
+  /**
+   * updated_at is the time at which the artifact was created or updated
+   *
+   * @generated from field: google.protobuf.Timestamp updated_at = 2;
+   */
+  updatedAt?: Timestamp;
+
+  constructor(data?: PartialMessage<ImageArtifact>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ImageArtifact";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ImageArtifact;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ImageArtifact;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ImageArtifact;
+
+  static equals(a: ImageArtifact | PlainMessage<ImageArtifact> | undefined, b: ImageArtifact | PlainMessage<ImageArtifact> | undefined): boolean;
 }
 
 /**
@@ -2605,6 +2675,58 @@ export declare class ManualServiceRunResponse extends Message<ManualServiceRunRe
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ManualServiceRunResponse;
 
   static equals(a: ManualServiceRunResponse | PlainMessage<ManualServiceRunResponse> | undefined, b: ManualServiceRunResponse | PlainMessage<ManualServiceRunResponse> | undefined): boolean;
+}
+
+/**
+ * ImagesRequest is the request object for listing images
+ *
+ * @generated from message porter.v1.ImagesRequest
+ */
+export declare class ImagesRequest extends Message<ImagesRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  constructor(data?: PartialMessage<ImagesRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ImagesRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ImagesRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ImagesRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ImagesRequest;
+
+  static equals(a: ImagesRequest | PlainMessage<ImagesRequest> | undefined, b: ImagesRequest | PlainMessage<ImagesRequest> | undefined): boolean;
+}
+
+/**
+ * ImagesResponse is the response object for listing images
+ *
+ * @generated from message porter.v1.ImagesResponse
+ */
+export declare class ImagesResponse extends Message<ImagesResponse> {
+  /**
+   * @generated from field: repeated porter.v1.ImageInfo images = 1;
+   */
+  images: ImageInfo[];
+
+  constructor(data?: PartialMessage<ImagesResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ImagesResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ImagesResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ImagesResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ImagesResponse;
+
+  static equals(a: ImagesResponse | PlainMessage<ImagesResponse> | undefined, b: ImagesResponse | PlainMessage<ImagesResponse> | undefined): boolean;
 }
 
 /**
