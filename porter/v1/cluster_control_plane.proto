@@ -177,6 +177,7 @@ message ListImagesForRepositoryResponse {
 
 message Image {
   // Deprecated: use ImageInfo instead
+  option deprecated = true;
   string repository_name = 1;
   string tag = 2;
   string digest = 3;
@@ -627,12 +628,6 @@ service ClusterControlPlaneService {
   // TokenForRegistry returns a token for accessing a given registry
   rpc TokenForRegistry(TokenForRegistryRequest) returns (TokenForRegistryResponse) {}
 
-  // ListRepositoriesForRegistry lists the repositories for a given registry, provided it is in the scope of the project id
-  rpc ListRepositoriesForRegistry(ListRepositoriesForRegistryRequest) returns (ListRepositoriesForRegistryResponse) {}
-
-  // ListImagesForRepository lists the repositories for a given registry, provided it is in the scope of the project id
-  rpc ListImagesForRepository(ListImagesForRepositoryRequest) returns (ListImagesForRepositoryResponse) {}
-
   // ValidatePorterApp validates and hydrates a definition of a porter app, based on the porter.yaml file
   rpc ValidatePorterApp(ValidatePorterAppRequest) returns (ValidatePorterAppResponse) {}
 
@@ -740,6 +735,18 @@ service ClusterControlPlaneService {
   // EKSBearerToken gets a bearer token for programatic access to an EKS cluster's kubernetes API.
   // Deprecated. Use KubeConfigForCluster instead.
   rpc EKSBearerToken(EKSBearerTokenRequest) returns (EKSBearerTokenResponse) {
+    option deprecated = true;
+  }
+
+  // ListRepositoriesForRegistry lists the repositories for a given registry, provided it is in the scope of the project id
+  // Deprecated. Use Images instead.
+  rpc ListRepositoriesForRegistry(ListRepositoriesForRegistryRequest) returns (ListRepositoriesForRegistryResponse) {
+    option deprecated = true;
+  }
+
+  // ListImagesForRepository lists the repositories for a given registry, provided it is in the scope of the project id
+  // Deprecated. Use Images instead.
+  rpc ListImagesForRepository(ListImagesForRepositoryRequest) returns (ListImagesForRepositoryResponse) {
     option deprecated = true;
   }
 }

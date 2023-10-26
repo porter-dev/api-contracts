@@ -339,6 +339,7 @@ export const ListImagesForRepositoryResponse = proto3.makeMessageType(
 
 /**
  * @generated from message porter.v1.Image
+ * @deprecated
  */
 export const Image = proto3.makeMessageType(
   "porter.v1.Image",

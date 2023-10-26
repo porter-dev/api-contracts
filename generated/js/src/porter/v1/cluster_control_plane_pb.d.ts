@@ -944,11 +944,10 @@ export declare class ListImagesForRepositoryResponse extends Message<ListImagesF
 
 /**
  * @generated from message porter.v1.Image
+ * @deprecated
  */
 export declare class Image extends Message<Image> {
   /**
-   * Deprecated: use ImageInfo instead
-   *
    * @generated from field: string repository_name = 1;
    */
   repositoryName: string;
