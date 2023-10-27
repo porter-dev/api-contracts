@@ -741,6 +741,27 @@ export const GetAppRevisionResponse = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message porter.v1.GetAppTemplateRequest
+ */
+export const GetAppTemplateRequest = proto3.makeMessageType(
+  "porter.v1.GetAppTemplateRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "app_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.GetAppTemplateResponse
+ */
+export const GetAppTemplateResponse = proto3.makeMessageType(
+  "porter.v1.GetAppTemplateResponse",
+  () => [
+    { no: 1, name: "app_template", kind: "message", T: PorterApp },
+  ],
+);
+
+/**
  * @generated from message porter.v1.PredeployStatusRequest
  */
 export const PredeployStatusRequest = proto3.makeMessageType(

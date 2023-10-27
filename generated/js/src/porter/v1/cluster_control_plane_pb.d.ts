@@ -2189,6 +2189,63 @@ export declare class GetAppRevisionResponse extends Message<GetAppRevisionRespon
 }
 
 /**
+ * @generated from message porter.v1.GetAppTemplateRequest
+ */
+export declare class GetAppTemplateRequest extends Message<GetAppTemplateRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * app_id is the id of the PorterApp to return the template for
+   *
+   * @generated from field: int64 app_id = 2;
+   */
+  appId: bigint;
+
+  constructor(data?: PartialMessage<GetAppTemplateRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.GetAppTemplateRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetAppTemplateRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetAppTemplateRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetAppTemplateRequest;
+
+  static equals(a: GetAppTemplateRequest | PlainMessage<GetAppTemplateRequest> | undefined, b: GetAppTemplateRequest | PlainMessage<GetAppTemplateRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.GetAppTemplateResponse
+ */
+export declare class GetAppTemplateResponse extends Message<GetAppTemplateResponse> {
+  /**
+   * app_template is the PorterApp template hydrated with the latest revision of the base app
+   *
+   * @generated from field: porter.v1.PorterApp app_template = 1;
+   */
+  appTemplate?: PorterApp;
+
+  constructor(data?: PartialMessage<GetAppTemplateResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.GetAppTemplateResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetAppTemplateResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetAppTemplateResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetAppTemplateResponse;
+
+  static equals(a: GetAppTemplateResponse | PlainMessage<GetAppTemplateResponse> | undefined, b: GetAppTemplateResponse | PlainMessage<GetAppTemplateResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.PredeployStatusRequest
  */
 export declare class PredeployStatusRequest extends Message<PredeployStatusRequest> {
