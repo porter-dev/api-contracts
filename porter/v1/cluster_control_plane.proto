@@ -462,7 +462,7 @@ message DeploymentTargetDetailsResponse {
   int64 cluster_id = 2;
   // is_preview indicates whether this is a preview deployment target or not
   bool is_preview = 3;
-  // deployment_target_name is the name of the deployment target where the app is installed
+  // deployment_target_name is the name of the deployment target
   string deployment_target_name = 4;
 }
 
@@ -519,10 +519,10 @@ message SeedAppRevisionsResponse {}
 // EnvGroupVariablesRequest is the request object when retrieving the variables for a given EnvGroup
 message EnvGroupVariablesRequest {
   int64 project_id = 1;
-  // deployment_target_id is the id of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+  // deployment_target_id is the id of the deployment target for the env group. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
   string deployment_target_id = 2;
   EnvGroup env_group = 3;
-  // deployment_target_name is the name of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+  // deployment_target_name is the name of the deployment target for the env group. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
   string deployment_target_name = 4;
 }
 
