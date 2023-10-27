@@ -473,6 +473,36 @@ export const ApplyPorterAppResponse = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message porter.v1.UpdateAppRequest
+ */
+export const UpdateAppRequest = proto3.makeMessageType(
+  "porter.v1.UpdateAppRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+    { no: 3, name: "app", kind: "message", T: PorterApp },
+    { no: 4, name: "app_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "app_env", kind: "message", T: EnvGroupVariables },
+    { no: 6, name: "deletions", kind: "message", T: Deletions },
+    { no: 7, name: "app_overrides", kind: "message", T: PorterApp },
+    { no: 8, name: "is_env_override", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 9, name: "is_predeploy_eligible", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 10, name: "commit_sha", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.UpdateAppResponse
+ */
+export const UpdateAppResponse = proto3.makeMessageType(
+  "porter.v1.UpdateAppResponse",
+  () => [
+    { no: 1, name: "app_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "cli_action", kind: "enum", T: proto3.getEnumType(EnumCLIAction) },
+  ],
+);
+
+/**
  * @generated from message porter.v1.UpdateRevisionStatusRequest
  */
 export const UpdateRevisionStatusRequest = proto3.makeMessageType(
