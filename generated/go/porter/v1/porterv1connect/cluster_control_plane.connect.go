@@ -139,6 +139,12 @@ const (
 	// ClusterControlPlaneServiceImagesProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's Images RPC.
 	ClusterControlPlaneServiceImagesProcedure = "/porter.v1.ClusterControlPlaneService/Images"
+	// ClusterControlPlaneServiceCreateAppInstanceProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's CreateAppInstance RPC.
+	ClusterControlPlaneServiceCreateAppInstanceProcedure = "/porter.v1.ClusterControlPlaneService/CreateAppInstance"
+	// ClusterControlPlaneServiceDeleteAppInstanceProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's DeleteAppInstance RPC.
+	ClusterControlPlaneServiceDeleteAppInstanceProcedure = "/porter.v1.ClusterControlPlaneService/DeleteAppInstance"
 	// ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DockerConfigFileForRegistry RPC.
 	ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure = "/porter.v1.ClusterControlPlaneService/DockerConfigFileForRegistry"
@@ -249,6 +255,10 @@ type ClusterControlPlaneServiceClient interface {
 	ClusterNetworkSettings(context.Context, *connect.Request[v1.ClusterNetworkSettingsRequest]) (*connect.Response[v1.ClusterNetworkSettingsResponse], error)
 	// Images returns images matching provided filter parameters
 	Images(context.Context, *connect.Request[v1.ImagesRequest]) (*connect.Response[v1.ImagesResponse], error)
+	// CreateAppInstance creates a new app instance for a given name and deployment target. If an app instance with the same name and deployment target already exists, the existing app instance ID will be returned.
+	CreateAppInstance(context.Context, *connect.Request[v1.CreateAppInstanceRequest]) (*connect.Response[v1.CreateAppInstanceResponse], error)
+	// DeleteAppInstance deletes an app instance and all associated revisions.
+	DeleteAppInstance(context.Context, *connect.Request[v1.DeleteAppInstanceRequest]) (*connect.Response[v1.DeleteAppInstanceResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -477,6 +487,16 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceImagesProcedure,
 			opts...,
 		),
+		createAppInstance: connect.NewClient[v1.CreateAppInstanceRequest, v1.CreateAppInstanceResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceCreateAppInstanceProcedure,
+			opts...,
+		),
+		deleteAppInstance: connect.NewClient[v1.DeleteAppInstanceRequest, v1.DeleteAppInstanceResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceDeleteAppInstanceProcedure,
+			opts...,
+		),
 		dockerConfigFileForRegistry: connect.NewClient[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
@@ -557,6 +577,8 @@ type clusterControlPlaneServiceClient struct {
 	manualServiceRun               *connect.Client[v1.ManualServiceRunRequest, v1.ManualServiceRunResponse]
 	clusterNetworkSettings         *connect.Client[v1.ClusterNetworkSettingsRequest, v1.ClusterNetworkSettingsResponse]
 	images                         *connect.Client[v1.ImagesRequest, v1.ImagesResponse]
+	createAppInstance              *connect.Client[v1.CreateAppInstanceRequest, v1.CreateAppInstanceResponse]
+	deleteAppInstance              *connect.Client[v1.DeleteAppInstanceRequest, v1.DeleteAppInstanceResponse]
 	dockerConfigFileForRegistry    *connect.Client[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse]
 	eCRTokenForRegistry            *connect.Client[v1.ECRTokenForRegistryRequest, v1.ECRTokenForRegistryResponse]
 	assumeRoleCredentials          *connect.Client[v1.AssumeRoleCredentialsRequest, v1.AssumeRoleCredentialsResponse]
@@ -750,6 +772,16 @@ func (c *clusterControlPlaneServiceClient) Images(ctx context.Context, req *conn
 	return c.images.CallUnary(ctx, req)
 }
 
+// CreateAppInstance calls porter.v1.ClusterControlPlaneService.CreateAppInstance.
+func (c *clusterControlPlaneServiceClient) CreateAppInstance(ctx context.Context, req *connect.Request[v1.CreateAppInstanceRequest]) (*connect.Response[v1.CreateAppInstanceResponse], error) {
+	return c.createAppInstance.CallUnary(ctx, req)
+}
+
+// DeleteAppInstance calls porter.v1.ClusterControlPlaneService.DeleteAppInstance.
+func (c *clusterControlPlaneServiceClient) DeleteAppInstance(ctx context.Context, req *connect.Request[v1.DeleteAppInstanceRequest]) (*connect.Response[v1.DeleteAppInstanceResponse], error) {
+	return c.deleteAppInstance.CallUnary(ctx, req)
+}
+
 // DockerConfigFileForRegistry calls
 // porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry.
 //
@@ -892,6 +924,10 @@ type ClusterControlPlaneServiceHandler interface {
 	ClusterNetworkSettings(context.Context, *connect.Request[v1.ClusterNetworkSettingsRequest]) (*connect.Response[v1.ClusterNetworkSettingsResponse], error)
 	// Images returns images matching provided filter parameters
 	Images(context.Context, *connect.Request[v1.ImagesRequest]) (*connect.Response[v1.ImagesResponse], error)
+	// CreateAppInstance creates a new app instance for a given name and deployment target. If an app instance with the same name and deployment target already exists, the existing app instance ID will be returned.
+	CreateAppInstance(context.Context, *connect.Request[v1.CreateAppInstanceRequest]) (*connect.Response[v1.CreateAppInstanceResponse], error)
+	// DeleteAppInstance deletes an app instance and all associated revisions.
+	DeleteAppInstance(context.Context, *connect.Request[v1.DeleteAppInstanceRequest]) (*connect.Response[v1.DeleteAppInstanceResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -1116,6 +1152,16 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.Images,
 		opts...,
 	)
+	clusterControlPlaneServiceCreateAppInstanceHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceCreateAppInstanceProcedure,
+		svc.CreateAppInstance,
+		opts...,
+	)
+	clusterControlPlaneServiceDeleteAppInstanceHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceDeleteAppInstanceProcedure,
+		svc.DeleteAppInstance,
+		opts...,
+	)
 	clusterControlPlaneServiceDockerConfigFileForRegistryHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
 		svc.DockerConfigFileForRegistry,
@@ -1228,6 +1274,10 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceClusterNetworkSettingsHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceImagesProcedure:
 			clusterControlPlaneServiceImagesHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceCreateAppInstanceProcedure:
+			clusterControlPlaneServiceCreateAppInstanceHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceDeleteAppInstanceProcedure:
+			clusterControlPlaneServiceDeleteAppInstanceHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure:
 			clusterControlPlaneServiceDockerConfigFileForRegistryHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceECRTokenForRegistryProcedure:
@@ -1391,6 +1441,14 @@ func (UnimplementedClusterControlPlaneServiceHandler) ClusterNetworkSettings(con
 
 func (UnimplementedClusterControlPlaneServiceHandler) Images(context.Context, *connect.Request[v1.ImagesRequest]) (*connect.Response[v1.ImagesResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.Images is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) CreateAppInstance(context.Context, *connect.Request[v1.CreateAppInstanceRequest]) (*connect.Response[v1.CreateAppInstanceResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.CreateAppInstance is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) DeleteAppInstance(context.Context, *connect.Request[v1.DeleteAppInstanceRequest]) (*connect.Response[v1.DeleteAppInstanceResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.DeleteAppInstance is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) DockerConfigFileForRegistry(context.Context, *connect.Request[v1.DockerConfigFileForRegistryRequest]) (*connect.Response[v1.DockerConfigFileForRegistryResponse], error) {

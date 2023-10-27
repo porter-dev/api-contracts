@@ -2885,6 +2885,134 @@ export declare class ImagesResponse extends Message<ImagesResponse> {
 }
 
 /**
+ * CreateAppInstanceRequest is the request object for creating an app instance
+ *
+ * @generated from message porter.v1.CreateAppInstanceRequest
+ */
+export declare class CreateAppInstanceRequest extends Message<CreateAppInstanceRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: string app_name = 2;
+   */
+  appName: string;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target where the app is installed.
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 3;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  /**
+   * @generated from field: int64 porter_app_id = 4;
+   */
+  porterAppId: bigint;
+
+  constructor(data?: PartialMessage<CreateAppInstanceRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CreateAppInstanceRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateAppInstanceRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateAppInstanceRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateAppInstanceRequest;
+
+  static equals(a: CreateAppInstanceRequest | PlainMessage<CreateAppInstanceRequest> | undefined, b: CreateAppInstanceRequest | PlainMessage<CreateAppInstanceRequest> | undefined): boolean;
+}
+
+/**
+ * CreateAppInstanceResponse is the response object for creating an app instance
+ *
+ * @generated from message porter.v1.CreateAppInstanceResponse
+ */
+export declare class CreateAppInstanceResponse extends Message<CreateAppInstanceResponse> {
+  /**
+   * @generated from field: string app_instance_id = 1;
+   */
+  appInstanceId: string;
+
+  constructor(data?: PartialMessage<CreateAppInstanceResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CreateAppInstanceResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateAppInstanceResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateAppInstanceResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateAppInstanceResponse;
+
+  static equals(a: CreateAppInstanceResponse | PlainMessage<CreateAppInstanceResponse> | undefined, b: CreateAppInstanceResponse | PlainMessage<CreateAppInstanceResponse> | undefined): boolean;
+}
+
+/**
+ * DeleteAppInstanceRequest is the request object for creating an app instance
+ *
+ * @generated from message porter.v1.DeleteAppInstanceRequest
+ */
+export declare class DeleteAppInstanceRequest extends Message<DeleteAppInstanceRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: string app_name = 2;
+   */
+  appName: string;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target where the app is installed.
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 3;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  constructor(data?: PartialMessage<DeleteAppInstanceRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeleteAppInstanceRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteAppInstanceRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteAppInstanceRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteAppInstanceRequest;
+
+  static equals(a: DeleteAppInstanceRequest | PlainMessage<DeleteAppInstanceRequest> | undefined, b: DeleteAppInstanceRequest | PlainMessage<DeleteAppInstanceRequest> | undefined): boolean;
+}
+
+/**
+ * DeleteAppInstanceResponse is the response object for creating an app instance
+ *
+ * @generated from message porter.v1.DeleteAppInstanceResponse
+ */
+export declare class DeleteAppInstanceResponse extends Message<DeleteAppInstanceResponse> {
+  constructor(data?: PartialMessage<DeleteAppInstanceResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeleteAppInstanceResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteAppInstanceResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteAppInstanceResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteAppInstanceResponse;
+
+  static equals(a: DeleteAppInstanceResponse | PlainMessage<DeleteAppInstanceResponse> | undefined, b: DeleteAppInstanceResponse | PlainMessage<DeleteAppInstanceResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  * @deprecated
  */

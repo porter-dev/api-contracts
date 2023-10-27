@@ -625,6 +625,31 @@ message ImagesResponse {
   repeated ImageInfo images = 1;
 }
 
+// CreateAppInstanceRequest is the request object for creating an app instance
+message CreateAppInstanceRequest {
+  int64 project_id = 1;
+  string app_name = 2;
+  // deployment_target_identifier is the object that identifies the deployment target where the app is installed.
+  DeploymentTargetIdentifier deployment_target_identifier = 3;
+  int64 porter_app_id = 4;
+}
+
+// CreateAppInstanceResponse is the response object for creating an app instance
+message CreateAppInstanceResponse {
+  string app_instance_id = 1;
+}
+
+// DeleteAppInstanceRequest is the request object for creating an app instance
+message DeleteAppInstanceRequest {
+  int64 project_id = 1;
+  string app_name = 2;
+  // deployment_target_identifier is the object that identifies the deployment target where the app is installed.
+  DeploymentTargetIdentifier deployment_target_identifier = 3;
+}
+
+// DeleteAppInstanceResponse is the response object for creating an app instance
+message DeleteAppInstanceResponse {}
+
 service ClusterControlPlaneService {
   // QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas
   rpc QuotaIncrease(QuotaIncreaseRequest) returns (QuotaIncreaseResponse) {}
@@ -741,6 +766,12 @@ service ClusterControlPlaneService {
 
   // Images returns images matching provided filter parameters
   rpc Images(ImagesRequest) returns (ImagesResponse) {}
+
+  // CreateAppInstance creates a new app instance for a given name and deployment target. If an app instance with the same name and deployment target already exists, the existing app instance ID will be returned.
+  rpc CreateAppInstance(CreateAppInstanceRequest) returns (CreateAppInstanceResponse) {}
+
+  // DeleteAppInstance deletes an app instance and all associated revisions.
+  rpc DeleteAppInstance(DeleteAppInstanceRequest) returns (DeleteAppInstanceResponse) {}
 
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
   // Deprecated. Use TokenForRegistry instead.

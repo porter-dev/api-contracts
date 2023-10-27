@@ -1003,6 +1003,57 @@ export const ImagesResponse = proto3.makeMessageType(
 );
 
 /**
+ * CreateAppInstanceRequest is the request object for creating an app instance
+ *
+ * @generated from message porter.v1.CreateAppInstanceRequest
+ */
+export const CreateAppInstanceRequest = proto3.makeMessageType(
+  "porter.v1.CreateAppInstanceRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+    { no: 4, name: "porter_app_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * CreateAppInstanceResponse is the response object for creating an app instance
+ *
+ * @generated from message porter.v1.CreateAppInstanceResponse
+ */
+export const CreateAppInstanceResponse = proto3.makeMessageType(
+  "porter.v1.CreateAppInstanceResponse",
+  () => [
+    { no: 1, name: "app_instance_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * DeleteAppInstanceRequest is the request object for creating an app instance
+ *
+ * @generated from message porter.v1.DeleteAppInstanceRequest
+ */
+export const DeleteAppInstanceRequest = proto3.makeMessageType(
+  "porter.v1.DeleteAppInstanceRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+  ],
+);
+
+/**
+ * DeleteAppInstanceResponse is the response object for creating an app instance
+ *
+ * @generated from message porter.v1.DeleteAppInstanceResponse
+ */
+export const DeleteAppInstanceResponse = proto3.makeMessageType(
+  "porter.v1.DeleteAppInstanceResponse",
+  [],
+);
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  * @deprecated
  */
