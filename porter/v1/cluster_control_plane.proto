@@ -219,8 +219,8 @@ message ReadContractResponse {
 
 message ValidatePorterAppRequest {
   int64 project_id = 1;
-  // deployment_target_id is the id of the deployment target where the app will be installed
-  string deployment_target_id = 2;
+  // deployment_target_id is the id of the deployment target where the app will be installed. Deprecated: use deployment_target_identifier.
+  string deployment_target_id = 2 [deprecated = true];
   // commit_sha is the current commit sha to be built and applied
   string commit_sha = 3;
   // app is the definition of the PorterApp to be applied
@@ -232,6 +232,8 @@ message ValidatePorterAppRequest {
   // base_deployment_target_id is used to find a revision of the app in the base deployment target, which hydrates the preview app template
   // deprecated: use the base deployment target directly on the template instead
   string base_deployment_target_id = 7 [deprecated = true];
+  // deployment_target_identifier is the object that identifies the deployment target where the app will be installed
+  DeploymentTargetIdentifier deployment_target_identifier = 8;
 }
 
 message ValidatePorterAppResponse {
@@ -240,8 +242,8 @@ message ValidatePorterAppResponse {
 
 message ApplyPorterAppRequest {
   int64 project_id = 1;
-  // deployment_target_id is the id of the deployment target where the app will be installed
-  string deployment_target_id = 2;
+  // deployment_target_id is the id of the deployment target where the app will be installed. Deprecated: use deployment_target_identifier.
+  string deployment_target_id = 2 [deprecated = true];
   // app is the definition of the PorterApp to be applied
   PorterApp app = 3;
   // porter_app_revision_id is the id of the PorterAppRevision to be applied.  This is used by the CLI to provide updates to an existing app revision. If provided, app must be empty.
@@ -252,6 +254,8 @@ message ApplyPorterAppRequest {
   EnvGroupVariables app_env = 6;
   // is_hard_env_update is a flag that indicates whether the app environment should be fully overwritten, or if the new app env variables should be merged with the existing
   bool is_hard_env_update = 7;
+  // deployment_target_identifier is the object that identifies the deployment target where the app will be installed
+  DeploymentTargetIdentifier deployment_target_identifier = 8;
 }
 
 message ApplyPorterAppResponse {
@@ -274,10 +278,12 @@ message RollbackRevisionRequest {
   int64 project_id = 1;
   // app_id is the id of the PorterApp to roll back
   int64 app_id = 2;
-  // deployment_target_id is the id of the deployment target where the app is installed
-  string deployment_target_id = 3;
+  // deployment_target_id is the id of the deployment target where the app is installed. Deprecated: use deployment_target_identifier.
+  string deployment_target_id = 3 [deprecated = true];
   // app_revision_id is the id of the PorterAppRevision
   string app_revision_id = 4;
+  // deployment_target_identifier is the object that identifies the deployment target for the app
+  DeploymentTargetIdentifier deployment_target_identifier = 5;
 }
 
 message RollbackRevisionResponse {
@@ -304,10 +310,12 @@ message DeletePorterAppResponse {
 // DeleteAppDeploymentRequest is the request object when removing a porter app from a given deployment target
 message DeleteAppDeploymentRequest {
   int64 project_id = 1;
-  // deployment_target_id is the id of the deployment target where the app is being uninstalled from
-  string deployment_target_id = 2;
+  // deployment_target_id is the id of the deployment target where the app is installed. Deprecated: use deployment_target_identifier.
+  string deployment_target_id = 2 [deprecated = true];
   // app_name is the name of the porter app to be uninstalled
   string app_name = 3;
+  // deployment_target_identifier is the object that identifies the deployment target for the app
+  DeploymentTargetIdentifier deployment_target_identifier = 4;
 }
 
 // DeleteAppDeploymentResponse is the response object when removing a porter app from a given deployment target
@@ -316,8 +324,10 @@ message DeleteAppDeploymentResponse {}
 // DeleteDeploymentTargetRequest is the request object when removing a deployment target from a given cluster
 message DeleteDeploymentTargetRequest {
   int64 project_id = 1;
-  // deployment_target_id is the id of the deployment target to be deleted
-  string deployment_target_id = 2;
+  // deployment_target_id is the id of the deployment target to be deleted. Deprecated: use deployment_target_identifier.
+  string deployment_target_id = 2 [deprecated = true];
+  // deployment_target_identifier is the object that identifies the deployment target for the app
+  DeploymentTargetIdentifier deployment_target_identifier = 3;
 }
 
 // DeleteDeploymentTargetResponse is the response object when removing a deployment target from a given cluster
@@ -327,8 +337,10 @@ message CurrentAppRevisionRequest {
   int64 project_id = 1;
   // app_id is the id of the PorterApp that is currently installed
   int64 app_id = 2;
-  // deployment_target_id is the id of the deployment target where the app is installed
-  string deployment_target_id = 3;
+  // deployment_target_id is the id of the deployment target where the app is installed. Deprecated: use deployment_target_identifier.
+  string deployment_target_id = 3 [deprecated = true];
+  // deployment_target_identifier is the object that identifies the deployment target for the app
+  DeploymentTargetIdentifier deployment_target_identifier = 4;
 }
 
 message AppRevision {
@@ -366,8 +378,10 @@ message ListAppRevisionsRequest {
   int64 project_id = 1;
   // app_id is the id of the PorterApp that is currently installed
   int64 app_id = 2;
-  // deployment_target_id is the id of the deployment target where the app is installed
-  string deployment_target_id = 3;
+  // deployment_target_id is the id of the deployment target where the app is installed. Deprecated: use deployment_target_identifier.
+  string deployment_target_id = 3 [deprecated = true];
+  // deployment_target_identifier is the object that identifies the deployment target for the app
+  DeploymentTargetIdentifier deployment_target_identifier = 4;
 }
 
 message ListAppRevisionsResponse {
@@ -377,8 +391,10 @@ message ListAppRevisionsResponse {
 
 message LatestAppRevisionsRequest {
   int64 project_id = 1;
-  // deployment_target_id is the id of the deployment target to retrieve revisions from
-  string deployment_target_id = 3;
+  // deployment_target_identifier is the object that identifies the deployment target to retrieve revisions from
+  DeploymentTargetIdentifier deployment_target_identifier = 2;
+  // deployment_target_id is the id of the deployment target to retrieve revisions from. Deprecated: use deployment_target_identifier.
+  string deployment_target_id = 3 [deprecated = true];
 }
 
 message LatestAppRevisionsResponse {
@@ -446,6 +462,8 @@ message DeploymentTargetDetailsResponse {
   int64 cluster_id = 2;
   // is_preview indicates whether this is a preview deployment target or not
   bool is_preview = 3;
+  // deployment_target_name is the name of the deployment target
+  string deployment_target_name = 4;
 }
 
 // CreateDeploymentTargetRequest is the request object for CreateDeploymentTarget
@@ -501,8 +519,19 @@ message SeedAppRevisionsResponse {}
 // EnvGroupVariablesRequest is the request object when retrieving the variables for a given EnvGroup
 message EnvGroupVariablesRequest {
   int64 project_id = 1;
-  string deployment_target_id = 2;
+  // deployment_target_id is the id of the deployment target for the env group. Deprecated: use deployment_target_identifier.
+  string deployment_target_id = 2 [deprecated = true];
   EnvGroup env_group = 3;
+  // deployment_target_identifier is the object that identifies the deployment target for the env group
+  DeploymentTargetIdentifier deployment_target_identifier = 4;
+}
+
+// DeploymentTargetIdentifier is the object that identifies a deployment target. One of id or name must be provided, with id taking precedence.
+message DeploymentTargetIdentifier {
+  // id is the id of the deployment target
+  string id = 1;
+  // name is the name of the deployment target
+  string name = 2;
 }
 
 // EnvGroupVariablesResponse is the response object when retrieving the variables for a given EnvGroup
@@ -513,8 +542,11 @@ message EnvGroupVariablesResponse {
 // LatestEnvGroupWithVariablesRequest is the request object when retrieving the latest EnvGroup and its variables for a given deployment target
 message LatestEnvGroupWithVariablesRequest {
   int64 project_id = 1;
-  string deployment_target_id = 2;
+  // deployment_target_id is the id of the deployment target where the app is installed. Deprecated: use deployment_target_identifier.
+  string deployment_target_id = 2 [deprecated = true];
   string env_group_name = 3;
+  // deployment_target_identifier is the object that identifies the deployment target for the env group
+  DeploymentTargetIdentifier deployment_target_identifier = 4;
 }
 
 // LatestEnvGroupWithVariablesResponse is the response object when retrieving the latest EnvGroup and its variables for a given deployment target
@@ -526,9 +558,12 @@ message LatestEnvGroupWithVariablesResponse {
 message UpdateAppImageRequest {
   int64 project_id = 1;
   string app_name = 2;
-  string deployment_target_id = 3;
+  // deployment_target_id is the id of the deployment target where the app is installed. Deprecated: use deployment_target_identifier.
+  string deployment_target_id = 3 [deprecated = true];
   string repository_url = 4;
   string tag = 5;
+  // deployment_target_identifier is the object that identifies the deployment target for the app
+  DeploymentTargetIdentifier deployment_target_identifier = 6;
 }
 
 message UpdateAppImageResponse {
@@ -550,9 +585,12 @@ message UpdateAppsLinkedToEnvGroupResponse {}
 message AppHelmValuesRequest {
   int64 project_id = 1;
   int64 app_id = 2;
-  string deployment_target_id = 3;
+  // deployment_target_id is the id of the deployment target where the app is installed. Deprecated: use deployment_target_identifier.
+  string deployment_target_id = 3 [deprecated = true];
   // with_defaults indicates whether to merge the default Helm values with the explicitly provided values
   bool with_defaults = 4;
+  // deployment_target_identifier is the object that identifies the deployment target for the app
+  DeploymentTargetIdentifier deployment_target_identifier = 5;
 }
 
 // AppHelmValuesResponse is the response object when retrieving the helm values for a given app
@@ -565,10 +603,13 @@ message AppHelmValuesResponse {
 message ManualServiceRunRequest {
   int64 project_id = 1;
   string app_name = 2;
-  string deployment_target_id = 3;
+  // deployment_target_id is the id of the deployment target where the app is installed. Deprecated: use deployment_target_identifier.
+  string deployment_target_id = 3 [deprecated = true];
   string service_name = 4;
   // Command is the command to run on the service.  If not specified, the run command for the service will be used, as defined in the latest app revision.
   optional string command = 5;
+  // deployment_target_identifier is the object that identifies the deployment target for the app
+  DeploymentTargetIdentifier deployment_target_identifier = 6;
 }
 
 // ManualServiceRunResponse is the response object for ManualServiceRun
