@@ -2395,24 +2395,24 @@ export declare class EnvGroupVariablesRequest extends Message<EnvGroupVariablesR
 }
 
 /**
- * DeploymentTargetIdentifier is the object that identifies a deployment target. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+ * DeploymentTargetIdentifier is the object that identifies a deployment target. One of id or name must be provided, with id taking precedence.
  *
  * @generated from message porter.v1.DeploymentTargetIdentifier
  */
 export declare class DeploymentTargetIdentifier extends Message<DeploymentTargetIdentifier> {
   /**
-   * deployment_target_id is the id of the deployment target
+   * id is the id of the deployment target
    *
-   * @generated from field: string deployment_target_id = 1;
+   * @generated from field: string id = 1;
    */
-  deploymentTargetId: string;
+  id: string;
 
   /**
-   * deployment_target_name is the name of the deployment target
+   * name is the name of the deployment target
    *
-   * @generated from field: string deployment_target_name = 2;
+   * @generated from field: string name = 2;
    */
-  deploymentTargetName: string;
+  name: string;
 
   constructor(data?: PartialMessage<DeploymentTargetIdentifier>);
 

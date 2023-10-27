@@ -821,15 +821,15 @@ export const EnvGroupVariablesRequest = proto3.makeMessageType(
 );
 
 /**
- * DeploymentTargetIdentifier is the object that identifies a deployment target. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+ * DeploymentTargetIdentifier is the object that identifies a deployment target. One of id or name must be provided, with id taking precedence.
  *
  * @generated from message porter.v1.DeploymentTargetIdentifier
  */
 export const DeploymentTargetIdentifier = proto3.makeMessageType(
   "porter.v1.DeploymentTargetIdentifier",
   () => [
-    { no: 1, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "deployment_target_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

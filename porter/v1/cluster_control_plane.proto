@@ -526,12 +526,12 @@ message EnvGroupVariablesRequest {
   DeploymentTargetIdentifier deployment_target_identifier = 4;
 }
 
-// DeploymentTargetIdentifier is the object that identifies a deployment target. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+// DeploymentTargetIdentifier is the object that identifies a deployment target. One of id or name must be provided, with id taking precedence.
 message DeploymentTargetIdentifier {
-  // deployment_target_id is the id of the deployment target
-  string deployment_target_id = 1;
-  // deployment_target_name is the name of the deployment target
-  string deployment_target_name = 2;
+  // id is the id of the deployment target
+  string id = 1;
+  // name is the name of the deployment target
+  string name = 2;
 }
 
 // EnvGroupVariablesResponse is the response object when retrieving the variables for a given EnvGroup
