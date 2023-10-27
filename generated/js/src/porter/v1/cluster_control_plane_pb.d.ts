@@ -1166,7 +1166,7 @@ export declare class ValidatePorterAppRequest extends Message<ValidatePorterAppR
   projectId: bigint;
 
   /**
-   * deployment_target_id is the id of the deployment target where the app will be installed
+   * deployment_target_id is the id of the deployment target where the app will be installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
    *
    * @generated from field: string deployment_target_id = 2;
    */
@@ -1208,6 +1208,13 @@ export declare class ValidatePorterAppRequest extends Message<ValidatePorterAppR
    * @deprecated
    */
   baseDeploymentTargetId: string;
+
+  /**
+   * deployment_target_name is the name of the deployment target where the app will be installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+   *
+   * @generated from field: string deployment_target_name = 8;
+   */
+  deploymentTargetName: string;
 
   constructor(data?: PartialMessage<ValidatePorterAppRequest>);
 
@@ -1258,7 +1265,7 @@ export declare class ApplyPorterAppRequest extends Message<ApplyPorterAppRequest
   projectId: bigint;
 
   /**
-   * deployment_target_id is the id of the deployment target where the app will be installed
+   * deployment_target_id is the id of the deployment target where the app will be installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
    *
    * @generated from field: string deployment_target_id = 2;
    */
@@ -1298,6 +1305,13 @@ export declare class ApplyPorterAppRequest extends Message<ApplyPorterAppRequest
    * @generated from field: bool is_hard_env_update = 7;
    */
   isHardEnvUpdate: boolean;
+
+  /**
+   * deployment_target_name is the name of the deployment target where the app will be installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+   *
+   * @generated from field: string deployment_target_name = 8;
+   */
+  deploymentTargetName: string;
 
   constructor(data?: PartialMessage<ApplyPorterAppRequest>);
 
@@ -1419,7 +1433,7 @@ export declare class RollbackRevisionRequest extends Message<RollbackRevisionReq
   appId: bigint;
 
   /**
-   * deployment_target_id is the id of the deployment target where the app is installed
+   * deployment_target_id is the id of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
    *
    * @generated from field: string deployment_target_id = 3;
    */
@@ -1431,6 +1445,13 @@ export declare class RollbackRevisionRequest extends Message<RollbackRevisionReq
    * @generated from field: string app_revision_id = 4;
    */
   appRevisionId: string;
+
+  /**
+   * deployment_target_name is the name of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+   *
+   * @generated from field: string deployment_target_name = 5;
+   */
+  deploymentTargetName: string;
 
   constructor(data?: PartialMessage<RollbackRevisionRequest>);
 
@@ -1555,7 +1576,7 @@ export declare class DeleteAppDeploymentRequest extends Message<DeleteAppDeploym
   projectId: bigint;
 
   /**
-   * deployment_target_id is the id of the deployment target where the app is being uninstalled from
+   * deployment_target_id is the id of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
    *
    * @generated from field: string deployment_target_id = 2;
    */
@@ -1567,6 +1588,13 @@ export declare class DeleteAppDeploymentRequest extends Message<DeleteAppDeploym
    * @generated from field: string app_name = 3;
    */
   appName: string;
+
+  /**
+   * deployment_target_name is the name of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+   *
+   * @generated from field: string deployment_target_name = 4;
+   */
+  deploymentTargetName: string;
 
   constructor(data?: PartialMessage<DeleteAppDeploymentRequest>);
 
@@ -1616,11 +1644,18 @@ export declare class DeleteDeploymentTargetRequest extends Message<DeleteDeploym
   projectId: bigint;
 
   /**
-   * deployment_target_id is the id of the deployment target to be deleted
+   * deployment_target_id is the id of the deployment target to be deleted. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
    *
    * @generated from field: string deployment_target_id = 2;
    */
   deploymentTargetId: string;
+
+  /**
+   * deployment_target_name is the name of the deployment target to be deleted. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+   *
+   * @generated from field: string deployment_target_name = 3;
+   */
+  deploymentTargetName: string;
 
   constructor(data?: PartialMessage<DeleteDeploymentTargetRequest>);
 
@@ -1675,11 +1710,18 @@ export declare class CurrentAppRevisionRequest extends Message<CurrentAppRevisio
   appId: bigint;
 
   /**
-   * deployment_target_id is the id of the deployment target where the app is installed
+   * deployment_target_id is the id of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
    *
    * @generated from field: string deployment_target_id = 3;
    */
   deploymentTargetId: string;
+
+  /**
+   * deployment_target_name is the name of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+   *
+   * @generated from field: string deployment_target_name = 4;
+   */
+  deploymentTargetName: string;
 
   constructor(data?: PartialMessage<CurrentAppRevisionRequest>);
 
@@ -1843,11 +1885,18 @@ export declare class ListAppRevisionsRequest extends Message<ListAppRevisionsReq
   appId: bigint;
 
   /**
-   * deployment_target_id is the id of the deployment target where the app is installed
+   * deployment_target_id is the id of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
    *
    * @generated from field: string deployment_target_id = 3;
    */
   deploymentTargetId: string;
+
+  /**
+   * deployment_target_name is the name of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+   *
+   * @generated from field: string deployment_target_name = 4;
+   */
+  deploymentTargetName: string;
 
   constructor(data?: PartialMessage<ListAppRevisionsRequest>);
 
@@ -1900,7 +1949,14 @@ export declare class LatestAppRevisionsRequest extends Message<LatestAppRevision
   projectId: bigint;
 
   /**
-   * deployment_target_id is the id of the deployment target to retrieve revisions from
+   * deployment_target_name is the name of the deployment target to retrieve revisions from. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+   *
+   * @generated from field: string deployment_target_name = 2;
+   */
+  deploymentTargetName: string;
+
+  /**
+   * deployment_target_id is the id of the deployment target to retrieve revisions from. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
    *
    * @generated from field: string deployment_target_id = 3;
    */
@@ -2115,6 +2171,13 @@ export declare class DeploymentTargetDetailsResponse extends Message<DeploymentT
    */
   isPreview: boolean;
 
+  /**
+   * deployment_target_name is the name of the deployment target
+   *
+   * @generated from field: string deployment_target_name = 4;
+   */
+  deploymentTargetName: string;
+
   constructor(data?: PartialMessage<DeploymentTargetDetailsResponse>);
 
   static readonly runtime: typeof proto3;
@@ -2289,6 +2352,8 @@ export declare class EnvGroupVariablesRequest extends Message<EnvGroupVariablesR
   projectId: bigint;
 
   /**
+   * deployment_target_id is the id of the deployment target for the env group. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+   *
    * @generated from field: string deployment_target_id = 2;
    */
   deploymentTargetId: string;
@@ -2297,6 +2362,13 @@ export declare class EnvGroupVariablesRequest extends Message<EnvGroupVariablesR
    * @generated from field: porter.v1.EnvGroup env_group = 3;
    */
   envGroup?: EnvGroup;
+
+  /**
+   * deployment_target_name is the name of the deployment target for the env group. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+   *
+   * @generated from field: string deployment_target_name = 4;
+   */
+  deploymentTargetName: string;
 
   constructor(data?: PartialMessage<EnvGroupVariablesRequest>);
 
@@ -2351,6 +2423,8 @@ export declare class LatestEnvGroupWithVariablesRequest extends Message<LatestEn
   projectId: bigint;
 
   /**
+   * deployment_target_id is the id of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+   *
    * @generated from field: string deployment_target_id = 2;
    */
   deploymentTargetId: string;
@@ -2359,6 +2433,13 @@ export declare class LatestEnvGroupWithVariablesRequest extends Message<LatestEn
    * @generated from field: string env_group_name = 3;
    */
   envGroupName: string;
+
+  /**
+   * deployment_target_name is the name of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+   *
+   * @generated from field: string deployment_target_name = 4;
+   */
+  deploymentTargetName: string;
 
   constructor(data?: PartialMessage<LatestEnvGroupWithVariablesRequest>);
 
@@ -2421,6 +2502,8 @@ export declare class UpdateAppImageRequest extends Message<UpdateAppImageRequest
   appName: string;
 
   /**
+   * deployment_target_id is the id of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+   *
    * @generated from field: string deployment_target_id = 3;
    */
   deploymentTargetId: string;
@@ -2434,6 +2517,13 @@ export declare class UpdateAppImageRequest extends Message<UpdateAppImageRequest
    * @generated from field: string tag = 5;
    */
   tag: string;
+
+  /**
+   * deployment_target_name is the name of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+   *
+   * @generated from field: string deployment_target_name = 6;
+   */
+  deploymentTargetName: string;
 
   constructor(data?: PartialMessage<UpdateAppImageRequest>);
 
@@ -2553,6 +2643,8 @@ export declare class AppHelmValuesRequest extends Message<AppHelmValuesRequest> 
   appId: bigint;
 
   /**
+   * deployment_target_id is the id of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+   *
    * @generated from field: string deployment_target_id = 3;
    */
   deploymentTargetId: string;
@@ -2563,6 +2655,13 @@ export declare class AppHelmValuesRequest extends Message<AppHelmValuesRequest> 
    * @generated from field: bool with_defaults = 4;
    */
   withDefaults: boolean;
+
+  /**
+   * deployment_target_name is the name of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+   *
+   * @generated from field: string deployment_target_name = 5;
+   */
+  deploymentTargetName: string;
 
   constructor(data?: PartialMessage<AppHelmValuesRequest>);
 
@@ -2624,6 +2723,8 @@ export declare class ManualServiceRunRequest extends Message<ManualServiceRunReq
   appName: string;
 
   /**
+   * deployment_target_id is the id of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+   *
    * @generated from field: string deployment_target_id = 3;
    */
   deploymentTargetId: string;
@@ -2639,6 +2740,13 @@ export declare class ManualServiceRunRequest extends Message<ManualServiceRunReq
    * @generated from field: optional string command = 5;
    */
   command?: string;
+
+  /**
+   * deployment_target_name is the name of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+   *
+   * @generated from field: string deployment_target_name = 6;
+   */
+  deploymentTargetName: string;
 
   constructor(data?: PartialMessage<ManualServiceRunRequest>);
 
