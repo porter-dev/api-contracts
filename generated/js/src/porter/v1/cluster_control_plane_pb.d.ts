@@ -1166,9 +1166,10 @@ export declare class ValidatePorterAppRequest extends Message<ValidatePorterAppR
   projectId: bigint;
 
   /**
-   * deployment_target_id is the id of the deployment target where the app will be installed
+   * deployment_target_id is the id of the deployment target where the app will be installed. Deprecated: use deployment_target_identifier.
    *
-   * @generated from field: string deployment_target_id = 2;
+   * @generated from field: string deployment_target_id = 2 [deprecated = true];
+   * @deprecated
    */
   deploymentTargetId: string;
 
@@ -1208,6 +1209,13 @@ export declare class ValidatePorterAppRequest extends Message<ValidatePorterAppR
    * @deprecated
    */
   baseDeploymentTargetId: string;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target where the app will be installed
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 8;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
 
   constructor(data?: PartialMessage<ValidatePorterAppRequest>);
 
@@ -1258,9 +1266,10 @@ export declare class ApplyPorterAppRequest extends Message<ApplyPorterAppRequest
   projectId: bigint;
 
   /**
-   * deployment_target_id is the id of the deployment target where the app will be installed
+   * deployment_target_id is the id of the deployment target where the app will be installed. Deprecated: use deployment_target_identifier.
    *
-   * @generated from field: string deployment_target_id = 2;
+   * @generated from field: string deployment_target_id = 2 [deprecated = true];
+   * @deprecated
    */
   deploymentTargetId: string;
 
@@ -1298,6 +1307,13 @@ export declare class ApplyPorterAppRequest extends Message<ApplyPorterAppRequest
    * @generated from field: bool is_hard_env_update = 7;
    */
   isHardEnvUpdate: boolean;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target where the app will be installed
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 8;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
 
   constructor(data?: PartialMessage<ApplyPorterAppRequest>);
 
@@ -1419,9 +1435,10 @@ export declare class RollbackRevisionRequest extends Message<RollbackRevisionReq
   appId: bigint;
 
   /**
-   * deployment_target_id is the id of the deployment target where the app is installed
+   * deployment_target_id is the id of the deployment target where the app is installed. Deprecated: use deployment_target_identifier.
    *
-   * @generated from field: string deployment_target_id = 3;
+   * @generated from field: string deployment_target_id = 3 [deprecated = true];
+   * @deprecated
    */
   deploymentTargetId: string;
 
@@ -1431,6 +1448,13 @@ export declare class RollbackRevisionRequest extends Message<RollbackRevisionReq
    * @generated from field: string app_revision_id = 4;
    */
   appRevisionId: string;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target for the app
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 5;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
 
   constructor(data?: PartialMessage<RollbackRevisionRequest>);
 
@@ -1555,9 +1579,10 @@ export declare class DeleteAppDeploymentRequest extends Message<DeleteAppDeploym
   projectId: bigint;
 
   /**
-   * deployment_target_id is the id of the deployment target where the app is being uninstalled from
+   * deployment_target_id is the id of the deployment target where the app is installed. Deprecated: use deployment_target_identifier.
    *
-   * @generated from field: string deployment_target_id = 2;
+   * @generated from field: string deployment_target_id = 2 [deprecated = true];
+   * @deprecated
    */
   deploymentTargetId: string;
 
@@ -1567,6 +1592,13 @@ export declare class DeleteAppDeploymentRequest extends Message<DeleteAppDeploym
    * @generated from field: string app_name = 3;
    */
   appName: string;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target for the app
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 4;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
 
   constructor(data?: PartialMessage<DeleteAppDeploymentRequest>);
 
@@ -1616,11 +1648,19 @@ export declare class DeleteDeploymentTargetRequest extends Message<DeleteDeploym
   projectId: bigint;
 
   /**
-   * deployment_target_id is the id of the deployment target to be deleted
+   * deployment_target_id is the id of the deployment target to be deleted. Deprecated: use deployment_target_identifier.
    *
-   * @generated from field: string deployment_target_id = 2;
+   * @generated from field: string deployment_target_id = 2 [deprecated = true];
+   * @deprecated
    */
   deploymentTargetId: string;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target for the app
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 3;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
 
   constructor(data?: PartialMessage<DeleteDeploymentTargetRequest>);
 
@@ -1675,11 +1715,19 @@ export declare class CurrentAppRevisionRequest extends Message<CurrentAppRevisio
   appId: bigint;
 
   /**
-   * deployment_target_id is the id of the deployment target where the app is installed
+   * deployment_target_id is the id of the deployment target where the app is installed. Deprecated: use deployment_target_identifier.
    *
-   * @generated from field: string deployment_target_id = 3;
+   * @generated from field: string deployment_target_id = 3 [deprecated = true];
+   * @deprecated
    */
   deploymentTargetId: string;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target for the app
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 4;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
 
   constructor(data?: PartialMessage<CurrentAppRevisionRequest>);
 
@@ -1843,11 +1891,19 @@ export declare class ListAppRevisionsRequest extends Message<ListAppRevisionsReq
   appId: bigint;
 
   /**
-   * deployment_target_id is the id of the deployment target where the app is installed
+   * deployment_target_id is the id of the deployment target where the app is installed. Deprecated: use deployment_target_identifier.
    *
-   * @generated from field: string deployment_target_id = 3;
+   * @generated from field: string deployment_target_id = 3 [deprecated = true];
+   * @deprecated
    */
   deploymentTargetId: string;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target for the app
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 4;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
 
   constructor(data?: PartialMessage<ListAppRevisionsRequest>);
 
@@ -1900,9 +1956,17 @@ export declare class LatestAppRevisionsRequest extends Message<LatestAppRevision
   projectId: bigint;
 
   /**
-   * deployment_target_id is the id of the deployment target to retrieve revisions from
+   * deployment_target_identifier is the object that identifies the deployment target to retrieve revisions from
    *
-   * @generated from field: string deployment_target_id = 3;
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 2;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  /**
+   * deployment_target_id is the id of the deployment target to retrieve revisions from. Deprecated: use deployment_target_identifier.
+   *
+   * @generated from field: string deployment_target_id = 3 [deprecated = true];
+   * @deprecated
    */
   deploymentTargetId: string;
 
@@ -2115,6 +2179,13 @@ export declare class DeploymentTargetDetailsResponse extends Message<DeploymentT
    */
   isPreview: boolean;
 
+  /**
+   * deployment_target_name is the name of the deployment target
+   *
+   * @generated from field: string deployment_target_name = 4;
+   */
+  deploymentTargetName: string;
+
   constructor(data?: PartialMessage<DeploymentTargetDetailsResponse>);
 
   static readonly runtime: typeof proto3;
@@ -2289,7 +2360,10 @@ export declare class EnvGroupVariablesRequest extends Message<EnvGroupVariablesR
   projectId: bigint;
 
   /**
-   * @generated from field: string deployment_target_id = 2;
+   * deployment_target_id is the id of the deployment target for the env group. Deprecated: use deployment_target_identifier.
+   *
+   * @generated from field: string deployment_target_id = 2 [deprecated = true];
+   * @deprecated
    */
   deploymentTargetId: string;
 
@@ -2297,6 +2371,13 @@ export declare class EnvGroupVariablesRequest extends Message<EnvGroupVariablesR
    * @generated from field: porter.v1.EnvGroup env_group = 3;
    */
   envGroup?: EnvGroup;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target for the env group
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 4;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
 
   constructor(data?: PartialMessage<EnvGroupVariablesRequest>);
 
@@ -2311,6 +2392,41 @@ export declare class EnvGroupVariablesRequest extends Message<EnvGroupVariablesR
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EnvGroupVariablesRequest;
 
   static equals(a: EnvGroupVariablesRequest | PlainMessage<EnvGroupVariablesRequest> | undefined, b: EnvGroupVariablesRequest | PlainMessage<EnvGroupVariablesRequest> | undefined): boolean;
+}
+
+/**
+ * DeploymentTargetIdentifier is the object that identifies a deployment target. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+ *
+ * @generated from message porter.v1.DeploymentTargetIdentifier
+ */
+export declare class DeploymentTargetIdentifier extends Message<DeploymentTargetIdentifier> {
+  /**
+   * deployment_target_id is the id of the deployment target
+   *
+   * @generated from field: string deployment_target_id = 1;
+   */
+  deploymentTargetId: string;
+
+  /**
+   * deployment_target_name is the name of the deployment target
+   *
+   * @generated from field: string deployment_target_name = 2;
+   */
+  deploymentTargetName: string;
+
+  constructor(data?: PartialMessage<DeploymentTargetIdentifier>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeploymentTargetIdentifier";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeploymentTargetIdentifier;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeploymentTargetIdentifier;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeploymentTargetIdentifier;
+
+  static equals(a: DeploymentTargetIdentifier | PlainMessage<DeploymentTargetIdentifier> | undefined, b: DeploymentTargetIdentifier | PlainMessage<DeploymentTargetIdentifier> | undefined): boolean;
 }
 
 /**
@@ -2351,7 +2467,10 @@ export declare class LatestEnvGroupWithVariablesRequest extends Message<LatestEn
   projectId: bigint;
 
   /**
-   * @generated from field: string deployment_target_id = 2;
+   * deployment_target_id is the id of the deployment target where the app is installed. Deprecated: use deployment_target_identifier.
+   *
+   * @generated from field: string deployment_target_id = 2 [deprecated = true];
+   * @deprecated
    */
   deploymentTargetId: string;
 
@@ -2359,6 +2478,13 @@ export declare class LatestEnvGroupWithVariablesRequest extends Message<LatestEn
    * @generated from field: string env_group_name = 3;
    */
   envGroupName: string;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target for the env group
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 4;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
 
   constructor(data?: PartialMessage<LatestEnvGroupWithVariablesRequest>);
 
@@ -2421,7 +2547,10 @@ export declare class UpdateAppImageRequest extends Message<UpdateAppImageRequest
   appName: string;
 
   /**
-   * @generated from field: string deployment_target_id = 3;
+   * deployment_target_id is the id of the deployment target where the app is installed. Deprecated: use deployment_target_identifier.
+   *
+   * @generated from field: string deployment_target_id = 3 [deprecated = true];
+   * @deprecated
    */
   deploymentTargetId: string;
 
@@ -2434,6 +2563,13 @@ export declare class UpdateAppImageRequest extends Message<UpdateAppImageRequest
    * @generated from field: string tag = 5;
    */
   tag: string;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target for the app
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 6;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
 
   constructor(data?: PartialMessage<UpdateAppImageRequest>);
 
@@ -2553,7 +2689,10 @@ export declare class AppHelmValuesRequest extends Message<AppHelmValuesRequest> 
   appId: bigint;
 
   /**
-   * @generated from field: string deployment_target_id = 3;
+   * deployment_target_id is the id of the deployment target where the app is installed. Deprecated: use deployment_target_identifier.
+   *
+   * @generated from field: string deployment_target_id = 3 [deprecated = true];
+   * @deprecated
    */
   deploymentTargetId: string;
 
@@ -2563,6 +2702,13 @@ export declare class AppHelmValuesRequest extends Message<AppHelmValuesRequest> 
    * @generated from field: bool with_defaults = 4;
    */
   withDefaults: boolean;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target for the app
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 5;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
 
   constructor(data?: PartialMessage<AppHelmValuesRequest>);
 
@@ -2624,7 +2770,10 @@ export declare class ManualServiceRunRequest extends Message<ManualServiceRunReq
   appName: string;
 
   /**
-   * @generated from field: string deployment_target_id = 3;
+   * deployment_target_id is the id of the deployment target where the app is installed. Deprecated: use deployment_target_identifier.
+   *
+   * @generated from field: string deployment_target_id = 3 [deprecated = true];
+   * @deprecated
    */
   deploymentTargetId: string;
 
@@ -2639,6 +2788,13 @@ export declare class ManualServiceRunRequest extends Message<ManualServiceRunReq
    * @generated from field: optional string command = 5;
    */
   command?: string;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target for the app
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 6;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
 
   constructor(data?: PartialMessage<ManualServiceRunRequest>);
 
