@@ -758,6 +758,7 @@ export const GetAppTemplateResponse = proto3.makeMessageType(
   "porter.v1.GetAppTemplateResponse",
   () => [
     { no: 1, name: "app_template", kind: "message", T: PorterApp },
+    { no: 2, name: "app_env", kind: "message", T: EnvGroupVariables },
   ],
 );
 

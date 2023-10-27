@@ -451,6 +451,8 @@ message GetAppTemplateRequest {
 message GetAppTemplateResponse {
   // app_template is the PorterApp template hydrated with the latest revision of the base app
   PorterApp app_template = 1;
+  // app_env is the current set of environment variables that will be used alongside the app template
+  EnvGroupVariables app_env = 2;
 }
 
 message PredeployStatusRequest {

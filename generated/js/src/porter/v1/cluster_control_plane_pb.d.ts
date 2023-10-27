@@ -2230,6 +2230,13 @@ export declare class GetAppTemplateResponse extends Message<GetAppTemplateRespon
    */
   appTemplate?: PorterApp;
 
+  /**
+   * app_env is the current set of environment variables that will be used alongside the app template
+   *
+   * @generated from field: porter.v1.EnvGroupVariables app_env = 2;
+   */
+  appEnv?: EnvGroupVariables;
+
   constructor(data?: PartialMessage<GetAppTemplateResponse>);
 
   static readonly runtime: typeof proto3;
