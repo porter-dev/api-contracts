@@ -3402,9 +3402,9 @@ type LatestAppRevisionsRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	ProjectId int64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
-	// deployment_target_name is the name of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+	// deployment_target_name is the name of the deployment target to retrieve revisions from. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
 	DeploymentTargetName string `protobuf:"bytes,2,opt,name=deployment_target_name,json=deploymentTargetName,proto3" json:"deployment_target_name,omitempty"`
-	// deployment_target_id is the id of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+	// deployment_target_id is the id of the deployment target to retrieve revisions from. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
 	DeploymentTargetId string `protobuf:"bytes,3,opt,name=deployment_target_id,json=deploymentTargetId,proto3" json:"deployment_target_id,omitempty"`
 }
 

@@ -1949,14 +1949,14 @@ export declare class LatestAppRevisionsRequest extends Message<LatestAppRevision
   projectId: bigint;
 
   /**
-   * deployment_target_name is the name of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+   * deployment_target_name is the name of the deployment target to retrieve revisions from. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
    *
    * @generated from field: string deployment_target_name = 2;
    */
   deploymentTargetName: string;
 
   /**
-   * deployment_target_id is the id of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+   * deployment_target_id is the id of the deployment target to retrieve revisions from. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
    *
    * @generated from field: string deployment_target_id = 3;
    */

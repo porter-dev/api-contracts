@@ -391,9 +391,9 @@ message ListAppRevisionsResponse {
 
 message LatestAppRevisionsRequest {
   int64 project_id = 1;
-  // deployment_target_name is the name of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+  // deployment_target_name is the name of the deployment target to retrieve revisions from. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
   string deployment_target_name = 2;
-  // deployment_target_id is the id of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+  // deployment_target_id is the id of the deployment target to retrieve revisions from. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
   string deployment_target_id = 3;
 }
 
