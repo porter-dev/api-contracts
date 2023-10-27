@@ -339,6 +339,7 @@ export const ListImagesForRepositoryResponse = proto3.makeMessageType(
 
 /**
  * @generated from message porter.v1.Image
+ * @deprecated
  */
 export const Image = proto3.makeMessageType(
   "porter.v1.Image",
@@ -347,6 +348,30 @@ export const Image = proto3.makeMessageType(
     { no: 2, name: "tag", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "digest", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "updated_at", kind: "message", T: Timestamp },
+  ],
+);
+
+/**
+ * ImageInfo describes everything related to a cloud-agnostic Docker image
+ *
+ * @generated from message porter.v1.ImageInfo
+ */
+export const ImageInfo = proto3.makeMessageType(
+  "porter.v1.ImageInfo",
+  () => [
+    { no: 1, name: "uri", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "artifacts", kind: "message", T: ImageArtifact, repeated: true },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.ImageArtifact
+ */
+export const ImageArtifact = proto3.makeMessageType(
+  "porter.v1.ImageArtifact",
+  () => [
+    { no: 1, name: "tag", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "updated_at", kind: "message", T: Timestamp },
   ],
 );
 
@@ -924,6 +949,30 @@ export const ManualServiceRunRequest = proto3.makeMessageType(
 export const ManualServiceRunResponse = proto3.makeMessageType(
   "porter.v1.ManualServiceRunResponse",
   [],
+);
+
+/**
+ * ImagesRequest is the request object for listing images
+ *
+ * @generated from message porter.v1.ImagesRequest
+ */
+export const ImagesRequest = proto3.makeMessageType(
+  "porter.v1.ImagesRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * ImagesResponse is the response object for listing images
+ *
+ * @generated from message porter.v1.ImagesResponse
+ */
+export const ImagesResponse = proto3.makeMessageType(
+  "porter.v1.ImagesResponse",
+  () => [
+    { no: 1, name: "images", kind: "message", T: ImageInfo, repeated: true },
+  ],
 );
 
 /**

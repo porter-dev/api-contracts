@@ -176,10 +176,27 @@ message ListImagesForRepositoryResponse {
 }
 
 message Image {
+  // Deprecated: use ImageInfo instead
+  option deprecated = true;
   string repository_name = 1;
   string tag = 2;
   string digest = 3;
   google.protobuf.Timestamp updated_at = 4;
+}
+
+// ImageInfo describes everything related to a cloud-agnostic Docker image
+message ImageInfo {
+  // uri the uri of an image. A valid image pull will use this uri suffixed by a tag
+  string uri = 1;
+  // artifacts refers to the instances of an image in an image repository, each sharing the same uri
+  repeated ImageArtifact artifacts = 2;
+}
+
+message ImageArtifact {
+  // tag is the tag associated with the artifact
+  string tag = 1;
+  // updated_at is the time at which the artifact was created or updated
+  google.protobuf.Timestamp updated_at = 2;
 }
 
 message TokenForRegistryRequest {
@@ -557,6 +574,16 @@ message ManualServiceRunRequest {
 // ManualServiceRunResponse is the response object for ManualServiceRun
 message ManualServiceRunResponse {}
 
+// ImagesRequest is the request object for listing images
+message ImagesRequest {
+  int64 project_id = 1;
+}
+
+// ImagesResponse is the response object for listing images
+message ImagesResponse {
+  repeated ImageInfo images = 1;
+}
+
 service ClusterControlPlaneService {
   // QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas
   rpc QuotaIncrease(QuotaIncreaseRequest) returns (QuotaIncreaseResponse) {}
@@ -600,12 +627,6 @@ service ClusterControlPlaneService {
 
   // TokenForRegistry returns a token for accessing a given registry
   rpc TokenForRegistry(TokenForRegistryRequest) returns (TokenForRegistryResponse) {}
-
-  // ListRepositoriesForRegistry lists the repositories for a given registry, provided it is in the scope of the project id
-  rpc ListRepositoriesForRegistry(ListRepositoriesForRegistryRequest) returns (ListRepositoriesForRegistryResponse) {}
-
-  // ListImagesForRepository lists the repositories for a given registry, provided it is in the scope of the project id
-  rpc ListImagesForRepository(ListImagesForRepositoryRequest) returns (ListImagesForRepositoryResponse) {}
 
   // ValidatePorterApp validates and hydrates a definition of a porter app, based on the porter.yaml file
   rpc ValidatePorterApp(ValidatePorterAppRequest) returns (ValidatePorterAppResponse) {}
@@ -677,6 +698,9 @@ service ClusterControlPlaneService {
   // ClusterNetworkSettings gets the network settings (region, subnets, vpc) for a given project/cluster combination
   rpc ClusterNetworkSettings(ClusterNetworkSettingsRequest) returns (ClusterNetworkSettingsResponse) {}
 
+  // Images returns images matching provided filter parameters
+  rpc Images(ImagesRequest) returns (ImagesResponse) {}
+
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
   // Deprecated. Use TokenForRegistry instead.
   rpc DockerConfigFileForRegistry(DockerConfigFileForRegistryRequest) returns (DockerConfigFileForRegistryResponse) {
@@ -711,6 +735,18 @@ service ClusterControlPlaneService {
   // EKSBearerToken gets a bearer token for programatic access to an EKS cluster's kubernetes API.
   // Deprecated. Use KubeConfigForCluster instead.
   rpc EKSBearerToken(EKSBearerTokenRequest) returns (EKSBearerTokenResponse) {
+    option deprecated = true;
+  }
+
+  // ListRepositoriesForRegistry lists the repositories for a given registry, provided it is in the scope of the project id
+  // Deprecated. Use Images instead.
+  rpc ListRepositoriesForRegistry(ListRepositoriesForRegistryRequest) returns (ListRepositoriesForRegistryResponse) {
+    option deprecated = true;
+  }
+
+  // ListImagesForRepository lists the repositories for a given registry, provided it is in the scope of the project id
+  // Deprecated. Use Images instead.
+  rpc ListImagesForRepository(ListImagesForRepositoryRequest) returns (ListImagesForRepositoryResponse) {
     option deprecated = true;
   }
 }

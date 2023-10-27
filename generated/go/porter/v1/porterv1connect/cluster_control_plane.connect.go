@@ -70,12 +70,6 @@ const (
 	// ClusterControlPlaneServiceTokenForRegistryProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's TokenForRegistry RPC.
 	ClusterControlPlaneServiceTokenForRegistryProcedure = "/porter.v1.ClusterControlPlaneService/TokenForRegistry"
-	// ClusterControlPlaneServiceListRepositoriesForRegistryProcedure is the fully-qualified name of the
-	// ClusterControlPlaneService's ListRepositoriesForRegistry RPC.
-	ClusterControlPlaneServiceListRepositoriesForRegistryProcedure = "/porter.v1.ClusterControlPlaneService/ListRepositoriesForRegistry"
-	// ClusterControlPlaneServiceListImagesForRepositoryProcedure is the fully-qualified name of the
-	// ClusterControlPlaneService's ListImagesForRepository RPC.
-	ClusterControlPlaneServiceListImagesForRepositoryProcedure = "/porter.v1.ClusterControlPlaneService/ListImagesForRepository"
 	// ClusterControlPlaneServiceValidatePorterAppProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's ValidatePorterApp RPC.
 	ClusterControlPlaneServiceValidatePorterAppProcedure = "/porter.v1.ClusterControlPlaneService/ValidatePorterApp"
@@ -142,6 +136,9 @@ const (
 	// ClusterControlPlaneServiceClusterNetworkSettingsProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's ClusterNetworkSettings RPC.
 	ClusterControlPlaneServiceClusterNetworkSettingsProcedure = "/porter.v1.ClusterControlPlaneService/ClusterNetworkSettings"
+	// ClusterControlPlaneServiceImagesProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's Images RPC.
+	ClusterControlPlaneServiceImagesProcedure = "/porter.v1.ClusterControlPlaneService/Images"
 	// ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DockerConfigFileForRegistry RPC.
 	ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure = "/porter.v1.ClusterControlPlaneService/DockerConfigFileForRegistry"
@@ -160,6 +157,12 @@ const (
 	// ClusterControlPlaneServiceEKSBearerTokenProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's EKSBearerToken RPC.
 	ClusterControlPlaneServiceEKSBearerTokenProcedure = "/porter.v1.ClusterControlPlaneService/EKSBearerToken"
+	// ClusterControlPlaneServiceListRepositoriesForRegistryProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's ListRepositoriesForRegistry RPC.
+	ClusterControlPlaneServiceListRepositoriesForRegistryProcedure = "/porter.v1.ClusterControlPlaneService/ListRepositoriesForRegistry"
+	// ClusterControlPlaneServiceListImagesForRepositoryProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's ListImagesForRepository RPC.
+	ClusterControlPlaneServiceListImagesForRepositoryProcedure = "/porter.v1.ClusterControlPlaneService/ListImagesForRepository"
 )
 
 // ClusterControlPlaneServiceClient is a client for the porter.v1.ClusterControlPlaneService
@@ -196,10 +199,6 @@ type ClusterControlPlaneServiceClient interface {
 	DeleteCluster(context.Context, *connect.Request[v1.DeleteClusterRequest]) (*connect.Response[v1.DeleteClusterResponse], error)
 	// TokenForRegistry returns a token for accessing a given registry
 	TokenForRegistry(context.Context, *connect.Request[v1.TokenForRegistryRequest]) (*connect.Response[v1.TokenForRegistryResponse], error)
-	// ListRepositoriesForRegistry lists the repositories for a given registry, provided it is in the scope of the project id
-	ListRepositoriesForRegistry(context.Context, *connect.Request[v1.ListRepositoriesForRegistryRequest]) (*connect.Response[v1.ListRepositoriesForRegistryResponse], error)
-	// ListImagesForRepository lists the repositories for a given registry, provided it is in the scope of the project id
-	ListImagesForRepository(context.Context, *connect.Request[v1.ListImagesForRepositoryRequest]) (*connect.Response[v1.ListImagesForRepositoryResponse], error)
 	// ValidatePorterApp validates and hydrates a definition of a porter app, based on the porter.yaml file
 	ValidatePorterApp(context.Context, *connect.Request[v1.ValidatePorterAppRequest]) (*connect.Response[v1.ValidatePorterAppResponse], error)
 	// ApplyPorterApp applies a porter app as defined by the provided porter.yaml file to a given deployment id
@@ -248,6 +247,8 @@ type ClusterControlPlaneServiceClient interface {
 	ManualServiceRun(context.Context, *connect.Request[v1.ManualServiceRunRequest]) (*connect.Response[v1.ManualServiceRunResponse], error)
 	// ClusterNetworkSettings gets the network settings (region, subnets, vpc) for a given project/cluster combination
 	ClusterNetworkSettings(context.Context, *connect.Request[v1.ClusterNetworkSettingsRequest]) (*connect.Response[v1.ClusterNetworkSettingsResponse], error)
+	// Images returns images matching provided filter parameters
+	Images(context.Context, *connect.Request[v1.ImagesRequest]) (*connect.Response[v1.ImagesResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -279,6 +280,16 @@ type ClusterControlPlaneServiceClient interface {
 	//
 	// Deprecated: do not use.
 	EKSBearerToken(context.Context, *connect.Request[v1.EKSBearerTokenRequest]) (*connect.Response[v1.EKSBearerTokenResponse], error)
+	// ListRepositoriesForRegistry lists the repositories for a given registry, provided it is in the scope of the project id
+	// Deprecated. Use Images instead.
+	//
+	// Deprecated: do not use.
+	ListRepositoriesForRegistry(context.Context, *connect.Request[v1.ListRepositoriesForRegistryRequest]) (*connect.Response[v1.ListRepositoriesForRegistryResponse], error)
+	// ListImagesForRepository lists the repositories for a given registry, provided it is in the scope of the project id
+	// Deprecated. Use Images instead.
+	//
+	// Deprecated: do not use.
+	ListImagesForRepository(context.Context, *connect.Request[v1.ListImagesForRepositoryRequest]) (*connect.Response[v1.ListImagesForRepositoryResponse], error)
 }
 
 // NewClusterControlPlaneServiceClient constructs a client for the
@@ -349,16 +360,6 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 		tokenForRegistry: connect.NewClient[v1.TokenForRegistryRequest, v1.TokenForRegistryResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceTokenForRegistryProcedure,
-			opts...,
-		),
-		listRepositoriesForRegistry: connect.NewClient[v1.ListRepositoriesForRegistryRequest, v1.ListRepositoriesForRegistryResponse](
-			httpClient,
-			baseURL+ClusterControlPlaneServiceListRepositoriesForRegistryProcedure,
-			opts...,
-		),
-		listImagesForRepository: connect.NewClient[v1.ListImagesForRepositoryRequest, v1.ListImagesForRepositoryResponse](
-			httpClient,
-			baseURL+ClusterControlPlaneServiceListImagesForRepositoryProcedure,
 			opts...,
 		),
 		validatePorterApp: connect.NewClient[v1.ValidatePorterAppRequest, v1.ValidatePorterAppResponse](
@@ -471,6 +472,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceClusterNetworkSettingsProcedure,
 			opts...,
 		),
+		images: connect.NewClient[v1.ImagesRequest, v1.ImagesResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceImagesProcedure,
+			opts...,
+		),
 		dockerConfigFileForRegistry: connect.NewClient[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
@@ -501,6 +507,16 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceEKSBearerTokenProcedure,
 			opts...,
 		),
+		listRepositoriesForRegistry: connect.NewClient[v1.ListRepositoriesForRegistryRequest, v1.ListRepositoriesForRegistryResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceListRepositoriesForRegistryProcedure,
+			opts...,
+		),
+		listImagesForRepository: connect.NewClient[v1.ListImagesForRepositoryRequest, v1.ListImagesForRepositoryResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceListImagesForRepositoryProcedure,
+			opts...,
+		),
 	}
 }
 
@@ -518,8 +534,6 @@ type clusterControlPlaneServiceClient struct {
 	clusterStatus                  *connect.Client[v1.ClusterStatusRequest, v1.ClusterStatusResponse]
 	deleteCluster                  *connect.Client[v1.DeleteClusterRequest, v1.DeleteClusterResponse]
 	tokenForRegistry               *connect.Client[v1.TokenForRegistryRequest, v1.TokenForRegistryResponse]
-	listRepositoriesForRegistry    *connect.Client[v1.ListRepositoriesForRegistryRequest, v1.ListRepositoriesForRegistryResponse]
-	listImagesForRepository        *connect.Client[v1.ListImagesForRepositoryRequest, v1.ListImagesForRepositoryResponse]
 	validatePorterApp              *connect.Client[v1.ValidatePorterAppRequest, v1.ValidatePorterAppResponse]
 	applyPorterApp                 *connect.Client[v1.ApplyPorterAppRequest, v1.ApplyPorterAppResponse]
 	rollbackRevision               *connect.Client[v1.RollbackRevisionRequest, v1.RollbackRevisionResponse]
@@ -542,12 +556,15 @@ type clusterControlPlaneServiceClient struct {
 	appHelmValues                  *connect.Client[v1.AppHelmValuesRequest, v1.AppHelmValuesResponse]
 	manualServiceRun               *connect.Client[v1.ManualServiceRunRequest, v1.ManualServiceRunResponse]
 	clusterNetworkSettings         *connect.Client[v1.ClusterNetworkSettingsRequest, v1.ClusterNetworkSettingsResponse]
+	images                         *connect.Client[v1.ImagesRequest, v1.ImagesResponse]
 	dockerConfigFileForRegistry    *connect.Client[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse]
 	eCRTokenForRegistry            *connect.Client[v1.ECRTokenForRegistryRequest, v1.ECRTokenForRegistryResponse]
 	assumeRoleCredentials          *connect.Client[v1.AssumeRoleCredentialsRequest, v1.AssumeRoleCredentialsResponse]
 	assumeRoleChainTargets         *connect.Client[v1.AssumeRoleChainTargetsRequest, v1.AssumeRoleChainTargetsResponse]
 	certificateAuthorityData       *connect.Client[v1.CertificateAuthorityDataRequest, v1.CertificateAuthorityDataResponse]
 	eKSBearerToken                 *connect.Client[v1.EKSBearerTokenRequest, v1.EKSBearerTokenResponse]
+	listRepositoriesForRegistry    *connect.Client[v1.ListRepositoriesForRegistryRequest, v1.ListRepositoriesForRegistryResponse]
+	listImagesForRepository        *connect.Client[v1.ListImagesForRepositoryRequest, v1.ListImagesForRepositoryResponse]
 }
 
 // QuotaIncrease calls porter.v1.ClusterControlPlaneService.QuotaIncrease.
@@ -615,17 +632,6 @@ func (c *clusterControlPlaneServiceClient) DeleteCluster(ctx context.Context, re
 // TokenForRegistry calls porter.v1.ClusterControlPlaneService.TokenForRegistry.
 func (c *clusterControlPlaneServiceClient) TokenForRegistry(ctx context.Context, req *connect.Request[v1.TokenForRegistryRequest]) (*connect.Response[v1.TokenForRegistryResponse], error) {
 	return c.tokenForRegistry.CallUnary(ctx, req)
-}
-
-// ListRepositoriesForRegistry calls
-// porter.v1.ClusterControlPlaneService.ListRepositoriesForRegistry.
-func (c *clusterControlPlaneServiceClient) ListRepositoriesForRegistry(ctx context.Context, req *connect.Request[v1.ListRepositoriesForRegistryRequest]) (*connect.Response[v1.ListRepositoriesForRegistryResponse], error) {
-	return c.listRepositoriesForRegistry.CallUnary(ctx, req)
-}
-
-// ListImagesForRepository calls porter.v1.ClusterControlPlaneService.ListImagesForRepository.
-func (c *clusterControlPlaneServiceClient) ListImagesForRepository(ctx context.Context, req *connect.Request[v1.ListImagesForRepositoryRequest]) (*connect.Response[v1.ListImagesForRepositoryResponse], error) {
-	return c.listImagesForRepository.CallUnary(ctx, req)
 }
 
 // ValidatePorterApp calls porter.v1.ClusterControlPlaneService.ValidatePorterApp.
@@ -739,6 +745,11 @@ func (c *clusterControlPlaneServiceClient) ClusterNetworkSettings(ctx context.Co
 	return c.clusterNetworkSettings.CallUnary(ctx, req)
 }
 
+// Images calls porter.v1.ClusterControlPlaneService.Images.
+func (c *clusterControlPlaneServiceClient) Images(ctx context.Context, req *connect.Request[v1.ImagesRequest]) (*connect.Response[v1.ImagesResponse], error) {
+	return c.images.CallUnary(ctx, req)
+}
+
 // DockerConfigFileForRegistry calls
 // porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry.
 //
@@ -782,6 +793,21 @@ func (c *clusterControlPlaneServiceClient) EKSBearerToken(ctx context.Context, r
 	return c.eKSBearerToken.CallUnary(ctx, req)
 }
 
+// ListRepositoriesForRegistry calls
+// porter.v1.ClusterControlPlaneService.ListRepositoriesForRegistry.
+//
+// Deprecated: do not use.
+func (c *clusterControlPlaneServiceClient) ListRepositoriesForRegistry(ctx context.Context, req *connect.Request[v1.ListRepositoriesForRegistryRequest]) (*connect.Response[v1.ListRepositoriesForRegistryResponse], error) {
+	return c.listRepositoriesForRegistry.CallUnary(ctx, req)
+}
+
+// ListImagesForRepository calls porter.v1.ClusterControlPlaneService.ListImagesForRepository.
+//
+// Deprecated: do not use.
+func (c *clusterControlPlaneServiceClient) ListImagesForRepository(ctx context.Context, req *connect.Request[v1.ListImagesForRepositoryRequest]) (*connect.Response[v1.ListImagesForRepositoryResponse], error) {
+	return c.listImagesForRepository.CallUnary(ctx, req)
+}
+
 // ClusterControlPlaneServiceHandler is an implementation of the
 // porter.v1.ClusterControlPlaneService service.
 type ClusterControlPlaneServiceHandler interface {
@@ -816,10 +842,6 @@ type ClusterControlPlaneServiceHandler interface {
 	DeleteCluster(context.Context, *connect.Request[v1.DeleteClusterRequest]) (*connect.Response[v1.DeleteClusterResponse], error)
 	// TokenForRegistry returns a token for accessing a given registry
 	TokenForRegistry(context.Context, *connect.Request[v1.TokenForRegistryRequest]) (*connect.Response[v1.TokenForRegistryResponse], error)
-	// ListRepositoriesForRegistry lists the repositories for a given registry, provided it is in the scope of the project id
-	ListRepositoriesForRegistry(context.Context, *connect.Request[v1.ListRepositoriesForRegistryRequest]) (*connect.Response[v1.ListRepositoriesForRegistryResponse], error)
-	// ListImagesForRepository lists the repositories for a given registry, provided it is in the scope of the project id
-	ListImagesForRepository(context.Context, *connect.Request[v1.ListImagesForRepositoryRequest]) (*connect.Response[v1.ListImagesForRepositoryResponse], error)
 	// ValidatePorterApp validates and hydrates a definition of a porter app, based on the porter.yaml file
 	ValidatePorterApp(context.Context, *connect.Request[v1.ValidatePorterAppRequest]) (*connect.Response[v1.ValidatePorterAppResponse], error)
 	// ApplyPorterApp applies a porter app as defined by the provided porter.yaml file to a given deployment id
@@ -868,6 +890,8 @@ type ClusterControlPlaneServiceHandler interface {
 	ManualServiceRun(context.Context, *connect.Request[v1.ManualServiceRunRequest]) (*connect.Response[v1.ManualServiceRunResponse], error)
 	// ClusterNetworkSettings gets the network settings (region, subnets, vpc) for a given project/cluster combination
 	ClusterNetworkSettings(context.Context, *connect.Request[v1.ClusterNetworkSettingsRequest]) (*connect.Response[v1.ClusterNetworkSettingsResponse], error)
+	// Images returns images matching provided filter parameters
+	Images(context.Context, *connect.Request[v1.ImagesRequest]) (*connect.Response[v1.ImagesResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -899,6 +923,16 @@ type ClusterControlPlaneServiceHandler interface {
 	//
 	// Deprecated: do not use.
 	EKSBearerToken(context.Context, *connect.Request[v1.EKSBearerTokenRequest]) (*connect.Response[v1.EKSBearerTokenResponse], error)
+	// ListRepositoriesForRegistry lists the repositories for a given registry, provided it is in the scope of the project id
+	// Deprecated. Use Images instead.
+	//
+	// Deprecated: do not use.
+	ListRepositoriesForRegistry(context.Context, *connect.Request[v1.ListRepositoriesForRegistryRequest]) (*connect.Response[v1.ListRepositoriesForRegistryResponse], error)
+	// ListImagesForRepository lists the repositories for a given registry, provided it is in the scope of the project id
+	// Deprecated. Use Images instead.
+	//
+	// Deprecated: do not use.
+	ListImagesForRepository(context.Context, *connect.Request[v1.ListImagesForRepositoryRequest]) (*connect.Response[v1.ListImagesForRepositoryResponse], error)
 }
 
 // NewClusterControlPlaneServiceHandler builds an HTTP handler from the service implementation. It
@@ -965,16 +999,6 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 	clusterControlPlaneServiceTokenForRegistryHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceTokenForRegistryProcedure,
 		svc.TokenForRegistry,
-		opts...,
-	)
-	clusterControlPlaneServiceListRepositoriesForRegistryHandler := connect.NewUnaryHandler(
-		ClusterControlPlaneServiceListRepositoriesForRegistryProcedure,
-		svc.ListRepositoriesForRegistry,
-		opts...,
-	)
-	clusterControlPlaneServiceListImagesForRepositoryHandler := connect.NewUnaryHandler(
-		ClusterControlPlaneServiceListImagesForRepositoryProcedure,
-		svc.ListImagesForRepository,
 		opts...,
 	)
 	clusterControlPlaneServiceValidatePorterAppHandler := connect.NewUnaryHandler(
@@ -1087,6 +1111,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.ClusterNetworkSettings,
 		opts...,
 	)
+	clusterControlPlaneServiceImagesHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceImagesProcedure,
+		svc.Images,
+		opts...,
+	)
 	clusterControlPlaneServiceDockerConfigFileForRegistryHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
 		svc.DockerConfigFileForRegistry,
@@ -1117,6 +1146,16 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.EKSBearerToken,
 		opts...,
 	)
+	clusterControlPlaneServiceListRepositoriesForRegistryHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceListRepositoriesForRegistryProcedure,
+		svc.ListRepositoriesForRegistry,
+		opts...,
+	)
+	clusterControlPlaneServiceListImagesForRepositoryHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceListImagesForRepositoryProcedure,
+		svc.ListImagesForRepository,
+		opts...,
+	)
 	return "/porter.v1.ClusterControlPlaneService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ClusterControlPlaneServiceQuotaIncreaseProcedure:
@@ -1143,10 +1182,6 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceDeleteClusterHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceTokenForRegistryProcedure:
 			clusterControlPlaneServiceTokenForRegistryHandler.ServeHTTP(w, r)
-		case ClusterControlPlaneServiceListRepositoriesForRegistryProcedure:
-			clusterControlPlaneServiceListRepositoriesForRegistryHandler.ServeHTTP(w, r)
-		case ClusterControlPlaneServiceListImagesForRepositoryProcedure:
-			clusterControlPlaneServiceListImagesForRepositoryHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceValidatePorterAppProcedure:
 			clusterControlPlaneServiceValidatePorterAppHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceApplyPorterAppProcedure:
@@ -1191,6 +1226,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceManualServiceRunHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceClusterNetworkSettingsProcedure:
 			clusterControlPlaneServiceClusterNetworkSettingsHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceImagesProcedure:
+			clusterControlPlaneServiceImagesHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure:
 			clusterControlPlaneServiceDockerConfigFileForRegistryHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceECRTokenForRegistryProcedure:
@@ -1203,6 +1240,10 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceCertificateAuthorityDataHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceEKSBearerTokenProcedure:
 			clusterControlPlaneServiceEKSBearerTokenHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceListRepositoriesForRegistryProcedure:
+			clusterControlPlaneServiceListRepositoriesForRegistryHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceListImagesForRepositoryProcedure:
+			clusterControlPlaneServiceListImagesForRepositoryHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -1258,14 +1299,6 @@ func (UnimplementedClusterControlPlaneServiceHandler) DeleteCluster(context.Cont
 
 func (UnimplementedClusterControlPlaneServiceHandler) TokenForRegistry(context.Context, *connect.Request[v1.TokenForRegistryRequest]) (*connect.Response[v1.TokenForRegistryResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.TokenForRegistry is not implemented"))
-}
-
-func (UnimplementedClusterControlPlaneServiceHandler) ListRepositoriesForRegistry(context.Context, *connect.Request[v1.ListRepositoriesForRegistryRequest]) (*connect.Response[v1.ListRepositoriesForRegistryResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ListRepositoriesForRegistry is not implemented"))
-}
-
-func (UnimplementedClusterControlPlaneServiceHandler) ListImagesForRepository(context.Context, *connect.Request[v1.ListImagesForRepositoryRequest]) (*connect.Response[v1.ListImagesForRepositoryResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ListImagesForRepository is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) ValidatePorterApp(context.Context, *connect.Request[v1.ValidatePorterAppRequest]) (*connect.Response[v1.ValidatePorterAppResponse], error) {
@@ -1356,6 +1389,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) ClusterNetworkSettings(con
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ClusterNetworkSettings is not implemented"))
 }
 
+func (UnimplementedClusterControlPlaneServiceHandler) Images(context.Context, *connect.Request[v1.ImagesRequest]) (*connect.Response[v1.ImagesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.Images is not implemented"))
+}
+
 func (UnimplementedClusterControlPlaneServiceHandler) DockerConfigFileForRegistry(context.Context, *connect.Request[v1.DockerConfigFileForRegistryRequest]) (*connect.Response[v1.DockerConfigFileForRegistryResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry is not implemented"))
 }
@@ -1378,4 +1415,12 @@ func (UnimplementedClusterControlPlaneServiceHandler) CertificateAuthorityData(c
 
 func (UnimplementedClusterControlPlaneServiceHandler) EKSBearerToken(context.Context, *connect.Request[v1.EKSBearerTokenRequest]) (*connect.Response[v1.EKSBearerTokenResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.EKSBearerToken is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) ListRepositoriesForRegistry(context.Context, *connect.Request[v1.ListRepositoriesForRegistryRequest]) (*connect.Response[v1.ListRepositoriesForRegistryResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ListRepositoriesForRegistry is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) ListImagesForRepository(context.Context, *connect.Request[v1.ListImagesForRepositoryRequest]) (*connect.Response[v1.ListImagesForRepositoryResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ListImagesForRepository is not implemented"))
 }
