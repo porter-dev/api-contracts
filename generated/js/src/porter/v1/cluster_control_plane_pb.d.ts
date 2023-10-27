@@ -1644,14 +1644,14 @@ export declare class DeleteDeploymentTargetRequest extends Message<DeleteDeploym
   projectId: bigint;
 
   /**
-   * deployment_target_id is the id of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+   * deployment_target_id is the id of the deployment target to be deleted. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
    *
    * @generated from field: string deployment_target_id = 2;
    */
   deploymentTargetId: string;
 
   /**
-   * deployment_target_name is the name of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+   * deployment_target_name is the name of the deployment target to be deleted. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
    *
    * @generated from field: string deployment_target_name = 3;
    */
