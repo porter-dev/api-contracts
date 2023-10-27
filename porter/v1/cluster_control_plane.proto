@@ -264,6 +264,35 @@ message ApplyPorterAppResponse {
   EnumCLIAction cli_action = 2;
 }
 
+message UpdateAppRequest {
+  int64 project_id = 1;
+  // deployment_target_identifier is the object that identifies the deployment target for the app
+  DeploymentTargetIdentifier deployment_target_identifier = 2;
+  // app is the (potentially partial) definition of the PorterApp to be applied
+  PorterApp app = 3;
+  // app_revision_id is the id of the PorterAppRevision to be applied.  This is used by the CLI to provide updates to an existing app revision. If provided, app must be empty.
+  string app_revision_id = 4;
+  // app_env is the current set of environment variables for the upcoming app revision
+  EnvGroupVariables app_env = 5;
+  // deletions is an object containing the names of fields to be deleted from the app
+  Deletions deletions = 6;
+  // app_overrides contains environment specific overrides if they exist, applied depending on the deployment target
+  PorterApp app_overrides = 7;
+  // is_env_override is a flag that indicates whether the app environment should be fully overwritten, or if the new app env variables should be merged with the existing
+  bool is_env_override = 8;
+  // is_predeploy_eligible is a flag that indicates whether the revision is ready for predeploy to run, usually after a successful build
+  bool is_predeploy_eligible = 9;
+  // commit_sha is the current commit sha to be built and applied. If provided, it is assumed that the app source has changed
+  string commit_sha = 10;
+}
+
+message UpdateAppResponse {
+  // app_revision_id is the id of the PorterAppRevision that was updated
+  string app_revision_id = 1;
+  // cli_action is the action that the CLI should take after applying the PorterApp (at the time of writing, either build the image or track whether a predeploy job has completed)
+  EnumCLIAction cli_action = 2;
+}
+
 message UpdateRevisionStatusRequest {
   int64 project_id = 1;
   // app_revision_id is the id of the PorterAppRevision
@@ -699,6 +728,9 @@ service ClusterControlPlaneService {
 
   // ApplyPorterApp applies a porter app as defined by the provided porter.yaml file to a given deployment id
   rpc ApplyPorterApp(ApplyPorterAppRequest) returns (ApplyPorterAppResponse) {}
+
+  // UpdateApp hydrates a definition of a porter app, and takes necessary actions to update the app on the cluster
+  rpc UpdateApp(UpdateAppRequest) returns (UpdateAppResponse) {}
 
   // RollbackRevision reverts an app to the previous revision, or optionally to the revision specified
   rpc RollbackRevision(RollbackRevisionRequest) returns (RollbackRevisionResponse) {}

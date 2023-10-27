@@ -76,6 +76,9 @@ const (
 	// ClusterControlPlaneServiceApplyPorterAppProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's ApplyPorterApp RPC.
 	ClusterControlPlaneServiceApplyPorterAppProcedure = "/porter.v1.ClusterControlPlaneService/ApplyPorterApp"
+	// ClusterControlPlaneServiceUpdateAppProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's UpdateApp RPC.
+	ClusterControlPlaneServiceUpdateAppProcedure = "/porter.v1.ClusterControlPlaneService/UpdateApp"
 	// ClusterControlPlaneServiceRollbackRevisionProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's RollbackRevision RPC.
 	ClusterControlPlaneServiceRollbackRevisionProcedure = "/porter.v1.ClusterControlPlaneService/RollbackRevision"
@@ -209,6 +212,8 @@ type ClusterControlPlaneServiceClient interface {
 	ValidatePorterApp(context.Context, *connect.Request[v1.ValidatePorterAppRequest]) (*connect.Response[v1.ValidatePorterAppResponse], error)
 	// ApplyPorterApp applies a porter app as defined by the provided porter.yaml file to a given deployment id
 	ApplyPorterApp(context.Context, *connect.Request[v1.ApplyPorterAppRequest]) (*connect.Response[v1.ApplyPorterAppResponse], error)
+	// UpdateApp hydrates a definition of a porter app, and takes necessary actions to update the app on the cluster
+	UpdateApp(context.Context, *connect.Request[v1.UpdateAppRequest]) (*connect.Response[v1.UpdateAppResponse], error)
 	// RollbackRevision reverts an app to the previous revision, or optionally to the revision specified
 	RollbackRevision(context.Context, *connect.Request[v1.RollbackRevisionRequest]) (*connect.Response[v1.RollbackRevisionResponse], error)
 	// UpdateRevisionStatus updates the status of a revision
@@ -380,6 +385,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 		applyPorterApp: connect.NewClient[v1.ApplyPorterAppRequest, v1.ApplyPorterAppResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceApplyPorterAppProcedure,
+			opts...,
+		),
+		updateApp: connect.NewClient[v1.UpdateAppRequest, v1.UpdateAppResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceUpdateAppProcedure,
 			opts...,
 		),
 		rollbackRevision: connect.NewClient[v1.RollbackRevisionRequest, v1.RollbackRevisionResponse](
@@ -556,6 +566,7 @@ type clusterControlPlaneServiceClient struct {
 	tokenForRegistry               *connect.Client[v1.TokenForRegistryRequest, v1.TokenForRegistryResponse]
 	validatePorterApp              *connect.Client[v1.ValidatePorterAppRequest, v1.ValidatePorterAppResponse]
 	applyPorterApp                 *connect.Client[v1.ApplyPorterAppRequest, v1.ApplyPorterAppResponse]
+	updateApp                      *connect.Client[v1.UpdateAppRequest, v1.UpdateAppResponse]
 	rollbackRevision               *connect.Client[v1.RollbackRevisionRequest, v1.RollbackRevisionResponse]
 	updateRevisionStatus           *connect.Client[v1.UpdateRevisionStatusRequest, v1.UpdateRevisionStatusResponse]
 	deletePorterApp                *connect.Client[v1.DeletePorterAppRequest, v1.DeletePorterAppResponse]
@@ -664,6 +675,11 @@ func (c *clusterControlPlaneServiceClient) ValidatePorterApp(ctx context.Context
 // ApplyPorterApp calls porter.v1.ClusterControlPlaneService.ApplyPorterApp.
 func (c *clusterControlPlaneServiceClient) ApplyPorterApp(ctx context.Context, req *connect.Request[v1.ApplyPorterAppRequest]) (*connect.Response[v1.ApplyPorterAppResponse], error) {
 	return c.applyPorterApp.CallUnary(ctx, req)
+}
+
+// UpdateApp calls porter.v1.ClusterControlPlaneService.UpdateApp.
+func (c *clusterControlPlaneServiceClient) UpdateApp(ctx context.Context, req *connect.Request[v1.UpdateAppRequest]) (*connect.Response[v1.UpdateAppResponse], error) {
+	return c.updateApp.CallUnary(ctx, req)
 }
 
 // RollbackRevision calls porter.v1.ClusterControlPlaneService.RollbackRevision.
@@ -878,6 +894,8 @@ type ClusterControlPlaneServiceHandler interface {
 	ValidatePorterApp(context.Context, *connect.Request[v1.ValidatePorterAppRequest]) (*connect.Response[v1.ValidatePorterAppResponse], error)
 	// ApplyPorterApp applies a porter app as defined by the provided porter.yaml file to a given deployment id
 	ApplyPorterApp(context.Context, *connect.Request[v1.ApplyPorterAppRequest]) (*connect.Response[v1.ApplyPorterAppResponse], error)
+	// UpdateApp hydrates a definition of a porter app, and takes necessary actions to update the app on the cluster
+	UpdateApp(context.Context, *connect.Request[v1.UpdateAppRequest]) (*connect.Response[v1.UpdateAppResponse], error)
 	// RollbackRevision reverts an app to the previous revision, or optionally to the revision specified
 	RollbackRevision(context.Context, *connect.Request[v1.RollbackRevisionRequest]) (*connect.Response[v1.RollbackRevisionResponse], error)
 	// UpdateRevisionStatus updates the status of a revision
@@ -1045,6 +1063,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 	clusterControlPlaneServiceApplyPorterAppHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceApplyPorterAppProcedure,
 		svc.ApplyPorterApp,
+		opts...,
+	)
+	clusterControlPlaneServiceUpdateAppHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceUpdateAppProcedure,
+		svc.UpdateApp,
 		opts...,
 	)
 	clusterControlPlaneServiceRollbackRevisionHandler := connect.NewUnaryHandler(
@@ -1232,6 +1255,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceValidatePorterAppHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceApplyPorterAppProcedure:
 			clusterControlPlaneServiceApplyPorterAppHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceUpdateAppProcedure:
+			clusterControlPlaneServiceUpdateAppHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceRollbackRevisionProcedure:
 			clusterControlPlaneServiceRollbackRevisionHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceUpdateRevisionStatusProcedure:
@@ -1357,6 +1382,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) ValidatePorterApp(context.
 
 func (UnimplementedClusterControlPlaneServiceHandler) ApplyPorterApp(context.Context, *connect.Request[v1.ApplyPorterAppRequest]) (*connect.Response[v1.ApplyPorterAppResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ApplyPorterApp is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) UpdateApp(context.Context, *connect.Request[v1.UpdateAppRequest]) (*connect.Response[v1.UpdateAppResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.UpdateApp is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) RollbackRevision(context.Context, *connect.Request[v1.RollbackRevisionRequest]) (*connect.Response[v1.RollbackRevisionResponse], error) {

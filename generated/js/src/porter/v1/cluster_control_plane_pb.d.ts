@@ -1362,6 +1362,126 @@ export declare class ApplyPorterAppResponse extends Message<ApplyPorterAppRespon
 }
 
 /**
+ * @generated from message porter.v1.UpdateAppRequest
+ */
+export declare class UpdateAppRequest extends Message<UpdateAppRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target for the app
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 2;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  /**
+   * app is the (potentially partial) definition of the PorterApp to be applied
+   *
+   * @generated from field: porter.v1.PorterApp app = 3;
+   */
+  app?: PorterApp;
+
+  /**
+   * app_revision_id is the id of the PorterAppRevision to be applied.  This is used by the CLI to provide updates to an existing app revision. If provided, app must be empty.
+   *
+   * @generated from field: string app_revision_id = 4;
+   */
+  appRevisionId: string;
+
+  /**
+   * app_env is the current set of environment variables for the upcoming app revision
+   *
+   * @generated from field: porter.v1.EnvGroupVariables app_env = 5;
+   */
+  appEnv?: EnvGroupVariables;
+
+  /**
+   * deletions is an object containing the names of fields to be deleted from the app
+   *
+   * @generated from field: porter.v1.Deletions deletions = 6;
+   */
+  deletions?: Deletions;
+
+  /**
+   * app_overrides contains environment specific overrides if they exist, applied depending on the deployment target
+   *
+   * @generated from field: porter.v1.PorterApp app_overrides = 7;
+   */
+  appOverrides?: PorterApp;
+
+  /**
+   * is_env_override is a flag that indicates whether the app environment should be fully overwritten, or if the new app env variables should be merged with the existing
+   *
+   * @generated from field: bool is_env_override = 8;
+   */
+  isEnvOverride: boolean;
+
+  /**
+   * is_predeploy_eligible is a flag that indicates whether the revision is ready for predeploy to run, usually after a successful build
+   *
+   * @generated from field: bool is_predeploy_eligible = 9;
+   */
+  isPredeployEligible: boolean;
+
+  /**
+   * commit_sha is the current commit sha to be built and applied. If provided, it is assumed that the app source has changed
+   *
+   * @generated from field: string commit_sha = 10;
+   */
+  commitSha: string;
+
+  constructor(data?: PartialMessage<UpdateAppRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateAppRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateAppRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateAppRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateAppRequest;
+
+  static equals(a: UpdateAppRequest | PlainMessage<UpdateAppRequest> | undefined, b: UpdateAppRequest | PlainMessage<UpdateAppRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.UpdateAppResponse
+ */
+export declare class UpdateAppResponse extends Message<UpdateAppResponse> {
+  /**
+   * app_revision_id is the id of the PorterAppRevision that was updated
+   *
+   * @generated from field: string app_revision_id = 1;
+   */
+  appRevisionId: string;
+
+  /**
+   * cli_action is the action that the CLI should take after applying the PorterApp (at the time of writing, either build the image or track whether a predeploy job has completed)
+   *
+   * @generated from field: porter.v1.EnumCLIAction cli_action = 2;
+   */
+  cliAction: EnumCLIAction;
+
+  constructor(data?: PartialMessage<UpdateAppResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateAppResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateAppResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateAppResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateAppResponse;
+
+  static equals(a: UpdateAppResponse | PlainMessage<UpdateAppResponse> | undefined, b: UpdateAppResponse | PlainMessage<UpdateAppResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.UpdateRevisionStatusRequest
  */
 export declare class UpdateRevisionStatusRequest extends Message<UpdateRevisionStatusRequest> {
