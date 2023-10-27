@@ -219,7 +219,7 @@ message ReadContractResponse {
 
 message ValidatePorterAppRequest {
   int64 project_id = 1;
-  // deployment_target_id is the id of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+  // deployment_target_id is the id of the deployment target where the app will be installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
   string deployment_target_id = 2;
   // commit_sha is the current commit sha to be built and applied
   string commit_sha = 3;
@@ -232,7 +232,7 @@ message ValidatePorterAppRequest {
   // base_deployment_target_id is used to find a revision of the app in the base deployment target, which hydrates the preview app template
   // deprecated: use the base deployment target directly on the template instead
   string base_deployment_target_id = 7 [deprecated = true];
-  // deployment_target_name is the name of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+  // deployment_target_name is the name of the deployment target where the app will be installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
   string deployment_target_name = 8;
 }
 
@@ -242,7 +242,7 @@ message ValidatePorterAppResponse {
 
 message ApplyPorterAppRequest {
   int64 project_id = 1;
-  // deployment_target_id is the id of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+  // deployment_target_id is the id of the deployment target where the app will be installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
   string deployment_target_id = 2;
   // app is the definition of the PorterApp to be applied
   PorterApp app = 3;
@@ -254,7 +254,7 @@ message ApplyPorterAppRequest {
   EnvGroupVariables app_env = 6;
   // is_hard_env_update is a flag that indicates whether the app environment should be fully overwritten, or if the new app env variables should be merged with the existing
   bool is_hard_env_update = 7;
-  // deployment_target_name is the name of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+  // deployment_target_name is the name of the deployment target where the app will be installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
   string deployment_target_name = 8;
 }
 

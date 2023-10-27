@@ -2101,7 +2101,7 @@ type ValidatePorterAppRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	ProjectId int64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
-	// deployment_target_id is the id of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+	// deployment_target_id is the id of the deployment target where the app will be installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
 	DeploymentTargetId string `protobuf:"bytes,2,opt,name=deployment_target_id,json=deploymentTargetId,proto3" json:"deployment_target_id,omitempty"`
 	// commit_sha is the current commit sha to be built and applied
 	CommitSha string `protobuf:"bytes,3,opt,name=commit_sha,json=commitSha,proto3" json:"commit_sha,omitempty"`
@@ -2116,7 +2116,7 @@ type ValidatePorterAppRequest struct {
 	//
 	// Deprecated: Marked as deprecated in porter/v1/cluster_control_plane.proto.
 	BaseDeploymentTargetId string `protobuf:"bytes,7,opt,name=base_deployment_target_id,json=baseDeploymentTargetId,proto3" json:"base_deployment_target_id,omitempty"`
-	// deployment_target_name is the name of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+	// deployment_target_name is the name of the deployment target where the app will be installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
 	DeploymentTargetName string `protobuf:"bytes,8,opt,name=deployment_target_name,json=deploymentTargetName,proto3" json:"deployment_target_name,omitempty"`
 }
 
@@ -2262,7 +2262,7 @@ type ApplyPorterAppRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	ProjectId int64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
-	// deployment_target_id is the id of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+	// deployment_target_id is the id of the deployment target where the app will be installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
 	DeploymentTargetId string `protobuf:"bytes,2,opt,name=deployment_target_id,json=deploymentTargetId,proto3" json:"deployment_target_id,omitempty"`
 	// app is the definition of the PorterApp to be applied
 	App *PorterApp `protobuf:"bytes,3,opt,name=app,proto3" json:"app,omitempty"`
@@ -2274,7 +2274,7 @@ type ApplyPorterAppRequest struct {
 	AppEnv *EnvGroupVariables `protobuf:"bytes,6,opt,name=app_env,json=appEnv,proto3" json:"app_env,omitempty"`
 	// is_hard_env_update is a flag that indicates whether the app environment should be fully overwritten, or if the new app env variables should be merged with the existing
 	IsHardEnvUpdate bool `protobuf:"varint,7,opt,name=is_hard_env_update,json=isHardEnvUpdate,proto3" json:"is_hard_env_update,omitempty"`
-	// deployment_target_name is the name of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+	// deployment_target_name is the name of the deployment target where the app will be installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
 	DeploymentTargetName string `protobuf:"bytes,8,opt,name=deployment_target_name,json=deploymentTargetName,proto3" json:"deployment_target_name,omitempty"`
 }
 

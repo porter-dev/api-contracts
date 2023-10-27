@@ -1166,7 +1166,7 @@ export declare class ValidatePorterAppRequest extends Message<ValidatePorterAppR
   projectId: bigint;
 
   /**
-   * deployment_target_id is the id of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+   * deployment_target_id is the id of the deployment target where the app will be installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
    *
    * @generated from field: string deployment_target_id = 2;
    */
@@ -1210,7 +1210,7 @@ export declare class ValidatePorterAppRequest extends Message<ValidatePorterAppR
   baseDeploymentTargetId: string;
 
   /**
-   * deployment_target_name is the name of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+   * deployment_target_name is the name of the deployment target where the app will be installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
    *
    * @generated from field: string deployment_target_name = 8;
    */
@@ -1265,7 +1265,7 @@ export declare class ApplyPorterAppRequest extends Message<ApplyPorterAppRequest
   projectId: bigint;
 
   /**
-   * deployment_target_id is the id of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+   * deployment_target_id is the id of the deployment target where the app will be installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
    *
    * @generated from field: string deployment_target_id = 2;
    */
@@ -1307,7 +1307,7 @@ export declare class ApplyPorterAppRequest extends Message<ApplyPorterAppRequest
   isHardEnvUpdate: boolean;
 
   /**
-   * deployment_target_name is the name of the deployment target where the app is installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
+   * deployment_target_name is the name of the deployment target where the app will be installed. One of deployment_target_id or deployment_target_name must be provided, with deployment_target_id taking precedence.
    *
    * @generated from field: string deployment_target_name = 8;
    */
