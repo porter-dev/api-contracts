@@ -741,10 +741,10 @@ export const GetAppRevisionResponse = proto3.makeMessageType(
 );
 
 /**
- * @generated from message porter.v1.GetAppTemplateRequest
+ * @generated from message porter.v1.AppTemplateRequest
  */
-export const GetAppTemplateRequest = proto3.makeMessageType(
-  "porter.v1.GetAppTemplateRequest",
+export const AppTemplateRequest = proto3.makeMessageType(
+  "porter.v1.AppTemplateRequest",
   () => [
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 2, name: "app_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
@@ -752,10 +752,10 @@ export const GetAppTemplateRequest = proto3.makeMessageType(
 );
 
 /**
- * @generated from message porter.v1.GetAppTemplateResponse
+ * @generated from message porter.v1.AppTemplateResponse
  */
-export const GetAppTemplateResponse = proto3.makeMessageType(
-  "porter.v1.GetAppTemplateResponse",
+export const AppTemplateResponse = proto3.makeMessageType(
+  "porter.v1.AppTemplateResponse",
   () => [
     { no: 1, name: "app_template", kind: "message", T: PorterApp },
     { no: 2, name: "app_env", kind: "message", T: EnvGroupVariables },

@@ -2189,9 +2189,9 @@ export declare class GetAppRevisionResponse extends Message<GetAppRevisionRespon
 }
 
 /**
- * @generated from message porter.v1.GetAppTemplateRequest
+ * @generated from message porter.v1.AppTemplateRequest
  */
-export declare class GetAppTemplateRequest extends Message<GetAppTemplateRequest> {
+export declare class AppTemplateRequest extends Message<AppTemplateRequest> {
   /**
    * @generated from field: int64 project_id = 1;
    */
@@ -2204,25 +2204,25 @@ export declare class GetAppTemplateRequest extends Message<GetAppTemplateRequest
    */
   appId: bigint;
 
-  constructor(data?: PartialMessage<GetAppTemplateRequest>);
+  constructor(data?: PartialMessage<AppTemplateRequest>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.GetAppTemplateRequest";
+  static readonly typeName = "porter.v1.AppTemplateRequest";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetAppTemplateRequest;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AppTemplateRequest;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetAppTemplateRequest;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AppTemplateRequest;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetAppTemplateRequest;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AppTemplateRequest;
 
-  static equals(a: GetAppTemplateRequest | PlainMessage<GetAppTemplateRequest> | undefined, b: GetAppTemplateRequest | PlainMessage<GetAppTemplateRequest> | undefined): boolean;
+  static equals(a: AppTemplateRequest | PlainMessage<AppTemplateRequest> | undefined, b: AppTemplateRequest | PlainMessage<AppTemplateRequest> | undefined): boolean;
 }
 
 /**
- * @generated from message porter.v1.GetAppTemplateResponse
+ * @generated from message porter.v1.AppTemplateResponse
  */
-export declare class GetAppTemplateResponse extends Message<GetAppTemplateResponse> {
+export declare class AppTemplateResponse extends Message<AppTemplateResponse> {
   /**
    * app_template is the PorterApp template hydrated with the latest revision of the base app
    *
@@ -2237,19 +2237,19 @@ export declare class GetAppTemplateResponse extends Message<GetAppTemplateRespon
    */
   appEnv?: EnvGroupVariables;
 
-  constructor(data?: PartialMessage<GetAppTemplateResponse>);
+  constructor(data?: PartialMessage<AppTemplateResponse>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.GetAppTemplateResponse";
+  static readonly typeName = "porter.v1.AppTemplateResponse";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GetAppTemplateResponse;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AppTemplateResponse;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GetAppTemplateResponse;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AppTemplateResponse;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GetAppTemplateResponse;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AppTemplateResponse;
 
-  static equals(a: GetAppTemplateResponse | PlainMessage<GetAppTemplateResponse> | undefined, b: GetAppTemplateResponse | PlainMessage<GetAppTemplateResponse> | undefined): boolean;
+  static equals(a: AppTemplateResponse | PlainMessage<AppTemplateResponse> | undefined, b: AppTemplateResponse | PlainMessage<AppTemplateResponse> | undefined): boolean;
 }
 
 /**
