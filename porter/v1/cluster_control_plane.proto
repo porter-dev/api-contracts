@@ -442,6 +442,19 @@ message GetAppRevisionResponse {
   AppRevision app_revision = 1;
 }
 
+message AppTemplateRequest {
+  int64 project_id = 1;
+  // app_id is the id of the PorterApp to return the template for
+  int64 app_id = 2;
+}
+
+message AppTemplateResponse {
+  // app_template is the PorterApp template hydrated with the latest revision of the base app
+  PorterApp app_template = 1;
+  // app_env is the current set of environment variables that will be used alongside the app template
+  EnvGroupVariables app_env = 2;
+}
+
 message PredeployStatusRequest {
   int64 project_id = 1;
   // app_revision_id is the revision id of the PorterApp which should have its predeploy status checked
@@ -757,6 +770,9 @@ service ClusterControlPlaneService {
 
   // GetAppRevision returns the app revision for a given app revision id
   rpc GetAppRevision(GetAppRevisionRequest) returns (GetAppRevisionResponse) {}
+
+  // AppTemplate returns the app template for a given app id
+  rpc AppTemplate(AppTemplateRequest) returns (AppTemplateResponse) {}
 
   // PredeployStatus returns the status of the predeploy job for a given app revision
   rpc PredeployStatus(PredeployStatusRequest) returns (PredeployStatusResponse) {}

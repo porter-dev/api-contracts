@@ -2189,6 +2189,70 @@ export declare class GetAppRevisionResponse extends Message<GetAppRevisionRespon
 }
 
 /**
+ * @generated from message porter.v1.AppTemplateRequest
+ */
+export declare class AppTemplateRequest extends Message<AppTemplateRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * app_id is the id of the PorterApp to return the template for
+   *
+   * @generated from field: int64 app_id = 2;
+   */
+  appId: bigint;
+
+  constructor(data?: PartialMessage<AppTemplateRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AppTemplateRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AppTemplateRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AppTemplateRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AppTemplateRequest;
+
+  static equals(a: AppTemplateRequest | PlainMessage<AppTemplateRequest> | undefined, b: AppTemplateRequest | PlainMessage<AppTemplateRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.AppTemplateResponse
+ */
+export declare class AppTemplateResponse extends Message<AppTemplateResponse> {
+  /**
+   * app_template is the PorterApp template hydrated with the latest revision of the base app
+   *
+   * @generated from field: porter.v1.PorterApp app_template = 1;
+   */
+  appTemplate?: PorterApp;
+
+  /**
+   * app_env is the current set of environment variables that will be used alongside the app template
+   *
+   * @generated from field: porter.v1.EnvGroupVariables app_env = 2;
+   */
+  appEnv?: EnvGroupVariables;
+
+  constructor(data?: PartialMessage<AppTemplateResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AppTemplateResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AppTemplateResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AppTemplateResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AppTemplateResponse;
+
+  static equals(a: AppTemplateResponse | PlainMessage<AppTemplateResponse> | undefined, b: AppTemplateResponse | PlainMessage<AppTemplateResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.PredeployStatusRequest
  */
 export declare class PredeployStatusRequest extends Message<PredeployStatusRequest> {
