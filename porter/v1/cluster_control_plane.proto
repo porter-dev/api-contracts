@@ -869,6 +869,9 @@ service ClusterControlPlaneService {
   rpc ListImagesForRepository(ListImagesForRepositoryRequest) returns (ListImagesForRepositoryResponse) {
     option deprecated = true;
   }
+
+  // DatastoreStatus returns the status of a given datastore within a project/cluster scope
+  rpc DatastoreStatus(DatastoreStatusRequest) returns (DatastoreStatusResponse) {}
 }
 
 message EKSBearerTokenRequest {
@@ -959,4 +962,28 @@ message ClusterNetworkSettingsResponse {
     //eks_cloud_provider_network is the aws vpc for the cluster
     AWSVpc eks_cloud_provider_network = 4;
   }
+}
+
+// DatastoreStatusRequest is the request object for fetching the status of a datastore in on a cluster
+message DatastoreStatusRequest {
+  // project_id id of the project that the datastore belongs to
+  int64 project_id = 1;
+  // cluster_id id of the cluster that the datastore belongs to
+  int64 cluster_id = 2;
+  // type type of the datastore
+  EnumDatastore type = 3;
+  // name name of the datastore
+  string name = 4;
+}
+
+enum EnumDatastore {
+  ENUM_DATASTORE_UNSPECIFIED = 0;
+  ENUM_DATASTORE_RDS_POSTGRESQL = 1;
+  ENUM_DATASTORE_RDS_AURORA_POSTGRESQL = 2;
+}
+
+// DatastoreStatusResponse is the response object containing the status of the datastore
+message DatastoreStatusResponse {
+  // status is the status of the datastore
+  string status = 1;
 }
