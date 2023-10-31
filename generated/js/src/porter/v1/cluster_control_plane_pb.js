@@ -1126,18 +1126,33 @@ export const ListAppInstancesRequest = proto3.makeMessageType(
   "porter.v1.ListAppInstancesRequest",
   () => [
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 3, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
   ],
 );
 
 /**
- * DeleteAppInstanceResponse is the response object for listing app instances
+ * ListAppInstancesResponse is the response object for listing app instances
  *
  * @generated from message porter.v1.ListAppInstancesResponse
  */
 export const ListAppInstancesResponse = proto3.makeMessageType(
   "porter.v1.ListAppInstancesResponse",
   [],
+);
+
+/**
+ * @generated from message porter.v1.AppInstance
+ */
+export const AppInstance = proto3.makeMessageType(
+  "porter.v1.AppInstance",
+  () => [
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "porter_app_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 5, name: "updated_at", kind: "message", T: Timestamp },
+  ],
 );
 
 /**

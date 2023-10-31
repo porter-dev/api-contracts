@@ -3228,7 +3228,14 @@ export declare class ListAppInstancesRequest extends Message<ListAppInstancesReq
   projectId: bigint;
 
   /**
-   * deployment_target_identifier is the object that identifies the deployment target where the app is installed. It is optional.
+   * cluster_id is the id of the cluster where the app is installed. It is optional. At most one of cluster_id or deployment_target_identifier should be provided.
+   *
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target where the app is installed. It is optional. At most one of cluster_id or deployment_target_identifier should be provided.
    *
    * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 3;
    */
@@ -3250,7 +3257,7 @@ export declare class ListAppInstancesRequest extends Message<ListAppInstancesReq
 }
 
 /**
- * DeleteAppInstanceResponse is the response object for listing app instances
+ * ListAppInstancesResponse is the response object for listing app instances
  *
  * @generated from message porter.v1.ListAppInstancesResponse
  */
@@ -3268,6 +3275,60 @@ export declare class ListAppInstancesResponse extends Message<ListAppInstancesRe
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListAppInstancesResponse;
 
   static equals(a: ListAppInstancesResponse | PlainMessage<ListAppInstancesResponse> | undefined, b: ListAppInstancesResponse | PlainMessage<ListAppInstancesResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.AppInstance
+ */
+export declare class AppInstance extends Message<AppInstance> {
+  /**
+   * id is the id of the app instance
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * name is the name of the app instance
+   *
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * deployment_target_id is the id of the deployment target where the app is installed
+   *
+   * @generated from field: string deployment_target_id = 3;
+   */
+  deploymentTargetId: string;
+
+  /**
+   * porter_app_id is the id of the porter app
+   *
+   * @generated from field: int64 porter_app_id = 4;
+   */
+  porterAppId: bigint;
+
+  /**
+   * updated_at is the time the app instance was last updated
+   *
+   * @generated from field: google.protobuf.Timestamp updated_at = 5;
+   */
+  updatedAt?: Timestamp;
+
+  constructor(data?: PartialMessage<AppInstance>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AppInstance";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AppInstance;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AppInstance;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AppInstance;
+
+  static equals(a: AppInstance | PlainMessage<AppInstance> | undefined, b: AppInstance | PlainMessage<AppInstance> | undefined): boolean;
 }
 
 /**

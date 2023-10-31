@@ -695,12 +695,27 @@ message DeleteAppInstanceResponse {}
 // ListAppInstanceRequest is the request object for listing app instances
 message ListAppInstancesRequest {
   int64 project_id = 1;
-  // deployment_target_identifier is the object that identifies the deployment target where the app is installed. It is optional.
+  // cluster_id is the id of the cluster where the app is installed. It is optional. At most one of cluster_id or deployment_target_identifier should be provided.
+  int64 cluster_id = 2;
+  // deployment_target_identifier is the object that identifies the deployment target where the app is installed. It is optional. At most one of cluster_id or deployment_target_identifier should be provided.
   DeploymentTargetIdentifier deployment_target_identifier = 3;
 }
 
-// DeleteAppInstanceResponse is the response object for listing app instances
+// ListAppInstancesResponse is the response object for listing app instances
 message ListAppInstancesResponse {}
+
+message AppInstance {
+  // id is the id of the app instance
+  string id = 1;
+  // name is the name of the app instance
+  string name = 2;
+  // deployment_target_id is the id of the deployment target where the app is installed
+  string deployment_target_id = 3;
+  // porter_app_id is the id of the porter app
+  int64 porter_app_id = 4;
+  // updated_at is the time the app instance was last updated
+  google.protobuf.Timestamp updated_at = 5;
+}
 
 service ClusterControlPlaneService {
   // QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas
