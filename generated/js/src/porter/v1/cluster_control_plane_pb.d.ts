@@ -176,6 +176,11 @@ export declare enum EnumDatastore {
    * @generated from enum value: ENUM_DATASTORE_RDS_AURORA_POSTGRESQL = 2;
    */
   RDS_AURORA_POSTGRESQL = 2,
+
+  /**
+   * @generated from enum value: ENUM_DATASTORE_ELASTICACHE_REDIS = 3;
+   */
+  ELASTICACHE_REDIS = 3,
 }
 
 /**
