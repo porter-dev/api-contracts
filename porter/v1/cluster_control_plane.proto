@@ -387,6 +387,12 @@ message AppRevision {
   string id = 6;
   // deployment_target_id is the id of the deployment target where the revision occurs
   string deployment_target_id = 7;
+  // app_instance_id is the id of the app instance
+  string app_instance_id = 8;
+  // app_instance_name is the name of the app instance
+  string app_instance_name = 9;
+  // porter_app_id is the id of the porter app
+  int64 porter_app_id = 10;
 }
 
 // AppRevisionMetadata is the metadata for a given app revision. It is a lightweight version of the AppRevision object
@@ -681,7 +687,7 @@ message CreateAppInstanceResponse {
   string app_instance_id = 1;
 }
 
-// DeleteAppInstanceRequest is the request object for creating an app instance
+// DeleteAppInstanceRequest is the request object for deleting an app instance
 message DeleteAppInstanceRequest {
   int64 project_id = 1;
   string app_name = 2;
@@ -689,8 +695,31 @@ message DeleteAppInstanceRequest {
   DeploymentTargetIdentifier deployment_target_identifier = 3;
 }
 
-// DeleteAppInstanceResponse is the response object for creating an app instance
+// DeleteAppInstanceResponse is the response object for deleting an app instance
 message DeleteAppInstanceResponse {}
+
+// ListAppInstanceRequest is the request object for listing app instances
+message ListAppInstancesRequest {
+  int64 project_id = 1;
+  // deployment_target_identifier is the object that identifies the deployment target where the app is installed. It is optional.
+  DeploymentTargetIdentifier deployment_target_identifier = 2;
+}
+
+// ListAppInstancesResponse is the response object for listing app instances
+message ListAppInstancesResponse {
+  repeated AppInstance app_instances = 1;
+}
+
+message AppInstance {
+  // id is the id of the app instance
+  string id = 1;
+  // name is the name of the app instance
+  string name = 2;
+  // deployment_target_id is the id of the deployment target where the app is installed
+  string deployment_target_id = 3;
+  // porter_app_id is the id of the porter app
+  int64 porter_app_id = 4;
+}
 
 service ClusterControlPlaneService {
   // QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas
@@ -820,6 +849,9 @@ service ClusterControlPlaneService {
 
   // DeleteAppInstance deletes an app instance and all associated revisions.
   rpc DeleteAppInstance(DeleteAppInstanceRequest) returns (DeleteAppInstanceResponse) {}
+
+  // ListAppInstances lists app instance in a project (and deployment target if provided).
+  rpc ListAppInstances(ListAppInstancesRequest) returns (ListAppInstancesResponse) {}
 
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
   // Deprecated. Use TokenForRegistry instead.

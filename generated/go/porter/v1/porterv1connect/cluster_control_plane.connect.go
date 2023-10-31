@@ -151,6 +151,9 @@ const (
 	// ClusterControlPlaneServiceDeleteAppInstanceProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DeleteAppInstance RPC.
 	ClusterControlPlaneServiceDeleteAppInstanceProcedure = "/porter.v1.ClusterControlPlaneService/DeleteAppInstance"
+	// ClusterControlPlaneServiceListAppInstancesProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's ListAppInstances RPC.
+	ClusterControlPlaneServiceListAppInstancesProcedure = "/porter.v1.ClusterControlPlaneService/ListAppInstances"
 	// ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DockerConfigFileForRegistry RPC.
 	ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure = "/porter.v1.ClusterControlPlaneService/DockerConfigFileForRegistry"
@@ -272,6 +275,8 @@ type ClusterControlPlaneServiceClient interface {
 	CreateAppInstance(context.Context, *connect.Request[v1.CreateAppInstanceRequest]) (*connect.Response[v1.CreateAppInstanceResponse], error)
 	// DeleteAppInstance deletes an app instance and all associated revisions.
 	DeleteAppInstance(context.Context, *connect.Request[v1.DeleteAppInstanceRequest]) (*connect.Response[v1.DeleteAppInstanceResponse], error)
+	// ListAppInstances lists app instance in a project (and deployment target if provided).
+	ListAppInstances(context.Context, *connect.Request[v1.ListAppInstancesRequest]) (*connect.Response[v1.ListAppInstancesResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -522,6 +527,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceDeleteAppInstanceProcedure,
 			opts...,
 		),
+		listAppInstances: connect.NewClient[v1.ListAppInstancesRequest, v1.ListAppInstancesResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceListAppInstancesProcedure,
+			opts...,
+		),
 		dockerConfigFileForRegistry: connect.NewClient[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
@@ -611,6 +621,7 @@ type clusterControlPlaneServiceClient struct {
 	images                         *connect.Client[v1.ImagesRequest, v1.ImagesResponse]
 	createAppInstance              *connect.Client[v1.CreateAppInstanceRequest, v1.CreateAppInstanceResponse]
 	deleteAppInstance              *connect.Client[v1.DeleteAppInstanceRequest, v1.DeleteAppInstanceResponse]
+	listAppInstances               *connect.Client[v1.ListAppInstancesRequest, v1.ListAppInstancesResponse]
 	dockerConfigFileForRegistry    *connect.Client[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse]
 	eCRTokenForRegistry            *connect.Client[v1.ECRTokenForRegistryRequest, v1.ECRTokenForRegistryResponse]
 	assumeRoleCredentials          *connect.Client[v1.AssumeRoleCredentialsRequest, v1.AssumeRoleCredentialsResponse]
@@ -825,6 +836,11 @@ func (c *clusterControlPlaneServiceClient) DeleteAppInstance(ctx context.Context
 	return c.deleteAppInstance.CallUnary(ctx, req)
 }
 
+// ListAppInstances calls porter.v1.ClusterControlPlaneService.ListAppInstances.
+func (c *clusterControlPlaneServiceClient) ListAppInstances(ctx context.Context, req *connect.Request[v1.ListAppInstancesRequest]) (*connect.Response[v1.ListAppInstancesResponse], error) {
+	return c.listAppInstances.CallUnary(ctx, req)
+}
+
 // DockerConfigFileForRegistry calls
 // porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry.
 //
@@ -980,6 +996,8 @@ type ClusterControlPlaneServiceHandler interface {
 	CreateAppInstance(context.Context, *connect.Request[v1.CreateAppInstanceRequest]) (*connect.Response[v1.CreateAppInstanceResponse], error)
 	// DeleteAppInstance deletes an app instance and all associated revisions.
 	DeleteAppInstance(context.Context, *connect.Request[v1.DeleteAppInstanceRequest]) (*connect.Response[v1.DeleteAppInstanceResponse], error)
+	// ListAppInstances lists app instance in a project (and deployment target if provided).
+	ListAppInstances(context.Context, *connect.Request[v1.ListAppInstancesRequest]) (*connect.Response[v1.ListAppInstancesResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -1226,6 +1244,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.DeleteAppInstance,
 		opts...,
 	)
+	clusterControlPlaneServiceListAppInstancesHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceListAppInstancesProcedure,
+		svc.ListAppInstances,
+		opts...,
+	)
 	clusterControlPlaneServiceDockerConfigFileForRegistryHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
 		svc.DockerConfigFileForRegistry,
@@ -1351,6 +1374,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceCreateAppInstanceHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDeleteAppInstanceProcedure:
 			clusterControlPlaneServiceDeleteAppInstanceHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceListAppInstancesProcedure:
+			clusterControlPlaneServiceListAppInstancesHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure:
 			clusterControlPlaneServiceDockerConfigFileForRegistryHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceECRTokenForRegistryProcedure:
@@ -1532,6 +1557,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) CreateAppInstance(context.
 
 func (UnimplementedClusterControlPlaneServiceHandler) DeleteAppInstance(context.Context, *connect.Request[v1.DeleteAppInstanceRequest]) (*connect.Response[v1.DeleteAppInstanceResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.DeleteAppInstance is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) ListAppInstances(context.Context, *connect.Request[v1.ListAppInstancesRequest]) (*connect.Response[v1.ListAppInstancesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ListAppInstances is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) DockerConfigFileForRegistry(context.Context, *connect.Request[v1.DockerConfigFileForRegistryRequest]) (*connect.Response[v1.DockerConfigFileForRegistryResponse], error) {
