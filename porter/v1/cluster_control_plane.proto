@@ -701,10 +701,8 @@ message DeleteAppInstanceResponse {}
 // ListAppInstanceRequest is the request object for listing app instances
 message ListAppInstancesRequest {
   int64 project_id = 1;
-  // cluster_id is the id of the cluster where the app is installed. It is optional. At most one of cluster_id or deployment_target_identifier should be provided.
-  int64 cluster_id = 2;
-  // deployment_target_identifier is the object that identifies the deployment target where the app is installed. It is optional. At most one of cluster_id or deployment_target_identifier should be provided.
-  DeploymentTargetIdentifier deployment_target_identifier = 3;
+  // deployment_target_identifier is the object that identifies the deployment target where the app is installed. It is optional.
+  DeploymentTargetIdentifier deployment_target_identifier = 2;
 }
 
 // ListAppInstancesResponse is the response object for listing app instances

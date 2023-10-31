@@ -3249,16 +3249,9 @@ export declare class ListAppInstancesRequest extends Message<ListAppInstancesReq
   projectId: bigint;
 
   /**
-   * cluster_id is the id of the cluster where the app is installed. It is optional. At most one of cluster_id or deployment_target_identifier should be provided.
+   * deployment_target_identifier is the object that identifies the deployment target where the app is installed. It is optional.
    *
-   * @generated from field: int64 cluster_id = 2;
-   */
-  clusterId: bigint;
-
-  /**
-   * deployment_target_identifier is the object that identifies the deployment target where the app is installed. It is optional. At most one of cluster_id or deployment_target_identifier should be provided.
-   *
-   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 3;
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 2;
    */
   deploymentTargetIdentifier?: DeploymentTargetIdentifier;
 
