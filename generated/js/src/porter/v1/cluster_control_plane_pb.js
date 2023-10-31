@@ -1094,7 +1094,7 @@ export const CreateAppInstanceResponse = proto3.makeMessageType(
 );
 
 /**
- * DeleteAppInstanceRequest is the request object for creating an app instance
+ * DeleteAppInstanceRequest is the request object for deleting an app instance
  *
  * @generated from message porter.v1.DeleteAppInstanceRequest
  */
@@ -1108,12 +1108,35 @@ export const DeleteAppInstanceRequest = proto3.makeMessageType(
 );
 
 /**
- * DeleteAppInstanceResponse is the response object for creating an app instance
+ * DeleteAppInstanceResponse is the response object for deleting an app instance
  *
  * @generated from message porter.v1.DeleteAppInstanceResponse
  */
 export const DeleteAppInstanceResponse = proto3.makeMessageType(
   "porter.v1.DeleteAppInstanceResponse",
+  [],
+);
+
+/**
+ * ListAppInstanceRequest is the request object for listing app instances
+ *
+ * @generated from message porter.v1.ListAppInstancesRequest
+ */
+export const ListAppInstancesRequest = proto3.makeMessageType(
+  "porter.v1.ListAppInstancesRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+  ],
+);
+
+/**
+ * DeleteAppInstanceResponse is the response object for listing app instances
+ *
+ * @generated from message porter.v1.ListAppInstancesResponse
+ */
+export const ListAppInstancesResponse = proto3.makeMessageType(
+  "porter.v1.ListAppInstancesResponse",
   [],
 );
 

@@ -3158,7 +3158,7 @@ export declare class CreateAppInstanceResponse extends Message<CreateAppInstance
 }
 
 /**
- * DeleteAppInstanceRequest is the request object for creating an app instance
+ * DeleteAppInstanceRequest is the request object for deleting an app instance
  *
  * @generated from message porter.v1.DeleteAppInstanceRequest
  */
@@ -3196,7 +3196,7 @@ export declare class DeleteAppInstanceRequest extends Message<DeleteAppInstanceR
 }
 
 /**
- * DeleteAppInstanceResponse is the response object for creating an app instance
+ * DeleteAppInstanceResponse is the response object for deleting an app instance
  *
  * @generated from message porter.v1.DeleteAppInstanceResponse
  */
@@ -3214,6 +3214,60 @@ export declare class DeleteAppInstanceResponse extends Message<DeleteAppInstance
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteAppInstanceResponse;
 
   static equals(a: DeleteAppInstanceResponse | PlainMessage<DeleteAppInstanceResponse> | undefined, b: DeleteAppInstanceResponse | PlainMessage<DeleteAppInstanceResponse> | undefined): boolean;
+}
+
+/**
+ * ListAppInstanceRequest is the request object for listing app instances
+ *
+ * @generated from message porter.v1.ListAppInstancesRequest
+ */
+export declare class ListAppInstancesRequest extends Message<ListAppInstancesRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target where the app is installed. It is optional.
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 3;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  constructor(data?: PartialMessage<ListAppInstancesRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ListAppInstancesRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListAppInstancesRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListAppInstancesRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListAppInstancesRequest;
+
+  static equals(a: ListAppInstancesRequest | PlainMessage<ListAppInstancesRequest> | undefined, b: ListAppInstancesRequest | PlainMessage<ListAppInstancesRequest> | undefined): boolean;
+}
+
+/**
+ * DeleteAppInstanceResponse is the response object for listing app instances
+ *
+ * @generated from message porter.v1.ListAppInstancesResponse
+ */
+export declare class ListAppInstancesResponse extends Message<ListAppInstancesResponse> {
+  constructor(data?: PartialMessage<ListAppInstancesResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ListAppInstancesResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListAppInstancesResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListAppInstancesResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListAppInstancesResponse;
+
+  static equals(a: ListAppInstancesResponse | PlainMessage<ListAppInstancesResponse> | undefined, b: ListAppInstancesResponse | PlainMessage<ListAppInstancesResponse> | undefined): boolean;
 }
 
 /**
