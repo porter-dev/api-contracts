@@ -1937,6 +1937,27 @@ export declare class AppRevision extends Message<AppRevision> {
    */
   deploymentTargetId: string;
 
+  /**
+   * app_instance_id is the id of the app instance
+   *
+   * @generated from field: string app_instance_id = 8;
+   */
+  appInstanceId: string;
+
+  /**
+   * app_instance_name is the name of the app instance
+   *
+   * @generated from field: string app_instance_name = 9;
+   */
+  appInstanceName: string;
+
+  /**
+   * porter_app_id is the id of the porter app
+   *
+   * @generated from field: int64 porter_app_id = 10;
+   */
+  porterAppId: bigint;
+
   constructor(data?: PartialMessage<AppRevision>);
 
   static readonly runtime: typeof proto3;
@@ -3313,13 +3334,6 @@ export declare class AppInstance extends Message<AppInstance> {
    * @generated from field: int64 porter_app_id = 4;
    */
   porterAppId: bigint;
-
-  /**
-   * updated_at is the time the app instance was last updated
-   *
-   * @generated from field: google.protobuf.Timestamp updated_at = 5;
-   */
-  updatedAt?: Timestamp;
 
   constructor(data?: PartialMessage<AppInstance>);
 
