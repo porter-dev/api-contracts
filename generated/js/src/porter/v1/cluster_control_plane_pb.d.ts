@@ -3262,6 +3262,11 @@ export declare class ListAppInstancesRequest extends Message<ListAppInstancesReq
  * @generated from message porter.v1.ListAppInstancesResponse
  */
 export declare class ListAppInstancesResponse extends Message<ListAppInstancesResponse> {
+  /**
+   * @generated from field: repeated porter.v1.AppInstance app_instances = 1;
+   */
+  appInstances: AppInstance[];
+
   constructor(data?: PartialMessage<ListAppInstancesResponse>);
 
   static readonly runtime: typeof proto3;

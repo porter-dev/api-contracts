@@ -1138,7 +1138,9 @@ export const ListAppInstancesRequest = proto3.makeMessageType(
  */
 export const ListAppInstancesResponse = proto3.makeMessageType(
   "porter.v1.ListAppInstancesResponse",
-  [],
+  () => [
+    { no: 1, name: "app_instances", kind: "message", T: AppInstance, repeated: true },
+  ],
 );
 
 /**

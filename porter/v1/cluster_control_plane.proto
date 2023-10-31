@@ -702,7 +702,9 @@ message ListAppInstancesRequest {
 }
 
 // ListAppInstancesResponse is the response object for listing app instances
-message ListAppInstancesResponse {}
+message ListAppInstancesResponse {
+  repeated AppInstance app_instances = 1;
+}
 
 message AppInstance {
   // id is the id of the app instance
