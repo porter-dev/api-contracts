@@ -667,12 +667,12 @@ export const AppRevision = proto3.makeMessageType(
 );
 
 /**
- * UpdateInfo is a lightweight version of the UpdateAppRequest object used to send messages via nats
+ * UpdateRevisionPayload is used to send messages via nats to update a revision
  *
- * @generated from message porter.v1.UpdateInfo
+ * @generated from message porter.v1.UpdateRevisionPayload
  */
-export const UpdateInfo = proto3.makeMessageType(
-  "porter.v1.UpdateInfo",
+export const UpdateRevisionPayload = proto3.makeMessageType(
+  "porter.v1.UpdateRevisionPayload",
   () => [
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 2, name: "revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },

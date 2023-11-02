@@ -1979,11 +1979,11 @@ export declare class AppRevision extends Message<AppRevision> {
 }
 
 /**
- * UpdateInfo is a lightweight version of the UpdateAppRequest object used to send messages via nats
+ * UpdateRevisionPayload is used to send messages via nats to update a revision
  *
- * @generated from message porter.v1.UpdateInfo
+ * @generated from message porter.v1.UpdateRevisionPayload
  */
-export declare class UpdateInfo extends Message<UpdateInfo> {
+export declare class UpdateRevisionPayload extends Message<UpdateRevisionPayload> {
   /**
    * project_id is the id of the project that the revision belongs to
    *
@@ -2012,19 +2012,19 @@ export declare class UpdateInfo extends Message<UpdateInfo> {
    */
   image?: AppImage;
 
-  constructor(data?: PartialMessage<UpdateInfo>);
+  constructor(data?: PartialMessage<UpdateRevisionPayload>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.UpdateInfo";
+  static readonly typeName = "porter.v1.UpdateRevisionPayload";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateInfo;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateRevisionPayload;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateInfo;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateRevisionPayload;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateInfo;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateRevisionPayload;
 
-  static equals(a: UpdateInfo | PlainMessage<UpdateInfo> | undefined, b: UpdateInfo | PlainMessage<UpdateInfo> | undefined): boolean;
+  static equals(a: UpdateRevisionPayload | PlainMessage<UpdateRevisionPayload> | undefined, b: UpdateRevisionPayload | PlainMessage<UpdateRevisionPayload> | undefined): boolean;
 }
 
 /**
