@@ -156,6 +156,13 @@ export declare enum EnumRevisionStatus {
    * @generated from enum value: ENUM_REVISION_STATUS_BUILD_FAILED = 3;
    */
   BUILD_FAILED = 3,
+
+  /**
+   * ENUM_REVISION_STATUS_BUILD_SUCCESSFUL signifies the build was successful.
+   *
+   * @generated from enum value: ENUM_REVISION_STATUS_BUILD_SUCCESSFUL = 4;
+   */
+  BUILD_SUCCESSFUL = 4,
 }
 
 /**

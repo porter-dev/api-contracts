@@ -64,6 +64,7 @@ export const EnumRevisionStatus = proto3.makeEnum(
     {no: 1, name: "ENUM_REVISION_STATUS_PREDEPLOY_FAILED", localName: "PREDEPLOY_FAILED"},
     {no: 2, name: "ENUM_REVISION_STATUS_DEPLOY_FAILED", localName: "DEPLOY_FAILED"},
     {no: 3, name: "ENUM_REVISION_STATUS_BUILD_FAILED", localName: "BUILD_FAILED"},
+    {no: 4, name: "ENUM_REVISION_STATUS_BUILD_SUCCESSFUL", localName: "BUILD_SUCCESSFUL"},
   ],
 );
 

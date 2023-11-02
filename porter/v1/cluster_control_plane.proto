@@ -553,6 +553,8 @@ enum EnumRevisionStatus {
   ENUM_REVISION_STATUS_DEPLOY_FAILED = 2;
   // ENUM_REVISION_STATUS_BUILD_FAILED signifies the build failed.
   ENUM_REVISION_STATUS_BUILD_FAILED = 3;
+  // ENUM_REVISION_STATUS_BUILD_SUCCESSFUL signifies the build was successful.
+  ENUM_REVISION_STATUS_BUILD_SUCCESSFUL = 4;
 }
 
 message SeedAppRevisionsRequest {
