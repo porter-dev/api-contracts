@@ -9,7 +9,7 @@ import { GKEPreflightValues } from "./gke_pb.js";
 import { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import { Error } from "./errors_pb.js";
 import { Contract, ContractRevision } from "./contract_pb.js";
-import { Deletions, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
+import { AppImage, Deletions, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
@@ -667,16 +667,17 @@ export const AppRevision = proto3.makeMessageType(
 );
 
 /**
- * AppRevisionMetadata is the metadata for a given app revision. It is a lightweight version of the AppRevision object
- * used to send messages via nats
+ * UpdateInfo is a lightweight version of the UpdateAppRequest object used to send messages via nats
  *
- * @generated from message porter.v1.AppRevisionMetadata
+ * @generated from message porter.v1.UpdateInfo
  */
-export const AppRevisionMetadata = proto3.makeMessageType(
-  "porter.v1.AppRevisionMetadata",
+export const UpdateInfo = proto3.makeMessageType(
+  "porter.v1.UpdateInfo",
   () => [
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 2, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "commit_sha", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "image", kind: "message", T: AppImage },
   ],
 );
 

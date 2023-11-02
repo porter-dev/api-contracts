@@ -10,7 +10,7 @@ import type { GKEPreflightValues } from "./gke_pb.js";
 import type { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import type { Error } from "./errors_pb.js";
 import type { Contract, ContractRevision } from "./contract_pb.js";
-import type { Deletions, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
+import type { AppImage, Deletions, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
@@ -1979,12 +1979,11 @@ export declare class AppRevision extends Message<AppRevision> {
 }
 
 /**
- * AppRevisionMetadata is the metadata for a given app revision. It is a lightweight version of the AppRevision object
- * used to send messages via nats
+ * UpdateInfo is a lightweight version of the UpdateAppRequest object used to send messages via nats
  *
- * @generated from message porter.v1.AppRevisionMetadata
+ * @generated from message porter.v1.UpdateInfo
  */
-export declare class AppRevisionMetadata extends Message<AppRevisionMetadata> {
+export declare class UpdateInfo extends Message<UpdateInfo> {
   /**
    * project_id is the id of the project that the revision belongs to
    *
@@ -1993,25 +1992,39 @@ export declare class AppRevisionMetadata extends Message<AppRevisionMetadata> {
   projectId: bigint;
 
   /**
-   * id is the id of the revision
+   * revision_id is the id of the revision
    *
-   * @generated from field: string id = 2;
+   * @generated from field: string revision_id = 2;
    */
-  id: string;
+  revisionId: string;
 
-  constructor(data?: PartialMessage<AppRevisionMetadata>);
+  /**
+   * commit_sha is the commit_sha of a new build
+   *
+   * @generated from field: string commit_sha = 3;
+   */
+  commitSha: string;
+
+  /**
+   * image is the image information for a new image
+   *
+   * @generated from field: porter.v1.AppImage image = 4;
+   */
+  image?: AppImage;
+
+  constructor(data?: PartialMessage<UpdateInfo>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.AppRevisionMetadata";
+  static readonly typeName = "porter.v1.UpdateInfo";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AppRevisionMetadata;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateInfo;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AppRevisionMetadata;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateInfo;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AppRevisionMetadata;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateInfo;
 
-  static equals(a: AppRevisionMetadata | PlainMessage<AppRevisionMetadata> | undefined, b: AppRevisionMetadata | PlainMessage<AppRevisionMetadata> | undefined): boolean;
+  static equals(a: UpdateInfo | PlainMessage<UpdateInfo> | undefined, b: UpdateInfo | PlainMessage<UpdateInfo> | undefined): boolean;
 }
 
 /**
