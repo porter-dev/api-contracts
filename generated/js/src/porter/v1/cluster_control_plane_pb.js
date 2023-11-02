@@ -9,7 +9,7 @@ import { GKEPreflightValues } from "./gke_pb.js";
 import { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import { Error } from "./errors_pb.js";
 import { Contract, ContractRevision } from "./contract_pb.js";
-import { AppImage, Deletions, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
+import { AppImage, Build, Deletions, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
@@ -966,6 +966,29 @@ export const UpdateAppImageResponse = proto3.makeMessageType(
   () => [
     { no: 1, name: "repository_url", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "tag", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.UpdateAppBuildSettingsRequest
+ */
+export const UpdateAppBuildSettingsRequest = proto3.makeMessageType(
+  "porter.v1.UpdateAppBuildSettingsRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+    { no: 4, name: "build", kind: "message", T: Build },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.UpdateAppBuildSettingsResponse
+ */
+export const UpdateAppBuildSettingsResponse = proto3.makeMessageType(
+  "porter.v1.UpdateAppBuildSettingsResponse",
+  () => [
+    { no: 1, name: "revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
