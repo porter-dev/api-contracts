@@ -624,6 +624,17 @@ message UpdateAppImageResponse {
   string tag = 2;
 }
 
+message UpdateAppBuildSettingsRequest {
+  int64 project_id = 1;
+  string app_name = 2;
+  DeploymentTargetIdentifier deployment_target_identifier = 3;
+  Build build = 4;
+}
+
+message UpdateAppBuildSettingsResponse {
+  string revision_id = 1;
+}
+
 // UpdateAppsLinkedToEnvGroupRequest is the request object for UpdateAppsLinkedToEnvGroup
 message UpdateAppsLinkedToEnvGroupRequest {
   int64 project_id = 1;
@@ -832,6 +843,9 @@ service ClusterControlPlaneService {
 
   // UpdateAppImage updates the image of a porter app and applies the new app revision to the deployment target.
   rpc UpdateAppImage(UpdateAppImageRequest) returns (UpdateAppImageResponse) {}
+
+  // UpdateAppBuildSettings updates the build settings for an app
+  rpc UpdateAppBuildSettings(UpdateAppBuildSettingsRequest) returns (UpdateAppBuildSettingsResponse) {}
 
   // UpdateAppsLinkedToEnvGroup updates all apps that are linked to a given env group
   rpc UpdateAppsLinkedToEnvGroup(UpdateAppsLinkedToEnvGroupRequest) returns (UpdateAppsLinkedToEnvGroupResponse) {}

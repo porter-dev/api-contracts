@@ -130,6 +130,9 @@ const (
 	// ClusterControlPlaneServiceUpdateAppImageProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's UpdateAppImage RPC.
 	ClusterControlPlaneServiceUpdateAppImageProcedure = "/porter.v1.ClusterControlPlaneService/UpdateAppImage"
+	// ClusterControlPlaneServiceUpdateAppBuildSettingsProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's UpdateAppBuildSettings RPC.
+	ClusterControlPlaneServiceUpdateAppBuildSettingsProcedure = "/porter.v1.ClusterControlPlaneService/UpdateAppBuildSettings"
 	// ClusterControlPlaneServiceUpdateAppsLinkedToEnvGroupProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's UpdateAppsLinkedToEnvGroup RPC.
 	ClusterControlPlaneServiceUpdateAppsLinkedToEnvGroupProcedure = "/porter.v1.ClusterControlPlaneService/UpdateAppsLinkedToEnvGroup"
@@ -260,6 +263,8 @@ type ClusterControlPlaneServiceClient interface {
 	LatestEnvGroupWithVariables(context.Context, *connect.Request[v1.LatestEnvGroupWithVariablesRequest]) (*connect.Response[v1.LatestEnvGroupWithVariablesResponse], error)
 	// UpdateAppImage updates the image of a porter app and applies the new app revision to the deployment target.
 	UpdateAppImage(context.Context, *connect.Request[v1.UpdateAppImageRequest]) (*connect.Response[v1.UpdateAppImageResponse], error)
+	// UpdateAppBuildSettings updates the build settings for an app
+	UpdateAppBuildSettings(context.Context, *connect.Request[v1.UpdateAppBuildSettingsRequest]) (*connect.Response[v1.UpdateAppBuildSettingsResponse], error)
 	// UpdateAppsLinkedToEnvGroup updates all apps that are linked to a given env group
 	UpdateAppsLinkedToEnvGroup(context.Context, *connect.Request[v1.UpdateAppsLinkedToEnvGroupRequest]) (*connect.Response[v1.UpdateAppsLinkedToEnvGroupResponse], error)
 	// AppHelmValues retrieves the raw helm values used to install an app on the cluster.
@@ -492,6 +497,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceUpdateAppImageProcedure,
 			opts...,
 		),
+		updateAppBuildSettings: connect.NewClient[v1.UpdateAppBuildSettingsRequest, v1.UpdateAppBuildSettingsResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceUpdateAppBuildSettingsProcedure,
+			opts...,
+		),
 		updateAppsLinkedToEnvGroup: connect.NewClient[v1.UpdateAppsLinkedToEnvGroupRequest, v1.UpdateAppsLinkedToEnvGroupResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceUpdateAppsLinkedToEnvGroupProcedure,
@@ -614,6 +624,7 @@ type clusterControlPlaneServiceClient struct {
 	envGroupVariables              *connect.Client[v1.EnvGroupVariablesRequest, v1.EnvGroupVariablesResponse]
 	latestEnvGroupWithVariables    *connect.Client[v1.LatestEnvGroupWithVariablesRequest, v1.LatestEnvGroupWithVariablesResponse]
 	updateAppImage                 *connect.Client[v1.UpdateAppImageRequest, v1.UpdateAppImageResponse]
+	updateAppBuildSettings         *connect.Client[v1.UpdateAppBuildSettingsRequest, v1.UpdateAppBuildSettingsResponse]
 	updateAppsLinkedToEnvGroup     *connect.Client[v1.UpdateAppsLinkedToEnvGroupRequest, v1.UpdateAppsLinkedToEnvGroupResponse]
 	appHelmValues                  *connect.Client[v1.AppHelmValuesRequest, v1.AppHelmValuesResponse]
 	manualServiceRun               *connect.Client[v1.ManualServiceRunRequest, v1.ManualServiceRunResponse]
@@ -801,6 +812,11 @@ func (c *clusterControlPlaneServiceClient) UpdateAppImage(ctx context.Context, r
 	return c.updateAppImage.CallUnary(ctx, req)
 }
 
+// UpdateAppBuildSettings calls porter.v1.ClusterControlPlaneService.UpdateAppBuildSettings.
+func (c *clusterControlPlaneServiceClient) UpdateAppBuildSettings(ctx context.Context, req *connect.Request[v1.UpdateAppBuildSettingsRequest]) (*connect.Response[v1.UpdateAppBuildSettingsResponse], error) {
+	return c.updateAppBuildSettings.CallUnary(ctx, req)
+}
+
 // UpdateAppsLinkedToEnvGroup calls porter.v1.ClusterControlPlaneService.UpdateAppsLinkedToEnvGroup.
 func (c *clusterControlPlaneServiceClient) UpdateAppsLinkedToEnvGroup(ctx context.Context, req *connect.Request[v1.UpdateAppsLinkedToEnvGroupRequest]) (*connect.Response[v1.UpdateAppsLinkedToEnvGroupResponse], error) {
 	return c.updateAppsLinkedToEnvGroup.CallUnary(ctx, req)
@@ -981,6 +997,8 @@ type ClusterControlPlaneServiceHandler interface {
 	LatestEnvGroupWithVariables(context.Context, *connect.Request[v1.LatestEnvGroupWithVariablesRequest]) (*connect.Response[v1.LatestEnvGroupWithVariablesResponse], error)
 	// UpdateAppImage updates the image of a porter app and applies the new app revision to the deployment target.
 	UpdateAppImage(context.Context, *connect.Request[v1.UpdateAppImageRequest]) (*connect.Response[v1.UpdateAppImageResponse], error)
+	// UpdateAppBuildSettings updates the build settings for an app
+	UpdateAppBuildSettings(context.Context, *connect.Request[v1.UpdateAppBuildSettingsRequest]) (*connect.Response[v1.UpdateAppBuildSettingsResponse], error)
 	// UpdateAppsLinkedToEnvGroup updates all apps that are linked to a given env group
 	UpdateAppsLinkedToEnvGroup(context.Context, *connect.Request[v1.UpdateAppsLinkedToEnvGroupRequest]) (*connect.Response[v1.UpdateAppsLinkedToEnvGroupResponse], error)
 	// AppHelmValues retrieves the raw helm values used to install an app on the cluster.
@@ -1209,6 +1227,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.UpdateAppImage,
 		opts...,
 	)
+	clusterControlPlaneServiceUpdateAppBuildSettingsHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceUpdateAppBuildSettingsProcedure,
+		svc.UpdateAppBuildSettings,
+		opts...,
+	)
 	clusterControlPlaneServiceUpdateAppsLinkedToEnvGroupHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceUpdateAppsLinkedToEnvGroupProcedure,
 		svc.UpdateAppsLinkedToEnvGroup,
@@ -1360,6 +1383,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceLatestEnvGroupWithVariablesHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceUpdateAppImageProcedure:
 			clusterControlPlaneServiceUpdateAppImageHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceUpdateAppBuildSettingsProcedure:
+			clusterControlPlaneServiceUpdateAppBuildSettingsHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceUpdateAppsLinkedToEnvGroupProcedure:
 			clusterControlPlaneServiceUpdateAppsLinkedToEnvGroupHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceAppHelmValuesProcedure:
@@ -1529,6 +1554,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) LatestEnvGroupWithVariable
 
 func (UnimplementedClusterControlPlaneServiceHandler) UpdateAppImage(context.Context, *connect.Request[v1.UpdateAppImageRequest]) (*connect.Response[v1.UpdateAppImageResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.UpdateAppImage is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) UpdateAppBuildSettings(context.Context, *connect.Request[v1.UpdateAppBuildSettingsRequest]) (*connect.Response[v1.UpdateAppBuildSettingsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.UpdateAppBuildSettings is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) UpdateAppsLinkedToEnvGroup(context.Context, *connect.Request[v1.UpdateAppsLinkedToEnvGroupRequest]) (*connect.Response[v1.UpdateAppsLinkedToEnvGroupResponse], error) {

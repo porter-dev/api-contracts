@@ -10,7 +10,7 @@ import type { GKEPreflightValues } from "./gke_pb.js";
 import type { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import type { Error } from "./errors_pb.js";
 import type { Contract, ContractRevision } from "./contract_pb.js";
-import type { AppImage, Deletions, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
+import type { AppImage, Build, Deletions, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
@@ -2863,6 +2863,69 @@ export declare class UpdateAppImageResponse extends Message<UpdateAppImageRespon
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateAppImageResponse;
 
   static equals(a: UpdateAppImageResponse | PlainMessage<UpdateAppImageResponse> | undefined, b: UpdateAppImageResponse | PlainMessage<UpdateAppImageResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.UpdateAppBuildSettingsRequest
+ */
+export declare class UpdateAppBuildSettingsRequest extends Message<UpdateAppBuildSettingsRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: string app_name = 2;
+   */
+  appName: string;
+
+  /**
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 3;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  /**
+   * @generated from field: porter.v1.Build build = 4;
+   */
+  build?: Build;
+
+  constructor(data?: PartialMessage<UpdateAppBuildSettingsRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateAppBuildSettingsRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateAppBuildSettingsRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateAppBuildSettingsRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateAppBuildSettingsRequest;
+
+  static equals(a: UpdateAppBuildSettingsRequest | PlainMessage<UpdateAppBuildSettingsRequest> | undefined, b: UpdateAppBuildSettingsRequest | PlainMessage<UpdateAppBuildSettingsRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.UpdateAppBuildSettingsResponse
+ */
+export declare class UpdateAppBuildSettingsResponse extends Message<UpdateAppBuildSettingsResponse> {
+  /**
+   * @generated from field: string revision_id = 1;
+   */
+  revisionId: string;
+
+  constructor(data?: PartialMessage<UpdateAppBuildSettingsResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateAppBuildSettingsResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateAppBuildSettingsResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateAppBuildSettingsResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateAppBuildSettingsResponse;
+
+  static equals(a: UpdateAppBuildSettingsResponse | PlainMessage<UpdateAppBuildSettingsResponse> | undefined, b: UpdateAppBuildSettingsResponse | PlainMessage<UpdateAppBuildSettingsResponse> | undefined): boolean;
 }
 
 /**
