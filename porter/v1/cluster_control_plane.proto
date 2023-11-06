@@ -677,7 +677,10 @@ message ManualServiceRunRequest {
 }
 
 // ManualServiceRunResponse is the response object for ManualServiceRun
-message ManualServiceRunResponse {}
+message ManualServiceRunResponse {
+  // job_run_id is the id of the job run that was created, if any
+  string job_run_id = 1;
+}
 
 // ImagesRequest is the request object for listing images
 message ImagesRequest {

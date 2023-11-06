@@ -3130,6 +3130,13 @@ export declare class ManualServiceRunRequest extends Message<ManualServiceRunReq
  * @generated from message porter.v1.ManualServiceRunResponse
  */
 export declare class ManualServiceRunResponse extends Message<ManualServiceRunResponse> {
+  /**
+   * job_run_id is the id of the job run that was created, if any
+   *
+   * @generated from field: string job_run_id = 1;
+   */
+  jobRunId: string;
+
   constructor(data?: PartialMessage<ManualServiceRunResponse>);
 
   static readonly runtime: typeof proto3;
