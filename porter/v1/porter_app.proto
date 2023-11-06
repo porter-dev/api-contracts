@@ -107,4 +107,6 @@ message AppImage {
 message EFS {
   //enabled enabes shared storage across services
   bool enabled = 1;
+  // file_system_id is the AWS EFS File System ID to mount
+  string file_system_id = 2;
 }
