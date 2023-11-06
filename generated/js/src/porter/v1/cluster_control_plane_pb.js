@@ -1068,7 +1068,9 @@ export const ManualServiceRunRequest = proto3.makeMessageType(
  */
 export const ManualServiceRunResponse = proto3.makeMessageType(
   "porter.v1.ManualServiceRunResponse",
-  [],
+  () => [
+    { no: 1, name: "job_run_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
 );
 
 /**
