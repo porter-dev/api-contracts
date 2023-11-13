@@ -155,7 +155,7 @@ export declare class RequiredApp extends Message<RequiredApp> {
 
   /**
    * from_target is the deployment target from which to pull the contract for the required app
-   * If not provided, the contract will be pulled from the deployment target that the new is app is based on.
+   * If not provided, the contract will be pulled from the default deployment target
    *
    * @generated from field: porter.v1.DeploymentTargetIdentifier from_target = 2;
    */

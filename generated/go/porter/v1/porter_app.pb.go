@@ -231,7 +231,7 @@ type RequiredApp struct {
 	// name is the name of the required app
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// from_target is the deployment target from which to pull the contract for the required app
-	// If not provided, the contract will be pulled from the deployment target that the new is app is based on.
+	// If not provided, the contract will be pulled from the default deployment target
 	FromTarget *DeploymentTargetIdentifier `protobuf:"bytes,2,opt,name=from_target,json=fromTarget,proto3" json:"from_target,omitempty"`
 }
 
