@@ -143,6 +143,9 @@ export declare class PorterApp extends Message<PorterApp> {
 }
 
 /**
+ * RequiredApp specifies another porter app that this app expects to be deployed alongside it
+ * These are used for preview environments to pull in the latest deployed version of an app from a different deployment target
+ *
  * @generated from message porter.v1.RequiredApp
  */
 export declare class RequiredApp extends Message<RequiredApp> {

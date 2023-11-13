@@ -42,6 +42,9 @@ export const PorterApp = proto3.makeMessageType(
 );
 
 /**
+ * RequiredApp specifies another porter app that this app expects to be deployed alongside it
+ * These are used for preview environments to pull in the latest deployed version of an app from a different deployment target
+ *
  * @generated from message porter.v1.RequiredApp
  */
 export const RequiredApp = proto3.makeMessageType(

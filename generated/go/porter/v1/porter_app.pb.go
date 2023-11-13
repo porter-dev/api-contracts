@@ -223,6 +223,8 @@ func (x *PorterApp) GetRequiredApps() []*RequiredApp {
 	return nil
 }
 
+// RequiredApp specifies another porter app that this app expects to be deployed alongside it
+// These are used for preview environments to pull in the latest deployed version of an app from a different deployment target
 type RequiredApp struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
