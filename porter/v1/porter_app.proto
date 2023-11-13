@@ -38,6 +38,8 @@ message PorterApp {
   repeated RequiredApp required_apps = 11;
 }
 
+// RequiredApp specifies another porter app that this app expects to be deployed alongside it
+// These are used for preview environments to pull in the latest deployed version of an app from a different deployment target
 message RequiredApp {
   // name is the name of the required app
   string name = 1;
