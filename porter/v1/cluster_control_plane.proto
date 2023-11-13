@@ -415,7 +415,7 @@ message RequireAppPayload {
   // app_revision_id is the id of the app revision specifying this requirement, applied to the deployment target where the requirement is expected
   string app_revision_id = 3;
   // source_deployment_target is the object that identifies the deployment target where the app definition is coming from
-  // if not provided, this will be the default target for the same cluster as the to_deployment_target
+  // if not provided, this will be the default target for the same cluster as the target where the requirement is expected
   DeploymentTargetIdentifier source_deployment_target = 4;
 }
 

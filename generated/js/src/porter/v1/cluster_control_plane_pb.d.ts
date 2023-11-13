@@ -2061,7 +2061,7 @@ export declare class RequireAppPayload extends Message<RequireAppPayload> {
 
   /**
    * source_deployment_target is the object that identifies the deployment target where the app definition is coming from
-   * if not provided, this will be the default target for the same cluster as the to_deployment_target
+   * if not provided, this will be the default target for the same cluster as the target where the requirement is expected
    *
    * @generated from field: porter.v1.DeploymentTargetIdentifier source_deployment_target = 4;
    */

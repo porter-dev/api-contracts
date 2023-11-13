@@ -3541,7 +3541,7 @@ type RequireAppPayload struct {
 	// app_revision_id is the id of the app revision specifying this requirement, applied to the deployment target where the requirement is expected
 	AppRevisionId string `protobuf:"bytes,3,opt,name=app_revision_id,json=appRevisionId,proto3" json:"app_revision_id,omitempty"`
 	// source_deployment_target is the object that identifies the deployment target where the app definition is coming from
-	// if not provided, this will be the default target for the same cluster as the to_deployment_target
+	// if not provided, this will be the default target for the same cluster as the target where the requirement is expected
 	SourceDeploymentTarget *DeploymentTargetIdentifier `protobuf:"bytes,4,opt,name=source_deployment_target,json=sourceDeploymentTarget,proto3" json:"source_deployment_target,omitempty"`
 }
 
