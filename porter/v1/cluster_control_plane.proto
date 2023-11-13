@@ -744,6 +744,29 @@ message AppInstance {
   int64 porter_app_id = 4;
 }
 
+// CreateNotificationRequest is the request object for creating notifications
+message CreateNotificationRequest {
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+  // deployment_target_identifier is the object that identifies the deployment target for the app
+  DeploymentTargetIdentifier deployment_target_identifier = 3;
+  // app_name is the name of the app
+  string app_name = 4;
+  // service_name is the name of the service of the app that the notification corresponds with
+  string service_name = 5;
+  // app_revision_id is the revision id of the app that the notification corresponds with
+  string app_revision_id = 6;
+  // porter_agent_event_id is the id of the event that triggers the porter agent. This field is used to dedupe notifications
+  int64 porter_agent_event_id = 7;
+  // raw_summary is the raw summary of the notification, used to determine an error code and then converted to a human readable form
+  string raw_summary = 8;
+  // raw_detail is the raw detail of the notification, used to determine an error code and then converted to a human readable form
+  string raw_detail = 9;
+}
+
+// CreateNotificationResponse is the response object for creating notifications
+message CreateNotificationResponse {}
+
 service ClusterControlPlaneService {
   // QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas
   rpc QuotaIncrease(QuotaIncreaseRequest) returns (QuotaIncreaseResponse) {}
@@ -878,6 +901,9 @@ service ClusterControlPlaneService {
 
   // ListAppInstances lists app instance in a project (and deployment target if provided).
   rpc ListAppInstances(ListAppInstancesRequest) returns (ListAppInstancesResponse) {}
+
+  // CreateNotification creates a notification for a porter app and service at a given app revision
+  rpc CreateNotification(CreateNotificationRequest) returns (CreateNotificationResponse) {}
 
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
   // Deprecated. Use TokenForRegistry instead.

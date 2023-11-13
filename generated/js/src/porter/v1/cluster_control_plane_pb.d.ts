@@ -3452,6 +3452,107 @@ export declare class AppInstance extends Message<AppInstance> {
 }
 
 /**
+ * CreateNotificationRequest is the request object for creating notifications
+ *
+ * @generated from message porter.v1.CreateNotificationRequest
+ */
+export declare class CreateNotificationRequest extends Message<CreateNotificationRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target for the app
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 3;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  /**
+   * app_name is the name of the app
+   *
+   * @generated from field: string app_name = 4;
+   */
+  appName: string;
+
+  /**
+   * service_name is the name of the service of the app that the notification corresponds with
+   *
+   * @generated from field: string service_name = 5;
+   */
+  serviceName: string;
+
+  /**
+   * app_revision_id is the revision id of the app that the notification corresponds with
+   *
+   * @generated from field: string app_revision_id = 6;
+   */
+  appRevisionId: string;
+
+  /**
+   * porter_agent_event_id is the id of the event that triggers the porter agent. This field is used to dedupe notifications
+   *
+   * @generated from field: int64 porter_agent_event_id = 7;
+   */
+  porterAgentEventId: bigint;
+
+  /**
+   * raw_summary is the raw summary of the notification, used to determine an error code and then converted to a human readable form
+   *
+   * @generated from field: string raw_summary = 8;
+   */
+  rawSummary: string;
+
+  /**
+   * raw_detail is the raw detail of the notification, used to determine an error code and then converted to a human readable form
+   *
+   * @generated from field: string raw_detail = 9;
+   */
+  rawDetail: string;
+
+  constructor(data?: PartialMessage<CreateNotificationRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CreateNotificationRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateNotificationRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateNotificationRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateNotificationRequest;
+
+  static equals(a: CreateNotificationRequest | PlainMessage<CreateNotificationRequest> | undefined, b: CreateNotificationRequest | PlainMessage<CreateNotificationRequest> | undefined): boolean;
+}
+
+/**
+ * CreateNotificationResponse is the response object for creating notifications
+ *
+ * @generated from message porter.v1.CreateNotificationResponse
+ */
+export declare class CreateNotificationResponse extends Message<CreateNotificationResponse> {
+  constructor(data?: PartialMessage<CreateNotificationResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CreateNotificationResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateNotificationResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateNotificationResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateNotificationResponse;
+
+  static equals(a: CreateNotificationResponse | PlainMessage<CreateNotificationResponse> | undefined, b: CreateNotificationResponse | PlainMessage<CreateNotificationResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  * @deprecated
  */
