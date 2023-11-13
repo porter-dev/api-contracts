@@ -40,13 +40,16 @@ message Service {
   optional string run_optional = 12;
 
   // gpu_cores_nvidia is the number of GPU cores to allocate to the service. This is only used for nvidia-backed GPU's at present. If set to a non-zero value, this service will only be scheduled if a GPU node with the specified number of cores is available.
-  float gpu_cores_nvidia = 13;
+  float gpu_cores_nvidia = 13 [deprecated = true];
 
   // name is the user-defined name for the service
   string name = 14;
 
   // instances_optional is the number of instances, or replicas, to run
   optional int32 instances_optional = 15;
+
+  //gpu_cores is the number GPU cores to allocate to the service. This is only used for nvidia-backed s at present. If set to a non-zero value, this service will only be scheduled if a GPU node with the specified number of cores is available.
+  optional float gpu_cores = 16;
 }
 
 // WebServiceConfig is the configuration for a web service
