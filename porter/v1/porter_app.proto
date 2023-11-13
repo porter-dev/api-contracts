@@ -4,6 +4,14 @@ package porter.v1;
 
 import "porter/v1/service.proto";
 
+// DeploymentTargetIdentifier is the object that identifies a deployment target. One of id or name must be provided, with id taking precedence.
+message DeploymentTargetIdentifier {
+  // id is the id of the deployment target
+  string id = 1;
+  // name is the name of the deployment target
+  string name = 2;
+}
+
 // PorterApp is the top-level configuration for a Porter application, usually found in porter.yaml
 message PorterApp {
   // name is the name of the application
@@ -26,6 +34,16 @@ message PorterApp {
   repeated Service service_list = 9;
   //efs_storage shared storage across service
   EFS efs_storage = 10;
+  // required_apps are other porter apps that this app expects to be deployed alongside it
+  repeated RequiredApp required_apps = 11;
+}
+
+message RequiredApp {
+  // name is the name of the required app
+  string name = 1;
+  // from_target is the deployment target from which to pull the contract for the required app
+  // If not provided, the contract will be pulled from the deployment target that the new is app is based on.
+  DeploymentTargetIdentifier from_target = 2;
 }
 
 // HelmOverrides is a wrapper over stringified json of raw Helm overrides to use for the application. HelmOverrides will only be removed if values is explicitly set to an empty string.

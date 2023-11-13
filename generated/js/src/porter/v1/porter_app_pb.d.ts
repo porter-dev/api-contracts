@@ -8,6 +8,41 @@ import { Message, proto3 } from "@bufbuild/protobuf";
 import type { Service } from "./service_pb.js";
 
 /**
+ * DeploymentTargetIdentifier is the object that identifies a deployment target. One of id or name must be provided, with id taking precedence.
+ *
+ * @generated from message porter.v1.DeploymentTargetIdentifier
+ */
+export declare class DeploymentTargetIdentifier extends Message<DeploymentTargetIdentifier> {
+  /**
+   * id is the id of the deployment target
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * name is the name of the deployment target
+   *
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  constructor(data?: PartialMessage<DeploymentTargetIdentifier>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeploymentTargetIdentifier";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeploymentTargetIdentifier;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeploymentTargetIdentifier;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeploymentTargetIdentifier;
+
+  static equals(a: DeploymentTargetIdentifier | PlainMessage<DeploymentTargetIdentifier> | undefined, b: DeploymentTargetIdentifier | PlainMessage<DeploymentTargetIdentifier> | undefined): boolean;
+}
+
+/**
  * PorterApp is the top-level configuration for a Porter application, usually found in porter.yaml
  *
  * @generated from message porter.v1.PorterApp
@@ -85,6 +120,13 @@ export declare class PorterApp extends Message<PorterApp> {
    */
   efsStorage?: EFS;
 
+  /**
+   * required_apps are other porter apps that this app expects to be deployed alongside it
+   *
+   * @generated from field: repeated porter.v1.RequiredApp required_apps = 11;
+   */
+  requiredApps: RequiredApp[];
+
   constructor(data?: PartialMessage<PorterApp>);
 
   static readonly runtime: typeof proto3;
@@ -98,6 +140,40 @@ export declare class PorterApp extends Message<PorterApp> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PorterApp;
 
   static equals(a: PorterApp | PlainMessage<PorterApp> | undefined, b: PorterApp | PlainMessage<PorterApp> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.RequiredApp
+ */
+export declare class RequiredApp extends Message<RequiredApp> {
+  /**
+   * name is the name of the required app
+   *
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * from_target is the deployment target from which to pull the contract for the required app
+   * If not provided, the contract will be pulled from the deployment target that the new is app is based on.
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier from_target = 2;
+   */
+  fromTarget?: DeploymentTargetIdentifier;
+
+  constructor(data?: PartialMessage<RequiredApp>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.RequiredApp";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RequiredApp;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RequiredApp;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RequiredApp;
+
+  static equals(a: RequiredApp | PlainMessage<RequiredApp> | undefined, b: RequiredApp | PlainMessage<RequiredApp> | undefined): boolean;
 }
 
 /**

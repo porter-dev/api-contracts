@@ -9,7 +9,7 @@ import { GKEPreflightValues } from "./gke_pb.js";
 import { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import { Error } from "./errors_pb.js";
 import { Contract, ContractRevision } from "./contract_pb.js";
-import { AppImage, Build, Deletions, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
+import { AppImage, Build, Deletions, DeploymentTargetIdentifier, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
@@ -683,6 +683,19 @@ export const UpdateRevisionPayload = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message porter.v1.RequireAppPayload
+ */
+export const RequireAppPayload = proto3.makeMessageType(
+  "porter.v1.RequireAppPayload",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "app_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "source_deployment_target", kind: "message", T: DeploymentTargetIdentifier },
+  ],
+);
+
+/**
  * @generated from message porter.v1.CurrentAppRevisionResponse
  */
 export const CurrentAppRevisionResponse = proto3.makeMessageType(
@@ -887,19 +900,6 @@ export const EnvGroupVariablesRequest = proto3.makeMessageType(
     { no: 2, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "env_group", kind: "message", T: EnvGroup },
     { no: 4, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
-  ],
-);
-
-/**
- * DeploymentTargetIdentifier is the object that identifies a deployment target. One of id or name must be provided, with id taking precedence.
- *
- * @generated from message porter.v1.DeploymentTargetIdentifier
- */
-export const DeploymentTargetIdentifier = proto3.makeMessageType(
-  "porter.v1.DeploymentTargetIdentifier",
-  () => [
-    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

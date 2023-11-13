@@ -7,6 +7,19 @@ import { proto3 } from "@bufbuild/protobuf";
 import { Service } from "./service_pb.js";
 
 /**
+ * DeploymentTargetIdentifier is the object that identifies a deployment target. One of id or name must be provided, with id taking precedence.
+ *
+ * @generated from message porter.v1.DeploymentTargetIdentifier
+ */
+export const DeploymentTargetIdentifier = proto3.makeMessageType(
+  "porter.v1.DeploymentTargetIdentifier",
+  () => [
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
  * PorterApp is the top-level configuration for a Porter application, usually found in porter.yaml
  *
  * @generated from message porter.v1.PorterApp
@@ -24,6 +37,18 @@ export const PorterApp = proto3.makeMessageType(
     { no: 8, name: "helm_overrides", kind: "message", T: HelmOverrides },
     { no: 9, name: "service_list", kind: "message", T: Service, repeated: true },
     { no: 10, name: "efs_storage", kind: "message", T: EFS },
+    { no: 11, name: "required_apps", kind: "message", T: RequiredApp, repeated: true },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.RequiredApp
+ */
+export const RequiredApp = proto3.makeMessageType(
+  "porter.v1.RequiredApp",
+  () => [
+    { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "from_target", kind: "message", T: DeploymentTargetIdentifier },
   ],
 );
 
