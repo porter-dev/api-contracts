@@ -1187,6 +1187,36 @@ export const AppInstance = proto3.makeMessageType(
 );
 
 /**
+ * CreateNotificationRequest is the request object for creating notifications
+ *
+ * @generated from message porter.v1.CreateNotificationRequest
+ */
+export const CreateNotificationRequest = proto3.makeMessageType(
+  "porter.v1.CreateNotificationRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+    { no: 4, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "service_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 6, name: "app_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 7, name: "porter_agent_event_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 8, name: "raw_summary", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 9, name: "raw_detail", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * CreateNotificationResponse is the response object for creating notifications
+ *
+ * @generated from message porter.v1.CreateNotificationResponse
+ */
+export const CreateNotificationResponse = proto3.makeMessageType(
+  "porter.v1.CreateNotificationResponse",
+  [],
+);
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  * @deprecated
  */
