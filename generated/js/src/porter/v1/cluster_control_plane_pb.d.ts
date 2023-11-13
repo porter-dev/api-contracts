@@ -10,7 +10,7 @@ import type { GKEPreflightValues } from "./gke_pb.js";
 import type { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import type { Error } from "./errors_pb.js";
 import type { Contract, ContractRevision } from "./contract_pb.js";
-import type { AppImage, Build, Deletions, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
+import type { AppImage, Build, Deletions, DeploymentTargetIdentifier, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
@@ -2035,6 +2035,54 @@ export declare class UpdateRevisionPayload extends Message<UpdateRevisionPayload
 }
 
 /**
+ * @generated from message porter.v1.RequireAppPayload
+ */
+export declare class RequireAppPayload extends Message<RequireAppPayload> {
+  /**
+   * project_id is the id of the project the app belongs to
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * app_name is the name of the app
+   *
+   * @generated from field: string app_name = 2;
+   */
+  appName: string;
+
+  /**
+   * app_revision_id is the id of the app revision specifying this requirement, applied to the deployment target where the requirement is expected
+   *
+   * @generated from field: string app_revision_id = 3;
+   */
+  appRevisionId: string;
+
+  /**
+   * source_deployment_target is the object that identifies the deployment target where the app definition is coming from
+   * if not provided, this will be the default target for the same cluster as the target where the requirement is expected
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier source_deployment_target = 4;
+   */
+  sourceDeploymentTarget?: DeploymentTargetIdentifier;
+
+  constructor(data?: PartialMessage<RequireAppPayload>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.RequireAppPayload";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RequireAppPayload;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RequireAppPayload;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RequireAppPayload;
+
+  static equals(a: RequireAppPayload | PlainMessage<RequireAppPayload> | undefined, b: RequireAppPayload | PlainMessage<RequireAppPayload> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.CurrentAppRevisionResponse
  */
 export declare class CurrentAppRevisionResponse extends Message<CurrentAppRevisionResponse> {
@@ -2642,41 +2690,6 @@ export declare class EnvGroupVariablesRequest extends Message<EnvGroupVariablesR
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EnvGroupVariablesRequest;
 
   static equals(a: EnvGroupVariablesRequest | PlainMessage<EnvGroupVariablesRequest> | undefined, b: EnvGroupVariablesRequest | PlainMessage<EnvGroupVariablesRequest> | undefined): boolean;
-}
-
-/**
- * DeploymentTargetIdentifier is the object that identifies a deployment target. One of id or name must be provided, with id taking precedence.
- *
- * @generated from message porter.v1.DeploymentTargetIdentifier
- */
-export declare class DeploymentTargetIdentifier extends Message<DeploymentTargetIdentifier> {
-  /**
-   * id is the id of the deployment target
-   *
-   * @generated from field: string id = 1;
-   */
-  id: string;
-
-  /**
-   * name is the name of the deployment target
-   *
-   * @generated from field: string name = 2;
-   */
-  name: string;
-
-  constructor(data?: PartialMessage<DeploymentTargetIdentifier>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.DeploymentTargetIdentifier";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeploymentTargetIdentifier;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeploymentTargetIdentifier;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeploymentTargetIdentifier;
-
-  static equals(a: DeploymentTargetIdentifier | PlainMessage<DeploymentTargetIdentifier> | undefined, b: DeploymentTargetIdentifier | PlainMessage<DeploymentTargetIdentifier> | undefined): boolean;
 }
 
 /**

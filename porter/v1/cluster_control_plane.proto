@@ -407,6 +407,18 @@ message UpdateRevisionPayload {
   AppImage image = 4;
 }
 
+message RequireAppPayload {
+  // project_id is the id of the project the app belongs to
+  int64 project_id = 1;
+  // app_name is the name of the app
+  string app_name = 2;
+  // app_revision_id is the id of the app revision specifying this requirement, applied to the deployment target where the requirement is expected
+  string app_revision_id = 3;
+  // source_deployment_target is the object that identifies the deployment target where the app definition is coming from
+  // if not provided, this will be the default target for the same cluster as the target where the requirement is expected
+  DeploymentTargetIdentifier source_deployment_target = 4;
+}
+
 message CurrentAppRevisionResponse {
   // revision is the currently deployed app revision for a given porter_app and deployment_target
   AppRevision app_revision = 1;
@@ -577,14 +589,6 @@ message EnvGroupVariablesRequest {
   EnvGroup env_group = 3;
   // deployment_target_identifier is the object that identifies the deployment target for the env group
   DeploymentTargetIdentifier deployment_target_identifier = 4;
-}
-
-// DeploymentTargetIdentifier is the object that identifies a deployment target. One of id or name must be provided, with id taking precedence.
-message DeploymentTargetIdentifier {
-  // id is the id of the deployment target
-  string id = 1;
-  // name is the name of the deployment target
-  string name = 2;
 }
 
 // EnvGroupVariablesResponse is the response object when retrieving the variables for a given EnvGroup
