@@ -956,6 +956,9 @@ service ClusterControlPlaneService {
 
   // DatastoreStatus returns the status of a given datastore within a project/cluster scope
   rpc DatastoreStatus(DatastoreStatusRequest) returns (DatastoreStatusResponse) {}
+
+  // ECRStatus returns the status of a given ecr registry within a project scope
+  rpc ECRStatus(ECRStatusRequest) returns (ECRStatusResponse) {}
 }
 
 message EKSBearerTokenRequest {
@@ -1071,4 +1074,18 @@ enum EnumDatastore {
 message DatastoreStatusResponse {
   // status is the status of the datastore
   string status = 1;
+}
+
+// ECRStatusRequest is the request object for fetching the status of a ecr registry associated to a project
+message ECRStatusRequest {
+  // project_id id of the project that the ecr registry belongs to
+  int64 project_id = 1;
+  // registry_id id of the ecr registry
+  int64 registry_id = 2;
+}
+
+// ECRStatusResponse is the response object containing the status of the ecr registry
+message ECRStatusResponse {
+  //scanned is a boolean containing whether scanning is properly enabled or not
+  bool scanned = 1;
 }
