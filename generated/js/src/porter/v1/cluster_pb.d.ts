@@ -125,11 +125,11 @@ export declare class Cluster extends Message<Cluster> {
   } | { case: undefined; value?: undefined };
 
   /**
-   * soc2_compliant force enables all the various soc2-related fields on a cluster
+   * is_soc2_compliant force enables all the various soc2-related fields on a cluster
    *
-   * @generated from field: bool soc2_compliant = 9;
+   * @generated from field: bool is_soc2_compliant = 9;
    */
-  soc2Compliant: boolean;
+  isSoc2Compliant: boolean;
 
   constructor(data?: PartialMessage<Cluster>);
 
