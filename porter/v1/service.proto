@@ -115,7 +115,6 @@ message HealthCheck {
   string http_path = 2;
 }
 
-
 // GPU is the gpu configuration
 message GPU {
   // enabled explicitly enables or disables gpu on a given workload

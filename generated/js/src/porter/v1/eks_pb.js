@@ -47,7 +47,6 @@ export const EKS = proto3.makeMessageType(
     { no: 8, name: "logging", kind: "message", T: EKSLogging },
     { no: 9, name: "enable_kms_encryption", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 10, name: "network", kind: "message", T: AWSClusterNetwork },
-    { no: 11, name: "enable_ecr_scanning", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
@@ -111,7 +110,6 @@ export const EKSLogging = proto3.makeMessageType(
     { no: 3, name: "enable_scheduler_logs", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 4, name: "enable_audit_logs", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 5, name: "enable_controller_manager_logs", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 6, name: "enable_cloudwatch_logs_to_s3", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
