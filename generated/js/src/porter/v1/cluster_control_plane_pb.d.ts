@@ -4194,3 +4194,66 @@ export declare class DatastoreStatusResponse extends Message<DatastoreStatusResp
   static equals(a: DatastoreStatusResponse | PlainMessage<DatastoreStatusResponse> | undefined, b: DatastoreStatusResponse | PlainMessage<DatastoreStatusResponse> | undefined): boolean;
 }
 
+/**
+ * RegistryStatusRequest is the request object for fetching the status of a docker registry associated to a project
+ *
+ * @generated from message porter.v1.RegistryStatusRequest
+ */
+export declare class RegistryStatusRequest extends Message<RegistryStatusRequest> {
+  /**
+   * project_id id of the project that the ecr registry belongs to
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * registry_id id of the ecr registry
+   *
+   * @generated from field: int64 registry_id = 2;
+   */
+  registryId: bigint;
+
+  constructor(data?: PartialMessage<RegistryStatusRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.RegistryStatusRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RegistryStatusRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RegistryStatusRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RegistryStatusRequest;
+
+  static equals(a: RegistryStatusRequest | PlainMessage<RegistryStatusRequest> | undefined, b: RegistryStatusRequest | PlainMessage<RegistryStatusRequest> | undefined): boolean;
+}
+
+/**
+ * RegistryStatusResponse is the response object containing the status of the docker registry
+ *
+ * @generated from message porter.v1.RegistryStatusResponse
+ */
+export declare class RegistryStatusResponse extends Message<RegistryStatusResponse> {
+  /**
+   * is_vulnerability_scanning_enabled is a boolean containing whether scanning is properly enabled or not
+   *
+   * @generated from field: bool is_vulnerability_scanning_enabled = 1;
+   */
+  isVulnerabilityScanningEnabled: boolean;
+
+  constructor(data?: PartialMessage<RegistryStatusResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.RegistryStatusResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RegistryStatusResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RegistryStatusResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RegistryStatusResponse;
+
+  static equals(a: RegistryStatusResponse | PlainMessage<RegistryStatusResponse> | undefined, b: RegistryStatusResponse | PlainMessage<RegistryStatusResponse> | undefined): boolean;
+}
+

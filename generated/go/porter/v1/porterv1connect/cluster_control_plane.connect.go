@@ -193,6 +193,9 @@ const (
 	// ClusterControlPlaneServiceDatastoreStatusProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DatastoreStatus RPC.
 	ClusterControlPlaneServiceDatastoreStatusProcedure = "/porter.v1.ClusterControlPlaneService/DatastoreStatus"
+	// ClusterControlPlaneServiceRegistryStatusProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's RegistryStatus RPC.
+	ClusterControlPlaneServiceRegistryStatusProcedure = "/porter.v1.ClusterControlPlaneService/RegistryStatus"
 )
 
 // ClusterControlPlaneServiceClient is a client for the porter.v1.ClusterControlPlaneService
@@ -340,6 +343,8 @@ type ClusterControlPlaneServiceClient interface {
 	ListImagesForRepository(context.Context, *connect.Request[v1.ListImagesForRepositoryRequest]) (*connect.Response[v1.ListImagesForRepositoryResponse], error)
 	// DatastoreStatus returns the status of a given datastore within a project/cluster scope
 	DatastoreStatus(context.Context, *connect.Request[v1.DatastoreStatusRequest]) (*connect.Response[v1.DatastoreStatusResponse], error)
+	// RegistryStatus returns the status of a given docker registry within a project scope
+	RegistryStatus(context.Context, *connect.Request[v1.RegistryStatusRequest]) (*connect.Response[v1.RegistryStatusResponse], error)
 }
 
 // NewClusterControlPlaneServiceClient constructs a client for the
@@ -617,6 +622,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceDatastoreStatusProcedure,
 			opts...,
 		),
+		registryStatus: connect.NewClient[v1.RegistryStatusRequest, v1.RegistryStatusResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceRegistryStatusProcedure,
+			opts...,
+		),
 	}
 }
 
@@ -675,6 +685,7 @@ type clusterControlPlaneServiceClient struct {
 	listRepositoriesForRegistry    *connect.Client[v1.ListRepositoriesForRegistryRequest, v1.ListRepositoriesForRegistryResponse]
 	listImagesForRepository        *connect.Client[v1.ListImagesForRepositoryRequest, v1.ListImagesForRepositoryResponse]
 	datastoreStatus                *connect.Client[v1.DatastoreStatusRequest, v1.DatastoreStatusResponse]
+	registryStatus                 *connect.Client[v1.RegistryStatusRequest, v1.RegistryStatusResponse]
 }
 
 // QuotaIncrease calls porter.v1.ClusterControlPlaneService.QuotaIncrease.
@@ -968,6 +979,11 @@ func (c *clusterControlPlaneServiceClient) DatastoreStatus(ctx context.Context, 
 	return c.datastoreStatus.CallUnary(ctx, req)
 }
 
+// RegistryStatus calls porter.v1.ClusterControlPlaneService.RegistryStatus.
+func (c *clusterControlPlaneServiceClient) RegistryStatus(ctx context.Context, req *connect.Request[v1.RegistryStatusRequest]) (*connect.Response[v1.RegistryStatusResponse], error) {
+	return c.registryStatus.CallUnary(ctx, req)
+}
+
 // ClusterControlPlaneServiceHandler is an implementation of the
 // porter.v1.ClusterControlPlaneService service.
 type ClusterControlPlaneServiceHandler interface {
@@ -1113,6 +1129,8 @@ type ClusterControlPlaneServiceHandler interface {
 	ListImagesForRepository(context.Context, *connect.Request[v1.ListImagesForRepositoryRequest]) (*connect.Response[v1.ListImagesForRepositoryResponse], error)
 	// DatastoreStatus returns the status of a given datastore within a project/cluster scope
 	DatastoreStatus(context.Context, *connect.Request[v1.DatastoreStatusRequest]) (*connect.Response[v1.DatastoreStatusResponse], error)
+	// RegistryStatus returns the status of a given docker registry within a project scope
+	RegistryStatus(context.Context, *connect.Request[v1.RegistryStatusRequest]) (*connect.Response[v1.RegistryStatusResponse], error)
 }
 
 // NewClusterControlPlaneServiceHandler builds an HTTP handler from the service implementation. It
@@ -1386,6 +1404,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.DatastoreStatus,
 		opts...,
 	)
+	clusterControlPlaneServiceRegistryStatusHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceRegistryStatusProcedure,
+		svc.RegistryStatus,
+		opts...,
+	)
 	return "/porter.v1.ClusterControlPlaneService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ClusterControlPlaneServiceQuotaIncreaseProcedure:
@@ -1494,6 +1517,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceListImagesForRepositoryHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDatastoreStatusProcedure:
 			clusterControlPlaneServiceDatastoreStatusHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceRegistryStatusProcedure:
+			clusterControlPlaneServiceRegistryStatusHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -1713,4 +1738,8 @@ func (UnimplementedClusterControlPlaneServiceHandler) ListImagesForRepository(co
 
 func (UnimplementedClusterControlPlaneServiceHandler) DatastoreStatus(context.Context, *connect.Request[v1.DatastoreStatusRequest]) (*connect.Response[v1.DatastoreStatusResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.DatastoreStatus is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) RegistryStatus(context.Context, *connect.Request[v1.RegistryStatusRequest]) (*connect.Response[v1.RegistryStatusResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.RegistryStatus is not implemented"))
 }
