@@ -10,7 +10,7 @@ import type { GKEPreflightValues } from "./gke_pb.js";
 import type { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import type { Error } from "./errors_pb.js";
 import type { Contract, ContractRevision } from "./contract_pb.js";
-import type { AppImage, Build, Deletions, DeploymentTargetIdentifier, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
+import type { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
@@ -2459,30 +2459,41 @@ export declare class DeploymentTargetDetailsResponse extends Message<DeploymentT
   /**
    * namespace is the namespace that the deployment target points to
    *
-   * @generated from field: string namespace = 1;
+   * @generated from field: string namespace = 1 [deprecated = true];
+   * @deprecated
    */
   namespace: string;
 
   /**
    * cluster_id is the id of the cluster that the deployment target points to
    *
-   * @generated from field: int64 cluster_id = 2;
+   * @generated from field: int64 cluster_id = 2 [deprecated = true];
+   * @deprecated
    */
   clusterId: bigint;
 
   /**
    * is_preview indicates whether this is a preview deployment target or not
    *
-   * @generated from field: bool is_preview = 3;
+   * @generated from field: bool is_preview = 3 [deprecated = true];
+   * @deprecated
    */
   isPreview: boolean;
 
   /**
    * deployment_target_name is the name of the deployment target
    *
-   * @generated from field: string deployment_target_name = 4;
+   * @generated from field: string deployment_target_name = 4 [deprecated = true];
+   * @deprecated
    */
   deploymentTargetName: string;
+
+  /**
+   * deployment_target is the requested deployment target
+   *
+   * @generated from field: porter.v1.DeploymentTarget deployment_target = 5;
+   */
+  deploymentTarget?: DeploymentTarget;
 
   constructor(data?: PartialMessage<DeploymentTargetDetailsResponse>);
 
@@ -2577,6 +2588,127 @@ export declare class CreateDeploymentTargetResponse extends Message<CreateDeploy
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateDeploymentTargetResponse;
 
   static equals(a: CreateDeploymentTargetResponse | PlainMessage<CreateDeploymentTargetResponse> | undefined, b: CreateDeploymentTargetResponse | PlainMessage<CreateDeploymentTargetResponse> | undefined): boolean;
+}
+
+/**
+ * DeploymentTargetsRequest is the request object for DeploymentTargets
+ *
+ * @generated from message porter.v1.DeploymentTargetsRequest
+ */
+export declare class DeploymentTargetsRequest extends Message<DeploymentTargetsRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * cluster_id is the id of the cluster to find deployment targets for
+   *
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  constructor(data?: PartialMessage<DeploymentTargetsRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeploymentTargetsRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeploymentTargetsRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeploymentTargetsRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeploymentTargetsRequest;
+
+  static equals(a: DeploymentTargetsRequest | PlainMessage<DeploymentTargetsRequest> | undefined, b: DeploymentTargetsRequest | PlainMessage<DeploymentTargetsRequest> | undefined): boolean;
+}
+
+/**
+ * DeploymentTargetsResponse is the response object for DeploymentTargets
+ *
+ * @generated from message porter.v1.DeploymentTargetsResponse
+ */
+export declare class DeploymentTargetsResponse extends Message<DeploymentTargetsResponse> {
+  /**
+   * @generated from field: repeated porter.v1.DeploymentTarget deployment_targets = 1;
+   */
+  deploymentTargets: DeploymentTarget[];
+
+  constructor(data?: PartialMessage<DeploymentTargetsResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeploymentTargetsResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeploymentTargetsResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeploymentTargetsResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeploymentTargetsResponse;
+
+  static equals(a: DeploymentTargetsResponse | PlainMessage<DeploymentTargetsResponse> | undefined, b: DeploymentTargetsResponse | PlainMessage<DeploymentTargetsResponse> | undefined): boolean;
+}
+
+/**
+ * DefaultDeploymentTargetRequest is the request object for DefaultDeploymentTarget
+ *
+ * @generated from message porter.v1.DefaultDeploymentTargetRequest
+ */
+export declare class DefaultDeploymentTargetRequest extends Message<DefaultDeploymentTargetRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * cluster_id is the id of cluster to find the default deployment target for
+   * each cluster has only one default deployment target
+   *
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  constructor(data?: PartialMessage<DefaultDeploymentTargetRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DefaultDeploymentTargetRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DefaultDeploymentTargetRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DefaultDeploymentTargetRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DefaultDeploymentTargetRequest;
+
+  static equals(a: DefaultDeploymentTargetRequest | PlainMessage<DefaultDeploymentTargetRequest> | undefined, b: DefaultDeploymentTargetRequest | PlainMessage<DefaultDeploymentTargetRequest> | undefined): boolean;
+}
+
+/**
+ * DefaultDeploymentTargetResponse is the response object for DefaultDeploymentTarget
+ *
+ * @generated from message porter.v1.DefaultDeploymentTargetResponse
+ */
+export declare class DefaultDeploymentTargetResponse extends Message<DefaultDeploymentTargetResponse> {
+  /**
+   * deployment_target is the default deployment target for the given cluster
+   *
+   * @generated from field: porter.v1.DeploymentTarget deployment_target = 1;
+   */
+  deploymentTarget?: DeploymentTarget;
+
+  constructor(data?: PartialMessage<DefaultDeploymentTargetResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DefaultDeploymentTargetResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DefaultDeploymentTargetResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DefaultDeploymentTargetResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DefaultDeploymentTargetResponse;
+
+  static equals(a: DefaultDeploymentTargetResponse | PlainMessage<DefaultDeploymentTargetResponse> | undefined, b: DefaultDeploymentTargetResponse | PlainMessage<DefaultDeploymentTargetResponse> | undefined): boolean;
 }
 
 /**

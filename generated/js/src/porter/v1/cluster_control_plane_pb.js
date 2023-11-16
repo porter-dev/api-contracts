@@ -9,7 +9,7 @@ import { GKEPreflightValues } from "./gke_pb.js";
 import { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import { Error } from "./errors_pb.js";
 import { Contract, ContractRevision } from "./contract_pb.js";
-import { AppImage, Build, Deletions, DeploymentTargetIdentifier, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
+import { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
@@ -835,6 +835,7 @@ export const DeploymentTargetDetailsResponse = proto3.makeMessageType(
     { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 3, name: "is_preview", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 4, name: "deployment_target_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "deployment_target", kind: "message", T: DeploymentTarget },
   ],
 );
 
@@ -863,6 +864,56 @@ export const CreateDeploymentTargetResponse = proto3.makeMessageType(
   "porter.v1.CreateDeploymentTargetResponse",
   () => [
     { no: 1, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * DeploymentTargetsRequest is the request object for DeploymentTargets
+ *
+ * @generated from message porter.v1.DeploymentTargetsRequest
+ */
+export const DeploymentTargetsRequest = proto3.makeMessageType(
+  "porter.v1.DeploymentTargetsRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * DeploymentTargetsResponse is the response object for DeploymentTargets
+ *
+ * @generated from message porter.v1.DeploymentTargetsResponse
+ */
+export const DeploymentTargetsResponse = proto3.makeMessageType(
+  "porter.v1.DeploymentTargetsResponse",
+  () => [
+    { no: 1, name: "deployment_targets", kind: "message", T: DeploymentTarget, repeated: true },
+  ],
+);
+
+/**
+ * DefaultDeploymentTargetRequest is the request object for DefaultDeploymentTarget
+ *
+ * @generated from message porter.v1.DefaultDeploymentTargetRequest
+ */
+export const DefaultDeploymentTargetRequest = proto3.makeMessageType(
+  "porter.v1.DefaultDeploymentTargetRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * DefaultDeploymentTargetResponse is the response object for DefaultDeploymentTarget
+ *
+ * @generated from message porter.v1.DefaultDeploymentTargetResponse
+ */
+export const DefaultDeploymentTargetResponse = proto3.makeMessageType(
+  "porter.v1.DefaultDeploymentTargetResponse",
+  () => [
+    { no: 1, name: "deployment_target", kind: "message", T: DeploymentTarget },
   ],
 );
 

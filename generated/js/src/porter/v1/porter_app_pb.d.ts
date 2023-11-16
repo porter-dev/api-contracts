@@ -43,6 +43,72 @@ export declare class DeploymentTargetIdentifier extends Message<DeploymentTarget
 }
 
 /**
+ * @generated from message porter.v1.DeploymentTarget
+ */
+export declare class DeploymentTarget extends Message<DeploymentTarget> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * name is the vanity name for the deployment target
+   *
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * namespace is the namespace that the deployment target points to
+   *
+   * @generated from field: string namespace = 3;
+   */
+  namespace: string;
+
+  /**
+   * cluster_id is the id of the cluster that the deployment target points to
+   *
+   * @generated from field: int64 cluster_id = 4;
+   */
+  clusterId: bigint;
+
+  /**
+   * is_preview indicates whether this is a preview deployment target or not
+   *
+   * @generated from field: bool is_preview = 5;
+   */
+  isPreview: boolean;
+
+  /**
+   * is_default indicates whether this is the default deployment target for the cluster
+   *
+   * @generated from field: bool is_default = 6;
+   */
+  isDefault: boolean;
+
+  /**
+   * id is the id of the deployment target
+   *
+   * @generated from field: string id = 7;
+   */
+  id: string;
+
+  constructor(data?: PartialMessage<DeploymentTarget>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeploymentTarget";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeploymentTarget;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeploymentTarget;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeploymentTarget;
+
+  static equals(a: DeploymentTarget | PlainMessage<DeploymentTarget> | undefined, b: DeploymentTarget | PlainMessage<DeploymentTarget> | undefined): boolean;
+}
+
+/**
  * PorterApp is the top-level configuration for a Porter application, usually found in porter.yaml
  *
  * @generated from message porter.v1.PorterApp

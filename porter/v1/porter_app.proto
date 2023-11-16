@@ -12,6 +12,22 @@ message DeploymentTargetIdentifier {
   string name = 2;
 }
 
+message DeploymentTarget {
+  int64 project_id = 1;
+  // name is the vanity name for the deployment target
+  string name = 2;
+  // namespace is the namespace that the deployment target points to
+  string namespace = 3;
+  // cluster_id is the id of the cluster that the deployment target points to
+  int64 cluster_id = 4;
+  // is_preview indicates whether this is a preview deployment target or not
+  bool is_preview = 5;
+  // is_default indicates whether this is the default deployment target for the cluster
+  bool is_default = 6;
+  // id is the id of the deployment target
+  string id = 7;
+}
+
 // PorterApp is the top-level configuration for a Porter application, usually found in porter.yaml
 message PorterApp {
   // name is the name of the application
