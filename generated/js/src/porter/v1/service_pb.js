@@ -43,6 +43,8 @@ export const Service = proto3.makeMessageType(
     { no: 13, name: "gpu_cores_nvidia", kind: "scalar", T: 2 /* ScalarType.FLOAT */ },
     { no: 14, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 15, name: "instances_optional", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
+    { no: 16, name: "gpu_cores", kind: "scalar", T: 2 /* ScalarType.FLOAT */, opt: true },
+    { no: 17, name: "gpu", kind: "message", T: GPU },
   ],
 );
 
@@ -128,6 +130,19 @@ export const HealthCheck = proto3.makeMessageType(
   () => [
     { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 2, name: "http_path", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * GPU is the gpu configuration
+ *
+ * @generated from message porter.v1.GPU
+ */
+export const GPU = proto3.makeMessageType(
+  "porter.v1.GPU",
+  () => [
+    { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 2, name: "gpu_cores_nvidia", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
   ],
 );
 

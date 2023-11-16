@@ -132,7 +132,8 @@ export declare class Service extends Message<Service> {
   /**
    * gpu_cores_nvidia is the number of GPU cores to allocate to the service. This is only used for nvidia-backed GPU's at present. If set to a non-zero value, this service will only be scheduled if a GPU node with the specified number of cores is available.
    *
-   * @generated from field: float gpu_cores_nvidia = 13;
+   * @generated from field: float gpu_cores_nvidia = 13 [deprecated = true];
+   * @deprecated
    */
   gpuCoresNvidia: number;
 
@@ -149,6 +150,21 @@ export declare class Service extends Message<Service> {
    * @generated from field: optional int32 instances_optional = 15;
    */
   instancesOptional?: number;
+
+  /**
+   * gpu_cores is the number GPU cores to allocate to the service. This is only used for nvidia-backed s at present. If set to a non-zero value, this service will only be scheduled if a GPU node with the specified number of cores is available.  Deprecated: use gpus instead.
+   *
+   * @generated from field: optional float gpu_cores = 16 [deprecated = true];
+   * @deprecated
+   */
+  gpuCores?: number;
+
+  /**
+   * gpu is the an object with information related to the gpu resources to allocate to the service
+   *
+   * @generated from field: porter.v1.GPU gpu = 17;
+   */
+  gpu?: GPU;
 
   constructor(data?: PartialMessage<Service>);
 
@@ -419,5 +435,42 @@ export declare class HealthCheck extends Message<HealthCheck> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): HealthCheck;
 
   static equals(a: HealthCheck | PlainMessage<HealthCheck> | undefined, b: HealthCheck | PlainMessage<HealthCheck> | undefined): boolean;
+}
+
+/**
+ * GPU is the gpu configuration
+ *
+ * @generated from message porter.v1.GPU
+ */
+export declare class GPU extends Message<GPU> {
+  /**
+   * enabled explicitly enables or disables gpu on a given workload
+   *
+   * @generated from field: bool enabled = 1;
+   */
+  enabled: boolean;
+
+  /**
+   *  gpu_cores_nvidia is the GPU threshold in gpus
+   *
+   * other types of gpus can be added here
+   *
+   * @generated from field: int32 gpu_cores_nvidia = 2;
+   */
+  gpuCoresNvidia: number;
+
+  constructor(data?: PartialMessage<GPU>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.GPU";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): GPU;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): GPU;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GPU;
+
+  static equals(a: GPU | PlainMessage<GPU> | undefined, b: GPU | PlainMessage<GPU> | undefined): boolean;
 }
 

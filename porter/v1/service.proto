@@ -40,13 +40,19 @@ message Service {
   optional string run_optional = 12;
 
   // gpu_cores_nvidia is the number of GPU cores to allocate to the service. This is only used for nvidia-backed GPU's at present. If set to a non-zero value, this service will only be scheduled if a GPU node with the specified number of cores is available.
-  float gpu_cores_nvidia = 13;
+  float gpu_cores_nvidia = 13 [deprecated = true];
 
   // name is the user-defined name for the service
   string name = 14;
 
   // instances_optional is the number of instances, or replicas, to run
   optional int32 instances_optional = 15;
+
+  //gpu_cores is the number GPU cores to allocate to the service. This is only used for nvidia-backed s at present. If set to a non-zero value, this service will only be scheduled if a GPU node with the specified number of cores is available.  Deprecated: use gpus instead.
+  optional float gpu_cores = 16 [deprecated = true];
+
+  // gpu is the an object with information related to the gpu resources to allocate to the service
+  GPU gpu = 17;
 }
 
 // WebServiceConfig is the configuration for a web service
@@ -107,4 +113,14 @@ message HealthCheck {
   bool enabled = 1;
   // http_path is the HTTP path to use for the health check
   string http_path = 2;
+}
+
+
+// GPU is the gpu configuration
+message GPU {
+  // enabled explicitly enables or disables gpu on a given workload
+  bool enabled = 1;
+  //  gpu_cores_nvidia is the GPU threshold in gpus
+  int32 gpu_cores_nvidia = 2;
+  //other types of gpus can be added here
 }
