@@ -166,6 +166,13 @@ export declare class Service extends Message<Service> {
    */
   gpu?: GPU;
 
+  /**
+   * terminationGracePeriodSeconds is the number of seconds to wait before terminating the service
+   *
+   * @generated from field: optional int32 termination_grace_period_seconds = 18;
+   */
+  terminationGracePeriodSeconds?: number;
+
   constructor(data?: PartialMessage<Service>);
 
   static readonly runtime: typeof proto3;
@@ -221,6 +228,13 @@ export declare class WebServiceConfig extends Message<WebServiceConfig> {
    * @generated from field: map<string, string> ingress_annotations = 5;
    */
   ingressAnnotations: { [key: string]: string };
+
+  /**
+   * disable_tls indicates whether or not the web service has TLS certificates managed on the cluster. If set to true, exposed applications will not be protected by TLS, unless managed elsewhere.
+   *
+   * @generated from field: optional bool disable_tls = 6;
+   */
+  disableTls?: boolean;
 
   constructor(data?: PartialMessage<WebServiceConfig>);
 

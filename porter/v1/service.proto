@@ -53,6 +53,9 @@ message Service {
 
   // gpu is the an object with information related to the gpu resources to allocate to the service
   GPU gpu = 17;
+
+  // terminationGracePeriodSeconds is the number of seconds to wait before terminating the service
+  optional int32 termination_grace_period_seconds = 18;
 }
 
 // WebServiceConfig is the configuration for a web service
@@ -67,6 +70,8 @@ message WebServiceConfig {
   optional bool private = 4;
   // ingress_annotations is a map of annotations to apply to the ingress resource
   map<string, string> ingress_annotations = 5;
+  // disable_tls indicates whether or not the web service has TLS certificates managed on the cluster. If set to true, exposed applications will not be protected by TLS, unless managed elsewhere.
+  optional bool disable_tls = 6;
 }
 
 // WorkerServiceConfig is the configuration for a worker service
@@ -114,7 +119,6 @@ message HealthCheck {
   // http_path is the HTTP path to use for the health check
   string http_path = 2;
 }
-
 
 // GPU is the gpu configuration
 message GPU {
