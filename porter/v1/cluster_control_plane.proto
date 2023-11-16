@@ -990,6 +990,9 @@ service ClusterControlPlaneService {
 
   // DatastoreStatus returns the status of a given datastore within a project/cluster scope
   rpc DatastoreStatus(DatastoreStatusRequest) returns (DatastoreStatusResponse) {}
+
+  // RegistryStatus returns the status of a given docker registry within a project scope
+  rpc RegistryStatus(RegistryStatusRequest) returns (RegistryStatusResponse) {}
 }
 
 message EKSBearerTokenRequest {
@@ -1105,4 +1108,18 @@ enum EnumDatastore {
 message DatastoreStatusResponse {
   // status is the status of the datastore
   string status = 1;
+}
+
+// RegistryStatusRequest is the request object for fetching the status of a docker registry associated to a project
+message RegistryStatusRequest {
+  // project_id id of the project that the ecr registry belongs to
+  int64 project_id = 1;
+  // registry_id id of the ecr registry
+  int64 registry_id = 2;
+}
+
+// RegistryStatusResponse is the response object containing the status of the docker registry
+message RegistryStatusResponse {
+  //is_vulnerability_scanning_enabled is a boolean containing whether scanning is properly enabled or not
+  bool is_vulnerability_scanning_enabled = 1;
 }

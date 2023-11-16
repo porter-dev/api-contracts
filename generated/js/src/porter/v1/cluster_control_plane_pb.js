@@ -1463,3 +1463,28 @@ export const DatastoreStatusResponse = proto3.makeMessageType(
   ],
 );
 
+/**
+ * RegistryStatusRequest is the request object for fetching the status of a docker registry associated to a project
+ *
+ * @generated from message porter.v1.RegistryStatusRequest
+ */
+export const RegistryStatusRequest = proto3.makeMessageType(
+  "porter.v1.RegistryStatusRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "registry_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * RegistryStatusResponse is the response object containing the status of the docker registry
+ *
+ * @generated from message porter.v1.RegistryStatusResponse
+ */
+export const RegistryStatusResponse = proto3.makeMessageType(
+  "porter.v1.RegistryStatusResponse",
+  () => [
+    { no: 1, name: "is_vulnerability_scanning_enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
