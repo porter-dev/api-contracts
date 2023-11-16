@@ -45,6 +45,7 @@ export const Service = proto3.makeMessageType(
     { no: 15, name: "instances_optional", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
     { no: 16, name: "gpu_cores", kind: "scalar", T: 2 /* ScalarType.FLOAT */, opt: true },
     { no: 17, name: "gpu", kind: "message", T: GPU },
+    { no: 18, name: "termination_grace_period_seconds", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
   ],
 );
 
@@ -61,6 +62,7 @@ export const WebServiceConfig = proto3.makeMessageType(
     { no: 3, name: "health_check", kind: "message", T: HealthCheck },
     { no: 4, name: "private", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
     { no: 5, name: "ingress_annotations", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "scalar", T: 9 /* ScalarType.STRING */} },
+    { no: 6, name: "disable_tls", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
   ],
 );
 
