@@ -118,6 +118,12 @@ const (
 	// ClusterControlPlaneServiceCreateDeploymentTargetProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's CreateDeploymentTarget RPC.
 	ClusterControlPlaneServiceCreateDeploymentTargetProcedure = "/porter.v1.ClusterControlPlaneService/CreateDeploymentTarget"
+	// ClusterControlPlaneServiceDeploymentTargetsProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's DeploymentTargets RPC.
+	ClusterControlPlaneServiceDeploymentTargetsProcedure = "/porter.v1.ClusterControlPlaneService/DeploymentTargets"
+	// ClusterControlPlaneServiceDefaultDeploymentTargetProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's DefaultDeploymentTarget RPC.
+	ClusterControlPlaneServiceDefaultDeploymentTargetProcedure = "/porter.v1.ClusterControlPlaneService/DefaultDeploymentTarget"
 	// ClusterControlPlaneServiceSeedAppRevisionsProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's SeedAppRevisions RPC.
 	ClusterControlPlaneServiceSeedAppRevisionsProcedure = "/porter.v1.ClusterControlPlaneService/SeedAppRevisions"
@@ -257,6 +263,10 @@ type ClusterControlPlaneServiceClient interface {
 	// CreateDeploymentTarget creates a new deployment target for a given cluster, returning the deployment target id. If a deployment target with the same name already exists with
 	// the same namespace, cluster and preview status, the existing deployment target ID will be returned. Otherwise, an error will be returned.
 	CreateDeploymentTarget(context.Context, *connect.Request[v1.CreateDeploymentTargetRequest]) (*connect.Response[v1.CreateDeploymentTargetResponse], error)
+	// DeploymentTargets returns all of the deployment targets for a given project
+	DeploymentTargets(context.Context, *connect.Request[v1.DeploymentTargetsRequest]) (*connect.Response[v1.DeploymentTargetsResponse], error)
+	// DefaultDeploymentTarget returns the default deployment target for a given cluster
+	DefaultDeploymentTarget(context.Context, *connect.Request[v1.DefaultDeploymentTargetRequest]) (*connect.Response[v1.DefaultDeploymentTargetResponse], error)
 	// SeedAppRevision seeds app revisions for a given project id, cluster id, release name, namespace.  It should only be called
 	// from the Cluster Control Plane CLI and should be removed once all legacy users are migrated to the new apply validate.
 	SeedAppRevisions(context.Context, *connect.Request[v1.SeedAppRevisionsRequest]) (*connect.Response[v1.SeedAppRevisionsResponse], error)
@@ -482,6 +492,16 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceCreateDeploymentTargetProcedure,
 			opts...,
 		),
+		deploymentTargets: connect.NewClient[v1.DeploymentTargetsRequest, v1.DeploymentTargetsResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceDeploymentTargetsProcedure,
+			opts...,
+		),
+		defaultDeploymentTarget: connect.NewClient[v1.DefaultDeploymentTargetRequest, v1.DefaultDeploymentTargetResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceDefaultDeploymentTargetProcedure,
+			opts...,
+		),
 		seedAppRevisions: connect.NewClient[v1.SeedAppRevisionsRequest, v1.SeedAppRevisionsResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceSeedAppRevisionsProcedure,
@@ -630,6 +650,8 @@ type clusterControlPlaneServiceClient struct {
 	predeployStatus                *connect.Client[v1.PredeployStatusRequest, v1.PredeployStatusResponse]
 	deploymentTargetDetails        *connect.Client[v1.DeploymentTargetDetailsRequest, v1.DeploymentTargetDetailsResponse]
 	createDeploymentTarget         *connect.Client[v1.CreateDeploymentTargetRequest, v1.CreateDeploymentTargetResponse]
+	deploymentTargets              *connect.Client[v1.DeploymentTargetsRequest, v1.DeploymentTargetsResponse]
+	defaultDeploymentTarget        *connect.Client[v1.DefaultDeploymentTargetRequest, v1.DefaultDeploymentTargetResponse]
 	seedAppRevisions               *connect.Client[v1.SeedAppRevisionsRequest, v1.SeedAppRevisionsResponse]
 	envGroupVariables              *connect.Client[v1.EnvGroupVariablesRequest, v1.EnvGroupVariablesResponse]
 	latestEnvGroupWithVariables    *connect.Client[v1.LatestEnvGroupWithVariablesRequest, v1.LatestEnvGroupWithVariablesResponse]
@@ -800,6 +822,16 @@ func (c *clusterControlPlaneServiceClient) DeploymentTargetDetails(ctx context.C
 // CreateDeploymentTarget calls porter.v1.ClusterControlPlaneService.CreateDeploymentTarget.
 func (c *clusterControlPlaneServiceClient) CreateDeploymentTarget(ctx context.Context, req *connect.Request[v1.CreateDeploymentTargetRequest]) (*connect.Response[v1.CreateDeploymentTargetResponse], error) {
 	return c.createDeploymentTarget.CallUnary(ctx, req)
+}
+
+// DeploymentTargets calls porter.v1.ClusterControlPlaneService.DeploymentTargets.
+func (c *clusterControlPlaneServiceClient) DeploymentTargets(ctx context.Context, req *connect.Request[v1.DeploymentTargetsRequest]) (*connect.Response[v1.DeploymentTargetsResponse], error) {
+	return c.deploymentTargets.CallUnary(ctx, req)
+}
+
+// DefaultDeploymentTarget calls porter.v1.ClusterControlPlaneService.DefaultDeploymentTarget.
+func (c *clusterControlPlaneServiceClient) DefaultDeploymentTarget(ctx context.Context, req *connect.Request[v1.DefaultDeploymentTargetRequest]) (*connect.Response[v1.DefaultDeploymentTargetResponse], error) {
+	return c.defaultDeploymentTarget.CallUnary(ctx, req)
 }
 
 // SeedAppRevisions calls porter.v1.ClusterControlPlaneService.SeedAppRevisions.
@@ -1004,6 +1036,10 @@ type ClusterControlPlaneServiceHandler interface {
 	// CreateDeploymentTarget creates a new deployment target for a given cluster, returning the deployment target id. If a deployment target with the same name already exists with
 	// the same namespace, cluster and preview status, the existing deployment target ID will be returned. Otherwise, an error will be returned.
 	CreateDeploymentTarget(context.Context, *connect.Request[v1.CreateDeploymentTargetRequest]) (*connect.Response[v1.CreateDeploymentTargetResponse], error)
+	// DeploymentTargets returns all of the deployment targets for a given project
+	DeploymentTargets(context.Context, *connect.Request[v1.DeploymentTargetsRequest]) (*connect.Response[v1.DeploymentTargetsResponse], error)
+	// DefaultDeploymentTarget returns the default deployment target for a given cluster
+	DefaultDeploymentTarget(context.Context, *connect.Request[v1.DefaultDeploymentTargetRequest]) (*connect.Response[v1.DefaultDeploymentTargetResponse], error)
 	// SeedAppRevision seeds app revisions for a given project id, cluster id, release name, namespace.  It should only be called
 	// from the Cluster Control Plane CLI and should be removed once all legacy users are migrated to the new apply validate.
 	SeedAppRevisions(context.Context, *connect.Request[v1.SeedAppRevisionsRequest]) (*connect.Response[v1.SeedAppRevisionsResponse], error)
@@ -1225,6 +1261,16 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.CreateDeploymentTarget,
 		opts...,
 	)
+	clusterControlPlaneServiceDeploymentTargetsHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceDeploymentTargetsProcedure,
+		svc.DeploymentTargets,
+		opts...,
+	)
+	clusterControlPlaneServiceDefaultDeploymentTargetHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceDefaultDeploymentTargetProcedure,
+		svc.DefaultDeploymentTarget,
+		opts...,
+	)
 	clusterControlPlaneServiceSeedAppRevisionsHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceSeedAppRevisionsProcedure,
 		svc.SeedAppRevisions,
@@ -1398,6 +1444,10 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceDeploymentTargetDetailsHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceCreateDeploymentTargetProcedure:
 			clusterControlPlaneServiceCreateDeploymentTargetHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceDeploymentTargetsProcedure:
+			clusterControlPlaneServiceDeploymentTargetsHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceDefaultDeploymentTargetProcedure:
+			clusterControlPlaneServiceDefaultDeploymentTargetHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceSeedAppRevisionsProcedure:
 			clusterControlPlaneServiceSeedAppRevisionsHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceEnvGroupVariablesProcedure:
@@ -1563,6 +1613,14 @@ func (UnimplementedClusterControlPlaneServiceHandler) DeploymentTargetDetails(co
 
 func (UnimplementedClusterControlPlaneServiceHandler) CreateDeploymentTarget(context.Context, *connect.Request[v1.CreateDeploymentTargetRequest]) (*connect.Response[v1.CreateDeploymentTargetResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.CreateDeploymentTarget is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) DeploymentTargets(context.Context, *connect.Request[v1.DeploymentTargetsRequest]) (*connect.Response[v1.DeploymentTargetsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.DeploymentTargets is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) DefaultDeploymentTarget(context.Context, *connect.Request[v1.DefaultDeploymentTargetRequest]) (*connect.Response[v1.DefaultDeploymentTargetResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.DefaultDeploymentTarget is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) SeedAppRevisions(context.Context, *connect.Request[v1.SeedAppRevisionsRequest]) (*connect.Response[v1.SeedAppRevisionsResponse], error) {

@@ -20,6 +20,22 @@ export const DeploymentTargetIdentifier = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message porter.v1.DeploymentTarget
+ */
+export const DeploymentTarget = proto3.makeMessageType(
+  "porter.v1.DeploymentTarget",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "namespace", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 5, name: "is_preview", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 6, name: "is_default", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 7, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
  * PorterApp is the top-level configuration for a Porter application, usually found in porter.yaml
  *
  * @generated from message porter.v1.PorterApp
