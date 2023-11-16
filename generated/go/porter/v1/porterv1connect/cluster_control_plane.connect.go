@@ -187,9 +187,6 @@ const (
 	// ClusterControlPlaneServiceDatastoreStatusProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DatastoreStatus RPC.
 	ClusterControlPlaneServiceDatastoreStatusProcedure = "/porter.v1.ClusterControlPlaneService/DatastoreStatus"
-	// ClusterControlPlaneServiceECRStatusProcedure is the fully-qualified name of the
-	// ClusterControlPlaneService's ECRStatus RPC.
-	ClusterControlPlaneServiceECRStatusProcedure = "/porter.v1.ClusterControlPlaneService/ECRStatus"
 )
 
 // ClusterControlPlaneServiceClient is a client for the porter.v1.ClusterControlPlaneService
@@ -333,8 +330,6 @@ type ClusterControlPlaneServiceClient interface {
 	ListImagesForRepository(context.Context, *connect.Request[v1.ListImagesForRepositoryRequest]) (*connect.Response[v1.ListImagesForRepositoryResponse], error)
 	// DatastoreStatus returns the status of a given datastore within a project/cluster scope
 	DatastoreStatus(context.Context, *connect.Request[v1.DatastoreStatusRequest]) (*connect.Response[v1.DatastoreStatusResponse], error)
-	// ECRStatus returns the status of a given ecr registry within a project scope
-	ECRStatus(context.Context, *connect.Request[v1.ECRStatusRequest]) (*connect.Response[v1.ECRStatusResponse], error)
 }
 
 // NewClusterControlPlaneServiceClient constructs a client for the
@@ -602,11 +597,6 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceDatastoreStatusProcedure,
 			opts...,
 		),
-		eCRStatus: connect.NewClient[v1.ECRStatusRequest, v1.ECRStatusResponse](
-			httpClient,
-			baseURL+ClusterControlPlaneServiceECRStatusProcedure,
-			opts...,
-		),
 	}
 }
 
@@ -663,7 +653,6 @@ type clusterControlPlaneServiceClient struct {
 	listRepositoriesForRegistry    *connect.Client[v1.ListRepositoriesForRegistryRequest, v1.ListRepositoriesForRegistryResponse]
 	listImagesForRepository        *connect.Client[v1.ListImagesForRepositoryRequest, v1.ListImagesForRepositoryResponse]
 	datastoreStatus                *connect.Client[v1.DatastoreStatusRequest, v1.DatastoreStatusResponse]
-	eCRStatus                      *connect.Client[v1.ECRStatusRequest, v1.ECRStatusResponse]
 }
 
 // QuotaIncrease calls porter.v1.ClusterControlPlaneService.QuotaIncrease.
@@ -947,11 +936,6 @@ func (c *clusterControlPlaneServiceClient) DatastoreStatus(ctx context.Context, 
 	return c.datastoreStatus.CallUnary(ctx, req)
 }
 
-// ECRStatus calls porter.v1.ClusterControlPlaneService.ECRStatus.
-func (c *clusterControlPlaneServiceClient) ECRStatus(ctx context.Context, req *connect.Request[v1.ECRStatusRequest]) (*connect.Response[v1.ECRStatusResponse], error) {
-	return c.eCRStatus.CallUnary(ctx, req)
-}
-
 // ClusterControlPlaneServiceHandler is an implementation of the
 // porter.v1.ClusterControlPlaneService service.
 type ClusterControlPlaneServiceHandler interface {
@@ -1093,8 +1077,6 @@ type ClusterControlPlaneServiceHandler interface {
 	ListImagesForRepository(context.Context, *connect.Request[v1.ListImagesForRepositoryRequest]) (*connect.Response[v1.ListImagesForRepositoryResponse], error)
 	// DatastoreStatus returns the status of a given datastore within a project/cluster scope
 	DatastoreStatus(context.Context, *connect.Request[v1.DatastoreStatusRequest]) (*connect.Response[v1.DatastoreStatusResponse], error)
-	// ECRStatus returns the status of a given ecr registry within a project scope
-	ECRStatus(context.Context, *connect.Request[v1.ECRStatusRequest]) (*connect.Response[v1.ECRStatusResponse], error)
 }
 
 // NewClusterControlPlaneServiceHandler builds an HTTP handler from the service implementation. It
@@ -1358,11 +1340,6 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.DatastoreStatus,
 		opts...,
 	)
-	clusterControlPlaneServiceECRStatusHandler := connect.NewUnaryHandler(
-		ClusterControlPlaneServiceECRStatusProcedure,
-		svc.ECRStatus,
-		opts...,
-	)
 	return "/porter.v1.ClusterControlPlaneService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ClusterControlPlaneServiceQuotaIncreaseProcedure:
@@ -1467,8 +1444,6 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceListImagesForRepositoryHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDatastoreStatusProcedure:
 			clusterControlPlaneServiceDatastoreStatusHandler.ServeHTTP(w, r)
-		case ClusterControlPlaneServiceECRStatusProcedure:
-			clusterControlPlaneServiceECRStatusHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -1680,8 +1655,4 @@ func (UnimplementedClusterControlPlaneServiceHandler) ListImagesForRepository(co
 
 func (UnimplementedClusterControlPlaneServiceHandler) DatastoreStatus(context.Context, *connect.Request[v1.DatastoreStatusRequest]) (*connect.Response[v1.DatastoreStatusResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.DatastoreStatus is not implemented"))
-}
-
-func (UnimplementedClusterControlPlaneServiceHandler) ECRStatus(context.Context, *connect.Request[v1.ECRStatusRequest]) (*connect.Response[v1.ECRStatusResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ECRStatus is not implemented"))
 }
