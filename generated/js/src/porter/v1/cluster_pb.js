@@ -48,6 +48,7 @@ export const Cluster = proto3.makeMessageType(
     { no: 6, name: "eks_kind", kind: "message", T: EKS, oneof: "kind_values" },
     { no: 7, name: "gke_kind", kind: "message", T: GKE, oneof: "kind_values" },
     { no: 8, name: "aks_kind", kind: "message", T: AKS, oneof: "kind_values" },
+    { no: 9, name: "is_soc2_compliant", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 

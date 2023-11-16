@@ -1412,3 +1412,28 @@ export const DatastoreStatusResponse = proto3.makeMessageType(
   ],
 );
 
+/**
+ * ECRStatusRequest is the request object for fetching the status of a ecr registry associated to a project
+ *
+ * @generated from message porter.v1.ECRStatusRequest
+ */
+export const ECRStatusRequest = proto3.makeMessageType(
+  "porter.v1.ECRStatusRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "registry_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * ECRStatusResponse is the response object containing the status of the ecr registry
+ *
+ * @generated from message porter.v1.ECRStatusResponse
+ */
+export const ECRStatusResponse = proto3.makeMessageType(
+  "porter.v1.ECRStatusResponse",
+  () => [
+    { no: 1, name: "scanned", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+

@@ -124,6 +124,13 @@ export declare class Cluster extends Message<Cluster> {
     case: "aksKind";
   } | { case: undefined; value?: undefined };
 
+  /**
+   * is_soc2_compliant force enables all the various soc2-related fields on a cluster
+   *
+   * @generated from field: bool is_soc2_compliant = 9;
+   */
+  isSoc2Compliant: boolean;
+
   constructor(data?: PartialMessage<Cluster>);
 
   static readonly runtime: typeof proto3;
