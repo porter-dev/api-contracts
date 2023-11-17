@@ -12,9 +12,18 @@ import type { EnumCloudProvider } from "./cluster_pb.js";
  */
 export declare class AWSCredentials extends Message<AWSCredentials> {
   /**
-   * @generated from field: repeated porter.v1.AssumeRoleHop chain = 1;
+   * target_arn is the ARN of the IAM role that we will assume
+   *
+   * @generated from field: string target_arn = 1;
    */
-  chain: AssumeRoleHop[];
+  targetArn: string;
+
+  /**
+   * external_id is optional and is used to prevent privilege escalation
+   *
+   * @generated from field: string external_id = 2;
+   */
+  externalId: string;
 
   constructor(data?: PartialMessage<AWSCredentials>);
 
@@ -29,44 +38,6 @@ export declare class AWSCredentials extends Message<AWSCredentials> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AWSCredentials;
 
   static equals(a: AWSCredentials | PlainMessage<AWSCredentials> | undefined, b: AWSCredentials | PlainMessage<AWSCredentials> | undefined): boolean;
-}
-
-/**
- * AssumeRoleHop contains all information required for the source_arn to assume the target_arn
- *
- * @generated from message porter.v1.AssumeRoleHop
- */
-export declare class AssumeRoleHop extends Message<AssumeRoleHop> {
-  /**
-   * @generated from field: string source_arn = 1;
-   */
-  sourceArn: string;
-
-  /**
-   * @generated from field: string target_arn = 2;
-   */
-  targetArn: string;
-
-  /**
-   * external_id is optional and is used to prevent privilege escalation
-   *
-   * @generated from field: string external_id = 3;
-   */
-  externalId: string;
-
-  constructor(data?: PartialMessage<AssumeRoleHop>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.AssumeRoleHop";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AssumeRoleHop;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AssumeRoleHop;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AssumeRoleHop;
-
-  static equals(a: AssumeRoleHop | PlainMessage<AssumeRoleHop> | undefined, b: AssumeRoleHop | PlainMessage<AssumeRoleHop> | undefined): boolean;
 }
 
 /**
