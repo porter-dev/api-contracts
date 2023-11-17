@@ -25,7 +25,10 @@ type AWSCredentials struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Chain []*AssumeRoleHop `protobuf:"bytes,1,rep,name=chain,proto3" json:"chain,omitempty"`
+	// target_arn is the ARN of the IAM role that we will assume
+	TargetArn string `protobuf:"bytes,1,opt,name=target_arn,json=targetArn,proto3" json:"target_arn,omitempty"`
+	// external_id is optional and is used to prevent privilege escalation
+	ExternalId string `protobuf:"bytes,2,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
 }
 
 func (x *AWSCredentials) Reset() {
@@ -60,72 +63,14 @@ func (*AWSCredentials) Descriptor() ([]byte, []int) {
 	return file_porter_v1_cloud_provider_credentials_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *AWSCredentials) GetChain() []*AssumeRoleHop {
-	if x != nil {
-		return x.Chain
-	}
-	return nil
-}
-
-// AssumeRoleHop contains all information required for the source_arn to assume the target_arn
-type AssumeRoleHop struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	SourceArn string `protobuf:"bytes,1,opt,name=source_arn,json=sourceArn,proto3" json:"source_arn,omitempty"`
-	TargetArn string `protobuf:"bytes,2,opt,name=target_arn,json=targetArn,proto3" json:"target_arn,omitempty"`
-	// external_id is optional and is used to prevent privilege escalation
-	ExternalId string `protobuf:"bytes,3,opt,name=external_id,json=externalId,proto3" json:"external_id,omitempty"`
-}
-
-func (x *AssumeRoleHop) Reset() {
-	*x = AssumeRoleHop{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cloud_provider_credentials_proto_msgTypes[1]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *AssumeRoleHop) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AssumeRoleHop) ProtoMessage() {}
-
-func (x *AssumeRoleHop) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cloud_provider_credentials_proto_msgTypes[1]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AssumeRoleHop.ProtoReflect.Descriptor instead.
-func (*AssumeRoleHop) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cloud_provider_credentials_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *AssumeRoleHop) GetSourceArn() string {
-	if x != nil {
-		return x.SourceArn
-	}
-	return ""
-}
-
-func (x *AssumeRoleHop) GetTargetArn() string {
+func (x *AWSCredentials) GetTargetArn() string {
 	if x != nil {
 		return x.TargetArn
 	}
 	return ""
 }
 
-func (x *AssumeRoleHop) GetExternalId() string {
+func (x *AWSCredentials) GetExternalId() string {
 	if x != nil {
 		return x.ExternalId
 	}
@@ -146,7 +91,7 @@ type AzureCredentials struct {
 func (x *AzureCredentials) Reset() {
 	*x = AzureCredentials{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cloud_provider_credentials_proto_msgTypes[2]
+		mi := &file_porter_v1_cloud_provider_credentials_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -159,7 +104,7 @@ func (x *AzureCredentials) String() string {
 func (*AzureCredentials) ProtoMessage() {}
 
 func (x *AzureCredentials) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cloud_provider_credentials_proto_msgTypes[2]
+	mi := &file_porter_v1_cloud_provider_credentials_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -172,7 +117,7 @@ func (x *AzureCredentials) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AzureCredentials.ProtoReflect.Descriptor instead.
 func (*AzureCredentials) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cloud_provider_credentials_proto_rawDescGZIP(), []int{2}
+	return file_porter_v1_cloud_provider_credentials_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *AzureCredentials) GetClientId() string {
@@ -215,7 +160,7 @@ type GCPCredentials struct {
 func (x *GCPCredentials) Reset() {
 	*x = GCPCredentials{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cloud_provider_credentials_proto_msgTypes[3]
+		mi := &file_porter_v1_cloud_provider_credentials_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -228,7 +173,7 @@ func (x *GCPCredentials) String() string {
 func (*GCPCredentials) ProtoMessage() {}
 
 func (x *GCPCredentials) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cloud_provider_credentials_proto_msgTypes[3]
+	mi := &file_porter_v1_cloud_provider_credentials_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -241,7 +186,7 @@ func (x *GCPCredentials) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GCPCredentials.ProtoReflect.Descriptor instead.
 func (*GCPCredentials) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cloud_provider_credentials_proto_rawDescGZIP(), []int{3}
+	return file_porter_v1_cloud_provider_credentials_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *GCPCredentials) GetServiceAccountJsonBase64() string {
@@ -275,7 +220,7 @@ type UpdateCloudProviderCredentialsRequest struct {
 func (x *UpdateCloudProviderCredentialsRequest) Reset() {
 	*x = UpdateCloudProviderCredentialsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cloud_provider_credentials_proto_msgTypes[4]
+		mi := &file_porter_v1_cloud_provider_credentials_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -288,7 +233,7 @@ func (x *UpdateCloudProviderCredentialsRequest) String() string {
 func (*UpdateCloudProviderCredentialsRequest) ProtoMessage() {}
 
 func (x *UpdateCloudProviderCredentialsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cloud_provider_credentials_proto_msgTypes[4]
+	mi := &file_porter_v1_cloud_provider_credentials_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -301,7 +246,7 @@ func (x *UpdateCloudProviderCredentialsRequest) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use UpdateCloudProviderCredentialsRequest.ProtoReflect.Descriptor instead.
 func (*UpdateCloudProviderCredentialsRequest) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cloud_provider_credentials_proto_rawDescGZIP(), []int{4}
+	return file_porter_v1_cloud_provider_credentials_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *UpdateCloudProviderCredentialsRequest) GetProjectId() int64 {
@@ -390,7 +335,7 @@ type UpdateCloudProviderCredentialsResponse struct {
 func (x *UpdateCloudProviderCredentialsResponse) Reset() {
 	*x = UpdateCloudProviderCredentialsResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cloud_provider_credentials_proto_msgTypes[5]
+		mi := &file_porter_v1_cloud_provider_credentials_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -403,7 +348,7 @@ func (x *UpdateCloudProviderCredentialsResponse) String() string {
 func (*UpdateCloudProviderCredentialsResponse) ProtoMessage() {}
 
 func (x *UpdateCloudProviderCredentialsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cloud_provider_credentials_proto_msgTypes[5]
+	mi := &file_porter_v1_cloud_provider_credentials_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -416,7 +361,7 @@ func (x *UpdateCloudProviderCredentialsResponse) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use UpdateCloudProviderCredentialsResponse.ProtoReflect.Descriptor instead.
 func (*UpdateCloudProviderCredentialsResponse) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cloud_provider_credentials_proto_rawDescGZIP(), []int{5}
+	return file_porter_v1_cloud_provider_credentials_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *UpdateCloudProviderCredentialsResponse) GetProjectId() int64 {
@@ -441,17 +386,11 @@ var file_porter_v1_cloud_provider_credentials_proto_rawDesc = []byte{
 	0x6e, 0x74, 0x69, 0x61, 0x6c, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x09, 0x70, 0x6f,
 	0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x1a, 0x17, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2f,
 	0x76, 0x31, 0x2f, 0x63, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x22, 0x40, 0x0a, 0x0e, 0x41, 0x57, 0x53, 0x43, 0x72, 0x65, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x61,
-	0x6c, 0x73, 0x12, 0x2e, 0x0a, 0x05, 0x63, 0x68, 0x61, 0x69, 0x6e, 0x18, 0x01, 0x20, 0x03, 0x28,
-	0x0b, 0x32, 0x18, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x73,
-	0x73, 0x75, 0x6d, 0x65, 0x52, 0x6f, 0x6c, 0x65, 0x48, 0x6f, 0x70, 0x52, 0x05, 0x63, 0x68, 0x61,
-	0x69, 0x6e, 0x22, 0x6e, 0x0a, 0x0d, 0x41, 0x73, 0x73, 0x75, 0x6d, 0x65, 0x52, 0x6f, 0x6c, 0x65,
-	0x48, 0x6f, 0x70, 0x12, 0x1d, 0x0a, 0x0a, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x5f, 0x61, 0x72,
-	0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x73, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x41,
-	0x72, 0x6e, 0x12, 0x1d, 0x0a, 0x0a, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x5f, 0x61, 0x72, 0x6e,
-	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x41, 0x72,
+	0x22, 0x50, 0x0a, 0x0e, 0x41, 0x57, 0x53, 0x43, 0x72, 0x65, 0x64, 0x65, 0x6e, 0x74, 0x69, 0x61,
+	0x6c, 0x73, 0x12, 0x1d, 0x0a, 0x0a, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x5f, 0x61, 0x72, 0x6e,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x41, 0x72,
 	0x6e, 0x12, 0x1f, 0x0a, 0x0b, 0x65, 0x78, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x5f, 0x69, 0x64,
-	0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x65, 0x78, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x65, 0x78, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c,
 	0x49, 0x64, 0x22, 0xaf, 0x01, 0x0a, 0x10, 0x41, 0x7a, 0x75, 0x72, 0x65, 0x43, 0x72, 0x65, 0x64,
 	0x65, 0x6e, 0x74, 0x69, 0x61, 0x6c, 0x73, 0x12, 0x1b, 0x0a, 0x09, 0x63, 0x6c, 0x69, 0x65, 0x6e,
 	0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x63, 0x6c, 0x69, 0x65,
@@ -531,27 +470,25 @@ func file_porter_v1_cloud_provider_credentials_proto_rawDescGZIP() []byte {
 	return file_porter_v1_cloud_provider_credentials_proto_rawDescData
 }
 
-var file_porter_v1_cloud_provider_credentials_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_porter_v1_cloud_provider_credentials_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_porter_v1_cloud_provider_credentials_proto_goTypes = []interface{}{
 	(*AWSCredentials)(nil),                         // 0: porter.v1.AWSCredentials
-	(*AssumeRoleHop)(nil),                          // 1: porter.v1.AssumeRoleHop
-	(*AzureCredentials)(nil),                       // 2: porter.v1.AzureCredentials
-	(*GCPCredentials)(nil),                         // 3: porter.v1.GCPCredentials
-	(*UpdateCloudProviderCredentialsRequest)(nil),  // 4: porter.v1.UpdateCloudProviderCredentialsRequest
-	(*UpdateCloudProviderCredentialsResponse)(nil), // 5: porter.v1.UpdateCloudProviderCredentialsResponse
-	(EnumCloudProvider)(0),                         // 6: porter.v1.EnumCloudProvider
+	(*AzureCredentials)(nil),                       // 1: porter.v1.AzureCredentials
+	(*GCPCredentials)(nil),                         // 2: porter.v1.GCPCredentials
+	(*UpdateCloudProviderCredentialsRequest)(nil),  // 3: porter.v1.UpdateCloudProviderCredentialsRequest
+	(*UpdateCloudProviderCredentialsResponse)(nil), // 4: porter.v1.UpdateCloudProviderCredentialsResponse
+	(EnumCloudProvider)(0),                         // 5: porter.v1.EnumCloudProvider
 }
 var file_porter_v1_cloud_provider_credentials_proto_depIdxs = []int32{
-	1, // 0: porter.v1.AWSCredentials.chain:type_name -> porter.v1.AssumeRoleHop
-	6, // 1: porter.v1.UpdateCloudProviderCredentialsRequest.cloud_provider:type_name -> porter.v1.EnumCloudProvider
-	0, // 2: porter.v1.UpdateCloudProviderCredentialsRequest.aws_credentials:type_name -> porter.v1.AWSCredentials
-	2, // 3: porter.v1.UpdateCloudProviderCredentialsRequest.azure_credentials:type_name -> porter.v1.AzureCredentials
-	3, // 4: porter.v1.UpdateCloudProviderCredentialsRequest.gcp_credentials:type_name -> porter.v1.GCPCredentials
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	5, // 0: porter.v1.UpdateCloudProviderCredentialsRequest.cloud_provider:type_name -> porter.v1.EnumCloudProvider
+	0, // 1: porter.v1.UpdateCloudProviderCredentialsRequest.aws_credentials:type_name -> porter.v1.AWSCredentials
+	1, // 2: porter.v1.UpdateCloudProviderCredentialsRequest.azure_credentials:type_name -> porter.v1.AzureCredentials
+	2, // 3: porter.v1.UpdateCloudProviderCredentialsRequest.gcp_credentials:type_name -> porter.v1.GCPCredentials
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_porter_v1_cloud_provider_credentials_proto_init() }
@@ -574,18 +511,6 @@ func file_porter_v1_cloud_provider_credentials_proto_init() {
 			}
 		}
 		file_porter_v1_cloud_provider_credentials_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*AssumeRoleHop); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_porter_v1_cloud_provider_credentials_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*AzureCredentials); i {
 			case 0:
 				return &v.state
@@ -597,7 +522,7 @@ func file_porter_v1_cloud_provider_credentials_proto_init() {
 				return nil
 			}
 		}
-		file_porter_v1_cloud_provider_credentials_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+		file_porter_v1_cloud_provider_credentials_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GCPCredentials); i {
 			case 0:
 				return &v.state
@@ -609,7 +534,7 @@ func file_porter_v1_cloud_provider_credentials_proto_init() {
 				return nil
 			}
 		}
-		file_porter_v1_cloud_provider_credentials_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+		file_porter_v1_cloud_provider_credentials_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UpdateCloudProviderCredentialsRequest); i {
 			case 0:
 				return &v.state
@@ -621,7 +546,7 @@ func file_porter_v1_cloud_provider_credentials_proto_init() {
 				return nil
 			}
 		}
-		file_porter_v1_cloud_provider_credentials_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+		file_porter_v1_cloud_provider_credentials_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UpdateCloudProviderCredentialsResponse); i {
 			case 0:
 				return &v.state
@@ -634,7 +559,7 @@ func file_porter_v1_cloud_provider_credentials_proto_init() {
 			}
 		}
 	}
-	file_porter_v1_cloud_provider_credentials_proto_msgTypes[4].OneofWrappers = []interface{}{
+	file_porter_v1_cloud_provider_credentials_proto_msgTypes[3].OneofWrappers = []interface{}{
 		(*UpdateCloudProviderCredentialsRequest_AwsCredentials)(nil),
 		(*UpdateCloudProviderCredentialsRequest_AzureCredentials)(nil),
 		(*UpdateCloudProviderCredentialsRequest_GcpCredentials)(nil),
@@ -645,7 +570,7 @@ func file_porter_v1_cloud_provider_credentials_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_porter_v1_cloud_provider_credentials_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
