@@ -128,7 +128,7 @@ export const EKSPreflightValues = proto3.makeMessageType(
 );
 
 /**
- * AWSVpc contains all the properties representing an AWS VPC
+ * AWSVpc contains all the properties representing an AWS VPC and any networking-related information
  *
  * @generated from message porter.v1.AWSVpc
  */
@@ -136,6 +136,21 @@ export const AWSVpc = proto3.makeMessageType(
   "porter.v1.AWSVpc",
   () => [
     { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "cidr_range", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "subnets", kind: "message", T: AWSSubnet, repeated: true },
+  ],
+);
+
+/**
+ * AWSSubnet contains all the properties representing a single subnet in an AWS VPC
+ *
+ * @generated from message porter.v1.AWSSubnet
+ */
+export const AWSSubnet = proto3.makeMessageType(
+  "porter.v1.AWSSubnet",
+  () => [
+    { no: 1, name: "availability_zone", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "cidr_range", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

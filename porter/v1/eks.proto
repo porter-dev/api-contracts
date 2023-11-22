@@ -97,8 +97,20 @@ message EKSPreflightValues {
   string region = 1;
 }
 
-//AWSVpc contains all the properties representing an AWS VPC
+//AWSVpc contains all the properties representing an AWS VPC and any networking-related information
 message AWSVpc {
   //id is a unique vpc identifier for an AWS VPC and can be used to reference the VPC in api calls
   string id = 1;
+  //cidr_range is the cidr range of the VPC
+  string cidr_range = 2;
+  //subnets is a list of subnets associated with the VPC
+  repeated AWSSubnet subnets = 3;
+}
+
+//AWSSubnet contains all the properties representing a single subnet in an AWS VPC
+message AWSSubnet {
+  //availability_zone is the availability zone in which the subnet resides
+  string availability_zone = 1;
+  //cidr_range is the cirdr range of the subnet within the VPC
+  string cidr_range = 2;
 }
