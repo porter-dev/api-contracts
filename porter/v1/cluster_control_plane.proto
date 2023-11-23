@@ -924,6 +924,9 @@ service ClusterControlPlaneService {
   // ClusterNetworkSettings gets the network settings (region, subnets, vpc) for a given project/cluster combination
   rpc ClusterNetworkSettings(ClusterNetworkSettingsRequest) returns (ClusterNetworkSettingsResponse) {}
 
+  // SharedNetworkSettings gets the network settings (region, subnets, vpc) for a given project/cluster/service combination
+  rpc SharedNetworkSettings(SharedNetworkSettingsRequest) returns (SharedNetworkSettingsResponse) {}
+
   // Images returns images matching provided filter parameters
   rpc Images(ImagesRequest) returns (ImagesResponse) {}
 
@@ -1122,4 +1125,31 @@ message RegistryStatusRequest {
 message RegistryStatusResponse {
   //is_vulnerability_scanning_enabled is a boolean containing whether scanning is properly enabled or not
   bool is_vulnerability_scanning_enabled = 1;
+}
+
+// SharedNetworkSettingsRequest is the request object for fetching cloud provider network settings for where a service should be provisioned relative to a cluster
+message SharedNetworkSettingsRequest {
+  // project_id id of the project that the service will be provisioned in
+  int64 project_id = 1;
+  // cluster_id id of the cluster that the service will be peered to in
+  int64 cluster_id = 2;
+  //service_type type of the service
+  string service_type = 3;
+}
+
+//SharedNetworkSettingsResponse is the response object containing cloud provider network settings for a service provisioned relative to a cluster
+message SharedNetworkSettingsResponse {
+  //region is the cloud provider region in which the cluster is located
+  string region = 1;
+  //cidr_range is the cidr range of the VPC
+  string cidr_range = 2;
+  //subnet_ids contains a string list of cloud provider subnets associated with the cluster
+  repeated string subnet_ids = 3;
+  //cloud_provider the given cloud provider for the cluster being queried
+  EnumCloudProvider cloud_provider = 4;
+  //cloud_provider_network contains the relevant cluster network config for the cloud provider on which the cluster exists
+  oneof cloud_provider_network {
+    //eks_cloud_provider_network is the aws vpc for the cluster
+    AWSVpc eks_cloud_provider_network = 5;
+  }
 }
