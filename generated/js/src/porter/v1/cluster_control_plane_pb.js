@@ -1488,3 +1488,33 @@ export const RegistryStatusResponse = proto3.makeMessageType(
   ],
 );
 
+/**
+ * SharedNetworkSettingsRequest is the request object for fetching cloud provider network settings for where a service should be provisioned relative to a cluster
+ *
+ * @generated from message porter.v1.SharedNetworkSettingsRequest
+ */
+export const SharedNetworkSettingsRequest = proto3.makeMessageType(
+  "porter.v1.SharedNetworkSettingsRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "service_type", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * SharedNetworkSettingsResponse is the response object containing cloud provider network settings for a service provisioned relative to a cluster
+ *
+ * @generated from message porter.v1.SharedNetworkSettingsResponse
+ */
+export const SharedNetworkSettingsResponse = proto3.makeMessageType(
+  "porter.v1.SharedNetworkSettingsResponse",
+  () => [
+    { no: 1, name: "region", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "cidr_range", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "subnet_ids", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 4, name: "cloud_provider", kind: "enum", T: proto3.getEnumType(EnumCloudProvider) },
+    { no: 5, name: "eks_cloud_provider_network", kind: "message", T: AWSVpc, oneof: "cloud_provider_network" },
+  ],
+);
+
