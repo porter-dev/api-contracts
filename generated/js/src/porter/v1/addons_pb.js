@@ -27,8 +27,8 @@ export const Addon = proto3.makeMessageType(
   () => [
     { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "type", kind: "enum", T: proto3.getEnumType(AddonType) },
-    { no: 3, name: "postgres", kind: "message", T: Postgres, oneof: "config" },
-    { no: 4, name: "env_groups", kind: "message", T: EnvGroup, repeated: true },
+    { no: 3, name: "env_groups", kind: "message", T: EnvGroup, repeated: true },
+    { no: 4, name: "postgres", kind: "message", T: Postgres, oneof: "config" },
   ],
 );
 

@@ -47,6 +47,13 @@ export declare class Addon extends Message<Addon> {
   type: AddonType;
 
   /**
+   * env_groups is a list of environment groups that can be applied to the addon
+   *
+   * @generated from field: repeated porter.v1.EnvGroup env_groups = 3;
+   */
+  envGroups: EnvGroup[];
+
+  /**
    * config is the addon-specific configuration
    *
    * @generated from oneof porter.v1.Addon.config
@@ -55,18 +62,11 @@ export declare class Addon extends Message<Addon> {
     /**
      * postgres is the configuration for the postgres addon
      *
-     * @generated from field: porter.v1.Postgres postgres = 3;
+     * @generated from field: porter.v1.Postgres postgres = 4;
      */
     value: Postgres;
     case: "postgres";
   } | { case: undefined; value?: undefined };
-
-  /**
-   * env_groups is a list of environment groups that can be applied to the addon
-   *
-   * @generated from field: repeated porter.v1.EnvGroup env_groups = 4;
-   */
-  envGroups: EnvGroup[];
 
   constructor(data?: PartialMessage<Addon>);
 

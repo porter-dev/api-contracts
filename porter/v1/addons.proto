@@ -17,13 +17,13 @@ message Addon {
   string name = 1;
   // type is the type of type of addon
   AddonType type = 2;
+  // env_groups is a list of environment groups that can be applied to the addon
+  repeated EnvGroup env_groups = 3;
   // config is the addon-specific configuration
   oneof config {
     // postgres is the configuration for the postgres addon
-    Postgres postgres = 3;
+    Postgres postgres = 4;
   }
-  // env_groups is a list of environment groups that can be applied to the addon
-  repeated EnvGroup env_groups = 4;
 }
 
 // Postgres is the configuration for postgres
