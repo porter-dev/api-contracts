@@ -56,6 +56,9 @@ message Service {
 
   // terminationGracePeriodSeconds is the number of seconds to wait before terminating the service
   optional int32 termination_grace_period_seconds = 18;
+
+  // cloud_sql is the cloud sql configuration
+  CloudSQL cloud_sql = 19;
 }
 
 // WebServiceConfig is the configuration for a web service
@@ -127,4 +130,14 @@ message GPU {
   //  gpu_cores_nvidia is the GPU threshold in gpus
   int32 gpu_cores_nvidia = 2;
   //other types of gpus can be added here
+}
+
+// CloudSQL is the cloud sql configuration
+message CloudSQL {
+  // connection_name is the name of the cloud sql connection
+  string connection_name = 1;
+  // port is the port of the database
+  int32 port = 2;
+  // service_account_json_base64 is the base64 encoded service account json
+  string service_account_json_base64 = 3;
 }

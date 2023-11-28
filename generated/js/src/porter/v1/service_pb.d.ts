@@ -173,6 +173,13 @@ export declare class Service extends Message<Service> {
    */
   terminationGracePeriodSeconds?: number;
 
+  /**
+   * cloud_sql is the cloud sql configuration
+   *
+   * @generated from field: porter.v1.CloudSQL cloud_sql = 19;
+   */
+  cloudSql?: CloudSQL;
+
   constructor(data?: PartialMessage<Service>);
 
   static readonly runtime: typeof proto3;
@@ -486,5 +493,47 @@ export declare class GPU extends Message<GPU> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GPU;
 
   static equals(a: GPU | PlainMessage<GPU> | undefined, b: GPU | PlainMessage<GPU> | undefined): boolean;
+}
+
+/**
+ * CloudSQL is the cloud sql configuration
+ *
+ * @generated from message porter.v1.CloudSQL
+ */
+export declare class CloudSQL extends Message<CloudSQL> {
+  /**
+   * connection_name is the name of the cloud sql connection
+   *
+   * @generated from field: string connection_name = 1;
+   */
+  connectionName: string;
+
+  /**
+   * port is the port of the database
+   *
+   * @generated from field: int32 port = 2;
+   */
+  port: number;
+
+  /**
+   * service_account_json_base64 is the base64 encoded service account json
+   *
+   * @generated from field: string service_account_json_base64 = 3;
+   */
+  serviceAccountJsonBase64: string;
+
+  constructor(data?: PartialMessage<CloudSQL>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CloudSQL";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CloudSQL;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CloudSQL;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CloudSQL;
+
+  static equals(a: CloudSQL | PlainMessage<CloudSQL> | undefined, b: CloudSQL | PlainMessage<CloudSQL> | undefined): boolean;
 }
 

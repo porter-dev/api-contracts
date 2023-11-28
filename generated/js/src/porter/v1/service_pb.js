@@ -46,6 +46,7 @@ export const Service = proto3.makeMessageType(
     { no: 16, name: "gpu_cores", kind: "scalar", T: 2 /* ScalarType.FLOAT */, opt: true },
     { no: 17, name: "gpu", kind: "message", T: GPU },
     { no: 18, name: "termination_grace_period_seconds", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
+    { no: 19, name: "cloud_sql", kind: "message", T: CloudSQL },
   ],
 );
 
@@ -145,6 +146,20 @@ export const GPU = proto3.makeMessageType(
   () => [
     { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 2, name: "gpu_cores_nvidia", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+  ],
+);
+
+/**
+ * CloudSQL is the cloud sql configuration
+ *
+ * @generated from message porter.v1.CloudSQL
+ */
+export const CloudSQL = proto3.makeMessageType(
+  "porter.v1.CloudSQL",
+  () => [
+    { no: 1, name: "connection_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "port", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 3, name: "service_account_json_base64", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
