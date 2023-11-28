@@ -1254,6 +1254,7 @@ export const CreateNotificationRequest = proto3.makeMessageType(
     { no: 7, name: "porter_agent_event_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 8, name: "raw_summary", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 9, name: "raw_detail", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 10, name: "job_run_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
