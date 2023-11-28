@@ -3648,6 +3648,13 @@ export declare class CreateNotificationRequest extends Message<CreateNotificatio
    */
   rawDetail: string;
 
+  /**
+   * job_run_id is the id of the job run, if the service is a job type service
+   *
+   * @generated from field: string job_run_id = 10;
+   */
+  jobRunId: string;
+
   constructor(data?: PartialMessage<CreateNotificationRequest>);
 
   static readonly runtime: typeof proto3;

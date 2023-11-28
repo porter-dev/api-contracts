@@ -790,6 +790,8 @@ message CreateNotificationRequest {
   string raw_summary = 8;
   // raw_detail is the raw detail of the notification, used to determine an error code and then converted to a human readable form
   string raw_detail = 9;
+  // job_run_id is the id of the job run, if the service is a job type service
+  string job_run_id = 10;
 }
 
 // CreateNotificationResponse is the response object for creating notifications
