@@ -928,6 +928,7 @@ export const SeedAppRevisionsRequest = proto3.makeMessageType(
     { no: 3, name: "release_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "source_namespace", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "target_namespace", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 6, name: "use_health_helm_values", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
@@ -936,7 +937,9 @@ export const SeedAppRevisionsRequest = proto3.makeMessageType(
  */
 export const SeedAppRevisionsResponse = proto3.makeMessageType(
   "porter.v1.SeedAppRevisionsResponse",
-  [],
+  () => [
+    { no: 1, name: "latest_revision_diff", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
 );
 
 /**
