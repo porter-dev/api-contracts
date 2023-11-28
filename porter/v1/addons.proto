@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package porter.v1;
+
+import "porter/v1/porter_app.proto";
+
+enum AddonType {
+  // ADDON_TYPE_UNSPECIFIED is the default value
+  ADDON_TYPE_UNSPECIFIED = 0;
+  // ADDON_TYPE_POSTGRES is the postgres addon type
+  ADDON_TYPE_POSTGRES = 1;
+}
+
+// Addon is the configuration object for tooling or services that can be applied to the cluster alongside porter apps.
+message Addon {
+  // name is the name of the addon
+  string name = 1;
+  // type is the type of type of addon
+  AddonType type = 2;
+  // env_groups is a list of environment groups that can be applied to the addon
+  repeated EnvGroup env_groups = 3;
+  // config is the addon-specific configuration
+  oneof config {
+    // postgres is the configuration for the postgres addon
+    Postgres postgres = 4;
+  }
+}
+
+// Postgres is the configuration for postgres
+message Postgres {
+  // cpu_cores is the number of CPU cores to allocate to the database
+  float cpu_cores = 1;
+  // ram_megabytes is the amount of memory to allocate to the database
+  int32 ram_megabytes = 2;
+  // storage_gigabytes is the amount of storage to allocate to the database
+  int32 storage_gigabytes = 3;
+}

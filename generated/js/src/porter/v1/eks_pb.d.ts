@@ -390,7 +390,7 @@ export declare class EKSPreflightValues extends Message<EKSPreflightValues> {
 }
 
 /**
- * AWSVpc contains all the properties representing an AWS VPC
+ * AWSVpc contains all the properties representing an AWS VPC and any networking-related information
  *
  * @generated from message porter.v1.AWSVpc
  */
@@ -401,6 +401,20 @@ export declare class AWSVpc extends Message<AWSVpc> {
    * @generated from field: string id = 1;
    */
   id: string;
+
+  /**
+   * cidr_range is the cidr range of the VPC
+   *
+   * @generated from field: string cidr_range = 2;
+   */
+  cidrRange: string;
+
+  /**
+   * subnets is a list of subnets associated with the VPC
+   *
+   * @generated from field: repeated porter.v1.AWSSubnet subnets = 3;
+   */
+  subnets: AWSSubnet[];
 
   constructor(data?: PartialMessage<AWSVpc>);
 
@@ -415,5 +429,40 @@ export declare class AWSVpc extends Message<AWSVpc> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AWSVpc;
 
   static equals(a: AWSVpc | PlainMessage<AWSVpc> | undefined, b: AWSVpc | PlainMessage<AWSVpc> | undefined): boolean;
+}
+
+/**
+ * AWSSubnet contains all the properties representing a single subnet in an AWS VPC
+ *
+ * @generated from message porter.v1.AWSSubnet
+ */
+export declare class AWSSubnet extends Message<AWSSubnet> {
+  /**
+   * availability_zone is the availability zone in which the subnet resides
+   *
+   * @generated from field: string availability_zone = 1;
+   */
+  availabilityZone: string;
+
+  /**
+   * cidr_range is the cirdr range of the subnet within the VPC
+   *
+   * @generated from field: string cidr_range = 2;
+   */
+  cidrRange: string;
+
+  constructor(data?: PartialMessage<AWSSubnet>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AWSSubnet";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AWSSubnet;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AWSSubnet;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AWSSubnet;
+
+  static equals(a: AWSSubnet | PlainMessage<AWSSubnet> | undefined, b: AWSSubnet | PlainMessage<AWSSubnet> | undefined): boolean;
 }
 

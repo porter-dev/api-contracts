@@ -151,6 +151,9 @@ const (
 	// ClusterControlPlaneServiceClusterNetworkSettingsProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's ClusterNetworkSettings RPC.
 	ClusterControlPlaneServiceClusterNetworkSettingsProcedure = "/porter.v1.ClusterControlPlaneService/ClusterNetworkSettings"
+	// ClusterControlPlaneServiceSharedNetworkSettingsProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's SharedNetworkSettings RPC.
+	ClusterControlPlaneServiceSharedNetworkSettingsProcedure = "/porter.v1.ClusterControlPlaneService/SharedNetworkSettings"
 	// ClusterControlPlaneServiceImagesProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's Images RPC.
 	ClusterControlPlaneServiceImagesProcedure = "/porter.v1.ClusterControlPlaneService/Images"
@@ -290,6 +293,8 @@ type ClusterControlPlaneServiceClient interface {
 	ManualServiceRun(context.Context, *connect.Request[v1.ManualServiceRunRequest]) (*connect.Response[v1.ManualServiceRunResponse], error)
 	// ClusterNetworkSettings gets the network settings (region, subnets, vpc) for a given project/cluster combination
 	ClusterNetworkSettings(context.Context, *connect.Request[v1.ClusterNetworkSettingsRequest]) (*connect.Response[v1.ClusterNetworkSettingsResponse], error)
+	// SharedNetworkSettings gets the network settings (region, subnets, vpc) for a given project/cluster/service combination
+	SharedNetworkSettings(context.Context, *connect.Request[v1.SharedNetworkSettingsRequest]) (*connect.Response[v1.SharedNetworkSettingsResponse], error)
 	// Images returns images matching provided filter parameters
 	Images(context.Context, *connect.Request[v1.ImagesRequest]) (*connect.Response[v1.ImagesResponse], error)
 	// CreateAppInstance creates a new app instance for a given name and deployment target. If an app instance with the same name and deployment target already exists, the existing app instance ID will be returned.
@@ -552,6 +557,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceClusterNetworkSettingsProcedure,
 			opts...,
 		),
+		sharedNetworkSettings: connect.NewClient[v1.SharedNetworkSettingsRequest, v1.SharedNetworkSettingsResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceSharedNetworkSettingsProcedure,
+			opts...,
+		),
 		images: connect.NewClient[v1.ImagesRequest, v1.ImagesResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceImagesProcedure,
@@ -671,6 +681,7 @@ type clusterControlPlaneServiceClient struct {
 	appHelmValues                  *connect.Client[v1.AppHelmValuesRequest, v1.AppHelmValuesResponse]
 	manualServiceRun               *connect.Client[v1.ManualServiceRunRequest, v1.ManualServiceRunResponse]
 	clusterNetworkSettings         *connect.Client[v1.ClusterNetworkSettingsRequest, v1.ClusterNetworkSettingsResponse]
+	sharedNetworkSettings          *connect.Client[v1.SharedNetworkSettingsRequest, v1.SharedNetworkSettingsResponse]
 	images                         *connect.Client[v1.ImagesRequest, v1.ImagesResponse]
 	createAppInstance              *connect.Client[v1.CreateAppInstanceRequest, v1.CreateAppInstanceResponse]
 	deleteAppInstance              *connect.Client[v1.DeleteAppInstanceRequest, v1.DeleteAppInstanceResponse]
@@ -891,6 +902,11 @@ func (c *clusterControlPlaneServiceClient) ClusterNetworkSettings(ctx context.Co
 	return c.clusterNetworkSettings.CallUnary(ctx, req)
 }
 
+// SharedNetworkSettings calls porter.v1.ClusterControlPlaneService.SharedNetworkSettings.
+func (c *clusterControlPlaneServiceClient) SharedNetworkSettings(ctx context.Context, req *connect.Request[v1.SharedNetworkSettingsRequest]) (*connect.Response[v1.SharedNetworkSettingsResponse], error) {
+	return c.sharedNetworkSettings.CallUnary(ctx, req)
+}
+
 // Images calls porter.v1.ClusterControlPlaneService.Images.
 func (c *clusterControlPlaneServiceClient) Images(ctx context.Context, req *connect.Request[v1.ImagesRequest]) (*connect.Response[v1.ImagesResponse], error) {
 	return c.images.CallUnary(ctx, req)
@@ -1076,6 +1092,8 @@ type ClusterControlPlaneServiceHandler interface {
 	ManualServiceRun(context.Context, *connect.Request[v1.ManualServiceRunRequest]) (*connect.Response[v1.ManualServiceRunResponse], error)
 	// ClusterNetworkSettings gets the network settings (region, subnets, vpc) for a given project/cluster combination
 	ClusterNetworkSettings(context.Context, *connect.Request[v1.ClusterNetworkSettingsRequest]) (*connect.Response[v1.ClusterNetworkSettingsResponse], error)
+	// SharedNetworkSettings gets the network settings (region, subnets, vpc) for a given project/cluster/service combination
+	SharedNetworkSettings(context.Context, *connect.Request[v1.SharedNetworkSettingsRequest]) (*connect.Response[v1.SharedNetworkSettingsResponse], error)
 	// Images returns images matching provided filter parameters
 	Images(context.Context, *connect.Request[v1.ImagesRequest]) (*connect.Response[v1.ImagesResponse], error)
 	// CreateAppInstance creates a new app instance for a given name and deployment target. If an app instance with the same name and deployment target already exists, the existing app instance ID will be returned.
@@ -1334,6 +1352,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.ClusterNetworkSettings,
 		opts...,
 	)
+	clusterControlPlaneServiceSharedNetworkSettingsHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceSharedNetworkSettingsProcedure,
+		svc.SharedNetworkSettings,
+		opts...,
+	)
 	clusterControlPlaneServiceImagesHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceImagesProcedure,
 		svc.Images,
@@ -1489,6 +1512,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceManualServiceRunHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceClusterNetworkSettingsProcedure:
 			clusterControlPlaneServiceClusterNetworkSettingsHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceSharedNetworkSettingsProcedure:
+			clusterControlPlaneServiceSharedNetworkSettingsHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceImagesProcedure:
 			clusterControlPlaneServiceImagesHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceCreateAppInstanceProcedure:
@@ -1682,6 +1707,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) ManualServiceRun(context.C
 
 func (UnimplementedClusterControlPlaneServiceHandler) ClusterNetworkSettings(context.Context, *connect.Request[v1.ClusterNetworkSettingsRequest]) (*connect.Response[v1.ClusterNetworkSettingsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ClusterNetworkSettings is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) SharedNetworkSettings(context.Context, *connect.Request[v1.SharedNetworkSettingsRequest]) (*connect.Response[v1.SharedNetworkSettingsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.SharedNetworkSettings is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) Images(context.Context, *connect.Request[v1.ImagesRequest]) (*connect.Response[v1.ImagesResponse], error) {

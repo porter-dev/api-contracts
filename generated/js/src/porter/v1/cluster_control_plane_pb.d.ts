@@ -4264,3 +4264,109 @@ export declare class RegistryStatusResponse extends Message<RegistryStatusRespon
   static equals(a: RegistryStatusResponse | PlainMessage<RegistryStatusResponse> | undefined, b: RegistryStatusResponse | PlainMessage<RegistryStatusResponse> | undefined): boolean;
 }
 
+/**
+ * SharedNetworkSettingsRequest is the request object for fetching cloud provider network settings for where a service should be provisioned relative to a cluster
+ *
+ * @generated from message porter.v1.SharedNetworkSettingsRequest
+ */
+export declare class SharedNetworkSettingsRequest extends Message<SharedNetworkSettingsRequest> {
+  /**
+   * project_id id of the project that the service will be provisioned in
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * cluster_id id of the cluster that the service will be peered to in
+   *
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  /**
+   * service_type type of the service
+   *
+   * @generated from field: string service_type = 3;
+   */
+  serviceType: string;
+
+  constructor(data?: PartialMessage<SharedNetworkSettingsRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.SharedNetworkSettingsRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SharedNetworkSettingsRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SharedNetworkSettingsRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SharedNetworkSettingsRequest;
+
+  static equals(a: SharedNetworkSettingsRequest | PlainMessage<SharedNetworkSettingsRequest> | undefined, b: SharedNetworkSettingsRequest | PlainMessage<SharedNetworkSettingsRequest> | undefined): boolean;
+}
+
+/**
+ * SharedNetworkSettingsResponse is the response object containing cloud provider network settings for a service provisioned relative to a cluster
+ *
+ * @generated from message porter.v1.SharedNetworkSettingsResponse
+ */
+export declare class SharedNetworkSettingsResponse extends Message<SharedNetworkSettingsResponse> {
+  /**
+   * region is the cloud provider region in which the cluster is located
+   *
+   * @generated from field: string region = 1;
+   */
+  region: string;
+
+  /**
+   * cidr_range is the cidr range of the VPC
+   *
+   * @generated from field: string cidr_range = 2;
+   */
+  cidrRange: string;
+
+  /**
+   * subnet_ids contains a string list of cloud provider subnets associated with the cluster
+   *
+   * @generated from field: repeated string subnet_ids = 3;
+   */
+  subnetIds: string[];
+
+  /**
+   * cloud_provider the given cloud provider for the cluster being queried
+   *
+   * @generated from field: porter.v1.EnumCloudProvider cloud_provider = 4;
+   */
+  cloudProvider: EnumCloudProvider;
+
+  /**
+   * cloud_provider_network contains the relevant cluster network config for the cloud provider on which the cluster exists
+   *
+   * @generated from oneof porter.v1.SharedNetworkSettingsResponse.cloud_provider_network
+   */
+  cloudProviderNetwork: {
+    /**
+     * eks_cloud_provider_network is the aws vpc for the cluster
+     *
+     * @generated from field: porter.v1.AWSVpc eks_cloud_provider_network = 5;
+     */
+    value: AWSVpc;
+    case: "eksCloudProviderNetwork";
+  } | { case: undefined; value?: undefined };
+
+  constructor(data?: PartialMessage<SharedNetworkSettingsResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.SharedNetworkSettingsResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SharedNetworkSettingsResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SharedNetworkSettingsResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SharedNetworkSettingsResponse;
+
+  static equals(a: SharedNetworkSettingsResponse | PlainMessage<SharedNetworkSettingsResponse> | undefined, b: SharedNetworkSettingsResponse | PlainMessage<SharedNetworkSettingsResponse> | undefined): boolean;
+}
+
