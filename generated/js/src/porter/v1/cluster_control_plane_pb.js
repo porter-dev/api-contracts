@@ -69,6 +69,19 @@ export const EnumRevisionStatus = proto3.makeEnum(
 );
 
 /**
+ * @generated from enum porter.v1.EnumServiceDeploymentStatus
+ */
+export const EnumServiceDeploymentStatus = proto3.makeEnum(
+  "porter.v1.EnumServiceDeploymentStatus",
+  [
+    {no: 0, name: "ENUM_SERVICE_DEPLOYMENT_STATUS_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "ENUM_SERVICE_DEPLOYMENT_STATUS_PROGRESSING", localName: "PROGRESSING"},
+    {no: 2, name: "ENUM_SERVICE_DEPLOYMENT_STATUS_SUCCESS", localName: "SUCCESS"},
+    {no: 3, name: "ENUM_SERVICE_DEPLOYMENT_STATUS_FAILED", localName: "FAILED"},
+  ],
+);
+
+/**
  * @generated from enum porter.v1.EnumDatastore
  */
 export const EnumDatastore = proto3.makeEnum(
@@ -1268,6 +1281,33 @@ export const CreateNotificationRequest = proto3.makeMessageType(
  */
 export const CreateNotificationResponse = proto3.makeMessageType(
   "porter.v1.CreateNotificationResponse",
+  [],
+);
+
+/**
+ * UpdateServiceDeploymentStatusRequest is the request object for updating the deployment status of a service
+ *
+ * @generated from message porter.v1.UpdateServiceDeploymentStatusRequest
+ */
+export const UpdateServiceDeploymentStatusRequest = proto3.makeMessageType(
+  "porter.v1.UpdateServiceDeploymentStatusRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+    { no: 4, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "app_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 6, name: "status", kind: "enum", T: proto3.getEnumType(EnumServiceDeploymentStatus) },
+  ],
+);
+
+/**
+ * UpdateServiceDeploymentStatusResponse is the response object for updating the deployment status of a service
+ *
+ * @generated from message porter.v1.UpdateServiceDeploymentStatusResponse
+ */
+export const UpdateServiceDeploymentStatusResponse = proto3.makeMessageType(
+  "porter.v1.UpdateServiceDeploymentStatusResponse",
   [],
 );
 

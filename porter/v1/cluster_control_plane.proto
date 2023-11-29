@@ -802,6 +802,30 @@ message CreateNotificationRequest {
 // CreateNotificationResponse is the response object for creating notifications
 message CreateNotificationResponse {}
 
+// UpdateServiceDeploymentStatusRequest is the request object for updating the deployment status of a service
+message UpdateServiceDeploymentStatusRequest {
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+  // deployment_target_identifier is the object that identifies the deployment target for the app
+  DeploymentTargetIdentifier deployment_target_identifier = 3;
+  // app_name is the name of the app
+  string app_name = 4;
+  // app_revision_id is the revision id of the app that the deployment corresponds with
+  string app_revision_id = 5;
+  // status is the status to update the service deployment to
+  EnumServiceDeploymentStatus status = 6;
+}
+
+enum EnumServiceDeploymentStatus {
+  ENUM_SERVICE_DEPLOYMENT_STATUS_UNSPECIFIED = 0;
+  ENUM_SERVICE_DEPLOYMENT_STATUS_PROGRESSING = 1;
+  ENUM_SERVICE_DEPLOYMENT_STATUS_SUCCESS = 2;
+  ENUM_SERVICE_DEPLOYMENT_STATUS_FAILED = 3;
+}
+
+// UpdateServiceDeploymentStatusResponse is the response object for updating the deployment status of a service
+message UpdateServiceDeploymentStatusResponse {}
+
 service ClusterControlPlaneService {
   // QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas
   rpc QuotaIncrease(QuotaIncreaseRequest) returns (QuotaIncreaseResponse) {}
@@ -948,6 +972,9 @@ service ClusterControlPlaneService {
 
   // CreateNotification creates a notification for a porter app and service at a given app revision
   rpc CreateNotification(CreateNotificationRequest) returns (CreateNotificationResponse) {}
+
+  // UpdateServiceDeploymentStatus updates the current deployment status of a service with a new status
+  rpc UpdateServiceDeploymentStatus(UpdateServiceDeploymentStatusRequest) returns (UpdateServiceDeploymentStatusResponse) {}
 
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
   // Deprecated. Use TokenForRegistry instead.

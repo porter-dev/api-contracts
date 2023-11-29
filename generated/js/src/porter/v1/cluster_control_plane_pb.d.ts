@@ -166,6 +166,31 @@ export declare enum EnumRevisionStatus {
 }
 
 /**
+ * @generated from enum porter.v1.EnumServiceDeploymentStatus
+ */
+export declare enum EnumServiceDeploymentStatus {
+  /**
+   * @generated from enum value: ENUM_SERVICE_DEPLOYMENT_STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: ENUM_SERVICE_DEPLOYMENT_STATUS_PROGRESSING = 1;
+   */
+  PROGRESSING = 1,
+
+  /**
+   * @generated from enum value: ENUM_SERVICE_DEPLOYMENT_STATUS_SUCCESS = 2;
+   */
+  SUCCESS = 2,
+
+  /**
+   * @generated from enum value: ENUM_SERVICE_DEPLOYMENT_STATUS_FAILED = 3;
+   */
+  FAILED = 3,
+}
+
+/**
  * @generated from enum porter.v1.EnumDatastore
  */
 export declare enum EnumDatastore {
@@ -3703,6 +3728,86 @@ export declare class CreateNotificationResponse extends Message<CreateNotificati
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateNotificationResponse;
 
   static equals(a: CreateNotificationResponse | PlainMessage<CreateNotificationResponse> | undefined, b: CreateNotificationResponse | PlainMessage<CreateNotificationResponse> | undefined): boolean;
+}
+
+/**
+ * UpdateServiceDeploymentStatusRequest is the request object for updating the deployment status of a service
+ *
+ * @generated from message porter.v1.UpdateServiceDeploymentStatusRequest
+ */
+export declare class UpdateServiceDeploymentStatusRequest extends Message<UpdateServiceDeploymentStatusRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target for the app
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 3;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  /**
+   * app_name is the name of the app
+   *
+   * @generated from field: string app_name = 4;
+   */
+  appName: string;
+
+  /**
+   * app_revision_id is the revision id of the app that the deployment corresponds with
+   *
+   * @generated from field: string app_revision_id = 5;
+   */
+  appRevisionId: string;
+
+  /**
+   * status is the status to update the service deployment to
+   *
+   * @generated from field: porter.v1.EnumServiceDeploymentStatus status = 6;
+   */
+  status: EnumServiceDeploymentStatus;
+
+  constructor(data?: PartialMessage<UpdateServiceDeploymentStatusRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateServiceDeploymentStatusRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateServiceDeploymentStatusRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateServiceDeploymentStatusRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateServiceDeploymentStatusRequest;
+
+  static equals(a: UpdateServiceDeploymentStatusRequest | PlainMessage<UpdateServiceDeploymentStatusRequest> | undefined, b: UpdateServiceDeploymentStatusRequest | PlainMessage<UpdateServiceDeploymentStatusRequest> | undefined): boolean;
+}
+
+/**
+ * UpdateServiceDeploymentStatusResponse is the response object for updating the deployment status of a service
+ *
+ * @generated from message porter.v1.UpdateServiceDeploymentStatusResponse
+ */
+export declare class UpdateServiceDeploymentStatusResponse extends Message<UpdateServiceDeploymentStatusResponse> {
+  constructor(data?: PartialMessage<UpdateServiceDeploymentStatusResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateServiceDeploymentStatusResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateServiceDeploymentStatusResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateServiceDeploymentStatusResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateServiceDeploymentStatusResponse;
+
+  static equals(a: UpdateServiceDeploymentStatusResponse | PlainMessage<UpdateServiceDeploymentStatusResponse> | undefined, b: UpdateServiceDeploymentStatusResponse | PlainMessage<UpdateServiceDeploymentStatusResponse> | undefined): boolean;
 }
 
 /**
