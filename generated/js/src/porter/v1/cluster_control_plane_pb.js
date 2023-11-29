@@ -10,6 +10,7 @@ import { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import { Error } from "./errors_pb.js";
 import { Contract, ContractRevision } from "./contract_pb.js";
 import { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
+import { Addon } from "./addons_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
@@ -515,6 +516,7 @@ export const UpdateAppRequest = proto3.makeMessageType(
     { no: 8, name: "is_env_override", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 9, name: "is_predeploy_eligible", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 10, name: "commit_sha", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 11, name: "addons", kind: "message", T: Addon, repeated: true },
   ],
 );
 

@@ -3,6 +3,7 @@ syntax = "proto3";
 package porter.v1;
 
 import "google/protobuf/timestamp.proto";
+import "porter/v1/addons.proto";
 import "porter/v1/aws_assume_role.proto";
 import "porter/v1/cloud_provider_credentials.proto";
 import "porter/v1/cluster.proto";
@@ -284,6 +285,8 @@ message UpdateAppRequest {
   bool is_predeploy_eligible = 9;
   // commit_sha is the current commit sha to be built and applied. If provided, it is assumed that the app source has changed
   string commit_sha = 10;
+  // addons is a list of addons which should be deployed alongside the app
+  repeated Addon addons = 11;
 }
 
 message UpdateAppResponse {

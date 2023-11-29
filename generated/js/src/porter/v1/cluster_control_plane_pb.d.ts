@@ -11,6 +11,7 @@ import type { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import type { Error } from "./errors_pb.js";
 import type { Contract, ContractRevision } from "./contract_pb.js";
 import type { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
+import type { Addon } from "./addons_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
@@ -1489,6 +1490,13 @@ export declare class UpdateAppRequest extends Message<UpdateAppRequest> {
    * @generated from field: string commit_sha = 10;
    */
   commitSha: string;
+
+  /**
+   * addons is a list of addons which should be deployed alongside the app
+   *
+   * @generated from field: repeated porter.v1.Addon addons = 11;
+   */
+  addons: Addon[];
 
   constructor(data?: PartialMessage<UpdateAppRequest>);
 
