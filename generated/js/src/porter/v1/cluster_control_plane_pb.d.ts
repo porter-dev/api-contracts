@@ -2744,6 +2744,13 @@ export declare class SeedAppRevisionsRequest extends Message<SeedAppRevisionsReq
    */
   targetNamespace: string;
 
+  /**
+   * use_health_helm_values is a flag that indicates whether to add the health helm values to the helm overrides for the app instead of the simplified interface from the app contract
+   *
+   * @generated from field: bool use_health_helm_values = 6;
+   */
+  useHealthHelmValues: boolean;
+
   constructor(data?: PartialMessage<SeedAppRevisionsRequest>);
 
   static readonly runtime: typeof proto3;
@@ -2763,6 +2770,13 @@ export declare class SeedAppRevisionsRequest extends Message<SeedAppRevisionsReq
  * @generated from message porter.v1.SeedAppRevisionsResponse
  */
 export declare class SeedAppRevisionsResponse extends Message<SeedAppRevisionsResponse> {
+  /**
+   * latest_revision_diff is the diff of between the latest helm revision of the app and the latest app revision that was seeded
+   *
+   * @generated from field: string latest_revision_diff = 1;
+   */
+  latestRevisionDiff: string;
+
   constructor(data?: PartialMessage<SeedAppRevisionsResponse>);
 
   static readonly runtime: typeof proto3;

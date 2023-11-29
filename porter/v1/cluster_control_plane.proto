@@ -605,9 +605,14 @@ message SeedAppRevisionsRequest {
   string source_namespace = 4;
   // target_namespace is the namespace where the app will be installed. This will determine where the env groups are seeded.
   string target_namespace = 5;
+  // use_health_helm_values is a flag that indicates whether to add the health helm values to the helm overrides for the app instead of the simplified interface from the app contract
+  bool use_health_helm_values = 6;
 }
 
-message SeedAppRevisionsResponse {}
+message SeedAppRevisionsResponse {
+  // latest_revision_diff is the diff of between the latest helm revision of the app and the latest app revision that was seeded
+  string latest_revision_diff = 1;
+}
 
 // EnvGroupVariablesRequest is the request object when retrieving the variables for a given EnvGroup
 message EnvGroupVariablesRequest {
