@@ -805,17 +805,16 @@ message CreateNotificationResponse {}
 // UpdateServiceDeploymentStatusRequest is the request object for updating the deployment status of a service
 message UpdateServiceDeploymentStatusRequest {
   int64 project_id = 1;
-  int64 cluster_id = 2;
   // deployment_target_identifier is the object that identifies the deployment target for the app
-  DeploymentTargetIdentifier deployment_target_identifier = 3;
+  DeploymentTargetIdentifier deployment_target_identifier = 2;
   // app_name is the name of the app
-  string app_name = 4;
+  string app_name = 3;
   // app_revision_id is the revision id of the app that the deployment corresponds with
-  string app_revision_id = 5;
+  string app_revision_id = 4;
   // service_name is the name of the service
-  string service_name = 6;
+  string service_name = 5;
   // status is the status to update the service deployment to
-  EnumServiceDeploymentStatus status = 7;
+  EnumServiceDeploymentStatus status = 6;
 }
 
 enum EnumServiceDeploymentStatus {

@@ -3742,42 +3742,37 @@ export declare class UpdateServiceDeploymentStatusRequest extends Message<Update
   projectId: bigint;
 
   /**
-   * @generated from field: int64 cluster_id = 2;
-   */
-  clusterId: bigint;
-
-  /**
    * deployment_target_identifier is the object that identifies the deployment target for the app
    *
-   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 3;
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 2;
    */
   deploymentTargetIdentifier?: DeploymentTargetIdentifier;
 
   /**
    * app_name is the name of the app
    *
-   * @generated from field: string app_name = 4;
+   * @generated from field: string app_name = 3;
    */
   appName: string;
 
   /**
    * app_revision_id is the revision id of the app that the deployment corresponds with
    *
-   * @generated from field: string app_revision_id = 5;
+   * @generated from field: string app_revision_id = 4;
    */
   appRevisionId: string;
 
   /**
    * service_name is the name of the service
    *
-   * @generated from field: string service_name = 6;
+   * @generated from field: string service_name = 5;
    */
   serviceName: string;
 
   /**
    * status is the status to update the service deployment to
    *
-   * @generated from field: porter.v1.EnumServiceDeploymentStatus status = 7;
+   * @generated from field: porter.v1.EnumServiceDeploymentStatus status = 6;
    */
   status: EnumServiceDeploymentStatus;
 
