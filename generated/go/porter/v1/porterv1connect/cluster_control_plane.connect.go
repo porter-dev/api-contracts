@@ -169,6 +169,9 @@ const (
 	// ClusterControlPlaneServiceCreateNotificationProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's CreateNotification RPC.
 	ClusterControlPlaneServiceCreateNotificationProcedure = "/porter.v1.ClusterControlPlaneService/CreateNotification"
+	// ClusterControlPlaneServiceUpdateServiceDeploymentStatusProcedure is the fully-qualified name of
+	// the ClusterControlPlaneService's UpdateServiceDeploymentStatus RPC.
+	ClusterControlPlaneServiceUpdateServiceDeploymentStatusProcedure = "/porter.v1.ClusterControlPlaneService/UpdateServiceDeploymentStatus"
 	// ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DockerConfigFileForRegistry RPC.
 	ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure = "/porter.v1.ClusterControlPlaneService/DockerConfigFileForRegistry"
@@ -305,6 +308,8 @@ type ClusterControlPlaneServiceClient interface {
 	ListAppInstances(context.Context, *connect.Request[v1.ListAppInstancesRequest]) (*connect.Response[v1.ListAppInstancesResponse], error)
 	// CreateNotification creates a notification for a porter app and service at a given app revision
 	CreateNotification(context.Context, *connect.Request[v1.CreateNotificationRequest]) (*connect.Response[v1.CreateNotificationResponse], error)
+	// UpdateServiceDeploymentStatus updates the current deployment status of a service with a new status
+	UpdateServiceDeploymentStatus(context.Context, *connect.Request[v1.UpdateServiceDeploymentStatusRequest]) (*connect.Response[v1.UpdateServiceDeploymentStatusResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -587,6 +592,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceCreateNotificationProcedure,
 			opts...,
 		),
+		updateServiceDeploymentStatus: connect.NewClient[v1.UpdateServiceDeploymentStatusRequest, v1.UpdateServiceDeploymentStatusResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceUpdateServiceDeploymentStatusProcedure,
+			opts...,
+		),
 		dockerConfigFileForRegistry: connect.NewClient[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
@@ -687,6 +697,7 @@ type clusterControlPlaneServiceClient struct {
 	deleteAppInstance              *connect.Client[v1.DeleteAppInstanceRequest, v1.DeleteAppInstanceResponse]
 	listAppInstances               *connect.Client[v1.ListAppInstancesRequest, v1.ListAppInstancesResponse]
 	createNotification             *connect.Client[v1.CreateNotificationRequest, v1.CreateNotificationResponse]
+	updateServiceDeploymentStatus  *connect.Client[v1.UpdateServiceDeploymentStatusRequest, v1.UpdateServiceDeploymentStatusResponse]
 	dockerConfigFileForRegistry    *connect.Client[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse]
 	eCRTokenForRegistry            *connect.Client[v1.ECRTokenForRegistryRequest, v1.ECRTokenForRegistryResponse]
 	assumeRoleCredentials          *connect.Client[v1.AssumeRoleCredentialsRequest, v1.AssumeRoleCredentialsResponse]
@@ -932,6 +943,12 @@ func (c *clusterControlPlaneServiceClient) CreateNotification(ctx context.Contex
 	return c.createNotification.CallUnary(ctx, req)
 }
 
+// UpdateServiceDeploymentStatus calls
+// porter.v1.ClusterControlPlaneService.UpdateServiceDeploymentStatus.
+func (c *clusterControlPlaneServiceClient) UpdateServiceDeploymentStatus(ctx context.Context, req *connect.Request[v1.UpdateServiceDeploymentStatusRequest]) (*connect.Response[v1.UpdateServiceDeploymentStatusResponse], error) {
+	return c.updateServiceDeploymentStatus.CallUnary(ctx, req)
+}
+
 // DockerConfigFileForRegistry calls
 // porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry.
 //
@@ -1104,6 +1121,8 @@ type ClusterControlPlaneServiceHandler interface {
 	ListAppInstances(context.Context, *connect.Request[v1.ListAppInstancesRequest]) (*connect.Response[v1.ListAppInstancesResponse], error)
 	// CreateNotification creates a notification for a porter app and service at a given app revision
 	CreateNotification(context.Context, *connect.Request[v1.CreateNotificationRequest]) (*connect.Response[v1.CreateNotificationResponse], error)
+	// UpdateServiceDeploymentStatus updates the current deployment status of a service with a new status
+	UpdateServiceDeploymentStatus(context.Context, *connect.Request[v1.UpdateServiceDeploymentStatusRequest]) (*connect.Response[v1.UpdateServiceDeploymentStatusResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -1382,6 +1401,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.CreateNotification,
 		opts...,
 	)
+	clusterControlPlaneServiceUpdateServiceDeploymentStatusHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceUpdateServiceDeploymentStatusProcedure,
+		svc.UpdateServiceDeploymentStatus,
+		opts...,
+	)
 	clusterControlPlaneServiceDockerConfigFileForRegistryHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
 		svc.DockerConfigFileForRegistry,
@@ -1524,6 +1548,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceListAppInstancesHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceCreateNotificationProcedure:
 			clusterControlPlaneServiceCreateNotificationHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceUpdateServiceDeploymentStatusProcedure:
+			clusterControlPlaneServiceUpdateServiceDeploymentStatusHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure:
 			clusterControlPlaneServiceDockerConfigFileForRegistryHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceECRTokenForRegistryProcedure:
@@ -1731,6 +1757,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) ListAppInstances(context.C
 
 func (UnimplementedClusterControlPlaneServiceHandler) CreateNotification(context.Context, *connect.Request[v1.CreateNotificationRequest]) (*connect.Response[v1.CreateNotificationResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.CreateNotification is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) UpdateServiceDeploymentStatus(context.Context, *connect.Request[v1.UpdateServiceDeploymentStatusRequest]) (*connect.Response[v1.UpdateServiceDeploymentStatusResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.UpdateServiceDeploymentStatus is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) DockerConfigFileForRegistry(context.Context, *connect.Request[v1.DockerConfigFileForRegistryRequest]) (*connect.Response[v1.DockerConfigFileForRegistryResponse], error) {
