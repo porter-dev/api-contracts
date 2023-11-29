@@ -812,8 +812,10 @@ message UpdateServiceDeploymentStatusRequest {
   string app_name = 4;
   // app_revision_id is the revision id of the app that the deployment corresponds with
   string app_revision_id = 5;
+  // service_name is the name of the service
+  string service_name = 6;
   // status is the status to update the service deployment to
-  EnumServiceDeploymentStatus status = 6;
+  EnumServiceDeploymentStatus status = 7;
 }
 
 enum EnumServiceDeploymentStatus {

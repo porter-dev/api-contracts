@@ -3768,9 +3768,16 @@ export declare class UpdateServiceDeploymentStatusRequest extends Message<Update
   appRevisionId: string;
 
   /**
+   * service_name is the name of the service
+   *
+   * @generated from field: string service_name = 6;
+   */
+  serviceName: string;
+
+  /**
    * status is the status to update the service deployment to
    *
-   * @generated from field: porter.v1.EnumServiceDeploymentStatus status = 6;
+   * @generated from field: porter.v1.EnumServiceDeploymentStatus status = 7;
    */
   status: EnumServiceDeploymentStatus;
 

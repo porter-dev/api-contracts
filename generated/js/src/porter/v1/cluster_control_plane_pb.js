@@ -1297,7 +1297,8 @@ export const UpdateServiceDeploymentStatusRequest = proto3.makeMessageType(
     { no: 3, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
     { no: 4, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "app_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 6, name: "status", kind: "enum", T: proto3.getEnumType(EnumServiceDeploymentStatus) },
+    { no: 6, name: "service_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 7, name: "status", kind: "enum", T: proto3.getEnumType(EnumServiceDeploymentStatus) },
   ],
 );
 
