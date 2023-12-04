@@ -86,14 +86,11 @@ export declare class AKS extends Message<AKS> {
   nodePools: AKSNodePool[];
 
   /**
+   * sku_tier is the SKU tier of the cluster (Free or Standard).  Standard should be used for all production workloads that require high availability.
+   *
    * @generated from field: porter.v1.AksSkuTier sku_tier = 6;
    */
   skuTier: AksSkuTier;
-
-  /**
-   * @generated from field: bool enable_azure_policy = 7;
-   */
-  enableAzurePolicy: boolean;
 
   constructor(data?: PartialMessage<AKS>);
 

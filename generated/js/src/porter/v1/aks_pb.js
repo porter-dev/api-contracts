@@ -43,7 +43,6 @@ export const AKS = proto3.makeMessageType(
     { no: 4, name: "location", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "node_pools", kind: "message", T: AKSNodePool, repeated: true },
     { no: 6, name: "sku_tier", kind: "enum", T: proto3.getEnumType(AksSkuTier) },
-    { no: 7, name: "enable_azure_policy", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
