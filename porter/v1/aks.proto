@@ -8,6 +8,14 @@ message AKS {
   string cidr_range = 3;
   string location = 4;
   repeated AKSNodePool node_pools = 5;
+  // sku_tier is the SKU tier of the cluster (Free or Standard).  Standard should be used for all production workloads that require high availability.
+  AksSkuTier sku_tier = 6;
+}
+
+enum AksSkuTier {
+  AKS_SKU_TIER_UNSPECIFIED = 0;
+  AKS_SKU_TIER_FREE = 1;
+  AKS_SKU_TIER_STANDARD = 2;
 }
 
 message AKSNodePool {
