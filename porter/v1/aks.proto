@@ -8,6 +8,14 @@ message AKS {
   string cidr_range = 3;
   string location = 4;
   repeated AKSNodePool node_pools = 5;
+  AksSkuTier sku_tier = 6;
+  bool enable_azure_policy = 7;
+}
+
+enum AksSkuTier {
+  AKS_SKU_TIER_UNSPECIFIED = 0;
+  AKS_SKU_TIER_FREE = 1;
+  AKS_SKU_TIER_STANDARD = 2;
 }
 
 message AKSNodePool {

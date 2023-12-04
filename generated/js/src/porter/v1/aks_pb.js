@@ -6,6 +6,18 @@
 import { proto3 } from "@bufbuild/protobuf";
 
 /**
+ * @generated from enum porter.v1.AksSkuTier
+ */
+export const AksSkuTier = proto3.makeEnum(
+  "porter.v1.AksSkuTier",
+  [
+    {no: 0, name: "AKS_SKU_TIER_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "AKS_SKU_TIER_FREE", localName: "FREE"},
+    {no: 2, name: "AKS_SKU_TIER_STANDARD", localName: "STANDARD"},
+  ],
+);
+
+/**
  * @generated from enum porter.v1.NodePoolType
  */
 export const NodePoolType = proto3.makeEnum(
@@ -30,6 +42,8 @@ export const AKS = proto3.makeMessageType(
     { no: 3, name: "cidr_range", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "location", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "node_pools", kind: "message", T: AKSNodePool, repeated: true },
+    { no: 6, name: "sku_tier", kind: "enum", T: proto3.getEnumType(AksSkuTier) },
+    { no: 7, name: "enable_azure_policy", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 

@@ -7,6 +7,26 @@ import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialM
 import { Message, proto3 } from "@bufbuild/protobuf";
 
 /**
+ * @generated from enum porter.v1.AksSkuTier
+ */
+export declare enum AksSkuTier {
+  /**
+   * @generated from enum value: AKS_SKU_TIER_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: AKS_SKU_TIER_FREE = 1;
+   */
+  FREE = 1,
+
+  /**
+   * @generated from enum value: AKS_SKU_TIER_STANDARD = 2;
+   */
+  STANDARD = 2,
+}
+
+/**
  * @generated from enum porter.v1.NodePoolType
  */
 export declare enum NodePoolType {
@@ -64,6 +84,16 @@ export declare class AKS extends Message<AKS> {
    * @generated from field: repeated porter.v1.AKSNodePool node_pools = 5;
    */
   nodePools: AKSNodePool[];
+
+  /**
+   * @generated from field: porter.v1.AksSkuTier sku_tier = 6;
+   */
+  skuTier: AksSkuTier;
+
+  /**
+   * @generated from field: bool enable_azure_policy = 7;
+   */
+  enableAzurePolicy: boolean;
 
   constructor(data?: PartialMessage<AKS>);
 
