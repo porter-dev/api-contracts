@@ -10,7 +10,7 @@ message AKS {
   repeated AKSNodePool node_pools = 5;
   // sku_tier is the SKU tier of the cluster (Free or Standard).  Standard should be used for all production workloads that require high availability.
   AksSkuTier sku_tier = 6;
-  // enable_azure_policy enables Azure Policy for the cluster (https://learn.microsoft.com/en-us/azure/governance/policy/concepts/policy-for-kubernetes)
+  // enable_azure_policy enables the Azure Policy addon on the cluster (https://learn.microsoft.com/en-us/azure/governance/policy/concepts/policy-for-kubernetes)
   bool enable_azure_policy = 7;
 }
 
