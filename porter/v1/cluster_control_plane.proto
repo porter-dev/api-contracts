@@ -410,6 +410,14 @@ message UpdateRevisionPayload {
   AppImage image = 4;
 }
 
+// UpdateAddonPayload is used to send messages via nats to update an addon
+message UpdateAddonPayload {
+  // project_id is the id of the project that the revision belongs to
+  int64 project_id = 1;
+  // commit_sha is the commit containing the latest values for the addon in the config repo
+  string commit_sha = 2;
+}
+
 message RequireAppPayload {
   // project_id is the id of the project the app belongs to
   int64 project_id = 1;

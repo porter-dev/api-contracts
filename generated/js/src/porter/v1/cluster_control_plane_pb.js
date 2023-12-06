@@ -698,6 +698,19 @@ export const UpdateRevisionPayload = proto3.makeMessageType(
 );
 
 /**
+ * UpdateAddonPayload is used to send messages via nats to update an addon
+ *
+ * @generated from message porter.v1.UpdateAddonPayload
+ */
+export const UpdateAddonPayload = proto3.makeMessageType(
+  "porter.v1.UpdateAddonPayload",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "commit_sha", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
  * @generated from message porter.v1.RequireAppPayload
  */
 export const RequireAppPayload = proto3.makeMessageType(
