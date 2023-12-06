@@ -2068,6 +2068,41 @@ export declare class UpdateRevisionPayload extends Message<UpdateRevisionPayload
 }
 
 /**
+ * UpdateAddonPayload is used to send messages via nats to update an addon
+ *
+ * @generated from message porter.v1.UpdateAddonPayload
+ */
+export declare class UpdateAddonPayload extends Message<UpdateAddonPayload> {
+  /**
+   * project_id is the id of the project that the revision belongs to
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * commit_sha is the commit containing the latest values for the addon in the config repo
+   *
+   * @generated from field: string commit_sha = 2;
+   */
+  commitSha: string;
+
+  constructor(data?: PartialMessage<UpdateAddonPayload>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateAddonPayload";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateAddonPayload;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateAddonPayload;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateAddonPayload;
+
+  static equals(a: UpdateAddonPayload | PlainMessage<UpdateAddonPayload> | undefined, b: UpdateAddonPayload | PlainMessage<UpdateAddonPayload> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.RequireAppPayload
  */
 export declare class RequireAppPayload extends Message<RequireAppPayload> {
