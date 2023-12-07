@@ -9,6 +9,7 @@ import "porter/v1/cloud_provider_credentials.proto";
 import "porter/v1/cluster.proto";
 import "porter/v1/contract.proto";
 import "porter/v1/eks.proto";
+import "porter/v1/env_group.proto";
 import "porter/v1/errors.proto";
 import "porter/v1/gke.proto";
 import "porter/v1/porter_app.proto";
@@ -838,6 +839,32 @@ enum EnumServiceDeploymentStatus {
 // UpdateServiceDeploymentStatusResponse is the response object for updating the deployment status of a service
 message UpdateServiceDeploymentStatusResponse {}
 
+message SetupExternalSecretsRequest {
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+}
+
+message SetupExternalSecretsResponse {}
+
+message CreateEnvGroupRequest {
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+  EnumEnvGroupType env_group_type = 3;
+  string env_group_name = 4;
+  string env_group_auth_token = 5;
+}
+
+message CreateEnvGroupResponse {}
+
+message DeleteEnvGroupRequest {
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+  EnumEnvGroupType env_group_type = 3;
+  string env_group_name = 4;
+}
+
+message DeleteEnvGroupResponse {}
+
 service ClusterControlPlaneService {
   // QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas
   rpc QuotaIncrease(QuotaIncreaseRequest) returns (QuotaIncreaseResponse) {}
@@ -1042,6 +1069,15 @@ service ClusterControlPlaneService {
 
   // RegistryStatus returns the status of a given docker registry within a project scope
   rpc RegistryStatus(RegistryStatusRequest) returns (RegistryStatusResponse) {}
+
+  // SetupExternalSecrets will set up the cluster to handle external secrets
+  rpc SetupExternalSecrets(SetupExternalSecretsRequest) returns (SetupExternalSecretsResponse) {}
+
+  // CreateEnvGroup will create an env group
+  rpc CreateEnvGroup(CreateEnvGroupRequest) returns (CreateEnvGroupResponse) {}
+
+  // DeleteEnvGroup will delete an env group
+  rpc DeleteEnvGroup(DeleteEnvGroupRequest) returns (DeleteEnvGroupResponse) {}
 }
 
 message EKSBearerTokenRequest {

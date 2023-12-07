@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package porter.v1;
+
+enum EnumEnvGroupType {
+  ENUM_ENV_GROUP_TYPE_UNSPECIFIED = 0;
+  ENUM_ENV_GROUP_TYPE_PORTER = 1;
+  ENUM_ENV_GROUP_TYPE_DOPPLER = 2;
+}
