@@ -3929,6 +3929,8 @@ export declare class CreateEnvGroupRequest extends Message<CreateEnvGroupRequest
   envGroupName: string;
 
   /**
+   * env_group_auth_token is the auth token for the env group. Not required for Porter env groups.
+   *
    * @generated from field: string env_group_auth_token = 5;
    */
   envGroupAuthToken: string;

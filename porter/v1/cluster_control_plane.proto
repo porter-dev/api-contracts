@@ -851,6 +851,7 @@ message CreateEnvGroupRequest {
   int64 cluster_id = 2;
   EnumEnvGroupType env_group_type = 3;
   string env_group_name = 4;
+  // env_group_auth_token is the auth token for the env group. Not required for Porter env groups.
   string env_group_auth_token = 5;
 }
 

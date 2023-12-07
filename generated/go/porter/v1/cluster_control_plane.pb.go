@@ -6769,11 +6769,12 @@ type CreateEnvGroupRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProjectId         int64            `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
-	ClusterId         int64            `protobuf:"varint,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
-	EnvGroupType      EnumEnvGroupType `protobuf:"varint,3,opt,name=env_group_type,json=envGroupType,proto3,enum=porter.v1.EnumEnvGroupType" json:"env_group_type,omitempty"`
-	EnvGroupName      string           `protobuf:"bytes,4,opt,name=env_group_name,json=envGroupName,proto3" json:"env_group_name,omitempty"`
-	EnvGroupAuthToken string           `protobuf:"bytes,5,opt,name=env_group_auth_token,json=envGroupAuthToken,proto3" json:"env_group_auth_token,omitempty"`
+	ProjectId    int64            `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	ClusterId    int64            `protobuf:"varint,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	EnvGroupType EnumEnvGroupType `protobuf:"varint,3,opt,name=env_group_type,json=envGroupType,proto3,enum=porter.v1.EnumEnvGroupType" json:"env_group_type,omitempty"`
+	EnvGroupName string           `protobuf:"bytes,4,opt,name=env_group_name,json=envGroupName,proto3" json:"env_group_name,omitempty"`
+	// env_group_auth_token is the auth token for the env group. Not required for Porter env groups.
+	EnvGroupAuthToken string `protobuf:"bytes,5,opt,name=env_group_auth_token,json=envGroupAuthToken,proto3" json:"env_group_auth_token,omitempty"`
 }
 
 func (x *CreateEnvGroupRequest) Reset() {
