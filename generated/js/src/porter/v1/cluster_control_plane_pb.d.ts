@@ -12,6 +12,7 @@ import type { Error } from "./errors_pb.js";
 import type { Contract, ContractRevision } from "./contract_pb.js";
 import type { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import type { Addon } from "./addons_pb.js";
+import type { EnumEnvGroupType } from "./env_group_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
@@ -3853,6 +3854,175 @@ export declare class UpdateServiceDeploymentStatusResponse extends Message<Updat
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateServiceDeploymentStatusResponse;
 
   static equals(a: UpdateServiceDeploymentStatusResponse | PlainMessage<UpdateServiceDeploymentStatusResponse> | undefined, b: UpdateServiceDeploymentStatusResponse | PlainMessage<UpdateServiceDeploymentStatusResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.SetupExternalSecretsRequest
+ */
+export declare class SetupExternalSecretsRequest extends Message<SetupExternalSecretsRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  constructor(data?: PartialMessage<SetupExternalSecretsRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.SetupExternalSecretsRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetupExternalSecretsRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetupExternalSecretsRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetupExternalSecretsRequest;
+
+  static equals(a: SetupExternalSecretsRequest | PlainMessage<SetupExternalSecretsRequest> | undefined, b: SetupExternalSecretsRequest | PlainMessage<SetupExternalSecretsRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.SetupExternalSecretsResponse
+ */
+export declare class SetupExternalSecretsResponse extends Message<SetupExternalSecretsResponse> {
+  constructor(data?: PartialMessage<SetupExternalSecretsResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.SetupExternalSecretsResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetupExternalSecretsResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetupExternalSecretsResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetupExternalSecretsResponse;
+
+  static equals(a: SetupExternalSecretsResponse | PlainMessage<SetupExternalSecretsResponse> | undefined, b: SetupExternalSecretsResponse | PlainMessage<SetupExternalSecretsResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.CreateEnvGroupRequest
+ */
+export declare class CreateEnvGroupRequest extends Message<CreateEnvGroupRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  /**
+   * @generated from field: porter.v1.EnumEnvGroupType env_group_type = 3;
+   */
+  envGroupType: EnumEnvGroupType;
+
+  /**
+   * @generated from field: string env_group_name = 4;
+   */
+  envGroupName: string;
+
+  /**
+   * @generated from field: string env_group_auth_token = 5;
+   */
+  envGroupAuthToken: string;
+
+  constructor(data?: PartialMessage<CreateEnvGroupRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CreateEnvGroupRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateEnvGroupRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateEnvGroupRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateEnvGroupRequest;
+
+  static equals(a: CreateEnvGroupRequest | PlainMessage<CreateEnvGroupRequest> | undefined, b: CreateEnvGroupRequest | PlainMessage<CreateEnvGroupRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.CreateEnvGroupResponse
+ */
+export declare class CreateEnvGroupResponse extends Message<CreateEnvGroupResponse> {
+  constructor(data?: PartialMessage<CreateEnvGroupResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CreateEnvGroupResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateEnvGroupResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateEnvGroupResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateEnvGroupResponse;
+
+  static equals(a: CreateEnvGroupResponse | PlainMessage<CreateEnvGroupResponse> | undefined, b: CreateEnvGroupResponse | PlainMessage<CreateEnvGroupResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.DeleteEnvGroupRequest
+ */
+export declare class DeleteEnvGroupRequest extends Message<DeleteEnvGroupRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  /**
+   * @generated from field: porter.v1.EnumEnvGroupType env_group_type = 3;
+   */
+  envGroupType: EnumEnvGroupType;
+
+  /**
+   * @generated from field: string env_group_name = 4;
+   */
+  envGroupName: string;
+
+  constructor(data?: PartialMessage<DeleteEnvGroupRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeleteEnvGroupRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteEnvGroupRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteEnvGroupRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteEnvGroupRequest;
+
+  static equals(a: DeleteEnvGroupRequest | PlainMessage<DeleteEnvGroupRequest> | undefined, b: DeleteEnvGroupRequest | PlainMessage<DeleteEnvGroupRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.DeleteEnvGroupResponse
+ */
+export declare class DeleteEnvGroupResponse extends Message<DeleteEnvGroupResponse> {
+  constructor(data?: PartialMessage<DeleteEnvGroupResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeleteEnvGroupResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteEnvGroupResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteEnvGroupResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteEnvGroupResponse;
+
+  static equals(a: DeleteEnvGroupResponse | PlainMessage<DeleteEnvGroupResponse> | undefined, b: DeleteEnvGroupResponse | PlainMessage<DeleteEnvGroupResponse> | undefined): boolean;
 }
 
 /**

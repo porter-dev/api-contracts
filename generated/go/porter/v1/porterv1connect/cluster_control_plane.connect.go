@@ -202,6 +202,15 @@ const (
 	// ClusterControlPlaneServiceRegistryStatusProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's RegistryStatus RPC.
 	ClusterControlPlaneServiceRegistryStatusProcedure = "/porter.v1.ClusterControlPlaneService/RegistryStatus"
+	// ClusterControlPlaneServiceSetupExternalSecretsProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's SetupExternalSecrets RPC.
+	ClusterControlPlaneServiceSetupExternalSecretsProcedure = "/porter.v1.ClusterControlPlaneService/SetupExternalSecrets"
+	// ClusterControlPlaneServiceCreateEnvGroupProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's CreateEnvGroup RPC.
+	ClusterControlPlaneServiceCreateEnvGroupProcedure = "/porter.v1.ClusterControlPlaneService/CreateEnvGroup"
+	// ClusterControlPlaneServiceDeleteEnvGroupProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's DeleteEnvGroup RPC.
+	ClusterControlPlaneServiceDeleteEnvGroupProcedure = "/porter.v1.ClusterControlPlaneService/DeleteEnvGroup"
 )
 
 // ClusterControlPlaneServiceClient is a client for the porter.v1.ClusterControlPlaneService
@@ -355,6 +364,12 @@ type ClusterControlPlaneServiceClient interface {
 	DatastoreStatus(context.Context, *connect.Request[v1.DatastoreStatusRequest]) (*connect.Response[v1.DatastoreStatusResponse], error)
 	// RegistryStatus returns the status of a given docker registry within a project scope
 	RegistryStatus(context.Context, *connect.Request[v1.RegistryStatusRequest]) (*connect.Response[v1.RegistryStatusResponse], error)
+	// SetupExternalSecrets will set up the cluster to handle external secrets
+	SetupExternalSecrets(context.Context, *connect.Request[v1.SetupExternalSecretsRequest]) (*connect.Response[v1.SetupExternalSecretsResponse], error)
+	// CreateEnvGroup will create an env group
+	CreateEnvGroup(context.Context, *connect.Request[v1.CreateEnvGroupRequest]) (*connect.Response[v1.CreateEnvGroupResponse], error)
+	// DeleteEnvGroup will delete an env group
+	DeleteEnvGroup(context.Context, *connect.Request[v1.DeleteEnvGroupRequest]) (*connect.Response[v1.DeleteEnvGroupResponse], error)
 }
 
 // NewClusterControlPlaneServiceClient constructs a client for the
@@ -647,6 +662,21 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceRegistryStatusProcedure,
 			opts...,
 		),
+		setupExternalSecrets: connect.NewClient[v1.SetupExternalSecretsRequest, v1.SetupExternalSecretsResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceSetupExternalSecretsProcedure,
+			opts...,
+		),
+		createEnvGroup: connect.NewClient[v1.CreateEnvGroupRequest, v1.CreateEnvGroupResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceCreateEnvGroupProcedure,
+			opts...,
+		),
+		deleteEnvGroup: connect.NewClient[v1.DeleteEnvGroupRequest, v1.DeleteEnvGroupResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceDeleteEnvGroupProcedure,
+			opts...,
+		),
 	}
 }
 
@@ -708,6 +738,9 @@ type clusterControlPlaneServiceClient struct {
 	listImagesForRepository        *connect.Client[v1.ListImagesForRepositoryRequest, v1.ListImagesForRepositoryResponse]
 	datastoreStatus                *connect.Client[v1.DatastoreStatusRequest, v1.DatastoreStatusResponse]
 	registryStatus                 *connect.Client[v1.RegistryStatusRequest, v1.RegistryStatusResponse]
+	setupExternalSecrets           *connect.Client[v1.SetupExternalSecretsRequest, v1.SetupExternalSecretsResponse]
+	createEnvGroup                 *connect.Client[v1.CreateEnvGroupRequest, v1.CreateEnvGroupResponse]
+	deleteEnvGroup                 *connect.Client[v1.DeleteEnvGroupRequest, v1.DeleteEnvGroupResponse]
 }
 
 // QuotaIncrease calls porter.v1.ClusterControlPlaneService.QuotaIncrease.
@@ -1017,6 +1050,21 @@ func (c *clusterControlPlaneServiceClient) RegistryStatus(ctx context.Context, r
 	return c.registryStatus.CallUnary(ctx, req)
 }
 
+// SetupExternalSecrets calls porter.v1.ClusterControlPlaneService.SetupExternalSecrets.
+func (c *clusterControlPlaneServiceClient) SetupExternalSecrets(ctx context.Context, req *connect.Request[v1.SetupExternalSecretsRequest]) (*connect.Response[v1.SetupExternalSecretsResponse], error) {
+	return c.setupExternalSecrets.CallUnary(ctx, req)
+}
+
+// CreateEnvGroup calls porter.v1.ClusterControlPlaneService.CreateEnvGroup.
+func (c *clusterControlPlaneServiceClient) CreateEnvGroup(ctx context.Context, req *connect.Request[v1.CreateEnvGroupRequest]) (*connect.Response[v1.CreateEnvGroupResponse], error) {
+	return c.createEnvGroup.CallUnary(ctx, req)
+}
+
+// DeleteEnvGroup calls porter.v1.ClusterControlPlaneService.DeleteEnvGroup.
+func (c *clusterControlPlaneServiceClient) DeleteEnvGroup(ctx context.Context, req *connect.Request[v1.DeleteEnvGroupRequest]) (*connect.Response[v1.DeleteEnvGroupResponse], error) {
+	return c.deleteEnvGroup.CallUnary(ctx, req)
+}
+
 // ClusterControlPlaneServiceHandler is an implementation of the
 // porter.v1.ClusterControlPlaneService service.
 type ClusterControlPlaneServiceHandler interface {
@@ -1168,6 +1216,12 @@ type ClusterControlPlaneServiceHandler interface {
 	DatastoreStatus(context.Context, *connect.Request[v1.DatastoreStatusRequest]) (*connect.Response[v1.DatastoreStatusResponse], error)
 	// RegistryStatus returns the status of a given docker registry within a project scope
 	RegistryStatus(context.Context, *connect.Request[v1.RegistryStatusRequest]) (*connect.Response[v1.RegistryStatusResponse], error)
+	// SetupExternalSecrets will set up the cluster to handle external secrets
+	SetupExternalSecrets(context.Context, *connect.Request[v1.SetupExternalSecretsRequest]) (*connect.Response[v1.SetupExternalSecretsResponse], error)
+	// CreateEnvGroup will create an env group
+	CreateEnvGroup(context.Context, *connect.Request[v1.CreateEnvGroupRequest]) (*connect.Response[v1.CreateEnvGroupResponse], error)
+	// DeleteEnvGroup will delete an env group
+	DeleteEnvGroup(context.Context, *connect.Request[v1.DeleteEnvGroupRequest]) (*connect.Response[v1.DeleteEnvGroupResponse], error)
 }
 
 // NewClusterControlPlaneServiceHandler builds an HTTP handler from the service implementation. It
@@ -1456,6 +1510,21 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.RegistryStatus,
 		opts...,
 	)
+	clusterControlPlaneServiceSetupExternalSecretsHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceSetupExternalSecretsProcedure,
+		svc.SetupExternalSecrets,
+		opts...,
+	)
+	clusterControlPlaneServiceCreateEnvGroupHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceCreateEnvGroupProcedure,
+		svc.CreateEnvGroup,
+		opts...,
+	)
+	clusterControlPlaneServiceDeleteEnvGroupHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceDeleteEnvGroupProcedure,
+		svc.DeleteEnvGroup,
+		opts...,
+	)
 	return "/porter.v1.ClusterControlPlaneService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ClusterControlPlaneServiceQuotaIncreaseProcedure:
@@ -1570,6 +1639,12 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceDatastoreStatusHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceRegistryStatusProcedure:
 			clusterControlPlaneServiceRegistryStatusHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceSetupExternalSecretsProcedure:
+			clusterControlPlaneServiceSetupExternalSecretsHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceCreateEnvGroupProcedure:
+			clusterControlPlaneServiceCreateEnvGroupHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceDeleteEnvGroupProcedure:
+			clusterControlPlaneServiceDeleteEnvGroupHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -1801,4 +1876,16 @@ func (UnimplementedClusterControlPlaneServiceHandler) DatastoreStatus(context.Co
 
 func (UnimplementedClusterControlPlaneServiceHandler) RegistryStatus(context.Context, *connect.Request[v1.RegistryStatusRequest]) (*connect.Response[v1.RegistryStatusResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.RegistryStatus is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) SetupExternalSecrets(context.Context, *connect.Request[v1.SetupExternalSecretsRequest]) (*connect.Response[v1.SetupExternalSecretsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.SetupExternalSecrets is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) CreateEnvGroup(context.Context, *connect.Request[v1.CreateEnvGroupRequest]) (*connect.Response[v1.CreateEnvGroupResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.CreateEnvGroup is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) DeleteEnvGroup(context.Context, *connect.Request[v1.DeleteEnvGroupRequest]) (*connect.Response[v1.DeleteEnvGroupResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.DeleteEnvGroup is not implemented"))
 }

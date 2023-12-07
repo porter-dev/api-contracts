@@ -5,6 +5,7 @@
 
 import { proto3 } from "@bufbuild/protobuf";
 import { Service } from "./service_pb.js";
+import { EnumEnvGroupType } from "./env_group_pb.js";
 
 /**
  * DeploymentTargetIdentifier is the object that identifies a deployment target. One of id or name must be provided, with id taking precedence.
@@ -93,6 +94,7 @@ export const EnvGroup = proto3.makeMessageType(
   () => [
     { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "version", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "type", kind: "enum", T: proto3.getEnumType(EnumEnvGroupType) },
   ],
 );
 
