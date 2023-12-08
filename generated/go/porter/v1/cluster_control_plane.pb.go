@@ -2563,6 +2563,7 @@ type UpdateAppRequest struct {
 	// addons is a list of addons which should be deployed alongside the app
 	Addons []*Addon `protobuf:"bytes,11,rep,name=addons,proto3" json:"addons,omitempty"`
 	// addon_overrides contains environment specific overrides for addons if they exist, applied depending on the deployment target
+	// if any addons are provided, these will be the only addons deployed alongside the app and the others will be ignored
 	AddonOverrides []*Addon `protobuf:"bytes,12,rep,name=addon_overrides,json=addonOverrides,proto3" json:"addon_overrides,omitempty"`
 }
 
