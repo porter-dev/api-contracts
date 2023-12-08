@@ -11,6 +11,7 @@ import { Error } from "./errors_pb.js";
 import { Contract, ContractRevision } from "./contract_pb.js";
 import { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import { Addon } from "./addons_pb.js";
+import { EnumEnvGroupProviderType } from "./env_group_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
@@ -1358,6 +1359,107 @@ export const UpdateServiceDeploymentStatusRequest = proto3.makeMessageType(
  */
 export const UpdateServiceDeploymentStatusResponse = proto3.makeMessageType(
   "porter.v1.UpdateServiceDeploymentStatusResponse",
+  [],
+);
+
+/**
+ * AreExternalEnvGroupProvidersEnabledRequest is the request object AreExternalEnvGroupProvidersEnabled
+ *
+ * @generated from message porter.v1.AreExternalEnvGroupProvidersEnabledRequest
+ */
+export const AreExternalEnvGroupProvidersEnabledRequest = proto3.makeMessageType(
+  "porter.v1.AreExternalEnvGroupProvidersEnabledRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * AreExternalEnvGroupProvidersEnabledResponse is the response object for AreExternalEnvGroupProvidersEnabled
+ *
+ * @generated from message porter.v1.AreExternalEnvGroupProvidersEnabledResponse
+ */
+export const AreExternalEnvGroupProvidersEnabledResponse = proto3.makeMessageType(
+  "porter.v1.AreExternalEnvGroupProvidersEnabledResponse",
+  () => [
+    { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 2, name: "reprovision_required", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 3, name: "k8s_upgrade_required", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
+/**
+ * EnableExternalEnvGroupProvidersRequest is the request object for EnableExternalEnvGroupProviders
+ *
+ * @generated from message porter.v1.EnableExternalEnvGroupProvidersRequest
+ */
+export const EnableExternalEnvGroupProvidersRequest = proto3.makeMessageType(
+  "porter.v1.EnableExternalEnvGroupProvidersRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * EnableExternalEnvGroupProvidersResponse is the response object for EnableExternalEnvGroupProviders
+ *
+ * @generated from message porter.v1.EnableExternalEnvGroupProvidersResponse
+ */
+export const EnableExternalEnvGroupProvidersResponse = proto3.makeMessageType(
+  "porter.v1.EnableExternalEnvGroupProvidersResponse",
+  [],
+);
+
+/**
+ * CreateOrUpdateEnvGroupRequest is the request object for CreateOrUpdateEnvGroup
+ *
+ * @generated from message porter.v1.CreateOrUpdateEnvGroupRequest
+ */
+export const CreateOrUpdateEnvGroupRequest = proto3.makeMessageType(
+  "porter.v1.CreateOrUpdateEnvGroupRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "env_group_provider_type", kind: "enum", T: proto3.getEnumType(EnumEnvGroupProviderType) },
+    { no: 4, name: "env_group_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "env_group_auth_token", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * CreateOrUpdateEnvGroupResponse is the response object for CreateOrUpdateEnvGroup
+ *
+ * @generated from message porter.v1.CreateOrUpdateEnvGroupResponse
+ */
+export const CreateOrUpdateEnvGroupResponse = proto3.makeMessageType(
+  "porter.v1.CreateOrUpdateEnvGroupResponse",
+  [],
+);
+
+/**
+ * DeleteEnvGroupRequest is the request object for DeleteEnvGroup
+ *
+ * @generated from message porter.v1.DeleteEnvGroupRequest
+ */
+export const DeleteEnvGroupRequest = proto3.makeMessageType(
+  "porter.v1.DeleteEnvGroupRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "env_group_provider_type", kind: "enum", T: proto3.getEnumType(EnumEnvGroupProviderType) },
+    { no: 4, name: "env_group_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * DeleteEnvGroupResponse is the response object for DeleteEnvGroup
+ *
+ * @generated from message porter.v1.DeleteEnvGroupResponse
+ */
+export const DeleteEnvGroupResponse = proto3.makeMessageType(
+  "porter.v1.DeleteEnvGroupResponse",
   [],
 );
 
