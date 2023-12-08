@@ -713,7 +713,7 @@ export const AppRevisionStatusResponse = proto3.makeMessageType(
     { no: 7, name: "deployment_started", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 8, name: "deployment_successful", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 9, name: "deployment_failed", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 10, name: "is_in_terminal_status", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 10, name: "should_cli_exit", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 

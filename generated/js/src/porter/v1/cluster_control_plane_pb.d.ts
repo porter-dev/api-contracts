@@ -2129,11 +2129,11 @@ export declare class AppRevisionStatusResponse extends Message<AppRevisionStatus
   deploymentFailed: boolean;
 
   /**
-   * is_in_terminal_status indicates whether the revision is in a terminal status (its status will not change)
+   * should_cli_exit indicates whether the revision is in a state such that the cli should exit, if updates were triggered through the cli
    *
-   * @generated from field: bool is_in_terminal_status = 10;
+   * @generated from field: bool should_cli_exit = 10;
    */
-  isInTerminalStatus: boolean;
+  shouldCliExit: boolean;
 
   constructor(data?: PartialMessage<AppRevisionStatusResponse>);
 
