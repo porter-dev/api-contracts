@@ -694,6 +694,7 @@ export const UpdateRevisionPayload = proto3.makeMessageType(
     { no: 2, name: "revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "commit_sha", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "image", kind: "message", T: AppImage },
+    { no: 5, name: "skip_rollback_on_deployment_failure", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 

@@ -408,6 +408,8 @@ message UpdateRevisionPayload {
   string commit_sha = 3;
   // image is the image information for a new image
   AppImage image = 4;
+  // skip_rollback_on_deployment_failure indicates whether an update should eventually attempt to rollback or not
+  bool skip_rollback_on_deployment_failure = 5;
 }
 
 // UpdateAddonPayload is used to send messages via nats to update an addon

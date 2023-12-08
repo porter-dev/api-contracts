@@ -2052,6 +2052,13 @@ export declare class UpdateRevisionPayload extends Message<UpdateRevisionPayload
    */
   image?: AppImage;
 
+  /**
+   * skip_rollback_on_deployment_failure indicates whether an update should eventually attempt to rollback or not
+   *
+   * @generated from field: bool skip_rollback_on_deployment_failure = 5;
+   */
+  skipRollbackOnDeploymentFailure: boolean;
+
   constructor(data?: PartialMessage<UpdateRevisionPayload>);
 
   static readonly runtime: typeof proto3;
