@@ -1328,7 +1328,7 @@ export const UpdateServiceDeploymentStatusResponse = proto3.makeMessageType(
 );
 
 /**
- * ListNotificationsRequest is the request object AreExternalEnvGroupProvidersEnabled
+ * AreExternalEnvGroupProvidersEnabledRequest is the request object AreExternalEnvGroupProvidersEnabled
  *
  * @generated from message porter.v1.AreExternalEnvGroupProvidersEnabledRequest
  */

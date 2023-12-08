@@ -3857,7 +3857,7 @@ export declare class UpdateServiceDeploymentStatusResponse extends Message<Updat
 }
 
 /**
- * ListNotificationsRequest is the request object AreExternalEnvGroupProvidersEnabled
+ * AreExternalEnvGroupProvidersEnabledRequest is the request object AreExternalEnvGroupProvidersEnabled
  *
  * @generated from message porter.v1.AreExternalEnvGroupProvidersEnabledRequest
  */

@@ -6671,7 +6671,7 @@ func (*UpdateServiceDeploymentStatusResponse) Descriptor() ([]byte, []int) {
 	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{98}
 }
 
-// ListNotificationsRequest is the request object AreExternalEnvGroupProvidersEnabled
+// AreExternalEnvGroupProvidersEnabledRequest is the request object AreExternalEnvGroupProvidersEnabled
 type AreExternalEnvGroupProvidersEnabledRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

@@ -839,7 +839,7 @@ enum EnumServiceDeploymentStatus {
 // UpdateServiceDeploymentStatusResponse is the response object for updating the deployment status of a service
 message UpdateServiceDeploymentStatusResponse {}
 
-// ListNotificationsRequest is the request object AreExternalEnvGroupProvidersEnabled
+// AreExternalEnvGroupProvidersEnabledRequest is the request object AreExternalEnvGroupProvidersEnabled
 message AreExternalEnvGroupProvidersEnabledRequest {
   // project_id is the id of the project in which to check whether external env group providers are enabled
   int64 project_id = 1;
