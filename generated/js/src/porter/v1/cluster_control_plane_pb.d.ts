@@ -2019,6 +2019,123 @@ export declare class AppRevision extends Message<AppRevision> {
 }
 
 /**
+ * AppRevisionStatusRequest is used to query the status of an app revision
+ *
+ * @generated from message porter.v1.AppRevisionStatusRequest
+ */
+export declare class AppRevisionStatusRequest extends Message<AppRevisionStatusRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * app_revision_id is the id of the revision to query
+   *
+   * @generated from field: string app_revision_id = 2;
+   */
+  appRevisionId: string;
+
+  constructor(data?: PartialMessage<AppRevisionStatusRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AppRevisionStatusRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AppRevisionStatusRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AppRevisionStatusRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AppRevisionStatusRequest;
+
+  static equals(a: AppRevisionStatusRequest | PlainMessage<AppRevisionStatusRequest> | undefined, b: AppRevisionStatusRequest | PlainMessage<AppRevisionStatusRequest> | undefined): boolean;
+}
+
+/**
+ * AppRevisionStatusResponse is the response object from querying the status of an app revision
+ *
+ * @generated from message porter.v1.AppRevisionStatusResponse
+ */
+export declare class AppRevisionStatusResponse extends Message<AppRevisionStatusResponse> {
+  /**
+   * predeploy_started indicates whether the predeploy has started
+   *
+   * @generated from field: bool predeploy_started = 1;
+   */
+  predeployStarted: boolean;
+
+  /**
+   * predeploy_successful indicates whether the predeploy was successful
+   *
+   * @generated from field: bool predeploy_successful = 2;
+   */
+  predeploySuccessful: boolean;
+
+  /**
+   * predeploy_failed indicates whether the predeploy failed
+   *
+   * @generated from field: bool predeploy_failed = 3;
+   */
+  predeployFailed: boolean;
+
+  /**
+   * install_started indicates whether the install has started
+   *
+   * @generated from field: bool install_started = 4;
+   */
+  installStarted: boolean;
+
+  /**
+   * install_successful indicates whether the revision install has completed successfully
+   *
+   * @generated from field: bool install_successful = 5;
+   */
+  installSuccessful: boolean;
+
+  /**
+   * install_failed indicates whether the revision install has failed
+   *
+   * @generated from field: bool install_failed = 6;
+   */
+  installFailed: boolean;
+
+  /**
+   * deployment_started indicates whether the deployment has started
+   *
+   * @generated from field: bool deployment_started = 7;
+   */
+  deploymentStarted: boolean;
+
+  /**
+   * deployment_successful indicates whether the revision deployment has completed successfully
+   *
+   * @generated from field: bool deployment_successful = 8;
+   */
+  deploymentSuccessful: boolean;
+
+  /**
+   * deployment_failed indicates whether the revision deployment has failed
+   *
+   * @generated from field: bool deployment_failed = 9;
+   */
+  deploymentFailed: boolean;
+
+  constructor(data?: PartialMessage<AppRevisionStatusResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AppRevisionStatusResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AppRevisionStatusResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AppRevisionStatusResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AppRevisionStatusResponse;
+
+  static equals(a: AppRevisionStatusResponse | PlainMessage<AppRevisionStatusResponse> | undefined, b: AppRevisionStatusResponse | PlainMessage<AppRevisionStatusResponse> | undefined): boolean;
+}
+
+/**
  * UpdateRevisionPayload is used to send messages via nats to update a revision
  *
  * @generated from message porter.v1.UpdateRevisionPayload
