@@ -1498,6 +1498,14 @@ export declare class UpdateAppRequest extends Message<UpdateAppRequest> {
    */
   addons: Addon[];
 
+  /**
+   * addon_overrides contains environment specific overrides for addons if they exist, applied depending on the deployment target
+   * if any addons are provided, these will be the only addons deployed alongside the app and the others will be ignored
+   *
+   * @generated from field: repeated porter.v1.Addon addon_overrides = 12;
+   */
+  addonOverrides: Addon[];
+
   constructor(data?: PartialMessage<UpdateAppRequest>);
 
   static readonly runtime: typeof proto3;
