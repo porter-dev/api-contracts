@@ -685,6 +685,40 @@ export const AppRevision = proto3.makeMessageType(
 );
 
 /**
+ * AppRevisionStatusRequest is used to query the status of an app revision
+ *
+ * @generated from message porter.v1.AppRevisionStatusRequest
+ */
+export const AppRevisionStatusRequest = proto3.makeMessageType(
+  "porter.v1.AppRevisionStatusRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "app_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * AppRevisionStatusResponse is the response object from querying the status of an app revision
+ *
+ * @generated from message porter.v1.AppRevisionStatusResponse
+ */
+export const AppRevisionStatusResponse = proto3.makeMessageType(
+  "porter.v1.AppRevisionStatusResponse",
+  () => [
+    { no: 1, name: "predeploy_started", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 2, name: "predeploy_successful", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 3, name: "predeploy_failed", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 4, name: "install_started", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 5, name: "install_successful", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 6, name: "install_failed", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 7, name: "deployment_started", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 8, name: "deployment_successful", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 9, name: "deployment_failed", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 10, name: "is_in_terminal_status", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
+/**
  * UpdateRevisionPayload is used to send messages via nats to update a revision
  *
  * @generated from message porter.v1.UpdateRevisionPayload

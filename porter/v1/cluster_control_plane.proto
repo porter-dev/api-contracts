@@ -402,6 +402,37 @@ message AppRevision {
   int64 porter_app_id = 10;
 }
 
+// AppRevisionStatusRequest is used to query the status of an app revision
+message AppRevisionStatusRequest {
+  int64 project_id = 1;
+  // app_revision_id is the id of the revision to query
+  string app_revision_id = 2;
+}
+
+// AppRevisionStatusResponse is the response object from querying the status of an app revision
+message AppRevisionStatusResponse {
+  // predeploy_started indicates whether the predeploy has started
+  bool predeploy_started = 1;
+  // predeploy_successful indicates whether the predeploy was successful
+  bool predeploy_successful = 2;
+  // predeploy_failed indicates whether the predeploy failed
+  bool predeploy_failed = 3;
+  // install_started indicates whether the install has started
+  bool install_started = 4;
+  // install_successful indicates whether the revision install has completed successfully
+  bool install_successful = 5;
+  // install_failed indicates whether the revision install has failed
+  bool install_failed = 6;
+  // deployment_started indicates whether the deployment has started
+  bool deployment_started = 7;
+  // deployment_successful indicates whether the revision deployment has completed successfully
+  bool deployment_successful = 8;
+  // deployment_failed indicates whether the revision deployment has failed
+  bool deployment_failed = 9;
+  // is_in_terminal_status indicates whether the revision is in a terminal status (its status will not change)
+  bool is_in_terminal_status = 10;
+}
+
 // UpdateRevisionPayload is used to send messages via nats to update a revision
 message UpdateRevisionPayload {
   // project_id is the id of the project that the revision belongs to
@@ -961,6 +992,9 @@ service ClusterControlPlaneService {
 
   // UpdateRevisionStatus updates the status of a revision
   rpc UpdateRevisionStatus(UpdateRevisionStatusRequest) returns (UpdateRevisionStatusResponse) {}
+
+  // AppRevisionStatus returns the status of a revision
+  rpc AppRevisionStatus(AppRevisionStatusRequest) returns (AppRevisionStatusResponse) {}
 
   // DeletePorterApp deletes all instances of a porter app across deployment targets in a given project
   rpc DeletePorterApp(DeletePorterAppRequest) returns (DeletePorterAppResponse) {}

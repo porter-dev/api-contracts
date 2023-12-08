@@ -85,6 +85,9 @@ const (
 	// ClusterControlPlaneServiceUpdateRevisionStatusProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's UpdateRevisionStatus RPC.
 	ClusterControlPlaneServiceUpdateRevisionStatusProcedure = "/porter.v1.ClusterControlPlaneService/UpdateRevisionStatus"
+	// ClusterControlPlaneServiceAppRevisionStatusProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's AppRevisionStatus RPC.
+	ClusterControlPlaneServiceAppRevisionStatusProcedure = "/porter.v1.ClusterControlPlaneService/AppRevisionStatus"
 	// ClusterControlPlaneServiceDeletePorterAppProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DeletePorterApp RPC.
 	ClusterControlPlaneServiceDeletePorterAppProcedure = "/porter.v1.ClusterControlPlaneService/DeletePorterApp"
@@ -260,6 +263,8 @@ type ClusterControlPlaneServiceClient interface {
 	RollbackRevision(context.Context, *connect.Request[v1.RollbackRevisionRequest]) (*connect.Response[v1.RollbackRevisionResponse], error)
 	// UpdateRevisionStatus updates the status of a revision
 	UpdateRevisionStatus(context.Context, *connect.Request[v1.UpdateRevisionStatusRequest]) (*connect.Response[v1.UpdateRevisionStatusResponse], error)
+	// AppRevisionStatus returns the status of a revision
+	AppRevisionStatus(context.Context, *connect.Request[v1.AppRevisionStatusRequest]) (*connect.Response[v1.AppRevisionStatusResponse], error)
 	// DeletePorterApp deletes all instances of a porter app across deployment targets in a given project
 	DeletePorterApp(context.Context, *connect.Request[v1.DeletePorterAppRequest]) (*connect.Response[v1.DeletePorterAppResponse], error)
 	// DeleteAppDeployment deletes a porter app from a given deployment target
@@ -470,6 +475,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 		updateRevisionStatus: connect.NewClient[v1.UpdateRevisionStatusRequest, v1.UpdateRevisionStatusResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceUpdateRevisionStatusProcedure,
+			opts...,
+		),
+		appRevisionStatus: connect.NewClient[v1.AppRevisionStatusRequest, v1.AppRevisionStatusResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceAppRevisionStatusProcedure,
 			opts...,
 		),
 		deletePorterApp: connect.NewClient[v1.DeletePorterAppRequest, v1.DeletePorterAppResponse](
@@ -709,6 +719,7 @@ type clusterControlPlaneServiceClient struct {
 	updateApp                           *connect.Client[v1.UpdateAppRequest, v1.UpdateAppResponse]
 	rollbackRevision                    *connect.Client[v1.RollbackRevisionRequest, v1.RollbackRevisionResponse]
 	updateRevisionStatus                *connect.Client[v1.UpdateRevisionStatusRequest, v1.UpdateRevisionStatusResponse]
+	appRevisionStatus                   *connect.Client[v1.AppRevisionStatusRequest, v1.AppRevisionStatusResponse]
 	deletePorterApp                     *connect.Client[v1.DeletePorterAppRequest, v1.DeletePorterAppResponse]
 	deleteAppDeployment                 *connect.Client[v1.DeleteAppDeploymentRequest, v1.DeleteAppDeploymentResponse]
 	deleteDeploymentTarget              *connect.Client[v1.DeleteDeploymentTargetRequest, v1.DeleteDeploymentTargetResponse]
@@ -844,6 +855,11 @@ func (c *clusterControlPlaneServiceClient) RollbackRevision(ctx context.Context,
 // UpdateRevisionStatus calls porter.v1.ClusterControlPlaneService.UpdateRevisionStatus.
 func (c *clusterControlPlaneServiceClient) UpdateRevisionStatus(ctx context.Context, req *connect.Request[v1.UpdateRevisionStatusRequest]) (*connect.Response[v1.UpdateRevisionStatusResponse], error) {
 	return c.updateRevisionStatus.CallUnary(ctx, req)
+}
+
+// AppRevisionStatus calls porter.v1.ClusterControlPlaneService.AppRevisionStatus.
+func (c *clusterControlPlaneServiceClient) AppRevisionStatus(ctx context.Context, req *connect.Request[v1.AppRevisionStatusRequest]) (*connect.Response[v1.AppRevisionStatusResponse], error) {
+	return c.appRevisionStatus.CallUnary(ctx, req)
 }
 
 // DeletePorterApp calls porter.v1.ClusterControlPlaneService.DeletePorterApp.
@@ -1127,6 +1143,8 @@ type ClusterControlPlaneServiceHandler interface {
 	RollbackRevision(context.Context, *connect.Request[v1.RollbackRevisionRequest]) (*connect.Response[v1.RollbackRevisionResponse], error)
 	// UpdateRevisionStatus updates the status of a revision
 	UpdateRevisionStatus(context.Context, *connect.Request[v1.UpdateRevisionStatusRequest]) (*connect.Response[v1.UpdateRevisionStatusResponse], error)
+	// AppRevisionStatus returns the status of a revision
+	AppRevisionStatus(context.Context, *connect.Request[v1.AppRevisionStatusRequest]) (*connect.Response[v1.AppRevisionStatusResponse], error)
 	// DeletePorterApp deletes all instances of a porter app across deployment targets in a given project
 	DeletePorterApp(context.Context, *connect.Request[v1.DeletePorterAppRequest]) (*connect.Response[v1.DeletePorterAppResponse], error)
 	// DeleteAppDeployment deletes a porter app from a given deployment target
@@ -1333,6 +1351,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 	clusterControlPlaneServiceUpdateRevisionStatusHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceUpdateRevisionStatusProcedure,
 		svc.UpdateRevisionStatus,
+		opts...,
+	)
+	clusterControlPlaneServiceAppRevisionStatusHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceAppRevisionStatusProcedure,
+		svc.AppRevisionStatus,
 		opts...,
 	)
 	clusterControlPlaneServiceDeletePorterAppHandler := connect.NewUnaryHandler(
@@ -1586,6 +1609,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceRollbackRevisionHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceUpdateRevisionStatusProcedure:
 			clusterControlPlaneServiceUpdateRevisionStatusHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceAppRevisionStatusProcedure:
+			clusterControlPlaneServiceAppRevisionStatusHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDeletePorterAppProcedure:
 			clusterControlPlaneServiceDeletePorterAppHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDeleteAppDeploymentProcedure:
@@ -1747,6 +1772,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) RollbackRevision(context.C
 
 func (UnimplementedClusterControlPlaneServiceHandler) UpdateRevisionStatus(context.Context, *connect.Request[v1.UpdateRevisionStatusRequest]) (*connect.Response[v1.UpdateRevisionStatusResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.UpdateRevisionStatus is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) AppRevisionStatus(context.Context, *connect.Request[v1.AppRevisionStatusRequest]) (*connect.Response[v1.AppRevisionStatusResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.AppRevisionStatus is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) DeletePorterApp(context.Context, *connect.Request[v1.DeletePorterAppRequest]) (*connect.Response[v1.DeletePorterAppResponse], error) {
