@@ -6,7 +6,6 @@
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 import type { Service } from "./service_pb.js";
-import type { EnumEnvGroupType } from "./env_group_pb.js";
 
 /**
  * DeploymentTargetIdentifier is the object that identifies a deployment target. One of id or name must be provided, with id taking precedence.
@@ -293,13 +292,6 @@ export declare class EnvGroup extends Message<EnvGroup> {
    * @generated from field: int64 version = 2;
    */
   version: bigint;
-
-  /**
-   * type is the type of the environment variable group
-   *
-   * @generated from field: porter.v1.EnumEnvGroupType type = 3;
-   */
-  type: EnumEnvGroupType;
 
   constructor(data?: PartialMessage<EnvGroup>);
 

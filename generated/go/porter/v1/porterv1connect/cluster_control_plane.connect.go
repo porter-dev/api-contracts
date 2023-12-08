@@ -202,12 +202,15 @@ const (
 	// ClusterControlPlaneServiceRegistryStatusProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's RegistryStatus RPC.
 	ClusterControlPlaneServiceRegistryStatusProcedure = "/porter.v1.ClusterControlPlaneService/RegistryStatus"
-	// ClusterControlPlaneServiceSetupExternalSecretsProcedure is the fully-qualified name of the
-	// ClusterControlPlaneService's SetupExternalSecrets RPC.
-	ClusterControlPlaneServiceSetupExternalSecretsProcedure = "/porter.v1.ClusterControlPlaneService/SetupExternalSecrets"
-	// ClusterControlPlaneServiceCreateEnvGroupProcedure is the fully-qualified name of the
-	// ClusterControlPlaneService's CreateEnvGroup RPC.
-	ClusterControlPlaneServiceCreateEnvGroupProcedure = "/porter.v1.ClusterControlPlaneService/CreateEnvGroup"
+	// ClusterControlPlaneServiceEnableExternalEnvGroupProvidersProcedure is the fully-qualified name of
+	// the ClusterControlPlaneService's EnableExternalEnvGroupProviders RPC.
+	ClusterControlPlaneServiceEnableExternalEnvGroupProvidersProcedure = "/porter.v1.ClusterControlPlaneService/EnableExternalEnvGroupProviders"
+	// ClusterControlPlaneServiceAreExternalEnvGroupProvidersEnabledProcedure is the fully-qualified
+	// name of the ClusterControlPlaneService's AreExternalEnvGroupProvidersEnabled RPC.
+	ClusterControlPlaneServiceAreExternalEnvGroupProvidersEnabledProcedure = "/porter.v1.ClusterControlPlaneService/AreExternalEnvGroupProvidersEnabled"
+	// ClusterControlPlaneServiceCreateOrUpdateEnvGroupProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's CreateOrUpdateEnvGroup RPC.
+	ClusterControlPlaneServiceCreateOrUpdateEnvGroupProcedure = "/porter.v1.ClusterControlPlaneService/CreateOrUpdateEnvGroup"
 	// ClusterControlPlaneServiceDeleteEnvGroupProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DeleteEnvGroup RPC.
 	ClusterControlPlaneServiceDeleteEnvGroupProcedure = "/porter.v1.ClusterControlPlaneService/DeleteEnvGroup"
@@ -364,10 +367,12 @@ type ClusterControlPlaneServiceClient interface {
 	DatastoreStatus(context.Context, *connect.Request[v1.DatastoreStatusRequest]) (*connect.Response[v1.DatastoreStatusResponse], error)
 	// RegistryStatus returns the status of a given docker registry within a project scope
 	RegistryStatus(context.Context, *connect.Request[v1.RegistryStatusRequest]) (*connect.Response[v1.RegistryStatusResponse], error)
-	// SetupExternalSecrets will set up the cluster to handle external secrets
-	SetupExternalSecrets(context.Context, *connect.Request[v1.SetupExternalSecretsRequest]) (*connect.Response[v1.SetupExternalSecretsResponse], error)
-	// CreateEnvGroup will create an env group
-	CreateEnvGroup(context.Context, *connect.Request[v1.CreateEnvGroupRequest]) (*connect.Response[v1.CreateEnvGroupResponse], error)
+	// EnableExternalEnvGroupProvider will enable support for external env group providers on the cluster
+	EnableExternalEnvGroupProviders(context.Context, *connect.Request[v1.EnableExternalEnvGroupProvidersRequest]) (*connect.Response[v1.EnableExternalEnvGroupProvidersResponse], error)
+	// AreExternalEnvGroupProviderEnabled will return whether external env group providers are enabled on the cluster
+	AreExternalEnvGroupProvidersEnabled(context.Context, *connect.Request[v1.AreExternalEnvGroupProvidersEnabledRequest]) (*connect.Response[v1.AreExternalEnvGroupProvidersEnabledResponse], error)
+	// CreateOrUpdateEnvGroup will create or update an env group
+	CreateOrUpdateEnvGroup(context.Context, *connect.Request[v1.CreateOrUpdateEnvGroupRequest]) (*connect.Response[v1.CreateOrUpdateEnvGroupResponse], error)
 	// DeleteEnvGroup will delete an env group
 	DeleteEnvGroup(context.Context, *connect.Request[v1.DeleteEnvGroupRequest]) (*connect.Response[v1.DeleteEnvGroupResponse], error)
 }
@@ -662,14 +667,19 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceRegistryStatusProcedure,
 			opts...,
 		),
-		setupExternalSecrets: connect.NewClient[v1.SetupExternalSecretsRequest, v1.SetupExternalSecretsResponse](
+		enableExternalEnvGroupProviders: connect.NewClient[v1.EnableExternalEnvGroupProvidersRequest, v1.EnableExternalEnvGroupProvidersResponse](
 			httpClient,
-			baseURL+ClusterControlPlaneServiceSetupExternalSecretsProcedure,
+			baseURL+ClusterControlPlaneServiceEnableExternalEnvGroupProvidersProcedure,
 			opts...,
 		),
-		createEnvGroup: connect.NewClient[v1.CreateEnvGroupRequest, v1.CreateEnvGroupResponse](
+		areExternalEnvGroupProvidersEnabled: connect.NewClient[v1.AreExternalEnvGroupProvidersEnabledRequest, v1.AreExternalEnvGroupProvidersEnabledResponse](
 			httpClient,
-			baseURL+ClusterControlPlaneServiceCreateEnvGroupProcedure,
+			baseURL+ClusterControlPlaneServiceAreExternalEnvGroupProvidersEnabledProcedure,
+			opts...,
+		),
+		createOrUpdateEnvGroup: connect.NewClient[v1.CreateOrUpdateEnvGroupRequest, v1.CreateOrUpdateEnvGroupResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceCreateOrUpdateEnvGroupProcedure,
 			opts...,
 		),
 		deleteEnvGroup: connect.NewClient[v1.DeleteEnvGroupRequest, v1.DeleteEnvGroupResponse](
@@ -682,65 +692,66 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 
 // clusterControlPlaneServiceClient implements ClusterControlPlaneServiceClient.
 type clusterControlPlaneServiceClient struct {
-	quotaIncrease                  *connect.Client[v1.QuotaIncreaseRequest, v1.QuotaIncreaseResponse]
-	updateCloudProviderCredentials *connect.Client[v1.UpdateCloudProviderCredentialsRequest, v1.UpdateCloudProviderCredentialsResponse]
-	quotaPreflightCheck            *connect.Client[v1.QuotaPreflightCheckRequest, v1.QuotaPreflightCheckResponse]
-	preflightCheck                 *connect.Client[v1.PreflightCheckRequest, v1.PreflightCheckResponse]
-	createAssumeRoleChain          *connect.Client[v1.CreateAssumeRoleChainRequest, v1.CreateAssumeRoleChainResponse]
-	saveAzureCredentials           *connect.Client[v1.SaveAzureCredentialsRequest, v1.SaveAzureCredentialsResponse]
-	kubeConfigForCluster           *connect.Client[v1.KubeConfigForClusterRequest, v1.KubeConfigForClusterResponse]
-	updateContract                 *connect.Client[v1.UpdateContractRequest, v1.UpdateContractResponse]
-	readContract                   *connect.Client[v1.ReadContractRequest, v1.ReadContractResponse]
-	clusterStatus                  *connect.Client[v1.ClusterStatusRequest, v1.ClusterStatusResponse]
-	deleteCluster                  *connect.Client[v1.DeleteClusterRequest, v1.DeleteClusterResponse]
-	tokenForRegistry               *connect.Client[v1.TokenForRegistryRequest, v1.TokenForRegistryResponse]
-	validatePorterApp              *connect.Client[v1.ValidatePorterAppRequest, v1.ValidatePorterAppResponse]
-	applyPorterApp                 *connect.Client[v1.ApplyPorterAppRequest, v1.ApplyPorterAppResponse]
-	updateApp                      *connect.Client[v1.UpdateAppRequest, v1.UpdateAppResponse]
-	rollbackRevision               *connect.Client[v1.RollbackRevisionRequest, v1.RollbackRevisionResponse]
-	updateRevisionStatus           *connect.Client[v1.UpdateRevisionStatusRequest, v1.UpdateRevisionStatusResponse]
-	deletePorterApp                *connect.Client[v1.DeletePorterAppRequest, v1.DeletePorterAppResponse]
-	deleteAppDeployment            *connect.Client[v1.DeleteAppDeploymentRequest, v1.DeleteAppDeploymentResponse]
-	deleteDeploymentTarget         *connect.Client[v1.DeleteDeploymentTargetRequest, v1.DeleteDeploymentTargetResponse]
-	currentAppRevision             *connect.Client[v1.CurrentAppRevisionRequest, v1.CurrentAppRevisionResponse]
-	listAppRevisions               *connect.Client[v1.ListAppRevisionsRequest, v1.ListAppRevisionsResponse]
-	latestAppRevisions             *connect.Client[v1.LatestAppRevisionsRequest, v1.LatestAppRevisionsResponse]
-	getAppRevision                 *connect.Client[v1.GetAppRevisionRequest, v1.GetAppRevisionResponse]
-	appTemplate                    *connect.Client[v1.AppTemplateRequest, v1.AppTemplateResponse]
-	predeployStatus                *connect.Client[v1.PredeployStatusRequest, v1.PredeployStatusResponse]
-	deploymentTargetDetails        *connect.Client[v1.DeploymentTargetDetailsRequest, v1.DeploymentTargetDetailsResponse]
-	createDeploymentTarget         *connect.Client[v1.CreateDeploymentTargetRequest, v1.CreateDeploymentTargetResponse]
-	deploymentTargets              *connect.Client[v1.DeploymentTargetsRequest, v1.DeploymentTargetsResponse]
-	defaultDeploymentTarget        *connect.Client[v1.DefaultDeploymentTargetRequest, v1.DefaultDeploymentTargetResponse]
-	seedAppRevisions               *connect.Client[v1.SeedAppRevisionsRequest, v1.SeedAppRevisionsResponse]
-	envGroupVariables              *connect.Client[v1.EnvGroupVariablesRequest, v1.EnvGroupVariablesResponse]
-	latestEnvGroupWithVariables    *connect.Client[v1.LatestEnvGroupWithVariablesRequest, v1.LatestEnvGroupWithVariablesResponse]
-	updateAppImage                 *connect.Client[v1.UpdateAppImageRequest, v1.UpdateAppImageResponse]
-	updateAppBuildSettings         *connect.Client[v1.UpdateAppBuildSettingsRequest, v1.UpdateAppBuildSettingsResponse]
-	updateAppsLinkedToEnvGroup     *connect.Client[v1.UpdateAppsLinkedToEnvGroupRequest, v1.UpdateAppsLinkedToEnvGroupResponse]
-	appHelmValues                  *connect.Client[v1.AppHelmValuesRequest, v1.AppHelmValuesResponse]
-	manualServiceRun               *connect.Client[v1.ManualServiceRunRequest, v1.ManualServiceRunResponse]
-	clusterNetworkSettings         *connect.Client[v1.ClusterNetworkSettingsRequest, v1.ClusterNetworkSettingsResponse]
-	sharedNetworkSettings          *connect.Client[v1.SharedNetworkSettingsRequest, v1.SharedNetworkSettingsResponse]
-	images                         *connect.Client[v1.ImagesRequest, v1.ImagesResponse]
-	createAppInstance              *connect.Client[v1.CreateAppInstanceRequest, v1.CreateAppInstanceResponse]
-	deleteAppInstance              *connect.Client[v1.DeleteAppInstanceRequest, v1.DeleteAppInstanceResponse]
-	listAppInstances               *connect.Client[v1.ListAppInstancesRequest, v1.ListAppInstancesResponse]
-	createNotification             *connect.Client[v1.CreateNotificationRequest, v1.CreateNotificationResponse]
-	updateServiceDeploymentStatus  *connect.Client[v1.UpdateServiceDeploymentStatusRequest, v1.UpdateServiceDeploymentStatusResponse]
-	dockerConfigFileForRegistry    *connect.Client[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse]
-	eCRTokenForRegistry            *connect.Client[v1.ECRTokenForRegistryRequest, v1.ECRTokenForRegistryResponse]
-	assumeRoleCredentials          *connect.Client[v1.AssumeRoleCredentialsRequest, v1.AssumeRoleCredentialsResponse]
-	assumeRoleChainTargets         *connect.Client[v1.AssumeRoleChainTargetsRequest, v1.AssumeRoleChainTargetsResponse]
-	certificateAuthorityData       *connect.Client[v1.CertificateAuthorityDataRequest, v1.CertificateAuthorityDataResponse]
-	eKSBearerToken                 *connect.Client[v1.EKSBearerTokenRequest, v1.EKSBearerTokenResponse]
-	listRepositoriesForRegistry    *connect.Client[v1.ListRepositoriesForRegistryRequest, v1.ListRepositoriesForRegistryResponse]
-	listImagesForRepository        *connect.Client[v1.ListImagesForRepositoryRequest, v1.ListImagesForRepositoryResponse]
-	datastoreStatus                *connect.Client[v1.DatastoreStatusRequest, v1.DatastoreStatusResponse]
-	registryStatus                 *connect.Client[v1.RegistryStatusRequest, v1.RegistryStatusResponse]
-	setupExternalSecrets           *connect.Client[v1.SetupExternalSecretsRequest, v1.SetupExternalSecretsResponse]
-	createEnvGroup                 *connect.Client[v1.CreateEnvGroupRequest, v1.CreateEnvGroupResponse]
-	deleteEnvGroup                 *connect.Client[v1.DeleteEnvGroupRequest, v1.DeleteEnvGroupResponse]
+	quotaIncrease                       *connect.Client[v1.QuotaIncreaseRequest, v1.QuotaIncreaseResponse]
+	updateCloudProviderCredentials      *connect.Client[v1.UpdateCloudProviderCredentialsRequest, v1.UpdateCloudProviderCredentialsResponse]
+	quotaPreflightCheck                 *connect.Client[v1.QuotaPreflightCheckRequest, v1.QuotaPreflightCheckResponse]
+	preflightCheck                      *connect.Client[v1.PreflightCheckRequest, v1.PreflightCheckResponse]
+	createAssumeRoleChain               *connect.Client[v1.CreateAssumeRoleChainRequest, v1.CreateAssumeRoleChainResponse]
+	saveAzureCredentials                *connect.Client[v1.SaveAzureCredentialsRequest, v1.SaveAzureCredentialsResponse]
+	kubeConfigForCluster                *connect.Client[v1.KubeConfigForClusterRequest, v1.KubeConfigForClusterResponse]
+	updateContract                      *connect.Client[v1.UpdateContractRequest, v1.UpdateContractResponse]
+	readContract                        *connect.Client[v1.ReadContractRequest, v1.ReadContractResponse]
+	clusterStatus                       *connect.Client[v1.ClusterStatusRequest, v1.ClusterStatusResponse]
+	deleteCluster                       *connect.Client[v1.DeleteClusterRequest, v1.DeleteClusterResponse]
+	tokenForRegistry                    *connect.Client[v1.TokenForRegistryRequest, v1.TokenForRegistryResponse]
+	validatePorterApp                   *connect.Client[v1.ValidatePorterAppRequest, v1.ValidatePorterAppResponse]
+	applyPorterApp                      *connect.Client[v1.ApplyPorterAppRequest, v1.ApplyPorterAppResponse]
+	updateApp                           *connect.Client[v1.UpdateAppRequest, v1.UpdateAppResponse]
+	rollbackRevision                    *connect.Client[v1.RollbackRevisionRequest, v1.RollbackRevisionResponse]
+	updateRevisionStatus                *connect.Client[v1.UpdateRevisionStatusRequest, v1.UpdateRevisionStatusResponse]
+	deletePorterApp                     *connect.Client[v1.DeletePorterAppRequest, v1.DeletePorterAppResponse]
+	deleteAppDeployment                 *connect.Client[v1.DeleteAppDeploymentRequest, v1.DeleteAppDeploymentResponse]
+	deleteDeploymentTarget              *connect.Client[v1.DeleteDeploymentTargetRequest, v1.DeleteDeploymentTargetResponse]
+	currentAppRevision                  *connect.Client[v1.CurrentAppRevisionRequest, v1.CurrentAppRevisionResponse]
+	listAppRevisions                    *connect.Client[v1.ListAppRevisionsRequest, v1.ListAppRevisionsResponse]
+	latestAppRevisions                  *connect.Client[v1.LatestAppRevisionsRequest, v1.LatestAppRevisionsResponse]
+	getAppRevision                      *connect.Client[v1.GetAppRevisionRequest, v1.GetAppRevisionResponse]
+	appTemplate                         *connect.Client[v1.AppTemplateRequest, v1.AppTemplateResponse]
+	predeployStatus                     *connect.Client[v1.PredeployStatusRequest, v1.PredeployStatusResponse]
+	deploymentTargetDetails             *connect.Client[v1.DeploymentTargetDetailsRequest, v1.DeploymentTargetDetailsResponse]
+	createDeploymentTarget              *connect.Client[v1.CreateDeploymentTargetRequest, v1.CreateDeploymentTargetResponse]
+	deploymentTargets                   *connect.Client[v1.DeploymentTargetsRequest, v1.DeploymentTargetsResponse]
+	defaultDeploymentTarget             *connect.Client[v1.DefaultDeploymentTargetRequest, v1.DefaultDeploymentTargetResponse]
+	seedAppRevisions                    *connect.Client[v1.SeedAppRevisionsRequest, v1.SeedAppRevisionsResponse]
+	envGroupVariables                   *connect.Client[v1.EnvGroupVariablesRequest, v1.EnvGroupVariablesResponse]
+	latestEnvGroupWithVariables         *connect.Client[v1.LatestEnvGroupWithVariablesRequest, v1.LatestEnvGroupWithVariablesResponse]
+	updateAppImage                      *connect.Client[v1.UpdateAppImageRequest, v1.UpdateAppImageResponse]
+	updateAppBuildSettings              *connect.Client[v1.UpdateAppBuildSettingsRequest, v1.UpdateAppBuildSettingsResponse]
+	updateAppsLinkedToEnvGroup          *connect.Client[v1.UpdateAppsLinkedToEnvGroupRequest, v1.UpdateAppsLinkedToEnvGroupResponse]
+	appHelmValues                       *connect.Client[v1.AppHelmValuesRequest, v1.AppHelmValuesResponse]
+	manualServiceRun                    *connect.Client[v1.ManualServiceRunRequest, v1.ManualServiceRunResponse]
+	clusterNetworkSettings              *connect.Client[v1.ClusterNetworkSettingsRequest, v1.ClusterNetworkSettingsResponse]
+	sharedNetworkSettings               *connect.Client[v1.SharedNetworkSettingsRequest, v1.SharedNetworkSettingsResponse]
+	images                              *connect.Client[v1.ImagesRequest, v1.ImagesResponse]
+	createAppInstance                   *connect.Client[v1.CreateAppInstanceRequest, v1.CreateAppInstanceResponse]
+	deleteAppInstance                   *connect.Client[v1.DeleteAppInstanceRequest, v1.DeleteAppInstanceResponse]
+	listAppInstances                    *connect.Client[v1.ListAppInstancesRequest, v1.ListAppInstancesResponse]
+	createNotification                  *connect.Client[v1.CreateNotificationRequest, v1.CreateNotificationResponse]
+	updateServiceDeploymentStatus       *connect.Client[v1.UpdateServiceDeploymentStatusRequest, v1.UpdateServiceDeploymentStatusResponse]
+	dockerConfigFileForRegistry         *connect.Client[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse]
+	eCRTokenForRegistry                 *connect.Client[v1.ECRTokenForRegistryRequest, v1.ECRTokenForRegistryResponse]
+	assumeRoleCredentials               *connect.Client[v1.AssumeRoleCredentialsRequest, v1.AssumeRoleCredentialsResponse]
+	assumeRoleChainTargets              *connect.Client[v1.AssumeRoleChainTargetsRequest, v1.AssumeRoleChainTargetsResponse]
+	certificateAuthorityData            *connect.Client[v1.CertificateAuthorityDataRequest, v1.CertificateAuthorityDataResponse]
+	eKSBearerToken                      *connect.Client[v1.EKSBearerTokenRequest, v1.EKSBearerTokenResponse]
+	listRepositoriesForRegistry         *connect.Client[v1.ListRepositoriesForRegistryRequest, v1.ListRepositoriesForRegistryResponse]
+	listImagesForRepository             *connect.Client[v1.ListImagesForRepositoryRequest, v1.ListImagesForRepositoryResponse]
+	datastoreStatus                     *connect.Client[v1.DatastoreStatusRequest, v1.DatastoreStatusResponse]
+	registryStatus                      *connect.Client[v1.RegistryStatusRequest, v1.RegistryStatusResponse]
+	enableExternalEnvGroupProviders     *connect.Client[v1.EnableExternalEnvGroupProvidersRequest, v1.EnableExternalEnvGroupProvidersResponse]
+	areExternalEnvGroupProvidersEnabled *connect.Client[v1.AreExternalEnvGroupProvidersEnabledRequest, v1.AreExternalEnvGroupProvidersEnabledResponse]
+	createOrUpdateEnvGroup              *connect.Client[v1.CreateOrUpdateEnvGroupRequest, v1.CreateOrUpdateEnvGroupResponse]
+	deleteEnvGroup                      *connect.Client[v1.DeleteEnvGroupRequest, v1.DeleteEnvGroupResponse]
 }
 
 // QuotaIncrease calls porter.v1.ClusterControlPlaneService.QuotaIncrease.
@@ -1050,14 +1061,21 @@ func (c *clusterControlPlaneServiceClient) RegistryStatus(ctx context.Context, r
 	return c.registryStatus.CallUnary(ctx, req)
 }
 
-// SetupExternalSecrets calls porter.v1.ClusterControlPlaneService.SetupExternalSecrets.
-func (c *clusterControlPlaneServiceClient) SetupExternalSecrets(ctx context.Context, req *connect.Request[v1.SetupExternalSecretsRequest]) (*connect.Response[v1.SetupExternalSecretsResponse], error) {
-	return c.setupExternalSecrets.CallUnary(ctx, req)
+// EnableExternalEnvGroupProviders calls
+// porter.v1.ClusterControlPlaneService.EnableExternalEnvGroupProviders.
+func (c *clusterControlPlaneServiceClient) EnableExternalEnvGroupProviders(ctx context.Context, req *connect.Request[v1.EnableExternalEnvGroupProvidersRequest]) (*connect.Response[v1.EnableExternalEnvGroupProvidersResponse], error) {
+	return c.enableExternalEnvGroupProviders.CallUnary(ctx, req)
 }
 
-// CreateEnvGroup calls porter.v1.ClusterControlPlaneService.CreateEnvGroup.
-func (c *clusterControlPlaneServiceClient) CreateEnvGroup(ctx context.Context, req *connect.Request[v1.CreateEnvGroupRequest]) (*connect.Response[v1.CreateEnvGroupResponse], error) {
-	return c.createEnvGroup.CallUnary(ctx, req)
+// AreExternalEnvGroupProvidersEnabled calls
+// porter.v1.ClusterControlPlaneService.AreExternalEnvGroupProvidersEnabled.
+func (c *clusterControlPlaneServiceClient) AreExternalEnvGroupProvidersEnabled(ctx context.Context, req *connect.Request[v1.AreExternalEnvGroupProvidersEnabledRequest]) (*connect.Response[v1.AreExternalEnvGroupProvidersEnabledResponse], error) {
+	return c.areExternalEnvGroupProvidersEnabled.CallUnary(ctx, req)
+}
+
+// CreateOrUpdateEnvGroup calls porter.v1.ClusterControlPlaneService.CreateOrUpdateEnvGroup.
+func (c *clusterControlPlaneServiceClient) CreateOrUpdateEnvGroup(ctx context.Context, req *connect.Request[v1.CreateOrUpdateEnvGroupRequest]) (*connect.Response[v1.CreateOrUpdateEnvGroupResponse], error) {
+	return c.createOrUpdateEnvGroup.CallUnary(ctx, req)
 }
 
 // DeleteEnvGroup calls porter.v1.ClusterControlPlaneService.DeleteEnvGroup.
@@ -1216,10 +1234,12 @@ type ClusterControlPlaneServiceHandler interface {
 	DatastoreStatus(context.Context, *connect.Request[v1.DatastoreStatusRequest]) (*connect.Response[v1.DatastoreStatusResponse], error)
 	// RegistryStatus returns the status of a given docker registry within a project scope
 	RegistryStatus(context.Context, *connect.Request[v1.RegistryStatusRequest]) (*connect.Response[v1.RegistryStatusResponse], error)
-	// SetupExternalSecrets will set up the cluster to handle external secrets
-	SetupExternalSecrets(context.Context, *connect.Request[v1.SetupExternalSecretsRequest]) (*connect.Response[v1.SetupExternalSecretsResponse], error)
-	// CreateEnvGroup will create an env group
-	CreateEnvGroup(context.Context, *connect.Request[v1.CreateEnvGroupRequest]) (*connect.Response[v1.CreateEnvGroupResponse], error)
+	// EnableExternalEnvGroupProvider will enable support for external env group providers on the cluster
+	EnableExternalEnvGroupProviders(context.Context, *connect.Request[v1.EnableExternalEnvGroupProvidersRequest]) (*connect.Response[v1.EnableExternalEnvGroupProvidersResponse], error)
+	// AreExternalEnvGroupProviderEnabled will return whether external env group providers are enabled on the cluster
+	AreExternalEnvGroupProvidersEnabled(context.Context, *connect.Request[v1.AreExternalEnvGroupProvidersEnabledRequest]) (*connect.Response[v1.AreExternalEnvGroupProvidersEnabledResponse], error)
+	// CreateOrUpdateEnvGroup will create or update an env group
+	CreateOrUpdateEnvGroup(context.Context, *connect.Request[v1.CreateOrUpdateEnvGroupRequest]) (*connect.Response[v1.CreateOrUpdateEnvGroupResponse], error)
 	// DeleteEnvGroup will delete an env group
 	DeleteEnvGroup(context.Context, *connect.Request[v1.DeleteEnvGroupRequest]) (*connect.Response[v1.DeleteEnvGroupResponse], error)
 }
@@ -1510,14 +1530,19 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.RegistryStatus,
 		opts...,
 	)
-	clusterControlPlaneServiceSetupExternalSecretsHandler := connect.NewUnaryHandler(
-		ClusterControlPlaneServiceSetupExternalSecretsProcedure,
-		svc.SetupExternalSecrets,
+	clusterControlPlaneServiceEnableExternalEnvGroupProvidersHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceEnableExternalEnvGroupProvidersProcedure,
+		svc.EnableExternalEnvGroupProviders,
 		opts...,
 	)
-	clusterControlPlaneServiceCreateEnvGroupHandler := connect.NewUnaryHandler(
-		ClusterControlPlaneServiceCreateEnvGroupProcedure,
-		svc.CreateEnvGroup,
+	clusterControlPlaneServiceAreExternalEnvGroupProvidersEnabledHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceAreExternalEnvGroupProvidersEnabledProcedure,
+		svc.AreExternalEnvGroupProvidersEnabled,
+		opts...,
+	)
+	clusterControlPlaneServiceCreateOrUpdateEnvGroupHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceCreateOrUpdateEnvGroupProcedure,
+		svc.CreateOrUpdateEnvGroup,
 		opts...,
 	)
 	clusterControlPlaneServiceDeleteEnvGroupHandler := connect.NewUnaryHandler(
@@ -1639,10 +1664,12 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceDatastoreStatusHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceRegistryStatusProcedure:
 			clusterControlPlaneServiceRegistryStatusHandler.ServeHTTP(w, r)
-		case ClusterControlPlaneServiceSetupExternalSecretsProcedure:
-			clusterControlPlaneServiceSetupExternalSecretsHandler.ServeHTTP(w, r)
-		case ClusterControlPlaneServiceCreateEnvGroupProcedure:
-			clusterControlPlaneServiceCreateEnvGroupHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceEnableExternalEnvGroupProvidersProcedure:
+			clusterControlPlaneServiceEnableExternalEnvGroupProvidersHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceAreExternalEnvGroupProvidersEnabledProcedure:
+			clusterControlPlaneServiceAreExternalEnvGroupProvidersEnabledHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceCreateOrUpdateEnvGroupProcedure:
+			clusterControlPlaneServiceCreateOrUpdateEnvGroupHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDeleteEnvGroupProcedure:
 			clusterControlPlaneServiceDeleteEnvGroupHandler.ServeHTTP(w, r)
 		default:
@@ -1878,12 +1905,16 @@ func (UnimplementedClusterControlPlaneServiceHandler) RegistryStatus(context.Con
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.RegistryStatus is not implemented"))
 }
 
-func (UnimplementedClusterControlPlaneServiceHandler) SetupExternalSecrets(context.Context, *connect.Request[v1.SetupExternalSecretsRequest]) (*connect.Response[v1.SetupExternalSecretsResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.SetupExternalSecrets is not implemented"))
+func (UnimplementedClusterControlPlaneServiceHandler) EnableExternalEnvGroupProviders(context.Context, *connect.Request[v1.EnableExternalEnvGroupProvidersRequest]) (*connect.Response[v1.EnableExternalEnvGroupProvidersResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.EnableExternalEnvGroupProviders is not implemented"))
 }
 
-func (UnimplementedClusterControlPlaneServiceHandler) CreateEnvGroup(context.Context, *connect.Request[v1.CreateEnvGroupRequest]) (*connect.Response[v1.CreateEnvGroupResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.CreateEnvGroup is not implemented"))
+func (UnimplementedClusterControlPlaneServiceHandler) AreExternalEnvGroupProvidersEnabled(context.Context, *connect.Request[v1.AreExternalEnvGroupProvidersEnabledRequest]) (*connect.Response[v1.AreExternalEnvGroupProvidersEnabledResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.AreExternalEnvGroupProvidersEnabled is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) CreateOrUpdateEnvGroup(context.Context, *connect.Request[v1.CreateOrUpdateEnvGroupRequest]) (*connect.Response[v1.CreateOrUpdateEnvGroupResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.CreateOrUpdateEnvGroup is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) DeleteEnvGroup(context.Context, *connect.Request[v1.DeleteEnvGroupRequest]) (*connect.Response[v1.DeleteEnvGroupResponse], error) {

@@ -839,28 +839,39 @@ enum EnumServiceDeploymentStatus {
 // UpdateServiceDeploymentStatusResponse is the response object for updating the deployment status of a service
 message UpdateServiceDeploymentStatusResponse {}
 
-message SetupExternalSecretsRequest {
+message AreExternalEnvGroupProvidersEnabledRequest {
   int64 project_id = 1;
   int64 cluster_id = 2;
 }
 
-message SetupExternalSecretsResponse {}
+message AreExternalEnvGroupProvidersEnabledResponse {
+  bool enabled = 1;
+  bool reprovision_required = 2;
+  bool k8s_upgrade_required = 3;
+}
 
-message CreateEnvGroupRequest {
+message EnableExternalEnvGroupProvidersRequest {
   int64 project_id = 1;
   int64 cluster_id = 2;
-  EnumEnvGroupType env_group_type = 3;
+}
+
+message EnableExternalEnvGroupProvidersResponse {}
+
+message CreateOrUpdateEnvGroupRequest {
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+  EnumEnvGroupProviderType env_group_provider_type = 3;
   string env_group_name = 4;
   // env_group_auth_token is the auth token for the env group. Not required for Porter env groups.
   string env_group_auth_token = 5;
 }
 
-message CreateEnvGroupResponse {}
+message CreateOrUpdateEnvGroupResponse {}
 
 message DeleteEnvGroupRequest {
   int64 project_id = 1;
   int64 cluster_id = 2;
-  EnumEnvGroupType env_group_type = 3;
+  EnumEnvGroupProviderType env_group_provider_type = 3;
   string env_group_name = 4;
 }
 
@@ -1071,11 +1082,14 @@ service ClusterControlPlaneService {
   // RegistryStatus returns the status of a given docker registry within a project scope
   rpc RegistryStatus(RegistryStatusRequest) returns (RegistryStatusResponse) {}
 
-  // SetupExternalSecrets will set up the cluster to handle external secrets
-  rpc SetupExternalSecrets(SetupExternalSecretsRequest) returns (SetupExternalSecretsResponse) {}
+  // EnableExternalEnvGroupProvider will enable support for external env group providers on the cluster
+  rpc EnableExternalEnvGroupProviders(EnableExternalEnvGroupProvidersRequest) returns (EnableExternalEnvGroupProvidersResponse) {}
 
-  // CreateEnvGroup will create an env group
-  rpc CreateEnvGroup(CreateEnvGroupRequest) returns (CreateEnvGroupResponse) {}
+  // AreExternalEnvGroupProviderEnabled will return whether external env group providers are enabled on the cluster
+  rpc AreExternalEnvGroupProvidersEnabled(AreExternalEnvGroupProvidersEnabledRequest) returns (AreExternalEnvGroupProvidersEnabledResponse) {}
+
+  // CreateOrUpdateEnvGroup will create or update an env group
+  rpc CreateOrUpdateEnvGroup(CreateOrUpdateEnvGroupRequest) returns (CreateOrUpdateEnvGroupResponse) {}
 
   // DeleteEnvGroup will delete an env group
   rpc DeleteEnvGroup(DeleteEnvGroupRequest) returns (DeleteEnvGroupResponse) {}

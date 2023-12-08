@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package porter.v1;
 
-import "porter/v1/env_group.proto";
 import "porter/v1/service.proto";
 
 // DeploymentTargetIdentifier is the object that identifies a deployment target. One of id or name must be provided, with id taking precedence.
@@ -77,8 +76,6 @@ message EnvGroup {
   string name = 1;
   // version is the version of the environment variable group
   int64 version = 2;
-  // type is the type of the environment variable group
-  EnumEnvGroupType type = 3;
 }
 
 // EnvGroupVariables represents the variables for an env group.

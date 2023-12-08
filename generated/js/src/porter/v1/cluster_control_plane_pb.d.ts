@@ -12,7 +12,7 @@ import type { Error } from "./errors_pb.js";
 import type { Contract, ContractRevision } from "./contract_pb.js";
 import type { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import type { Addon } from "./addons_pb.js";
-import type { EnumEnvGroupType } from "./env_group_pb.js";
+import type { EnumEnvGroupProviderType } from "./env_group_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
@@ -3857,9 +3857,9 @@ export declare class UpdateServiceDeploymentStatusResponse extends Message<Updat
 }
 
 /**
- * @generated from message porter.v1.SetupExternalSecretsRequest
+ * @generated from message porter.v1.AreExternalEnvGroupProvidersEnabledRequest
  */
-export declare class SetupExternalSecretsRequest extends Message<SetupExternalSecretsRequest> {
+export declare class AreExternalEnvGroupProvidersEnabledRequest extends Message<AreExternalEnvGroupProvidersEnabledRequest> {
   /**
    * @generated from field: int64 project_id = 1;
    */
@@ -3870,44 +3870,107 @@ export declare class SetupExternalSecretsRequest extends Message<SetupExternalSe
    */
   clusterId: bigint;
 
-  constructor(data?: PartialMessage<SetupExternalSecretsRequest>);
+  constructor(data?: PartialMessage<AreExternalEnvGroupProvidersEnabledRequest>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.SetupExternalSecretsRequest";
+  static readonly typeName = "porter.v1.AreExternalEnvGroupProvidersEnabledRequest";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetupExternalSecretsRequest;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AreExternalEnvGroupProvidersEnabledRequest;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetupExternalSecretsRequest;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AreExternalEnvGroupProvidersEnabledRequest;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetupExternalSecretsRequest;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AreExternalEnvGroupProvidersEnabledRequest;
 
-  static equals(a: SetupExternalSecretsRequest | PlainMessage<SetupExternalSecretsRequest> | undefined, b: SetupExternalSecretsRequest | PlainMessage<SetupExternalSecretsRequest> | undefined): boolean;
+  static equals(a: AreExternalEnvGroupProvidersEnabledRequest | PlainMessage<AreExternalEnvGroupProvidersEnabledRequest> | undefined, b: AreExternalEnvGroupProvidersEnabledRequest | PlainMessage<AreExternalEnvGroupProvidersEnabledRequest> | undefined): boolean;
 }
 
 /**
- * @generated from message porter.v1.SetupExternalSecretsResponse
+ * @generated from message porter.v1.AreExternalEnvGroupProvidersEnabledResponse
  */
-export declare class SetupExternalSecretsResponse extends Message<SetupExternalSecretsResponse> {
-  constructor(data?: PartialMessage<SetupExternalSecretsResponse>);
+export declare class AreExternalEnvGroupProvidersEnabledResponse extends Message<AreExternalEnvGroupProvidersEnabledResponse> {
+  /**
+   * @generated from field: bool enabled = 1;
+   */
+  enabled: boolean;
+
+  /**
+   * @generated from field: bool reprovision_required = 2;
+   */
+  reprovisionRequired: boolean;
+
+  /**
+   * @generated from field: bool k8s_upgrade_required = 3;
+   */
+  k8sUpgradeRequired: boolean;
+
+  constructor(data?: PartialMessage<AreExternalEnvGroupProvidersEnabledResponse>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.SetupExternalSecretsResponse";
+  static readonly typeName = "porter.v1.AreExternalEnvGroupProvidersEnabledResponse";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SetupExternalSecretsResponse;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AreExternalEnvGroupProvidersEnabledResponse;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SetupExternalSecretsResponse;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AreExternalEnvGroupProvidersEnabledResponse;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SetupExternalSecretsResponse;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AreExternalEnvGroupProvidersEnabledResponse;
 
-  static equals(a: SetupExternalSecretsResponse | PlainMessage<SetupExternalSecretsResponse> | undefined, b: SetupExternalSecretsResponse | PlainMessage<SetupExternalSecretsResponse> | undefined): boolean;
+  static equals(a: AreExternalEnvGroupProvidersEnabledResponse | PlainMessage<AreExternalEnvGroupProvidersEnabledResponse> | undefined, b: AreExternalEnvGroupProvidersEnabledResponse | PlainMessage<AreExternalEnvGroupProvidersEnabledResponse> | undefined): boolean;
 }
 
 /**
- * @generated from message porter.v1.CreateEnvGroupRequest
+ * @generated from message porter.v1.EnableExternalEnvGroupProvidersRequest
  */
-export declare class CreateEnvGroupRequest extends Message<CreateEnvGroupRequest> {
+export declare class EnableExternalEnvGroupProvidersRequest extends Message<EnableExternalEnvGroupProvidersRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  constructor(data?: PartialMessage<EnableExternalEnvGroupProvidersRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.EnableExternalEnvGroupProvidersRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EnableExternalEnvGroupProvidersRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): EnableExternalEnvGroupProvidersRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EnableExternalEnvGroupProvidersRequest;
+
+  static equals(a: EnableExternalEnvGroupProvidersRequest | PlainMessage<EnableExternalEnvGroupProvidersRequest> | undefined, b: EnableExternalEnvGroupProvidersRequest | PlainMessage<EnableExternalEnvGroupProvidersRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.EnableExternalEnvGroupProvidersResponse
+ */
+export declare class EnableExternalEnvGroupProvidersResponse extends Message<EnableExternalEnvGroupProvidersResponse> {
+  constructor(data?: PartialMessage<EnableExternalEnvGroupProvidersResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.EnableExternalEnvGroupProvidersResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EnableExternalEnvGroupProvidersResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): EnableExternalEnvGroupProvidersResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EnableExternalEnvGroupProvidersResponse;
+
+  static equals(a: EnableExternalEnvGroupProvidersResponse | PlainMessage<EnableExternalEnvGroupProvidersResponse> | undefined, b: EnableExternalEnvGroupProvidersResponse | PlainMessage<EnableExternalEnvGroupProvidersResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.CreateOrUpdateEnvGroupRequest
+ */
+export declare class CreateOrUpdateEnvGroupRequest extends Message<CreateOrUpdateEnvGroupRequest> {
   /**
    * @generated from field: int64 project_id = 1;
    */
@@ -3919,9 +3982,9 @@ export declare class CreateEnvGroupRequest extends Message<CreateEnvGroupRequest
   clusterId: bigint;
 
   /**
-   * @generated from field: porter.v1.EnumEnvGroupType env_group_type = 3;
+   * @generated from field: porter.v1.EnumEnvGroupProviderType env_group_provider_type = 3;
    */
-  envGroupType: EnumEnvGroupType;
+  envGroupProviderType: EnumEnvGroupProviderType;
 
   /**
    * @generated from field: string env_group_name = 4;
@@ -3935,38 +3998,38 @@ export declare class CreateEnvGroupRequest extends Message<CreateEnvGroupRequest
    */
   envGroupAuthToken: string;
 
-  constructor(data?: PartialMessage<CreateEnvGroupRequest>);
+  constructor(data?: PartialMessage<CreateOrUpdateEnvGroupRequest>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.CreateEnvGroupRequest";
+  static readonly typeName = "porter.v1.CreateOrUpdateEnvGroupRequest";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateEnvGroupRequest;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateOrUpdateEnvGroupRequest;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateEnvGroupRequest;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateOrUpdateEnvGroupRequest;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateEnvGroupRequest;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateOrUpdateEnvGroupRequest;
 
-  static equals(a: CreateEnvGroupRequest | PlainMessage<CreateEnvGroupRequest> | undefined, b: CreateEnvGroupRequest | PlainMessage<CreateEnvGroupRequest> | undefined): boolean;
+  static equals(a: CreateOrUpdateEnvGroupRequest | PlainMessage<CreateOrUpdateEnvGroupRequest> | undefined, b: CreateOrUpdateEnvGroupRequest | PlainMessage<CreateOrUpdateEnvGroupRequest> | undefined): boolean;
 }
 
 /**
- * @generated from message porter.v1.CreateEnvGroupResponse
+ * @generated from message porter.v1.CreateOrUpdateEnvGroupResponse
  */
-export declare class CreateEnvGroupResponse extends Message<CreateEnvGroupResponse> {
-  constructor(data?: PartialMessage<CreateEnvGroupResponse>);
+export declare class CreateOrUpdateEnvGroupResponse extends Message<CreateOrUpdateEnvGroupResponse> {
+  constructor(data?: PartialMessage<CreateOrUpdateEnvGroupResponse>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.CreateEnvGroupResponse";
+  static readonly typeName = "porter.v1.CreateOrUpdateEnvGroupResponse";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateEnvGroupResponse;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateOrUpdateEnvGroupResponse;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateEnvGroupResponse;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateOrUpdateEnvGroupResponse;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateEnvGroupResponse;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateOrUpdateEnvGroupResponse;
 
-  static equals(a: CreateEnvGroupResponse | PlainMessage<CreateEnvGroupResponse> | undefined, b: CreateEnvGroupResponse | PlainMessage<CreateEnvGroupResponse> | undefined): boolean;
+  static equals(a: CreateOrUpdateEnvGroupResponse | PlainMessage<CreateOrUpdateEnvGroupResponse> | undefined, b: CreateOrUpdateEnvGroupResponse | PlainMessage<CreateOrUpdateEnvGroupResponse> | undefined): boolean;
 }
 
 /**
@@ -3984,9 +4047,9 @@ export declare class DeleteEnvGroupRequest extends Message<DeleteEnvGroupRequest
   clusterId: bigint;
 
   /**
-   * @generated from field: porter.v1.EnumEnvGroupType env_group_type = 3;
+   * @generated from field: porter.v1.EnumEnvGroupProviderType env_group_provider_type = 3;
    */
-  envGroupType: EnumEnvGroupType;
+  envGroupProviderType: EnumEnvGroupProviderType;
 
   /**
    * @generated from field: string env_group_name = 4;
