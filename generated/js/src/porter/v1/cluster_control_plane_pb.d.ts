@@ -2128,6 +2128,13 @@ export declare class AppRevisionStatusResponse extends Message<AppRevisionStatus
    */
   deploymentFailed: boolean;
 
+  /**
+   * is_in_terminal_status indicates whether the revision is in a terminal status (its status will not change)
+   *
+   * @generated from field: bool is_in_terminal_status = 10;
+   */
+  isInTerminalStatus: boolean;
+
   constructor(data?: PartialMessage<AppRevisionStatusResponse>);
 
   static readonly runtime: typeof proto3;
