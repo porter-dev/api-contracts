@@ -12,6 +12,7 @@ import type { Error } from "./errors_pb.js";
 import type { Contract, ContractRevision } from "./contract_pb.js";
 import type { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import type { Addon } from "./addons_pb.js";
+import type { EnumEnvGroupProviderType } from "./env_group_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
@@ -3861,6 +3862,286 @@ export declare class UpdateServiceDeploymentStatusResponse extends Message<Updat
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateServiceDeploymentStatusResponse;
 
   static equals(a: UpdateServiceDeploymentStatusResponse | PlainMessage<UpdateServiceDeploymentStatusResponse> | undefined, b: UpdateServiceDeploymentStatusResponse | PlainMessage<UpdateServiceDeploymentStatusResponse> | undefined): boolean;
+}
+
+/**
+ * AreExternalEnvGroupProvidersEnabledRequest is the request object AreExternalEnvGroupProvidersEnabled
+ *
+ * @generated from message porter.v1.AreExternalEnvGroupProvidersEnabledRequest
+ */
+export declare class AreExternalEnvGroupProvidersEnabledRequest extends Message<AreExternalEnvGroupProvidersEnabledRequest> {
+  /**
+   * project_id is the id of the project in which to check whether external env group providers are enabled
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * cluster_id is the id of the cluster in which to check whether external env group providers are enabled
+   *
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  constructor(data?: PartialMessage<AreExternalEnvGroupProvidersEnabledRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AreExternalEnvGroupProvidersEnabledRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AreExternalEnvGroupProvidersEnabledRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AreExternalEnvGroupProvidersEnabledRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AreExternalEnvGroupProvidersEnabledRequest;
+
+  static equals(a: AreExternalEnvGroupProvidersEnabledRequest | PlainMessage<AreExternalEnvGroupProvidersEnabledRequest> | undefined, b: AreExternalEnvGroupProvidersEnabledRequest | PlainMessage<AreExternalEnvGroupProvidersEnabledRequest> | undefined): boolean;
+}
+
+/**
+ * AreExternalEnvGroupProvidersEnabledResponse is the response object for AreExternalEnvGroupProvidersEnabled
+ *
+ * @generated from message porter.v1.AreExternalEnvGroupProvidersEnabledResponse
+ */
+export declare class AreExternalEnvGroupProvidersEnabledResponse extends Message<AreExternalEnvGroupProvidersEnabledResponse> {
+  /**
+   * enabled is a flag that indicates whether external env group providers are enabled
+   *
+   * @generated from field: bool enabled = 1;
+   */
+  enabled: boolean;
+
+  /**
+   * reprovision_required is a flag that indicates whether the cluster needs to be reprovisioned to enable external env group providers
+   *
+   * @generated from field: bool reprovision_required = 2;
+   */
+  reprovisionRequired: boolean;
+
+  /**
+   * k8s_upgrade_required is a flag that indicates whether the cluster needs to be upgraded to enable external env group providers
+   *
+   * @generated from field: bool k8s_upgrade_required = 3;
+   */
+  k8sUpgradeRequired: boolean;
+
+  constructor(data?: PartialMessage<AreExternalEnvGroupProvidersEnabledResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AreExternalEnvGroupProvidersEnabledResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AreExternalEnvGroupProvidersEnabledResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AreExternalEnvGroupProvidersEnabledResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AreExternalEnvGroupProvidersEnabledResponse;
+
+  static equals(a: AreExternalEnvGroupProvidersEnabledResponse | PlainMessage<AreExternalEnvGroupProvidersEnabledResponse> | undefined, b: AreExternalEnvGroupProvidersEnabledResponse | PlainMessage<AreExternalEnvGroupProvidersEnabledResponse> | undefined): boolean;
+}
+
+/**
+ * EnableExternalEnvGroupProvidersRequest is the request object for EnableExternalEnvGroupProviders
+ *
+ * @generated from message porter.v1.EnableExternalEnvGroupProvidersRequest
+ */
+export declare class EnableExternalEnvGroupProvidersRequest extends Message<EnableExternalEnvGroupProvidersRequest> {
+  /**
+   * project_id is the id of the project where external env group providers should be enabled
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * cluster_id is the id of the cluster where external env group providers should be enabled
+   *
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  constructor(data?: PartialMessage<EnableExternalEnvGroupProvidersRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.EnableExternalEnvGroupProvidersRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EnableExternalEnvGroupProvidersRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): EnableExternalEnvGroupProvidersRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EnableExternalEnvGroupProvidersRequest;
+
+  static equals(a: EnableExternalEnvGroupProvidersRequest | PlainMessage<EnableExternalEnvGroupProvidersRequest> | undefined, b: EnableExternalEnvGroupProvidersRequest | PlainMessage<EnableExternalEnvGroupProvidersRequest> | undefined): boolean;
+}
+
+/**
+ * EnableExternalEnvGroupProvidersResponse is the response object for EnableExternalEnvGroupProviders
+ *
+ * @generated from message porter.v1.EnableExternalEnvGroupProvidersResponse
+ */
+export declare class EnableExternalEnvGroupProvidersResponse extends Message<EnableExternalEnvGroupProvidersResponse> {
+  constructor(data?: PartialMessage<EnableExternalEnvGroupProvidersResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.EnableExternalEnvGroupProvidersResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EnableExternalEnvGroupProvidersResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): EnableExternalEnvGroupProvidersResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EnableExternalEnvGroupProvidersResponse;
+
+  static equals(a: EnableExternalEnvGroupProvidersResponse | PlainMessage<EnableExternalEnvGroupProvidersResponse> | undefined, b: EnableExternalEnvGroupProvidersResponse | PlainMessage<EnableExternalEnvGroupProvidersResponse> | undefined): boolean;
+}
+
+/**
+ * CreateOrUpdateEnvGroupRequest is the request object for CreateOrUpdateEnvGroup
+ *
+ * @generated from message porter.v1.CreateOrUpdateEnvGroupRequest
+ */
+export declare class CreateOrUpdateEnvGroupRequest extends Message<CreateOrUpdateEnvGroupRequest> {
+  /**
+   * project_id is the id of the project where the env group will be created
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * cluster_id is the id of the cluster where the env group will be created
+   *
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  /**
+   * env_group_provider_type is the type of provider for the env group
+   *
+   * @generated from field: porter.v1.EnumEnvGroupProviderType env_group_provider_type = 3;
+   */
+  envGroupProviderType: EnumEnvGroupProviderType;
+
+  /**
+   * env_group_name is the name of the env group
+   *
+   * @generated from field: string env_group_name = 4;
+   */
+  envGroupName: string;
+
+  /**
+   * env_group_auth_token is the auth token for the env group. Not required for Porter env groups.
+   *
+   * @generated from field: string env_group_auth_token = 5;
+   */
+  envGroupAuthToken: string;
+
+  constructor(data?: PartialMessage<CreateOrUpdateEnvGroupRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CreateOrUpdateEnvGroupRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateOrUpdateEnvGroupRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateOrUpdateEnvGroupRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateOrUpdateEnvGroupRequest;
+
+  static equals(a: CreateOrUpdateEnvGroupRequest | PlainMessage<CreateOrUpdateEnvGroupRequest> | undefined, b: CreateOrUpdateEnvGroupRequest | PlainMessage<CreateOrUpdateEnvGroupRequest> | undefined): boolean;
+}
+
+/**
+ * CreateOrUpdateEnvGroupResponse is the response object for CreateOrUpdateEnvGroup
+ *
+ * @generated from message porter.v1.CreateOrUpdateEnvGroupResponse
+ */
+export declare class CreateOrUpdateEnvGroupResponse extends Message<CreateOrUpdateEnvGroupResponse> {
+  constructor(data?: PartialMessage<CreateOrUpdateEnvGroupResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CreateOrUpdateEnvGroupResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateOrUpdateEnvGroupResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateOrUpdateEnvGroupResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateOrUpdateEnvGroupResponse;
+
+  static equals(a: CreateOrUpdateEnvGroupResponse | PlainMessage<CreateOrUpdateEnvGroupResponse> | undefined, b: CreateOrUpdateEnvGroupResponse | PlainMessage<CreateOrUpdateEnvGroupResponse> | undefined): boolean;
+}
+
+/**
+ * DeleteEnvGroupRequest is the request object for DeleteEnvGroup
+ *
+ * @generated from message porter.v1.DeleteEnvGroupRequest
+ */
+export declare class DeleteEnvGroupRequest extends Message<DeleteEnvGroupRequest> {
+  /**
+   * project_id is the id of the project where the env group will be deleted
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * cluster_id is the id of the cluster where the env group will be deleted
+   *
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  /**
+   * env_group_provider_type is the type of provider for the env group
+   *
+   * @generated from field: porter.v1.EnumEnvGroupProviderType env_group_provider_type = 3;
+   */
+  envGroupProviderType: EnumEnvGroupProviderType;
+
+  /**
+   * env_group_name is the name of the env group to delete
+   *
+   * @generated from field: string env_group_name = 4;
+   */
+  envGroupName: string;
+
+  constructor(data?: PartialMessage<DeleteEnvGroupRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeleteEnvGroupRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteEnvGroupRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteEnvGroupRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteEnvGroupRequest;
+
+  static equals(a: DeleteEnvGroupRequest | PlainMessage<DeleteEnvGroupRequest> | undefined, b: DeleteEnvGroupRequest | PlainMessage<DeleteEnvGroupRequest> | undefined): boolean;
+}
+
+/**
+ * DeleteEnvGroupResponse is the response object for DeleteEnvGroup
+ *
+ * @generated from message porter.v1.DeleteEnvGroupResponse
+ */
+export declare class DeleteEnvGroupResponse extends Message<DeleteEnvGroupResponse> {
+  constructor(data?: PartialMessage<DeleteEnvGroupResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeleteEnvGroupResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteEnvGroupResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteEnvGroupResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteEnvGroupResponse;
+
+  static equals(a: DeleteEnvGroupResponse | PlainMessage<DeleteEnvGroupResponse> | undefined, b: DeleteEnvGroupResponse | PlainMessage<DeleteEnvGroupResponse> | undefined): boolean;
 }
 
 /**
