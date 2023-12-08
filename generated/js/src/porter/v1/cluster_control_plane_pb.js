@@ -518,6 +518,7 @@ export const UpdateAppRequest = proto3.makeMessageType(
     { no: 9, name: "is_predeploy_eligible", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 10, name: "commit_sha", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 11, name: "addons", kind: "message", T: Addon, repeated: true },
+    { no: 12, name: "addon_overrides", kind: "message", T: Addon, repeated: true },
   ],
 );
 

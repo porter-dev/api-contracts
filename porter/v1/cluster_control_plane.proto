@@ -288,6 +288,9 @@ message UpdateAppRequest {
   string commit_sha = 10;
   // addons is a list of addons which should be deployed alongside the app
   repeated Addon addons = 11;
+  // addon_overrides contains environment specific overrides for addons if they exist, applied depending on the deployment target
+  // if any addons are provided, these will be the only addons deployed alongside the app and the others will be ignored
+  repeated Addon addon_overrides = 12;
 }
 
 message UpdateAppResponse {
