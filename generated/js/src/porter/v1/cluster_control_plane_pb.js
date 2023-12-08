@@ -1328,6 +1328,8 @@ export const UpdateServiceDeploymentStatusResponse = proto3.makeMessageType(
 );
 
 /**
+ * ListNotificationsRequest is the request object AreExternalEnvGroupProvidersEnabled
+ *
  * @generated from message porter.v1.AreExternalEnvGroupProvidersEnabledRequest
  */
 export const AreExternalEnvGroupProvidersEnabledRequest = proto3.makeMessageType(
@@ -1339,6 +1341,8 @@ export const AreExternalEnvGroupProvidersEnabledRequest = proto3.makeMessageType
 );
 
 /**
+ * AreExternalEnvGroupProvidersEnabledResponse is the response object for AreExternalEnvGroupProvidersEnabled
+ *
  * @generated from message porter.v1.AreExternalEnvGroupProvidersEnabledResponse
  */
 export const AreExternalEnvGroupProvidersEnabledResponse = proto3.makeMessageType(
@@ -1351,6 +1355,8 @@ export const AreExternalEnvGroupProvidersEnabledResponse = proto3.makeMessageTyp
 );
 
 /**
+ * EnableExternalEnvGroupProvidersRequest is the request object for EnableExternalEnvGroupProviders
+ *
  * @generated from message porter.v1.EnableExternalEnvGroupProvidersRequest
  */
 export const EnableExternalEnvGroupProvidersRequest = proto3.makeMessageType(
@@ -1362,6 +1368,8 @@ export const EnableExternalEnvGroupProvidersRequest = proto3.makeMessageType(
 );
 
 /**
+ * EnableExternalEnvGroupProvidersResponse is the response object for EnableExternalEnvGroupProviders
+ *
  * @generated from message porter.v1.EnableExternalEnvGroupProvidersResponse
  */
 export const EnableExternalEnvGroupProvidersResponse = proto3.makeMessageType(
@@ -1370,6 +1378,8 @@ export const EnableExternalEnvGroupProvidersResponse = proto3.makeMessageType(
 );
 
 /**
+ * CreateOrUpdateEnvGroupRequest is the request object for CreateOrUpdateEnvGroup
+ *
  * @generated from message porter.v1.CreateOrUpdateEnvGroupRequest
  */
 export const CreateOrUpdateEnvGroupRequest = proto3.makeMessageType(
@@ -1384,6 +1394,8 @@ export const CreateOrUpdateEnvGroupRequest = proto3.makeMessageType(
 );
 
 /**
+ * CreateOrUpdateEnvGroupResponse is the response object for CreateOrUpdateEnvGroup
+ *
  * @generated from message porter.v1.CreateOrUpdateEnvGroupResponse
  */
 export const CreateOrUpdateEnvGroupResponse = proto3.makeMessageType(
@@ -1392,6 +1404,8 @@ export const CreateOrUpdateEnvGroupResponse = proto3.makeMessageType(
 );
 
 /**
+ * DeleteEnvGroupRequest is the request object for DeleteEnvGroup
+ *
  * @generated from message porter.v1.DeleteEnvGroupRequest
  */
 export const DeleteEnvGroupRequest = proto3.makeMessageType(
@@ -1405,6 +1419,8 @@ export const DeleteEnvGroupRequest = proto3.makeMessageType(
 );
 
 /**
+ * DeleteEnvGroupResponse is the response object for DeleteEnvGroup
+ *
  * @generated from message porter.v1.DeleteEnvGroupResponse
  */
 export const DeleteEnvGroupResponse = proto3.makeMessageType(

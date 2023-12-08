@@ -3857,15 +3857,21 @@ export declare class UpdateServiceDeploymentStatusResponse extends Message<Updat
 }
 
 /**
+ * ListNotificationsRequest is the request object AreExternalEnvGroupProvidersEnabled
+ *
  * @generated from message porter.v1.AreExternalEnvGroupProvidersEnabledRequest
  */
 export declare class AreExternalEnvGroupProvidersEnabledRequest extends Message<AreExternalEnvGroupProvidersEnabledRequest> {
   /**
+   * project_id is the id of the project in which to check whether external env group providers are enabled
+   *
    * @generated from field: int64 project_id = 1;
    */
   projectId: bigint;
 
   /**
+   * cluster_id is the id of the cluster in which to check whether external env group providers are enabled
+   *
    * @generated from field: int64 cluster_id = 2;
    */
   clusterId: bigint;
@@ -3886,20 +3892,28 @@ export declare class AreExternalEnvGroupProvidersEnabledRequest extends Message<
 }
 
 /**
+ * AreExternalEnvGroupProvidersEnabledResponse is the response object for AreExternalEnvGroupProvidersEnabled
+ *
  * @generated from message porter.v1.AreExternalEnvGroupProvidersEnabledResponse
  */
 export declare class AreExternalEnvGroupProvidersEnabledResponse extends Message<AreExternalEnvGroupProvidersEnabledResponse> {
   /**
+   * enabled is a flag that indicates whether external env group providers are enabled
+   *
    * @generated from field: bool enabled = 1;
    */
   enabled: boolean;
 
   /**
+   * reprovision_required is a flag that indicates whether the cluster needs to be reprovisioned to enable external env group providers
+   *
    * @generated from field: bool reprovision_required = 2;
    */
   reprovisionRequired: boolean;
 
   /**
+   * k8s_upgrade_required is a flag that indicates whether the cluster needs to be upgraded to enable external env group providers
+   *
    * @generated from field: bool k8s_upgrade_required = 3;
    */
   k8sUpgradeRequired: boolean;
@@ -3920,15 +3934,21 @@ export declare class AreExternalEnvGroupProvidersEnabledResponse extends Message
 }
 
 /**
+ * EnableExternalEnvGroupProvidersRequest is the request object for EnableExternalEnvGroupProviders
+ *
  * @generated from message porter.v1.EnableExternalEnvGroupProvidersRequest
  */
 export declare class EnableExternalEnvGroupProvidersRequest extends Message<EnableExternalEnvGroupProvidersRequest> {
   /**
+   * project_id is the id of the project where external env group providers should be enabled
+   *
    * @generated from field: int64 project_id = 1;
    */
   projectId: bigint;
 
   /**
+   * cluster_id is the id of the cluster where external env group providers should be enabled
+   *
    * @generated from field: int64 cluster_id = 2;
    */
   clusterId: bigint;
@@ -3949,6 +3969,8 @@ export declare class EnableExternalEnvGroupProvidersRequest extends Message<Enab
 }
 
 /**
+ * EnableExternalEnvGroupProvidersResponse is the response object for EnableExternalEnvGroupProviders
+ *
  * @generated from message porter.v1.EnableExternalEnvGroupProvidersResponse
  */
 export declare class EnableExternalEnvGroupProvidersResponse extends Message<EnableExternalEnvGroupProvidersResponse> {
@@ -3968,25 +3990,35 @@ export declare class EnableExternalEnvGroupProvidersResponse extends Message<Ena
 }
 
 /**
+ * CreateOrUpdateEnvGroupRequest is the request object for CreateOrUpdateEnvGroup
+ *
  * @generated from message porter.v1.CreateOrUpdateEnvGroupRequest
  */
 export declare class CreateOrUpdateEnvGroupRequest extends Message<CreateOrUpdateEnvGroupRequest> {
   /**
+   * project_id is the id of the project where the env group will be created
+   *
    * @generated from field: int64 project_id = 1;
    */
   projectId: bigint;
 
   /**
+   * cluster_id is the id of the cluster where the env group will be created
+   *
    * @generated from field: int64 cluster_id = 2;
    */
   clusterId: bigint;
 
   /**
+   * env_group_provider_type is the type of provider for the env group
+   *
    * @generated from field: porter.v1.EnumEnvGroupProviderType env_group_provider_type = 3;
    */
   envGroupProviderType: EnumEnvGroupProviderType;
 
   /**
+   * env_group_name is the name of the env group
+   *
    * @generated from field: string env_group_name = 4;
    */
   envGroupName: string;
@@ -4014,6 +4046,8 @@ export declare class CreateOrUpdateEnvGroupRequest extends Message<CreateOrUpdat
 }
 
 /**
+ * CreateOrUpdateEnvGroupResponse is the response object for CreateOrUpdateEnvGroup
+ *
  * @generated from message porter.v1.CreateOrUpdateEnvGroupResponse
  */
 export declare class CreateOrUpdateEnvGroupResponse extends Message<CreateOrUpdateEnvGroupResponse> {
@@ -4033,25 +4067,35 @@ export declare class CreateOrUpdateEnvGroupResponse extends Message<CreateOrUpda
 }
 
 /**
+ * DeleteEnvGroupRequest is the request object for DeleteEnvGroup
+ *
  * @generated from message porter.v1.DeleteEnvGroupRequest
  */
 export declare class DeleteEnvGroupRequest extends Message<DeleteEnvGroupRequest> {
   /**
+   * project_id is the id of the project where the env group will be deleted
+   *
    * @generated from field: int64 project_id = 1;
    */
   projectId: bigint;
 
   /**
+   * cluster_id is the id of the cluster where the env group will be deleted
+   *
    * @generated from field: int64 cluster_id = 2;
    */
   clusterId: bigint;
 
   /**
+   * env_group_provider_type is the type of provider for the env group
+   *
    * @generated from field: porter.v1.EnumEnvGroupProviderType env_group_provider_type = 3;
    */
   envGroupProviderType: EnumEnvGroupProviderType;
 
   /**
+   * env_group_name is the name of the env group to delete
+   *
    * @generated from field: string env_group_name = 4;
    */
   envGroupName: string;
@@ -4072,6 +4116,8 @@ export declare class DeleteEnvGroupRequest extends Message<DeleteEnvGroupRequest
 }
 
 /**
+ * DeleteEnvGroupResponse is the response object for DeleteEnvGroup
+ *
  * @generated from message porter.v1.DeleteEnvGroupResponse
  */
 export declare class DeleteEnvGroupResponse extends Message<DeleteEnvGroupResponse> {

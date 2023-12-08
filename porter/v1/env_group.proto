@@ -2,8 +2,12 @@ syntax = "proto3";
 
 package porter.v1;
 
+// EnvGroupProviderType is the type of the EnvGroupProvider.
 enum EnumEnvGroupProviderType {
+  // ENUM_ENV_GROUP_PROVIDER_TYPE_UNSPECIFIED represents the nil value
   ENUM_ENV_GROUP_PROVIDER_TYPE_UNSPECIFIED = 0;
+  // ENUM_ENV_GROUP_PROVIDER_TYPE_PORTER represents an env group sourced from Porter
   ENUM_ENV_GROUP_PROVIDER_TYPE_PORTER = 1;
+  // ENUM_ENV_GROUP_PROVIDER_TYPE_DOPPLER represents an env group sourced from Doppler
   ENUM_ENV_GROUP_PROVIDER_TYPE_DOPPLER = 2;
 }

@@ -6671,12 +6671,15 @@ func (*UpdateServiceDeploymentStatusResponse) Descriptor() ([]byte, []int) {
 	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{98}
 }
 
+// ListNotificationsRequest is the request object AreExternalEnvGroupProvidersEnabled
 type AreExternalEnvGroupProvidersEnabledRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// project_id is the id of the project in which to check whether external env group providers are enabled
 	ProjectId int64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	// cluster_id is the id of the cluster in which to check whether external env group providers are enabled
 	ClusterId int64 `protobuf:"varint,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 }
 
@@ -6726,14 +6729,18 @@ func (x *AreExternalEnvGroupProvidersEnabledRequest) GetClusterId() int64 {
 	return 0
 }
 
+// AreExternalEnvGroupProvidersEnabledResponse is the response object for AreExternalEnvGroupProvidersEnabled
 type AreExternalEnvGroupProvidersEnabledResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Enabled             bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// enabled is a flag that indicates whether external env group providers are enabled
+	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// reprovision_required is a flag that indicates whether the cluster needs to be reprovisioned to enable external env group providers
 	ReprovisionRequired bool `protobuf:"varint,2,opt,name=reprovision_required,json=reprovisionRequired,proto3" json:"reprovision_required,omitempty"`
-	K8SUpgradeRequired  bool `protobuf:"varint,3,opt,name=k8s_upgrade_required,json=k8sUpgradeRequired,proto3" json:"k8s_upgrade_required,omitempty"`
+	// k8s_upgrade_required is a flag that indicates whether the cluster needs to be upgraded to enable external env group providers
+	K8SUpgradeRequired bool `protobuf:"varint,3,opt,name=k8s_upgrade_required,json=k8sUpgradeRequired,proto3" json:"k8s_upgrade_required,omitempty"`
 }
 
 func (x *AreExternalEnvGroupProvidersEnabledResponse) Reset() {
@@ -6789,12 +6796,15 @@ func (x *AreExternalEnvGroupProvidersEnabledResponse) GetK8SUpgradeRequired() bo
 	return false
 }
 
+// EnableExternalEnvGroupProvidersRequest is the request object for EnableExternalEnvGroupProviders
 type EnableExternalEnvGroupProvidersRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// project_id is the id of the project where external env group providers should be enabled
 	ProjectId int64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	// cluster_id is the id of the cluster where external env group providers should be enabled
 	ClusterId int64 `protobuf:"varint,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 }
 
@@ -6844,6 +6854,7 @@ func (x *EnableExternalEnvGroupProvidersRequest) GetClusterId() int64 {
 	return 0
 }
 
+// EnableExternalEnvGroupProvidersResponse is the response object for EnableExternalEnvGroupProviders
 type EnableExternalEnvGroupProvidersResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -6882,15 +6893,20 @@ func (*EnableExternalEnvGroupProvidersResponse) Descriptor() ([]byte, []int) {
 	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{102}
 }
 
+// CreateOrUpdateEnvGroupRequest is the request object for CreateOrUpdateEnvGroup
 type CreateOrUpdateEnvGroupRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProjectId            int64                    `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
-	ClusterId            int64                    `protobuf:"varint,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// project_id is the id of the project where the env group will be created
+	ProjectId int64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	// cluster_id is the id of the cluster where the env group will be created
+	ClusterId int64 `protobuf:"varint,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// env_group_provider_type is the type of provider for the env group
 	EnvGroupProviderType EnumEnvGroupProviderType `protobuf:"varint,3,opt,name=env_group_provider_type,json=envGroupProviderType,proto3,enum=porter.v1.EnumEnvGroupProviderType" json:"env_group_provider_type,omitempty"`
-	EnvGroupName         string                   `protobuf:"bytes,4,opt,name=env_group_name,json=envGroupName,proto3" json:"env_group_name,omitempty"`
+	// env_group_name is the name of the env group
+	EnvGroupName string `protobuf:"bytes,4,opt,name=env_group_name,json=envGroupName,proto3" json:"env_group_name,omitempty"`
 	// env_group_auth_token is the auth token for the env group. Not required for Porter env groups.
 	EnvGroupAuthToken string `protobuf:"bytes,5,opt,name=env_group_auth_token,json=envGroupAuthToken,proto3" json:"env_group_auth_token,omitempty"`
 }
@@ -6962,6 +6978,7 @@ func (x *CreateOrUpdateEnvGroupRequest) GetEnvGroupAuthToken() string {
 	return ""
 }
 
+// CreateOrUpdateEnvGroupResponse is the response object for CreateOrUpdateEnvGroup
 type CreateOrUpdateEnvGroupResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -7000,15 +7017,20 @@ func (*CreateOrUpdateEnvGroupResponse) Descriptor() ([]byte, []int) {
 	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{104}
 }
 
+// DeleteEnvGroupRequest is the request object for DeleteEnvGroup
 type DeleteEnvGroupRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProjectId            int64                    `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
-	ClusterId            int64                    `protobuf:"varint,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// project_id is the id of the project where the env group will be deleted
+	ProjectId int64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	// cluster_id is the id of the cluster where the env group will be deleted
+	ClusterId int64 `protobuf:"varint,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
+	// env_group_provider_type is the type of provider for the env group
 	EnvGroupProviderType EnumEnvGroupProviderType `protobuf:"varint,3,opt,name=env_group_provider_type,json=envGroupProviderType,proto3,enum=porter.v1.EnumEnvGroupProviderType" json:"env_group_provider_type,omitempty"`
-	EnvGroupName         string                   `protobuf:"bytes,4,opt,name=env_group_name,json=envGroupName,proto3" json:"env_group_name,omitempty"`
+	// env_group_name is the name of the env group to delete
+	EnvGroupName string `protobuf:"bytes,4,opt,name=env_group_name,json=envGroupName,proto3" json:"env_group_name,omitempty"`
 }
 
 func (x *DeleteEnvGroupRequest) Reset() {
@@ -7071,6 +7093,7 @@ func (x *DeleteEnvGroupRequest) GetEnvGroupName() string {
 	return ""
 }
 
+// DeleteEnvGroupResponse is the response object for DeleteEnvGroup
 type DeleteEnvGroupResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
