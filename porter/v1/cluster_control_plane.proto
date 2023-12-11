@@ -9,6 +9,7 @@ import "porter/v1/cloud_provider_credentials.proto";
 import "porter/v1/cluster.proto";
 import "porter/v1/contract.proto";
 import "porter/v1/eks.proto";
+import "porter/v1/env_group.proto";
 import "porter/v1/errors.proto";
 import "porter/v1/gke.proto";
 import "porter/v1/porter_app.proto";
@@ -287,6 +288,9 @@ message UpdateAppRequest {
   string commit_sha = 10;
   // addons is a list of addons which should be deployed alongside the app
   repeated Addon addons = 11;
+  // addon_overrides contains environment specific overrides for addons if they exist, applied depending on the deployment target
+  // if any addons are provided, these will be the only addons deployed alongside the app and the others will be ignored
+  repeated Addon addon_overrides = 12;
 }
 
 message UpdateAppResponse {
@@ -396,6 +400,37 @@ message AppRevision {
   string app_instance_name = 9;
   // porter_app_id is the id of the porter app
   int64 porter_app_id = 10;
+}
+
+// AppRevisionStatusRequest is used to query the status of an app revision
+message AppRevisionStatusRequest {
+  int64 project_id = 1;
+  // app_revision_id is the id of the revision to query
+  string app_revision_id = 2;
+}
+
+// AppRevisionStatusResponse is the response object from querying the status of an app revision
+message AppRevisionStatusResponse {
+  // predeploy_started indicates whether the predeploy has started
+  bool predeploy_started = 1;
+  // predeploy_successful indicates whether the predeploy was successful
+  bool predeploy_successful = 2;
+  // predeploy_failed indicates whether the predeploy failed
+  bool predeploy_failed = 3;
+  // install_started indicates whether the install has started
+  bool install_started = 4;
+  // install_successful indicates whether the revision install has completed successfully
+  bool install_successful = 5;
+  // install_failed indicates whether the revision install has failed
+  bool install_failed = 6;
+  // deployment_started indicates whether the deployment has started
+  bool deployment_started = 7;
+  // deployment_successful indicates whether the revision deployment has completed successfully
+  bool deployment_successful = 8;
+  // deployment_failed indicates whether the revision deployment has failed
+  bool deployment_failed = 9;
+  // is_in_terminal_status indicates whether the revision is in a terminal status (its status will not change)
+  bool is_in_terminal_status = 10;
 }
 
 // UpdateRevisionPayload is used to send messages via nats to update a revision
@@ -840,6 +875,67 @@ enum EnumServiceDeploymentStatus {
 // UpdateServiceDeploymentStatusResponse is the response object for updating the deployment status of a service
 message UpdateServiceDeploymentStatusResponse {}
 
+// AreExternalEnvGroupProvidersEnabledRequest is the request object AreExternalEnvGroupProvidersEnabled
+message AreExternalEnvGroupProvidersEnabledRequest {
+  // project_id is the id of the project in which to check whether external env group providers are enabled
+  int64 project_id = 1;
+  // cluster_id is the id of the cluster in which to check whether external env group providers are enabled
+  int64 cluster_id = 2;
+}
+
+// AreExternalEnvGroupProvidersEnabledResponse is the response object for AreExternalEnvGroupProvidersEnabled
+message AreExternalEnvGroupProvidersEnabledResponse {
+  // enabled is a flag that indicates whether external env group providers are enabled
+  bool enabled = 1;
+  // reprovision_required is a flag that indicates whether the cluster needs to be reprovisioned to enable external env group providers
+  bool reprovision_required = 2;
+  // k8s_upgrade_required is a flag that indicates whether the cluster needs to be upgraded to enable external env group providers
+  bool k8s_upgrade_required = 3;
+}
+
+// EnableExternalEnvGroupProvidersRequest is the request object for EnableExternalEnvGroupProviders
+message EnableExternalEnvGroupProvidersRequest {
+  // project_id is the id of the project where external env group providers should be enabled
+  int64 project_id = 1;
+  // cluster_id is the id of the cluster where external env group providers should be enabled
+  int64 cluster_id = 2;
+}
+
+// EnableExternalEnvGroupProvidersResponse is the response object for EnableExternalEnvGroupProviders
+message EnableExternalEnvGroupProvidersResponse {}
+
+// CreateOrUpdateEnvGroupRequest is the request object for CreateOrUpdateEnvGroup
+message CreateOrUpdateEnvGroupRequest {
+  // project_id is the id of the project where the env group will be created
+  int64 project_id = 1;
+  // cluster_id is the id of the cluster where the env group will be created
+  int64 cluster_id = 2;
+  // env_group_provider_type is the type of provider for the env group
+  EnumEnvGroupProviderType env_group_provider_type = 3;
+  // env_group_name is the name of the env group
+  string env_group_name = 4;
+  // env_group_auth_token is the auth token for the env group. Not required for Porter env groups.
+  string env_group_auth_token = 5;
+}
+
+// CreateOrUpdateEnvGroupResponse is the response object for CreateOrUpdateEnvGroup
+message CreateOrUpdateEnvGroupResponse {}
+
+// DeleteEnvGroupRequest is the request object for DeleteEnvGroup
+message DeleteEnvGroupRequest {
+  // project_id is the id of the project where the env group will be deleted
+  int64 project_id = 1;
+  // cluster_id is the id of the cluster where the env group will be deleted
+  int64 cluster_id = 2;
+  // env_group_provider_type is the type of provider for the env group
+  EnumEnvGroupProviderType env_group_provider_type = 3;
+  // env_group_name is the name of the env group to delete
+  string env_group_name = 4;
+}
+
+// DeleteEnvGroupResponse is the response object for DeleteEnvGroup
+message DeleteEnvGroupResponse {}
+
 service ClusterControlPlaneService {
   // QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas
   rpc QuotaIncrease(QuotaIncreaseRequest) returns (QuotaIncreaseResponse) {}
@@ -898,6 +994,9 @@ service ClusterControlPlaneService {
 
   // UpdateRevisionStatus updates the status of a revision
   rpc UpdateRevisionStatus(UpdateRevisionStatusRequest) returns (UpdateRevisionStatusResponse) {}
+
+  // AppRevisionStatus returns the status of a revision
+  rpc AppRevisionStatus(AppRevisionStatusRequest) returns (AppRevisionStatusResponse) {}
 
   // DeletePorterApp deletes all instances of a porter app across deployment targets in a given project
   rpc DeletePorterApp(DeletePorterAppRequest) returns (DeletePorterAppResponse) {}
@@ -1044,6 +1143,18 @@ service ClusterControlPlaneService {
 
   // RegistryStatus returns the status of a given docker registry within a project scope
   rpc RegistryStatus(RegistryStatusRequest) returns (RegistryStatusResponse) {}
+
+  // EnableExternalEnvGroupProvider will enable support for external env group providers on the cluster
+  rpc EnableExternalEnvGroupProviders(EnableExternalEnvGroupProvidersRequest) returns (EnableExternalEnvGroupProvidersResponse) {}
+
+  // AreExternalEnvGroupProviderEnabled will return whether external env group providers are enabled on the cluster
+  rpc AreExternalEnvGroupProvidersEnabled(AreExternalEnvGroupProvidersEnabledRequest) returns (AreExternalEnvGroupProvidersEnabledResponse) {}
+
+  // CreateOrUpdateEnvGroup will create or update an env group
+  rpc CreateOrUpdateEnvGroup(CreateOrUpdateEnvGroupRequest) returns (CreateOrUpdateEnvGroupResponse) {}
+
+  // DeleteEnvGroup will delete an env group
+  rpc DeleteEnvGroup(DeleteEnvGroupRequest) returns (DeleteEnvGroupResponse) {}
 }
 
 message EKSBearerTokenRequest {
