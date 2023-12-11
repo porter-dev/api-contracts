@@ -2186,7 +2186,7 @@ export declare class UpdateRevisionPayload extends Message<UpdateRevisionPayload
   image?: AppImage;
 
   /**
-   * skip_rollback_on_deployment_failure indicates whether an update should eventually attempt to rollback or not
+   * skip_rollback_on_deployment_failure indicates whether an update should trigger a rollback or not if a deployment fails during the app revision lifecycle
    *
    * @generated from field: bool skip_rollback_on_deployment_failure = 5;
    */

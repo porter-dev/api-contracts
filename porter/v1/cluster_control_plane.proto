@@ -443,7 +443,7 @@ message UpdateRevisionPayload {
   string commit_sha = 3;
   // image is the image information for a new image
   AppImage image = 4;
-  // skip_rollback_on_deployment_failure indicates whether an update should eventually attempt to rollback or not
+  // skip_rollback_on_deployment_failure indicates whether an update should trigger a rollback or not if a deployment fails during the app revision lifecycle
   bool skip_rollback_on_deployment_failure = 5;
 }
 

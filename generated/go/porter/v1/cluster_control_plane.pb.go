@@ -3725,7 +3725,7 @@ type UpdateRevisionPayload struct {
 	CommitSha string `protobuf:"bytes,3,opt,name=commit_sha,json=commitSha,proto3" json:"commit_sha,omitempty"`
 	// image is the image information for a new image
 	Image *AppImage `protobuf:"bytes,4,opt,name=image,proto3" json:"image,omitempty"`
-	// skip_rollback_on_deployment_failure indicates whether an update should eventually attempt to rollback or not
+	// skip_rollback_on_deployment_failure indicates whether an update should trigger a rollback or not if a deployment fails during the app revision lifecycle
 	SkipRollbackOnDeploymentFailure bool `protobuf:"varint,5,opt,name=skip_rollback_on_deployment_failure,json=skipRollbackOnDeploymentFailure,proto3" json:"skip_rollback_on_deployment_failure,omitempty"`
 }
 
