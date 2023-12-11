@@ -293,6 +293,27 @@ export declare class EnvGroup extends Message<EnvGroup> {
    */
   version: bigint;
 
+  /**
+   * linked_applications is an optional list of applications linked to the env group
+   *
+   * @generated from field: repeated string linked_applications = 3;
+   */
+  linkedApplications: string[];
+
+  /**
+   * variables is an optional map of non-sensitive variable names to values
+   *
+   * @generated from field: map<string, string> variables = 4;
+   */
+  variables: { [key: string]: string };
+
+  /**
+   * secret is an optional map of sensitive variable names to values
+   *
+   * @generated from field: map<string, string> secret_variables = 5;
+   */
+  secretVariables: { [key: string]: string };
+
   constructor(data?: PartialMessage<EnvGroup>);
 
   static readonly runtime: typeof proto3;

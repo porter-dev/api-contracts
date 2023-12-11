@@ -193,25 +193,36 @@ export declare enum EnumServiceDeploymentStatus {
 }
 
 /**
+ * EnumDatastore represents the datastore type
+ *
  * @generated from enum porter.v1.EnumDatastore
  */
 export declare enum EnumDatastore {
   /**
+   * ENUM_DATASTORE_UNSPECIFIED is an enum representing an unknown datastore
+   * and is used as a sentinel value when interacting with datastore types
+   *
    * @generated from enum value: ENUM_DATASTORE_UNSPECIFIED = 0;
    */
   UNSPECIFIED = 0,
 
   /**
+   * ENUM_DATASTORE_RDS_POSTGRESQL is an enum representing an rds postgresql instance
+   *
    * @generated from enum value: ENUM_DATASTORE_RDS_POSTGRESQL = 1;
    */
   RDS_POSTGRESQL = 1,
 
   /**
+   * ENUM_DATASTORE_RDS_AURORA_POSTGRESQL is an enum representing an rds postgresql aurora cluster
+   *
    * @generated from enum value: ENUM_DATASTORE_RDS_AURORA_POSTGRESQL = 2;
    */
   RDS_AURORA_POSTGRESQL = 2,
 
   /**
+   * ENUM_DATASTORE_ELASTICACHE_REDIS is an enum representing an elasticache redis replication group
+   *
    * @generated from enum value: ENUM_DATASTORE_ELASTICACHE_REDIS = 3;
    */
   ELASTICACHE_REDIS = 3,
@@ -4702,6 +4713,111 @@ export declare class ClusterNetworkSettingsResponse extends Message<ClusterNetwo
 }
 
 /**
+ * ListDatastoresRequest is the request object for getting a list of datastores for a given project/account
+ *
+ * @generated from message porter.v1.ListDatastoresRequest
+ */
+export declare class ListDatastoresRequest extends Message<ListDatastoresRequest> {
+  /**
+   * project_id id of the project to retrieve datastores for
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * cloud_provider the cloud provider to retrieve datastores for
+   *
+   * @generated from field: porter.v1.EnumCloudProvider cloud_provider = 2;
+   */
+  cloudProvider: EnumCloudProvider;
+
+  /**
+   * cloud_provider_account_id is an identifier to use when matching resources for a cloud provider
+   *
+   * @generated from field: string cloud_provider_account_id = 3;
+   */
+  cloudProviderAccountId: string;
+
+  /**
+   * type is an optional type of the datastore to filter by
+   *
+   * @generated from field: optional porter.v1.EnumDatastore type = 4;
+   */
+  type?: EnumDatastore;
+
+  /**
+   * name is an optional name of the datastore to filter by
+   *
+   * @generated from field: string name = 5;
+   */
+  name: string;
+
+  /**
+   * include_config is a field denoting whether to include the datastore config in the response
+   *
+   * @generated from field: bool include_config = 6;
+   */
+  includeConfig: boolean;
+
+  /**
+   * include_env_group is a field denoting whether to include the datastore env group in the response
+   *
+   * @generated from field: bool include_env_group = 7;
+   */
+  includeEnvGroup: boolean;
+
+  /**
+   * include_metadata is a field denoting whether to include the datastore metadata in the response
+   *
+   * @generated from field: bool include_metadata = 8;
+   */
+  includeMetadata: boolean;
+
+  constructor(data?: PartialMessage<ListDatastoresRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ListDatastoresRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListDatastoresRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListDatastoresRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListDatastoresRequest;
+
+  static equals(a: ListDatastoresRequest | PlainMessage<ListDatastoresRequest> | undefined, b: ListDatastoresRequest | PlainMessage<ListDatastoresRequest> | undefined): boolean;
+}
+
+/**
+ * ListDatastoresResponse is the response object containing a list of datastores
+ *
+ * @generated from message porter.v1.ListDatastoresResponse
+ */
+export declare class ListDatastoresResponse extends Message<ListDatastoresResponse> {
+  /**
+   * datastores list of datastore objects
+   *
+   * @generated from field: repeated porter.v1.Datastore datastores = 1;
+   */
+  datastores: Datastore[];
+
+  constructor(data?: PartialMessage<ListDatastoresResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ListDatastoresResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListDatastoresResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListDatastoresResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListDatastoresResponse;
+
+  static equals(a: ListDatastoresResponse | PlainMessage<ListDatastoresResponse> | undefined, b: ListDatastoresResponse | PlainMessage<ListDatastoresResponse> | undefined): boolean;
+}
+
+/**
  * DatastoreStatusRequest is the request object for fetching the status of a datastore in on a cluster
  *
  * @generated from message porter.v1.DatastoreStatusRequest
@@ -4776,6 +4892,90 @@ export declare class DatastoreStatusResponse extends Message<DatastoreStatusResp
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DatastoreStatusResponse;
 
   static equals(a: DatastoreStatusResponse | PlainMessage<DatastoreStatusResponse> | undefined, b: DatastoreStatusResponse | PlainMessage<DatastoreStatusResponse> | undefined): boolean;
+}
+
+/**
+ * Datastore represents a single datastore object
+ *
+ * @generated from message porter.v1.Datastore
+ */
+export declare class Datastore extends Message<Datastore> {
+  /**
+   * type is the type of the datastore
+   *
+   * @generated from field: porter.v1.EnumDatastore type = 1;
+   */
+  type: EnumDatastore;
+
+  /**
+   * name is the name of the datastore
+   *
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * metadata is a list of metadata objects for the datastore
+   *
+   * @generated from field: repeated porter.v1.DatastoreMetadata metadata = 3;
+   */
+  metadata: DatastoreMetadata[];
+
+  /**
+   * env is the datastore's env group
+   *
+   * @generated from field: porter.v1.EnvGroup env = 4;
+   */
+  env?: EnvGroup;
+
+  constructor(data?: PartialMessage<Datastore>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.Datastore";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Datastore;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Datastore;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Datastore;
+
+  static equals(a: Datastore | PlainMessage<Datastore> | undefined, b: Datastore | PlainMessage<Datastore> | undefined): boolean;
+}
+
+/**
+ * DatastoreMetadata represents an object containing metadata for a given datastore
+ *
+ * @generated from message porter.v1.DatastoreMetadata
+ */
+export declare class DatastoreMetadata extends Message<DatastoreMetadata> {
+  /**
+   * name is the name for the metadata field
+   *
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * value is value for the metadata field
+   *
+   * @generated from field: string value = 2;
+   */
+  value: string;
+
+  constructor(data?: PartialMessage<DatastoreMetadata>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DatastoreMetadata";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DatastoreMetadata;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DatastoreMetadata;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DatastoreMetadata;
+
+  static equals(a: DatastoreMetadata | PlainMessage<DatastoreMetadata> | undefined, b: DatastoreMetadata | PlainMessage<DatastoreMetadata> | undefined): boolean;
 }
 
 /**
