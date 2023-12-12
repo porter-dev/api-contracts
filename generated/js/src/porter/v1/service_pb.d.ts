@@ -544,3 +544,29 @@ export declare class Toleration extends Message<Toleration> {
   static equals(a: Toleration | PlainMessage<Toleration> | undefined, b: Toleration | PlainMessage<Toleration> | undefined): boolean;
 }
 
+/**
+ * TolerationList is used
+ *
+ * @generated from message porter.v1.TolerationList
+ */
+export declare class TolerationList extends Message<TolerationList> {
+  /**
+   * @generated from field: repeated porter.v1.Toleration items = 1;
+   */
+  items: Toleration[];
+
+  constructor(data?: PartialMessage<TolerationList>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.TolerationList";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): TolerationList;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): TolerationList;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): TolerationList;
+
+  static equals(a: TolerationList | PlainMessage<TolerationList> | undefined, b: TolerationList | PlainMessage<TolerationList> | undefined): boolean;
+}
+

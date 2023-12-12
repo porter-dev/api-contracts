@@ -164,3 +164,15 @@ export const Toleration = proto3.makeMessageType(
   ],
 );
 
+/**
+ * TolerationList is used
+ *
+ * @generated from message porter.v1.TolerationList
+ */
+export const TolerationList = proto3.makeMessageType(
+  "porter.v1.TolerationList",
+  () => [
+    { no: 1, name: "items", kind: "message", T: Toleration, repeated: true },
+  ],
+);
+

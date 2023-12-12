@@ -143,3 +143,8 @@ message Toleration {
   // effect is the effect of the toleration
   string effect = 4;
 }
+
+// TolerationList is used
+message TolerationList {
+  repeated Toleration items = 1;
+}
