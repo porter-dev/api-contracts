@@ -114,6 +114,13 @@ export declare class GKENodePool extends Message<GKENodePool> {
    */
   additionalTaints: string[];
 
+  /**
+   * is_spot_instance is used to specify whether the node group should use spot instances.
+   *
+   * @generated from field: bool is_spot_instance = 6;
+   */
+  isSpotInstance: boolean;
+
   constructor(data?: PartialMessage<GKENodePool>);
 
   static readonly runtime: typeof proto3;
