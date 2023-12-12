@@ -2391,7 +2391,7 @@ export declare class LatestAppRevisionsRequest extends Message<LatestAppRevision
   projectId: bigint;
 
   /**
-   * deployment_target_identifier is the object that identifies the deployment target to retrieve revisions from
+   * deployment_target_identifier is the object that identifies the deployment target. Optional.
    *
    * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 2;
    */
@@ -2404,6 +2404,13 @@ export declare class LatestAppRevisionsRequest extends Message<LatestAppRevision
    * @deprecated
    */
   deploymentTargetId: string;
+
+  /**
+   * cluster_id is the id of the cluster to retrieve revisions from. Optional.
+   *
+   * @generated from field: int64 cluster_id = 4;
+   */
+  clusterId: bigint;
 
   constructor(data?: PartialMessage<LatestAppRevisionsRequest>);
 
@@ -3209,6 +3216,11 @@ export declare class UpdateAppImageResponse extends Message<UpdateAppImageRespon
    * @generated from field: string tag = 2;
    */
   tag: string;
+
+  /**
+   * @generated from field: string revision_id = 3;
+   */
+  revisionId: string;
 
   constructor(data?: PartialMessage<UpdateAppImageResponse>);
 

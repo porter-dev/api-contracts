@@ -487,10 +487,12 @@ message ListAppRevisionsResponse {
 
 message LatestAppRevisionsRequest {
   int64 project_id = 1;
-  // deployment_target_identifier is the object that identifies the deployment target to retrieve revisions from
+  // deployment_target_identifier is the object that identifies the deployment target. Optional.
   DeploymentTargetIdentifier deployment_target_identifier = 2;
   // deployment_target_id is the id of the deployment target to retrieve revisions from. Deprecated: use deployment_target_identifier.
   string deployment_target_id = 3 [deprecated = true];
+  // cluster_id is the id of the cluster to retrieve revisions from. Optional.
+  int64 cluster_id = 4;
 }
 
 message LatestAppRevisionsResponse {
@@ -705,6 +707,7 @@ message UpdateAppImageRequest {
 message UpdateAppImageResponse {
   string repository_url = 1;
   string tag = 2;
+  string revision_id = 3;
 }
 
 message UpdateAppBuildSettingsRequest {
