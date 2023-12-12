@@ -174,11 +174,12 @@ export declare class Service extends Message<Service> {
   terminationGracePeriodSeconds?: number;
 
   /**
-   * tolerations are any tolerations that should be applied to the application
+   * tolerations are any tolerations that should be applied to the application.
+   * These are all no-schedules.
    *
-   * @generated from field: repeated porter.v1.Toleration tolerations = 19;
+   * @generated from field: repeated porter.v1.KeyValue tolerations = 19;
    */
-  tolerations: Toleration[];
+  tolerations: KeyValue[];
 
   constructor(data?: PartialMessage<Service>);
 
@@ -496,11 +497,11 @@ export declare class GPU extends Message<GPU> {
 }
 
 /**
- * Tolerations are any tolerations that should be applied to the application
+ * KeyValue is a generic key/value pair
  *
- * @generated from message porter.v1.Toleration
+ * @generated from message porter.v1.KeyValue
  */
-export declare class Toleration extends Message<Toleration> {
+export declare class KeyValue extends Message<KeyValue> {
   /**
    * key is the key of the toleration
    *
@@ -509,64 +510,24 @@ export declare class Toleration extends Message<Toleration> {
   key: string;
 
   /**
-   * operator is the operator of the toleration
+   * value is the value
    *
-   * @generated from field: string operator = 2;
-   */
-  operator: string;
-
-  /**
-   * value is the value of the toleration
-   *
-   * @generated from field: string value = 3;
-   */
-  value: string;
-
-  /**
-   * effect is the effect of the toleration
-   *
-   * @generated from field: string effect = 4;
+   * @generated from field: string effect = 2;
    */
   effect: string;
 
-  constructor(data?: PartialMessage<Toleration>);
+  constructor(data?: PartialMessage<KeyValue>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.Toleration";
+  static readonly typeName = "porter.v1.KeyValue";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Toleration;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): KeyValue;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Toleration;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): KeyValue;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Toleration;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): KeyValue;
 
-  static equals(a: Toleration | PlainMessage<Toleration> | undefined, b: Toleration | PlainMessage<Toleration> | undefined): boolean;
-}
-
-/**
- * TolerationList is used
- *
- * @generated from message porter.v1.TolerationList
- */
-export declare class TolerationList extends Message<TolerationList> {
-  /**
-   * @generated from field: repeated porter.v1.Toleration items = 1;
-   */
-  items: Toleration[];
-
-  constructor(data?: PartialMessage<TolerationList>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.TolerationList";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): TolerationList;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): TolerationList;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): TolerationList;
-
-  static equals(a: TolerationList | PlainMessage<TolerationList> | undefined, b: TolerationList | PlainMessage<TolerationList> | undefined): boolean;
+  static equals(a: KeyValue | PlainMessage<KeyValue> | undefined, b: KeyValue | PlainMessage<KeyValue> | undefined): boolean;
 }
 
