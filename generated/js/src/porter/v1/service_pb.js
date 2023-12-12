@@ -46,7 +46,6 @@ export const Service = proto3.makeMessageType(
     { no: 16, name: "gpu_cores", kind: "scalar", T: 2 /* ScalarType.FLOAT */, opt: true },
     { no: 17, name: "gpu", kind: "message", T: GPU },
     { no: 18, name: "termination_grace_period_seconds", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
-    { no: 19, name: "tolerations", kind: "message", T: KeyValue, repeated: true },
   ],
 );
 
@@ -146,19 +145,6 @@ export const GPU = proto3.makeMessageType(
   () => [
     { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 2, name: "gpu_cores_nvidia", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-  ],
-);
-
-/**
- * KeyValue is a generic key/value pair
- *
- * @generated from message porter.v1.KeyValue
- */
-export const KeyValue = proto3.makeMessageType(
-  "porter.v1.KeyValue",
-  () => [
-    { no: 1, name: "key", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "effect", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

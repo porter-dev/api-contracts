@@ -173,14 +173,6 @@ export declare class Service extends Message<Service> {
    */
   terminationGracePeriodSeconds?: number;
 
-  /**
-   * tolerations are any tolerations that should be applied to the application.
-   * These are all no-schedules.
-   *
-   * @generated from field: repeated porter.v1.KeyValue tolerations = 19;
-   */
-  tolerations: KeyValue[];
-
   constructor(data?: PartialMessage<Service>);
 
   static readonly runtime: typeof proto3;
@@ -494,40 +486,5 @@ export declare class GPU extends Message<GPU> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GPU;
 
   static equals(a: GPU | PlainMessage<GPU> | undefined, b: GPU | PlainMessage<GPU> | undefined): boolean;
-}
-
-/**
- * KeyValue is a generic key/value pair
- *
- * @generated from message porter.v1.KeyValue
- */
-export declare class KeyValue extends Message<KeyValue> {
-  /**
-   * key is the key of the toleration
-   *
-   * @generated from field: string key = 1;
-   */
-  key: string;
-
-  /**
-   * value is the value
-   *
-   * @generated from field: string effect = 2;
-   */
-  effect: string;
-
-  constructor(data?: PartialMessage<KeyValue>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.KeyValue";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): KeyValue;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): KeyValue;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): KeyValue;
-
-  static equals(a: KeyValue | PlainMessage<KeyValue> | undefined, b: KeyValue | PlainMessage<KeyValue> | undefined): boolean;
 }
 

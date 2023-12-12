@@ -56,10 +56,6 @@ message Service {
 
   // terminationGracePeriodSeconds is the number of seconds to wait before terminating the service
   optional int32 termination_grace_period_seconds = 18;
-
-  // tolerations are any tolerations that should be applied to the application.
-  // These are all no-schedules.
-  repeated KeyValue tolerations = 19;
 }
 
 // WebServiceConfig is the configuration for a web service
@@ -131,12 +127,4 @@ message GPU {
   //  gpu_cores_nvidia is the GPU threshold in gpus
   int32 gpu_cores_nvidia = 2;
   //other types of gpus can be added here
-}
-
-// KeyValue is a generic key/value pair
-message KeyValue {
-  // key is the key of the toleration
-  string key = 1;
-  // value is the value
-  string effect = 2;
 }
