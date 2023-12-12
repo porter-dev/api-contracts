@@ -16,6 +16,9 @@ message GKENodePool {
   uint32 max_instances = 3;
   // node_pool_type is used to specify the type of node group. This is used to specify what node groups are used by Porter, vs users.
   GKENodePoolType node_pool_type = 4;
+  // additional_taints is a list of NoSchedule taints to apply to the node group.
+  // These will be applied on top of the default porter.run/workload-kind taints.
+  repeated string additional_taints = 5;
 }
 
 enum GKENodePoolType {

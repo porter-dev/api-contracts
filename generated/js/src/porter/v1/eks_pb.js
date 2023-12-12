@@ -78,6 +78,7 @@ export const EKSNodeGroup = proto3.makeMessageType(
     { no: 4, name: "node_group_type", kind: "enum", T: proto3.getEnumType(NodeGroupType) },
     { no: 5, name: "is_stateful", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 6, name: "additional_policies", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 7, name: "additional_taints", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
   ],
 );
 
