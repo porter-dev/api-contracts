@@ -136,6 +136,14 @@ export declare class AKSNodePool extends Message<AKSNodePool> {
    */
   nodePoolType: NodePoolType;
 
+  /**
+   * additional_taints is a list of NoSchedule taints to apply to the node group.
+   * These will be applied on top of the default porter.run/workload-kind taints.
+   *
+   * @generated from field: repeated string additional_taints = 6;
+   */
+  additionalTaints: string[];
+
   constructor(data?: PartialMessage<AKSNodePool>);
 
   static readonly runtime: typeof proto3;

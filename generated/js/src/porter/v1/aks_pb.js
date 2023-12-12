@@ -57,6 +57,7 @@ export const AKSNodePool = proto3.makeMessageType(
     { no: 3, name: "max_instances", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
     { no: 4, name: "mode", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "node_pool_type", kind: "enum", T: proto3.getEnumType(NodePoolType) },
+    { no: 6, name: "additional_taints", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
   ],
 );
 

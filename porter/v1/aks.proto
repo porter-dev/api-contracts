@@ -24,6 +24,9 @@ message AKSNodePool {
   uint32 max_instances = 3;
   string mode = 4;
   NodePoolType node_pool_type = 5;
+  // additional_taints is a list of NoSchedule taints to apply to the node group.
+  // These will be applied on top of the default porter.run/workload-kind taints.
+  repeated string additional_taints = 6;
 }
 
 enum NodePoolType {
