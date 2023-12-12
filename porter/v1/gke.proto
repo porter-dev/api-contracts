@@ -19,6 +19,8 @@ message GKENodePool {
   // additional_taints is a list of NoSchedule taints to apply to the node group.
   // These will be applied on top of the default porter.run/workload-kind taints.
   repeated string additional_taints = 5;
+  // is_spot_instance is used to specify whether the node group should use spot instances.
+  bool is_spot_instance = 6;
 }
 
 enum GKENodePoolType {
