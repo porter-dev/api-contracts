@@ -1139,8 +1139,14 @@ service ClusterControlPlaneService {
     option deprecated = true;
   }
 
-  // DatastoreStatus returns the status of a given datastore within a project/cluster scope
-  rpc DatastoreStatus(DatastoreStatusRequest) returns (DatastoreStatusResponse) {}
+  // ListDatastores returns a list of datastores for a project and account scope
+  rpc ListDatastores(ListDatastoresRequest) returns (ListDatastoresResponse) {}
+
+  // DatastoreStatus returns the status of a given datastore within a project and cluster scope
+  // Deprecated. Use ListDatastores with the proper filtering instead.
+  rpc DatastoreStatus(DatastoreStatusRequest) returns (DatastoreStatusResponse) {
+    option deprecated = true;
+  }
 
   // RegistryStatus returns the status of a given docker registry within a project scope
   rpc RegistryStatus(RegistryStatusRequest) returns (RegistryStatusResponse) {}
@@ -1248,6 +1254,30 @@ message ClusterNetworkSettingsResponse {
   }
 }
 
+// ListDatastoresRequest is the request object for getting a list of datastores for a given project/account
+message ListDatastoresRequest {
+  // project_id id of the project to retrieve datastores for
+  int64 project_id = 1;
+  // cloud_provider the cloud provider to retrieve datastores for
+  EnumCloudProvider cloud_provider = 2;
+  // cloud_provider_account_id is an identifier to use when matching resources for a cloud provider
+  string cloud_provider_account_id = 3;
+  // type is an optional type of the datastore to filter by
+  optional EnumDatastore type = 4;
+  // name is an optional name of the datastore to filter by
+  string name = 5;
+  // include_env_group is a field denoting whether to include the datastore env group in the response
+  bool include_env_group = 6;
+  // include_metadata is a field denoting whether to include the datastore metadata in the response
+  bool include_metadata = 7;
+}
+
+// ListDatastoresResponse is the response object containing a list of datastores
+message ListDatastoresResponse {
+  // datastores list of datastore objects
+  repeated Datastore datastores = 1;
+}
+
 // DatastoreStatusRequest is the request object for fetching the status of a datastore in on a cluster
 message DatastoreStatusRequest {
   // project_id id of the project that the datastore belongs to
@@ -1260,17 +1290,43 @@ message DatastoreStatusRequest {
   string name = 4;
 }
 
-enum EnumDatastore {
-  ENUM_DATASTORE_UNSPECIFIED = 0;
-  ENUM_DATASTORE_RDS_POSTGRESQL = 1;
-  ENUM_DATASTORE_RDS_AURORA_POSTGRESQL = 2;
-  ENUM_DATASTORE_ELASTICACHE_REDIS = 3;
-}
-
 // DatastoreStatusResponse is the response object containing the status of the datastore
 message DatastoreStatusResponse {
   // status is the status of the datastore
   string status = 1;
+}
+
+// Datastore represents a single datastore object
+message Datastore {
+  // type is the type of the datastore
+  EnumDatastore type = 1;
+  // name is the name of the datastore
+  string name = 2;
+  // metadata is a list of metadata objects for the datastore
+  repeated DatastoreMetadata metadata = 3;
+  // env is the datastore's env group
+  EnvGroup env = 4;
+}
+
+// EnumDatastore represents the datastore type
+enum EnumDatastore {
+  // ENUM_DATASTORE_UNSPECIFIED is an enum representing an unknown datastore
+  // and is used as a sentinel value when interacting with datastore types
+  ENUM_DATASTORE_UNSPECIFIED = 0;
+  // ENUM_DATASTORE_RDS_POSTGRESQL is an enum representing an rds postgresql instance
+  ENUM_DATASTORE_RDS_POSTGRESQL = 1;
+  // ENUM_DATASTORE_RDS_AURORA_POSTGRESQL is an enum representing an rds postgresql aurora cluster
+  ENUM_DATASTORE_RDS_AURORA_POSTGRESQL = 2;
+  // ENUM_DATASTORE_ELASTICACHE_REDIS is an enum representing an elasticache redis replication group
+  ENUM_DATASTORE_ELASTICACHE_REDIS = 3;
+}
+
+// DatastoreMetadata represents an object containing metadata for a given datastore
+message DatastoreMetadata {
+  // name is the name for the metadata field
+  string name = 1;
+  // value is value for the metadata field
+  string value = 2;
 }
 
 // RegistryStatusRequest is the request object for fetching the status of a docker registry associated to a project

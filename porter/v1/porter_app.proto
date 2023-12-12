@@ -76,6 +76,12 @@ message EnvGroup {
   string name = 1;
   // version is the version of the environment variable group
   int64 version = 2;
+  // linked_applications is an optional list of applications linked to the env group
+  repeated string linked_applications = 3;
+  // variables is an optional map of non-sensitive variable names to values
+  map<string, string> variables = 4;
+  // secret is an optional map of sensitive variable names to values
+  map<string, string> secret_variables = 5;
 }
 
 // EnvGroupVariables represents the variables for an env group.

@@ -309,13 +309,19 @@ func (EnumServiceDeploymentStatus) EnumDescriptor() ([]byte, []int) {
 	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{4}
 }
 
+// EnumDatastore represents the datastore type
 type EnumDatastore int32
 
 const (
-	EnumDatastore_ENUM_DATASTORE_UNSPECIFIED           EnumDatastore = 0
-	EnumDatastore_ENUM_DATASTORE_RDS_POSTGRESQL        EnumDatastore = 1
+	// ENUM_DATASTORE_UNSPECIFIED is an enum representing an unknown datastore
+	// and is used as a sentinel value when interacting with datastore types
+	EnumDatastore_ENUM_DATASTORE_UNSPECIFIED EnumDatastore = 0
+	// ENUM_DATASTORE_RDS_POSTGRESQL is an enum representing an rds postgresql instance
+	EnumDatastore_ENUM_DATASTORE_RDS_POSTGRESQL EnumDatastore = 1
+	// ENUM_DATASTORE_RDS_AURORA_POSTGRESQL is an enum representing an rds postgresql aurora cluster
 	EnumDatastore_ENUM_DATASTORE_RDS_AURORA_POSTGRESQL EnumDatastore = 2
-	EnumDatastore_ENUM_DATASTORE_ELASTICACHE_REDIS     EnumDatastore = 3
+	// ENUM_DATASTORE_ELASTICACHE_REDIS is an enum representing an elasticache redis replication group
+	EnumDatastore_ENUM_DATASTORE_ELASTICACHE_REDIS EnumDatastore = 3
 )
 
 // Enum value maps for EnumDatastore.
@@ -8149,6 +8155,158 @@ type ClusterNetworkSettingsResponse_EksCloudProviderNetwork struct {
 func (*ClusterNetworkSettingsResponse_EksCloudProviderNetwork) isClusterNetworkSettingsResponse_CloudProviderNetwork() {
 }
 
+// ListDatastoresRequest is the request object for getting a list of datastores for a given project/account
+type ListDatastoresRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// project_id id of the project to retrieve datastores for
+	ProjectId int64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	// cloud_provider the cloud provider to retrieve datastores for
+	CloudProvider EnumCloudProvider `protobuf:"varint,2,opt,name=cloud_provider,json=cloudProvider,proto3,enum=porter.v1.EnumCloudProvider" json:"cloud_provider,omitempty"`
+	// cloud_provider_account_id is an identifier to use when matching resources for a cloud provider
+	CloudProviderAccountId string `protobuf:"bytes,3,opt,name=cloud_provider_account_id,json=cloudProviderAccountId,proto3" json:"cloud_provider_account_id,omitempty"`
+	// type is an optional type of the datastore to filter by
+	Type *EnumDatastore `protobuf:"varint,4,opt,name=type,proto3,enum=porter.v1.EnumDatastore,oneof" json:"type,omitempty"`
+	// name is an optional name of the datastore to filter by
+	Name string `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
+	// include_env_group is a field denoting whether to include the datastore env group in the response
+	IncludeEnvGroup bool `protobuf:"varint,6,opt,name=include_env_group,json=includeEnvGroup,proto3" json:"include_env_group,omitempty"`
+	// include_metadata is a field denoting whether to include the datastore metadata in the response
+	IncludeMetadata bool `protobuf:"varint,7,opt,name=include_metadata,json=includeMetadata,proto3" json:"include_metadata,omitempty"`
+}
+
+func (x *ListDatastoresRequest) Reset() {
+	*x = ListDatastoresRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[123]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListDatastoresRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListDatastoresRequest) ProtoMessage() {}
+
+func (x *ListDatastoresRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[123]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListDatastoresRequest.ProtoReflect.Descriptor instead.
+func (*ListDatastoresRequest) Descriptor() ([]byte, []int) {
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{123}
+}
+
+func (x *ListDatastoresRequest) GetProjectId() int64 {
+	if x != nil {
+		return x.ProjectId
+	}
+	return 0
+}
+
+func (x *ListDatastoresRequest) GetCloudProvider() EnumCloudProvider {
+	if x != nil {
+		return x.CloudProvider
+	}
+	return EnumCloudProvider_ENUM_CLOUD_PROVIDER_UNSPECIFIED
+}
+
+func (x *ListDatastoresRequest) GetCloudProviderAccountId() string {
+	if x != nil {
+		return x.CloudProviderAccountId
+	}
+	return ""
+}
+
+func (x *ListDatastoresRequest) GetType() EnumDatastore {
+	if x != nil && x.Type != nil {
+		return *x.Type
+	}
+	return EnumDatastore_ENUM_DATASTORE_UNSPECIFIED
+}
+
+func (x *ListDatastoresRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *ListDatastoresRequest) GetIncludeEnvGroup() bool {
+	if x != nil {
+		return x.IncludeEnvGroup
+	}
+	return false
+}
+
+func (x *ListDatastoresRequest) GetIncludeMetadata() bool {
+	if x != nil {
+		return x.IncludeMetadata
+	}
+	return false
+}
+
+// ListDatastoresResponse is the response object containing a list of datastores
+type ListDatastoresResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// datastores list of datastore objects
+	Datastores []*Datastore `protobuf:"bytes,1,rep,name=datastores,proto3" json:"datastores,omitempty"`
+}
+
+func (x *ListDatastoresResponse) Reset() {
+	*x = ListDatastoresResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[124]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListDatastoresResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListDatastoresResponse) ProtoMessage() {}
+
+func (x *ListDatastoresResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[124]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListDatastoresResponse.ProtoReflect.Descriptor instead.
+func (*ListDatastoresResponse) Descriptor() ([]byte, []int) {
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{124}
+}
+
+func (x *ListDatastoresResponse) GetDatastores() []*Datastore {
+	if x != nil {
+		return x.Datastores
+	}
+	return nil
+}
+
 // DatastoreStatusRequest is the request object for fetching the status of a datastore in on a cluster
 type DatastoreStatusRequest struct {
 	state         protoimpl.MessageState
@@ -8168,7 +8326,7 @@ type DatastoreStatusRequest struct {
 func (x *DatastoreStatusRequest) Reset() {
 	*x = DatastoreStatusRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[123]
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[125]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -8181,7 +8339,7 @@ func (x *DatastoreStatusRequest) String() string {
 func (*DatastoreStatusRequest) ProtoMessage() {}
 
 func (x *DatastoreStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[123]
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[125]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8194,7 +8352,7 @@ func (x *DatastoreStatusRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DatastoreStatusRequest.ProtoReflect.Descriptor instead.
 func (*DatastoreStatusRequest) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{123}
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{125}
 }
 
 func (x *DatastoreStatusRequest) GetProjectId() int64 {
@@ -8238,7 +8396,7 @@ type DatastoreStatusResponse struct {
 func (x *DatastoreStatusResponse) Reset() {
 	*x = DatastoreStatusResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[124]
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[126]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -8251,7 +8409,7 @@ func (x *DatastoreStatusResponse) String() string {
 func (*DatastoreStatusResponse) ProtoMessage() {}
 
 func (x *DatastoreStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[124]
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[126]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8264,12 +8422,146 @@ func (x *DatastoreStatusResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DatastoreStatusResponse.ProtoReflect.Descriptor instead.
 func (*DatastoreStatusResponse) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{124}
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{126}
 }
 
 func (x *DatastoreStatusResponse) GetStatus() string {
 	if x != nil {
 		return x.Status
+	}
+	return ""
+}
+
+// Datastore represents a single datastore object
+type Datastore struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// type is the type of the datastore
+	Type EnumDatastore `protobuf:"varint,1,opt,name=type,proto3,enum=porter.v1.EnumDatastore" json:"type,omitempty"`
+	// name is the name of the datastore
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// metadata is a list of metadata objects for the datastore
+	Metadata []*DatastoreMetadata `protobuf:"bytes,3,rep,name=metadata,proto3" json:"metadata,omitempty"`
+	// env is the datastore's env group
+	Env *EnvGroup `protobuf:"bytes,4,opt,name=env,proto3" json:"env,omitempty"`
+}
+
+func (x *Datastore) Reset() {
+	*x = Datastore{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[127]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Datastore) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Datastore) ProtoMessage() {}
+
+func (x *Datastore) ProtoReflect() protoreflect.Message {
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[127]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Datastore.ProtoReflect.Descriptor instead.
+func (*Datastore) Descriptor() ([]byte, []int) {
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{127}
+}
+
+func (x *Datastore) GetType() EnumDatastore {
+	if x != nil {
+		return x.Type
+	}
+	return EnumDatastore_ENUM_DATASTORE_UNSPECIFIED
+}
+
+func (x *Datastore) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *Datastore) GetMetadata() []*DatastoreMetadata {
+	if x != nil {
+		return x.Metadata
+	}
+	return nil
+}
+
+func (x *Datastore) GetEnv() *EnvGroup {
+	if x != nil {
+		return x.Env
+	}
+	return nil
+}
+
+// DatastoreMetadata represents an object containing metadata for a given datastore
+type DatastoreMetadata struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// name is the name for the metadata field
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	// value is value for the metadata field
+	Value string `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+}
+
+func (x *DatastoreMetadata) Reset() {
+	*x = DatastoreMetadata{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[128]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DatastoreMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DatastoreMetadata) ProtoMessage() {}
+
+func (x *DatastoreMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[128]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DatastoreMetadata.ProtoReflect.Descriptor instead.
+func (*DatastoreMetadata) Descriptor() ([]byte, []int) {
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{128}
+}
+
+func (x *DatastoreMetadata) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *DatastoreMetadata) GetValue() string {
+	if x != nil {
+		return x.Value
 	}
 	return ""
 }
@@ -8289,7 +8581,7 @@ type RegistryStatusRequest struct {
 func (x *RegistryStatusRequest) Reset() {
 	*x = RegistryStatusRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[125]
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[129]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -8302,7 +8594,7 @@ func (x *RegistryStatusRequest) String() string {
 func (*RegistryStatusRequest) ProtoMessage() {}
 
 func (x *RegistryStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[125]
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[129]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8315,7 +8607,7 @@ func (x *RegistryStatusRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegistryStatusRequest.ProtoReflect.Descriptor instead.
 func (*RegistryStatusRequest) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{125}
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{129}
 }
 
 func (x *RegistryStatusRequest) GetProjectId() int64 {
@@ -8345,7 +8637,7 @@ type RegistryStatusResponse struct {
 func (x *RegistryStatusResponse) Reset() {
 	*x = RegistryStatusResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[126]
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[130]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -8358,7 +8650,7 @@ func (x *RegistryStatusResponse) String() string {
 func (*RegistryStatusResponse) ProtoMessage() {}
 
 func (x *RegistryStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[126]
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[130]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8371,7 +8663,7 @@ func (x *RegistryStatusResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RegistryStatusResponse.ProtoReflect.Descriptor instead.
 func (*RegistryStatusResponse) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{126}
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{130}
 }
 
 func (x *RegistryStatusResponse) GetIsVulnerabilityScanningEnabled() bool {
@@ -8398,7 +8690,7 @@ type SharedNetworkSettingsRequest struct {
 func (x *SharedNetworkSettingsRequest) Reset() {
 	*x = SharedNetworkSettingsRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[127]
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[131]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -8411,7 +8703,7 @@ func (x *SharedNetworkSettingsRequest) String() string {
 func (*SharedNetworkSettingsRequest) ProtoMessage() {}
 
 func (x *SharedNetworkSettingsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[127]
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[131]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8424,7 +8716,7 @@ func (x *SharedNetworkSettingsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SharedNetworkSettingsRequest.ProtoReflect.Descriptor instead.
 func (*SharedNetworkSettingsRequest) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{127}
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{131}
 }
 
 func (x *SharedNetworkSettingsRequest) GetProjectId() int64 {
@@ -8473,7 +8765,7 @@ type SharedNetworkSettingsResponse struct {
 func (x *SharedNetworkSettingsResponse) Reset() {
 	*x = SharedNetworkSettingsResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[128]
+		mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[132]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -8486,7 +8778,7 @@ func (x *SharedNetworkSettingsResponse) String() string {
 func (*SharedNetworkSettingsResponse) ProtoMessage() {}
 
 func (x *SharedNetworkSettingsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[128]
+	mi := &file_porter_v1_cluster_control_plane_proto_msgTypes[132]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8499,7 +8791,7 @@ func (x *SharedNetworkSettingsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SharedNetworkSettingsResponse.ProtoReflect.Descriptor instead.
 func (*SharedNetworkSettingsResponse) Descriptor() ([]byte, []int) {
-	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{128}
+	return file_porter_v1_cluster_control_plane_proto_rawDescGZIP(), []int{132}
 }
 
 func (x *SharedNetworkSettingsResponse) GetRegion() string {
@@ -9739,7 +10031,34 @@ var file_porter_v1_cluster_control_plane_proto_rawDesc = []byte{
 	0x2e, 0x41, 0x57, 0x53, 0x56, 0x70, 0x63, 0x48, 0x00, 0x52, 0x17, 0x65, 0x6b, 0x73, 0x43, 0x6c,
 	0x6f, 0x75, 0x64, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x4e, 0x65, 0x74, 0x77, 0x6f,
 	0x72, 0x6b, 0x42, 0x18, 0x0a, 0x16, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x5f, 0x70, 0x72, 0x6f, 0x76,
-	0x69, 0x64, 0x65, 0x72, 0x5f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x22, 0x98, 0x01, 0x0a,
+	0x69, 0x64, 0x65, 0x72, 0x5f, 0x6e, 0x65, 0x74, 0x77, 0x6f, 0x72, 0x6b, 0x22, 0xdd, 0x02, 0x0a,
+	0x15, 0x4c, 0x69, 0x73, 0x74, 0x44, 0x61, 0x74, 0x61, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x73, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63,
+	0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a,
+	0x65, 0x63, 0x74, 0x49, 0x64, 0x12, 0x43, 0x0a, 0x0e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x5f, 0x70,
+	0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x1c, 0x2e,
+	0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x6e, 0x75, 0x6d, 0x43, 0x6c,
+	0x6f, 0x75, 0x64, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x52, 0x0d, 0x63, 0x6c, 0x6f,
+	0x75, 0x64, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x12, 0x39, 0x0a, 0x19, 0x63, 0x6c,
+	0x6f, 0x75, 0x64, 0x5f, 0x70, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x5f, 0x61, 0x63, 0x63,
+	0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x16, 0x63,
+	0x6c, 0x6f, 0x75, 0x64, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x41, 0x63, 0x63, 0x6f,
+	0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x31, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65, 0x18, 0x04, 0x20,
+	0x01, 0x28, 0x0e, 0x32, 0x18, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e,
+	0x45, 0x6e, 0x75, 0x6d, 0x44, 0x61, 0x74, 0x61, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x48, 0x00, 0x52,
+	0x04, 0x74, 0x79, 0x70, 0x65, 0x88, 0x01, 0x01, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65,
+	0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x2a, 0x0a, 0x11,
+	0x69, 0x6e, 0x63, 0x6c, 0x75, 0x64, 0x65, 0x5f, 0x65, 0x6e, 0x76, 0x5f, 0x67, 0x72, 0x6f, 0x75,
+	0x70, 0x18, 0x06, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0f, 0x69, 0x6e, 0x63, 0x6c, 0x75, 0x64, 0x65,
+	0x45, 0x6e, 0x76, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x12, 0x29, 0x0a, 0x10, 0x69, 0x6e, 0x63, 0x6c,
+	0x75, 0x64, 0x65, 0x5f, 0x6d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x18, 0x07, 0x20, 0x01,
+	0x28, 0x08, 0x52, 0x0f, 0x69, 0x6e, 0x63, 0x6c, 0x75, 0x64, 0x65, 0x4d, 0x65, 0x74, 0x61, 0x64,
+	0x61, 0x74, 0x61, 0x42, 0x07, 0x0a, 0x05, 0x5f, 0x74, 0x79, 0x70, 0x65, 0x22, 0x4e, 0x0a, 0x16,
+	0x4c, 0x69, 0x73, 0x74, 0x44, 0x61, 0x74, 0x61, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x73, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x34, 0x0a, 0x0a, 0x64, 0x61, 0x74, 0x61, 0x73, 0x74,
+	0x6f, 0x72, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x70, 0x6f, 0x72,
+	0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x61, 0x74, 0x61, 0x73, 0x74, 0x6f, 0x72, 0x65,
+	0x52, 0x0a, 0x64, 0x61, 0x74, 0x61, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x73, 0x22, 0x98, 0x01, 0x0a,
 	0x16, 0x44, 0x61, 0x74, 0x61, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73,
 	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x72, 0x6f, 0x6a, 0x65,
 	0x63, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x70, 0x72, 0x6f,
@@ -9752,7 +10071,22 @@ var file_porter_v1_cluster_control_plane_proto_rawDesc = []byte{
 	0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x22, 0x31, 0x0a, 0x17, 0x44, 0x61, 0x74, 0x61, 0x73,
 	0x74, 0x6f, 0x72, 0x65, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
 	0x73, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x22, 0x57, 0x0a, 0x15, 0x52, 0x65,
+	0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x22, 0xae, 0x01, 0x0a, 0x09, 0x44,
+	0x61, 0x74, 0x61, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x12, 0x2c, 0x0a, 0x04, 0x74, 0x79, 0x70, 0x65,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x18, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e,
+	0x76, 0x31, 0x2e, 0x45, 0x6e, 0x75, 0x6d, 0x44, 0x61, 0x74, 0x61, 0x73, 0x74, 0x6f, 0x72, 0x65,
+	0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x38, 0x0a, 0x08, 0x6d, 0x65,
+	0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1c, 0x2e, 0x70,
+	0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x61, 0x74, 0x61, 0x73, 0x74, 0x6f,
+	0x72, 0x65, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x52, 0x08, 0x6d, 0x65, 0x74, 0x61,
+	0x64, 0x61, 0x74, 0x61, 0x12, 0x25, 0x0a, 0x03, 0x65, 0x6e, 0x76, 0x18, 0x04, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x13, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x6e,
+	0x76, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x52, 0x03, 0x65, 0x6e, 0x76, 0x22, 0x3d, 0x0a, 0x11, 0x44,
+	0x61, 0x74, 0x61, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61,
+	0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
+	0x6e, 0x61, 0x6d, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x22, 0x57, 0x0a, 0x15, 0x52, 0x65,
 	0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x71, 0x75,
 	0x65, 0x73, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x5f, 0x69,
 	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74,
@@ -9864,7 +10198,7 @@ var file_porter_v1_cluster_control_plane_proto_rawDesc = []byte{
 	0x52, 0x4f, 0x52, 0x41, 0x5f, 0x50, 0x4f, 0x53, 0x54, 0x47, 0x52, 0x45, 0x53, 0x51, 0x4c, 0x10,
 	0x02, 0x12, 0x24, 0x0a, 0x20, 0x45, 0x4e, 0x55, 0x4d, 0x5f, 0x44, 0x41, 0x54, 0x41, 0x53, 0x54,
 	0x4f, 0x52, 0x45, 0x5f, 0x45, 0x4c, 0x41, 0x53, 0x54, 0x49, 0x43, 0x41, 0x43, 0x48, 0x45, 0x5f,
-	0x52, 0x45, 0x44, 0x49, 0x53, 0x10, 0x03, 0x32, 0xc6, 0x31, 0x0a, 0x1a, 0x43, 0x6c, 0x75, 0x73,
+	0x52, 0x45, 0x44, 0x49, 0x53, 0x10, 0x03, 0x32, 0xa2, 0x32, 0x0a, 0x1a, 0x43, 0x6c, 0x75, 0x73,
 	0x74, 0x65, 0x72, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x50, 0x6c, 0x61, 0x6e, 0x65, 0x53,
 	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x54, 0x0a, 0x0d, 0x51, 0x75, 0x6f, 0x74, 0x61, 0x49,
 	0x6e, 0x63, 0x72, 0x65, 0x61, 0x73, 0x65, 0x12, 0x1f, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72,
@@ -10218,61 +10552,67 @@ var file_porter_v1_cluster_control_plane_proto_rawDesc = []byte{
 	0x6f, 0x72, 0x79, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x2a, 0x2e, 0x70, 0x6f, 0x72,
 	0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x49, 0x6d, 0x61, 0x67, 0x65,
 	0x73, 0x46, 0x6f, 0x72, 0x52, 0x65, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x6f, 0x72, 0x79, 0x52, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x03, 0x88, 0x02, 0x01, 0x12, 0x5a, 0x0a, 0x0f, 0x44,
-	0x61, 0x74, 0x61, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x21,
-	0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x61, 0x74, 0x61, 0x73,
-	0x74, 0x6f, 0x72, 0x65, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
-	0x74, 0x1a, 0x22, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x61,
-	0x74, 0x61, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x57, 0x0a, 0x0e, 0x52, 0x65, 0x67, 0x69, 0x73,
-	0x74, 0x72, 0x79, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x20, 0x2e, 0x70, 0x6f, 0x72, 0x74,
-	0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x53, 0x74,
-	0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x70, 0x6f,
-	0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79,
-	0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00,
-	0x12, 0x8a, 0x01, 0x0a, 0x1f, 0x45, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x45, 0x78, 0x74, 0x65, 0x72,
-	0x6e, 0x61, 0x6c, 0x45, 0x6e, 0x76, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x50, 0x72, 0x6f, 0x76, 0x69,
-	0x64, 0x65, 0x72, 0x73, 0x12, 0x31, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31,
-	0x2e, 0x45, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x45, 0x78, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x45,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x03, 0x88, 0x02, 0x01, 0x12, 0x57, 0x0a, 0x0e, 0x4c,
+	0x69, 0x73, 0x74, 0x44, 0x61, 0x74, 0x61, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x73, 0x12, 0x20, 0x2e,
+	0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x44, 0x61,
+	0x74, 0x61, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
+	0x21, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x4c, 0x69, 0x73, 0x74,
+	0x44, 0x61, 0x74, 0x61, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x73, 0x65, 0x22, 0x00, 0x12, 0x5d, 0x0a, 0x0f, 0x44, 0x61, 0x74, 0x61, 0x73, 0x74, 0x6f, 0x72,
+	0x65, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x21, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72,
+	0x2e, 0x76, 0x31, 0x2e, 0x44, 0x61, 0x74, 0x61, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x53, 0x74, 0x61,
+	0x74, 0x75, 0x73, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x22, 0x2e, 0x70, 0x6f, 0x72,
+	0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x61, 0x74, 0x61, 0x73, 0x74, 0x6f, 0x72, 0x65,
+	0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x03,
+	0x88, 0x02, 0x01, 0x12, 0x57, 0x0a, 0x0e, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x53,
+	0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x20, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76,
+	0x31, 0x2e, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72,
+	0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65, 0x67, 0x69, 0x73, 0x74, 0x72, 0x79, 0x53, 0x74, 0x61, 0x74,
+	0x75, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x8a, 0x01, 0x0a,
+	0x1f, 0x45, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x45, 0x78, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x45,
 	0x6e, 0x76, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x73,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x32, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72,
-	0x2e, 0x76, 0x31, 0x2e, 0x45, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x45, 0x78, 0x74, 0x65, 0x72, 0x6e,
-	0x61, 0x6c, 0x45, 0x6e, 0x76, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64,
-	0x65, 0x72, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x96, 0x01,
-	0x0a, 0x23, 0x41, 0x72, 0x65, 0x45, 0x78, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x45, 0x6e, 0x76,
-	0x47, 0x72, 0x6f, 0x75, 0x70, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x73, 0x45, 0x6e,
-	0x61, 0x62, 0x6c, 0x65, 0x64, 0x12, 0x35, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76,
-	0x31, 0x2e, 0x41, 0x72, 0x65, 0x45, 0x78, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x45, 0x6e, 0x76,
-	0x47, 0x72, 0x6f, 0x75, 0x70, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x73, 0x45, 0x6e,
-	0x61, 0x62, 0x6c, 0x65, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x36, 0x2e, 0x70,
-	0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x72, 0x65, 0x45, 0x78, 0x74, 0x65,
-	0x72, 0x6e, 0x61, 0x6c, 0x45, 0x6e, 0x76, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x50, 0x72, 0x6f, 0x76,
-	0x69, 0x64, 0x65, 0x72, 0x73, 0x45, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x6f, 0x0a, 0x16, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65,
-	0x4f, 0x72, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x45, 0x6e, 0x76, 0x47, 0x72, 0x6f, 0x75, 0x70,
-	0x12, 0x28, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65,
-	0x61, 0x74, 0x65, 0x4f, 0x72, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x45, 0x6e, 0x76, 0x47, 0x72,
-	0x6f, 0x75, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x29, 0x2e, 0x70, 0x6f, 0x72,
-	0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4f, 0x72, 0x55,
-	0x70, 0x64, 0x61, 0x74, 0x65, 0x45, 0x6e, 0x76, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x52, 0x65, 0x73,
-	0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x57, 0x0a, 0x0e, 0x44, 0x65, 0x6c, 0x65, 0x74,
-	0x65, 0x45, 0x6e, 0x76, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x12, 0x20, 0x2e, 0x70, 0x6f, 0x72, 0x74,
-	0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x45, 0x6e, 0x76, 0x47,
-	0x72, 0x6f, 0x75, 0x70, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x70, 0x6f,
-	0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x45, 0x6e,
-	0x76, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00,
-	0x42, 0xb3, 0x01, 0x0a, 0x0d, 0x63, 0x6f, 0x6d, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e,
-	0x76, 0x31, 0x42, 0x18, 0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x43, 0x6f, 0x6e, 0x74, 0x72,
-	0x6f, 0x6c, 0x50, 0x6c, 0x61, 0x6e, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x43,
-	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x70, 0x6f, 0x72, 0x74, 0x65,
-	0x72, 0x2d, 0x64, 0x65, 0x76, 0x2f, 0x61, 0x70, 0x69, 0x2d, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61,
-	0x63, 0x74, 0x73, 0x2f, 0x67, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x65, 0x64, 0x2f, 0x67, 0x6f,
-	0x2f, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2f, 0x76, 0x31, 0x3b, 0x70, 0x6f, 0x72, 0x74, 0x65,
-	0x72, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x50, 0x58, 0x58, 0xaa, 0x02, 0x09, 0x50, 0x6f, 0x72, 0x74,
-	0x65, 0x72, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x09, 0x50, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x5c, 0x56,
-	0x31, 0xe2, 0x02, 0x15, 0x50, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50,
-	0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0a, 0x50, 0x6f, 0x72, 0x74,
-	0x65, 0x72, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x12, 0x31, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x6e, 0x61,
+	0x62, 0x6c, 0x65, 0x45, 0x78, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x45, 0x6e, 0x76, 0x47, 0x72,
+	0x6f, 0x75, 0x70, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x73, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x1a, 0x32, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e,
+	0x45, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x45, 0x78, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x45, 0x6e,
+	0x76, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x73, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x96, 0x01, 0x0a, 0x23, 0x41, 0x72,
+	0x65, 0x45, 0x78, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x45, 0x6e, 0x76, 0x47, 0x72, 0x6f, 0x75,
+	0x70, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x73, 0x45, 0x6e, 0x61, 0x62, 0x6c, 0x65,
+	0x64, 0x12, 0x35, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x72,
+	0x65, 0x45, 0x78, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c, 0x45, 0x6e, 0x76, 0x47, 0x72, 0x6f, 0x75,
+	0x70, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72, 0x73, 0x45, 0x6e, 0x61, 0x62, 0x6c, 0x65,
+	0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x36, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65,
+	0x72, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x72, 0x65, 0x45, 0x78, 0x74, 0x65, 0x72, 0x6e, 0x61, 0x6c,
+	0x45, 0x6e, 0x76, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x50, 0x72, 0x6f, 0x76, 0x69, 0x64, 0x65, 0x72,
+	0x73, 0x45, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x22, 0x00, 0x12, 0x6f, 0x0a, 0x16, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4f, 0x72, 0x55, 0x70,
+	0x64, 0x61, 0x74, 0x65, 0x45, 0x6e, 0x76, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x12, 0x28, 0x2e, 0x70,
+	0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4f,
+	0x72, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x45, 0x6e, 0x76, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x29, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e,
+	0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4f, 0x72, 0x55, 0x70, 0x64, 0x61, 0x74,
+	0x65, 0x45, 0x6e, 0x76, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
+	0x65, 0x22, 0x00, 0x12, 0x57, 0x0a, 0x0e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x45, 0x6e, 0x76,
+	0x47, 0x72, 0x6f, 0x75, 0x70, 0x12, 0x20, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76,
+	0x31, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x45, 0x6e, 0x76, 0x47, 0x72, 0x6f, 0x75, 0x70,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x21, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72,
+	0x2e, 0x76, 0x31, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x45, 0x6e, 0x76, 0x47, 0x72, 0x6f,
+	0x75, 0x70, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0xb3, 0x01, 0x0a,
+	0x0d, 0x63, 0x6f, 0x6d, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x42, 0x18,
+	0x43, 0x6c, 0x75, 0x73, 0x74, 0x65, 0x72, 0x43, 0x6f, 0x6e, 0x74, 0x72, 0x6f, 0x6c, 0x50, 0x6c,
+	0x61, 0x6e, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x43, 0x67, 0x69, 0x74, 0x68,
+	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2d, 0x64, 0x65,
+	0x76, 0x2f, 0x61, 0x70, 0x69, 0x2d, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x73, 0x2f,
+	0x67, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x65, 0x64, 0x2f, 0x67, 0x6f, 0x2f, 0x70, 0x6f, 0x72,
+	0x74, 0x65, 0x72, 0x2f, 0x76, 0x31, 0x3b, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x76, 0x31, 0xa2,
+	0x02, 0x03, 0x50, 0x58, 0x58, 0xaa, 0x02, 0x09, 0x50, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x56,
+	0x31, 0xca, 0x02, 0x09, 0x50, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x15,
+	0x50, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74,
+	0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0a, 0x50, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x3a, 0x3a,
+	0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -10288,7 +10628,7 @@ func file_porter_v1_cluster_control_plane_proto_rawDescGZIP() []byte {
 }
 
 var file_porter_v1_cluster_control_plane_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
-var file_porter_v1_cluster_control_plane_proto_msgTypes = make([]protoimpl.MessageInfo, 130)
+var file_porter_v1_cluster_control_plane_proto_msgTypes = make([]protoimpl.MessageInfo, 134)
 var file_porter_v1_cluster_control_plane_proto_goTypes = []interface{}{
 	(EnumPredeployStatus)(0),                            // 0: porter.v1.EnumPredeployStatus
 	(EnumQuotaIncrease)(0),                              // 1: porter.v1.EnumQuotaIncrease
@@ -10419,251 +10759,263 @@ var file_porter_v1_cluster_control_plane_proto_goTypes = []interface{}{
 	(*DockerConfigFileForRegistryResponse)(nil),         // 126: porter.v1.DockerConfigFileForRegistryResponse
 	(*ClusterNetworkSettingsRequest)(nil),               // 127: porter.v1.ClusterNetworkSettingsRequest
 	(*ClusterNetworkSettingsResponse)(nil),              // 128: porter.v1.ClusterNetworkSettingsResponse
-	(*DatastoreStatusRequest)(nil),                      // 129: porter.v1.DatastoreStatusRequest
-	(*DatastoreStatusResponse)(nil),                     // 130: porter.v1.DatastoreStatusResponse
-	(*RegistryStatusRequest)(nil),                       // 131: porter.v1.RegistryStatusRequest
-	(*RegistryStatusResponse)(nil),                      // 132: porter.v1.RegistryStatusResponse
-	(*SharedNetworkSettingsRequest)(nil),                // 133: porter.v1.SharedNetworkSettingsRequest
-	(*SharedNetworkSettingsResponse)(nil),               // 134: porter.v1.SharedNetworkSettingsResponse
-	nil,                                                 // 135: porter.v1.PreflightCheckResponse.PreflightChecksEntry
-	(EnumCloudProvider)(0),                              // 136: porter.v1.EnumCloudProvider
-	(*GKEPreflightValues)(nil),                          // 137: porter.v1.GKEPreflightValues
-	(*EKSPreflightValues)(nil),                          // 138: porter.v1.EKSPreflightValues
-	(*Error)(nil),                                       // 139: porter.v1.Error
-	(*Contract)(nil),                                    // 140: porter.v1.Contract
-	(*ContractRevision)(nil),                            // 141: porter.v1.ContractRevision
-	(*timestamppb.Timestamp)(nil),                       // 142: google.protobuf.Timestamp
-	(*PorterApp)(nil),                                   // 143: porter.v1.PorterApp
-	(*Deletions)(nil),                                   // 144: porter.v1.Deletions
-	(*DeploymentTargetIdentifier)(nil),                  // 145: porter.v1.DeploymentTargetIdentifier
-	(*EnvGroupVariables)(nil),                           // 146: porter.v1.EnvGroupVariables
-	(*Addon)(nil),                                       // 147: porter.v1.Addon
-	(*AppImage)(nil),                                    // 148: porter.v1.AppImage
-	(*DeploymentTarget)(nil),                            // 149: porter.v1.DeploymentTarget
-	(*EnvGroup)(nil),                                    // 150: porter.v1.EnvGroup
-	(*Build)(nil),                                       // 151: porter.v1.Build
-	(EnumEnvGroupProviderType)(0),                       // 152: porter.v1.EnumEnvGroupProviderType
-	(*AssumeRoleChainLink)(nil),                         // 153: porter.v1.AssumeRoleChainLink
-	(*AWSVpc)(nil),                                      // 154: porter.v1.AWSVpc
-	(*UpdateCloudProviderCredentialsRequest)(nil),       // 155: porter.v1.UpdateCloudProviderCredentialsRequest
-	(*UpdateCloudProviderCredentialsResponse)(nil),      // 156: porter.v1.UpdateCloudProviderCredentialsResponse
+	(*ListDatastoresRequest)(nil),                       // 129: porter.v1.ListDatastoresRequest
+	(*ListDatastoresResponse)(nil),                      // 130: porter.v1.ListDatastoresResponse
+	(*DatastoreStatusRequest)(nil),                      // 131: porter.v1.DatastoreStatusRequest
+	(*DatastoreStatusResponse)(nil),                     // 132: porter.v1.DatastoreStatusResponse
+	(*Datastore)(nil),                                   // 133: porter.v1.Datastore
+	(*DatastoreMetadata)(nil),                           // 134: porter.v1.DatastoreMetadata
+	(*RegistryStatusRequest)(nil),                       // 135: porter.v1.RegistryStatusRequest
+	(*RegistryStatusResponse)(nil),                      // 136: porter.v1.RegistryStatusResponse
+	(*SharedNetworkSettingsRequest)(nil),                // 137: porter.v1.SharedNetworkSettingsRequest
+	(*SharedNetworkSettingsResponse)(nil),               // 138: porter.v1.SharedNetworkSettingsResponse
+	nil,                                                 // 139: porter.v1.PreflightCheckResponse.PreflightChecksEntry
+	(EnumCloudProvider)(0),                              // 140: porter.v1.EnumCloudProvider
+	(*GKEPreflightValues)(nil),                          // 141: porter.v1.GKEPreflightValues
+	(*EKSPreflightValues)(nil),                          // 142: porter.v1.EKSPreflightValues
+	(*Error)(nil),                                       // 143: porter.v1.Error
+	(*Contract)(nil),                                    // 144: porter.v1.Contract
+	(*ContractRevision)(nil),                            // 145: porter.v1.ContractRevision
+	(*timestamppb.Timestamp)(nil),                       // 146: google.protobuf.Timestamp
+	(*PorterApp)(nil),                                   // 147: porter.v1.PorterApp
+	(*Deletions)(nil),                                   // 148: porter.v1.Deletions
+	(*DeploymentTargetIdentifier)(nil),                  // 149: porter.v1.DeploymentTargetIdentifier
+	(*EnvGroupVariables)(nil),                           // 150: porter.v1.EnvGroupVariables
+	(*Addon)(nil),                                       // 151: porter.v1.Addon
+	(*AppImage)(nil),                                    // 152: porter.v1.AppImage
+	(*DeploymentTarget)(nil),                            // 153: porter.v1.DeploymentTarget
+	(*EnvGroup)(nil),                                    // 154: porter.v1.EnvGroup
+	(*Build)(nil),                                       // 155: porter.v1.Build
+	(EnumEnvGroupProviderType)(0),                       // 156: porter.v1.EnumEnvGroupProviderType
+	(*AssumeRoleChainLink)(nil),                         // 157: porter.v1.AssumeRoleChainLink
+	(*AWSVpc)(nil),                                      // 158: porter.v1.AWSVpc
+	(*UpdateCloudProviderCredentialsRequest)(nil),       // 159: porter.v1.UpdateCloudProviderCredentialsRequest
+	(*UpdateCloudProviderCredentialsResponse)(nil),      // 160: porter.v1.UpdateCloudProviderCredentialsResponse
 }
 var file_porter_v1_cluster_control_plane_proto_depIdxs = []int32{
-	136, // 0: porter.v1.QuotaIncreaseRequest.cloud_provider:type_name -> porter.v1.EnumCloudProvider
+	140, // 0: porter.v1.QuotaIncreaseRequest.cloud_provider:type_name -> porter.v1.EnumCloudProvider
 	1,   // 1: porter.v1.QuotaIncreaseRequest.quota_increases:type_name -> porter.v1.EnumQuotaIncrease
-	137, // 2: porter.v1.QuotaIncreaseRequest.gke_preflight_values:type_name -> porter.v1.GKEPreflightValues
-	138, // 3: porter.v1.QuotaIncreaseRequest.eks_preflight_values:type_name -> porter.v1.EKSPreflightValues
-	139, // 4: porter.v1.QuotaIncreaseResponse.error:type_name -> porter.v1.Error
-	136, // 5: porter.v1.PreflightCheckRequest.cloud_provider:type_name -> porter.v1.EnumCloudProvider
-	137, // 6: porter.v1.PreflightCheckRequest.gke_preflight_values:type_name -> porter.v1.GKEPreflightValues
-	138, // 7: porter.v1.PreflightCheckRequest.eks_preflight_values:type_name -> porter.v1.EKSPreflightValues
-	140, // 8: porter.v1.PreflightCheckRequest.contract:type_name -> porter.v1.Contract
-	135, // 9: porter.v1.PreflightCheckResponse.preflight_checks:type_name -> porter.v1.PreflightCheckResponse.PreflightChecksEntry
-	140, // 10: porter.v1.UpdateContractRequest.contract:type_name -> porter.v1.Contract
-	141, // 11: porter.v1.UpdateContractResponse.contract_revision:type_name -> porter.v1.ContractRevision
-	141, // 12: porter.v1.DeleteClusterRequest.contract_revision:type_name -> porter.v1.ContractRevision
+	141, // 2: porter.v1.QuotaIncreaseRequest.gke_preflight_values:type_name -> porter.v1.GKEPreflightValues
+	142, // 3: porter.v1.QuotaIncreaseRequest.eks_preflight_values:type_name -> porter.v1.EKSPreflightValues
+	143, // 4: porter.v1.QuotaIncreaseResponse.error:type_name -> porter.v1.Error
+	140, // 5: porter.v1.PreflightCheckRequest.cloud_provider:type_name -> porter.v1.EnumCloudProvider
+	141, // 6: porter.v1.PreflightCheckRequest.gke_preflight_values:type_name -> porter.v1.GKEPreflightValues
+	142, // 7: porter.v1.PreflightCheckRequest.eks_preflight_values:type_name -> porter.v1.EKSPreflightValues
+	144, // 8: porter.v1.PreflightCheckRequest.contract:type_name -> porter.v1.Contract
+	139, // 9: porter.v1.PreflightCheckResponse.preflight_checks:type_name -> porter.v1.PreflightCheckResponse.PreflightChecksEntry
+	144, // 10: porter.v1.UpdateContractRequest.contract:type_name -> porter.v1.Contract
+	145, // 11: porter.v1.UpdateContractResponse.contract_revision:type_name -> porter.v1.ContractRevision
+	145, // 12: porter.v1.DeleteClusterRequest.contract_revision:type_name -> porter.v1.ContractRevision
 	26,  // 13: porter.v1.ListRepositoriesForRegistryResponse.repositories:type_name -> porter.v1.Repository
 	29,  // 14: porter.v1.ListImagesForRepositoryResponse.images:type_name -> porter.v1.Image
-	142, // 15: porter.v1.Image.updated_at:type_name -> google.protobuf.Timestamp
+	146, // 15: porter.v1.Image.updated_at:type_name -> google.protobuf.Timestamp
 	31,  // 16: porter.v1.ImageInfo.artifacts:type_name -> porter.v1.ImageArtifact
-	142, // 17: porter.v1.ImageArtifact.updated_at:type_name -> google.protobuf.Timestamp
-	142, // 18: porter.v1.TokenForRegistryResponse.expiry:type_name -> google.protobuf.Timestamp
-	141, // 19: porter.v1.ReadContractRequest.contract_revision:type_name -> porter.v1.ContractRevision
-	143, // 20: porter.v1.ValidatePorterAppRequest.app:type_name -> porter.v1.PorterApp
-	144, // 21: porter.v1.ValidatePorterAppRequest.deletions:type_name -> porter.v1.Deletions
-	143, // 22: porter.v1.ValidatePorterAppRequest.app_overrides:type_name -> porter.v1.PorterApp
-	145, // 23: porter.v1.ValidatePorterAppRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
-	143, // 24: porter.v1.ValidatePorterAppResponse.app:type_name -> porter.v1.PorterApp
-	143, // 25: porter.v1.ApplyPorterAppRequest.app:type_name -> porter.v1.PorterApp
-	146, // 26: porter.v1.ApplyPorterAppRequest.app_env:type_name -> porter.v1.EnvGroupVariables
-	145, // 27: porter.v1.ApplyPorterAppRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
+	146, // 17: porter.v1.ImageArtifact.updated_at:type_name -> google.protobuf.Timestamp
+	146, // 18: porter.v1.TokenForRegistryResponse.expiry:type_name -> google.protobuf.Timestamp
+	145, // 19: porter.v1.ReadContractRequest.contract_revision:type_name -> porter.v1.ContractRevision
+	147, // 20: porter.v1.ValidatePorterAppRequest.app:type_name -> porter.v1.PorterApp
+	148, // 21: porter.v1.ValidatePorterAppRequest.deletions:type_name -> porter.v1.Deletions
+	147, // 22: porter.v1.ValidatePorterAppRequest.app_overrides:type_name -> porter.v1.PorterApp
+	149, // 23: porter.v1.ValidatePorterAppRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
+	147, // 24: porter.v1.ValidatePorterAppResponse.app:type_name -> porter.v1.PorterApp
+	147, // 25: porter.v1.ApplyPorterAppRequest.app:type_name -> porter.v1.PorterApp
+	150, // 26: porter.v1.ApplyPorterAppRequest.app_env:type_name -> porter.v1.EnvGroupVariables
+	149, // 27: porter.v1.ApplyPorterAppRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
 	2,   // 28: porter.v1.ApplyPorterAppResponse.cli_action:type_name -> porter.v1.EnumCLIAction
-	145, // 29: porter.v1.UpdateAppRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
-	143, // 30: porter.v1.UpdateAppRequest.app:type_name -> porter.v1.PorterApp
-	146, // 31: porter.v1.UpdateAppRequest.app_env:type_name -> porter.v1.EnvGroupVariables
-	144, // 32: porter.v1.UpdateAppRequest.deletions:type_name -> porter.v1.Deletions
-	143, // 33: porter.v1.UpdateAppRequest.app_overrides:type_name -> porter.v1.PorterApp
-	147, // 34: porter.v1.UpdateAppRequest.addons:type_name -> porter.v1.Addon
-	147, // 35: porter.v1.UpdateAppRequest.addon_overrides:type_name -> porter.v1.Addon
+	149, // 29: porter.v1.UpdateAppRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
+	147, // 30: porter.v1.UpdateAppRequest.app:type_name -> porter.v1.PorterApp
+	150, // 31: porter.v1.UpdateAppRequest.app_env:type_name -> porter.v1.EnvGroupVariables
+	148, // 32: porter.v1.UpdateAppRequest.deletions:type_name -> porter.v1.Deletions
+	147, // 33: porter.v1.UpdateAppRequest.app_overrides:type_name -> porter.v1.PorterApp
+	151, // 34: porter.v1.UpdateAppRequest.addons:type_name -> porter.v1.Addon
+	151, // 35: porter.v1.UpdateAppRequest.addon_overrides:type_name -> porter.v1.Addon
 	2,   // 36: porter.v1.UpdateAppResponse.cli_action:type_name -> porter.v1.EnumCLIAction
 	3,   // 37: porter.v1.UpdateRevisionStatusRequest.revision_status:type_name -> porter.v1.EnumRevisionStatus
-	145, // 38: porter.v1.RollbackRevisionRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
-	145, // 39: porter.v1.DeleteAppDeploymentRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
-	145, // 40: porter.v1.DeleteDeploymentTargetRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
-	145, // 41: porter.v1.CurrentAppRevisionRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
-	143, // 42: porter.v1.AppRevision.app:type_name -> porter.v1.PorterApp
-	142, // 43: porter.v1.AppRevision.created_at:type_name -> google.protobuf.Timestamp
-	142, // 44: porter.v1.AppRevision.updated_at:type_name -> google.protobuf.Timestamp
-	148, // 45: porter.v1.UpdateRevisionPayload.image:type_name -> porter.v1.AppImage
-	145, // 46: porter.v1.RequireAppPayload.source_deployment_target:type_name -> porter.v1.DeploymentTargetIdentifier
+	149, // 38: porter.v1.RollbackRevisionRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
+	149, // 39: porter.v1.DeleteAppDeploymentRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
+	149, // 40: porter.v1.DeleteDeploymentTargetRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
+	149, // 41: porter.v1.CurrentAppRevisionRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
+	147, // 42: porter.v1.AppRevision.app:type_name -> porter.v1.PorterApp
+	146, // 43: porter.v1.AppRevision.created_at:type_name -> google.protobuf.Timestamp
+	146, // 44: porter.v1.AppRevision.updated_at:type_name -> google.protobuf.Timestamp
+	152, // 45: porter.v1.UpdateRevisionPayload.image:type_name -> porter.v1.AppImage
+	149, // 46: porter.v1.RequireAppPayload.source_deployment_target:type_name -> porter.v1.DeploymentTargetIdentifier
 	53,  // 47: porter.v1.CurrentAppRevisionResponse.app_revision:type_name -> porter.v1.AppRevision
-	145, // 48: porter.v1.ListAppRevisionsRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
+	149, // 48: porter.v1.ListAppRevisionsRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
 	53,  // 49: porter.v1.ListAppRevisionsResponse.app_revisions:type_name -> porter.v1.AppRevision
-	145, // 50: porter.v1.LatestAppRevisionsRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
+	149, // 50: porter.v1.LatestAppRevisionsRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
 	53,  // 51: porter.v1.LatestAppRevisionsResponse.app_revisions:type_name -> porter.v1.AppRevision
 	53,  // 52: porter.v1.GetAppRevisionResponse.app_revision:type_name -> porter.v1.AppRevision
-	143, // 53: porter.v1.AppTemplateResponse.app_template:type_name -> porter.v1.PorterApp
-	146, // 54: porter.v1.AppTemplateResponse.app_env:type_name -> porter.v1.EnvGroupVariables
+	147, // 53: porter.v1.AppTemplateResponse.app_template:type_name -> porter.v1.PorterApp
+	150, // 54: porter.v1.AppTemplateResponse.app_env:type_name -> porter.v1.EnvGroupVariables
 	0,   // 55: porter.v1.PredeployStatusResponse.predeploy_status:type_name -> porter.v1.EnumPredeployStatus
-	149, // 56: porter.v1.DeploymentTargetDetailsResponse.deployment_target:type_name -> porter.v1.DeploymentTarget
-	149, // 57: porter.v1.DeploymentTargetsResponse.deployment_targets:type_name -> porter.v1.DeploymentTarget
-	149, // 58: porter.v1.DefaultDeploymentTargetResponse.deployment_target:type_name -> porter.v1.DeploymentTarget
-	150, // 59: porter.v1.EnvGroupVariablesRequest.env_group:type_name -> porter.v1.EnvGroup
-	145, // 60: porter.v1.EnvGroupVariablesRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
-	146, // 61: porter.v1.EnvGroupVariablesResponse.env_group_variables:type_name -> porter.v1.EnvGroupVariables
-	145, // 62: porter.v1.LatestEnvGroupWithVariablesRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
-	150, // 63: porter.v1.LatestEnvGroupWithVariablesResponse.env_group:type_name -> porter.v1.EnvGroup
-	146, // 64: porter.v1.LatestEnvGroupWithVariablesResponse.env_group_variables:type_name -> porter.v1.EnvGroupVariables
-	145, // 65: porter.v1.UpdateAppImageRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
-	145, // 66: porter.v1.UpdateAppBuildSettingsRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
-	151, // 67: porter.v1.UpdateAppBuildSettingsRequest.build:type_name -> porter.v1.Build
-	145, // 68: porter.v1.AppHelmValuesRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
-	145, // 69: porter.v1.ManualServiceRunRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
+	153, // 56: porter.v1.DeploymentTargetDetailsResponse.deployment_target:type_name -> porter.v1.DeploymentTarget
+	153, // 57: porter.v1.DeploymentTargetsResponse.deployment_targets:type_name -> porter.v1.DeploymentTarget
+	153, // 58: porter.v1.DefaultDeploymentTargetResponse.deployment_target:type_name -> porter.v1.DeploymentTarget
+	154, // 59: porter.v1.EnvGroupVariablesRequest.env_group:type_name -> porter.v1.EnvGroup
+	149, // 60: porter.v1.EnvGroupVariablesRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
+	150, // 61: porter.v1.EnvGroupVariablesResponse.env_group_variables:type_name -> porter.v1.EnvGroupVariables
+	149, // 62: porter.v1.LatestEnvGroupWithVariablesRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
+	154, // 63: porter.v1.LatestEnvGroupWithVariablesResponse.env_group:type_name -> porter.v1.EnvGroup
+	150, // 64: porter.v1.LatestEnvGroupWithVariablesResponse.env_group_variables:type_name -> porter.v1.EnvGroupVariables
+	149, // 65: porter.v1.UpdateAppImageRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
+	149, // 66: porter.v1.UpdateAppBuildSettingsRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
+	155, // 67: porter.v1.UpdateAppBuildSettingsRequest.build:type_name -> porter.v1.Build
+	149, // 68: porter.v1.AppHelmValuesRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
+	149, // 69: porter.v1.ManualServiceRunRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
 	30,  // 70: porter.v1.ImagesResponse.images:type_name -> porter.v1.ImageInfo
-	145, // 71: porter.v1.CreateAppInstanceRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
-	145, // 72: porter.v1.DeleteAppInstanceRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
-	145, // 73: porter.v1.ListAppInstancesRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
+	149, // 71: porter.v1.CreateAppInstanceRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
+	149, // 72: porter.v1.DeleteAppInstanceRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
+	149, // 73: porter.v1.ListAppInstancesRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
 	102, // 74: porter.v1.ListAppInstancesResponse.app_instances:type_name -> porter.v1.AppInstance
-	145, // 75: porter.v1.CreateNotificationRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
-	145, // 76: porter.v1.UpdateServiceDeploymentStatusRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
+	149, // 75: porter.v1.CreateNotificationRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
+	149, // 76: porter.v1.UpdateServiceDeploymentStatusRequest.deployment_target_identifier:type_name -> porter.v1.DeploymentTargetIdentifier
 	4,   // 77: porter.v1.UpdateServiceDeploymentStatusRequest.status:type_name -> porter.v1.EnumServiceDeploymentStatus
-	152, // 78: porter.v1.CreateOrUpdateEnvGroupRequest.env_group_provider_type:type_name -> porter.v1.EnumEnvGroupProviderType
-	152, // 79: porter.v1.DeleteEnvGroupRequest.env_group_provider_type:type_name -> porter.v1.EnumEnvGroupProviderType
-	153, // 80: porter.v1.AssumeRoleChainTargetsResponse.chain_links:type_name -> porter.v1.AssumeRoleChainLink
-	142, // 81: porter.v1.ECRTokenForRegistryResponse.expiry:type_name -> google.protobuf.Timestamp
-	136, // 82: porter.v1.ClusterNetworkSettingsResponse.cloud_provider:type_name -> porter.v1.EnumCloudProvider
-	154, // 83: porter.v1.ClusterNetworkSettingsResponse.eks_cloud_provider_network:type_name -> porter.v1.AWSVpc
-	5,   // 84: porter.v1.DatastoreStatusRequest.type:type_name -> porter.v1.EnumDatastore
-	136, // 85: porter.v1.SharedNetworkSettingsResponse.cloud_provider:type_name -> porter.v1.EnumCloudProvider
-	154, // 86: porter.v1.SharedNetworkSettingsResponse.eks_cloud_provider_network:type_name -> porter.v1.AWSVpc
-	139, // 87: porter.v1.PreflightCheckResponse.PreflightChecksEntry.value:type_name -> porter.v1.Error
-	6,   // 88: porter.v1.ClusterControlPlaneService.QuotaIncrease:input_type -> porter.v1.QuotaIncreaseRequest
-	155, // 89: porter.v1.ClusterControlPlaneService.UpdateCloudProviderCredentials:input_type -> porter.v1.UpdateCloudProviderCredentialsRequest
-	10,  // 90: porter.v1.ClusterControlPlaneService.QuotaPreflightCheck:input_type -> porter.v1.QuotaPreflightCheckRequest
-	8,   // 91: porter.v1.ClusterControlPlaneService.PreflightCheck:input_type -> porter.v1.PreflightCheckRequest
-	12,  // 92: porter.v1.ClusterControlPlaneService.CreateAssumeRoleChain:input_type -> porter.v1.CreateAssumeRoleChainRequest
-	14,  // 93: porter.v1.ClusterControlPlaneService.SaveAzureCredentials:input_type -> porter.v1.SaveAzureCredentialsRequest
-	16,  // 94: porter.v1.ClusterControlPlaneService.KubeConfigForCluster:input_type -> porter.v1.KubeConfigForClusterRequest
-	18,  // 95: porter.v1.ClusterControlPlaneService.UpdateContract:input_type -> porter.v1.UpdateContractRequest
-	34,  // 96: porter.v1.ClusterControlPlaneService.ReadContract:input_type -> porter.v1.ReadContractRequest
-	20,  // 97: porter.v1.ClusterControlPlaneService.ClusterStatus:input_type -> porter.v1.ClusterStatusRequest
-	22,  // 98: porter.v1.ClusterControlPlaneService.DeleteCluster:input_type -> porter.v1.DeleteClusterRequest
-	32,  // 99: porter.v1.ClusterControlPlaneService.TokenForRegistry:input_type -> porter.v1.TokenForRegistryRequest
-	36,  // 100: porter.v1.ClusterControlPlaneService.ValidatePorterApp:input_type -> porter.v1.ValidatePorterAppRequest
-	38,  // 101: porter.v1.ClusterControlPlaneService.ApplyPorterApp:input_type -> porter.v1.ApplyPorterAppRequest
-	40,  // 102: porter.v1.ClusterControlPlaneService.UpdateApp:input_type -> porter.v1.UpdateAppRequest
-	44,  // 103: porter.v1.ClusterControlPlaneService.RollbackRevision:input_type -> porter.v1.RollbackRevisionRequest
-	42,  // 104: porter.v1.ClusterControlPlaneService.UpdateRevisionStatus:input_type -> porter.v1.UpdateRevisionStatusRequest
-	54,  // 105: porter.v1.ClusterControlPlaneService.AppRevisionStatus:input_type -> porter.v1.AppRevisionStatusRequest
-	46,  // 106: porter.v1.ClusterControlPlaneService.DeletePorterApp:input_type -> porter.v1.DeletePorterAppRequest
-	48,  // 107: porter.v1.ClusterControlPlaneService.DeleteAppDeployment:input_type -> porter.v1.DeleteAppDeploymentRequest
-	50,  // 108: porter.v1.ClusterControlPlaneService.DeleteDeploymentTarget:input_type -> porter.v1.DeleteDeploymentTargetRequest
-	52,  // 109: porter.v1.ClusterControlPlaneService.CurrentAppRevision:input_type -> porter.v1.CurrentAppRevisionRequest
-	60,  // 110: porter.v1.ClusterControlPlaneService.ListAppRevisions:input_type -> porter.v1.ListAppRevisionsRequest
-	62,  // 111: porter.v1.ClusterControlPlaneService.LatestAppRevisions:input_type -> porter.v1.LatestAppRevisionsRequest
-	64,  // 112: porter.v1.ClusterControlPlaneService.GetAppRevision:input_type -> porter.v1.GetAppRevisionRequest
-	66,  // 113: porter.v1.ClusterControlPlaneService.AppTemplate:input_type -> porter.v1.AppTemplateRequest
-	68,  // 114: porter.v1.ClusterControlPlaneService.PredeployStatus:input_type -> porter.v1.PredeployStatusRequest
-	70,  // 115: porter.v1.ClusterControlPlaneService.DeploymentTargetDetails:input_type -> porter.v1.DeploymentTargetDetailsRequest
-	72,  // 116: porter.v1.ClusterControlPlaneService.CreateDeploymentTarget:input_type -> porter.v1.CreateDeploymentTargetRequest
-	74,  // 117: porter.v1.ClusterControlPlaneService.DeploymentTargets:input_type -> porter.v1.DeploymentTargetsRequest
-	76,  // 118: porter.v1.ClusterControlPlaneService.DefaultDeploymentTarget:input_type -> porter.v1.DefaultDeploymentTargetRequest
-	78,  // 119: porter.v1.ClusterControlPlaneService.SeedAppRevisions:input_type -> porter.v1.SeedAppRevisionsRequest
-	80,  // 120: porter.v1.ClusterControlPlaneService.EnvGroupVariables:input_type -> porter.v1.EnvGroupVariablesRequest
-	82,  // 121: porter.v1.ClusterControlPlaneService.LatestEnvGroupWithVariables:input_type -> porter.v1.LatestEnvGroupWithVariablesRequest
-	84,  // 122: porter.v1.ClusterControlPlaneService.UpdateAppImage:input_type -> porter.v1.UpdateAppImageRequest
-	86,  // 123: porter.v1.ClusterControlPlaneService.UpdateAppBuildSettings:input_type -> porter.v1.UpdateAppBuildSettingsRequest
-	88,  // 124: porter.v1.ClusterControlPlaneService.UpdateAppsLinkedToEnvGroup:input_type -> porter.v1.UpdateAppsLinkedToEnvGroupRequest
-	90,  // 125: porter.v1.ClusterControlPlaneService.AppHelmValues:input_type -> porter.v1.AppHelmValuesRequest
-	92,  // 126: porter.v1.ClusterControlPlaneService.ManualServiceRun:input_type -> porter.v1.ManualServiceRunRequest
-	127, // 127: porter.v1.ClusterControlPlaneService.ClusterNetworkSettings:input_type -> porter.v1.ClusterNetworkSettingsRequest
-	133, // 128: porter.v1.ClusterControlPlaneService.SharedNetworkSettings:input_type -> porter.v1.SharedNetworkSettingsRequest
-	94,  // 129: porter.v1.ClusterControlPlaneService.Images:input_type -> porter.v1.ImagesRequest
-	96,  // 130: porter.v1.ClusterControlPlaneService.CreateAppInstance:input_type -> porter.v1.CreateAppInstanceRequest
-	98,  // 131: porter.v1.ClusterControlPlaneService.DeleteAppInstance:input_type -> porter.v1.DeleteAppInstanceRequest
-	100, // 132: porter.v1.ClusterControlPlaneService.ListAppInstances:input_type -> porter.v1.ListAppInstancesRequest
-	103, // 133: porter.v1.ClusterControlPlaneService.CreateNotification:input_type -> porter.v1.CreateNotificationRequest
-	105, // 134: porter.v1.ClusterControlPlaneService.UpdateServiceDeploymentStatus:input_type -> porter.v1.UpdateServiceDeploymentStatusRequest
-	125, // 135: porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry:input_type -> porter.v1.DockerConfigFileForRegistryRequest
-	121, // 136: porter.v1.ClusterControlPlaneService.ECRTokenForRegistry:input_type -> porter.v1.ECRTokenForRegistryRequest
-	123, // 137: porter.v1.ClusterControlPlaneService.AssumeRoleCredentials:input_type -> porter.v1.AssumeRoleCredentialsRequest
-	119, // 138: porter.v1.ClusterControlPlaneService.AssumeRoleChainTargets:input_type -> porter.v1.AssumeRoleChainTargetsRequest
-	117, // 139: porter.v1.ClusterControlPlaneService.CertificateAuthorityData:input_type -> porter.v1.CertificateAuthorityDataRequest
-	115, // 140: porter.v1.ClusterControlPlaneService.EKSBearerToken:input_type -> porter.v1.EKSBearerTokenRequest
-	24,  // 141: porter.v1.ClusterControlPlaneService.ListRepositoriesForRegistry:input_type -> porter.v1.ListRepositoriesForRegistryRequest
-	27,  // 142: porter.v1.ClusterControlPlaneService.ListImagesForRepository:input_type -> porter.v1.ListImagesForRepositoryRequest
-	129, // 143: porter.v1.ClusterControlPlaneService.DatastoreStatus:input_type -> porter.v1.DatastoreStatusRequest
-	131, // 144: porter.v1.ClusterControlPlaneService.RegistryStatus:input_type -> porter.v1.RegistryStatusRequest
-	109, // 145: porter.v1.ClusterControlPlaneService.EnableExternalEnvGroupProviders:input_type -> porter.v1.EnableExternalEnvGroupProvidersRequest
-	107, // 146: porter.v1.ClusterControlPlaneService.AreExternalEnvGroupProvidersEnabled:input_type -> porter.v1.AreExternalEnvGroupProvidersEnabledRequest
-	111, // 147: porter.v1.ClusterControlPlaneService.CreateOrUpdateEnvGroup:input_type -> porter.v1.CreateOrUpdateEnvGroupRequest
-	113, // 148: porter.v1.ClusterControlPlaneService.DeleteEnvGroup:input_type -> porter.v1.DeleteEnvGroupRequest
-	7,   // 149: porter.v1.ClusterControlPlaneService.QuotaIncrease:output_type -> porter.v1.QuotaIncreaseResponse
-	156, // 150: porter.v1.ClusterControlPlaneService.UpdateCloudProviderCredentials:output_type -> porter.v1.UpdateCloudProviderCredentialsResponse
-	11,  // 151: porter.v1.ClusterControlPlaneService.QuotaPreflightCheck:output_type -> porter.v1.QuotaPreflightCheckResponse
-	9,   // 152: porter.v1.ClusterControlPlaneService.PreflightCheck:output_type -> porter.v1.PreflightCheckResponse
-	13,  // 153: porter.v1.ClusterControlPlaneService.CreateAssumeRoleChain:output_type -> porter.v1.CreateAssumeRoleChainResponse
-	15,  // 154: porter.v1.ClusterControlPlaneService.SaveAzureCredentials:output_type -> porter.v1.SaveAzureCredentialsResponse
-	17,  // 155: porter.v1.ClusterControlPlaneService.KubeConfigForCluster:output_type -> porter.v1.KubeConfigForClusterResponse
-	19,  // 156: porter.v1.ClusterControlPlaneService.UpdateContract:output_type -> porter.v1.UpdateContractResponse
-	35,  // 157: porter.v1.ClusterControlPlaneService.ReadContract:output_type -> porter.v1.ReadContractResponse
-	21,  // 158: porter.v1.ClusterControlPlaneService.ClusterStatus:output_type -> porter.v1.ClusterStatusResponse
-	23,  // 159: porter.v1.ClusterControlPlaneService.DeleteCluster:output_type -> porter.v1.DeleteClusterResponse
-	33,  // 160: porter.v1.ClusterControlPlaneService.TokenForRegistry:output_type -> porter.v1.TokenForRegistryResponse
-	37,  // 161: porter.v1.ClusterControlPlaneService.ValidatePorterApp:output_type -> porter.v1.ValidatePorterAppResponse
-	39,  // 162: porter.v1.ClusterControlPlaneService.ApplyPorterApp:output_type -> porter.v1.ApplyPorterAppResponse
-	41,  // 163: porter.v1.ClusterControlPlaneService.UpdateApp:output_type -> porter.v1.UpdateAppResponse
-	45,  // 164: porter.v1.ClusterControlPlaneService.RollbackRevision:output_type -> porter.v1.RollbackRevisionResponse
-	43,  // 165: porter.v1.ClusterControlPlaneService.UpdateRevisionStatus:output_type -> porter.v1.UpdateRevisionStatusResponse
-	55,  // 166: porter.v1.ClusterControlPlaneService.AppRevisionStatus:output_type -> porter.v1.AppRevisionStatusResponse
-	47,  // 167: porter.v1.ClusterControlPlaneService.DeletePorterApp:output_type -> porter.v1.DeletePorterAppResponse
-	49,  // 168: porter.v1.ClusterControlPlaneService.DeleteAppDeployment:output_type -> porter.v1.DeleteAppDeploymentResponse
-	51,  // 169: porter.v1.ClusterControlPlaneService.DeleteDeploymentTarget:output_type -> porter.v1.DeleteDeploymentTargetResponse
-	59,  // 170: porter.v1.ClusterControlPlaneService.CurrentAppRevision:output_type -> porter.v1.CurrentAppRevisionResponse
-	61,  // 171: porter.v1.ClusterControlPlaneService.ListAppRevisions:output_type -> porter.v1.ListAppRevisionsResponse
-	63,  // 172: porter.v1.ClusterControlPlaneService.LatestAppRevisions:output_type -> porter.v1.LatestAppRevisionsResponse
-	65,  // 173: porter.v1.ClusterControlPlaneService.GetAppRevision:output_type -> porter.v1.GetAppRevisionResponse
-	67,  // 174: porter.v1.ClusterControlPlaneService.AppTemplate:output_type -> porter.v1.AppTemplateResponse
-	69,  // 175: porter.v1.ClusterControlPlaneService.PredeployStatus:output_type -> porter.v1.PredeployStatusResponse
-	71,  // 176: porter.v1.ClusterControlPlaneService.DeploymentTargetDetails:output_type -> porter.v1.DeploymentTargetDetailsResponse
-	73,  // 177: porter.v1.ClusterControlPlaneService.CreateDeploymentTarget:output_type -> porter.v1.CreateDeploymentTargetResponse
-	75,  // 178: porter.v1.ClusterControlPlaneService.DeploymentTargets:output_type -> porter.v1.DeploymentTargetsResponse
-	77,  // 179: porter.v1.ClusterControlPlaneService.DefaultDeploymentTarget:output_type -> porter.v1.DefaultDeploymentTargetResponse
-	79,  // 180: porter.v1.ClusterControlPlaneService.SeedAppRevisions:output_type -> porter.v1.SeedAppRevisionsResponse
-	81,  // 181: porter.v1.ClusterControlPlaneService.EnvGroupVariables:output_type -> porter.v1.EnvGroupVariablesResponse
-	83,  // 182: porter.v1.ClusterControlPlaneService.LatestEnvGroupWithVariables:output_type -> porter.v1.LatestEnvGroupWithVariablesResponse
-	85,  // 183: porter.v1.ClusterControlPlaneService.UpdateAppImage:output_type -> porter.v1.UpdateAppImageResponse
-	87,  // 184: porter.v1.ClusterControlPlaneService.UpdateAppBuildSettings:output_type -> porter.v1.UpdateAppBuildSettingsResponse
-	89,  // 185: porter.v1.ClusterControlPlaneService.UpdateAppsLinkedToEnvGroup:output_type -> porter.v1.UpdateAppsLinkedToEnvGroupResponse
-	91,  // 186: porter.v1.ClusterControlPlaneService.AppHelmValues:output_type -> porter.v1.AppHelmValuesResponse
-	93,  // 187: porter.v1.ClusterControlPlaneService.ManualServiceRun:output_type -> porter.v1.ManualServiceRunResponse
-	128, // 188: porter.v1.ClusterControlPlaneService.ClusterNetworkSettings:output_type -> porter.v1.ClusterNetworkSettingsResponse
-	134, // 189: porter.v1.ClusterControlPlaneService.SharedNetworkSettings:output_type -> porter.v1.SharedNetworkSettingsResponse
-	95,  // 190: porter.v1.ClusterControlPlaneService.Images:output_type -> porter.v1.ImagesResponse
-	97,  // 191: porter.v1.ClusterControlPlaneService.CreateAppInstance:output_type -> porter.v1.CreateAppInstanceResponse
-	99,  // 192: porter.v1.ClusterControlPlaneService.DeleteAppInstance:output_type -> porter.v1.DeleteAppInstanceResponse
-	101, // 193: porter.v1.ClusterControlPlaneService.ListAppInstances:output_type -> porter.v1.ListAppInstancesResponse
-	104, // 194: porter.v1.ClusterControlPlaneService.CreateNotification:output_type -> porter.v1.CreateNotificationResponse
-	106, // 195: porter.v1.ClusterControlPlaneService.UpdateServiceDeploymentStatus:output_type -> porter.v1.UpdateServiceDeploymentStatusResponse
-	126, // 196: porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry:output_type -> porter.v1.DockerConfigFileForRegistryResponse
-	122, // 197: porter.v1.ClusterControlPlaneService.ECRTokenForRegistry:output_type -> porter.v1.ECRTokenForRegistryResponse
-	124, // 198: porter.v1.ClusterControlPlaneService.AssumeRoleCredentials:output_type -> porter.v1.AssumeRoleCredentialsResponse
-	120, // 199: porter.v1.ClusterControlPlaneService.AssumeRoleChainTargets:output_type -> porter.v1.AssumeRoleChainTargetsResponse
-	118, // 200: porter.v1.ClusterControlPlaneService.CertificateAuthorityData:output_type -> porter.v1.CertificateAuthorityDataResponse
-	116, // 201: porter.v1.ClusterControlPlaneService.EKSBearerToken:output_type -> porter.v1.EKSBearerTokenResponse
-	25,  // 202: porter.v1.ClusterControlPlaneService.ListRepositoriesForRegistry:output_type -> porter.v1.ListRepositoriesForRegistryResponse
-	28,  // 203: porter.v1.ClusterControlPlaneService.ListImagesForRepository:output_type -> porter.v1.ListImagesForRepositoryResponse
-	130, // 204: porter.v1.ClusterControlPlaneService.DatastoreStatus:output_type -> porter.v1.DatastoreStatusResponse
-	132, // 205: porter.v1.ClusterControlPlaneService.RegistryStatus:output_type -> porter.v1.RegistryStatusResponse
-	110, // 206: porter.v1.ClusterControlPlaneService.EnableExternalEnvGroupProviders:output_type -> porter.v1.EnableExternalEnvGroupProvidersResponse
-	108, // 207: porter.v1.ClusterControlPlaneService.AreExternalEnvGroupProvidersEnabled:output_type -> porter.v1.AreExternalEnvGroupProvidersEnabledResponse
-	112, // 208: porter.v1.ClusterControlPlaneService.CreateOrUpdateEnvGroup:output_type -> porter.v1.CreateOrUpdateEnvGroupResponse
-	114, // 209: porter.v1.ClusterControlPlaneService.DeleteEnvGroup:output_type -> porter.v1.DeleteEnvGroupResponse
-	149, // [149:210] is the sub-list for method output_type
-	88,  // [88:149] is the sub-list for method input_type
-	88,  // [88:88] is the sub-list for extension type_name
-	88,  // [88:88] is the sub-list for extension extendee
-	0,   // [0:88] is the sub-list for field type_name
+	156, // 78: porter.v1.CreateOrUpdateEnvGroupRequest.env_group_provider_type:type_name -> porter.v1.EnumEnvGroupProviderType
+	156, // 79: porter.v1.DeleteEnvGroupRequest.env_group_provider_type:type_name -> porter.v1.EnumEnvGroupProviderType
+	157, // 80: porter.v1.AssumeRoleChainTargetsResponse.chain_links:type_name -> porter.v1.AssumeRoleChainLink
+	146, // 81: porter.v1.ECRTokenForRegistryResponse.expiry:type_name -> google.protobuf.Timestamp
+	140, // 82: porter.v1.ClusterNetworkSettingsResponse.cloud_provider:type_name -> porter.v1.EnumCloudProvider
+	158, // 83: porter.v1.ClusterNetworkSettingsResponse.eks_cloud_provider_network:type_name -> porter.v1.AWSVpc
+	140, // 84: porter.v1.ListDatastoresRequest.cloud_provider:type_name -> porter.v1.EnumCloudProvider
+	5,   // 85: porter.v1.ListDatastoresRequest.type:type_name -> porter.v1.EnumDatastore
+	133, // 86: porter.v1.ListDatastoresResponse.datastores:type_name -> porter.v1.Datastore
+	5,   // 87: porter.v1.DatastoreStatusRequest.type:type_name -> porter.v1.EnumDatastore
+	5,   // 88: porter.v1.Datastore.type:type_name -> porter.v1.EnumDatastore
+	134, // 89: porter.v1.Datastore.metadata:type_name -> porter.v1.DatastoreMetadata
+	154, // 90: porter.v1.Datastore.env:type_name -> porter.v1.EnvGroup
+	140, // 91: porter.v1.SharedNetworkSettingsResponse.cloud_provider:type_name -> porter.v1.EnumCloudProvider
+	158, // 92: porter.v1.SharedNetworkSettingsResponse.eks_cloud_provider_network:type_name -> porter.v1.AWSVpc
+	143, // 93: porter.v1.PreflightCheckResponse.PreflightChecksEntry.value:type_name -> porter.v1.Error
+	6,   // 94: porter.v1.ClusterControlPlaneService.QuotaIncrease:input_type -> porter.v1.QuotaIncreaseRequest
+	159, // 95: porter.v1.ClusterControlPlaneService.UpdateCloudProviderCredentials:input_type -> porter.v1.UpdateCloudProviderCredentialsRequest
+	10,  // 96: porter.v1.ClusterControlPlaneService.QuotaPreflightCheck:input_type -> porter.v1.QuotaPreflightCheckRequest
+	8,   // 97: porter.v1.ClusterControlPlaneService.PreflightCheck:input_type -> porter.v1.PreflightCheckRequest
+	12,  // 98: porter.v1.ClusterControlPlaneService.CreateAssumeRoleChain:input_type -> porter.v1.CreateAssumeRoleChainRequest
+	14,  // 99: porter.v1.ClusterControlPlaneService.SaveAzureCredentials:input_type -> porter.v1.SaveAzureCredentialsRequest
+	16,  // 100: porter.v1.ClusterControlPlaneService.KubeConfigForCluster:input_type -> porter.v1.KubeConfigForClusterRequest
+	18,  // 101: porter.v1.ClusterControlPlaneService.UpdateContract:input_type -> porter.v1.UpdateContractRequest
+	34,  // 102: porter.v1.ClusterControlPlaneService.ReadContract:input_type -> porter.v1.ReadContractRequest
+	20,  // 103: porter.v1.ClusterControlPlaneService.ClusterStatus:input_type -> porter.v1.ClusterStatusRequest
+	22,  // 104: porter.v1.ClusterControlPlaneService.DeleteCluster:input_type -> porter.v1.DeleteClusterRequest
+	32,  // 105: porter.v1.ClusterControlPlaneService.TokenForRegistry:input_type -> porter.v1.TokenForRegistryRequest
+	36,  // 106: porter.v1.ClusterControlPlaneService.ValidatePorterApp:input_type -> porter.v1.ValidatePorterAppRequest
+	38,  // 107: porter.v1.ClusterControlPlaneService.ApplyPorterApp:input_type -> porter.v1.ApplyPorterAppRequest
+	40,  // 108: porter.v1.ClusterControlPlaneService.UpdateApp:input_type -> porter.v1.UpdateAppRequest
+	44,  // 109: porter.v1.ClusterControlPlaneService.RollbackRevision:input_type -> porter.v1.RollbackRevisionRequest
+	42,  // 110: porter.v1.ClusterControlPlaneService.UpdateRevisionStatus:input_type -> porter.v1.UpdateRevisionStatusRequest
+	54,  // 111: porter.v1.ClusterControlPlaneService.AppRevisionStatus:input_type -> porter.v1.AppRevisionStatusRequest
+	46,  // 112: porter.v1.ClusterControlPlaneService.DeletePorterApp:input_type -> porter.v1.DeletePorterAppRequest
+	48,  // 113: porter.v1.ClusterControlPlaneService.DeleteAppDeployment:input_type -> porter.v1.DeleteAppDeploymentRequest
+	50,  // 114: porter.v1.ClusterControlPlaneService.DeleteDeploymentTarget:input_type -> porter.v1.DeleteDeploymentTargetRequest
+	52,  // 115: porter.v1.ClusterControlPlaneService.CurrentAppRevision:input_type -> porter.v1.CurrentAppRevisionRequest
+	60,  // 116: porter.v1.ClusterControlPlaneService.ListAppRevisions:input_type -> porter.v1.ListAppRevisionsRequest
+	62,  // 117: porter.v1.ClusterControlPlaneService.LatestAppRevisions:input_type -> porter.v1.LatestAppRevisionsRequest
+	64,  // 118: porter.v1.ClusterControlPlaneService.GetAppRevision:input_type -> porter.v1.GetAppRevisionRequest
+	66,  // 119: porter.v1.ClusterControlPlaneService.AppTemplate:input_type -> porter.v1.AppTemplateRequest
+	68,  // 120: porter.v1.ClusterControlPlaneService.PredeployStatus:input_type -> porter.v1.PredeployStatusRequest
+	70,  // 121: porter.v1.ClusterControlPlaneService.DeploymentTargetDetails:input_type -> porter.v1.DeploymentTargetDetailsRequest
+	72,  // 122: porter.v1.ClusterControlPlaneService.CreateDeploymentTarget:input_type -> porter.v1.CreateDeploymentTargetRequest
+	74,  // 123: porter.v1.ClusterControlPlaneService.DeploymentTargets:input_type -> porter.v1.DeploymentTargetsRequest
+	76,  // 124: porter.v1.ClusterControlPlaneService.DefaultDeploymentTarget:input_type -> porter.v1.DefaultDeploymentTargetRequest
+	78,  // 125: porter.v1.ClusterControlPlaneService.SeedAppRevisions:input_type -> porter.v1.SeedAppRevisionsRequest
+	80,  // 126: porter.v1.ClusterControlPlaneService.EnvGroupVariables:input_type -> porter.v1.EnvGroupVariablesRequest
+	82,  // 127: porter.v1.ClusterControlPlaneService.LatestEnvGroupWithVariables:input_type -> porter.v1.LatestEnvGroupWithVariablesRequest
+	84,  // 128: porter.v1.ClusterControlPlaneService.UpdateAppImage:input_type -> porter.v1.UpdateAppImageRequest
+	86,  // 129: porter.v1.ClusterControlPlaneService.UpdateAppBuildSettings:input_type -> porter.v1.UpdateAppBuildSettingsRequest
+	88,  // 130: porter.v1.ClusterControlPlaneService.UpdateAppsLinkedToEnvGroup:input_type -> porter.v1.UpdateAppsLinkedToEnvGroupRequest
+	90,  // 131: porter.v1.ClusterControlPlaneService.AppHelmValues:input_type -> porter.v1.AppHelmValuesRequest
+	92,  // 132: porter.v1.ClusterControlPlaneService.ManualServiceRun:input_type -> porter.v1.ManualServiceRunRequest
+	127, // 133: porter.v1.ClusterControlPlaneService.ClusterNetworkSettings:input_type -> porter.v1.ClusterNetworkSettingsRequest
+	137, // 134: porter.v1.ClusterControlPlaneService.SharedNetworkSettings:input_type -> porter.v1.SharedNetworkSettingsRequest
+	94,  // 135: porter.v1.ClusterControlPlaneService.Images:input_type -> porter.v1.ImagesRequest
+	96,  // 136: porter.v1.ClusterControlPlaneService.CreateAppInstance:input_type -> porter.v1.CreateAppInstanceRequest
+	98,  // 137: porter.v1.ClusterControlPlaneService.DeleteAppInstance:input_type -> porter.v1.DeleteAppInstanceRequest
+	100, // 138: porter.v1.ClusterControlPlaneService.ListAppInstances:input_type -> porter.v1.ListAppInstancesRequest
+	103, // 139: porter.v1.ClusterControlPlaneService.CreateNotification:input_type -> porter.v1.CreateNotificationRequest
+	105, // 140: porter.v1.ClusterControlPlaneService.UpdateServiceDeploymentStatus:input_type -> porter.v1.UpdateServiceDeploymentStatusRequest
+	125, // 141: porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry:input_type -> porter.v1.DockerConfigFileForRegistryRequest
+	121, // 142: porter.v1.ClusterControlPlaneService.ECRTokenForRegistry:input_type -> porter.v1.ECRTokenForRegistryRequest
+	123, // 143: porter.v1.ClusterControlPlaneService.AssumeRoleCredentials:input_type -> porter.v1.AssumeRoleCredentialsRequest
+	119, // 144: porter.v1.ClusterControlPlaneService.AssumeRoleChainTargets:input_type -> porter.v1.AssumeRoleChainTargetsRequest
+	117, // 145: porter.v1.ClusterControlPlaneService.CertificateAuthorityData:input_type -> porter.v1.CertificateAuthorityDataRequest
+	115, // 146: porter.v1.ClusterControlPlaneService.EKSBearerToken:input_type -> porter.v1.EKSBearerTokenRequest
+	24,  // 147: porter.v1.ClusterControlPlaneService.ListRepositoriesForRegistry:input_type -> porter.v1.ListRepositoriesForRegistryRequest
+	27,  // 148: porter.v1.ClusterControlPlaneService.ListImagesForRepository:input_type -> porter.v1.ListImagesForRepositoryRequest
+	129, // 149: porter.v1.ClusterControlPlaneService.ListDatastores:input_type -> porter.v1.ListDatastoresRequest
+	131, // 150: porter.v1.ClusterControlPlaneService.DatastoreStatus:input_type -> porter.v1.DatastoreStatusRequest
+	135, // 151: porter.v1.ClusterControlPlaneService.RegistryStatus:input_type -> porter.v1.RegistryStatusRequest
+	109, // 152: porter.v1.ClusterControlPlaneService.EnableExternalEnvGroupProviders:input_type -> porter.v1.EnableExternalEnvGroupProvidersRequest
+	107, // 153: porter.v1.ClusterControlPlaneService.AreExternalEnvGroupProvidersEnabled:input_type -> porter.v1.AreExternalEnvGroupProvidersEnabledRequest
+	111, // 154: porter.v1.ClusterControlPlaneService.CreateOrUpdateEnvGroup:input_type -> porter.v1.CreateOrUpdateEnvGroupRequest
+	113, // 155: porter.v1.ClusterControlPlaneService.DeleteEnvGroup:input_type -> porter.v1.DeleteEnvGroupRequest
+	7,   // 156: porter.v1.ClusterControlPlaneService.QuotaIncrease:output_type -> porter.v1.QuotaIncreaseResponse
+	160, // 157: porter.v1.ClusterControlPlaneService.UpdateCloudProviderCredentials:output_type -> porter.v1.UpdateCloudProviderCredentialsResponse
+	11,  // 158: porter.v1.ClusterControlPlaneService.QuotaPreflightCheck:output_type -> porter.v1.QuotaPreflightCheckResponse
+	9,   // 159: porter.v1.ClusterControlPlaneService.PreflightCheck:output_type -> porter.v1.PreflightCheckResponse
+	13,  // 160: porter.v1.ClusterControlPlaneService.CreateAssumeRoleChain:output_type -> porter.v1.CreateAssumeRoleChainResponse
+	15,  // 161: porter.v1.ClusterControlPlaneService.SaveAzureCredentials:output_type -> porter.v1.SaveAzureCredentialsResponse
+	17,  // 162: porter.v1.ClusterControlPlaneService.KubeConfigForCluster:output_type -> porter.v1.KubeConfigForClusterResponse
+	19,  // 163: porter.v1.ClusterControlPlaneService.UpdateContract:output_type -> porter.v1.UpdateContractResponse
+	35,  // 164: porter.v1.ClusterControlPlaneService.ReadContract:output_type -> porter.v1.ReadContractResponse
+	21,  // 165: porter.v1.ClusterControlPlaneService.ClusterStatus:output_type -> porter.v1.ClusterStatusResponse
+	23,  // 166: porter.v1.ClusterControlPlaneService.DeleteCluster:output_type -> porter.v1.DeleteClusterResponse
+	33,  // 167: porter.v1.ClusterControlPlaneService.TokenForRegistry:output_type -> porter.v1.TokenForRegistryResponse
+	37,  // 168: porter.v1.ClusterControlPlaneService.ValidatePorterApp:output_type -> porter.v1.ValidatePorterAppResponse
+	39,  // 169: porter.v1.ClusterControlPlaneService.ApplyPorterApp:output_type -> porter.v1.ApplyPorterAppResponse
+	41,  // 170: porter.v1.ClusterControlPlaneService.UpdateApp:output_type -> porter.v1.UpdateAppResponse
+	45,  // 171: porter.v1.ClusterControlPlaneService.RollbackRevision:output_type -> porter.v1.RollbackRevisionResponse
+	43,  // 172: porter.v1.ClusterControlPlaneService.UpdateRevisionStatus:output_type -> porter.v1.UpdateRevisionStatusResponse
+	55,  // 173: porter.v1.ClusterControlPlaneService.AppRevisionStatus:output_type -> porter.v1.AppRevisionStatusResponse
+	47,  // 174: porter.v1.ClusterControlPlaneService.DeletePorterApp:output_type -> porter.v1.DeletePorterAppResponse
+	49,  // 175: porter.v1.ClusterControlPlaneService.DeleteAppDeployment:output_type -> porter.v1.DeleteAppDeploymentResponse
+	51,  // 176: porter.v1.ClusterControlPlaneService.DeleteDeploymentTarget:output_type -> porter.v1.DeleteDeploymentTargetResponse
+	59,  // 177: porter.v1.ClusterControlPlaneService.CurrentAppRevision:output_type -> porter.v1.CurrentAppRevisionResponse
+	61,  // 178: porter.v1.ClusterControlPlaneService.ListAppRevisions:output_type -> porter.v1.ListAppRevisionsResponse
+	63,  // 179: porter.v1.ClusterControlPlaneService.LatestAppRevisions:output_type -> porter.v1.LatestAppRevisionsResponse
+	65,  // 180: porter.v1.ClusterControlPlaneService.GetAppRevision:output_type -> porter.v1.GetAppRevisionResponse
+	67,  // 181: porter.v1.ClusterControlPlaneService.AppTemplate:output_type -> porter.v1.AppTemplateResponse
+	69,  // 182: porter.v1.ClusterControlPlaneService.PredeployStatus:output_type -> porter.v1.PredeployStatusResponse
+	71,  // 183: porter.v1.ClusterControlPlaneService.DeploymentTargetDetails:output_type -> porter.v1.DeploymentTargetDetailsResponse
+	73,  // 184: porter.v1.ClusterControlPlaneService.CreateDeploymentTarget:output_type -> porter.v1.CreateDeploymentTargetResponse
+	75,  // 185: porter.v1.ClusterControlPlaneService.DeploymentTargets:output_type -> porter.v1.DeploymentTargetsResponse
+	77,  // 186: porter.v1.ClusterControlPlaneService.DefaultDeploymentTarget:output_type -> porter.v1.DefaultDeploymentTargetResponse
+	79,  // 187: porter.v1.ClusterControlPlaneService.SeedAppRevisions:output_type -> porter.v1.SeedAppRevisionsResponse
+	81,  // 188: porter.v1.ClusterControlPlaneService.EnvGroupVariables:output_type -> porter.v1.EnvGroupVariablesResponse
+	83,  // 189: porter.v1.ClusterControlPlaneService.LatestEnvGroupWithVariables:output_type -> porter.v1.LatestEnvGroupWithVariablesResponse
+	85,  // 190: porter.v1.ClusterControlPlaneService.UpdateAppImage:output_type -> porter.v1.UpdateAppImageResponse
+	87,  // 191: porter.v1.ClusterControlPlaneService.UpdateAppBuildSettings:output_type -> porter.v1.UpdateAppBuildSettingsResponse
+	89,  // 192: porter.v1.ClusterControlPlaneService.UpdateAppsLinkedToEnvGroup:output_type -> porter.v1.UpdateAppsLinkedToEnvGroupResponse
+	91,  // 193: porter.v1.ClusterControlPlaneService.AppHelmValues:output_type -> porter.v1.AppHelmValuesResponse
+	93,  // 194: porter.v1.ClusterControlPlaneService.ManualServiceRun:output_type -> porter.v1.ManualServiceRunResponse
+	128, // 195: porter.v1.ClusterControlPlaneService.ClusterNetworkSettings:output_type -> porter.v1.ClusterNetworkSettingsResponse
+	138, // 196: porter.v1.ClusterControlPlaneService.SharedNetworkSettings:output_type -> porter.v1.SharedNetworkSettingsResponse
+	95,  // 197: porter.v1.ClusterControlPlaneService.Images:output_type -> porter.v1.ImagesResponse
+	97,  // 198: porter.v1.ClusterControlPlaneService.CreateAppInstance:output_type -> porter.v1.CreateAppInstanceResponse
+	99,  // 199: porter.v1.ClusterControlPlaneService.DeleteAppInstance:output_type -> porter.v1.DeleteAppInstanceResponse
+	101, // 200: porter.v1.ClusterControlPlaneService.ListAppInstances:output_type -> porter.v1.ListAppInstancesResponse
+	104, // 201: porter.v1.ClusterControlPlaneService.CreateNotification:output_type -> porter.v1.CreateNotificationResponse
+	106, // 202: porter.v1.ClusterControlPlaneService.UpdateServiceDeploymentStatus:output_type -> porter.v1.UpdateServiceDeploymentStatusResponse
+	126, // 203: porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry:output_type -> porter.v1.DockerConfigFileForRegistryResponse
+	122, // 204: porter.v1.ClusterControlPlaneService.ECRTokenForRegistry:output_type -> porter.v1.ECRTokenForRegistryResponse
+	124, // 205: porter.v1.ClusterControlPlaneService.AssumeRoleCredentials:output_type -> porter.v1.AssumeRoleCredentialsResponse
+	120, // 206: porter.v1.ClusterControlPlaneService.AssumeRoleChainTargets:output_type -> porter.v1.AssumeRoleChainTargetsResponse
+	118, // 207: porter.v1.ClusterControlPlaneService.CertificateAuthorityData:output_type -> porter.v1.CertificateAuthorityDataResponse
+	116, // 208: porter.v1.ClusterControlPlaneService.EKSBearerToken:output_type -> porter.v1.EKSBearerTokenResponse
+	25,  // 209: porter.v1.ClusterControlPlaneService.ListRepositoriesForRegistry:output_type -> porter.v1.ListRepositoriesForRegistryResponse
+	28,  // 210: porter.v1.ClusterControlPlaneService.ListImagesForRepository:output_type -> porter.v1.ListImagesForRepositoryResponse
+	130, // 211: porter.v1.ClusterControlPlaneService.ListDatastores:output_type -> porter.v1.ListDatastoresResponse
+	132, // 212: porter.v1.ClusterControlPlaneService.DatastoreStatus:output_type -> porter.v1.DatastoreStatusResponse
+	136, // 213: porter.v1.ClusterControlPlaneService.RegistryStatus:output_type -> porter.v1.RegistryStatusResponse
+	110, // 214: porter.v1.ClusterControlPlaneService.EnableExternalEnvGroupProviders:output_type -> porter.v1.EnableExternalEnvGroupProvidersResponse
+	108, // 215: porter.v1.ClusterControlPlaneService.AreExternalEnvGroupProvidersEnabled:output_type -> porter.v1.AreExternalEnvGroupProvidersEnabledResponse
+	112, // 216: porter.v1.ClusterControlPlaneService.CreateOrUpdateEnvGroup:output_type -> porter.v1.CreateOrUpdateEnvGroupResponse
+	114, // 217: porter.v1.ClusterControlPlaneService.DeleteEnvGroup:output_type -> porter.v1.DeleteEnvGroupResponse
+	156, // [156:218] is the sub-list for method output_type
+	94,  // [94:156] is the sub-list for method input_type
+	94,  // [94:94] is the sub-list for extension type_name
+	94,  // [94:94] is the sub-list for extension extendee
+	0,   // [0:94] is the sub-list for field type_name
 }
 
 func init() { file_porter_v1_cluster_control_plane_proto_init() }
@@ -12159,7 +12511,7 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			}
 		}
 		file_porter_v1_cluster_control_plane_proto_msgTypes[123].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DatastoreStatusRequest); i {
+			switch v := v.(*ListDatastoresRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -12171,7 +12523,7 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			}
 		}
 		file_porter_v1_cluster_control_plane_proto_msgTypes[124].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DatastoreStatusResponse); i {
+			switch v := v.(*ListDatastoresResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -12183,7 +12535,7 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			}
 		}
 		file_porter_v1_cluster_control_plane_proto_msgTypes[125].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RegistryStatusRequest); i {
+			switch v := v.(*DatastoreStatusRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -12195,7 +12547,7 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			}
 		}
 		file_porter_v1_cluster_control_plane_proto_msgTypes[126].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RegistryStatusResponse); i {
+			switch v := v.(*DatastoreStatusResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -12207,7 +12559,7 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			}
 		}
 		file_porter_v1_cluster_control_plane_proto_msgTypes[127].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SharedNetworkSettingsRequest); i {
+			switch v := v.(*Datastore); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -12219,6 +12571,54 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			}
 		}
 		file_porter_v1_cluster_control_plane_proto_msgTypes[128].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DatastoreMetadata); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_porter_v1_cluster_control_plane_proto_msgTypes[129].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RegistryStatusRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_porter_v1_cluster_control_plane_proto_msgTypes[130].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RegistryStatusResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_porter_v1_cluster_control_plane_proto_msgTypes[131].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*SharedNetworkSettingsRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_porter_v1_cluster_control_plane_proto_msgTypes[132].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*SharedNetworkSettingsResponse); i {
 			case 0:
 				return &v.state
@@ -12243,7 +12643,8 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 	file_porter_v1_cluster_control_plane_proto_msgTypes[122].OneofWrappers = []interface{}{
 		(*ClusterNetworkSettingsResponse_EksCloudProviderNetwork)(nil),
 	}
-	file_porter_v1_cluster_control_plane_proto_msgTypes[128].OneofWrappers = []interface{}{
+	file_porter_v1_cluster_control_plane_proto_msgTypes[123].OneofWrappers = []interface{}{}
+	file_porter_v1_cluster_control_plane_proto_msgTypes[132].OneofWrappers = []interface{}{
 		(*SharedNetworkSettingsResponse_EksCloudProviderNetwork)(nil),
 	}
 	type x struct{}
@@ -12252,7 +12653,7 @@ func file_porter_v1_cluster_control_plane_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_porter_v1_cluster_control_plane_proto_rawDesc,
 			NumEnums:      6,
-			NumMessages:   130,
+			NumMessages:   134,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

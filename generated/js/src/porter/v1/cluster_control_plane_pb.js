@@ -84,6 +84,8 @@ export const EnumServiceDeploymentStatus = proto3.makeEnum(
 );
 
 /**
+ * EnumDatastore represents the datastore type
+ *
  * @generated from enum porter.v1.EnumDatastore
  */
 export const EnumDatastore = proto3.makeEnum(
@@ -1635,6 +1637,36 @@ export const ClusterNetworkSettingsResponse = proto3.makeMessageType(
 );
 
 /**
+ * ListDatastoresRequest is the request object for getting a list of datastores for a given project/account
+ *
+ * @generated from message porter.v1.ListDatastoresRequest
+ */
+export const ListDatastoresRequest = proto3.makeMessageType(
+  "porter.v1.ListDatastoresRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cloud_provider", kind: "enum", T: proto3.getEnumType(EnumCloudProvider) },
+    { no: 3, name: "cloud_provider_account_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "type", kind: "enum", T: proto3.getEnumType(EnumDatastore), opt: true },
+    { no: 5, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 6, name: "include_env_group", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 7, name: "include_metadata", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
+/**
+ * ListDatastoresResponse is the response object containing a list of datastores
+ *
+ * @generated from message porter.v1.ListDatastoresResponse
+ */
+export const ListDatastoresResponse = proto3.makeMessageType(
+  "porter.v1.ListDatastoresResponse",
+  () => [
+    { no: 1, name: "datastores", kind: "message", T: Datastore, repeated: true },
+  ],
+);
+
+/**
  * DatastoreStatusRequest is the request object for fetching the status of a datastore in on a cluster
  *
  * @generated from message porter.v1.DatastoreStatusRequest
@@ -1658,6 +1690,34 @@ export const DatastoreStatusResponse = proto3.makeMessageType(
   "porter.v1.DatastoreStatusResponse",
   () => [
     { no: 1, name: "status", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * Datastore represents a single datastore object
+ *
+ * @generated from message porter.v1.Datastore
+ */
+export const Datastore = proto3.makeMessageType(
+  "porter.v1.Datastore",
+  () => [
+    { no: 1, name: "type", kind: "enum", T: proto3.getEnumType(EnumDatastore) },
+    { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "metadata", kind: "message", T: DatastoreMetadata, repeated: true },
+    { no: 4, name: "env", kind: "message", T: EnvGroup },
+  ],
+);
+
+/**
+ * DatastoreMetadata represents an object containing metadata for a given datastore
+ *
+ * @generated from message porter.v1.DatastoreMetadata
+ */
+export const DatastoreMetadata = proto3.makeMessageType(
+  "porter.v1.DatastoreMetadata",
+  () => [
+    { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "value", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
