@@ -1263,12 +1263,10 @@ message ListDatastoresRequest {
   optional EnumDatastore type = 4;
   // name is an optional name of the datastore to filter by
   string name = 5;
-  // include_config is a field denoting whether to include the datastore config in the response
-  bool include_config = 6;
   // include_env_group is a field denoting whether to include the datastore env group in the response
-  bool include_env_group = 7;
+  bool include_env_group = 6;
   // include_metadata is a field denoting whether to include the datastore metadata in the response
-  bool include_metadata = 8;
+  bool include_metadata = 7;
 }
 
 // ListDatastoresResponse is the response object containing a list of datastores

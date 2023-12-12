@@ -4754,23 +4754,16 @@ export declare class ListDatastoresRequest extends Message<ListDatastoresRequest
   name: string;
 
   /**
-   * include_config is a field denoting whether to include the datastore config in the response
-   *
-   * @generated from field: bool include_config = 6;
-   */
-  includeConfig: boolean;
-
-  /**
    * include_env_group is a field denoting whether to include the datastore env group in the response
    *
-   * @generated from field: bool include_env_group = 7;
+   * @generated from field: bool include_env_group = 6;
    */
   includeEnvGroup: boolean;
 
   /**
    * include_metadata is a field denoting whether to include the datastore metadata in the response
    *
-   * @generated from field: bool include_metadata = 8;
+   * @generated from field: bool include_metadata = 7;
    */
   includeMetadata: boolean;
 

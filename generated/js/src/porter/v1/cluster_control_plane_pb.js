@@ -1647,9 +1647,8 @@ export const ListDatastoresRequest = proto3.makeMessageType(
     { no: 3, name: "cloud_provider_account_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "type", kind: "enum", T: proto3.getEnumType(EnumDatastore), opt: true },
     { no: 5, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 6, name: "include_config", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 7, name: "include_env_group", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 8, name: "include_metadata", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 6, name: "include_env_group", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 7, name: "include_metadata", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
