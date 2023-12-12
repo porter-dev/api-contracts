@@ -801,6 +801,7 @@ export const LatestAppRevisionsRequest = proto3.makeMessageType(
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 2, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
     { no: 3, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ],
 );
 
@@ -1084,6 +1085,7 @@ export const UpdateAppImageResponse = proto3.makeMessageType(
   () => [
     { no: 1, name: "repository_url", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "tag", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
