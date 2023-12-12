@@ -173,6 +173,13 @@ export declare class Service extends Message<Service> {
    */
   terminationGracePeriodSeconds?: number;
 
+  /**
+   * tolerations are any tolerations that should be applied to the application
+   *
+   * @generated from field: repeated porter.v1.Toleration tolerations = 19;
+   */
+  tolerations: Toleration[];
+
   constructor(data?: PartialMessage<Service>);
 
   static readonly runtime: typeof proto3;
@@ -486,5 +493,54 @@ export declare class GPU extends Message<GPU> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): GPU;
 
   static equals(a: GPU | PlainMessage<GPU> | undefined, b: GPU | PlainMessage<GPU> | undefined): boolean;
+}
+
+/**
+ * Tolerations are any tolerations that should be applied to the application
+ *
+ * @generated from message porter.v1.Toleration
+ */
+export declare class Toleration extends Message<Toleration> {
+  /**
+   * key is the key of the toleration
+   *
+   * @generated from field: string key = 1;
+   */
+  key: string;
+
+  /**
+   * operator is the operator of the toleration
+   *
+   * @generated from field: string operator = 2;
+   */
+  operator: string;
+
+  /**
+   * value is the value of the toleration
+   *
+   * @generated from field: string value = 3;
+   */
+  value: string;
+
+  /**
+   * effect is the effect of the toleration
+   *
+   * @generated from field: string effect = 4;
+   */
+  effect: string;
+
+  constructor(data?: PartialMessage<Toleration>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.Toleration";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Toleration;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Toleration;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Toleration;
+
+  static equals(a: Toleration | PlainMessage<Toleration> | undefined, b: Toleration | PlainMessage<Toleration> | undefined): boolean;
 }
 

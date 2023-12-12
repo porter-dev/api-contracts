@@ -46,6 +46,7 @@ export const Service = proto3.makeMessageType(
     { no: 16, name: "gpu_cores", kind: "scalar", T: 2 /* ScalarType.FLOAT */, opt: true },
     { no: 17, name: "gpu", kind: "message", T: GPU },
     { no: 18, name: "termination_grace_period_seconds", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
+    { no: 19, name: "tolerations", kind: "message", T: Toleration, repeated: true },
   ],
 );
 
@@ -145,6 +146,21 @@ export const GPU = proto3.makeMessageType(
   () => [
     { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 2, name: "gpu_cores_nvidia", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+  ],
+);
+
+/**
+ * Tolerations are any tolerations that should be applied to the application
+ *
+ * @generated from message porter.v1.Toleration
+ */
+export const Toleration = proto3.makeMessageType(
+  "porter.v1.Toleration",
+  () => [
+    { no: 1, name: "key", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "operator", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "value", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "effect", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
