@@ -2971,11 +2971,15 @@ export declare class SeedAppRevisionsRequest extends Message<SeedAppRevisionsReq
   useHealthHelmValues: boolean;
 
   /**
+   * target_project_id is the id of the project where the app will be installed
+   *
    * @generated from field: int64 target_project_id = 7;
    */
   targetProjectId: bigint;
 
   /**
+   * target_cluster_id is the id of the cluster where the app will be installed
+   *
    * @generated from field: int64 target_cluster_id = 8;
    */
   targetClusterId: bigint;

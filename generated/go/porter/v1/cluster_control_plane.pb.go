@@ -5054,9 +5054,11 @@ type SeedAppRevisionsRequest struct {
 	// target_namespace is the namespace where the app will be installed. This will determine where the env groups are seeded.
 	TargetNamespace string `protobuf:"bytes,5,opt,name=target_namespace,json=targetNamespace,proto3" json:"target_namespace,omitempty"`
 	// use_health_helm_values is a flag that indicates whether to add the health helm values to the helm overrides for the app instead of the simplified interface from the app contract
-	UseHealthHelmValues bool  `protobuf:"varint,6,opt,name=use_health_helm_values,json=useHealthHelmValues,proto3" json:"use_health_helm_values,omitempty"`
-	TargetProjectId     int64 `protobuf:"varint,7,opt,name=target_project_id,json=targetProjectId,proto3" json:"target_project_id,omitempty"`
-	TargetClusterId     int64 `protobuf:"varint,8,opt,name=target_cluster_id,json=targetClusterId,proto3" json:"target_cluster_id,omitempty"`
+	UseHealthHelmValues bool `protobuf:"varint,6,opt,name=use_health_helm_values,json=useHealthHelmValues,proto3" json:"use_health_helm_values,omitempty"`
+	// target_project_id is the id of the project where the app will be installed
+	TargetProjectId int64 `protobuf:"varint,7,opt,name=target_project_id,json=targetProjectId,proto3" json:"target_project_id,omitempty"`
+	// target_cluster_id is the id of the cluster where the app will be installed
+	TargetClusterId int64 `protobuf:"varint,8,opt,name=target_cluster_id,json=targetClusterId,proto3" json:"target_cluster_id,omitempty"`
 }
 
 func (x *SeedAppRevisionsRequest) Reset() {
