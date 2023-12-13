@@ -199,6 +199,9 @@ const (
 	// ClusterControlPlaneServiceListImagesForRepositoryProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's ListImagesForRepository RPC.
 	ClusterControlPlaneServiceListImagesForRepositoryProcedure = "/porter.v1.ClusterControlPlaneService/ListImagesForRepository"
+	// ClusterControlPlaneServiceListDatastoresProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's ListDatastores RPC.
+	ClusterControlPlaneServiceListDatastoresProcedure = "/porter.v1.ClusterControlPlaneService/ListDatastores"
 	// ClusterControlPlaneServiceDatastoreStatusProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DatastoreStatus RPC.
 	ClusterControlPlaneServiceDatastoreStatusProcedure = "/porter.v1.ClusterControlPlaneService/DatastoreStatus"
@@ -368,7 +371,12 @@ type ClusterControlPlaneServiceClient interface {
 	//
 	// Deprecated: do not use.
 	ListImagesForRepository(context.Context, *connect.Request[v1.ListImagesForRepositoryRequest]) (*connect.Response[v1.ListImagesForRepositoryResponse], error)
-	// DatastoreStatus returns the status of a given datastore within a project/cluster scope
+	// ListDatastores returns a list of datastores for a project and account scope
+	ListDatastores(context.Context, *connect.Request[v1.ListDatastoresRequest]) (*connect.Response[v1.ListDatastoresResponse], error)
+	// DatastoreStatus returns the status of a given datastore within a project and cluster scope
+	// Deprecated. Use ListDatastores with the proper filtering instead.
+	//
+	// Deprecated: do not use.
 	DatastoreStatus(context.Context, *connect.Request[v1.DatastoreStatusRequest]) (*connect.Response[v1.DatastoreStatusResponse], error)
 	// RegistryStatus returns the status of a given docker registry within a project scope
 	RegistryStatus(context.Context, *connect.Request[v1.RegistryStatusRequest]) (*connect.Response[v1.RegistryStatusResponse], error)
@@ -667,6 +675,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceListImagesForRepositoryProcedure,
 			opts...,
 		),
+		listDatastores: connect.NewClient[v1.ListDatastoresRequest, v1.ListDatastoresResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceListDatastoresProcedure,
+			opts...,
+		),
 		datastoreStatus: connect.NewClient[v1.DatastoreStatusRequest, v1.DatastoreStatusResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDatastoreStatusProcedure,
@@ -757,6 +770,7 @@ type clusterControlPlaneServiceClient struct {
 	eKSBearerToken                      *connect.Client[v1.EKSBearerTokenRequest, v1.EKSBearerTokenResponse]
 	listRepositoriesForRegistry         *connect.Client[v1.ListRepositoriesForRegistryRequest, v1.ListRepositoriesForRegistryResponse]
 	listImagesForRepository             *connect.Client[v1.ListImagesForRepositoryRequest, v1.ListImagesForRepositoryResponse]
+	listDatastores                      *connect.Client[v1.ListDatastoresRequest, v1.ListDatastoresResponse]
 	datastoreStatus                     *connect.Client[v1.DatastoreStatusRequest, v1.DatastoreStatusResponse]
 	registryStatus                      *connect.Client[v1.RegistryStatusRequest, v1.RegistryStatusResponse]
 	enableExternalEnvGroupProviders     *connect.Client[v1.EnableExternalEnvGroupProvidersRequest, v1.EnableExternalEnvGroupProvidersResponse]
@@ -1067,7 +1081,14 @@ func (c *clusterControlPlaneServiceClient) ListImagesForRepository(ctx context.C
 	return c.listImagesForRepository.CallUnary(ctx, req)
 }
 
+// ListDatastores calls porter.v1.ClusterControlPlaneService.ListDatastores.
+func (c *clusterControlPlaneServiceClient) ListDatastores(ctx context.Context, req *connect.Request[v1.ListDatastoresRequest]) (*connect.Response[v1.ListDatastoresResponse], error) {
+	return c.listDatastores.CallUnary(ctx, req)
+}
+
 // DatastoreStatus calls porter.v1.ClusterControlPlaneService.DatastoreStatus.
+//
+// Deprecated: do not use.
 func (c *clusterControlPlaneServiceClient) DatastoreStatus(ctx context.Context, req *connect.Request[v1.DatastoreStatusRequest]) (*connect.Response[v1.DatastoreStatusResponse], error) {
 	return c.datastoreStatus.CallUnary(ctx, req)
 }
@@ -1248,7 +1269,12 @@ type ClusterControlPlaneServiceHandler interface {
 	//
 	// Deprecated: do not use.
 	ListImagesForRepository(context.Context, *connect.Request[v1.ListImagesForRepositoryRequest]) (*connect.Response[v1.ListImagesForRepositoryResponse], error)
-	// DatastoreStatus returns the status of a given datastore within a project/cluster scope
+	// ListDatastores returns a list of datastores for a project and account scope
+	ListDatastores(context.Context, *connect.Request[v1.ListDatastoresRequest]) (*connect.Response[v1.ListDatastoresResponse], error)
+	// DatastoreStatus returns the status of a given datastore within a project and cluster scope
+	// Deprecated. Use ListDatastores with the proper filtering instead.
+	//
+	// Deprecated: do not use.
 	DatastoreStatus(context.Context, *connect.Request[v1.DatastoreStatusRequest]) (*connect.Response[v1.DatastoreStatusResponse], error)
 	// RegistryStatus returns the status of a given docker registry within a project scope
 	RegistryStatus(context.Context, *connect.Request[v1.RegistryStatusRequest]) (*connect.Response[v1.RegistryStatusResponse], error)
@@ -1543,6 +1569,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.ListImagesForRepository,
 		opts...,
 	)
+	clusterControlPlaneServiceListDatastoresHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceListDatastoresProcedure,
+		svc.ListDatastores,
+		opts...,
+	)
 	clusterControlPlaneServiceDatastoreStatusHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDatastoreStatusProcedure,
 		svc.DatastoreStatus,
@@ -1685,6 +1716,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceListRepositoriesForRegistryHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceListImagesForRepositoryProcedure:
 			clusterControlPlaneServiceListImagesForRepositoryHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceListDatastoresProcedure:
+			clusterControlPlaneServiceListDatastoresHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDatastoreStatusProcedure:
 			clusterControlPlaneServiceDatastoreStatusHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceRegistryStatusProcedure:
@@ -1924,6 +1957,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) ListRepositoriesForRegistr
 
 func (UnimplementedClusterControlPlaneServiceHandler) ListImagesForRepository(context.Context, *connect.Request[v1.ListImagesForRepositoryRequest]) (*connect.Response[v1.ListImagesForRepositoryResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ListImagesForRepository is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) ListDatastores(context.Context, *connect.Request[v1.ListDatastoresRequest]) (*connect.Response[v1.ListDatastoresResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ListDatastores is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) DatastoreStatus(context.Context, *connect.Request[v1.DatastoreStatusRequest]) (*connect.Response[v1.DatastoreStatusResponse], error) {

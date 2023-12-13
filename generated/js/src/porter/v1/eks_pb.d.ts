@@ -213,10 +213,20 @@ export declare class EKSNodeGroup extends Message<EKSNodeGroup> {
 
   /**
    * additional_policies is a list of IAM policies to attach to the node group role, on top of the policies applied by Porter.
+   * deprecated: policies should be managed before cluster provisioning instead
    *
-   * @generated from field: repeated string additional_policies = 6;
+   * @generated from field: repeated string additional_policies = 6 [deprecated = true];
+   * @deprecated
    */
   additionalPolicies: string[];
+
+  /**
+   * additional_taints is a list of NoSchedule taints to apply to the node group.
+   * These will be applied on top of the default porter.run/workload-kind taints.
+   *
+   * @generated from field: repeated string additional_taints = 7;
+   */
+  additionalTaints: string[];
 
   constructor(data?: PartialMessage<EKSNodeGroup>);
 

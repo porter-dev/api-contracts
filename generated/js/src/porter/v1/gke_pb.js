@@ -43,6 +43,8 @@ export const GKENodePool = proto3.makeMessageType(
     { no: 2, name: "min_instances", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
     { no: 3, name: "max_instances", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
     { no: 4, name: "node_pool_type", kind: "enum", T: proto3.getEnumType(GKENodePoolType) },
+    { no: 5, name: "additional_taints", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 6, name: "is_spot_instance", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 

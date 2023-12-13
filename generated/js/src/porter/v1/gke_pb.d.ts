@@ -106,6 +106,21 @@ export declare class GKENodePool extends Message<GKENodePool> {
    */
   nodePoolType: GKENodePoolType;
 
+  /**
+   * additional_taints is a list of NoSchedule taints to apply to the node group.
+   * These will be applied on top of the default porter.run/workload-kind taints.
+   *
+   * @generated from field: repeated string additional_taints = 5;
+   */
+  additionalTaints: string[];
+
+  /**
+   * is_spot_instance is used to specify whether the node group should use spot instances.
+   *
+   * @generated from field: bool is_spot_instance = 6;
+   */
+  isSpotInstance: boolean;
+
   constructor(data?: PartialMessage<GKENodePool>);
 
   static readonly runtime: typeof proto3;
