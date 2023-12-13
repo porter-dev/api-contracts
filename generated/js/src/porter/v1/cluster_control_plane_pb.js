@@ -15,6 +15,19 @@ import { EnumEnvGroupProviderType } from "./env_group_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
+ * EnumUpdateTrigger describes the action that triggered a porter app revision update
+ *
+ * @generated from enum porter.v1.EnumUpdateTrigger
+ */
+export const EnumUpdateTrigger = proto3.makeEnum(
+  "porter.v1.EnumUpdateTrigger",
+  [
+    {no: 0, name: "ENUM_UPDATE_TRIGGER_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "ENUM_UPDATE_TRIGGER_ROLLBACK", localName: "ROLLBACK"},
+  ],
+);
+
+/**
  * @generated from enum porter.v1.EnumPredeployStatus
  */
 export const EnumPredeployStatus = proto3.makeEnum(
@@ -732,7 +745,7 @@ export const UpdateRevisionPayload = proto3.makeMessageType(
     { no: 2, name: "revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "commit_sha", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "image", kind: "message", T: AppImage },
-    { no: 5, name: "skip_rollback_on_deployment_failure", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 5, name: "triggered_by", kind: "enum", T: proto3.getEnumType(EnumUpdateTrigger) },
   ],
 );
 

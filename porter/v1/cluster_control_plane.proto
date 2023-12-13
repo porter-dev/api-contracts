@@ -443,8 +443,15 @@ message UpdateRevisionPayload {
   string commit_sha = 3;
   // image is the image information for a new image
   AppImage image = 4;
-  // skip_rollback_on_deployment_failure indicates whether an update should trigger a rollback or not if a deployment fails during the app revision lifecycle
-  bool skip_rollback_on_deployment_failure = 5;
+  // triggered_by specifies what triggered the update
+  EnumUpdateTrigger triggered_by = 5;
+}
+
+// EnumUpdateTrigger describes the action that triggered a porter app revision update
+enum EnumUpdateTrigger {
+  ENUM_UPDATE_TRIGGER_UNSPECIFIED = 0;
+  // ENUM_UPDATE_TRIGGER_ROLLBACK signifies the update was triggered by a rollback
+  ENUM_UPDATE_TRIGGER_ROLLBACK = 1;
 }
 
 // UpdateAddonPayload is used to send messages via nats to update an addon

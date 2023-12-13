@@ -16,6 +16,25 @@ import type { EnumEnvGroupProviderType } from "./env_group_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
+ * EnumUpdateTrigger describes the action that triggered a porter app revision update
+ *
+ * @generated from enum porter.v1.EnumUpdateTrigger
+ */
+export declare enum EnumUpdateTrigger {
+  /**
+   * @generated from enum value: ENUM_UPDATE_TRIGGER_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * ENUM_UPDATE_TRIGGER_ROLLBACK signifies the update was triggered by a rollback
+   *
+   * @generated from enum value: ENUM_UPDATE_TRIGGER_ROLLBACK = 1;
+   */
+  ROLLBACK = 1,
+}
+
+/**
  * @generated from enum porter.v1.EnumPredeployStatus
  */
 export declare enum EnumPredeployStatus {
@@ -2197,11 +2216,11 @@ export declare class UpdateRevisionPayload extends Message<UpdateRevisionPayload
   image?: AppImage;
 
   /**
-   * skip_rollback_on_deployment_failure indicates whether an update should trigger a rollback or not if a deployment fails during the app revision lifecycle
+   * triggered_by specifies what triggered the update
    *
-   * @generated from field: bool skip_rollback_on_deployment_failure = 5;
+   * @generated from field: porter.v1.EnumUpdateTrigger triggered_by = 5;
    */
-  skipRollbackOnDeploymentFailure: boolean;
+  triggeredBy: EnumUpdateTrigger;
 
   constructor(data?: PartialMessage<UpdateRevisionPayload>);
 
