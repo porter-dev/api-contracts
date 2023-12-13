@@ -2970,6 +2970,16 @@ export declare class SeedAppRevisionsRequest extends Message<SeedAppRevisionsReq
    */
   useHealthHelmValues: boolean;
 
+  /**
+   * @generated from field: int64 target_project_id = 7;
+   */
+  targetProjectId: bigint;
+
+  /**
+   * @generated from field: int64 target_cluster_id = 8;
+   */
+  targetClusterId: bigint;
+
   constructor(data?: PartialMessage<SeedAppRevisionsRequest>);
 
   static readonly runtime: typeof proto3;

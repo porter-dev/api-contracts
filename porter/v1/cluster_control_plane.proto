@@ -655,6 +655,8 @@ message SeedAppRevisionsRequest {
   string target_namespace = 5;
   // use_health_helm_values is a flag that indicates whether to add the health helm values to the helm overrides for the app instead of the simplified interface from the app contract
   bool use_health_helm_values = 6;
+  int64 target_project_id = 7;
+  int64 target_cluster_id = 8;
 }
 
 message SeedAppRevisionsResponse {
