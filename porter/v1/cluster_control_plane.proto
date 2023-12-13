@@ -533,6 +533,37 @@ message AppTemplateResponse {
   EnvGroupVariables app_env = 2;
 }
 
+// AddonTemplatesPayload is an object containg a list of addons to be included alongside an app template
+// these addons will be applied or updated whenever an app is deployed to a new preview deployment target
+message AddonTemplatesPayload {
+  // addon_templates is the list of addons to be included in the template
+  repeated Addon addon_templates = 1;
+}
+
+message AddonWithEnvVars {
+  // addon is the addon to be included in the template
+  Addon addon = 1;
+  // env_vars is the set of environment variables to create the addon with
+  EnvGroupVariables env_vars = 2;
+}
+
+message UpdateAppTemplateRequest {
+  int64 project_id = 1;
+  // app_name is the name of the PorterApp to update the template for
+  string app_name = 2;
+  // app_template is the PorterApp template to be updated
+  PorterApp app_template = 3;
+  // app_env is the current set of environment variables that will be used alongside the app template
+  EnvGroupVariables app_env = 4;
+  // addon_templates is the collection of addons to be included alongside the template when applied in a new preview deployment target
+  repeated AddonWithEnvVars addon_templates = 5;
+  // base_deployment_target_id is the id of the deployment target that the template is based on
+  // the template will be hydrated with the latest version of the app in the base when applied to a new preview deployment target
+  string base_deployment_target_id = 6;
+}
+
+message UpdateAppTemplateResponse {}
+
 message PredeployStatusRequest {
   int64 project_id = 1;
   // app_revision_id is the revision id of the PorterApp which should have its predeploy status checked
@@ -1034,6 +1065,9 @@ service ClusterControlPlaneService {
 
   // AppTemplate returns the app template for a given app id
   rpc AppTemplate(AppTemplateRequest) returns (AppTemplateResponse) {}
+
+  // UpdateAppTemplate updates the app template for a given app
+  rpc UpdateAppTemplate(UpdateAppTemplateRequest) returns (UpdateAppTemplateResponse) {}
 
   // PredeployStatus returns the status of the predeploy job for a given app revision
   rpc PredeployStatus(PredeployStatusRequest) returns (PredeployStatusResponse) {}
