@@ -875,6 +875,53 @@ export const AppTemplateResponse = proto3.makeMessageType(
 );
 
 /**
+ * AddonTemplatesPayload is an object containg a list of addons to be included alongside an app template
+ * these addons will be applied or updated whenever an app is deployed to a new preview deployment target
+ *
+ * @generated from message porter.v1.AddonTemplatesPayload
+ */
+export const AddonTemplatesPayload = proto3.makeMessageType(
+  "porter.v1.AddonTemplatesPayload",
+  () => [
+    { no: 1, name: "addon_templates", kind: "message", T: Addon, repeated: true },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.AddonWithEnvVars
+ */
+export const AddonWithEnvVars = proto3.makeMessageType(
+  "porter.v1.AddonWithEnvVars",
+  () => [
+    { no: 1, name: "addon", kind: "message", T: Addon },
+    { no: 2, name: "env_vars", kind: "message", T: EnvGroupVariables },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.UpdateAppTemplateRequest
+ */
+export const UpdateAppTemplateRequest = proto3.makeMessageType(
+  "porter.v1.UpdateAppTemplateRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "app_template", kind: "message", T: PorterApp },
+    { no: 4, name: "app_env", kind: "message", T: EnvGroupVariables },
+    { no: 5, name: "addon_templates", kind: "message", T: AddonWithEnvVars, repeated: true },
+    { no: 6, name: "base_deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.UpdateAppTemplateResponse
+ */
+export const UpdateAppTemplateResponse = proto3.makeMessageType(
+  "porter.v1.UpdateAppTemplateResponse",
+  [],
+);
+
+/**
  * @generated from message porter.v1.PredeployStatusRequest
  */
 export const PredeployStatusRequest = proto3.makeMessageType(

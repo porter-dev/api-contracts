@@ -2612,6 +2612,147 @@ export declare class AppTemplateResponse extends Message<AppTemplateResponse> {
 }
 
 /**
+ * AddonTemplatesPayload is an object containg a list of addons to be included alongside an app template
+ * these addons will be applied or updated whenever an app is deployed to a new preview deployment target
+ *
+ * @generated from message porter.v1.AddonTemplatesPayload
+ */
+export declare class AddonTemplatesPayload extends Message<AddonTemplatesPayload> {
+  /**
+   * addon_templates is the list of addons to be included in the template
+   *
+   * @generated from field: repeated porter.v1.Addon addon_templates = 1;
+   */
+  addonTemplates: Addon[];
+
+  constructor(data?: PartialMessage<AddonTemplatesPayload>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AddonTemplatesPayload";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AddonTemplatesPayload;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AddonTemplatesPayload;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AddonTemplatesPayload;
+
+  static equals(a: AddonTemplatesPayload | PlainMessage<AddonTemplatesPayload> | undefined, b: AddonTemplatesPayload | PlainMessage<AddonTemplatesPayload> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.AddonWithEnvVars
+ */
+export declare class AddonWithEnvVars extends Message<AddonWithEnvVars> {
+  /**
+   * addon is the addon to be included in the template
+   *
+   * @generated from field: porter.v1.Addon addon = 1;
+   */
+  addon?: Addon;
+
+  /**
+   * env_vars is the set of environment variables to create the addon with
+   *
+   * @generated from field: porter.v1.EnvGroupVariables env_vars = 2;
+   */
+  envVars?: EnvGroupVariables;
+
+  constructor(data?: PartialMessage<AddonWithEnvVars>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AddonWithEnvVars";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AddonWithEnvVars;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AddonWithEnvVars;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AddonWithEnvVars;
+
+  static equals(a: AddonWithEnvVars | PlainMessage<AddonWithEnvVars> | undefined, b: AddonWithEnvVars | PlainMessage<AddonWithEnvVars> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.UpdateAppTemplateRequest
+ */
+export declare class UpdateAppTemplateRequest extends Message<UpdateAppTemplateRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * app_name is the name of the PorterApp to update the template for
+   *
+   * @generated from field: string app_name = 2;
+   */
+  appName: string;
+
+  /**
+   * app_template is the PorterApp template to be updated
+   *
+   * @generated from field: porter.v1.PorterApp app_template = 3;
+   */
+  appTemplate?: PorterApp;
+
+  /**
+   * app_env is the current set of environment variables that will be used alongside the app template
+   *
+   * @generated from field: porter.v1.EnvGroupVariables app_env = 4;
+   */
+  appEnv?: EnvGroupVariables;
+
+  /**
+   * addon_templates is the collection of addons to be included alongside the template when applied in a new preview deployment target
+   *
+   * @generated from field: repeated porter.v1.AddonWithEnvVars addon_templates = 5;
+   */
+  addonTemplates: AddonWithEnvVars[];
+
+  /**
+   * base_deployment_target_id is the id of the deployment target that the template is based on
+   * the template will be hydrated with the latest version of the app in the base when applied to a new preview deployment target
+   *
+   * @generated from field: string base_deployment_target_id = 6;
+   */
+  baseDeploymentTargetId: string;
+
+  constructor(data?: PartialMessage<UpdateAppTemplateRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateAppTemplateRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateAppTemplateRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateAppTemplateRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateAppTemplateRequest;
+
+  static equals(a: UpdateAppTemplateRequest | PlainMessage<UpdateAppTemplateRequest> | undefined, b: UpdateAppTemplateRequest | PlainMessage<UpdateAppTemplateRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.UpdateAppTemplateResponse
+ */
+export declare class UpdateAppTemplateResponse extends Message<UpdateAppTemplateResponse> {
+  constructor(data?: PartialMessage<UpdateAppTemplateResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateAppTemplateResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateAppTemplateResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateAppTemplateResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateAppTemplateResponse;
+
+  static equals(a: UpdateAppTemplateResponse | PlainMessage<UpdateAppTemplateResponse> | undefined, b: UpdateAppTemplateResponse | PlainMessage<UpdateAppTemplateResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.PredeployStatusRequest
  */
 export declare class PredeployStatusRequest extends Message<PredeployStatusRequest> {
