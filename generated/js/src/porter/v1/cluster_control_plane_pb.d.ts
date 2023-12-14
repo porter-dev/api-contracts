@@ -3300,10 +3300,19 @@ export declare class LatestEnvGroupWithVariablesRequest extends Message<LatestEn
 
   /**
    * deployment_target_identifier is the object that identifies the deployment target for the env group
+   * deprecated: use cluster_id instead
    *
-   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 4;
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 4 [deprecated = true];
+   * @deprecated
    */
   deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  /**
+   * cluster_id is the id of the cluster containing the env group is the porter-env-group ns
+   *
+   * @generated from field: int64 cluster_id = 5;
+   */
+  clusterId: bigint;
 
   constructor(data?: PartialMessage<LatestEnvGroupWithVariablesRequest>);
 
@@ -3349,6 +3358,79 @@ export declare class LatestEnvGroupWithVariablesResponse extends Message<LatestE
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LatestEnvGroupWithVariablesResponse;
 
   static equals(a: LatestEnvGroupWithVariablesResponse | PlainMessage<LatestEnvGroupWithVariablesResponse> | undefined, b: LatestEnvGroupWithVariablesResponse | PlainMessage<LatestEnvGroupWithVariablesResponse> | undefined): boolean;
+}
+
+/**
+ * AppEnvVariablesRequestis the request object for retrieving all of the latest env variables attached to an app
+ *
+ * @generated from message porter.v1.AppEnvVariablesRequest
+ */
+export declare class AppEnvVariablesRequest extends Message<AppEnvVariablesRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * cluster_id is the id of the cluster where the app is installed, presumably in the default deployment target. Ignored if deployment_target_identifier is provided.
+   *
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target for the app
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 3;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  /**
+   * app_name is the name of the app to retrieve the env variables for
+   *
+   * @generated from field: string app_name = 4;
+   */
+  appName: string;
+
+  constructor(data?: PartialMessage<AppEnvVariablesRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AppEnvVariablesRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AppEnvVariablesRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AppEnvVariablesRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AppEnvVariablesRequest;
+
+  static equals(a: AppEnvVariablesRequest | PlainMessage<AppEnvVariablesRequest> | undefined, b: AppEnvVariablesRequest | PlainMessage<AppEnvVariablesRequest> | undefined): boolean;
+}
+
+/**
+ * AppEnvVariablesResponse is the response object for retrieving all of the latest env variables attached to an app
+ *
+ * @generated from message porter.v1.AppEnvVariablesResponse
+ */
+export declare class AppEnvVariablesResponse extends Message<AppEnvVariablesResponse> {
+  /**
+   * @generated from field: porter.v1.EnvGroupVariables env_variables = 1;
+   */
+  envVariables?: EnvGroupVariables;
+
+  constructor(data?: PartialMessage<AppEnvVariablesResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AppEnvVariablesResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AppEnvVariablesResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AppEnvVariablesResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AppEnvVariablesResponse;
+
+  static equals(a: AppEnvVariablesResponse | PlainMessage<AppEnvVariablesResponse> | undefined, b: AppEnvVariablesResponse | PlainMessage<AppEnvVariablesResponse> | undefined): boolean;
 }
 
 /**
