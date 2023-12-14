@@ -731,13 +731,34 @@ message LatestEnvGroupWithVariablesRequest {
   string deployment_target_id = 2 [deprecated = true];
   string env_group_name = 3;
   // deployment_target_identifier is the object that identifies the deployment target for the env group
-  DeploymentTargetIdentifier deployment_target_identifier = 4;
+  // deprecated: use cluster_id instead
+  DeploymentTargetIdentifier deployment_target_identifier = 4 [deprecated = true];
+  // cluster_id is the id of the cluster containing the env group is the porter-env-group ns
+  int64 cluster_id = 5;
 }
 
 // LatestEnvGroupWithVariablesResponse is the response object when retrieving the latest EnvGroup and its variables for a given deployment target
+// Note: Secrets returned in this response will not be obfuscated in any way
 message LatestEnvGroupWithVariablesResponse {
   EnvGroup env_group = 1;
   EnvGroupVariables env_group_variables = 2;
+}
+
+// AppEnvVariablesRequest is the request object for retrieving all of the latest env variables attached to an app
+message AppEnvVariablesRequest {
+  int64 project_id = 1;
+  // cluster_id is the id of the cluster where the app is installed, presumably in the default deployment target. Ignored if deployment_target_identifier is provided.
+  int64 cluster_id = 2;
+  // deployment_target_identifier is the object that identifies the deployment target for the app
+  DeploymentTargetIdentifier deployment_target_identifier = 3;
+  // app_name is the name of the app to retrieve the env variables for
+  string app_name = 4;
+}
+
+// AppEnvVariablesResponse is the response object for retrieving all of the latest env variables attached to an app
+// Note: Secrets returned in this response will not be obfuscated in any way
+message AppEnvVariablesResponse {
+  EnvGroupVariables env_variables = 1;
 }
 
 message UpdateAppImageRequest {
@@ -1099,6 +1120,9 @@ service ClusterControlPlaneService {
 
   // LatestEnvGroupWithVariables returns the latest env group and variables for a given env group name in the given deployment target
   rpc LatestEnvGroupWithVariables(LatestEnvGroupWithVariablesRequest) returns (LatestEnvGroupWithVariablesResponse) {}
+
+  // AppEnvVariables returns the latest env variables for a given app in the given deployment target
+  rpc AppEnvVariables(AppEnvVariablesRequest) returns (AppEnvVariablesResponse) {}
 
   // UpdateAppImage updates the image of a porter app and applies the new app revision to the deployment target.
   rpc UpdateAppImage(UpdateAppImageRequest) returns (UpdateAppImageResponse) {}

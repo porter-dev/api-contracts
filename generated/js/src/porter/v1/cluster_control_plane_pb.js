@@ -1112,11 +1112,13 @@ export const LatestEnvGroupWithVariablesRequest = proto3.makeMessageType(
     { no: 2, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "env_group_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+    { no: 5, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ],
 );
 
 /**
  * LatestEnvGroupWithVariablesResponse is the response object when retrieving the latest EnvGroup and its variables for a given deployment target
+ * Note: Secrets returned in this response will not be obfuscated in any way
  *
  * @generated from message porter.v1.LatestEnvGroupWithVariablesResponse
  */
@@ -1125,6 +1127,34 @@ export const LatestEnvGroupWithVariablesResponse = proto3.makeMessageType(
   () => [
     { no: 1, name: "env_group", kind: "message", T: EnvGroup },
     { no: 2, name: "env_group_variables", kind: "message", T: EnvGroupVariables },
+  ],
+);
+
+/**
+ * AppEnvVariablesRequest is the request object for retrieving all of the latest env variables attached to an app
+ *
+ * @generated from message porter.v1.AppEnvVariablesRequest
+ */
+export const AppEnvVariablesRequest = proto3.makeMessageType(
+  "porter.v1.AppEnvVariablesRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+    { no: 4, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * AppEnvVariablesResponse is the response object for retrieving all of the latest env variables attached to an app
+ * Note: Secrets returned in this response will not be obfuscated in any way
+ *
+ * @generated from message porter.v1.AppEnvVariablesResponse
+ */
+export const AppEnvVariablesResponse = proto3.makeMessageType(
+  "porter.v1.AppEnvVariablesResponse",
+  () => [
+    { no: 1, name: "env_variables", kind: "message", T: EnvGroupVariables },
   ],
 );
 

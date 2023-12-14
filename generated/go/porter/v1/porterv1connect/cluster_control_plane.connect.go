@@ -139,6 +139,9 @@ const (
 	// ClusterControlPlaneServiceLatestEnvGroupWithVariablesProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's LatestEnvGroupWithVariables RPC.
 	ClusterControlPlaneServiceLatestEnvGroupWithVariablesProcedure = "/porter.v1.ClusterControlPlaneService/LatestEnvGroupWithVariables"
+	// ClusterControlPlaneServiceAppEnvVariablesProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's AppEnvVariables RPC.
+	ClusterControlPlaneServiceAppEnvVariablesProcedure = "/porter.v1.ClusterControlPlaneService/AppEnvVariables"
 	// ClusterControlPlaneServiceUpdateAppImageProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's UpdateAppImage RPC.
 	ClusterControlPlaneServiceUpdateAppImageProcedure = "/porter.v1.ClusterControlPlaneService/UpdateAppImage"
@@ -308,6 +311,8 @@ type ClusterControlPlaneServiceClient interface {
 	EnvGroupVariables(context.Context, *connect.Request[v1.EnvGroupVariablesRequest]) (*connect.Response[v1.EnvGroupVariablesResponse], error)
 	// LatestEnvGroupWithVariables returns the latest env group and variables for a given env group name in the given deployment target
 	LatestEnvGroupWithVariables(context.Context, *connect.Request[v1.LatestEnvGroupWithVariablesRequest]) (*connect.Response[v1.LatestEnvGroupWithVariablesResponse], error)
+	// AppEnvVariables returns the latest env variables for a given app in the given deployment target
+	AppEnvVariables(context.Context, *connect.Request[v1.AppEnvVariablesRequest]) (*connect.Response[v1.AppEnvVariablesResponse], error)
 	// UpdateAppImage updates the image of a porter app and applies the new app revision to the deployment target.
 	UpdateAppImage(context.Context, *connect.Request[v1.UpdateAppImageRequest]) (*connect.Response[v1.UpdateAppImageResponse], error)
 	// UpdateAppBuildSettings updates the build settings for an app
@@ -580,6 +585,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceLatestEnvGroupWithVariablesProcedure,
 			opts...,
 		),
+		appEnvVariables: connect.NewClient[v1.AppEnvVariablesRequest, v1.AppEnvVariablesResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceAppEnvVariablesProcedure,
+			opts...,
+		),
 		updateAppImage: connect.NewClient[v1.UpdateAppImageRequest, v1.UpdateAppImageResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceUpdateAppImageProcedure,
@@ -760,6 +770,7 @@ type clusterControlPlaneServiceClient struct {
 	seedAppRevisions                    *connect.Client[v1.SeedAppRevisionsRequest, v1.SeedAppRevisionsResponse]
 	envGroupVariables                   *connect.Client[v1.EnvGroupVariablesRequest, v1.EnvGroupVariablesResponse]
 	latestEnvGroupWithVariables         *connect.Client[v1.LatestEnvGroupWithVariablesRequest, v1.LatestEnvGroupWithVariablesResponse]
+	appEnvVariables                     *connect.Client[v1.AppEnvVariablesRequest, v1.AppEnvVariablesResponse]
 	updateAppImage                      *connect.Client[v1.UpdateAppImageRequest, v1.UpdateAppImageResponse]
 	updateAppBuildSettings              *connect.Client[v1.UpdateAppBuildSettingsRequest, v1.UpdateAppBuildSettingsResponse]
 	updateAppsLinkedToEnvGroup          *connect.Client[v1.UpdateAppsLinkedToEnvGroupRequest, v1.UpdateAppsLinkedToEnvGroupResponse]
@@ -971,6 +982,11 @@ func (c *clusterControlPlaneServiceClient) EnvGroupVariables(ctx context.Context
 // porter.v1.ClusterControlPlaneService.LatestEnvGroupWithVariables.
 func (c *clusterControlPlaneServiceClient) LatestEnvGroupWithVariables(ctx context.Context, req *connect.Request[v1.LatestEnvGroupWithVariablesRequest]) (*connect.Response[v1.LatestEnvGroupWithVariablesResponse], error) {
 	return c.latestEnvGroupWithVariables.CallUnary(ctx, req)
+}
+
+// AppEnvVariables calls porter.v1.ClusterControlPlaneService.AppEnvVariables.
+func (c *clusterControlPlaneServiceClient) AppEnvVariables(ctx context.Context, req *connect.Request[v1.AppEnvVariablesRequest]) (*connect.Response[v1.AppEnvVariablesResponse], error) {
+	return c.appEnvVariables.CallUnary(ctx, req)
 }
 
 // UpdateAppImage calls porter.v1.ClusterControlPlaneService.UpdateAppImage.
@@ -1219,6 +1235,8 @@ type ClusterControlPlaneServiceHandler interface {
 	EnvGroupVariables(context.Context, *connect.Request[v1.EnvGroupVariablesRequest]) (*connect.Response[v1.EnvGroupVariablesResponse], error)
 	// LatestEnvGroupWithVariables returns the latest env group and variables for a given env group name in the given deployment target
 	LatestEnvGroupWithVariables(context.Context, *connect.Request[v1.LatestEnvGroupWithVariablesRequest]) (*connect.Response[v1.LatestEnvGroupWithVariablesResponse], error)
+	// AppEnvVariables returns the latest env variables for a given app in the given deployment target
+	AppEnvVariables(context.Context, *connect.Request[v1.AppEnvVariablesRequest]) (*connect.Response[v1.AppEnvVariablesResponse], error)
 	// UpdateAppImage updates the image of a porter app and applies the new app revision to the deployment target.
 	UpdateAppImage(context.Context, *connect.Request[v1.UpdateAppImageRequest]) (*connect.Response[v1.UpdateAppImageResponse], error)
 	// UpdateAppBuildSettings updates the build settings for an app
@@ -1487,6 +1505,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.LatestEnvGroupWithVariables,
 		opts...,
 	)
+	clusterControlPlaneServiceAppEnvVariablesHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceAppEnvVariablesProcedure,
+		svc.AppEnvVariables,
+		opts...,
+	)
 	clusterControlPlaneServiceUpdateAppImageHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceUpdateAppImageProcedure,
 		svc.UpdateAppImage,
@@ -1699,6 +1722,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceEnvGroupVariablesHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceLatestEnvGroupWithVariablesProcedure:
 			clusterControlPlaneServiceLatestEnvGroupWithVariablesHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceAppEnvVariablesProcedure:
+			clusterControlPlaneServiceAppEnvVariablesHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceUpdateAppImageProcedure:
 			clusterControlPlaneServiceUpdateAppImageHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceUpdateAppBuildSettingsProcedure:
@@ -1902,6 +1927,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) EnvGroupVariables(context.
 
 func (UnimplementedClusterControlPlaneServiceHandler) LatestEnvGroupWithVariables(context.Context, *connect.Request[v1.LatestEnvGroupWithVariablesRequest]) (*connect.Response[v1.LatestEnvGroupWithVariablesResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.LatestEnvGroupWithVariables is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) AppEnvVariables(context.Context, *connect.Request[v1.AppEnvVariablesRequest]) (*connect.Response[v1.AppEnvVariablesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.AppEnvVariables is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) UpdateAppImage(context.Context, *connect.Request[v1.UpdateAppImageRequest]) (*connect.Response[v1.UpdateAppImageResponse], error) {
