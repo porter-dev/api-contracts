@@ -5721,6 +5721,7 @@ func (x *LatestEnvGroupWithVariablesRequest) GetClusterId() int64 {
 }
 
 // LatestEnvGroupWithVariablesResponse is the response object when retrieving the latest EnvGroup and its variables for a given deployment target
+// Note: Secrets returned in this response will not be obfuscated in any way
 type LatestEnvGroupWithVariablesResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5776,7 +5777,7 @@ func (x *LatestEnvGroupWithVariablesResponse) GetEnvGroupVariables() *EnvGroupVa
 	return nil
 }
 
-// AppEnvVariablesRequestis the request object for retrieving all of the latest env variables attached to an app
+// AppEnvVariablesRequest is the request object for retrieving all of the latest env variables attached to an app
 type AppEnvVariablesRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -5852,6 +5853,7 @@ func (x *AppEnvVariablesRequest) GetAppName() string {
 }
 
 // AppEnvVariablesResponse is the response object for retrieving all of the latest env variables attached to an app
+// Note: Secrets returned in this response will not be obfuscated in any way
 type AppEnvVariablesResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

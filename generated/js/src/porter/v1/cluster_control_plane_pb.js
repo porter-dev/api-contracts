@@ -1118,6 +1118,7 @@ export const LatestEnvGroupWithVariablesRequest = proto3.makeMessageType(
 
 /**
  * LatestEnvGroupWithVariablesResponse is the response object when retrieving the latest EnvGroup and its variables for a given deployment target
+ * Note: Secrets returned in this response will not be obfuscated in any way
  *
  * @generated from message porter.v1.LatestEnvGroupWithVariablesResponse
  */
@@ -1130,7 +1131,7 @@ export const LatestEnvGroupWithVariablesResponse = proto3.makeMessageType(
 );
 
 /**
- * AppEnvVariablesRequestis the request object for retrieving all of the latest env variables attached to an app
+ * AppEnvVariablesRequest is the request object for retrieving all of the latest env variables attached to an app
  *
  * @generated from message porter.v1.AppEnvVariablesRequest
  */
@@ -1146,6 +1147,7 @@ export const AppEnvVariablesRequest = proto3.makeMessageType(
 
 /**
  * AppEnvVariablesResponse is the response object for retrieving all of the latest env variables attached to an app
+ * Note: Secrets returned in this response will not be obfuscated in any way
  *
  * @generated from message porter.v1.AppEnvVariablesResponse
  */

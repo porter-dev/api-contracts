@@ -738,12 +738,13 @@ message LatestEnvGroupWithVariablesRequest {
 }
 
 // LatestEnvGroupWithVariablesResponse is the response object when retrieving the latest EnvGroup and its variables for a given deployment target
+// Note: Secrets returned in this response will not be obfuscated in any way
 message LatestEnvGroupWithVariablesResponse {
   EnvGroup env_group = 1;
   EnvGroupVariables env_group_variables = 2;
 }
 
-// AppEnvVariablesRequestis the request object for retrieving all of the latest env variables attached to an app
+// AppEnvVariablesRequest is the request object for retrieving all of the latest env variables attached to an app
 message AppEnvVariablesRequest {
   int64 project_id = 1;
   // cluster_id is the id of the cluster where the app is installed, presumably in the default deployment target. Ignored if deployment_target_identifier is provided.
@@ -755,6 +756,7 @@ message AppEnvVariablesRequest {
 }
 
 // AppEnvVariablesResponse is the response object for retrieving all of the latest env variables attached to an app
+// Note: Secrets returned in this response will not be obfuscated in any way
 message AppEnvVariablesResponse {
   EnvGroupVariables env_variables = 1;
 }
