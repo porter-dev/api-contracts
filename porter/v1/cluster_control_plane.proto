@@ -603,7 +603,10 @@ enum EnumQuotaIncrease {
 
 message DeploymentTargetDetailsRequest {
   int64 project_id = 1;
-  string deployment_target_id = 2;
+  // deployment_target_id is the id of the deployment target. Deprecated: use deployment_target_identifier.
+  string deployment_target_id = 2 [deprecated = true];
+  // deployment_target_identifier is the object that identifies the deployment target
+  DeploymentTargetIdentifier deployment_target_identifier = 3;
 }
 
 message DeploymentTargetDetailsResponse {

@@ -2819,9 +2819,19 @@ export declare class DeploymentTargetDetailsRequest extends Message<DeploymentTa
   projectId: bigint;
 
   /**
-   * @generated from field: string deployment_target_id = 2;
+   * deployment_target_id is the id of the deployment target. Deprecated: use deployment_target_identifier.
+   *
+   * @generated from field: string deployment_target_id = 2 [deprecated = true];
+   * @deprecated
    */
   deploymentTargetId: string;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 3;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
 
   constructor(data?: PartialMessage<DeploymentTargetDetailsRequest>);
 
