@@ -7,3 +7,4 @@ export * from './src/porter/v1/gke_pb';
 export * from './src/porter/v1/aks_pb';
 export * from './src/porter/v1/service_pb';
 export * from './src/porter/v1/porter_app_pb';
+export * from './src/porter/v1/addons_pb';
