@@ -702,6 +702,10 @@ message SeedAppRevisionsRequest {
   int64 target_project_id = 7;
   // target_cluster_id is the id of the cluster where the app will be installed
   int64 target_cluster_id = 8;
+  // number_of_revisions is the number of revisions to seed
+  int64 number_of_revisions = 9;
+  // reset_count specifies whether to seed the revisions as revision 0 (if true) or to seed them as the helm revision number (if false)
+  bool reset_count = 10;
 }
 
 message SeedAppRevisionsResponse {
