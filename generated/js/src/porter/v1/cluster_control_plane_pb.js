@@ -1060,6 +1060,8 @@ export const SeedAppRevisionsRequest = proto3.makeMessageType(
     { no: 6, name: "use_health_helm_values", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 7, name: "target_project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 8, name: "target_cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 9, name: "number_of_revisions", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 10, name: "reset_count", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 

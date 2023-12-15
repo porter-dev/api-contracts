@@ -3161,6 +3161,20 @@ export declare class SeedAppRevisionsRequest extends Message<SeedAppRevisionsReq
    */
   targetClusterId: bigint;
 
+  /**
+   * number_of_revisions is the number of revisions to seed
+   *
+   * @generated from field: int64 number_of_revisions = 9;
+   */
+  numberOfRevisions: bigint;
+
+  /**
+   * reset_count specifies whether to seed the revisions as revision 0 (if true) or to seed them as the helm revision number (if false)
+   *
+   * @generated from field: bool reset_count = 10;
+   */
+  resetCount: boolean;
+
   constructor(data?: PartialMessage<SeedAppRevisionsRequest>);
 
   static readonly runtime: typeof proto3;
