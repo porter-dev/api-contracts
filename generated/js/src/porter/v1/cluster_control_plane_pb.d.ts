@@ -2596,6 +2596,13 @@ export declare class AppTemplateResponse extends Message<AppTemplateResponse> {
    */
   appEnv?: EnvGroupVariables;
 
+  /**
+   * addon_templates is the list of addons to be included alongside the app template
+   *
+   * @generated from field: repeated porter.v1.AddonWithEnvVars addon_templates = 3;
+   */
+  addonTemplates: AddonWithEnvVars[];
+
   constructor(data?: PartialMessage<AppTemplateResponse>);
 
   static readonly runtime: typeof proto3;
