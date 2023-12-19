@@ -923,6 +923,28 @@ export const UpdateAppTemplateResponse = proto3.makeMessageType(
 );
 
 /**
+ * @generated from message porter.v1.LatestAddonsRequest
+ */
+export const LatestAddonsRequest = proto3.makeMessageType(
+  "porter.v1.LatestAddonsRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+    { no: 4, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.LatestAddonsResponse
+ */
+export const LatestAddonsResponse = proto3.makeMessageType(
+  "porter.v1.LatestAddonsResponse",
+  () => [
+    { no: 1, name: "addons", kind: "message", T: Addon, repeated: true },
+  ],
+);
+
+/**
  * @generated from message porter.v1.PredeployStatusRequest
  */
 export const PredeployStatusRequest = proto3.makeMessageType(
