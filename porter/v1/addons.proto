@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package porter.v1;
 
+import "google/protobuf/timestamp.proto";
 import "porter/v1/porter_app.proto";
 
 enum AddonType {
@@ -24,6 +25,9 @@ message Addon {
     // postgres is the configuration for the postgres addon
     Postgres postgres = 4;
   }
+  // updated_at is the time the addon was last updated
+  // optional value pulled from the latest commit, only included for existing addons
+  google.protobuf.Timestamp updated_at = 5;
 }
 
 // Postgres is the configuration for postgres

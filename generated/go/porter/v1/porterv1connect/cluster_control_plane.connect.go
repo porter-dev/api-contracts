@@ -115,6 +115,9 @@ const (
 	// ClusterControlPlaneServiceUpdateAppTemplateProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's UpdateAppTemplate RPC.
 	ClusterControlPlaneServiceUpdateAppTemplateProcedure = "/porter.v1.ClusterControlPlaneService/UpdateAppTemplate"
+	// ClusterControlPlaneServiceLatestAddonsProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's LatestAddons RPC.
+	ClusterControlPlaneServiceLatestAddonsProcedure = "/porter.v1.ClusterControlPlaneService/LatestAddons"
 	// ClusterControlPlaneServicePredeployStatusProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's PredeployStatus RPC.
 	ClusterControlPlaneServicePredeployStatusProcedure = "/porter.v1.ClusterControlPlaneService/PredeployStatus"
@@ -291,6 +294,8 @@ type ClusterControlPlaneServiceClient interface {
 	AppTemplate(context.Context, *connect.Request[v1.AppTemplateRequest]) (*connect.Response[v1.AppTemplateResponse], error)
 	// UpdateAppTemplate updates the app template for a given app
 	UpdateAppTemplate(context.Context, *connect.Request[v1.UpdateAppTemplateRequest]) (*connect.Response[v1.UpdateAppTemplateResponse], error)
+	// LatestAddons returns the currently deployed addons for a given deployment_target
+	LatestAddons(context.Context, *connect.Request[v1.LatestAddonsRequest]) (*connect.Response[v1.LatestAddonsResponse], error)
 	// PredeployStatus returns the status of the predeploy job for a given app revision
 	PredeployStatus(context.Context, *connect.Request[v1.PredeployStatusRequest]) (*connect.Response[v1.PredeployStatusResponse], error)
 	// DeploymentTargetDetails returns the details of a deployment target job given the id.  This is a work-around to moving all namespace-related
@@ -545,6 +550,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceUpdateAppTemplateProcedure,
 			opts...,
 		),
+		latestAddons: connect.NewClient[v1.LatestAddonsRequest, v1.LatestAddonsResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceLatestAddonsProcedure,
+			opts...,
+		),
 		predeployStatus: connect.NewClient[v1.PredeployStatusRequest, v1.PredeployStatusResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServicePredeployStatusProcedure,
@@ -762,6 +772,7 @@ type clusterControlPlaneServiceClient struct {
 	getAppRevision                      *connect.Client[v1.GetAppRevisionRequest, v1.GetAppRevisionResponse]
 	appTemplate                         *connect.Client[v1.AppTemplateRequest, v1.AppTemplateResponse]
 	updateAppTemplate                   *connect.Client[v1.UpdateAppTemplateRequest, v1.UpdateAppTemplateResponse]
+	latestAddons                        *connect.Client[v1.LatestAddonsRequest, v1.LatestAddonsResponse]
 	predeployStatus                     *connect.Client[v1.PredeployStatusRequest, v1.PredeployStatusResponse]
 	deploymentTargetDetails             *connect.Client[v1.DeploymentTargetDetailsRequest, v1.DeploymentTargetDetailsResponse]
 	createDeploymentTarget              *connect.Client[v1.CreateDeploymentTargetRequest, v1.CreateDeploymentTargetResponse]
@@ -941,6 +952,11 @@ func (c *clusterControlPlaneServiceClient) AppTemplate(ctx context.Context, req 
 // UpdateAppTemplate calls porter.v1.ClusterControlPlaneService.UpdateAppTemplate.
 func (c *clusterControlPlaneServiceClient) UpdateAppTemplate(ctx context.Context, req *connect.Request[v1.UpdateAppTemplateRequest]) (*connect.Response[v1.UpdateAppTemplateResponse], error) {
 	return c.updateAppTemplate.CallUnary(ctx, req)
+}
+
+// LatestAddons calls porter.v1.ClusterControlPlaneService.LatestAddons.
+func (c *clusterControlPlaneServiceClient) LatestAddons(ctx context.Context, req *connect.Request[v1.LatestAddonsRequest]) (*connect.Response[v1.LatestAddonsResponse], error) {
+	return c.latestAddons.CallUnary(ctx, req)
 }
 
 // PredeployStatus calls porter.v1.ClusterControlPlaneService.PredeployStatus.
@@ -1215,6 +1231,8 @@ type ClusterControlPlaneServiceHandler interface {
 	AppTemplate(context.Context, *connect.Request[v1.AppTemplateRequest]) (*connect.Response[v1.AppTemplateResponse], error)
 	// UpdateAppTemplate updates the app template for a given app
 	UpdateAppTemplate(context.Context, *connect.Request[v1.UpdateAppTemplateRequest]) (*connect.Response[v1.UpdateAppTemplateResponse], error)
+	// LatestAddons returns the currently deployed addons for a given deployment_target
+	LatestAddons(context.Context, *connect.Request[v1.LatestAddonsRequest]) (*connect.Response[v1.LatestAddonsResponse], error)
 	// PredeployStatus returns the status of the predeploy job for a given app revision
 	PredeployStatus(context.Context, *connect.Request[v1.PredeployStatusRequest]) (*connect.Response[v1.PredeployStatusResponse], error)
 	// DeploymentTargetDetails returns the details of a deployment target job given the id.  This is a work-around to moving all namespace-related
@@ -1465,6 +1483,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.UpdateAppTemplate,
 		opts...,
 	)
+	clusterControlPlaneServiceLatestAddonsHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceLatestAddonsProcedure,
+		svc.LatestAddons,
+		opts...,
+	)
 	clusterControlPlaneServicePredeployStatusHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServicePredeployStatusProcedure,
 		svc.PredeployStatus,
@@ -1706,6 +1729,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceAppTemplateHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceUpdateAppTemplateProcedure:
 			clusterControlPlaneServiceUpdateAppTemplateHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceLatestAddonsProcedure:
+			clusterControlPlaneServiceLatestAddonsHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServicePredeployStatusProcedure:
 			clusterControlPlaneServicePredeployStatusHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDeploymentTargetDetailsProcedure:
@@ -1895,6 +1920,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) AppTemplate(context.Contex
 
 func (UnimplementedClusterControlPlaneServiceHandler) UpdateAppTemplate(context.Context, *connect.Request[v1.UpdateAppTemplateRequest]) (*connect.Response[v1.UpdateAppTemplateResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.UpdateAppTemplate is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) LatestAddons(context.Context, *connect.Request[v1.LatestAddonsRequest]) (*connect.Response[v1.LatestAddonsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.LatestAddons is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) PredeployStatus(context.Context, *connect.Request[v1.PredeployStatusRequest]) (*connect.Response[v1.PredeployStatusResponse], error) {

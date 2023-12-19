@@ -566,6 +566,19 @@ message UpdateAppTemplateRequest {
 
 message UpdateAppTemplateResponse {}
 
+message LatestAddonsRequest {
+  int64 project_id = 1;
+  // deployment_target_identifier is the object that identifies the deployment target. Optional.
+  DeploymentTargetIdentifier deployment_target_identifier = 2;
+  // cluster_id is the id of the cluster to retrieve addons from. Optional.
+  int64 cluster_id = 4;
+}
+
+message LatestAddonsResponse {
+  // addons is the list of addons for the given deployment target
+  repeated Addon addons = 1;
+}
+
 message PredeployStatusRequest {
   int64 project_id = 1;
   // app_revision_id is the revision id of the PorterApp which should have its predeploy status checked
@@ -1098,6 +1111,9 @@ service ClusterControlPlaneService {
 
   // UpdateAppTemplate updates the app template for a given app
   rpc UpdateAppTemplate(UpdateAppTemplateRequest) returns (UpdateAppTemplateResponse) {}
+
+  // LatestAddons returns the currently deployed addons for a given deployment_target
+  rpc LatestAddons(LatestAddonsRequest) returns (LatestAddonsResponse) {}
 
   // PredeployStatus returns the status of the predeploy job for a given app revision
   rpc PredeployStatus(PredeployStatusRequest) returns (PredeployStatusResponse) {}

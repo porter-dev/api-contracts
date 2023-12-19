@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
+import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage, Timestamp } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 import type { EnvGroup } from "./porter_app_pb.js";
 
@@ -67,6 +67,14 @@ export declare class Addon extends Message<Addon> {
     value: Postgres;
     case: "postgres";
   } | { case: undefined; value?: undefined };
+
+  /**
+   * updated_at is the time the addon was last updated
+   * optional value pulled from the latest commit, only included for existing addons
+   *
+   * @generated from field: google.protobuf.Timestamp updated_at = 5;
+   */
+  updatedAt?: Timestamp;
 
   constructor(data?: PartialMessage<Addon>);
 

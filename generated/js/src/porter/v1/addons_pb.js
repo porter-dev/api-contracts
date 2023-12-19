@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { proto3 } from "@bufbuild/protobuf";
+import { proto3, Timestamp } from "@bufbuild/protobuf";
 import { EnvGroup } from "./porter_app_pb.js";
 
 /**
@@ -29,6 +29,7 @@ export const Addon = proto3.makeMessageType(
     { no: 2, name: "type", kind: "enum", T: proto3.getEnumType(AddonType) },
     { no: 3, name: "env_groups", kind: "message", T: EnvGroup, repeated: true },
     { no: 4, name: "postgres", kind: "message", T: Postgres, oneof: "config" },
+    { no: 5, name: "updated_at", kind: "message", T: Timestamp },
   ],
 );
 

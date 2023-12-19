@@ -2760,6 +2760,70 @@ export declare class UpdateAppTemplateResponse extends Message<UpdateAppTemplate
 }
 
 /**
+ * @generated from message porter.v1.LatestAddonsRequest
+ */
+export declare class LatestAddonsRequest extends Message<LatestAddonsRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target. Optional.
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 2;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  /**
+   * cluster_id is the id of the cluster to retrieve addons from. Optional.
+   *
+   * @generated from field: int64 cluster_id = 4;
+   */
+  clusterId: bigint;
+
+  constructor(data?: PartialMessage<LatestAddonsRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.LatestAddonsRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LatestAddonsRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LatestAddonsRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LatestAddonsRequest;
+
+  static equals(a: LatestAddonsRequest | PlainMessage<LatestAddonsRequest> | undefined, b: LatestAddonsRequest | PlainMessage<LatestAddonsRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.LatestAddonsResponse
+ */
+export declare class LatestAddonsResponse extends Message<LatestAddonsResponse> {
+  /**
+   * addons is the list of addons for the given deployment target
+   *
+   * @generated from field: repeated porter.v1.Addon addons = 1;
+   */
+  addons: Addon[];
+
+  constructor(data?: PartialMessage<LatestAddonsResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.LatestAddonsResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LatestAddonsResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LatestAddonsResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LatestAddonsResponse;
+
+  static equals(a: LatestAddonsResponse | PlainMessage<LatestAddonsResponse> | undefined, b: LatestAddonsResponse | PlainMessage<LatestAddonsResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.PredeployStatusRequest
  */
 export declare class PredeployStatusRequest extends Message<PredeployStatusRequest> {
