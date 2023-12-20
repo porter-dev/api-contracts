@@ -1609,8 +1609,8 @@ export const AppsLinkedToEnvGroupRequest = proto3.makeMessageType(
 export const AppsLinkedToEnvGroupResponse = proto3.makeMessageType(
   "porter.v1.AppsLinkedToEnvGroupResponse",
   () => [
-    { no: 3, name: "env_group_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "linked_apps", kind: "message", T: AppInstance, repeated: true },
+    { no: 1, name: "env_group_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "linked_apps", kind: "message", T: AppInstance, repeated: true },
   ],
 );
 

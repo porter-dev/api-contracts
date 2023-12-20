@@ -7,10 +7,11 @@
 package porterv1
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -379,14 +380,16 @@ func file_porter_v1_aks_proto_rawDescGZIP() []byte {
 	return file_porter_v1_aks_proto_rawDescData
 }
 
-var file_porter_v1_aks_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_porter_v1_aks_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_porter_v1_aks_proto_goTypes = []interface{}{
-	(AksSkuTier)(0),     // 0: porter.v1.AksSkuTier
-	(NodePoolType)(0),   // 1: porter.v1.NodePoolType
-	(*AKS)(nil),         // 2: porter.v1.AKS
-	(*AKSNodePool)(nil), // 3: porter.v1.AKSNodePool
-}
+var (
+	file_porter_v1_aks_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+	file_porter_v1_aks_proto_msgTypes  = make([]protoimpl.MessageInfo, 2)
+	file_porter_v1_aks_proto_goTypes   = []interface{}{
+		(AksSkuTier)(0),     // 0: porter.v1.AksSkuTier
+		(NodePoolType)(0),   // 1: porter.v1.NodePoolType
+		(*AKS)(nil),         // 2: porter.v1.AKS
+		(*AKSNodePool)(nil), // 3: porter.v1.AKSNodePool
+	}
+)
 var file_porter_v1_aks_proto_depIdxs = []int32{
 	3, // 0: porter.v1.AKS.node_pools:type_name -> porter.v1.AKSNodePool
 	0, // 1: porter.v1.AKS.sku_tier:type_name -> porter.v1.AksSkuTier

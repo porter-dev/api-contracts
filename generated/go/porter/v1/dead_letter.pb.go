@@ -7,10 +7,11 @@
 package porterv1
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -117,12 +118,14 @@ func file_porter_v1_dead_letter_proto_rawDescGZIP() []byte {
 	return file_porter_v1_dead_letter_proto_rawDescData
 }
 
-var file_porter_v1_dead_letter_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_porter_v1_dead_letter_proto_goTypes = []interface{}{
-	(*DeadLetter)(nil),       // 0: porter.v1.DeadLetter
-	(*ContractRevision)(nil), // 1: porter.v1.ContractRevision
-	(*Error)(nil),            // 2: porter.v1.Error
-}
+var (
+	file_porter_v1_dead_letter_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_porter_v1_dead_letter_proto_goTypes  = []interface{}{
+		(*DeadLetter)(nil),       // 0: porter.v1.DeadLetter
+		(*ContractRevision)(nil), // 1: porter.v1.ContractRevision
+		(*Error)(nil),            // 2: porter.v1.Error
+	}
+)
 var file_porter_v1_dead_letter_proto_depIdxs = []int32{
 	1, // 0: porter.v1.DeadLetter.contract_revision:type_name -> porter.v1.ContractRevision
 	2, // 1: porter.v1.DeadLetter.error:type_name -> porter.v1.Error

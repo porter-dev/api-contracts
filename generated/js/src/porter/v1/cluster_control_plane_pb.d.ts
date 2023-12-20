@@ -4707,14 +4707,14 @@ export declare class AppsLinkedToEnvGroupResponse extends Message<AppsLinkedToEn
   /**
    * env_group_name is the name of the env group
    *
-   * @generated from field: string env_group_name = 3;
+   * @generated from field: string env_group_name = 1;
    */
   envGroupName: string;
 
   /**
    * linked_apps is the list of apps linked to the env group
    *
-   * @generated from field: repeated porter.v1.AppInstance linked_apps = 4;
+   * @generated from field: repeated porter.v1.AppInstance linked_apps = 2;
    */
   linkedApps: AppInstance[];
 

@@ -7,10 +7,11 @@
 package porterv1
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -136,10 +137,12 @@ func file_porter_v1_aws_assume_role_proto_rawDescGZIP() []byte {
 	return file_porter_v1_aws_assume_role_proto_rawDescData
 }
 
-var file_porter_v1_aws_assume_role_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
-var file_porter_v1_aws_assume_role_proto_goTypes = []interface{}{
-	(*AssumeRoleChainLink)(nil), // 0: porter.v1.AssumeRoleChainLink
-}
+var (
+	file_porter_v1_aws_assume_role_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+	file_porter_v1_aws_assume_role_proto_goTypes  = []interface{}{
+		(*AssumeRoleChainLink)(nil), // 0: porter.v1.AssumeRoleChainLink
+	}
+)
 var file_porter_v1_aws_assume_role_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
 	0, // [0:0] is the sub-list for method input_type
