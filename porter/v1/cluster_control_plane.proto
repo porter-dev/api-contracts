@@ -1026,6 +1026,7 @@ message DeleteEnvGroupResponse {}
 
 // AppsLinkedToEnvGroupRequest is the request object for AppsLinkedToEnvGroup
 message AppsLinkedToEnvGroupRequest {
+  // project_id is the id of the project where the env group is installed
   int64 project_id = 1;
   // cluster_id is the id of the cluster where the env group is installed
   int64 cluster_id = 2;
@@ -1035,7 +1036,7 @@ message AppsLinkedToEnvGroupRequest {
   bool ignore_preview = 4;
 }
 
-// AppsLinkedToEnvGroupResponse is the request object for AppsLinkedToEnvGroup
+// AppsLinkedToEnvGroupResponse is the response object for AppsLinkedToEnvGroup
 message AppsLinkedToEnvGroupResponse {
   // env_group_name is the name of the env group
   string env_group_name = 1;

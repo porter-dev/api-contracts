@@ -4658,6 +4658,8 @@ export declare class DeleteEnvGroupResponse extends Message<DeleteEnvGroupRespon
  */
 export declare class AppsLinkedToEnvGroupRequest extends Message<AppsLinkedToEnvGroupRequest> {
   /**
+   * project_id is the id of the project where the env group is installed
+   *
    * @generated from field: int64 project_id = 1;
    */
   projectId: bigint;
@@ -4699,7 +4701,7 @@ export declare class AppsLinkedToEnvGroupRequest extends Message<AppsLinkedToEnv
 }
 
 /**
- * AppsLinkedToEnvGroupResponse is the request object for AppsLinkedToEnvGroup
+ * AppsLinkedToEnvGroupResponse is the response object for AppsLinkedToEnvGroup
  *
  * @generated from message porter.v1.AppsLinkedToEnvGroupResponse
  */

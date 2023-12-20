@@ -7,11 +7,10 @@
 package porterv1
 
 import (
-	reflect "reflect"
-	sync "sync"
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	reflect "reflect"
+	sync "sync"
 )
 
 const (
@@ -971,23 +970,21 @@ func file_porter_v1_eks_proto_rawDescGZIP() []byte {
 	return file_porter_v1_eks_proto_rawDescData
 }
 
-var (
-	file_porter_v1_eks_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-	file_porter_v1_eks_proto_msgTypes  = make([]protoimpl.MessageInfo, 9)
-	file_porter_v1_eks_proto_goTypes   = []interface{}{
-		(NodeGroupType)(0),         // 0: porter.v1.NodeGroupType
-		(LoadBalancerType)(0),      // 1: porter.v1.LoadBalancerType
-		(*EKS)(nil),                // 2: porter.v1.EKS
-		(*AWSClusterNetwork)(nil),  // 3: porter.v1.AWSClusterNetwork
-		(*EKSNodeGroup)(nil),       // 4: porter.v1.EKSNodeGroup
-		(*LoadBalancer)(nil),       // 5: porter.v1.LoadBalancer
-		(*EKSLogging)(nil),         // 6: porter.v1.EKSLogging
-		(*EKSPreflightValues)(nil), // 7: porter.v1.EKSPreflightValues
-		(*AWSVpc)(nil),             // 8: porter.v1.AWSVpc
-		(*AWSSubnet)(nil),          // 9: porter.v1.AWSSubnet
-		nil,                        // 10: porter.v1.LoadBalancer.TagsEntry
-	}
-)
+var file_porter_v1_eks_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_porter_v1_eks_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_porter_v1_eks_proto_goTypes = []interface{}{
+	(NodeGroupType)(0),         // 0: porter.v1.NodeGroupType
+	(LoadBalancerType)(0),      // 1: porter.v1.LoadBalancerType
+	(*EKS)(nil),                // 2: porter.v1.EKS
+	(*AWSClusterNetwork)(nil),  // 3: porter.v1.AWSClusterNetwork
+	(*EKSNodeGroup)(nil),       // 4: porter.v1.EKSNodeGroup
+	(*LoadBalancer)(nil),       // 5: porter.v1.LoadBalancer
+	(*EKSLogging)(nil),         // 6: porter.v1.EKSLogging
+	(*EKSPreflightValues)(nil), // 7: porter.v1.EKSPreflightValues
+	(*AWSVpc)(nil),             // 8: porter.v1.AWSVpc
+	(*AWSSubnet)(nil),          // 9: porter.v1.AWSSubnet
+	nil,                        // 10: porter.v1.LoadBalancer.TagsEntry
+}
 var file_porter_v1_eks_proto_depIdxs = []int32{
 	4,  // 0: porter.v1.EKS.node_groups:type_name -> porter.v1.EKSNodeGroup
 	5,  // 1: porter.v1.EKS.load_balancer:type_name -> porter.v1.LoadBalancer

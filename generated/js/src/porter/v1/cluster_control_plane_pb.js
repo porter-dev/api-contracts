@@ -1602,7 +1602,7 @@ export const AppsLinkedToEnvGroupRequest = proto3.makeMessageType(
 );
 
 /**
- * AppsLinkedToEnvGroupResponse is the request object for AppsLinkedToEnvGroup
+ * AppsLinkedToEnvGroupResponse is the response object for AppsLinkedToEnvGroup
  *
  * @generated from message porter.v1.AppsLinkedToEnvGroupResponse
  */
