@@ -576,7 +576,7 @@ message LatestAddonsRequest {
 
 message LatestAddonsResponse {
   // addons is the list of addons for the given deployment target
-  repeated Addon addons = 1;
+  repeated AddonWithEnvVars addons = 1;
 }
 
 message PredeployStatusRequest {

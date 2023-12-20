@@ -2804,9 +2804,9 @@ export declare class LatestAddonsResponse extends Message<LatestAddonsResponse> 
   /**
    * addons is the list of addons for the given deployment target
    *
-   * @generated from field: repeated porter.v1.Addon addons = 1;
+   * @generated from field: repeated porter.v1.AddonWithEnvVars addons = 1;
    */
-  addons: Addon[];
+  addons: AddonWithEnvVars[];
 
   constructor(data?: PartialMessage<LatestAddonsResponse>);
 

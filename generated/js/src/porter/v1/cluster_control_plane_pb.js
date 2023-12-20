@@ -940,7 +940,7 @@ export const LatestAddonsRequest = proto3.makeMessageType(
 export const LatestAddonsResponse = proto3.makeMessageType(
   "porter.v1.LatestAddonsResponse",
   () => [
-    { no: 1, name: "addons", kind: "message", T: Addon, repeated: true },
+    { no: 1, name: "addons", kind: "message", T: AddonWithEnvVars, repeated: true },
   ],
 );
 
