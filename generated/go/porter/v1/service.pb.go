@@ -7,11 +7,10 @@
 package porterv1
 
 import (
-	reflect "reflect"
-	sync "sync"
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	reflect "reflect"
+	sync "sync"
 )
 
 const (
@@ -749,7 +748,7 @@ type GPU struct {
 	// enabled explicitly enables or disables gpu on a given workload
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// gpu_cores_nvidia is the GPU threshold in gpus
-	GpuCoresNvidia int32 `protobuf:"varint,2,opt,name=gpu_cores_nvidia,json=gpuCoresNvidia,proto3" json:"gpu_cores_nvidia,omitempty"` // other types of gpus can be added here
+	GpuCoresNvidia int32 `protobuf:"varint,2,opt,name=gpu_cores_nvidia,json=gpuCoresNvidia,proto3" json:"gpu_cores_nvidia,omitempty"` //other types of gpus can be added here
 }
 
 func (x *GPU) Reset() {
@@ -969,22 +968,20 @@ func file_porter_v1_service_proto_rawDescGZIP() []byte {
 	return file_porter_v1_service_proto_rawDescData
 }
 
-var (
-	file_porter_v1_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-	file_porter_v1_service_proto_msgTypes  = make([]protoimpl.MessageInfo, 9)
-	file_porter_v1_service_proto_goTypes   = []interface{}{
-		(ServiceType)(0),            // 0: porter.v1.ServiceType
-		(*Service)(nil),             // 1: porter.v1.Service
-		(*WebServiceConfig)(nil),    // 2: porter.v1.WebServiceConfig
-		(*WorkerServiceConfig)(nil), // 3: porter.v1.WorkerServiceConfig
-		(*JobServiceConfig)(nil),    // 4: porter.v1.JobServiceConfig
-		(*Domain)(nil),              // 5: porter.v1.Domain
-		(*Autoscaling)(nil),         // 6: porter.v1.Autoscaling
-		(*HealthCheck)(nil),         // 7: porter.v1.HealthCheck
-		(*GPU)(nil),                 // 8: porter.v1.GPU
-		nil,                         // 9: porter.v1.WebServiceConfig.IngressAnnotationsEntry
-	}
-)
+var file_porter_v1_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_porter_v1_service_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_porter_v1_service_proto_goTypes = []interface{}{
+	(ServiceType)(0),            // 0: porter.v1.ServiceType
+	(*Service)(nil),             // 1: porter.v1.Service
+	(*WebServiceConfig)(nil),    // 2: porter.v1.WebServiceConfig
+	(*WorkerServiceConfig)(nil), // 3: porter.v1.WorkerServiceConfig
+	(*JobServiceConfig)(nil),    // 4: porter.v1.JobServiceConfig
+	(*Domain)(nil),              // 5: porter.v1.Domain
+	(*Autoscaling)(nil),         // 6: porter.v1.Autoscaling
+	(*HealthCheck)(nil),         // 7: porter.v1.HealthCheck
+	(*GPU)(nil),                 // 8: porter.v1.GPU
+	nil,                         // 9: porter.v1.WebServiceConfig.IngressAnnotationsEntry
+}
 var file_porter_v1_service_proto_depIdxs = []int32{
 	2,  // 0: porter.v1.Service.web_config:type_name -> porter.v1.WebServiceConfig
 	3,  // 1: porter.v1.Service.worker_config:type_name -> porter.v1.WorkerServiceConfig

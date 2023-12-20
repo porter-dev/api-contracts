@@ -7,11 +7,10 @@
 package porterv1
 
 import (
-	reflect "reflect"
-	sync "sync"
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	reflect "reflect"
+	sync "sync"
 )
 
 const (
@@ -161,13 +160,11 @@ func file_porter_v1_auth_management_proto_rawDescGZIP() []byte {
 	return file_porter_v1_auth_management_proto_rawDescData
 }
 
-var (
-	file_porter_v1_auth_management_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-	file_porter_v1_auth_management_proto_goTypes  = []interface{}{
-		(*APITokenRequest)(nil),  // 0: porter.v1.APITokenRequest
-		(*APITokenResponse)(nil), // 1: porter.v1.APITokenResponse
-	}
-)
+var file_porter_v1_auth_management_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_porter_v1_auth_management_proto_goTypes = []interface{}{
+	(*APITokenRequest)(nil),  // 0: porter.v1.APITokenRequest
+	(*APITokenResponse)(nil), // 1: porter.v1.APITokenResponse
+}
 var file_porter_v1_auth_management_proto_depIdxs = []int32{
 	0, // 0: porter.v1.AuthManagementService.APIToken:input_type -> porter.v1.APITokenRequest
 	1, // 1: porter.v1.AuthManagementService.APIToken:output_type -> porter.v1.APITokenResponse

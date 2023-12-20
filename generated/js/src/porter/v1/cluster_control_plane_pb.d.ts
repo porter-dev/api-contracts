@@ -4677,7 +4677,7 @@ export declare class AppsLinkedToEnvGroupRequest extends Message<AppsLinkedToEnv
   envGroupName: string;
 
   /**
-   * ignore_preview indicates whether to ignore preview deployment targets
+   * ignore_preview indicates whether to ignore apps in preview deployment targets
    *
    * @generated from field: bool ignore_preview = 4;
    */

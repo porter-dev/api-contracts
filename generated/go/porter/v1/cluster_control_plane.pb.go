@@ -7,12 +7,11 @@
 package porterv1
 
 import (
-	reflect "reflect"
-	sync "sync"
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	reflect "reflect"
+	sync "sync"
 )
 
 const (
@@ -528,7 +527,7 @@ type QuotaIncreaseRequest_GkePreflightValues struct {
 
 type QuotaIncreaseRequest_EksPreflightValues struct {
 	// eks_preflight_values the values that AWS will use to perform quota increases
-	EksPreflightValues *EKSPreflightValues `protobuf:"bytes,6,opt,name=eks_preflight_values,json=eksPreflightValues,proto3,oneof"` // AKS aks_kind = 6;
+	EksPreflightValues *EKSPreflightValues `protobuf:"bytes,6,opt,name=eks_preflight_values,json=eksPreflightValues,proto3,oneof"` //AKS aks_kind = 6;
 }
 
 func (*QuotaIncreaseRequest_GkePreflightValues) isQuotaIncreaseRequest_PreflightValues() {}
@@ -7968,7 +7967,7 @@ type AppsLinkedToEnvGroupRequest struct {
 	ClusterId int64 `protobuf:"varint,2,opt,name=cluster_id,json=clusterId,proto3" json:"cluster_id,omitempty"`
 	// env_group_name is the name of the env group
 	EnvGroupName string `protobuf:"bytes,3,opt,name=env_group_name,json=envGroupName,proto3" json:"env_group_name,omitempty"`
-	// ignore_preview indicates whether to ignore preview deployment targets
+	// ignore_preview indicates whether to ignore apps in preview deployment targets
 	IgnorePreview bool `protobuf:"varint,4,opt,name=ignore_preview,json=ignorePreview,proto3" json:"ignore_preview,omitempty"`
 }
 
@@ -11512,184 +11511,182 @@ func file_porter_v1_cluster_control_plane_proto_rawDescGZIP() []byte {
 	return file_porter_v1_cluster_control_plane_proto_rawDescData
 }
 
-var (
-	file_porter_v1_cluster_control_plane_proto_enumTypes = make([]protoimpl.EnumInfo, 7)
-	file_porter_v1_cluster_control_plane_proto_msgTypes  = make([]protoimpl.MessageInfo, 144)
-	file_porter_v1_cluster_control_plane_proto_goTypes   = []interface{}{
-		(EnumUpdateTrigger)(0),                              // 0: porter.v1.EnumUpdateTrigger
-		(EnumPredeployStatus)(0),                            // 1: porter.v1.EnumPredeployStatus
-		(EnumQuotaIncrease)(0),                              // 2: porter.v1.EnumQuotaIncrease
-		(EnumCLIAction)(0),                                  // 3: porter.v1.EnumCLIAction
-		(EnumRevisionStatus)(0),                             // 4: porter.v1.EnumRevisionStatus
-		(EnumServiceDeploymentStatus)(0),                    // 5: porter.v1.EnumServiceDeploymentStatus
-		(EnumDatastore)(0),                                  // 6: porter.v1.EnumDatastore
-		(*QuotaIncreaseRequest)(nil),                        // 7: porter.v1.QuotaIncreaseRequest
-		(*QuotaIncreaseResponse)(nil),                       // 8: porter.v1.QuotaIncreaseResponse
-		(*PreflightCheckRequest)(nil),                       // 9: porter.v1.PreflightCheckRequest
-		(*PreflightCheckResponse)(nil),                      // 10: porter.v1.PreflightCheckResponse
-		(*QuotaPreflightCheckRequest)(nil),                  // 11: porter.v1.QuotaPreflightCheckRequest
-		(*QuotaPreflightCheckResponse)(nil),                 // 12: porter.v1.QuotaPreflightCheckResponse
-		(*CreateAssumeRoleChainRequest)(nil),                // 13: porter.v1.CreateAssumeRoleChainRequest
-		(*CreateAssumeRoleChainResponse)(nil),               // 14: porter.v1.CreateAssumeRoleChainResponse
-		(*SaveAzureCredentialsRequest)(nil),                 // 15: porter.v1.SaveAzureCredentialsRequest
-		(*SaveAzureCredentialsResponse)(nil),                // 16: porter.v1.SaveAzureCredentialsResponse
-		(*KubeConfigForClusterRequest)(nil),                 // 17: porter.v1.KubeConfigForClusterRequest
-		(*KubeConfigForClusterResponse)(nil),                // 18: porter.v1.KubeConfigForClusterResponse
-		(*UpdateContractRequest)(nil),                       // 19: porter.v1.UpdateContractRequest
-		(*UpdateContractResponse)(nil),                      // 20: porter.v1.UpdateContractResponse
-		(*ClusterStatusRequest)(nil),                        // 21: porter.v1.ClusterStatusRequest
-		(*ClusterStatusResponse)(nil),                       // 22: porter.v1.ClusterStatusResponse
-		(*DeleteClusterRequest)(nil),                        // 23: porter.v1.DeleteClusterRequest
-		(*DeleteClusterResponse)(nil),                       // 24: porter.v1.DeleteClusterResponse
-		(*ListRepositoriesForRegistryRequest)(nil),          // 25: porter.v1.ListRepositoriesForRegistryRequest
-		(*ListRepositoriesForRegistryResponse)(nil),         // 26: porter.v1.ListRepositoriesForRegistryResponse
-		(*Repository)(nil),                                  // 27: porter.v1.Repository
-		(*ListImagesForRepositoryRequest)(nil),              // 28: porter.v1.ListImagesForRepositoryRequest
-		(*ListImagesForRepositoryResponse)(nil),             // 29: porter.v1.ListImagesForRepositoryResponse
-		(*Image)(nil),                                       // 30: porter.v1.Image
-		(*ImageInfo)(nil),                                   // 31: porter.v1.ImageInfo
-		(*ImageArtifact)(nil),                               // 32: porter.v1.ImageArtifact
-		(*TokenForRegistryRequest)(nil),                     // 33: porter.v1.TokenForRegistryRequest
-		(*TokenForRegistryResponse)(nil),                    // 34: porter.v1.TokenForRegistryResponse
-		(*ReadContractRequest)(nil),                         // 35: porter.v1.ReadContractRequest
-		(*ReadContractResponse)(nil),                        // 36: porter.v1.ReadContractResponse
-		(*ValidatePorterAppRequest)(nil),                    // 37: porter.v1.ValidatePorterAppRequest
-		(*ValidatePorterAppResponse)(nil),                   // 38: porter.v1.ValidatePorterAppResponse
-		(*ApplyPorterAppRequest)(nil),                       // 39: porter.v1.ApplyPorterAppRequest
-		(*ApplyPorterAppResponse)(nil),                      // 40: porter.v1.ApplyPorterAppResponse
-		(*UpdateAppRequest)(nil),                            // 41: porter.v1.UpdateAppRequest
-		(*UpdateAppResponse)(nil),                           // 42: porter.v1.UpdateAppResponse
-		(*UpdateRevisionStatusRequest)(nil),                 // 43: porter.v1.UpdateRevisionStatusRequest
-		(*UpdateRevisionStatusResponse)(nil),                // 44: porter.v1.UpdateRevisionStatusResponse
-		(*RollbackRevisionRequest)(nil),                     // 45: porter.v1.RollbackRevisionRequest
-		(*RollbackRevisionResponse)(nil),                    // 46: porter.v1.RollbackRevisionResponse
-		(*DeletePorterAppRequest)(nil),                      // 47: porter.v1.DeletePorterAppRequest
-		(*DeletePorterAppResponse)(nil),                     // 48: porter.v1.DeletePorterAppResponse
-		(*DeleteAppDeploymentRequest)(nil),                  // 49: porter.v1.DeleteAppDeploymentRequest
-		(*DeleteAppDeploymentResponse)(nil),                 // 50: porter.v1.DeleteAppDeploymentResponse
-		(*DeleteDeploymentTargetRequest)(nil),               // 51: porter.v1.DeleteDeploymentTargetRequest
-		(*DeleteDeploymentTargetResponse)(nil),              // 52: porter.v1.DeleteDeploymentTargetResponse
-		(*CurrentAppRevisionRequest)(nil),                   // 53: porter.v1.CurrentAppRevisionRequest
-		(*AppRevision)(nil),                                 // 54: porter.v1.AppRevision
-		(*AppRevisionStatusRequest)(nil),                    // 55: porter.v1.AppRevisionStatusRequest
-		(*AppRevisionStatusResponse)(nil),                   // 56: porter.v1.AppRevisionStatusResponse
-		(*UpdateRevisionPayload)(nil),                       // 57: porter.v1.UpdateRevisionPayload
-		(*UpdateAddonPayload)(nil),                          // 58: porter.v1.UpdateAddonPayload
-		(*RequireAppPayload)(nil),                           // 59: porter.v1.RequireAppPayload
-		(*CurrentAppRevisionResponse)(nil),                  // 60: porter.v1.CurrentAppRevisionResponse
-		(*ListAppRevisionsRequest)(nil),                     // 61: porter.v1.ListAppRevisionsRequest
-		(*ListAppRevisionsResponse)(nil),                    // 62: porter.v1.ListAppRevisionsResponse
-		(*LatestAppRevisionsRequest)(nil),                   // 63: porter.v1.LatestAppRevisionsRequest
-		(*LatestAppRevisionsResponse)(nil),                  // 64: porter.v1.LatestAppRevisionsResponse
-		(*GetAppRevisionRequest)(nil),                       // 65: porter.v1.GetAppRevisionRequest
-		(*GetAppRevisionResponse)(nil),                      // 66: porter.v1.GetAppRevisionResponse
-		(*AppTemplateRequest)(nil),                          // 67: porter.v1.AppTemplateRequest
-		(*AppTemplateResponse)(nil),                         // 68: porter.v1.AppTemplateResponse
-		(*AddonTemplatesPayload)(nil),                       // 69: porter.v1.AddonTemplatesPayload
-		(*AddonWithEnvVars)(nil),                            // 70: porter.v1.AddonWithEnvVars
-		(*UpdateAppTemplateRequest)(nil),                    // 71: porter.v1.UpdateAppTemplateRequest
-		(*UpdateAppTemplateResponse)(nil),                   // 72: porter.v1.UpdateAppTemplateResponse
-		(*LatestAddonsRequest)(nil),                         // 73: porter.v1.LatestAddonsRequest
-		(*LatestAddonsResponse)(nil),                        // 74: porter.v1.LatestAddonsResponse
-		(*PredeployStatusRequest)(nil),                      // 75: porter.v1.PredeployStatusRequest
-		(*PredeployStatusResponse)(nil),                     // 76: porter.v1.PredeployStatusResponse
-		(*DeploymentTargetDetailsRequest)(nil),              // 77: porter.v1.DeploymentTargetDetailsRequest
-		(*DeploymentTargetDetailsResponse)(nil),             // 78: porter.v1.DeploymentTargetDetailsResponse
-		(*CreateDeploymentTargetRequest)(nil),               // 79: porter.v1.CreateDeploymentTargetRequest
-		(*CreateDeploymentTargetResponse)(nil),              // 80: porter.v1.CreateDeploymentTargetResponse
-		(*DeploymentTargetsRequest)(nil),                    // 81: porter.v1.DeploymentTargetsRequest
-		(*DeploymentTargetsResponse)(nil),                   // 82: porter.v1.DeploymentTargetsResponse
-		(*DefaultDeploymentTargetRequest)(nil),              // 83: porter.v1.DefaultDeploymentTargetRequest
-		(*DefaultDeploymentTargetResponse)(nil),             // 84: porter.v1.DefaultDeploymentTargetResponse
-		(*SeedAppRevisionsRequest)(nil),                     // 85: porter.v1.SeedAppRevisionsRequest
-		(*SeedAppRevisionsResponse)(nil),                    // 86: porter.v1.SeedAppRevisionsResponse
-		(*EnvGroupVariablesRequest)(nil),                    // 87: porter.v1.EnvGroupVariablesRequest
-		(*EnvGroupVariablesResponse)(nil),                   // 88: porter.v1.EnvGroupVariablesResponse
-		(*LatestEnvGroupWithVariablesRequest)(nil),          // 89: porter.v1.LatestEnvGroupWithVariablesRequest
-		(*LatestEnvGroupWithVariablesResponse)(nil),         // 90: porter.v1.LatestEnvGroupWithVariablesResponse
-		(*AppEnvVariablesRequest)(nil),                      // 91: porter.v1.AppEnvVariablesRequest
-		(*AppEnvVariablesResponse)(nil),                     // 92: porter.v1.AppEnvVariablesResponse
-		(*UpdateAppImageRequest)(nil),                       // 93: porter.v1.UpdateAppImageRequest
-		(*UpdateAppImageResponse)(nil),                      // 94: porter.v1.UpdateAppImageResponse
-		(*UpdateAppBuildSettingsRequest)(nil),               // 95: porter.v1.UpdateAppBuildSettingsRequest
-		(*UpdateAppBuildSettingsResponse)(nil),              // 96: porter.v1.UpdateAppBuildSettingsResponse
-		(*UpdateAppsLinkedToEnvGroupRequest)(nil),           // 97: porter.v1.UpdateAppsLinkedToEnvGroupRequest
-		(*UpdateAppsLinkedToEnvGroupResponse)(nil),          // 98: porter.v1.UpdateAppsLinkedToEnvGroupResponse
-		(*AppHelmValuesRequest)(nil),                        // 99: porter.v1.AppHelmValuesRequest
-		(*AppHelmValuesResponse)(nil),                       // 100: porter.v1.AppHelmValuesResponse
-		(*ManualServiceRunRequest)(nil),                     // 101: porter.v1.ManualServiceRunRequest
-		(*ManualServiceRunResponse)(nil),                    // 102: porter.v1.ManualServiceRunResponse
-		(*ImagesRequest)(nil),                               // 103: porter.v1.ImagesRequest
-		(*ImagesResponse)(nil),                              // 104: porter.v1.ImagesResponse
-		(*CreateAppInstanceRequest)(nil),                    // 105: porter.v1.CreateAppInstanceRequest
-		(*CreateAppInstanceResponse)(nil),                   // 106: porter.v1.CreateAppInstanceResponse
-		(*DeleteAppInstanceRequest)(nil),                    // 107: porter.v1.DeleteAppInstanceRequest
-		(*DeleteAppInstanceResponse)(nil),                   // 108: porter.v1.DeleteAppInstanceResponse
-		(*ListAppInstancesRequest)(nil),                     // 109: porter.v1.ListAppInstancesRequest
-		(*ListAppInstancesResponse)(nil),                    // 110: porter.v1.ListAppInstancesResponse
-		(*AppInstance)(nil),                                 // 111: porter.v1.AppInstance
-		(*CreateNotificationRequest)(nil),                   // 112: porter.v1.CreateNotificationRequest
-		(*CreateNotificationResponse)(nil),                  // 113: porter.v1.CreateNotificationResponse
-		(*UpdateServiceDeploymentStatusRequest)(nil),        // 114: porter.v1.UpdateServiceDeploymentStatusRequest
-		(*UpdateServiceDeploymentStatusResponse)(nil),       // 115: porter.v1.UpdateServiceDeploymentStatusResponse
-		(*AreExternalEnvGroupProvidersEnabledRequest)(nil),  // 116: porter.v1.AreExternalEnvGroupProvidersEnabledRequest
-		(*AreExternalEnvGroupProvidersEnabledResponse)(nil), // 117: porter.v1.AreExternalEnvGroupProvidersEnabledResponse
-		(*EnableExternalEnvGroupProvidersRequest)(nil),      // 118: porter.v1.EnableExternalEnvGroupProvidersRequest
-		(*EnableExternalEnvGroupProvidersResponse)(nil),     // 119: porter.v1.EnableExternalEnvGroupProvidersResponse
-		(*CreateOrUpdateEnvGroupRequest)(nil),               // 120: porter.v1.CreateOrUpdateEnvGroupRequest
-		(*CreateOrUpdateEnvGroupResponse)(nil),              // 121: porter.v1.CreateOrUpdateEnvGroupResponse
-		(*DeleteEnvGroupRequest)(nil),                       // 122: porter.v1.DeleteEnvGroupRequest
-		(*DeleteEnvGroupResponse)(nil),                      // 123: porter.v1.DeleteEnvGroupResponse
-		(*AppsLinkedToEnvGroupRequest)(nil),                 // 124: porter.v1.AppsLinkedToEnvGroupRequest
-		(*AppsLinkedToEnvGroupResponse)(nil),                // 125: porter.v1.AppsLinkedToEnvGroupResponse
-		(*EKSBearerTokenRequest)(nil),                       // 126: porter.v1.EKSBearerTokenRequest
-		(*EKSBearerTokenResponse)(nil),                      // 127: porter.v1.EKSBearerTokenResponse
-		(*CertificateAuthorityDataRequest)(nil),             // 128: porter.v1.CertificateAuthorityDataRequest
-		(*CertificateAuthorityDataResponse)(nil),            // 129: porter.v1.CertificateAuthorityDataResponse
-		(*AssumeRoleChainTargetsRequest)(nil),               // 130: porter.v1.AssumeRoleChainTargetsRequest
-		(*AssumeRoleChainTargetsResponse)(nil),              // 131: porter.v1.AssumeRoleChainTargetsResponse
-		(*ECRTokenForRegistryRequest)(nil),                  // 132: porter.v1.ECRTokenForRegistryRequest
-		(*ECRTokenForRegistryResponse)(nil),                 // 133: porter.v1.ECRTokenForRegistryResponse
-		(*AssumeRoleCredentialsRequest)(nil),                // 134: porter.v1.AssumeRoleCredentialsRequest
-		(*AssumeRoleCredentialsResponse)(nil),               // 135: porter.v1.AssumeRoleCredentialsResponse
-		(*DockerConfigFileForRegistryRequest)(nil),          // 136: porter.v1.DockerConfigFileForRegistryRequest
-		(*DockerConfigFileForRegistryResponse)(nil),         // 137: porter.v1.DockerConfigFileForRegistryResponse
-		(*ClusterNetworkSettingsRequest)(nil),               // 138: porter.v1.ClusterNetworkSettingsRequest
-		(*ClusterNetworkSettingsResponse)(nil),              // 139: porter.v1.ClusterNetworkSettingsResponse
-		(*ListDatastoresRequest)(nil),                       // 140: porter.v1.ListDatastoresRequest
-		(*ListDatastoresResponse)(nil),                      // 141: porter.v1.ListDatastoresResponse
-		(*DatastoreStatusRequest)(nil),                      // 142: porter.v1.DatastoreStatusRequest
-		(*DatastoreStatusResponse)(nil),                     // 143: porter.v1.DatastoreStatusResponse
-		(*Datastore)(nil),                                   // 144: porter.v1.Datastore
-		(*DatastoreMetadata)(nil),                           // 145: porter.v1.DatastoreMetadata
-		(*RegistryStatusRequest)(nil),                       // 146: porter.v1.RegistryStatusRequest
-		(*RegistryStatusResponse)(nil),                      // 147: porter.v1.RegistryStatusResponse
-		(*SharedNetworkSettingsRequest)(nil),                // 148: porter.v1.SharedNetworkSettingsRequest
-		(*SharedNetworkSettingsResponse)(nil),               // 149: porter.v1.SharedNetworkSettingsResponse
-		nil,                                                 // 150: porter.v1.PreflightCheckResponse.PreflightChecksEntry
-		(EnumCloudProvider)(0),                              // 151: porter.v1.EnumCloudProvider
-		(*GKEPreflightValues)(nil),                          // 152: porter.v1.GKEPreflightValues
-		(*EKSPreflightValues)(nil),                          // 153: porter.v1.EKSPreflightValues
-		(*Error)(nil),                                       // 154: porter.v1.Error
-		(*Contract)(nil),                                    // 155: porter.v1.Contract
-		(*ContractRevision)(nil),                            // 156: porter.v1.ContractRevision
-		(*timestamppb.Timestamp)(nil),                       // 157: google.protobuf.Timestamp
-		(*PorterApp)(nil),                                   // 158: porter.v1.PorterApp
-		(*Deletions)(nil),                                   // 159: porter.v1.Deletions
-		(*DeploymentTargetIdentifier)(nil),                  // 160: porter.v1.DeploymentTargetIdentifier
-		(*EnvGroupVariables)(nil),                           // 161: porter.v1.EnvGroupVariables
-		(*Addon)(nil),                                       // 162: porter.v1.Addon
-		(*AppImage)(nil),                                    // 163: porter.v1.AppImage
-		(*DeploymentTarget)(nil),                            // 164: porter.v1.DeploymentTarget
-		(*EnvGroup)(nil),                                    // 165: porter.v1.EnvGroup
-		(*Build)(nil),                                       // 166: porter.v1.Build
-		(EnumEnvGroupProviderType)(0),                       // 167: porter.v1.EnumEnvGroupProviderType
-		(*AssumeRoleChainLink)(nil),                         // 168: porter.v1.AssumeRoleChainLink
-		(*AWSVpc)(nil),                                      // 169: porter.v1.AWSVpc
-		(*UpdateCloudProviderCredentialsRequest)(nil),       // 170: porter.v1.UpdateCloudProviderCredentialsRequest
-		(*UpdateCloudProviderCredentialsResponse)(nil),      // 171: porter.v1.UpdateCloudProviderCredentialsResponse
-	}
-)
+var file_porter_v1_cluster_control_plane_proto_enumTypes = make([]protoimpl.EnumInfo, 7)
+var file_porter_v1_cluster_control_plane_proto_msgTypes = make([]protoimpl.MessageInfo, 144)
+var file_porter_v1_cluster_control_plane_proto_goTypes = []interface{}{
+	(EnumUpdateTrigger)(0),                              // 0: porter.v1.EnumUpdateTrigger
+	(EnumPredeployStatus)(0),                            // 1: porter.v1.EnumPredeployStatus
+	(EnumQuotaIncrease)(0),                              // 2: porter.v1.EnumQuotaIncrease
+	(EnumCLIAction)(0),                                  // 3: porter.v1.EnumCLIAction
+	(EnumRevisionStatus)(0),                             // 4: porter.v1.EnumRevisionStatus
+	(EnumServiceDeploymentStatus)(0),                    // 5: porter.v1.EnumServiceDeploymentStatus
+	(EnumDatastore)(0),                                  // 6: porter.v1.EnumDatastore
+	(*QuotaIncreaseRequest)(nil),                        // 7: porter.v1.QuotaIncreaseRequest
+	(*QuotaIncreaseResponse)(nil),                       // 8: porter.v1.QuotaIncreaseResponse
+	(*PreflightCheckRequest)(nil),                       // 9: porter.v1.PreflightCheckRequest
+	(*PreflightCheckResponse)(nil),                      // 10: porter.v1.PreflightCheckResponse
+	(*QuotaPreflightCheckRequest)(nil),                  // 11: porter.v1.QuotaPreflightCheckRequest
+	(*QuotaPreflightCheckResponse)(nil),                 // 12: porter.v1.QuotaPreflightCheckResponse
+	(*CreateAssumeRoleChainRequest)(nil),                // 13: porter.v1.CreateAssumeRoleChainRequest
+	(*CreateAssumeRoleChainResponse)(nil),               // 14: porter.v1.CreateAssumeRoleChainResponse
+	(*SaveAzureCredentialsRequest)(nil),                 // 15: porter.v1.SaveAzureCredentialsRequest
+	(*SaveAzureCredentialsResponse)(nil),                // 16: porter.v1.SaveAzureCredentialsResponse
+	(*KubeConfigForClusterRequest)(nil),                 // 17: porter.v1.KubeConfigForClusterRequest
+	(*KubeConfigForClusterResponse)(nil),                // 18: porter.v1.KubeConfigForClusterResponse
+	(*UpdateContractRequest)(nil),                       // 19: porter.v1.UpdateContractRequest
+	(*UpdateContractResponse)(nil),                      // 20: porter.v1.UpdateContractResponse
+	(*ClusterStatusRequest)(nil),                        // 21: porter.v1.ClusterStatusRequest
+	(*ClusterStatusResponse)(nil),                       // 22: porter.v1.ClusterStatusResponse
+	(*DeleteClusterRequest)(nil),                        // 23: porter.v1.DeleteClusterRequest
+	(*DeleteClusterResponse)(nil),                       // 24: porter.v1.DeleteClusterResponse
+	(*ListRepositoriesForRegistryRequest)(nil),          // 25: porter.v1.ListRepositoriesForRegistryRequest
+	(*ListRepositoriesForRegistryResponse)(nil),         // 26: porter.v1.ListRepositoriesForRegistryResponse
+	(*Repository)(nil),                                  // 27: porter.v1.Repository
+	(*ListImagesForRepositoryRequest)(nil),              // 28: porter.v1.ListImagesForRepositoryRequest
+	(*ListImagesForRepositoryResponse)(nil),             // 29: porter.v1.ListImagesForRepositoryResponse
+	(*Image)(nil),                                       // 30: porter.v1.Image
+	(*ImageInfo)(nil),                                   // 31: porter.v1.ImageInfo
+	(*ImageArtifact)(nil),                               // 32: porter.v1.ImageArtifact
+	(*TokenForRegistryRequest)(nil),                     // 33: porter.v1.TokenForRegistryRequest
+	(*TokenForRegistryResponse)(nil),                    // 34: porter.v1.TokenForRegistryResponse
+	(*ReadContractRequest)(nil),                         // 35: porter.v1.ReadContractRequest
+	(*ReadContractResponse)(nil),                        // 36: porter.v1.ReadContractResponse
+	(*ValidatePorterAppRequest)(nil),                    // 37: porter.v1.ValidatePorterAppRequest
+	(*ValidatePorterAppResponse)(nil),                   // 38: porter.v1.ValidatePorterAppResponse
+	(*ApplyPorterAppRequest)(nil),                       // 39: porter.v1.ApplyPorterAppRequest
+	(*ApplyPorterAppResponse)(nil),                      // 40: porter.v1.ApplyPorterAppResponse
+	(*UpdateAppRequest)(nil),                            // 41: porter.v1.UpdateAppRequest
+	(*UpdateAppResponse)(nil),                           // 42: porter.v1.UpdateAppResponse
+	(*UpdateRevisionStatusRequest)(nil),                 // 43: porter.v1.UpdateRevisionStatusRequest
+	(*UpdateRevisionStatusResponse)(nil),                // 44: porter.v1.UpdateRevisionStatusResponse
+	(*RollbackRevisionRequest)(nil),                     // 45: porter.v1.RollbackRevisionRequest
+	(*RollbackRevisionResponse)(nil),                    // 46: porter.v1.RollbackRevisionResponse
+	(*DeletePorterAppRequest)(nil),                      // 47: porter.v1.DeletePorterAppRequest
+	(*DeletePorterAppResponse)(nil),                     // 48: porter.v1.DeletePorterAppResponse
+	(*DeleteAppDeploymentRequest)(nil),                  // 49: porter.v1.DeleteAppDeploymentRequest
+	(*DeleteAppDeploymentResponse)(nil),                 // 50: porter.v1.DeleteAppDeploymentResponse
+	(*DeleteDeploymentTargetRequest)(nil),               // 51: porter.v1.DeleteDeploymentTargetRequest
+	(*DeleteDeploymentTargetResponse)(nil),              // 52: porter.v1.DeleteDeploymentTargetResponse
+	(*CurrentAppRevisionRequest)(nil),                   // 53: porter.v1.CurrentAppRevisionRequest
+	(*AppRevision)(nil),                                 // 54: porter.v1.AppRevision
+	(*AppRevisionStatusRequest)(nil),                    // 55: porter.v1.AppRevisionStatusRequest
+	(*AppRevisionStatusResponse)(nil),                   // 56: porter.v1.AppRevisionStatusResponse
+	(*UpdateRevisionPayload)(nil),                       // 57: porter.v1.UpdateRevisionPayload
+	(*UpdateAddonPayload)(nil),                          // 58: porter.v1.UpdateAddonPayload
+	(*RequireAppPayload)(nil),                           // 59: porter.v1.RequireAppPayload
+	(*CurrentAppRevisionResponse)(nil),                  // 60: porter.v1.CurrentAppRevisionResponse
+	(*ListAppRevisionsRequest)(nil),                     // 61: porter.v1.ListAppRevisionsRequest
+	(*ListAppRevisionsResponse)(nil),                    // 62: porter.v1.ListAppRevisionsResponse
+	(*LatestAppRevisionsRequest)(nil),                   // 63: porter.v1.LatestAppRevisionsRequest
+	(*LatestAppRevisionsResponse)(nil),                  // 64: porter.v1.LatestAppRevisionsResponse
+	(*GetAppRevisionRequest)(nil),                       // 65: porter.v1.GetAppRevisionRequest
+	(*GetAppRevisionResponse)(nil),                      // 66: porter.v1.GetAppRevisionResponse
+	(*AppTemplateRequest)(nil),                          // 67: porter.v1.AppTemplateRequest
+	(*AppTemplateResponse)(nil),                         // 68: porter.v1.AppTemplateResponse
+	(*AddonTemplatesPayload)(nil),                       // 69: porter.v1.AddonTemplatesPayload
+	(*AddonWithEnvVars)(nil),                            // 70: porter.v1.AddonWithEnvVars
+	(*UpdateAppTemplateRequest)(nil),                    // 71: porter.v1.UpdateAppTemplateRequest
+	(*UpdateAppTemplateResponse)(nil),                   // 72: porter.v1.UpdateAppTemplateResponse
+	(*LatestAddonsRequest)(nil),                         // 73: porter.v1.LatestAddonsRequest
+	(*LatestAddonsResponse)(nil),                        // 74: porter.v1.LatestAddonsResponse
+	(*PredeployStatusRequest)(nil),                      // 75: porter.v1.PredeployStatusRequest
+	(*PredeployStatusResponse)(nil),                     // 76: porter.v1.PredeployStatusResponse
+	(*DeploymentTargetDetailsRequest)(nil),              // 77: porter.v1.DeploymentTargetDetailsRequest
+	(*DeploymentTargetDetailsResponse)(nil),             // 78: porter.v1.DeploymentTargetDetailsResponse
+	(*CreateDeploymentTargetRequest)(nil),               // 79: porter.v1.CreateDeploymentTargetRequest
+	(*CreateDeploymentTargetResponse)(nil),              // 80: porter.v1.CreateDeploymentTargetResponse
+	(*DeploymentTargetsRequest)(nil),                    // 81: porter.v1.DeploymentTargetsRequest
+	(*DeploymentTargetsResponse)(nil),                   // 82: porter.v1.DeploymentTargetsResponse
+	(*DefaultDeploymentTargetRequest)(nil),              // 83: porter.v1.DefaultDeploymentTargetRequest
+	(*DefaultDeploymentTargetResponse)(nil),             // 84: porter.v1.DefaultDeploymentTargetResponse
+	(*SeedAppRevisionsRequest)(nil),                     // 85: porter.v1.SeedAppRevisionsRequest
+	(*SeedAppRevisionsResponse)(nil),                    // 86: porter.v1.SeedAppRevisionsResponse
+	(*EnvGroupVariablesRequest)(nil),                    // 87: porter.v1.EnvGroupVariablesRequest
+	(*EnvGroupVariablesResponse)(nil),                   // 88: porter.v1.EnvGroupVariablesResponse
+	(*LatestEnvGroupWithVariablesRequest)(nil),          // 89: porter.v1.LatestEnvGroupWithVariablesRequest
+	(*LatestEnvGroupWithVariablesResponse)(nil),         // 90: porter.v1.LatestEnvGroupWithVariablesResponse
+	(*AppEnvVariablesRequest)(nil),                      // 91: porter.v1.AppEnvVariablesRequest
+	(*AppEnvVariablesResponse)(nil),                     // 92: porter.v1.AppEnvVariablesResponse
+	(*UpdateAppImageRequest)(nil),                       // 93: porter.v1.UpdateAppImageRequest
+	(*UpdateAppImageResponse)(nil),                      // 94: porter.v1.UpdateAppImageResponse
+	(*UpdateAppBuildSettingsRequest)(nil),               // 95: porter.v1.UpdateAppBuildSettingsRequest
+	(*UpdateAppBuildSettingsResponse)(nil),              // 96: porter.v1.UpdateAppBuildSettingsResponse
+	(*UpdateAppsLinkedToEnvGroupRequest)(nil),           // 97: porter.v1.UpdateAppsLinkedToEnvGroupRequest
+	(*UpdateAppsLinkedToEnvGroupResponse)(nil),          // 98: porter.v1.UpdateAppsLinkedToEnvGroupResponse
+	(*AppHelmValuesRequest)(nil),                        // 99: porter.v1.AppHelmValuesRequest
+	(*AppHelmValuesResponse)(nil),                       // 100: porter.v1.AppHelmValuesResponse
+	(*ManualServiceRunRequest)(nil),                     // 101: porter.v1.ManualServiceRunRequest
+	(*ManualServiceRunResponse)(nil),                    // 102: porter.v1.ManualServiceRunResponse
+	(*ImagesRequest)(nil),                               // 103: porter.v1.ImagesRequest
+	(*ImagesResponse)(nil),                              // 104: porter.v1.ImagesResponse
+	(*CreateAppInstanceRequest)(nil),                    // 105: porter.v1.CreateAppInstanceRequest
+	(*CreateAppInstanceResponse)(nil),                   // 106: porter.v1.CreateAppInstanceResponse
+	(*DeleteAppInstanceRequest)(nil),                    // 107: porter.v1.DeleteAppInstanceRequest
+	(*DeleteAppInstanceResponse)(nil),                   // 108: porter.v1.DeleteAppInstanceResponse
+	(*ListAppInstancesRequest)(nil),                     // 109: porter.v1.ListAppInstancesRequest
+	(*ListAppInstancesResponse)(nil),                    // 110: porter.v1.ListAppInstancesResponse
+	(*AppInstance)(nil),                                 // 111: porter.v1.AppInstance
+	(*CreateNotificationRequest)(nil),                   // 112: porter.v1.CreateNotificationRequest
+	(*CreateNotificationResponse)(nil),                  // 113: porter.v1.CreateNotificationResponse
+	(*UpdateServiceDeploymentStatusRequest)(nil),        // 114: porter.v1.UpdateServiceDeploymentStatusRequest
+	(*UpdateServiceDeploymentStatusResponse)(nil),       // 115: porter.v1.UpdateServiceDeploymentStatusResponse
+	(*AreExternalEnvGroupProvidersEnabledRequest)(nil),  // 116: porter.v1.AreExternalEnvGroupProvidersEnabledRequest
+	(*AreExternalEnvGroupProvidersEnabledResponse)(nil), // 117: porter.v1.AreExternalEnvGroupProvidersEnabledResponse
+	(*EnableExternalEnvGroupProvidersRequest)(nil),      // 118: porter.v1.EnableExternalEnvGroupProvidersRequest
+	(*EnableExternalEnvGroupProvidersResponse)(nil),     // 119: porter.v1.EnableExternalEnvGroupProvidersResponse
+	(*CreateOrUpdateEnvGroupRequest)(nil),               // 120: porter.v1.CreateOrUpdateEnvGroupRequest
+	(*CreateOrUpdateEnvGroupResponse)(nil),              // 121: porter.v1.CreateOrUpdateEnvGroupResponse
+	(*DeleteEnvGroupRequest)(nil),                       // 122: porter.v1.DeleteEnvGroupRequest
+	(*DeleteEnvGroupResponse)(nil),                      // 123: porter.v1.DeleteEnvGroupResponse
+	(*AppsLinkedToEnvGroupRequest)(nil),                 // 124: porter.v1.AppsLinkedToEnvGroupRequest
+	(*AppsLinkedToEnvGroupResponse)(nil),                // 125: porter.v1.AppsLinkedToEnvGroupResponse
+	(*EKSBearerTokenRequest)(nil),                       // 126: porter.v1.EKSBearerTokenRequest
+	(*EKSBearerTokenResponse)(nil),                      // 127: porter.v1.EKSBearerTokenResponse
+	(*CertificateAuthorityDataRequest)(nil),             // 128: porter.v1.CertificateAuthorityDataRequest
+	(*CertificateAuthorityDataResponse)(nil),            // 129: porter.v1.CertificateAuthorityDataResponse
+	(*AssumeRoleChainTargetsRequest)(nil),               // 130: porter.v1.AssumeRoleChainTargetsRequest
+	(*AssumeRoleChainTargetsResponse)(nil),              // 131: porter.v1.AssumeRoleChainTargetsResponse
+	(*ECRTokenForRegistryRequest)(nil),                  // 132: porter.v1.ECRTokenForRegistryRequest
+	(*ECRTokenForRegistryResponse)(nil),                 // 133: porter.v1.ECRTokenForRegistryResponse
+	(*AssumeRoleCredentialsRequest)(nil),                // 134: porter.v1.AssumeRoleCredentialsRequest
+	(*AssumeRoleCredentialsResponse)(nil),               // 135: porter.v1.AssumeRoleCredentialsResponse
+	(*DockerConfigFileForRegistryRequest)(nil),          // 136: porter.v1.DockerConfigFileForRegistryRequest
+	(*DockerConfigFileForRegistryResponse)(nil),         // 137: porter.v1.DockerConfigFileForRegistryResponse
+	(*ClusterNetworkSettingsRequest)(nil),               // 138: porter.v1.ClusterNetworkSettingsRequest
+	(*ClusterNetworkSettingsResponse)(nil),              // 139: porter.v1.ClusterNetworkSettingsResponse
+	(*ListDatastoresRequest)(nil),                       // 140: porter.v1.ListDatastoresRequest
+	(*ListDatastoresResponse)(nil),                      // 141: porter.v1.ListDatastoresResponse
+	(*DatastoreStatusRequest)(nil),                      // 142: porter.v1.DatastoreStatusRequest
+	(*DatastoreStatusResponse)(nil),                     // 143: porter.v1.DatastoreStatusResponse
+	(*Datastore)(nil),                                   // 144: porter.v1.Datastore
+	(*DatastoreMetadata)(nil),                           // 145: porter.v1.DatastoreMetadata
+	(*RegistryStatusRequest)(nil),                       // 146: porter.v1.RegistryStatusRequest
+	(*RegistryStatusResponse)(nil),                      // 147: porter.v1.RegistryStatusResponse
+	(*SharedNetworkSettingsRequest)(nil),                // 148: porter.v1.SharedNetworkSettingsRequest
+	(*SharedNetworkSettingsResponse)(nil),               // 149: porter.v1.SharedNetworkSettingsResponse
+	nil,                                                 // 150: porter.v1.PreflightCheckResponse.PreflightChecksEntry
+	(EnumCloudProvider)(0),                              // 151: porter.v1.EnumCloudProvider
+	(*GKEPreflightValues)(nil),                          // 152: porter.v1.GKEPreflightValues
+	(*EKSPreflightValues)(nil),                          // 153: porter.v1.EKSPreflightValues
+	(*Error)(nil),                                       // 154: porter.v1.Error
+	(*Contract)(nil),                                    // 155: porter.v1.Contract
+	(*ContractRevision)(nil),                            // 156: porter.v1.ContractRevision
+	(*timestamppb.Timestamp)(nil),                       // 157: google.protobuf.Timestamp
+	(*PorterApp)(nil),                                   // 158: porter.v1.PorterApp
+	(*Deletions)(nil),                                   // 159: porter.v1.Deletions
+	(*DeploymentTargetIdentifier)(nil),                  // 160: porter.v1.DeploymentTargetIdentifier
+	(*EnvGroupVariables)(nil),                           // 161: porter.v1.EnvGroupVariables
+	(*Addon)(nil),                                       // 162: porter.v1.Addon
+	(*AppImage)(nil),                                    // 163: porter.v1.AppImage
+	(*DeploymentTarget)(nil),                            // 164: porter.v1.DeploymentTarget
+	(*EnvGroup)(nil),                                    // 165: porter.v1.EnvGroup
+	(*Build)(nil),                                       // 166: porter.v1.Build
+	(EnumEnvGroupProviderType)(0),                       // 167: porter.v1.EnumEnvGroupProviderType
+	(*AssumeRoleChainLink)(nil),                         // 168: porter.v1.AssumeRoleChainLink
+	(*AWSVpc)(nil),                                      // 169: porter.v1.AWSVpc
+	(*UpdateCloudProviderCredentialsRequest)(nil),       // 170: porter.v1.UpdateCloudProviderCredentialsRequest
+	(*UpdateCloudProviderCredentialsResponse)(nil),      // 171: porter.v1.UpdateCloudProviderCredentialsResponse
+}
 var file_porter_v1_cluster_control_plane_proto_depIdxs = []int32{
 	151, // 0: porter.v1.QuotaIncreaseRequest.cloud_provider:type_name -> porter.v1.EnumCloudProvider
 	2,   // 1: porter.v1.QuotaIncreaseRequest.quota_increases:type_name -> porter.v1.EnumQuotaIncrease

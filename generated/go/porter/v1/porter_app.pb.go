@@ -7,11 +7,10 @@
 package porterv1
 
 import (
-	reflect "reflect"
-	sync "sync"
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	reflect "reflect"
+	sync "sync"
 )
 
 const (
@@ -1202,33 +1201,31 @@ func file_porter_v1_porter_app_proto_rawDescGZIP() []byte {
 	return file_porter_v1_porter_app_proto_rawDescData
 }
 
-var (
-	file_porter_v1_porter_app_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
-	file_porter_v1_porter_app_proto_goTypes  = []interface{}{
-		(*DeploymentTargetIdentifier)(nil), // 0: porter.v1.DeploymentTargetIdentifier
-		(*DeploymentTarget)(nil),           // 1: porter.v1.DeploymentTarget
-		(*PorterApp)(nil),                  // 2: porter.v1.PorterApp
-		(*RequiredApp)(nil),                // 3: porter.v1.RequiredApp
-		(*HelmOverrides)(nil),              // 4: porter.v1.HelmOverrides
-		(*EnvGroup)(nil),                   // 5: porter.v1.EnvGroup
-		(*EnvGroupVariables)(nil),          // 6: porter.v1.EnvGroupVariables
-		(*ServiceDeletions)(nil),           // 7: porter.v1.ServiceDeletions
-		(*Deletions)(nil),                  // 8: porter.v1.Deletions
-		(*DomainNameList)(nil),             // 9: porter.v1.DomainNameList
-		(*Build)(nil),                      // 10: porter.v1.Build
-		(*AppImage)(nil),                   // 11: porter.v1.AppImage
-		(*EFS)(nil),                        // 12: porter.v1.EFS
-		nil,                                // 13: porter.v1.PorterApp.ServicesEntry
-		nil,                                // 14: porter.v1.PorterApp.EnvEntry
-		nil,                                // 15: porter.v1.EnvGroup.VariablesEntry
-		nil,                                // 16: porter.v1.EnvGroup.SecretVariablesEntry
-		nil,                                // 17: porter.v1.EnvGroupVariables.NormalEntry
-		nil,                                // 18: porter.v1.EnvGroupVariables.SecretEntry
-		nil,                                // 19: porter.v1.Deletions.ServiceDomainsEntry
-		nil,                                // 20: porter.v1.Deletions.ServiceDeletionsEntry
-		(*Service)(nil),                    // 21: porter.v1.Service
-	}
-)
+var file_porter_v1_porter_app_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
+var file_porter_v1_porter_app_proto_goTypes = []interface{}{
+	(*DeploymentTargetIdentifier)(nil), // 0: porter.v1.DeploymentTargetIdentifier
+	(*DeploymentTarget)(nil),           // 1: porter.v1.DeploymentTarget
+	(*PorterApp)(nil),                  // 2: porter.v1.PorterApp
+	(*RequiredApp)(nil),                // 3: porter.v1.RequiredApp
+	(*HelmOverrides)(nil),              // 4: porter.v1.HelmOverrides
+	(*EnvGroup)(nil),                   // 5: porter.v1.EnvGroup
+	(*EnvGroupVariables)(nil),          // 6: porter.v1.EnvGroupVariables
+	(*ServiceDeletions)(nil),           // 7: porter.v1.ServiceDeletions
+	(*Deletions)(nil),                  // 8: porter.v1.Deletions
+	(*DomainNameList)(nil),             // 9: porter.v1.DomainNameList
+	(*Build)(nil),                      // 10: porter.v1.Build
+	(*AppImage)(nil),                   // 11: porter.v1.AppImage
+	(*EFS)(nil),                        // 12: porter.v1.EFS
+	nil,                                // 13: porter.v1.PorterApp.ServicesEntry
+	nil,                                // 14: porter.v1.PorterApp.EnvEntry
+	nil,                                // 15: porter.v1.EnvGroup.VariablesEntry
+	nil,                                // 16: porter.v1.EnvGroup.SecretVariablesEntry
+	nil,                                // 17: porter.v1.EnvGroupVariables.NormalEntry
+	nil,                                // 18: porter.v1.EnvGroupVariables.SecretEntry
+	nil,                                // 19: porter.v1.Deletions.ServiceDomainsEntry
+	nil,                                // 20: porter.v1.Deletions.ServiceDeletionsEntry
+	(*Service)(nil),                    // 21: porter.v1.Service
+}
 var file_porter_v1_porter_app_proto_depIdxs = []int32{
 	13, // 0: porter.v1.PorterApp.services:type_name -> porter.v1.PorterApp.ServicesEntry
 	14, // 1: porter.v1.PorterApp.env:type_name -> porter.v1.PorterApp.EnvEntry

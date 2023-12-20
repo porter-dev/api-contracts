@@ -7,11 +7,10 @@
 package porterv1
 
 import (
-	reflect "reflect"
-	sync "sync"
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	reflect "reflect"
+	sync "sync"
 )
 
 const (
@@ -130,13 +129,11 @@ func file_porter_v1_errors_proto_rawDescGZIP() []byte {
 	return file_porter_v1_errors_proto_rawDescData
 }
 
-var (
-	file_porter_v1_errors_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-	file_porter_v1_errors_proto_goTypes  = []interface{}{
-		(*Error)(nil), // 0: porter.v1.Error
-		nil,           // 1: porter.v1.Error.MetadataEntry
-	}
-)
+var file_porter_v1_errors_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_porter_v1_errors_proto_goTypes = []interface{}{
+	(*Error)(nil), // 0: porter.v1.Error
+	nil,           // 1: porter.v1.Error.MetadataEntry
+}
 var file_porter_v1_errors_proto_depIdxs = []int32{
 	1, // 0: porter.v1.Error.metadata:type_name -> porter.v1.Error.MetadataEntry
 	1, // [1:1] is the sub-list for method output_type
