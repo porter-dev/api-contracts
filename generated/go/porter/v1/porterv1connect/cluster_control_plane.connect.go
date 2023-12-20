@@ -406,7 +406,7 @@ type ClusterControlPlaneServiceClient interface {
 	CreateOrUpdateEnvGroup(context.Context, *connect.Request[v1.CreateOrUpdateEnvGroupRequest]) (*connect.Response[v1.CreateOrUpdateEnvGroupResponse], error)
 	// DeleteEnvGroup will delete an env group
 	DeleteEnvGroup(context.Context, *connect.Request[v1.DeleteEnvGroupRequest]) (*connect.Response[v1.DeleteEnvGroupResponse], error)
-	// AppsLinkedToEnvGroup returns the list of app names linked to a given env group
+	// AppsLinkedToEnvGroup returns the list of app names linked to a given env group.  Note: this should be deprecated in the future in favor of a higher-level ListEnvGroups API (POR-2182)
 	AppsLinkedToEnvGroup(context.Context, *connect.Request[v1.AppsLinkedToEnvGroupRequest]) (*connect.Response[v1.AppsLinkedToEnvGroupResponse], error)
 }
 
@@ -1356,7 +1356,7 @@ type ClusterControlPlaneServiceHandler interface {
 	CreateOrUpdateEnvGroup(context.Context, *connect.Request[v1.CreateOrUpdateEnvGroupRequest]) (*connect.Response[v1.CreateOrUpdateEnvGroupResponse], error)
 	// DeleteEnvGroup will delete an env group
 	DeleteEnvGroup(context.Context, *connect.Request[v1.DeleteEnvGroupRequest]) (*connect.Response[v1.DeleteEnvGroupResponse], error)
-	// AppsLinkedToEnvGroup returns the list of app names linked to a given env group
+	// AppsLinkedToEnvGroup returns the list of app names linked to a given env group.  Note: this should be deprecated in the future in favor of a higher-level ListEnvGroups API (POR-2182)
 	AppsLinkedToEnvGroup(context.Context, *connect.Request[v1.AppsLinkedToEnvGroupRequest]) (*connect.Response[v1.AppsLinkedToEnvGroupResponse], error)
 }
 
