@@ -7,10 +7,11 @@
 package porterv1
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -289,14 +290,16 @@ func file_porter_v1_addons_proto_rawDescGZIP() []byte {
 	return file_porter_v1_addons_proto_rawDescData
 }
 
-var file_porter_v1_addons_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_porter_v1_addons_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_porter_v1_addons_proto_goTypes = []interface{}{
-	(AddonType)(0),   // 0: porter.v1.AddonType
-	(*Addon)(nil),    // 1: porter.v1.Addon
-	(*Postgres)(nil), // 2: porter.v1.Postgres
-	(*EnvGroup)(nil), // 3: porter.v1.EnvGroup
-}
+var (
+	file_porter_v1_addons_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+	file_porter_v1_addons_proto_msgTypes  = make([]protoimpl.MessageInfo, 2)
+	file_porter_v1_addons_proto_goTypes   = []interface{}{
+		(AddonType)(0),   // 0: porter.v1.AddonType
+		(*Addon)(nil),    // 1: porter.v1.Addon
+		(*Postgres)(nil), // 2: porter.v1.Postgres
+		(*EnvGroup)(nil), // 3: porter.v1.EnvGroup
+	}
+)
 var file_porter_v1_addons_proto_depIdxs = []int32{
 	0, // 0: porter.v1.Addon.type:type_name -> porter.v1.AddonType
 	3, // 1: porter.v1.Addon.env_groups:type_name -> porter.v1.EnvGroup

@@ -1024,6 +1024,25 @@ message DeleteEnvGroupRequest {
 // DeleteEnvGroupResponse is the response object for DeleteEnvGroup
 message DeleteEnvGroupResponse {}
 
+// AppsLinkedToEnvGroupRequest is the request object for AppsLinkedToEnvGroup
+message AppsLinkedToEnvGroupRequest {
+  int64 project_id = 1;
+  // cluster_id is the id of the cluster where the env group is installed
+  int64 cluster_id = 2;
+  // env_group_name is the name of the env group
+  string env_group_name = 3;
+  // ignore_preview indicates whether to ignore apps in preview deployment targets
+  bool ignore_preview = 4;
+}
+
+// AppsLinkedToEnvGroupResponse is the request object for AppsLinkedToEnvGroup
+message AppsLinkedToEnvGroupResponse {
+  // env_group_name is the name of the env group
+  string env_group_name = 3;
+  // linked_apps is the list of apps linked to the env group
+  repeated AppInstance linked_apps = 4;
+}
+
 service ClusterControlPlaneService {
   // QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas
   rpc QuotaIncrease(QuotaIncreaseRequest) returns (QuotaIncreaseResponse) {}
@@ -1258,6 +1277,9 @@ service ClusterControlPlaneService {
 
   // DeleteEnvGroup will delete an env group
   rpc DeleteEnvGroup(DeleteEnvGroupRequest) returns (DeleteEnvGroupResponse) {}
+
+  // AppsLinkedToEnvGroup returns the list of app names linked to a given env group
+  rpc AppsLinkedToEnvGroup(AppsLinkedToEnvGroupRequest) returns (AppsLinkedToEnvGroupResponse) {}
 }
 
 message EKSBearerTokenRequest {

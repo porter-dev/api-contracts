@@ -7,10 +7,11 @@
 package porterv1
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -470,15 +471,17 @@ func file_porter_v1_cloud_provider_credentials_proto_rawDescGZIP() []byte {
 	return file_porter_v1_cloud_provider_credentials_proto_rawDescData
 }
 
-var file_porter_v1_cloud_provider_credentials_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
-var file_porter_v1_cloud_provider_credentials_proto_goTypes = []interface{}{
-	(*AWSCredentials)(nil),                         // 0: porter.v1.AWSCredentials
-	(*AzureCredentials)(nil),                       // 1: porter.v1.AzureCredentials
-	(*GCPCredentials)(nil),                         // 2: porter.v1.GCPCredentials
-	(*UpdateCloudProviderCredentialsRequest)(nil),  // 3: porter.v1.UpdateCloudProviderCredentialsRequest
-	(*UpdateCloudProviderCredentialsResponse)(nil), // 4: porter.v1.UpdateCloudProviderCredentialsResponse
-	(EnumCloudProvider)(0),                         // 5: porter.v1.EnumCloudProvider
-}
+var (
+	file_porter_v1_cloud_provider_credentials_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+	file_porter_v1_cloud_provider_credentials_proto_goTypes  = []interface{}{
+		(*AWSCredentials)(nil),                         // 0: porter.v1.AWSCredentials
+		(*AzureCredentials)(nil),                       // 1: porter.v1.AzureCredentials
+		(*GCPCredentials)(nil),                         // 2: porter.v1.GCPCredentials
+		(*UpdateCloudProviderCredentialsRequest)(nil),  // 3: porter.v1.UpdateCloudProviderCredentialsRequest
+		(*UpdateCloudProviderCredentialsResponse)(nil), // 4: porter.v1.UpdateCloudProviderCredentialsResponse
+		(EnumCloudProvider)(0),                         // 5: porter.v1.EnumCloudProvider
+	}
+)
 var file_porter_v1_cloud_provider_credentials_proto_depIdxs = []int32{
 	5, // 0: porter.v1.UpdateCloudProviderCredentialsRequest.cloud_provider:type_name -> porter.v1.EnumCloudProvider
 	0, // 1: porter.v1.UpdateCloudProviderCredentialsRequest.aws_credentials:type_name -> porter.v1.AWSCredentials

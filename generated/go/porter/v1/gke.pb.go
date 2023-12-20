@@ -7,10 +7,11 @@
 package porterv1
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -457,15 +458,17 @@ func file_porter_v1_gke_proto_rawDescGZIP() []byte {
 	return file_porter_v1_gke_proto_rawDescData
 }
 
-var file_porter_v1_gke_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_porter_v1_gke_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
-var file_porter_v1_gke_proto_goTypes = []interface{}{
-	(GKENodePoolType)(0),       // 0: porter.v1.GKENodePoolType
-	(*GKE)(nil),                // 1: porter.v1.GKE
-	(*GKENodePool)(nil),        // 2: porter.v1.GKENodePool
-	(*GKENetwork)(nil),         // 3: porter.v1.GKENetwork
-	(*GKEPreflightValues)(nil), // 4: porter.v1.GKEPreflightValues
-}
+var (
+	file_porter_v1_gke_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+	file_porter_v1_gke_proto_msgTypes  = make([]protoimpl.MessageInfo, 4)
+	file_porter_v1_gke_proto_goTypes   = []interface{}{
+		(GKENodePoolType)(0),       // 0: porter.v1.GKENodePoolType
+		(*GKE)(nil),                // 1: porter.v1.GKE
+		(*GKENodePool)(nil),        // 2: porter.v1.GKENodePool
+		(*GKENetwork)(nil),         // 3: porter.v1.GKENetwork
+		(*GKEPreflightValues)(nil), // 4: porter.v1.GKEPreflightValues
+	}
+)
 var file_porter_v1_gke_proto_depIdxs = []int32{
 	3, // 0: porter.v1.GKE.network:type_name -> porter.v1.GKENetwork
 	2, // 1: porter.v1.GKE.node_pools:type_name -> porter.v1.GKENodePool

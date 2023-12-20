@@ -7,10 +7,11 @@
 package porterv1
 
 import (
-	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
-	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
 	sync "sync"
+
+	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
+	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 )
 
 const (
@@ -240,13 +241,15 @@ func file_porter_v1_contract_proto_rawDescGZIP() []byte {
 	return file_porter_v1_contract_proto_rawDescData
 }
 
-var file_porter_v1_contract_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
-var file_porter_v1_contract_proto_goTypes = []interface{}{
-	(*Contract)(nil),         // 0: porter.v1.Contract
-	(*ContractRevision)(nil), // 1: porter.v1.ContractRevision
-	(*User)(nil),             // 2: porter.v1.User
-	(*Cluster)(nil),          // 3: porter.v1.Cluster
-}
+var (
+	file_porter_v1_contract_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+	file_porter_v1_contract_proto_goTypes  = []interface{}{
+		(*Contract)(nil),         // 0: porter.v1.Contract
+		(*ContractRevision)(nil), // 1: porter.v1.ContractRevision
+		(*User)(nil),             // 2: porter.v1.User
+		(*Cluster)(nil),          // 3: porter.v1.Cluster
+	}
+)
 var file_porter_v1_contract_proto_depIdxs = []int32{
 	3, // 0: porter.v1.Contract.cluster:type_name -> porter.v1.Cluster
 	2, // 1: porter.v1.Contract.user:type_name -> porter.v1.User

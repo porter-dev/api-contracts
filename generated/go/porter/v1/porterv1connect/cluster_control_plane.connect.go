@@ -5,12 +5,14 @@
 package porterv1connect
 
 import (
-	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	v1 "github.com/porter-dev/api-contracts/generated/go/porter/v1"
 	http "net/http"
 	strings "strings"
+
+	connect "connectrpc.com/connect"
+
+	v1 "github.com/porter-dev/api-contracts/generated/go/porter/v1"
 )
 
 // This is a compile-time assertion to ensure that this generated file and the connect package are
@@ -229,6 +231,9 @@ const (
 	// ClusterControlPlaneServiceDeleteEnvGroupProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DeleteEnvGroup RPC.
 	ClusterControlPlaneServiceDeleteEnvGroupProcedure = "/porter.v1.ClusterControlPlaneService/DeleteEnvGroup"
+	// ClusterControlPlaneServiceAppsLinkedToEnvGroupProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's AppsLinkedToEnvGroup RPC.
+	ClusterControlPlaneServiceAppsLinkedToEnvGroupProcedure = "/porter.v1.ClusterControlPlaneService/AppsLinkedToEnvGroup"
 )
 
 // ClusterControlPlaneServiceClient is a client for the porter.v1.ClusterControlPlaneService
@@ -403,6 +408,8 @@ type ClusterControlPlaneServiceClient interface {
 	CreateOrUpdateEnvGroup(context.Context, *connect.Request[v1.CreateOrUpdateEnvGroupRequest]) (*connect.Response[v1.CreateOrUpdateEnvGroupResponse], error)
 	// DeleteEnvGroup will delete an env group
 	DeleteEnvGroup(context.Context, *connect.Request[v1.DeleteEnvGroupRequest]) (*connect.Response[v1.DeleteEnvGroupResponse], error)
+	// AppsLinkedToEnvGroup returns the list of app names linked to a given env group
+	AppsLinkedToEnvGroup(context.Context, *connect.Request[v1.AppsLinkedToEnvGroupRequest]) (*connect.Response[v1.AppsLinkedToEnvGroupResponse], error)
 }
 
 // NewClusterControlPlaneServiceClient constructs a client for the
@@ -740,6 +747,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceDeleteEnvGroupProcedure,
 			opts...,
 		),
+		appsLinkedToEnvGroup: connect.NewClient[v1.AppsLinkedToEnvGroupRequest, v1.AppsLinkedToEnvGroupResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceAppsLinkedToEnvGroupProcedure,
+			opts...,
+		),
 	}
 }
 
@@ -810,6 +822,7 @@ type clusterControlPlaneServiceClient struct {
 	areExternalEnvGroupProvidersEnabled *connect.Client[v1.AreExternalEnvGroupProvidersEnabledRequest, v1.AreExternalEnvGroupProvidersEnabledResponse]
 	createOrUpdateEnvGroup              *connect.Client[v1.CreateOrUpdateEnvGroupRequest, v1.CreateOrUpdateEnvGroupResponse]
 	deleteEnvGroup                      *connect.Client[v1.DeleteEnvGroupRequest, v1.DeleteEnvGroupResponse]
+	appsLinkedToEnvGroup                *connect.Client[v1.AppsLinkedToEnvGroupRequest, v1.AppsLinkedToEnvGroupResponse]
 }
 
 // QuotaIncrease calls porter.v1.ClusterControlPlaneService.QuotaIncrease.
@@ -1168,6 +1181,11 @@ func (c *clusterControlPlaneServiceClient) DeleteEnvGroup(ctx context.Context, r
 	return c.deleteEnvGroup.CallUnary(ctx, req)
 }
 
+// AppsLinkedToEnvGroup calls porter.v1.ClusterControlPlaneService.AppsLinkedToEnvGroup.
+func (c *clusterControlPlaneServiceClient) AppsLinkedToEnvGroup(ctx context.Context, req *connect.Request[v1.AppsLinkedToEnvGroupRequest]) (*connect.Response[v1.AppsLinkedToEnvGroupResponse], error) {
+	return c.appsLinkedToEnvGroup.CallUnary(ctx, req)
+}
+
 // ClusterControlPlaneServiceHandler is an implementation of the
 // porter.v1.ClusterControlPlaneService service.
 type ClusterControlPlaneServiceHandler interface {
@@ -1340,6 +1358,8 @@ type ClusterControlPlaneServiceHandler interface {
 	CreateOrUpdateEnvGroup(context.Context, *connect.Request[v1.CreateOrUpdateEnvGroupRequest]) (*connect.Response[v1.CreateOrUpdateEnvGroupResponse], error)
 	// DeleteEnvGroup will delete an env group
 	DeleteEnvGroup(context.Context, *connect.Request[v1.DeleteEnvGroupRequest]) (*connect.Response[v1.DeleteEnvGroupResponse], error)
+	// AppsLinkedToEnvGroup returns the list of app names linked to a given env group
+	AppsLinkedToEnvGroup(context.Context, *connect.Request[v1.AppsLinkedToEnvGroupRequest]) (*connect.Response[v1.AppsLinkedToEnvGroupResponse], error)
 }
 
 // NewClusterControlPlaneServiceHandler builds an HTTP handler from the service implementation. It
@@ -1673,6 +1693,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.DeleteEnvGroup,
 		opts...,
 	)
+	clusterControlPlaneServiceAppsLinkedToEnvGroupHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceAppsLinkedToEnvGroupProcedure,
+		svc.AppsLinkedToEnvGroup,
+		opts...,
+	)
 	return "/porter.v1.ClusterControlPlaneService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ClusterControlPlaneServiceQuotaIncreaseProcedure:
@@ -1805,6 +1830,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceCreateOrUpdateEnvGroupHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDeleteEnvGroupProcedure:
 			clusterControlPlaneServiceDeleteEnvGroupHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceAppsLinkedToEnvGroupProcedure:
+			clusterControlPlaneServiceAppsLinkedToEnvGroupHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -2072,4 +2099,8 @@ func (UnimplementedClusterControlPlaneServiceHandler) CreateOrUpdateEnvGroup(con
 
 func (UnimplementedClusterControlPlaneServiceHandler) DeleteEnvGroup(context.Context, *connect.Request[v1.DeleteEnvGroupRequest]) (*connect.Response[v1.DeleteEnvGroupResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.DeleteEnvGroup is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) AppsLinkedToEnvGroup(context.Context, *connect.Request[v1.AppsLinkedToEnvGroupRequest]) (*connect.Response[v1.AppsLinkedToEnvGroupResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.AppsLinkedToEnvGroup is not implemented"))
 }

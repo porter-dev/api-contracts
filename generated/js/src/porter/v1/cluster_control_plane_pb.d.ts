@@ -4652,6 +4652,88 @@ export declare class DeleteEnvGroupResponse extends Message<DeleteEnvGroupRespon
 }
 
 /**
+ * AppsLinkedToEnvGroupRequest is the request object for AppsLinkedToEnvGroup
+ *
+ * @generated from message porter.v1.AppsLinkedToEnvGroupRequest
+ */
+export declare class AppsLinkedToEnvGroupRequest extends Message<AppsLinkedToEnvGroupRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * cluster_id is the id of the cluster where the env group is installed
+   *
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  /**
+   * env_group_name is the name of the env group
+   *
+   * @generated from field: string env_group_name = 3;
+   */
+  envGroupName: string;
+
+  /**
+   * ignore_preview indicates whether to ignore preview deployment targets
+   *
+   * @generated from field: bool ignore_preview = 4;
+   */
+  ignorePreview: boolean;
+
+  constructor(data?: PartialMessage<AppsLinkedToEnvGroupRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AppsLinkedToEnvGroupRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AppsLinkedToEnvGroupRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AppsLinkedToEnvGroupRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AppsLinkedToEnvGroupRequest;
+
+  static equals(a: AppsLinkedToEnvGroupRequest | PlainMessage<AppsLinkedToEnvGroupRequest> | undefined, b: AppsLinkedToEnvGroupRequest | PlainMessage<AppsLinkedToEnvGroupRequest> | undefined): boolean;
+}
+
+/**
+ * AppsLinkedToEnvGroupResponse is the request object for AppsLinkedToEnvGroup
+ *
+ * @generated from message porter.v1.AppsLinkedToEnvGroupResponse
+ */
+export declare class AppsLinkedToEnvGroupResponse extends Message<AppsLinkedToEnvGroupResponse> {
+  /**
+   * env_group_name is the name of the env group
+   *
+   * @generated from field: string env_group_name = 3;
+   */
+  envGroupName: string;
+
+  /**
+   * linked_apps is the list of apps linked to the env group
+   *
+   * @generated from field: repeated porter.v1.AppInstance linked_apps = 4;
+   */
+  linkedApps: AppInstance[];
+
+  constructor(data?: PartialMessage<AppsLinkedToEnvGroupResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AppsLinkedToEnvGroupResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AppsLinkedToEnvGroupResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AppsLinkedToEnvGroupResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AppsLinkedToEnvGroupResponse;
+
+  static equals(a: AppsLinkedToEnvGroupResponse | PlainMessage<AppsLinkedToEnvGroupResponse> | undefined, b: AppsLinkedToEnvGroupResponse | PlainMessage<AppsLinkedToEnvGroupResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  * @deprecated
  */
