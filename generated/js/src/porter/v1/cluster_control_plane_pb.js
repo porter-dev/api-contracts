@@ -1587,6 +1587,34 @@ export const DeleteEnvGroupResponse = proto3.makeMessageType(
 );
 
 /**
+ * AppsLinkedToEnvGroupRequest is the request object for AppsLinkedToEnvGroup
+ *
+ * @generated from message porter.v1.AppsLinkedToEnvGroupRequest
+ */
+export const AppsLinkedToEnvGroupRequest = proto3.makeMessageType(
+  "porter.v1.AppsLinkedToEnvGroupRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "env_group_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "ignore_preview", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
+/**
+ * AppsLinkedToEnvGroupResponse is the response object for AppsLinkedToEnvGroup
+ *
+ * @generated from message porter.v1.AppsLinkedToEnvGroupResponse
+ */
+export const AppsLinkedToEnvGroupResponse = proto3.makeMessageType(
+  "porter.v1.AppsLinkedToEnvGroupResponse",
+  () => [
+    { no: 1, name: "env_group_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "linked_apps", kind: "message", T: AppInstance, repeated: true },
+  ],
+);
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  * @deprecated
  */
