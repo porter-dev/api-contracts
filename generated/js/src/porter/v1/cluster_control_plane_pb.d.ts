@@ -245,6 +245,13 @@ export declare enum EnumDatastore {
    * @generated from enum value: ENUM_DATASTORE_ELASTICACHE_REDIS = 3;
    */
   ELASTICACHE_REDIS = 3,
+
+  /**
+   * ENUM_DATASTORE_ELASTICACHE_MEMCACHED is an enum representing an elasticache memcached replication group
+   *
+   * @generated from enum value: ENUM_DATASTORE_ELASTICACHE_MEMCACHED = 4;
+   */
+  ELASTICACHE_MEMCACHED = 4,
 }
 
 /**
