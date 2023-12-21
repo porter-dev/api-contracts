@@ -1438,6 +1438,8 @@ enum EnumDatastore {
   ENUM_DATASTORE_RDS_AURORA_POSTGRESQL = 2;
   // ENUM_DATASTORE_ELASTICACHE_REDIS is an enum representing an elasticache redis replication group
   ENUM_DATASTORE_ELASTICACHE_REDIS = 3;
+  // ENUM_DATASTORE_ELASTICACHE_MEMCACHED is an enum representing an elasticache memcached replication group
+  ENUM_DATASTORE_ELASTICACHE_MEMCACHED = 4;
 }
 
 // DatastoreMetadata represents an object containing metadata for a given datastore
