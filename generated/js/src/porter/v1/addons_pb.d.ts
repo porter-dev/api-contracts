@@ -24,6 +24,13 @@ export declare enum AddonType {
    * @generated from enum value: ADDON_TYPE_POSTGRES = 1;
    */
   POSTGRES = 1,
+
+  /**
+   * ADDON_TYPE_REDIS is the redis addon type
+   *
+   * @generated from enum value: ADDON_TYPE_REDIS = 2;
+   */
+  REDIS = 2,
 }
 
 /**
@@ -66,6 +73,14 @@ export declare class Addon extends Message<Addon> {
      */
     value: Postgres;
     case: "postgres";
+  } | {
+    /**
+     * redis is the configuration for the redis addon
+     *
+     * @generated from field: porter.v1.Redis redis = 5;
+     */
+    value: Redis;
+    case: "redis";
   } | { case: undefined; value?: undefined };
 
   constructor(data?: PartialMessage<Addon>);
@@ -123,5 +138,47 @@ export declare class Postgres extends Message<Postgres> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Postgres;
 
   static equals(a: Postgres | PlainMessage<Postgres> | undefined, b: Postgres | PlainMessage<Postgres> | undefined): boolean;
+}
+
+/**
+ * Redis is the configuration for redis
+ *
+ * @generated from message porter.v1.Redis
+ */
+export declare class Redis extends Message<Redis> {
+  /**
+   * cpu_cores is the number of CPU cores to allocate to the database
+   *
+   * @generated from field: float cpu_cores = 1;
+   */
+  cpuCores: number;
+
+  /**
+   * ram_megabytes is the amount of memory to allocate to the database
+   *
+   * @generated from field: int32 ram_megabytes = 2;
+   */
+  ramMegabytes: number;
+
+  /**
+   * storage_gigabytes is the amount of storage to allocate to the database
+   *
+   * @generated from field: int32 storage_gigabytes = 3;
+   */
+  storageGigabytes: number;
+
+  constructor(data?: PartialMessage<Redis>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.Redis";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Redis;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Redis;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Redis;
+
+  static equals(a: Redis | PlainMessage<Redis> | undefined, b: Redis | PlainMessage<Redis> | undefined): boolean;
 }
 

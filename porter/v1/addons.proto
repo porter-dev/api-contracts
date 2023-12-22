@@ -9,6 +9,8 @@ enum AddonType {
   ADDON_TYPE_UNSPECIFIED = 0;
   // ADDON_TYPE_POSTGRES is the postgres addon type
   ADDON_TYPE_POSTGRES = 1;
+  // ADDON_TYPE_REDIS is the redis addon type
+  ADDON_TYPE_REDIS = 2;
 }
 
 // Addon is the configuration object for tooling or services that can be applied to the cluster alongside porter apps.
@@ -23,11 +25,23 @@ message Addon {
   oneof config {
     // postgres is the configuration for the postgres addon
     Postgres postgres = 4;
+    // redis is the configuration for the redis addon
+    Redis redis = 5;
   }
 }
 
 // Postgres is the configuration for postgres
 message Postgres {
+  // cpu_cores is the number of CPU cores to allocate to the database
+  float cpu_cores = 1;
+  // ram_megabytes is the amount of memory to allocate to the database
+  int32 ram_megabytes = 2;
+  // storage_gigabytes is the amount of storage to allocate to the database
+  int32 storage_gigabytes = 3;
+}
+
+// Redis is the configuration for redis
+message Redis {
   // cpu_cores is the number of CPU cores to allocate to the database
   float cpu_cores = 1;
   // ram_megabytes is the amount of memory to allocate to the database

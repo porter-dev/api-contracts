@@ -14,6 +14,7 @@ export const AddonType = proto3.makeEnum(
   [
     {no: 0, name: "ADDON_TYPE_UNSPECIFIED", localName: "UNSPECIFIED"},
     {no: 1, name: "ADDON_TYPE_POSTGRES", localName: "POSTGRES"},
+    {no: 2, name: "ADDON_TYPE_REDIS", localName: "REDIS"},
   ],
 );
 
@@ -29,6 +30,7 @@ export const Addon = proto3.makeMessageType(
     { no: 2, name: "type", kind: "enum", T: proto3.getEnumType(AddonType) },
     { no: 3, name: "env_groups", kind: "message", T: EnvGroup, repeated: true },
     { no: 4, name: "postgres", kind: "message", T: Postgres, oneof: "config" },
+    { no: 5, name: "redis", kind: "message", T: Redis, oneof: "config" },
   ],
 );
 
@@ -39,6 +41,20 @@ export const Addon = proto3.makeMessageType(
  */
 export const Postgres = proto3.makeMessageType(
   "porter.v1.Postgres",
+  () => [
+    { no: 1, name: "cpu_cores", kind: "scalar", T: 2 /* ScalarType.FLOAT */ },
+    { no: 2, name: "ram_megabytes", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 3, name: "storage_gigabytes", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+  ],
+);
+
+/**
+ * Redis is the configuration for redis
+ *
+ * @generated from message porter.v1.Redis
+ */
+export const Redis = proto3.makeMessageType(
+  "porter.v1.Redis",
   () => [
     { no: 1, name: "cpu_cores", kind: "scalar", T: 2 /* ScalarType.FLOAT */ },
     { no: 2, name: "ram_megabytes", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
