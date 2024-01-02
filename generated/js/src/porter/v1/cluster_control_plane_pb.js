@@ -109,6 +109,7 @@ export const EnumDatastore = proto3.makeEnum(
     {no: 2, name: "ENUM_DATASTORE_RDS_AURORA_POSTGRESQL", localName: "RDS_AURORA_POSTGRESQL"},
     {no: 3, name: "ENUM_DATASTORE_ELASTICACHE_REDIS", localName: "ELASTICACHE_REDIS"},
     {no: 4, name: "ENUM_DATASTORE_ELASTICACHE_MEMCACHED", localName: "ELASTICACHE_MEMCACHED"},
+    {no: 5, name: "ENUM_DATASTORE_RDS_MYSQL", localName: "RDS_MYSQL"},
   ],
 );
 

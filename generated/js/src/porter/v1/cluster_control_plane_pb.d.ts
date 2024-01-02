@@ -252,6 +252,13 @@ export declare enum EnumDatastore {
    * @generated from enum value: ENUM_DATASTORE_ELASTICACHE_MEMCACHED = 4;
    */
   ELASTICACHE_MEMCACHED = 4,
+
+  /**
+   * ENUM_DATASTORE_RDS_MYSQL is an enum representing an rds mysql instance
+   *
+   * @generated from enum value: ENUM_DATASTORE_RDS_MYSQL = 5;
+   */
+  RDS_MYSQL = 5,
 }
 
 /**
