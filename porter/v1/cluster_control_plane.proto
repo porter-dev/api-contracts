@@ -1440,6 +1440,8 @@ enum EnumDatastore {
   ENUM_DATASTORE_ELASTICACHE_REDIS = 3;
   // ENUM_DATASTORE_ELASTICACHE_MEMCACHED is an enum representing an elasticache memcached replication group
   ENUM_DATASTORE_ELASTICACHE_MEMCACHED = 4;
+  // ENUM_DATASTORE_RDS_MYSQL is an enum representing an rds mysql instance
+  ENUM_DATASTORE_RDS_MYSQL = 5;
 }
 
 // DatastoreMetadata represents an object containing metadata for a given datastore
