@@ -258,11 +258,11 @@ type Redis struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// cpu_cores is the number of CPU cores to allocate to the database
+	// cpu_cores is the number of CPU cores to allocate to redis
 	CpuCores float32 `protobuf:"fixed32,1,opt,name=cpu_cores,json=cpuCores,proto3" json:"cpu_cores,omitempty"`
-	// ram_megabytes is the amount of memory to allocate to the database
+	// ram_megabytes is the amount of memory to allocate to redis
 	RamMegabytes int32 `protobuf:"varint,2,opt,name=ram_megabytes,json=ramMegabytes,proto3" json:"ram_megabytes,omitempty"`
-	// storage_gigabytes is the amount of storage to allocate to the database
+	// storage_gigabytes is the amount of storage to allocate to redis
 	StorageGigabytes int32 `protobuf:"varint,3,opt,name=storage_gigabytes,json=storageGigabytes,proto3" json:"storage_gigabytes,omitempty"`
 }
 

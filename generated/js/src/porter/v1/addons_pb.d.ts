@@ -147,21 +147,21 @@ export declare class Postgres extends Message<Postgres> {
  */
 export declare class Redis extends Message<Redis> {
   /**
-   * cpu_cores is the number of CPU cores to allocate to the database
+   * cpu_cores is the number of CPU cores to allocate to redis
    *
    * @generated from field: float cpu_cores = 1;
    */
   cpuCores: number;
 
   /**
-   * ram_megabytes is the amount of memory to allocate to the database
+   * ram_megabytes is the amount of memory to allocate to redis
    *
    * @generated from field: int32 ram_megabytes = 2;
    */
   ramMegabytes: number;
 
   /**
-   * storage_gigabytes is the amount of storage to allocate to the database
+   * storage_gigabytes is the amount of storage to allocate to redis
    *
    * @generated from field: int32 storage_gigabytes = 3;
    */
