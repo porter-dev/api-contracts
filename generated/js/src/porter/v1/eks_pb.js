@@ -48,6 +48,20 @@ export const EKS = proto3.makeMessageType(
     { no: 9, name: "enable_kms_encryption", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 10, name: "network", kind: "message", T: AWSClusterNetwork },
     { no: 11, name: "enable_ecr_scanning", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 12, name: "cloudwatch_alarm", kind: "message", T: CloudwatchAlarm },
+  ],
+);
+
+/**
+ * CloudwatchAlarm contains all the information required to configure cloudwatch alarms on a cluster
+ *
+ * @generated from message porter.v1.CloudwatchAlarm
+ */
+export const CloudwatchAlarm = proto3.makeMessageType(
+  "porter.v1.CloudwatchAlarm",
+  () => [
+    { no: 1, name: "enable", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 2, name: "emails", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
   ],
 );
 
