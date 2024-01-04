@@ -34,6 +34,35 @@ export declare enum AddonType {
 }
 
 /**
+ * PrerequisiteAddon specifies an addon that must be installed before any apps can be installed
+ * the addon should be installed with the specified config
+ *
+ * @generated from message porter.v1.PrerequisiteAddon
+ */
+export declare class PrerequisiteAddon extends Message<PrerequisiteAddon> {
+  /**
+   * commit_sha is the commit SHA of the addon
+   *
+   * @generated from field: string commit_sha = 2;
+   */
+  commitSha: string;
+
+  constructor(data?: PartialMessage<PrerequisiteAddon>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.PrerequisiteAddon";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PrerequisiteAddon;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PrerequisiteAddon;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PrerequisiteAddon;
+
+  static equals(a: PrerequisiteAddon | PlainMessage<PrerequisiteAddon> | undefined, b: PrerequisiteAddon | PlainMessage<PrerequisiteAddon> | undefined): boolean;
+}
+
+/**
  * Addon is the configuration object for tooling or services that can be applied to the cluster alongside porter apps.
  *
  * @generated from message porter.v1.Addon
