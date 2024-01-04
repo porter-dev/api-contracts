@@ -178,6 +178,9 @@ const (
 	// ClusterControlPlaneServiceListAppInstancesProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's ListAppInstances RPC.
 	ClusterControlPlaneServiceListAppInstancesProcedure = "/porter.v1.ClusterControlPlaneService/ListAppInstances"
+	// ClusterControlPlaneServiceTemplateAppManifestsProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's TemplateAppManifests RPC.
+	ClusterControlPlaneServiceTemplateAppManifestsProcedure = "/porter.v1.ClusterControlPlaneService/TemplateAppManifests"
 	// ClusterControlPlaneServiceCreateNotificationProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's CreateNotification RPC.
 	ClusterControlPlaneServiceCreateNotificationProcedure = "/porter.v1.ClusterControlPlaneService/CreateNotification"
@@ -344,6 +347,8 @@ type ClusterControlPlaneServiceClient interface {
 	DeleteAppInstance(context.Context, *connect.Request[v1.DeleteAppInstanceRequest]) (*connect.Response[v1.DeleteAppInstanceResponse], error)
 	// ListAppInstances lists app instance in a project (and deployment target if provided).
 	ListAppInstances(context.Context, *connect.Request[v1.ListAppInstancesRequest]) (*connect.Response[v1.ListAppInstancesResponse], error)
+	// TemplateAppManifests returns the manifests for a given app template
+	TemplateAppManifests(context.Context, *connect.Request[v1.TemplateAppManifestsRequest]) (*connect.Response[v1.TemplateAppManifestsResponse], error)
 	// CreateNotification creates a notification for a porter app and service at a given app revision
 	CreateNotification(context.Context, *connect.Request[v1.CreateNotificationRequest]) (*connect.Response[v1.CreateNotificationResponse], error)
 	// UpdateServiceDeploymentStatus updates the current deployment status of a service with a new status
@@ -660,6 +665,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceListAppInstancesProcedure,
 			opts...,
 		),
+		templateAppManifests: connect.NewClient[v1.TemplateAppManifestsRequest, v1.TemplateAppManifestsResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceTemplateAppManifestsProcedure,
+			opts...,
+		),
 		createNotification: connect.NewClient[v1.CreateNotificationRequest, v1.CreateNotificationResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceCreateNotificationProcedure,
@@ -803,6 +813,7 @@ type clusterControlPlaneServiceClient struct {
 	createAppInstance                   *connect.Client[v1.CreateAppInstanceRequest, v1.CreateAppInstanceResponse]
 	deleteAppInstance                   *connect.Client[v1.DeleteAppInstanceRequest, v1.DeleteAppInstanceResponse]
 	listAppInstances                    *connect.Client[v1.ListAppInstancesRequest, v1.ListAppInstancesResponse]
+	templateAppManifests                *connect.Client[v1.TemplateAppManifestsRequest, v1.TemplateAppManifestsResponse]
 	createNotification                  *connect.Client[v1.CreateNotificationRequest, v1.CreateNotificationResponse]
 	updateServiceDeploymentStatus       *connect.Client[v1.UpdateServiceDeploymentStatusRequest, v1.UpdateServiceDeploymentStatusResponse]
 	dockerConfigFileForRegistry         *connect.Client[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse]
@@ -1071,6 +1082,11 @@ func (c *clusterControlPlaneServiceClient) ListAppInstances(ctx context.Context,
 	return c.listAppInstances.CallUnary(ctx, req)
 }
 
+// TemplateAppManifests calls porter.v1.ClusterControlPlaneService.TemplateAppManifests.
+func (c *clusterControlPlaneServiceClient) TemplateAppManifests(ctx context.Context, req *connect.Request[v1.TemplateAppManifestsRequest]) (*connect.Response[v1.TemplateAppManifestsResponse], error) {
+	return c.templateAppManifests.CallUnary(ctx, req)
+}
+
 // CreateNotification calls porter.v1.ClusterControlPlaneService.CreateNotification.
 func (c *clusterControlPlaneServiceClient) CreateNotification(ctx context.Context, req *connect.Request[v1.CreateNotificationRequest]) (*connect.Response[v1.CreateNotificationResponse], error) {
 	return c.createNotification.CallUnary(ctx, req)
@@ -1294,6 +1310,8 @@ type ClusterControlPlaneServiceHandler interface {
 	DeleteAppInstance(context.Context, *connect.Request[v1.DeleteAppInstanceRequest]) (*connect.Response[v1.DeleteAppInstanceResponse], error)
 	// ListAppInstances lists app instance in a project (and deployment target if provided).
 	ListAppInstances(context.Context, *connect.Request[v1.ListAppInstancesRequest]) (*connect.Response[v1.ListAppInstancesResponse], error)
+	// TemplateAppManifests returns the manifests for a given app template
+	TemplateAppManifests(context.Context, *connect.Request[v1.TemplateAppManifestsRequest]) (*connect.Response[v1.TemplateAppManifestsResponse], error)
 	// CreateNotification creates a notification for a porter app and service at a given app revision
 	CreateNotification(context.Context, *connect.Request[v1.CreateNotificationRequest]) (*connect.Response[v1.CreateNotificationResponse], error)
 	// UpdateServiceDeploymentStatus updates the current deployment status of a service with a new status
@@ -1606,6 +1624,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.ListAppInstances,
 		opts...,
 	)
+	clusterControlPlaneServiceTemplateAppManifestsHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceTemplateAppManifestsProcedure,
+		svc.TemplateAppManifests,
+		opts...,
+	)
 	clusterControlPlaneServiceCreateNotificationHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceCreateNotificationProcedure,
 		svc.CreateNotification,
@@ -1794,6 +1817,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceDeleteAppInstanceHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceListAppInstancesProcedure:
 			clusterControlPlaneServiceListAppInstancesHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceTemplateAppManifestsProcedure:
+			clusterControlPlaneServiceTemplateAppManifestsHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceCreateNotificationProcedure:
 			clusterControlPlaneServiceCreateNotificationHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceUpdateServiceDeploymentStatusProcedure:
@@ -2029,6 +2054,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) DeleteAppInstance(context.
 
 func (UnimplementedClusterControlPlaneServiceHandler) ListAppInstances(context.Context, *connect.Request[v1.ListAppInstancesRequest]) (*connect.Response[v1.ListAppInstancesResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ListAppInstances is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) TemplateAppManifests(context.Context, *connect.Request[v1.TemplateAppManifestsRequest]) (*connect.Response[v1.TemplateAppManifestsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.TemplateAppManifests is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) CreateNotification(context.Context, *connect.Request[v1.CreateNotificationRequest]) (*connect.Response[v1.CreateNotificationResponse], error) {

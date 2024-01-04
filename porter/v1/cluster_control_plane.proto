@@ -902,6 +902,24 @@ message ListAppInstancesResponse {
   repeated AppInstance app_instances = 1;
 }
 
+// TemplateAppManifestsRequest is the request object for retrieving the manifests for a given app definition
+message TemplateAppManifestsRequest {
+  int64 project_id = 1;
+  // cluster_id is the id of the cluster where the app is installed, presumably in the default deployment target. Ignored if deployment_target_identifier is provided.
+  int64 cluster_id = 2;
+  // deployment_target_identifier is the object that identifies the deployment target for the app
+  DeploymentTargetIdentifier deployment_target_identifier = 3;
+  // app_name is the name of the app to retrieve the manifests for
+  // the latest successful revision of the app will be used
+  string app_name = 4;
+}
+
+// TemplateAppManifestsResponse is the response object for retrieving the manifests for a given app definition
+message TemplateAppManifestsResponse {
+  // base64_manifests is the base64-encoded, stringified manifests for the app
+  string base64_manifests = 1;
+}
+
 message AppInstance {
   // id is the id of the app instance
   string id = 1;
@@ -1199,6 +1217,9 @@ service ClusterControlPlaneService {
 
   // ListAppInstances lists app instance in a project (and deployment target if provided).
   rpc ListAppInstances(ListAppInstancesRequest) returns (ListAppInstancesResponse) {}
+
+  // TemplateAppManifests returns the manifests for a given app template
+  rpc TemplateAppManifests(TemplateAppManifestsRequest) returns (TemplateAppManifestsResponse) {}
 
   // CreateNotification creates a notification for a porter app and service at a given app revision
   rpc CreateNotification(CreateNotificationRequest) returns (CreateNotificationResponse) {}
