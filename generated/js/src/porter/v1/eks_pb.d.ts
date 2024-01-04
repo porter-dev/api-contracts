@@ -125,6 +125,13 @@ export declare class EKS extends Message<EKS> {
    */
   enableEcrScanning: boolean;
 
+  /**
+   * cloudwatch_alarm contains the configuration for setting up cloudwatch on a cluster
+   *
+   * @generated from field: porter.v1.CloudwatchAlarm cloudwatch_alarm = 12;
+   */
+  cloudwatchAlarm?: CloudwatchAlarm;
+
   constructor(data?: PartialMessage<EKS>);
 
   static readonly runtime: typeof proto3;
@@ -138,6 +145,41 @@ export declare class EKS extends Message<EKS> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EKS;
 
   static equals(a: EKS | PlainMessage<EKS> | undefined, b: EKS | PlainMessage<EKS> | undefined): boolean;
+}
+
+/**
+ * CloudwatchAlarm contains all the information required to configure cloudwatch alarms on a cluster
+ *
+ * @generated from message porter.v1.CloudwatchAlarm
+ */
+export declare class CloudwatchAlarm extends Message<CloudwatchAlarm> {
+  /**
+   * enable toggles whether cloudwatch alarms are setup or not
+   *
+   * @generated from field: bool enable = 1;
+   */
+  enable: boolean;
+
+  /**
+   * emails is a list of email addresses to send alarms to
+   *
+   * @generated from field: repeated string emails = 2;
+   */
+  emails: string[];
+
+  constructor(data?: PartialMessage<CloudwatchAlarm>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CloudwatchAlarm";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CloudwatchAlarm;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CloudwatchAlarm;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CloudwatchAlarm;
+
+  static equals(a: CloudwatchAlarm | PlainMessage<CloudwatchAlarm> | undefined, b: CloudwatchAlarm | PlainMessage<CloudwatchAlarm> | undefined): boolean;
 }
 
 /**

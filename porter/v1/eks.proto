@@ -20,6 +20,18 @@ message EKS {
 
   // enable_ecr_scanning controls whether continuous scanning should be enabled for all AWS registries associated with the cluster
   bool enable_ecr_scanning = 11;
+
+  // cloudwatch_alarm contains the configuration for setting up cloudwatch on a cluster
+  CloudwatchAlarm cloudwatch_alarm = 12;
+}
+
+// CloudwatchAlarm contains all the information required to configure cloudwatch alarms on a cluster
+message CloudwatchAlarm {
+  // enable toggles whether cloudwatch alarms are setup or not
+  bool enable = 1;
+
+  // emails is a list of email addresses to send alarms to
+  repeated string emails = 2;
 }
 
 // AWSClusterNetwork contains all information required to configure the AWS cluster's network
