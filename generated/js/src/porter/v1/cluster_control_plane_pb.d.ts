@@ -4149,6 +4149,82 @@ export declare class ListAppInstancesResponse extends Message<ListAppInstancesRe
 }
 
 /**
+ * TemplateAppManifestsRequest is the request object for retrieving the manifests for a given app definition
+ *
+ * @generated from message porter.v1.TemplateAppManifestsRequest
+ */
+export declare class TemplateAppManifestsRequest extends Message<TemplateAppManifestsRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * cluster_id is the id of the cluster where the app is installed, presumably in the default deployment target. Ignored if deployment_target_identifier is provided.
+   *
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target for the app
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 3;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  /**
+   * app_name is the name of the app to retrieve the manifests for
+   * the latest successful revision of the app will be used
+   *
+   * @generated from field: string app_name = 4;
+   */
+  appName: string;
+
+  constructor(data?: PartialMessage<TemplateAppManifestsRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.TemplateAppManifestsRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): TemplateAppManifestsRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): TemplateAppManifestsRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): TemplateAppManifestsRequest;
+
+  static equals(a: TemplateAppManifestsRequest | PlainMessage<TemplateAppManifestsRequest> | undefined, b: TemplateAppManifestsRequest | PlainMessage<TemplateAppManifestsRequest> | undefined): boolean;
+}
+
+/**
+ * TemplateAppManifestsResponse is the response object for retrieving the manifests for a given app definition
+ *
+ * @generated from message porter.v1.TemplateAppManifestsResponse
+ */
+export declare class TemplateAppManifestsResponse extends Message<TemplateAppManifestsResponse> {
+  /**
+   * base64_manifests is the base64-encoded, stringified manifests for the app
+   *
+   * @generated from field: string base64_manifests = 1;
+   */
+  base64Manifests: string;
+
+  constructor(data?: PartialMessage<TemplateAppManifestsResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.TemplateAppManifestsResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): TemplateAppManifestsResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): TemplateAppManifestsResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): TemplateAppManifestsResponse;
+
+  static equals(a: TemplateAppManifestsResponse | PlainMessage<TemplateAppManifestsResponse> | undefined, b: TemplateAppManifestsResponse | PlainMessage<TemplateAppManifestsResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.AppInstance
  */
 export declare class AppInstance extends Message<AppInstance> {

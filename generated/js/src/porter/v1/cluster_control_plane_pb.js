@@ -1417,6 +1417,33 @@ export const ListAppInstancesResponse = proto3.makeMessageType(
 );
 
 /**
+ * TemplateAppManifestsRequest is the request object for retrieving the manifests for a given app definition
+ *
+ * @generated from message porter.v1.TemplateAppManifestsRequest
+ */
+export const TemplateAppManifestsRequest = proto3.makeMessageType(
+  "porter.v1.TemplateAppManifestsRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+    { no: 4, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * TemplateAppManifestsResponse is the response object for retrieving the manifests for a given app definition
+ *
+ * @generated from message porter.v1.TemplateAppManifestsResponse
+ */
+export const TemplateAppManifestsResponse = proto3.makeMessageType(
+  "porter.v1.TemplateAppManifestsResponse",
+  () => [
+    { no: 1, name: "base64_manifests", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
  * @generated from message porter.v1.AppInstance
  */
 export const AppInstance = proto3.makeMessageType(
