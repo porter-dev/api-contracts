@@ -34,8 +34,8 @@ message PorterApp {
   string name = 1;
   // services is a map of service names to service configurations
   map<string, Service> services = 2 [deprecated = true];
-  // env is deprecated in favor of env groups. It was a map of environment variable names to values
-  map<string, string> env = 3 [deprecated = true];
+  // env is a list of environment variables to set on the application
+  repeated EnvVariable env = 3;
   // build is the build settings for the application
   Build build = 4;
   // predeploy is a job service to run before deploying the application
@@ -151,4 +151,40 @@ message EFS {
   bool enabled = 1;
   // file_system_id is the AWS EFS File System ID to mount
   string file_system_id = 2;
+}
+
+// EnvDefinitionMethod is the method for setting the environment variable
+enum EnvDefinitionMethod {
+  ENV_DEFINITION_METHOD_UNSPECIFIED = 0;
+  ENV_DEFINITION_METHOD_FROM_VALUE = 1;
+  ENV_DEFINITION_METHOD_FROM_APP = 2;
+}
+
+message EnvVariable {
+  // key is the name of the environment variable
+  string key = 1;
+  // definition_method specifies how the env variable should be set
+  EnvDefinitionMethod definition_method = 2;
+  // value is the value of the environment variable. This is only used if case is ENV_VARIABLE_CASE_FROM_VALUE
+  string value = 3;
+  // definition is an object that defines how the environment variable should be set
+  oneof definition {
+    EnvVariableFromApp from_app = 4;
+  }
+}
+
+// EnvValueFromApp is an enum of the possible values to use in the EnvVariableFromApp definition
+enum EnvValueFromApp {
+  ENV_VALUE_FROM_APP_UNSPECIFIED = 0;
+  ENV_VALUE_FROM_APP_PUBLIC_DOMAIN = 1;
+  ENV_VALUE_FROM_APP_INTERNAL_DOMAIN = 2;
+}
+
+message EnvVariableFromApp {
+  // name is the name of the app
+  string name = 1;
+  // value is one of a discrete set of configured values on the app that can be used for the environment variable
+  EnvValueFromApp value = 2;
+  // service is the name of the service where the value is defined
+  string service = 3;
 }
