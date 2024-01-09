@@ -242,9 +242,9 @@ export const EnvVariable = proto3.makeMessageType(
 export const EnvVariableFromApp = proto3.makeMessageType(
   "porter.v1.EnvVariableFromApp",
   () => [
-    { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "value", kind: "enum", T: proto3.getEnumType(EnvValueFromApp) },
-    { no: 3, name: "service", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "service_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

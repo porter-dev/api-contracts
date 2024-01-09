@@ -724,11 +724,11 @@ export declare class EnvVariable extends Message<EnvVariable> {
  */
 export declare class EnvVariableFromApp extends Message<EnvVariableFromApp> {
   /**
-   * name is the name of the app
+   * app_name is the name of the app
    *
-   * @generated from field: string name = 1;
+   * @generated from field: string app_name = 1;
    */
-  name: string;
+  appName: string;
 
   /**
    * value is one of a discrete set of configured values on the app that can be used for the environment variable
@@ -738,11 +738,11 @@ export declare class EnvVariableFromApp extends Message<EnvVariableFromApp> {
   value: EnvValueFromApp;
 
   /**
-   * service is the name of the service where the value is defined
+   * service_name is the name of the service where the value is defined
    *
-   * @generated from field: string service = 3;
+   * @generated from field: string service_name = 3;
    */
-  service: string;
+  serviceName: string;
 
   constructor(data?: PartialMessage<EnvVariableFromApp>);
 
