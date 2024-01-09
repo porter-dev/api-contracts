@@ -8,6 +8,50 @@ import { Message, proto3 } from "@bufbuild/protobuf";
 import type { Service } from "./service_pb.js";
 
 /**
+ * EnvVariableSource is the source type from which to pull the environment variable
+ *
+ * @generated from enum porter.v1.EnvVariableSource
+ */
+export declare enum EnvVariableSource {
+  /**
+   * @generated from enum value: ENV_VARIABLE_SOURCE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: ENV_VARIABLE_SOURCE_VALUE = 1;
+   */
+  VALUE = 1,
+
+  /**
+   * @generated from enum value: ENV_VARIABLE_SOURCE_FROM_APP = 2;
+   */
+  FROM_APP = 2,
+}
+
+/**
+ * EnvValueFromApp is an enum of the possible values to use in the EnvVariableFromApp definition
+ *
+ * @generated from enum porter.v1.EnvValueFromApp
+ */
+export declare enum EnvValueFromApp {
+  /**
+   * @generated from enum value: ENV_VALUE_FROM_APP_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: ENV_VALUE_FROM_APP_PUBLIC_DOMAIN = 1;
+   */
+  PUBLIC_DOMAIN = 1,
+
+  /**
+   * @generated from enum value: ENV_VALUE_FROM_APP_INTERNAL_DOMAIN = 2;
+   */
+  INTERNAL_DOMAIN = 2,
+}
+
+/**
  * DeploymentTargetIdentifier is the object that identifies a deployment target. One of id or name must be provided, with id taking precedence.
  *
  * @generated from message porter.v1.DeploymentTargetIdentifier
@@ -130,12 +174,11 @@ export declare class PorterApp extends Message<PorterApp> {
   services: { [key: string]: Service };
 
   /**
-   * env is deprecated in favor of env groups. It was a map of environment variable names to values
+   * env is a list of environment variables to set on the application
    *
-   * @generated from field: map<string, string> env = 3 [deprecated = true];
-   * @deprecated
+   * @generated from field: repeated porter.v1.EnvVariable env = 3;
    */
-  env: { [key: string]: string };
+  env: EnvVariable[];
 
   /**
    * build is the build settings for the application
@@ -621,5 +664,98 @@ export declare class EFS extends Message<EFS> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EFS;
 
   static equals(a: EFS | PlainMessage<EFS> | undefined, b: EFS | PlainMessage<EFS> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.EnvVariable
+ */
+export declare class EnvVariable extends Message<EnvVariable> {
+  /**
+   * key is the name of the environment variable
+   *
+   * @generated from field: string key = 1;
+   */
+  key: string;
+
+  /**
+   * source specifies how the env variable should be set
+   *
+   * @generated from field: porter.v1.EnvVariableSource source = 2;
+   */
+  source: EnvVariableSource;
+
+  /**
+   * value is the value of the environment variable. This is only used if case is ENV_VARIABLE_SOURCE_VALUE
+   *
+   * @generated from field: string value = 3;
+   */
+  value: string;
+
+  /**
+   * definition is an object that defines how the environment variable should be set
+   *
+   * @generated from oneof porter.v1.EnvVariable.definition
+   */
+  definition: {
+    /**
+     * @generated from field: porter.v1.EnvVariableFromApp from_app = 4;
+     */
+    value: EnvVariableFromApp;
+    case: "fromApp";
+  } | { case: undefined; value?: undefined };
+
+  constructor(data?: PartialMessage<EnvVariable>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.EnvVariable";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EnvVariable;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): EnvVariable;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EnvVariable;
+
+  static equals(a: EnvVariable | PlainMessage<EnvVariable> | undefined, b: EnvVariable | PlainMessage<EnvVariable> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.EnvVariableFromApp
+ */
+export declare class EnvVariableFromApp extends Message<EnvVariableFromApp> {
+  /**
+   * app_name is the name of the app
+   *
+   * @generated from field: string app_name = 1;
+   */
+  appName: string;
+
+  /**
+   * value is one of a discrete set of configured values on the app that can be used for the environment variable
+   *
+   * @generated from field: porter.v1.EnvValueFromApp value = 2;
+   */
+  value: EnvValueFromApp;
+
+  /**
+   * service_name is the name of the service where the value is defined
+   *
+   * @generated from field: string service_name = 3;
+   */
+  serviceName: string;
+
+  constructor(data?: PartialMessage<EnvVariableFromApp>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.EnvVariableFromApp";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EnvVariableFromApp;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): EnvVariableFromApp;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EnvVariableFromApp;
+
+  static equals(a: EnvVariableFromApp | PlainMessage<EnvVariableFromApp> | undefined, b: EnvVariableFromApp | PlainMessage<EnvVariableFromApp> | undefined): boolean;
 }
 

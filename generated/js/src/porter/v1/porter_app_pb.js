@@ -7,6 +7,34 @@ import { proto3 } from "@bufbuild/protobuf";
 import { Service } from "./service_pb.js";
 
 /**
+ * EnvVariableSource is the source type from which to pull the environment variable
+ *
+ * @generated from enum porter.v1.EnvVariableSource
+ */
+export const EnvVariableSource = proto3.makeEnum(
+  "porter.v1.EnvVariableSource",
+  [
+    {no: 0, name: "ENV_VARIABLE_SOURCE_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "ENV_VARIABLE_SOURCE_VALUE", localName: "VALUE"},
+    {no: 2, name: "ENV_VARIABLE_SOURCE_FROM_APP", localName: "FROM_APP"},
+  ],
+);
+
+/**
+ * EnvValueFromApp is an enum of the possible values to use in the EnvVariableFromApp definition
+ *
+ * @generated from enum porter.v1.EnvValueFromApp
+ */
+export const EnvValueFromApp = proto3.makeEnum(
+  "porter.v1.EnvValueFromApp",
+  [
+    {no: 0, name: "ENV_VALUE_FROM_APP_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "ENV_VALUE_FROM_APP_PUBLIC_DOMAIN", localName: "PUBLIC_DOMAIN"},
+    {no: 2, name: "ENV_VALUE_FROM_APP_INTERNAL_DOMAIN", localName: "INTERNAL_DOMAIN"},
+  ],
+);
+
+/**
  * DeploymentTargetIdentifier is the object that identifies a deployment target. One of id or name must be provided, with id taking precedence.
  *
  * @generated from message porter.v1.DeploymentTargetIdentifier
@@ -45,7 +73,7 @@ export const PorterApp = proto3.makeMessageType(
   () => [
     { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "services", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Service} },
-    { no: 3, name: "env", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "scalar", T: 9 /* ScalarType.STRING */} },
+    { no: 3, name: "env", kind: "message", T: EnvVariable, repeated: true },
     { no: 4, name: "build", kind: "message", T: Build },
     { no: 5, name: "predeploy", kind: "message", T: Service },
     { no: 6, name: "image", kind: "message", T: AppImage },
@@ -192,6 +220,31 @@ export const EFS = proto3.makeMessageType(
   () => [
     { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 2, name: "file_system_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.EnvVariable
+ */
+export const EnvVariable = proto3.makeMessageType(
+  "porter.v1.EnvVariable",
+  () => [
+    { no: 1, name: "key", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "source", kind: "enum", T: proto3.getEnumType(EnvVariableSource) },
+    { no: 3, name: "value", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "from_app", kind: "message", T: EnvVariableFromApp, oneof: "definition" },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.EnvVariableFromApp
+ */
+export const EnvVariableFromApp = proto3.makeMessageType(
+  "porter.v1.EnvVariableFromApp",
+  () => [
+    { no: 1, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "value", kind: "enum", T: proto3.getEnumType(EnvValueFromApp) },
+    { no: 3, name: "service_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
