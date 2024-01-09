@@ -153,19 +153,19 @@ message EFS {
   string file_system_id = 2;
 }
 
-// EnvDefinitionMethod is the method for setting the environment variable
-enum EnvDefinitionMethod {
-  ENV_DEFINITION_METHOD_UNSPECIFIED = 0;
-  ENV_DEFINITION_METHOD_FROM_VALUE = 1;
-  ENV_DEFINITION_METHOD_FROM_APP = 2;
+// EnvVariableSource is the source type from which to pull the environment variable
+enum EnvVariableSource {
+  ENV_VARIABLE_SOURCE_UNSPECIFIED = 0;
+  ENV_VARIABLE_SOURCE_VALUE = 1;
+  ENV_VARIABLE_SOURCE_FROM_APP = 2;
 }
 
 message EnvVariable {
   // key is the name of the environment variable
   string key = 1;
-  // definition_method specifies how the env variable should be set
-  EnvDefinitionMethod definition_method = 2;
-  // value is the value of the environment variable. This is only used if case is ENV_VARIABLE_CASE_FROM_VALUE
+  // source specifies how the env variable should be set
+  EnvVariableSource source = 2;
+  // value is the value of the environment variable. This is only used if case is ENV_VARIABLE_SOURCE_VALUE
   string value = 3;
   // definition is an object that defines how the environment variable should be set
   oneof definition {

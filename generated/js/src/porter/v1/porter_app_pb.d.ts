@@ -8,23 +8,23 @@ import { Message, proto3 } from "@bufbuild/protobuf";
 import type { Service } from "./service_pb.js";
 
 /**
- * EnvDefinitionMethod is the method for setting the environment variable
+ * EnvVariableSource is the source type from which to pull the environment variable
  *
- * @generated from enum porter.v1.EnvDefinitionMethod
+ * @generated from enum porter.v1.EnvVariableSource
  */
-export declare enum EnvDefinitionMethod {
+export declare enum EnvVariableSource {
   /**
-   * @generated from enum value: ENV_DEFINITION_METHOD_UNSPECIFIED = 0;
+   * @generated from enum value: ENV_VARIABLE_SOURCE_UNSPECIFIED = 0;
    */
   UNSPECIFIED = 0,
 
   /**
-   * @generated from enum value: ENV_DEFINITION_METHOD_FROM_VALUE = 1;
+   * @generated from enum value: ENV_VARIABLE_SOURCE_VALUE = 1;
    */
-  FROM_VALUE = 1,
+  VALUE = 1,
 
   /**
-   * @generated from enum value: ENV_DEFINITION_METHOD_FROM_APP = 2;
+   * @generated from enum value: ENV_VARIABLE_SOURCE_FROM_APP = 2;
    */
   FROM_APP = 2,
 }
@@ -678,14 +678,14 @@ export declare class EnvVariable extends Message<EnvVariable> {
   key: string;
 
   /**
-   * definition_method specifies how the env variable should be set
+   * source specifies how the env variable should be set
    *
-   * @generated from field: porter.v1.EnvDefinitionMethod definition_method = 2;
+   * @generated from field: porter.v1.EnvVariableSource source = 2;
    */
-  definitionMethod: EnvDefinitionMethod;
+  source: EnvVariableSource;
 
   /**
-   * value is the value of the environment variable. This is only used if case is ENV_VARIABLE_CASE_FROM_VALUE
+   * value is the value of the environment variable. This is only used if case is ENV_VARIABLE_SOURCE_VALUE
    *
    * @generated from field: string value = 3;
    */

@@ -7,16 +7,16 @@ import { proto3 } from "@bufbuild/protobuf";
 import { Service } from "./service_pb.js";
 
 /**
- * EnvDefinitionMethod is the method for setting the environment variable
+ * EnvVariableSource is the source type from which to pull the environment variable
  *
- * @generated from enum porter.v1.EnvDefinitionMethod
+ * @generated from enum porter.v1.EnvVariableSource
  */
-export const EnvDefinitionMethod = proto3.makeEnum(
-  "porter.v1.EnvDefinitionMethod",
+export const EnvVariableSource = proto3.makeEnum(
+  "porter.v1.EnvVariableSource",
   [
-    {no: 0, name: "ENV_DEFINITION_METHOD_UNSPECIFIED", localName: "UNSPECIFIED"},
-    {no: 1, name: "ENV_DEFINITION_METHOD_FROM_VALUE", localName: "FROM_VALUE"},
-    {no: 2, name: "ENV_DEFINITION_METHOD_FROM_APP", localName: "FROM_APP"},
+    {no: 0, name: "ENV_VARIABLE_SOURCE_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "ENV_VARIABLE_SOURCE_VALUE", localName: "VALUE"},
+    {no: 2, name: "ENV_VARIABLE_SOURCE_FROM_APP", localName: "FROM_APP"},
   ],
 );
 
@@ -230,7 +230,7 @@ export const EnvVariable = proto3.makeMessageType(
   "porter.v1.EnvVariable",
   () => [
     { no: 1, name: "key", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "definition_method", kind: "enum", T: proto3.getEnumType(EnvDefinitionMethod) },
+    { no: 2, name: "source", kind: "enum", T: proto3.getEnumType(EnvVariableSource) },
     { no: 3, name: "value", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "from_app", kind: "message", T: EnvVariableFromApp, oneof: "definition" },
   ],
