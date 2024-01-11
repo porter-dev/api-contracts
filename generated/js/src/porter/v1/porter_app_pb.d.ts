@@ -63,9 +63,9 @@ export declare enum EnumAppRevisionStatus {
   UNSPECIFIED = 0,
 
   /**
-   * @generated from enum value: ENUM_APP_REVISION_STATUS_IN_PROGRESS = 1;
+   * @generated from enum value: ENUM_APP_REVISION_STATUS_PROGRESSING = 1;
    */
-  IN_PROGRESS = 1,
+  PROGRESSING = 1,
 
   /**
    * @generated from enum value: ENUM_APP_REVISION_STATUS_SUCCESSFUL = 2;

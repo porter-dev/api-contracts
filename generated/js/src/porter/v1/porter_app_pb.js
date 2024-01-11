@@ -43,7 +43,7 @@ export const EnumAppRevisionStatus = proto3.makeEnum(
   "porter.v1.EnumAppRevisionStatus",
   [
     {no: 0, name: "ENUM_APP_REVISION_STATUS_UNSPECIFIED", localName: "UNSPECIFIED"},
-    {no: 1, name: "ENUM_APP_REVISION_STATUS_IN_PROGRESS", localName: "IN_PROGRESS"},
+    {no: 1, name: "ENUM_APP_REVISION_STATUS_PROGRESSING", localName: "PROGRESSING"},
     {no: 2, name: "ENUM_APP_REVISION_STATUS_SUCCESSFUL", localName: "SUCCESSFUL"},
     {no: 3, name: "ENUM_APP_REVISION_STATUS_FAILED", localName: "FAILED"},
   ],
