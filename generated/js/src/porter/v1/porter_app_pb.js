@@ -35,6 +35,21 @@ export const EnvValueFromApp = proto3.makeEnum(
 );
 
 /**
+ * EnumAppRevisionStatus describes the status of an app revision
+ *
+ * @generated from enum porter.v1.EnumAppRevisionStatus
+ */
+export const EnumAppRevisionStatus = proto3.makeEnum(
+  "porter.v1.EnumAppRevisionStatus",
+  [
+    {no: 0, name: "ENUM_APP_REVISION_STATUS_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "ENUM_APP_REVISION_STATUS_IN_PROGRESS", localName: "IN_PROGRESS"},
+    {no: 2, name: "ENUM_APP_REVISION_STATUS_SUCCESSFUL", localName: "SUCCESSFUL"},
+    {no: 3, name: "ENUM_APP_REVISION_STATUS_FAILED", localName: "FAILED"},
+  ],
+);
+
+/**
  * DeploymentTargetIdentifier is the object that identifies a deployment target. One of id or name must be provided, with id taking precedence.
  *
  * @generated from message porter.v1.DeploymentTargetIdentifier

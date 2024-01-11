@@ -9,7 +9,7 @@ import { GKEPreflightValues } from "./gke_pb.js";
 import { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import { Error } from "./errors_pb.js";
 import { Contract, ContractRevision } from "./contract_pb.js";
-import { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
+import { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import { Addon } from "./addons_pb.js";
 import { EnumEnvGroupProviderType } from "./env_group_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
@@ -732,6 +732,7 @@ export const AppRevisionStatusResponse = proto3.makeMessageType(
     { no: 8, name: "deployment_successful", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 9, name: "deployment_failed", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 10, name: "is_in_terminal_status", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 11, name: "status", kind: "enum", T: proto3.getEnumType(EnumAppRevisionStatus) },
   ],
 );
 
