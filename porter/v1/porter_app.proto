@@ -188,3 +188,11 @@ message EnvVariableFromApp {
   // service_name is the name of the service where the value is defined
   string service_name = 3;
 }
+
+// EnumAppRevisionStatus describes the status of an app revision
+enum EnumAppRevisionStatus {
+  ENUM_APP_REVISION_STATUS_UNSPECIFIED = 0;
+  ENUM_APP_REVISION_STATUS_PROGRESSING = 1;
+  ENUM_APP_REVISION_STATUS_SUCCESSFUL = 2;
+  ENUM_APP_REVISION_STATUS_FAILED = 3;
+}

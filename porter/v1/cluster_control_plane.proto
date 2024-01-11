@@ -431,6 +431,8 @@ message AppRevisionStatusResponse {
   bool deployment_failed = 9;
   // is_in_terminal_status indicates whether the revision is in a terminal status (its status will not change)
   bool is_in_terminal_status = 10;
+  // status is the current status of the revision
+  EnumAppRevisionStatus status = 11;
 }
 
 // UpdateRevisionPayload is used to send messages via nats to update a revision

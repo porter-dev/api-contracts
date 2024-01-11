@@ -52,6 +52,33 @@ export declare enum EnvValueFromApp {
 }
 
 /**
+ * EnumAppRevisionStatus describes the status of an app revision
+ *
+ * @generated from enum porter.v1.EnumAppRevisionStatus
+ */
+export declare enum EnumAppRevisionStatus {
+  /**
+   * @generated from enum value: ENUM_APP_REVISION_STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: ENUM_APP_REVISION_STATUS_PROGRESSING = 1;
+   */
+  PROGRESSING = 1,
+
+  /**
+   * @generated from enum value: ENUM_APP_REVISION_STATUS_SUCCESSFUL = 2;
+   */
+  SUCCESSFUL = 2,
+
+  /**
+   * @generated from enum value: ENUM_APP_REVISION_STATUS_FAILED = 3;
+   */
+  FAILED = 3,
+}
+
+/**
  * DeploymentTargetIdentifier is the object that identifies a deployment target. One of id or name must be provided, with id taking precedence.
  *
  * @generated from message porter.v1.DeploymentTargetIdentifier

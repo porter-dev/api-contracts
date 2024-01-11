@@ -10,7 +10,7 @@ import type { GKEPreflightValues } from "./gke_pb.js";
 import type { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import type { Error } from "./errors_pb.js";
 import type { Contract, ContractRevision } from "./contract_pb.js";
-import type { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
+import type { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import type { Addon } from "./addons_pb.js";
 import type { EnumEnvGroupProviderType } from "./env_group_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
@@ -2179,6 +2179,13 @@ export declare class AppRevisionStatusResponse extends Message<AppRevisionStatus
    * @generated from field: bool is_in_terminal_status = 10;
    */
   isInTerminalStatus: boolean;
+
+  /**
+   * status is the current status of the revision
+   *
+   * @generated from field: porter.v1.EnumAppRevisionStatus status = 11;
+   */
+  status: EnumAppRevisionStatus;
 
   constructor(data?: PartialMessage<AppRevisionStatusResponse>);
 

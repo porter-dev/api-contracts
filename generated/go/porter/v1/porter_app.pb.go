@@ -120,6 +120,59 @@ func (EnvValueFromApp) EnumDescriptor() ([]byte, []int) {
 	return file_porter_v1_porter_app_proto_rawDescGZIP(), []int{1}
 }
 
+// EnumAppRevisionStatus describes the status of an app revision
+type EnumAppRevisionStatus int32
+
+const (
+	EnumAppRevisionStatus_ENUM_APP_REVISION_STATUS_UNSPECIFIED EnumAppRevisionStatus = 0
+	EnumAppRevisionStatus_ENUM_APP_REVISION_STATUS_PROGRESSING EnumAppRevisionStatus = 1
+	EnumAppRevisionStatus_ENUM_APP_REVISION_STATUS_SUCCESSFUL  EnumAppRevisionStatus = 2
+	EnumAppRevisionStatus_ENUM_APP_REVISION_STATUS_FAILED      EnumAppRevisionStatus = 3
+)
+
+// Enum value maps for EnumAppRevisionStatus.
+var (
+	EnumAppRevisionStatus_name = map[int32]string{
+		0: "ENUM_APP_REVISION_STATUS_UNSPECIFIED",
+		1: "ENUM_APP_REVISION_STATUS_PROGRESSING",
+		2: "ENUM_APP_REVISION_STATUS_SUCCESSFUL",
+		3: "ENUM_APP_REVISION_STATUS_FAILED",
+	}
+	EnumAppRevisionStatus_value = map[string]int32{
+		"ENUM_APP_REVISION_STATUS_UNSPECIFIED": 0,
+		"ENUM_APP_REVISION_STATUS_PROGRESSING": 1,
+		"ENUM_APP_REVISION_STATUS_SUCCESSFUL":  2,
+		"ENUM_APP_REVISION_STATUS_FAILED":      3,
+	}
+)
+
+func (x EnumAppRevisionStatus) Enum() *EnumAppRevisionStatus {
+	p := new(EnumAppRevisionStatus)
+	*p = x
+	return p
+}
+
+func (x EnumAppRevisionStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (EnumAppRevisionStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_porter_v1_porter_app_proto_enumTypes[2].Descriptor()
+}
+
+func (EnumAppRevisionStatus) Type() protoreflect.EnumType {
+	return &file_porter_v1_porter_app_proto_enumTypes[2]
+}
+
+func (x EnumAppRevisionStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use EnumAppRevisionStatus.Descriptor instead.
+func (EnumAppRevisionStatus) EnumDescriptor() ([]byte, []int) {
+	return file_porter_v1_porter_app_proto_rawDescGZIP(), []int{2}
+}
+
 // DeploymentTargetIdentifier is the object that identifies a deployment target. One of id or name must be provided, with id taking precedence.
 type DeploymentTargetIdentifier struct {
 	state         protoimpl.MessageState
@@ -1466,18 +1519,30 @@ var file_porter_v1_porter_app_proto_rawDesc = []byte{
 	0x43, 0x5f, 0x44, 0x4f, 0x4d, 0x41, 0x49, 0x4e, 0x10, 0x01, 0x12, 0x26, 0x0a, 0x22, 0x45, 0x4e,
 	0x56, 0x5f, 0x56, 0x41, 0x4c, 0x55, 0x45, 0x5f, 0x46, 0x52, 0x4f, 0x4d, 0x5f, 0x41, 0x50, 0x50,
 	0x5f, 0x49, 0x4e, 0x54, 0x45, 0x52, 0x4e, 0x41, 0x4c, 0x5f, 0x44, 0x4f, 0x4d, 0x41, 0x49, 0x4e,
-	0x10, 0x02, 0x42, 0xa9, 0x01, 0x0a, 0x0d, 0x63, 0x6f, 0x6d, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65,
-	0x72, 0x2e, 0x76, 0x31, 0x42, 0x0e, 0x50, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x41, 0x70, 0x70, 0x50,
-	0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x43, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
-	0x6f, 0x6d, 0x2f, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2d, 0x64, 0x65, 0x76, 0x2f, 0x61, 0x70,
-	0x69, 0x2d, 0x63, 0x6f, 0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x73, 0x2f, 0x67, 0x65, 0x6e, 0x65,
-	0x72, 0x61, 0x74, 0x65, 0x64, 0x2f, 0x67, 0x6f, 0x2f, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2f,
-	0x76, 0x31, 0x3b, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x50, 0x58,
-	0x58, 0xaa, 0x02, 0x09, 0x50, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x09,
-	0x50, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x15, 0x50, 0x6f, 0x72, 0x74,
-	0x65, 0x72, 0x5c, 0x56, 0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74,
-	0x61, 0xea, 0x02, 0x0a, 0x50, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x10, 0x02, 0x2a, 0xb9, 0x01, 0x0a, 0x15, 0x45, 0x6e, 0x75, 0x6d, 0x41, 0x70, 0x70, 0x52, 0x65,
+	0x76, 0x69, 0x73, 0x69, 0x6f, 0x6e, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x28, 0x0a, 0x24,
+	0x45, 0x4e, 0x55, 0x4d, 0x5f, 0x41, 0x50, 0x50, 0x5f, 0x52, 0x45, 0x56, 0x49, 0x53, 0x49, 0x4f,
+	0x4e, 0x5f, 0x53, 0x54, 0x41, 0x54, 0x55, 0x53, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49,
+	0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x28, 0x0a, 0x24, 0x45, 0x4e, 0x55, 0x4d, 0x5f, 0x41,
+	0x50, 0x50, 0x5f, 0x52, 0x45, 0x56, 0x49, 0x53, 0x49, 0x4f, 0x4e, 0x5f, 0x53, 0x54, 0x41, 0x54,
+	0x55, 0x53, 0x5f, 0x50, 0x52, 0x4f, 0x47, 0x52, 0x45, 0x53, 0x53, 0x49, 0x4e, 0x47, 0x10, 0x01,
+	0x12, 0x27, 0x0a, 0x23, 0x45, 0x4e, 0x55, 0x4d, 0x5f, 0x41, 0x50, 0x50, 0x5f, 0x52, 0x45, 0x56,
+	0x49, 0x53, 0x49, 0x4f, 0x4e, 0x5f, 0x53, 0x54, 0x41, 0x54, 0x55, 0x53, 0x5f, 0x53, 0x55, 0x43,
+	0x43, 0x45, 0x53, 0x53, 0x46, 0x55, 0x4c, 0x10, 0x02, 0x12, 0x23, 0x0a, 0x1f, 0x45, 0x4e, 0x55,
+	0x4d, 0x5f, 0x41, 0x50, 0x50, 0x5f, 0x52, 0x45, 0x56, 0x49, 0x53, 0x49, 0x4f, 0x4e, 0x5f, 0x53,
+	0x54, 0x41, 0x54, 0x55, 0x53, 0x5f, 0x46, 0x41, 0x49, 0x4c, 0x45, 0x44, 0x10, 0x03, 0x42, 0xa9,
+	0x01, 0x0a, 0x0d, 0x63, 0x6f, 0x6d, 0x2e, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x76, 0x31,
+	0x42, 0x0e, 0x50, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x41, 0x70, 0x70, 0x50, 0x72, 0x6f, 0x74, 0x6f,
+	0x50, 0x01, 0x5a, 0x43, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x70,
+	0x6f, 0x72, 0x74, 0x65, 0x72, 0x2d, 0x64, 0x65, 0x76, 0x2f, 0x61, 0x70, 0x69, 0x2d, 0x63, 0x6f,
+	0x6e, 0x74, 0x72, 0x61, 0x63, 0x74, 0x73, 0x2f, 0x67, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x65,
+	0x64, 0x2f, 0x67, 0x6f, 0x2f, 0x70, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2f, 0x76, 0x31, 0x3b, 0x70,
+	0x6f, 0x72, 0x74, 0x65, 0x72, 0x76, 0x31, 0xa2, 0x02, 0x03, 0x50, 0x58, 0x58, 0xaa, 0x02, 0x09,
+	0x50, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x2e, 0x56, 0x31, 0xca, 0x02, 0x09, 0x50, 0x6f, 0x72, 0x74,
+	0x65, 0x72, 0x5c, 0x56, 0x31, 0xe2, 0x02, 0x15, 0x50, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x5c, 0x56,
+	0x31, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x0a,
+	0x50, 0x6f, 0x72, 0x74, 0x65, 0x72, 0x3a, 0x3a, 0x56, 0x31, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x33,
 }
 
 var (
@@ -1492,59 +1557,60 @@ func file_porter_v1_porter_app_proto_rawDescGZIP() []byte {
 	return file_porter_v1_porter_app_proto_rawDescData
 }
 
-var file_porter_v1_porter_app_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_porter_v1_porter_app_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_porter_v1_porter_app_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
 var file_porter_v1_porter_app_proto_goTypes = []interface{}{
 	(EnvVariableSource)(0),             // 0: porter.v1.EnvVariableSource
 	(EnvValueFromApp)(0),               // 1: porter.v1.EnvValueFromApp
-	(*DeploymentTargetIdentifier)(nil), // 2: porter.v1.DeploymentTargetIdentifier
-	(*DeploymentTarget)(nil),           // 3: porter.v1.DeploymentTarget
-	(*PorterApp)(nil),                  // 4: porter.v1.PorterApp
-	(*RequiredApp)(nil),                // 5: porter.v1.RequiredApp
-	(*HelmOverrides)(nil),              // 6: porter.v1.HelmOverrides
-	(*EnvGroup)(nil),                   // 7: porter.v1.EnvGroup
-	(*EnvGroupVariables)(nil),          // 8: porter.v1.EnvGroupVariables
-	(*ServiceDeletions)(nil),           // 9: porter.v1.ServiceDeletions
-	(*Deletions)(nil),                  // 10: porter.v1.Deletions
-	(*DomainNameList)(nil),             // 11: porter.v1.DomainNameList
-	(*Build)(nil),                      // 12: porter.v1.Build
-	(*AppImage)(nil),                   // 13: porter.v1.AppImage
-	(*EFS)(nil),                        // 14: porter.v1.EFS
-	(*EnvVariable)(nil),                // 15: porter.v1.EnvVariable
-	(*EnvVariableFromApp)(nil),         // 16: porter.v1.EnvVariableFromApp
-	nil,                                // 17: porter.v1.PorterApp.ServicesEntry
-	nil,                                // 18: porter.v1.EnvGroup.VariablesEntry
-	nil,                                // 19: porter.v1.EnvGroup.SecretVariablesEntry
-	nil,                                // 20: porter.v1.EnvGroupVariables.NormalEntry
-	nil,                                // 21: porter.v1.EnvGroupVariables.SecretEntry
-	nil,                                // 22: porter.v1.Deletions.ServiceDomainsEntry
-	nil,                                // 23: porter.v1.Deletions.ServiceDeletionsEntry
-	(*Service)(nil),                    // 24: porter.v1.Service
+	(EnumAppRevisionStatus)(0),         // 2: porter.v1.EnumAppRevisionStatus
+	(*DeploymentTargetIdentifier)(nil), // 3: porter.v1.DeploymentTargetIdentifier
+	(*DeploymentTarget)(nil),           // 4: porter.v1.DeploymentTarget
+	(*PorterApp)(nil),                  // 5: porter.v1.PorterApp
+	(*RequiredApp)(nil),                // 6: porter.v1.RequiredApp
+	(*HelmOverrides)(nil),              // 7: porter.v1.HelmOverrides
+	(*EnvGroup)(nil),                   // 8: porter.v1.EnvGroup
+	(*EnvGroupVariables)(nil),          // 9: porter.v1.EnvGroupVariables
+	(*ServiceDeletions)(nil),           // 10: porter.v1.ServiceDeletions
+	(*Deletions)(nil),                  // 11: porter.v1.Deletions
+	(*DomainNameList)(nil),             // 12: porter.v1.DomainNameList
+	(*Build)(nil),                      // 13: porter.v1.Build
+	(*AppImage)(nil),                   // 14: porter.v1.AppImage
+	(*EFS)(nil),                        // 15: porter.v1.EFS
+	(*EnvVariable)(nil),                // 16: porter.v1.EnvVariable
+	(*EnvVariableFromApp)(nil),         // 17: porter.v1.EnvVariableFromApp
+	nil,                                // 18: porter.v1.PorterApp.ServicesEntry
+	nil,                                // 19: porter.v1.EnvGroup.VariablesEntry
+	nil,                                // 20: porter.v1.EnvGroup.SecretVariablesEntry
+	nil,                                // 21: porter.v1.EnvGroupVariables.NormalEntry
+	nil,                                // 22: porter.v1.EnvGroupVariables.SecretEntry
+	nil,                                // 23: porter.v1.Deletions.ServiceDomainsEntry
+	nil,                                // 24: porter.v1.Deletions.ServiceDeletionsEntry
+	(*Service)(nil),                    // 25: porter.v1.Service
 }
 var file_porter_v1_porter_app_proto_depIdxs = []int32{
-	17, // 0: porter.v1.PorterApp.services:type_name -> porter.v1.PorterApp.ServicesEntry
-	15, // 1: porter.v1.PorterApp.env:type_name -> porter.v1.EnvVariable
-	12, // 2: porter.v1.PorterApp.build:type_name -> porter.v1.Build
-	24, // 3: porter.v1.PorterApp.predeploy:type_name -> porter.v1.Service
-	13, // 4: porter.v1.PorterApp.image:type_name -> porter.v1.AppImage
-	7,  // 5: porter.v1.PorterApp.env_groups:type_name -> porter.v1.EnvGroup
-	6,  // 6: porter.v1.PorterApp.helm_overrides:type_name -> porter.v1.HelmOverrides
-	24, // 7: porter.v1.PorterApp.service_list:type_name -> porter.v1.Service
-	14, // 8: porter.v1.PorterApp.efs_storage:type_name -> porter.v1.EFS
-	5,  // 9: porter.v1.PorterApp.required_apps:type_name -> porter.v1.RequiredApp
-	2,  // 10: porter.v1.RequiredApp.from_target:type_name -> porter.v1.DeploymentTargetIdentifier
-	18, // 11: porter.v1.EnvGroup.variables:type_name -> porter.v1.EnvGroup.VariablesEntry
-	19, // 12: porter.v1.EnvGroup.secret_variables:type_name -> porter.v1.EnvGroup.SecretVariablesEntry
-	20, // 13: porter.v1.EnvGroupVariables.normal:type_name -> porter.v1.EnvGroupVariables.NormalEntry
-	21, // 14: porter.v1.EnvGroupVariables.secret:type_name -> porter.v1.EnvGroupVariables.SecretEntry
-	22, // 15: porter.v1.Deletions.service_domains:type_name -> porter.v1.Deletions.ServiceDomainsEntry
-	23, // 16: porter.v1.Deletions.service_deletions:type_name -> porter.v1.Deletions.ServiceDeletionsEntry
+	18, // 0: porter.v1.PorterApp.services:type_name -> porter.v1.PorterApp.ServicesEntry
+	16, // 1: porter.v1.PorterApp.env:type_name -> porter.v1.EnvVariable
+	13, // 2: porter.v1.PorterApp.build:type_name -> porter.v1.Build
+	25, // 3: porter.v1.PorterApp.predeploy:type_name -> porter.v1.Service
+	14, // 4: porter.v1.PorterApp.image:type_name -> porter.v1.AppImage
+	8,  // 5: porter.v1.PorterApp.env_groups:type_name -> porter.v1.EnvGroup
+	7,  // 6: porter.v1.PorterApp.helm_overrides:type_name -> porter.v1.HelmOverrides
+	25, // 7: porter.v1.PorterApp.service_list:type_name -> porter.v1.Service
+	15, // 8: porter.v1.PorterApp.efs_storage:type_name -> porter.v1.EFS
+	6,  // 9: porter.v1.PorterApp.required_apps:type_name -> porter.v1.RequiredApp
+	3,  // 10: porter.v1.RequiredApp.from_target:type_name -> porter.v1.DeploymentTargetIdentifier
+	19, // 11: porter.v1.EnvGroup.variables:type_name -> porter.v1.EnvGroup.VariablesEntry
+	20, // 12: porter.v1.EnvGroup.secret_variables:type_name -> porter.v1.EnvGroup.SecretVariablesEntry
+	21, // 13: porter.v1.EnvGroupVariables.normal:type_name -> porter.v1.EnvGroupVariables.NormalEntry
+	22, // 14: porter.v1.EnvGroupVariables.secret:type_name -> porter.v1.EnvGroupVariables.SecretEntry
+	23, // 15: porter.v1.Deletions.service_domains:type_name -> porter.v1.Deletions.ServiceDomainsEntry
+	24, // 16: porter.v1.Deletions.service_deletions:type_name -> porter.v1.Deletions.ServiceDeletionsEntry
 	0,  // 17: porter.v1.EnvVariable.source:type_name -> porter.v1.EnvVariableSource
-	16, // 18: porter.v1.EnvVariable.from_app:type_name -> porter.v1.EnvVariableFromApp
+	17, // 18: porter.v1.EnvVariable.from_app:type_name -> porter.v1.EnvVariableFromApp
 	1,  // 19: porter.v1.EnvVariableFromApp.value:type_name -> porter.v1.EnvValueFromApp
-	24, // 20: porter.v1.PorterApp.ServicesEntry.value:type_name -> porter.v1.Service
-	11, // 21: porter.v1.Deletions.ServiceDomainsEntry.value:type_name -> porter.v1.DomainNameList
-	9,  // 22: porter.v1.Deletions.ServiceDeletionsEntry.value:type_name -> porter.v1.ServiceDeletions
+	25, // 20: porter.v1.PorterApp.ServicesEntry.value:type_name -> porter.v1.Service
+	12, // 21: porter.v1.Deletions.ServiceDomainsEntry.value:type_name -> porter.v1.DomainNameList
+	10, // 22: porter.v1.Deletions.ServiceDeletionsEntry.value:type_name -> porter.v1.ServiceDeletions
 	23, // [23:23] is the sub-list for method output_type
 	23, // [23:23] is the sub-list for method input_type
 	23, // [23:23] is the sub-list for extension type_name
@@ -1748,7 +1814,7 @@ func file_porter_v1_porter_app_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_porter_v1_porter_app_proto_rawDesc,
-			NumEnums:      2,
+			NumEnums:      3,
 			NumMessages:   22,
 			NumExtensions: 0,
 			NumServices:   0,
