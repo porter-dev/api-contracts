@@ -16,6 +16,19 @@ export const Contract = proto3.makeMessageType(
   () => [
     { no: 1, name: "cluster", kind: "message", T: Cluster },
     { no: 2, name: "user", kind: "message", T: User },
+    { no: 3, name: "compliance_profile", kind: "message", T: ComplianceProfile },
+  ],
+);
+
+/**
+ * ComplianceProfile
+ *
+ * @generated from message porter.v1.ComplianceProfile
+ */
+export const ComplianceProfile = proto3.makeMessageType(
+  "porter.v1.ComplianceProfile",
+  () => [
+    { no: 1, name: "soc2_type1", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
