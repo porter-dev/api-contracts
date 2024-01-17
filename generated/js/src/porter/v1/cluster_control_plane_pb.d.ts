@@ -3873,6 +3873,13 @@ export declare class ManualServiceRunRequest extends Message<ManualServiceRunReq
    */
   deploymentTargetIdentifier?: DeploymentTargetIdentifier;
 
+  /**
+   * image is the image information to use for the run. If not specified, the image details for the latest app revision will be used.
+   *
+   * @generated from field: porter.v1.AppImage image = 7;
+   */
+  image?: AppImage;
+
   constructor(data?: PartialMessage<ManualServiceRunRequest>);
 
   static readonly runtime: typeof proto3;

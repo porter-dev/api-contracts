@@ -849,6 +849,8 @@ message ManualServiceRunRequest {
   optional string command = 5;
   // deployment_target_identifier is the object that identifies the deployment target for the app
   DeploymentTargetIdentifier deployment_target_identifier = 6;
+  // image is the image information to use for the run. If not specified, the image details for the latest app revision will be used.
+  AppImage image = 7;
 }
 
 // ManualServiceRunResponse is the response object for ManualServiceRun

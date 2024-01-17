@@ -1302,6 +1302,7 @@ export const ManualServiceRunRequest = proto3.makeMessageType(
     { no: 4, name: "service_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "command", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 6, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+    { no: 7, name: "image", kind: "message", T: AppImage },
   ],
 );
 
