@@ -4840,25 +4840,17 @@ export declare class AppsLinkedToEnvGroupResponse extends Message<AppsLinkedToEn
 }
 
 /**
- * ConnectHostedProjectRequest is the request object for connecting a hosted project to a cluster
+ * ConnectHostedProjectRequest is the request object for connecting a hosted project to a host cluster
  *
  * @generated from message porter.v1.ConnectHostedProjectRequest
  */
 export declare class ConnectHostedProjectRequest extends Message<ConnectHostedProjectRequest> {
   /**
+   * project_id is the project id of the new hosted project which should be connected to the host cluster
+   *
    * @generated from field: int64 project_id = 1;
    */
   projectId: bigint;
-
-  /**
-   * @generated from field: int64 host_project_id = 2;
-   */
-  hostProjectId: bigint;
-
-  /**
-   * @generated from field: int64 host_cluster_id = 3;
-   */
-  hostClusterId: bigint;
 
   constructor(data?: PartialMessage<ConnectHostedProjectRequest>);
 
@@ -4876,13 +4868,13 @@ export declare class ConnectHostedProjectRequest extends Message<ConnectHostedPr
 }
 
 /**
- * ConnectHostedProjectResponse is the response object for connecting a hosted project to a cluster
+ * ConnectHostedProjectResponse is the response object for connecting a hosted project to a host cluster
  *
  * @generated from message porter.v1.ConnectHostedProjectResponse
  */
 export declare class ConnectHostedProjectResponse extends Message<ConnectHostedProjectResponse> {
   /**
-   * cluster_id is the id of the symbolic cluster that links to the actual cluster
+   * cluster_id is the id of the symbolic hosted cluster linked to the host cluster
    *
    * @generated from field: int64 cluster_id = 1;
    */

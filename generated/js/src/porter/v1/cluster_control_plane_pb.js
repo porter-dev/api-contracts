@@ -1646,7 +1646,7 @@ export const AppsLinkedToEnvGroupResponse = proto3.makeMessageType(
 );
 
 /**
- * ConnectHostedProjectRequest is the request object for connecting a hosted project to a cluster
+ * ConnectHostedProjectRequest is the request object for connecting a hosted project to a host cluster
  *
  * @generated from message porter.v1.ConnectHostedProjectRequest
  */
@@ -1654,13 +1654,11 @@ export const ConnectHostedProjectRequest = proto3.makeMessageType(
   "porter.v1.ConnectHostedProjectRequest",
   () => [
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 2, name: "host_project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 3, name: "host_cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ],
 );
 
 /**
- * ConnectHostedProjectResponse is the response object for connecting a hosted project to a cluster
+ * ConnectHostedProjectResponse is the response object for connecting a hosted project to a host cluster
  *
  * @generated from message porter.v1.ConnectHostedProjectResponse
  */
