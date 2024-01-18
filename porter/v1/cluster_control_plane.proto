@@ -1066,6 +1066,18 @@ message AppsLinkedToEnvGroupResponse {
   repeated AppInstance linked_apps = 2;
 }
 
+// ConnectHostedProjectRequest is the request object for connecting a hosted project to a host cluster
+message ConnectHostedProjectRequest {
+  // project_id is the project id of the new hosted project which should be connected to the host cluster
+  int64 project_id = 1;
+}
+
+// ConnectHostedProjectResponse is the response object for connecting a hosted project to a host cluster
+message ConnectHostedProjectResponse {
+  // cluster_id is the id of the symbolic hosted cluster linked to the host cluster
+  int64 cluster_id = 1;
+}
+
 service ClusterControlPlaneService {
   // QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas
   rpc QuotaIncrease(QuotaIncreaseRequest) returns (QuotaIncreaseResponse) {}
@@ -1230,6 +1242,9 @@ service ClusterControlPlaneService {
 
   // UpdateServiceDeploymentStatus updates the current deployment status of a service with a new status
   rpc UpdateServiceDeploymentStatus(UpdateServiceDeploymentStatusRequest) returns (UpdateServiceDeploymentStatusResponse) {}
+
+  // ConnectHostedProject connects a hosted project to a host cluster, returning the cluster id of the symbolic cluster associated with this project that is linked to the host cluster
+  rpc ConnectHostedProject(ConnectHostedProjectRequest) returns (ConnectHostedProjectResponse) {}
 
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
   // Deprecated. Use TokenForRegistry instead.

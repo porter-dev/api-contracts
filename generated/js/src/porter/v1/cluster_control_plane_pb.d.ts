@@ -4840,6 +4840,70 @@ export declare class AppsLinkedToEnvGroupResponse extends Message<AppsLinkedToEn
 }
 
 /**
+ * ConnectHostedProjectRequest is the request object for connecting a hosted project to a cluster
+ *
+ * @generated from message porter.v1.ConnectHostedProjectRequest
+ */
+export declare class ConnectHostedProjectRequest extends Message<ConnectHostedProjectRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 host_project_id = 2;
+   */
+  hostProjectId: bigint;
+
+  /**
+   * @generated from field: int64 host_cluster_id = 3;
+   */
+  hostClusterId: bigint;
+
+  constructor(data?: PartialMessage<ConnectHostedProjectRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ConnectHostedProjectRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ConnectHostedProjectRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ConnectHostedProjectRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ConnectHostedProjectRequest;
+
+  static equals(a: ConnectHostedProjectRequest | PlainMessage<ConnectHostedProjectRequest> | undefined, b: ConnectHostedProjectRequest | PlainMessage<ConnectHostedProjectRequest> | undefined): boolean;
+}
+
+/**
+ * ConnectHostedProjectResponse is the response object for connecting a hosted project to a cluster
+ *
+ * @generated from message porter.v1.ConnectHostedProjectResponse
+ */
+export declare class ConnectHostedProjectResponse extends Message<ConnectHostedProjectResponse> {
+  /**
+   * cluster_id is the id of the symbolic cluster that links to the actual cluster
+   *
+   * @generated from field: int64 cluster_id = 1;
+   */
+  clusterId: bigint;
+
+  constructor(data?: PartialMessage<ConnectHostedProjectResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ConnectHostedProjectResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ConnectHostedProjectResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ConnectHostedProjectResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ConnectHostedProjectResponse;
+
+  static equals(a: ConnectHostedProjectResponse | PlainMessage<ConnectHostedProjectResponse> | undefined, b: ConnectHostedProjectResponse | PlainMessage<ConnectHostedProjectResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  * @deprecated
  */
