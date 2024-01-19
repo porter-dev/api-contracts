@@ -1670,6 +1670,29 @@ export const ConnectHostedProjectResponse = proto3.makeMessageType(
 );
 
 /**
+ * UpdateDatastoreRequest is the request object for updating a datastore
+ *
+ * @generated from message porter.v1.UpdateDatastoreRequest
+ */
+export const UpdateDatastoreRequest = proto3.makeMessageType(
+  "porter.v1.UpdateDatastoreRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "datastore_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * UpdateDatastoreResponse is the response object for updating a datastore
+ *
+ * @generated from message porter.v1.UpdateDatastoreResponse
+ */
+export const UpdateDatastoreResponse = proto3.makeMessageType(
+  "porter.v1.UpdateDatastoreResponse",
+  [],
+);
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  * @deprecated
  */

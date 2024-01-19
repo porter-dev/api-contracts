@@ -1078,6 +1078,17 @@ message ConnectHostedProjectResponse {
   int64 cluster_id = 1;
 }
 
+// UpdateDatastoreRequest is the request object for updating a datastore
+message UpdateDatastoreRequest {
+  // project_id is the project id that the datastore is provisioned in
+  int64 project_id = 1;
+  // datastore_id is the id of the datastore
+  string datastore_id = 2;
+}
+
+// UpdateDatastoreResponse is the response object for updating a datastore
+message UpdateDatastoreResponse {}
+
 service ClusterControlPlaneService {
   // QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas
   rpc QuotaIncrease(QuotaIncreaseRequest) returns (QuotaIncreaseResponse) {}
@@ -1245,6 +1256,9 @@ service ClusterControlPlaneService {
 
   // ConnectHostedProject connects a hosted project to a host cluster, returning the cluster id of the symbolic cluster associated with this project that is linked to the host cluster
   rpc ConnectHostedProject(ConnectHostedProjectRequest) returns (ConnectHostedProjectResponse) {}
+
+  // UpdateDatastore updates a porter-managed datastore
+  rpc UpdateDatastore(UpdateDatastoreRequest) returns (UpdateDatastoreResponse) {}
 
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
   // Deprecated. Use TokenForRegistry instead.

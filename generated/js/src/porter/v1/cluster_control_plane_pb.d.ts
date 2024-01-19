@@ -4896,6 +4896,62 @@ export declare class ConnectHostedProjectResponse extends Message<ConnectHostedP
 }
 
 /**
+ * UpdateDatastoreRequest is the request object for updating a datastore
+ *
+ * @generated from message porter.v1.UpdateDatastoreRequest
+ */
+export declare class UpdateDatastoreRequest extends Message<UpdateDatastoreRequest> {
+  /**
+   * project_id is the project id that the datastore is provisioned in
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * datastore_id is the id of the datastore
+   *
+   * @generated from field: string datastore_id = 2;
+   */
+  datastoreId: string;
+
+  constructor(data?: PartialMessage<UpdateDatastoreRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateDatastoreRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateDatastoreRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateDatastoreRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateDatastoreRequest;
+
+  static equals(a: UpdateDatastoreRequest | PlainMessage<UpdateDatastoreRequest> | undefined, b: UpdateDatastoreRequest | PlainMessage<UpdateDatastoreRequest> | undefined): boolean;
+}
+
+/**
+ * UpdateDatastoreResponse is the response object for updating a datastore
+ *
+ * @generated from message porter.v1.UpdateDatastoreResponse
+ */
+export declare class UpdateDatastoreResponse extends Message<UpdateDatastoreResponse> {
+  constructor(data?: PartialMessage<UpdateDatastoreResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateDatastoreResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateDatastoreResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateDatastoreResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateDatastoreResponse;
+
+  static equals(a: UpdateDatastoreResponse | PlainMessage<UpdateDatastoreResponse> | undefined, b: UpdateDatastoreResponse | PlainMessage<UpdateDatastoreResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  * @deprecated
  */
