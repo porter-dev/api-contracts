@@ -6,12 +6,12 @@
 import { proto3 } from "@bufbuild/protobuf";
 
 /**
- * UpdateDatastorePaylod is used to send messages via nats to update a datastore
+ * UpdateDatastorePayload is used to send messages via nats to update a datastore
  *
- * @generated from message porter.v1.UpdateDatastorePaylod
+ * @generated from message porter.v1.UpdateDatastorePayload
  */
-export const UpdateDatastorePaylod = proto3.makeMessageType(
-  "porter.v1.UpdateDatastorePaylod",
+export const UpdateDatastorePayload = proto3.makeMessageType(
+  "porter.v1.UpdateDatastorePayload",
   () => [
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 2, name: "datastore_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },

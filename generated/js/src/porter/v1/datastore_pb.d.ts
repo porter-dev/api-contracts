@@ -7,11 +7,11 @@ import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialM
 import { Message, proto3 } from "@bufbuild/protobuf";
 
 /**
- * UpdateDatastorePaylod is used to send messages via nats to update a datastore
+ * UpdateDatastorePayload is used to send messages via nats to update a datastore
  *
- * @generated from message porter.v1.UpdateDatastorePaylod
+ * @generated from message porter.v1.UpdateDatastorePayload
  */
-export declare class UpdateDatastorePaylod extends Message<UpdateDatastorePaylod> {
+export declare class UpdateDatastorePayload extends Message<UpdateDatastorePayload> {
   /**
    * project_id is the id of the project that the datastore belongs to
    *
@@ -26,18 +26,18 @@ export declare class UpdateDatastorePaylod extends Message<UpdateDatastorePaylod
    */
   datastoreId: string;
 
-  constructor(data?: PartialMessage<UpdateDatastorePaylod>);
+  constructor(data?: PartialMessage<UpdateDatastorePayload>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.UpdateDatastorePaylod";
+  static readonly typeName = "porter.v1.UpdateDatastorePayload";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateDatastorePaylod;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateDatastorePayload;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateDatastorePaylod;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateDatastorePayload;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateDatastorePaylod;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateDatastorePayload;
 
-  static equals(a: UpdateDatastorePaylod | PlainMessage<UpdateDatastorePaylod> | undefined, b: UpdateDatastorePaylod | PlainMessage<UpdateDatastorePaylod> | undefined): boolean;
+  static equals(a: UpdateDatastorePayload | PlainMessage<UpdateDatastorePayload> | undefined, b: UpdateDatastorePayload | PlainMessage<UpdateDatastorePayload> | undefined): boolean;
 }
 
