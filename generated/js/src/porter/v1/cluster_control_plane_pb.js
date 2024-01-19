@@ -9,6 +9,7 @@ import { GKEPreflightValues } from "./gke_pb.js";
 import { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import { Error } from "./errors_pb.js";
 import { Contract, ContractRevision } from "./contract_pb.js";
+import { ContractComplianceCheckGroup, EnumComplianceVendor, VendorComplianceCheck } from "./compliance_pb.js";
 import { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import { Addon } from "./addons_pb.js";
 import { EnumEnvGroupProviderType } from "./env_group_pb.js";
@@ -460,6 +461,29 @@ export const ReadContractResponse = proto3.makeMessageType(
   "porter.v1.ReadContractResponse",
   () => [
     { no: 1, name: "base64_contract", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.ContractComplianceChecksRequest
+ */
+export const ContractComplianceChecksRequest = proto3.makeMessageType(
+  "porter.v1.ContractComplianceChecksRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "vendor", kind: "enum", T: proto3.getEnumType(EnumComplianceVendor) },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.ContractComplianceChecksResponse
+ */
+export const ContractComplianceChecksResponse = proto3.makeMessageType(
+  "porter.v1.ContractComplianceChecksResponse",
+  () => [
+    { no: 1, name: "check_groups", kind: "message", T: ContractComplianceCheckGroup, repeated: true },
+    { no: 2, name: "vendor_checks", kind: "message", T: VendorComplianceCheck, repeated: true },
   ],
 );
 

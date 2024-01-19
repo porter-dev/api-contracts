@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package porter.v1;
+
+enum EnumComplianceVendor {
+  ENUM_COMPLIANCE_VENDOR_UNSPECIFIED = 0;
+  // ENUM_COMPLIANCE_VENDOR_VANTA signifies the compliance vendor Vanta.
+  ENUM_COMPLIANCE_VENDOR_VANTA = 1;
+}
+
+enum EnumComplianceCheckStatus {
+  ENUM_COMPLIANCE_CHECK_STATUS_UNSPECIFIED = 0;
+  // ENUM_COMPLIANCE_CHECK_STATUS_PASSED signifies the compliance check passed.
+  ENUM_COMPLIANCE_CHECK_STATUS_PASSED = 1;
+  // ENUM_COMPLIANCE_CHECK_STATUS_FAILED signifies the compliance check failed.
+  ENUM_COMPLIANCE_CHECK_STATUS_FAILED = 2;
+  // ENUM_COMPLIANCE_CHECK_STATUS_NOT_APPLICABLE signifies the compliance check was not applicable.
+  ENUM_COMPLIANCE_CHECK_STATUS_NOT_APPLICABLE = 3;
+}
+
+message ContractComplianceCheckGroup {
+  // name is the name of the compliance check group.
+  string name = 1;
+  // status is the current status of the compliance check group.
+  EnumComplianceCheckStatus status = 2;
+  // message is an optional message indicating why the compliance check group is in the current state.
+  string message = 3;
+}
+
+message VendorComplianceCheck {
+  // description is the vendor provided description of the compliance check.
+  string description = 1;
+  // check_group is the name of the compliance check group that this check belongs to.
+  string check_group = 2;
+  // status is the status of the compliance check.
+  EnumComplianceCheckStatus status = 3;
+  // reason is an optional message indicating why the compliance check is in the current state.
+  string reason = 4;
+}

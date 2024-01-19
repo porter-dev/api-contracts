@@ -10,6 +10,7 @@ import type { GKEPreflightValues } from "./gke_pb.js";
 import type { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import type { Error } from "./errors_pb.js";
 import type { Contract, ContractRevision } from "./contract_pb.js";
+import type { ContractComplianceCheckGroup, EnumComplianceVendor, VendorComplianceCheck } from "./compliance_pb.js";
 import type { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import type { Addon } from "./addons_pb.js";
 import type { EnumEnvGroupProviderType } from "./env_group_pb.js";
@@ -1257,6 +1258,71 @@ export declare class ReadContractResponse extends Message<ReadContractResponse> 
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ReadContractResponse;
 
   static equals(a: ReadContractResponse | PlainMessage<ReadContractResponse> | undefined, b: ReadContractResponse | PlainMessage<ReadContractResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.ContractComplianceChecksRequest
+ */
+export declare class ContractComplianceChecksRequest extends Message<ContractComplianceChecksRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  /**
+   * vendor is the name of the vendor to run compliance checks for. Optional, if not provider no vendor checks will be run
+   *
+   * @generated from field: porter.v1.EnumComplianceVendor vendor = 3;
+   */
+  vendor: EnumComplianceVendor;
+
+  constructor(data?: PartialMessage<ContractComplianceChecksRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ContractComplianceChecksRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ContractComplianceChecksRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ContractComplianceChecksRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ContractComplianceChecksRequest;
+
+  static equals(a: ContractComplianceChecksRequest | PlainMessage<ContractComplianceChecksRequest> | undefined, b: ContractComplianceChecksRequest | PlainMessage<ContractComplianceChecksRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.ContractComplianceChecksResponse
+ */
+export declare class ContractComplianceChecksResponse extends Message<ContractComplianceChecksResponse> {
+  /**
+   * @generated from field: repeated porter.v1.ContractComplianceCheckGroup check_groups = 1;
+   */
+  checkGroups: ContractComplianceCheckGroup[];
+
+  /**
+   * @generated from field: repeated porter.v1.VendorComplianceCheck vendor_checks = 2;
+   */
+  vendorChecks: VendorComplianceCheck[];
+
+  constructor(data?: PartialMessage<ContractComplianceChecksResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ContractComplianceChecksResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ContractComplianceChecksResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ContractComplianceChecksResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ContractComplianceChecksResponse;
+
+  static equals(a: ContractComplianceChecksResponse | PlainMessage<ContractComplianceChecksResponse> | undefined, b: ContractComplianceChecksResponse | PlainMessage<ContractComplianceChecksResponse> | undefined): boolean;
 }
 
 /**

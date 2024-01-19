@@ -7,6 +7,7 @@ import "porter/v1/addons.proto";
 import "porter/v1/aws_assume_role.proto";
 import "porter/v1/cloud_provider_credentials.proto";
 import "porter/v1/cluster.proto";
+import "porter/v1/compliance.proto";
 import "porter/v1/contract.proto";
 import "porter/v1/eks.proto";
 import "porter/v1/env_group.proto";
@@ -217,6 +218,18 @@ message ReadContractRequest {
 
 message ReadContractResponse {
   string base64_contract = 1;
+}
+
+message ContractComplianceChecksRequest {
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+  // vendor is the name of the vendor to run compliance checks for. Optional, if not provider no vendor checks will be run
+  EnumComplianceVendor vendor = 3;
+}
+
+message ContractComplianceChecksResponse {
+  repeated ContractComplianceCheckGroup check_groups = 1;
+  repeated VendorComplianceCheck vendor_checks = 2;
 }
 
 message ValidatePorterAppRequest {
@@ -1132,6 +1145,9 @@ service ClusterControlPlaneService {
 
   // TokenForRegistry returns a token for accessing a given registry
   rpc TokenForRegistry(TokenForRegistryRequest) returns (TokenForRegistryResponse) {}
+
+  // ContractComplianceChecks returns the current status of the compliance checks for a given cluster and project
+  rpc ContractComplianceChecks(ContractComplianceChecksRequest) returns (ContractComplianceChecksResponse) {}
 
   // ValidatePorterApp validates and hydrates a definition of a porter app, based on the porter.yaml file
   rpc ValidatePorterApp(ValidatePorterAppRequest) returns (ValidatePorterAppResponse) {}
