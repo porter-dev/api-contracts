@@ -1497,6 +1497,8 @@ message Datastore {
   repeated DatastoreMetadata metadata = 3;
   // env is the datastore's env group
   EnvGroup env = 4;
+  // cluster_id is the cluster associated with the datastore
+  int64 cluster_id = 5;
 }
 
 // EnumDatastore represents the datastore type

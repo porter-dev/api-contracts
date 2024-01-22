@@ -1954,6 +1954,7 @@ export const Datastore = proto3.makeMessageType(
     { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "metadata", kind: "message", T: DatastoreMetadata, repeated: true },
     { no: 4, name: "env", kind: "message", T: EnvGroup },
+    { no: 5, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ],
 );
 
