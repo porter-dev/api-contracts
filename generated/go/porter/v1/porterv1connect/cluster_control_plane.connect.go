@@ -70,6 +70,9 @@ const (
 	// ClusterControlPlaneServiceTokenForRegistryProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's TokenForRegistry RPC.
 	ClusterControlPlaneServiceTokenForRegistryProcedure = "/porter.v1.ClusterControlPlaneService/TokenForRegistry"
+	// ClusterControlPlaneServiceContractComplianceChecksProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's ContractComplianceChecks RPC.
+	ClusterControlPlaneServiceContractComplianceChecksProcedure = "/porter.v1.ClusterControlPlaneService/ContractComplianceChecks"
 	// ClusterControlPlaneServiceValidatePorterAppProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's ValidatePorterApp RPC.
 	ClusterControlPlaneServiceValidatePorterAppProcedure = "/porter.v1.ClusterControlPlaneService/ValidatePorterApp"
@@ -277,6 +280,8 @@ type ClusterControlPlaneServiceClient interface {
 	DeleteCluster(context.Context, *connect.Request[v1.DeleteClusterRequest]) (*connect.Response[v1.DeleteClusterResponse], error)
 	// TokenForRegistry returns a token for accessing a given registry
 	TokenForRegistry(context.Context, *connect.Request[v1.TokenForRegistryRequest]) (*connect.Response[v1.TokenForRegistryResponse], error)
+	// ContractComplianceChecks returns the current status of the compliance checks for a given cluster and project
+	ContractComplianceChecks(context.Context, *connect.Request[v1.ContractComplianceChecksRequest]) (*connect.Response[v1.ContractComplianceChecksResponse], error)
 	// ValidatePorterApp validates and hydrates a definition of a porter app, based on the porter.yaml file
 	ValidatePorterApp(context.Context, *connect.Request[v1.ValidatePorterAppRequest]) (*connect.Response[v1.ValidatePorterAppResponse], error)
 	// ApplyPorterApp applies a porter app as defined by the provided porter.yaml file to a given deployment id
@@ -493,6 +498,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 		tokenForRegistry: connect.NewClient[v1.TokenForRegistryRequest, v1.TokenForRegistryResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceTokenForRegistryProcedure,
+			opts...,
+		),
+		contractComplianceChecks: connect.NewClient[v1.ContractComplianceChecksRequest, v1.ContractComplianceChecksResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceContractComplianceChecksProcedure,
 			opts...,
 		),
 		validatePorterApp: connect.NewClient[v1.ValidatePorterAppRequest, v1.ValidatePorterAppResponse](
@@ -797,6 +807,7 @@ type clusterControlPlaneServiceClient struct {
 	clusterStatus                       *connect.Client[v1.ClusterStatusRequest, v1.ClusterStatusResponse]
 	deleteCluster                       *connect.Client[v1.DeleteClusterRequest, v1.DeleteClusterResponse]
 	tokenForRegistry                    *connect.Client[v1.TokenForRegistryRequest, v1.TokenForRegistryResponse]
+	contractComplianceChecks            *connect.Client[v1.ContractComplianceChecksRequest, v1.ContractComplianceChecksResponse]
 	validatePorterApp                   *connect.Client[v1.ValidatePorterAppRequest, v1.ValidatePorterAppResponse]
 	applyPorterApp                      *connect.Client[v1.ApplyPorterAppRequest, v1.ApplyPorterAppResponse]
 	updateApp                           *connect.Client[v1.UpdateAppRequest, v1.UpdateAppResponse]
@@ -921,6 +932,11 @@ func (c *clusterControlPlaneServiceClient) DeleteCluster(ctx context.Context, re
 // TokenForRegistry calls porter.v1.ClusterControlPlaneService.TokenForRegistry.
 func (c *clusterControlPlaneServiceClient) TokenForRegistry(ctx context.Context, req *connect.Request[v1.TokenForRegistryRequest]) (*connect.Response[v1.TokenForRegistryResponse], error) {
 	return c.tokenForRegistry.CallUnary(ctx, req)
+}
+
+// ContractComplianceChecks calls porter.v1.ClusterControlPlaneService.ContractComplianceChecks.
+func (c *clusterControlPlaneServiceClient) ContractComplianceChecks(ctx context.Context, req *connect.Request[v1.ContractComplianceChecksRequest]) (*connect.Response[v1.ContractComplianceChecksResponse], error) {
+	return c.contractComplianceChecks.CallUnary(ctx, req)
 }
 
 // ValidatePorterApp calls porter.v1.ClusterControlPlaneService.ValidatePorterApp.
@@ -1266,6 +1282,8 @@ type ClusterControlPlaneServiceHandler interface {
 	DeleteCluster(context.Context, *connect.Request[v1.DeleteClusterRequest]) (*connect.Response[v1.DeleteClusterResponse], error)
 	// TokenForRegistry returns a token for accessing a given registry
 	TokenForRegistry(context.Context, *connect.Request[v1.TokenForRegistryRequest]) (*connect.Response[v1.TokenForRegistryResponse], error)
+	// ContractComplianceChecks returns the current status of the compliance checks for a given cluster and project
+	ContractComplianceChecks(context.Context, *connect.Request[v1.ContractComplianceChecksRequest]) (*connect.Response[v1.ContractComplianceChecksResponse], error)
 	// ValidatePorterApp validates and hydrates a definition of a porter app, based on the porter.yaml file
 	ValidatePorterApp(context.Context, *connect.Request[v1.ValidatePorterAppRequest]) (*connect.Response[v1.ValidatePorterAppResponse], error)
 	// ApplyPorterApp applies a porter app as defined by the provided porter.yaml file to a given deployment id
@@ -1478,6 +1496,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 	clusterControlPlaneServiceTokenForRegistryHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceTokenForRegistryProcedure,
 		svc.TokenForRegistry,
+		opts...,
+	)
+	clusterControlPlaneServiceContractComplianceChecksHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceContractComplianceChecksProcedure,
+		svc.ContractComplianceChecks,
 		opts...,
 	)
 	clusterControlPlaneServiceValidatePorterAppHandler := connect.NewUnaryHandler(
@@ -1791,6 +1814,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceDeleteClusterHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceTokenForRegistryProcedure:
 			clusterControlPlaneServiceTokenForRegistryHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceContractComplianceChecksProcedure:
+			clusterControlPlaneServiceContractComplianceChecksHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceValidatePorterAppProcedure:
 			clusterControlPlaneServiceValidatePorterAppHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceApplyPorterAppProcedure:
@@ -1960,6 +1985,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) DeleteCluster(context.Cont
 
 func (UnimplementedClusterControlPlaneServiceHandler) TokenForRegistry(context.Context, *connect.Request[v1.TokenForRegistryRequest]) (*connect.Response[v1.TokenForRegistryResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.TokenForRegistry is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) ContractComplianceChecks(context.Context, *connect.Request[v1.ContractComplianceChecksRequest]) (*connect.Response[v1.ContractComplianceChecksResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ContractComplianceChecks is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) ValidatePorterApp(context.Context, *connect.Request[v1.ValidatePorterAppRequest]) (*connect.Response[v1.ValidatePorterAppResponse], error) {
