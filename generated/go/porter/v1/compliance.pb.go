@@ -122,6 +122,8 @@ func (EnumComplianceCheckStatus) EnumDescriptor() ([]byte, []int) {
 	return file_porter_v1_compliance_proto_rawDescGZIP(), []int{1}
 }
 
+// ContractComplianceCheckGroup representes a porter internal concept that represents some infrastructure level configuration
+// that is expected to be in place for a contract to be considered compliant.
 type ContractComplianceCheckGroup struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -188,6 +190,7 @@ func (x *ContractComplianceCheckGroup) GetMessage() string {
 	return ""
 }
 
+// VendorComplianceCheckGroup represents a vendor provided compliance test, which porter deems to be passing based on the status of the corresponding check group.
 type VendorComplianceCheck struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

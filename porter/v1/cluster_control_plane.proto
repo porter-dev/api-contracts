@@ -228,7 +228,9 @@ message ContractComplianceChecksRequest {
 }
 
 message ContractComplianceChecksResponse {
+  // check_groups are the list of porter internal check groups that have been run against the contract
   repeated ContractComplianceCheckGroup check_groups = 1;
+  // vendor_check are the results of any vendor specific checks, derived based on the status of the internal checks
   repeated VendorComplianceCheck vendor_checks = 2;
 }
 

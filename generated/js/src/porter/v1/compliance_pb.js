@@ -30,6 +30,9 @@ export const EnumComplianceCheckStatus = proto3.makeEnum(
 );
 
 /**
+ * ContractComplianceCheckGroup representes a porter internal concept that represents some infrastructure level configuration
+ * that is expected to be in place for a contract to be considered compliant.
+ *
  * @generated from message porter.v1.ContractComplianceCheckGroup
  */
 export const ContractComplianceCheckGroup = proto3.makeMessageType(
@@ -42,6 +45,8 @@ export const ContractComplianceCheckGroup = proto3.makeMessageType(
 );
 
 /**
+ * VendorComplianceCheckGroup represents a vendor provided compliance test, which porter deems to be passing based on the status of the corresponding check group.
+ *
  * @generated from message porter.v1.VendorComplianceCheck
  */
 export const VendorComplianceCheck = proto3.makeMessageType(

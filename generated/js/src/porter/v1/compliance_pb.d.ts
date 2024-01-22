@@ -55,6 +55,9 @@ export declare enum EnumComplianceCheckStatus {
 }
 
 /**
+ * ContractComplianceCheckGroup representes a porter internal concept that represents some infrastructure level configuration
+ * that is expected to be in place for a contract to be considered compliant.
+ *
  * @generated from message porter.v1.ContractComplianceCheckGroup
  */
 export declare class ContractComplianceCheckGroup extends Message<ContractComplianceCheckGroup> {
@@ -95,6 +98,8 @@ export declare class ContractComplianceCheckGroup extends Message<ContractCompli
 }
 
 /**
+ * VendorComplianceCheckGroup represents a vendor provided compliance test, which porter deems to be passing based on the status of the corresponding check group.
+ *
  * @generated from message porter.v1.VendorComplianceCheck
  */
 export declare class VendorComplianceCheck extends Message<VendorComplianceCheck> {

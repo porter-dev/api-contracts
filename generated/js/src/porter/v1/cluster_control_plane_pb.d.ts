@@ -1301,11 +1301,15 @@ export declare class ContractComplianceChecksRequest extends Message<ContractCom
  */
 export declare class ContractComplianceChecksResponse extends Message<ContractComplianceChecksResponse> {
   /**
+   * check_groups are the list of porter internal check groups that have been run against the contract
+   *
    * @generated from field: repeated porter.v1.ContractComplianceCheckGroup check_groups = 1;
    */
   checkGroups: ContractComplianceCheckGroup[];
 
   /**
+   * vendor_check are the results of any vendor specific checks, derived based on the status of the internal checks
+   *
    * @generated from field: repeated porter.v1.VendorComplianceCheck vendor_checks = 2;
    */
   vendorChecks: VendorComplianceCheck[];

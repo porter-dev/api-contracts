@@ -18,6 +18,8 @@ enum EnumComplianceCheckStatus {
   ENUM_COMPLIANCE_CHECK_STATUS_NOT_APPLICABLE = 3;
 }
 
+// ContractComplianceCheckGroup representes a porter internal concept that represents some infrastructure level configuration
+// that is expected to be in place for a contract to be considered compliant.
 message ContractComplianceCheckGroup {
   // name is the name of the compliance check group.
   string name = 1;
@@ -27,6 +29,7 @@ message ContractComplianceCheckGroup {
   string message = 3;
 }
 
+// VendorComplianceCheckGroup represents a vendor provided compliance test, which porter deems to be passing based on the status of the corresponding check group.
 message VendorComplianceCheck {
   // description is the vendor provided description of the compliance check.
   string description = 1;

@@ -2334,8 +2334,10 @@ type ContractComplianceChecksResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	CheckGroups  []*ContractComplianceCheckGroup `protobuf:"bytes,1,rep,name=check_groups,json=checkGroups,proto3" json:"check_groups,omitempty"`
-	VendorChecks []*VendorComplianceCheck        `protobuf:"bytes,2,rep,name=vendor_checks,json=vendorChecks,proto3" json:"vendor_checks,omitempty"`
+	// check_groups are the list of porter internal check groups that have been run against the contract
+	CheckGroups []*ContractComplianceCheckGroup `protobuf:"bytes,1,rep,name=check_groups,json=checkGroups,proto3" json:"check_groups,omitempty"`
+	// vendor_check are the results of any vendor specific checks, derived based on the status of the internal checks
+	VendorChecks []*VendorComplianceCheck `protobuf:"bytes,2,rep,name=vendor_checks,json=vendorChecks,proto3" json:"vendor_checks,omitempty"`
 }
 
 func (x *ContractComplianceChecksResponse) Reset() {
