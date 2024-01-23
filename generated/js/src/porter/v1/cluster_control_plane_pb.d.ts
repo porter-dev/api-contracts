@@ -5663,6 +5663,13 @@ export declare class Datastore extends Message<Datastore> {
    */
   env?: EnvGroup;
 
+  /**
+   * cluster_id is the cluster associated with the datastore
+   *
+   * @generated from field: int64 cluster_id = 5;
+   */
+  clusterId: bigint;
+
   constructor(data?: PartialMessage<Datastore>);
 
   static readonly runtime: typeof proto3;
