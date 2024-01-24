@@ -13,6 +13,7 @@ import { ContractComplianceCheckGroup, EnumComplianceVendor, VendorComplianceChe
 import { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import { Addon } from "./addons_pb.js";
 import { EnumEnvGroupProviderType } from "./env_group_pb.js";
+import { DatastoreCredential } from "./datastore_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
@@ -1714,6 +1715,34 @@ export const UpdateDatastoreRequest = proto3.makeMessageType(
 export const UpdateDatastoreResponse = proto3.makeMessageType(
   "porter.v1.UpdateDatastoreResponse",
   [],
+);
+
+/**
+ * CreateDatastoreProxyRequest is the request object for creating a datastore proxy
+ *
+ * @generated from message porter.v1.CreateDatastoreProxyRequest
+ */
+export const CreateDatastoreProxyRequest = proto3.makeMessageType(
+  "porter.v1.CreateDatastoreProxyRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "datastore_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * CreateDatastoreProxyResponse is the response object for creating a datastore proxy
+ *
+ * @generated from message porter.v1.CreateDatastoreProxyResponse
+ */
+export const CreateDatastoreProxyResponse = proto3.makeMessageType(
+  "porter.v1.CreateDatastoreProxyResponse",
+  () => [
+    { no: 1, name: "pod_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "credential", kind: "message", T: DatastoreCredential },
+    { no: 3, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 4, name: "namespace", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
 );
 
 /**

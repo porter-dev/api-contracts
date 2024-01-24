@@ -9,6 +9,7 @@ import "porter/v1/cloud_provider_credentials.proto";
 import "porter/v1/cluster.proto";
 import "porter/v1/compliance.proto";
 import "porter/v1/contract.proto";
+import "porter/v1/datastore.proto";
 import "porter/v1/eks.proto";
 import "porter/v1/env_group.proto";
 import "porter/v1/errors.proto";
@@ -1104,6 +1105,26 @@ message UpdateDatastoreRequest {
 // UpdateDatastoreResponse is the response object for updating a datastore
 message UpdateDatastoreResponse {}
 
+// CreateDatastoreProxyRequest is the request object for creating a datastore proxy
+message CreateDatastoreProxyRequest {
+  // project_id is the project id that the datastore is provisioned in
+  int64 project_id = 1;
+  // datastore_id is the id of the datastore
+  string datastore_id = 2;
+}
+
+// CreateDatastoreProxyResponse is the response object for creating a datastore proxy
+message CreateDatastoreProxyResponse {
+  // pod_name is the name of the pod that was created
+  string pod_name = 1;
+  // credential is the credential used to connect to the datastore
+  DatastoreCredential credential = 2;
+  // cluster_id is the id of the cluster that the pod was created in
+  int64 cluster_id = 3;
+  // namespace is the namespace that the pod was created in
+  string namespace = 4;
+}
+
 service ClusterControlPlaneService {
   // QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas
   rpc QuotaIncrease(QuotaIncreaseRequest) returns (QuotaIncreaseResponse) {}
@@ -1277,6 +1298,9 @@ service ClusterControlPlaneService {
 
   // UpdateDatastore updates a porter-managed datastore
   rpc UpdateDatastore(UpdateDatastoreRequest) returns (UpdateDatastoreResponse) {}
+
+  // CreateDatastoreProxy creates a proxy for connecting to a datastore
+  rpc CreateDatastoreProxy(CreateDatastoreProxyRequest) returns (CreateDatastoreProxyResponse) {}
 
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
   // Deprecated. Use TokenForRegistry instead.

@@ -18,3 +18,19 @@ export const UpdateDatastorePayload = proto3.makeMessageType(
   ],
 );
 
+/**
+ * DatastoreCredential is used to connect to a datastore
+ *
+ * @generated from message porter.v1.DatastoreCredential
+ */
+export const DatastoreCredential = proto3.makeMessageType(
+  "porter.v1.DatastoreCredential",
+  () => [
+    { no: 1, name: "host", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "database_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "username", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "password", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "port", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
