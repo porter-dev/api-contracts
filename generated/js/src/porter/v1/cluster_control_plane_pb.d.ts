@@ -5091,13 +5091,6 @@ export declare class CreateDatastoreProxyResponse extends Message<CreateDatastor
    */
   namespace: string;
 
-  /**
-   * example_connect_command is an example command that can be used to connect to the datastore
-   *
-   * @generated from field: string example_connect_command = 5;
-   */
-  exampleConnectCommand: string;
-
   constructor(data?: PartialMessage<CreateDatastoreProxyResponse>);
 
   static readonly runtime: typeof proto3;

@@ -1123,8 +1123,6 @@ message CreateDatastoreProxyResponse {
   int64 cluster_id = 3;
   // namespace is the namespace that the pod was created in
   string namespace = 4;
-  // example_connect_command is an example command that can be used to connect to the datastore
-  string example_connect_command = 5;
 }
 
 service ClusterControlPlaneService {

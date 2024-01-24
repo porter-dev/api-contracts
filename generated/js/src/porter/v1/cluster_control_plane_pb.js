@@ -1742,7 +1742,6 @@ export const CreateDatastoreProxyResponse = proto3.makeMessageType(
     { no: 2, name: "credential", kind: "message", T: DatastoreCredential },
     { no: 3, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 4, name: "namespace", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 5, name: "example_connect_command", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
