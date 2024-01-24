@@ -41,3 +41,59 @@ export declare class UpdateDatastorePayload extends Message<UpdateDatastorePaylo
   static equals(a: UpdateDatastorePayload | PlainMessage<UpdateDatastorePayload> | undefined, b: UpdateDatastorePayload | PlainMessage<UpdateDatastorePayload> | undefined): boolean;
 }
 
+/**
+ * DatastoreCredential is used to connect to a datastore
+ *
+ * @generated from message porter.v1.DatastoreCredential
+ */
+export declare class DatastoreCredential extends Message<DatastoreCredential> {
+  /**
+   * host is the datastore host
+   *
+   * @generated from field: string host = 1;
+   */
+  host: string;
+
+  /**
+   * database_name is the name of the database
+   *
+   * @generated from field: string database_name = 2;
+   */
+  databaseName: string;
+
+  /**
+   * username is the username required to access the datastore
+   *
+   * @generated from field: string username = 3;
+   */
+  username: string;
+
+  /**
+   * password is the password required to access the datastore
+   *
+   * @generated from field: string password = 4;
+   */
+  password: string;
+
+  /**
+   * port is the port to connect to
+   *
+   * @generated from field: int64 port = 5;
+   */
+  port: bigint;
+
+  constructor(data?: PartialMessage<DatastoreCredential>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DatastoreCredential";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DatastoreCredential;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DatastoreCredential;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DatastoreCredential;
+
+  static equals(a: DatastoreCredential | PlainMessage<DatastoreCredential> | undefined, b: DatastoreCredential | PlainMessage<DatastoreCredential> | undefined): boolean;
+}
+

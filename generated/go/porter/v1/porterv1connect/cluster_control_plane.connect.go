@@ -196,6 +196,9 @@ const (
 	// ClusterControlPlaneServiceUpdateDatastoreProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's UpdateDatastore RPC.
 	ClusterControlPlaneServiceUpdateDatastoreProcedure = "/porter.v1.ClusterControlPlaneService/UpdateDatastore"
+	// ClusterControlPlaneServiceCreateDatastoreProxyProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's CreateDatastoreProxy RPC.
+	ClusterControlPlaneServiceCreateDatastoreProxyProcedure = "/porter.v1.ClusterControlPlaneService/CreateDatastoreProxy"
 	// ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DockerConfigFileForRegistry RPC.
 	ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure = "/porter.v1.ClusterControlPlaneService/DockerConfigFileForRegistry"
@@ -368,6 +371,8 @@ type ClusterControlPlaneServiceClient interface {
 	ConnectHostedProject(context.Context, *connect.Request[v1.ConnectHostedProjectRequest]) (*connect.Response[v1.ConnectHostedProjectResponse], error)
 	// UpdateDatastore updates a porter-managed datastore
 	UpdateDatastore(context.Context, *connect.Request[v1.UpdateDatastoreRequest]) (*connect.Response[v1.UpdateDatastoreResponse], error)
+	// CreateDatastoreProxy creates a proxy for connecting to a datastore
+	CreateDatastoreProxy(context.Context, *connect.Request[v1.CreateDatastoreProxyRequest]) (*connect.Response[v1.CreateDatastoreProxyResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -710,6 +715,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceUpdateDatastoreProcedure,
 			opts...,
 		),
+		createDatastoreProxy: connect.NewClient[v1.CreateDatastoreProxyRequest, v1.CreateDatastoreProxyResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceCreateDatastoreProxyProcedure,
+			opts...,
+		),
 		dockerConfigFileForRegistry: connect.NewClient[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
@@ -849,6 +859,7 @@ type clusterControlPlaneServiceClient struct {
 	updateServiceDeploymentStatus       *connect.Client[v1.UpdateServiceDeploymentStatusRequest, v1.UpdateServiceDeploymentStatusResponse]
 	connectHostedProject                *connect.Client[v1.ConnectHostedProjectRequest, v1.ConnectHostedProjectResponse]
 	updateDatastore                     *connect.Client[v1.UpdateDatastoreRequest, v1.UpdateDatastoreResponse]
+	createDatastoreProxy                *connect.Client[v1.CreateDatastoreProxyRequest, v1.CreateDatastoreProxyResponse]
 	dockerConfigFileForRegistry         *connect.Client[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse]
 	eCRTokenForRegistry                 *connect.Client[v1.ECRTokenForRegistryRequest, v1.ECRTokenForRegistryResponse]
 	assumeRoleCredentials               *connect.Client[v1.AssumeRoleCredentialsRequest, v1.AssumeRoleCredentialsResponse]
@@ -1146,6 +1157,11 @@ func (c *clusterControlPlaneServiceClient) UpdateDatastore(ctx context.Context, 
 	return c.updateDatastore.CallUnary(ctx, req)
 }
 
+// CreateDatastoreProxy calls porter.v1.ClusterControlPlaneService.CreateDatastoreProxy.
+func (c *clusterControlPlaneServiceClient) CreateDatastoreProxy(ctx context.Context, req *connect.Request[v1.CreateDatastoreProxyRequest]) (*connect.Response[v1.CreateDatastoreProxyResponse], error) {
+	return c.createDatastoreProxy.CallUnary(ctx, req)
+}
+
 // DockerConfigFileForRegistry calls
 // porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry.
 //
@@ -1370,6 +1386,8 @@ type ClusterControlPlaneServiceHandler interface {
 	ConnectHostedProject(context.Context, *connect.Request[v1.ConnectHostedProjectRequest]) (*connect.Response[v1.ConnectHostedProjectResponse], error)
 	// UpdateDatastore updates a porter-managed datastore
 	UpdateDatastore(context.Context, *connect.Request[v1.UpdateDatastoreRequest]) (*connect.Response[v1.UpdateDatastoreResponse], error)
+	// CreateDatastoreProxy creates a proxy for connecting to a datastore
+	CreateDatastoreProxy(context.Context, *connect.Request[v1.CreateDatastoreProxyRequest]) (*connect.Response[v1.CreateDatastoreProxyResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -1708,6 +1726,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.UpdateDatastore,
 		opts...,
 	)
+	clusterControlPlaneServiceCreateDatastoreProxyHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceCreateDatastoreProxyProcedure,
+		svc.CreateDatastoreProxy,
+		opts...,
+	)
 	clusterControlPlaneServiceDockerConfigFileForRegistryHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
 		svc.DockerConfigFileForRegistry,
@@ -1898,6 +1921,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceConnectHostedProjectHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceUpdateDatastoreProcedure:
 			clusterControlPlaneServiceUpdateDatastoreHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceCreateDatastoreProxyProcedure:
+			clusterControlPlaneServiceCreateDatastoreProxyHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure:
 			clusterControlPlaneServiceDockerConfigFileForRegistryHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceECRTokenForRegistryProcedure:
@@ -2153,6 +2178,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) ConnectHostedProject(conte
 
 func (UnimplementedClusterControlPlaneServiceHandler) UpdateDatastore(context.Context, *connect.Request[v1.UpdateDatastoreRequest]) (*connect.Response[v1.UpdateDatastoreResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.UpdateDatastore is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) CreateDatastoreProxy(context.Context, *connect.Request[v1.CreateDatastoreProxyRequest]) (*connect.Response[v1.CreateDatastoreProxyResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.CreateDatastoreProxy is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) DockerConfigFileForRegistry(context.Context, *connect.Request[v1.DockerConfigFileForRegistryRequest]) (*connect.Response[v1.DockerConfigFileForRegistryResponse], error) {

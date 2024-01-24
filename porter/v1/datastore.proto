@@ -9,3 +9,17 @@ message UpdateDatastorePayload {
   // datastore_id is the id of the datastore
   string datastore_id = 2;
 }
+
+// DatastoreCredential is used to connect to a datastore
+message DatastoreCredential {
+  // host is the datastore host
+  string host = 1;
+  // database_name is the name of the database
+  string database_name = 2;
+  // username is the username required to access the datastore
+  string username = 3;
+  // password is the password required to access the datastore
+  string password = 4;
+  // port is the port to connect to
+  int64 port = 5;
+}

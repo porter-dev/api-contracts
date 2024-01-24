@@ -14,6 +14,7 @@ import type { ContractComplianceCheckGroup, EnumComplianceVendor, VendorComplian
 import type { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import type { Addon } from "./addons_pb.js";
 import type { EnumEnvGroupProviderType } from "./env_group_pb.js";
+import type { DatastoreCredential } from "./datastore_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
@@ -5019,6 +5020,90 @@ export declare class UpdateDatastoreResponse extends Message<UpdateDatastoreResp
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateDatastoreResponse;
 
   static equals(a: UpdateDatastoreResponse | PlainMessage<UpdateDatastoreResponse> | undefined, b: UpdateDatastoreResponse | PlainMessage<UpdateDatastoreResponse> | undefined): boolean;
+}
+
+/**
+ * CreateDatastoreProxyRequest is the request object for creating a datastore proxy
+ *
+ * @generated from message porter.v1.CreateDatastoreProxyRequest
+ */
+export declare class CreateDatastoreProxyRequest extends Message<CreateDatastoreProxyRequest> {
+  /**
+   * project_id is the project id that the datastore is provisioned in
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * datastore_id is the id of the datastore
+   *
+   * @generated from field: string datastore_id = 2;
+   */
+  datastoreId: string;
+
+  constructor(data?: PartialMessage<CreateDatastoreProxyRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CreateDatastoreProxyRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateDatastoreProxyRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateDatastoreProxyRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateDatastoreProxyRequest;
+
+  static equals(a: CreateDatastoreProxyRequest | PlainMessage<CreateDatastoreProxyRequest> | undefined, b: CreateDatastoreProxyRequest | PlainMessage<CreateDatastoreProxyRequest> | undefined): boolean;
+}
+
+/**
+ * CreateDatastoreProxyResponse is the response object for creating a datastore proxy
+ *
+ * @generated from message porter.v1.CreateDatastoreProxyResponse
+ */
+export declare class CreateDatastoreProxyResponse extends Message<CreateDatastoreProxyResponse> {
+  /**
+   * pod_name is the name of the pod that was created
+   *
+   * @generated from field: string pod_name = 1;
+   */
+  podName: string;
+
+  /**
+   * credential is the credential used to connect to the datastore
+   *
+   * @generated from field: porter.v1.DatastoreCredential credential = 2;
+   */
+  credential?: DatastoreCredential;
+
+  /**
+   * cluster_id is the id of the cluster that the pod was created in
+   *
+   * @generated from field: int64 cluster_id = 3;
+   */
+  clusterId: bigint;
+
+  /**
+   * namespace is the namespace that the pod was created in
+   *
+   * @generated from field: string namespace = 4;
+   */
+  namespace: string;
+
+  constructor(data?: PartialMessage<CreateDatastoreProxyResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CreateDatastoreProxyResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CreateDatastoreProxyResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CreateDatastoreProxyResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateDatastoreProxyResponse;
+
+  static equals(a: CreateDatastoreProxyResponse | PlainMessage<CreateDatastoreProxyResponse> | undefined, b: CreateDatastoreProxyResponse | PlainMessage<CreateDatastoreProxyResponse> | undefined): boolean;
 }
 
 /**
