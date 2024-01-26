@@ -12,6 +12,8 @@ message AKS {
   AksSkuTier sku_tier = 6;
   // enable_container_insights enables Azure Monitor for containers on the cluster.
   bool enable_container_insights = 7;
+  // enable_rbac enables Azure RBAC on the cluster.
+  bool enable_rbac = 8;
 }
 
 enum AksSkuTier {
