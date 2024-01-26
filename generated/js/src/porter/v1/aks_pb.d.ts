@@ -99,6 +99,13 @@ export declare class AKS extends Message<AKS> {
    */
   enableContainerInsights: boolean;
 
+  /**
+   * enable_rbac enables Azure RBAC on the cluster.
+   *
+   * @generated from field: bool enable_rbac = 8;
+   */
+  enableRbac: boolean;
+
   constructor(data?: PartialMessage<AKS>);
 
   static readonly runtime: typeof proto3;

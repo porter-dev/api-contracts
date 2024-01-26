@@ -44,6 +44,7 @@ export const AKS = proto3.makeMessageType(
     { no: 5, name: "node_pools", kind: "message", T: AKSNodePool, repeated: true },
     { no: 6, name: "sku_tier", kind: "enum", T: proto3.getEnumType(AksSkuTier) },
     { no: 7, name: "enable_container_insights", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 8, name: "enable_rbac", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
