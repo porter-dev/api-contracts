@@ -92,6 +92,13 @@ export declare class AKS extends Message<AKS> {
    */
   skuTier: AksSkuTier;
 
+  /**
+   * enable_container_insights enables Azure Monitor for containers on the cluster.
+   *
+   * @generated from field: bool enable_container_insights = 7;
+   */
+  enableContainerInsights: boolean;
+
   constructor(data?: PartialMessage<AKS>);
 
   static readonly runtime: typeof proto3;
