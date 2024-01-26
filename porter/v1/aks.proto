@@ -10,6 +10,8 @@ message AKS {
   repeated AKSNodePool node_pools = 5;
   // sku_tier is the SKU tier of the cluster (Free or Standard).  Standard should be used for all production workloads that require high availability.
   AksSkuTier sku_tier = 6;
+  // enable_container_insights enables Azure Monitor for containers on the cluster.
+  bool enable_container_insights = 7;
 }
 
 enum AksSkuTier {
