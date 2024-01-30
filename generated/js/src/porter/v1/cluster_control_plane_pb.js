@@ -26,6 +26,7 @@ export const EnumUpdateTrigger = proto3.makeEnum(
   [
     {no: 0, name: "ENUM_UPDATE_TRIGGER_UNSPECIFIED", localName: "UNSPECIFIED"},
     {no: 1, name: "ENUM_UPDATE_TRIGGER_ROLLBACK", localName: "ROLLBACK"},
+    {no: 2, name: "ENUM_UPDATE_TRIGGER_USER_REVERT", localName: "USER_REVERT"},
   ],
 );
 

@@ -29,11 +29,18 @@ export declare enum EnumUpdateTrigger {
   UNSPECIFIED = 0,
 
   /**
-   * ENUM_UPDATE_TRIGGER_ROLLBACK signifies the update was triggered by a rollback
+   * ENUM_UPDATE_TRIGGER_ROLLBACK signifies the update was triggered by an auto rollback
    *
    * @generated from enum value: ENUM_UPDATE_TRIGGER_ROLLBACK = 1;
    */
   ROLLBACK = 1,
+
+  /**
+   * ENUM_UPDATE_TRIGGER_USER_REVERT signifies the update was triggered by a user reverting to a previous revision
+   *
+   * @generated from enum value: ENUM_UPDATE_TRIGGER_USER_REVERT = 2;
+   */
+  USER_REVERT = 2,
 }
 
 /**

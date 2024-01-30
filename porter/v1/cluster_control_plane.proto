@@ -468,8 +468,10 @@ message UpdateRevisionPayload {
 // EnumUpdateTrigger describes the action that triggered a porter app revision update
 enum EnumUpdateTrigger {
   ENUM_UPDATE_TRIGGER_UNSPECIFIED = 0;
-  // ENUM_UPDATE_TRIGGER_ROLLBACK signifies the update was triggered by a rollback
+  // ENUM_UPDATE_TRIGGER_ROLLBACK signifies the update was triggered by an auto rollback
   ENUM_UPDATE_TRIGGER_ROLLBACK = 1;
+  // ENUM_UPDATE_TRIGGER_USER_REVERT signifies the update was triggered by a user reverting to a previous revision
+  ENUM_UPDATE_TRIGGER_USER_REVERT = 2;
 }
 
 // UpdateAddonPayload is used to send messages via nats to update an addon
