@@ -6,8 +6,18 @@ import "porter/v1/cluster.proto";
 
 // Contract represents the API contract for Porter, commonly known as "porter.yaml"
 message Contract {
+  // cluster is a cluster object
   Cluster cluster = 1;
+  // user is the user that triggered a contract create/update
   User user = 2;
+  // compliance_profile is the compliance profile that the cluster should be configured with
+  ComplianceProfile compliance_profile = 3;
+}
+
+// ComplianceProfile
+message ComplianceProfile {
+  // soc2_type1 is a boolean that represents whether the cluster should be configured with SOC2 Type 1
+  bool soc2_type1 = 1;
 }
 
 // ContractRevision represents a contract revision which should be acted upon, depending on the stream

@@ -14,14 +14,25 @@ import type { Cluster } from "./cluster_pb.js";
  */
 export declare class Contract extends Message<Contract> {
   /**
+   * cluster is a cluster object
+   *
    * @generated from field: porter.v1.Cluster cluster = 1;
    */
   cluster?: Cluster;
 
   /**
+   * user is the user that triggered a contract create/update
+   *
    * @generated from field: porter.v1.User user = 2;
    */
   user?: User;
+
+  /**
+   * compliance_profile is the compliance profile that the cluster should be configured with
+   *
+   * @generated from field: porter.v1.ComplianceProfile compliance_profile = 3;
+   */
+  complianceProfile?: ComplianceProfile;
 
   constructor(data?: PartialMessage<Contract>);
 
@@ -36,6 +47,34 @@ export declare class Contract extends Message<Contract> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Contract;
 
   static equals(a: Contract | PlainMessage<Contract> | undefined, b: Contract | PlainMessage<Contract> | undefined): boolean;
+}
+
+/**
+ * ComplianceProfile
+ *
+ * @generated from message porter.v1.ComplianceProfile
+ */
+export declare class ComplianceProfile extends Message<ComplianceProfile> {
+  /**
+   * soc2_type1 is a boolean that represents whether the cluster should be configured with SOC2 Type 1
+   *
+   * @generated from field: bool soc2_type1 = 1;
+   */
+  soc2Type1: boolean;
+
+  constructor(data?: PartialMessage<ComplianceProfile>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ComplianceProfile";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ComplianceProfile;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ComplianceProfile;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ComplianceProfile;
+
+  static equals(a: ComplianceProfile | PlainMessage<ComplianceProfile> | undefined, b: ComplianceProfile | PlainMessage<ComplianceProfile> | undefined): boolean;
 }
 
 /**
