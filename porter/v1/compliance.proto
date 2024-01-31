@@ -2,6 +2,14 @@ syntax = "proto3";
 
 package porter.v1;
 
+enum EnumComplianceProfile {
+  ENUM_COMPLIANCE_PROFILE_UNSPECIFIED = 0;
+  // ENUM_COMPLIANCE_PROFILE_SOC2 represents the SOC2 compliance profile.
+  ENUM_COMPLIANCE_PROFILE_SOC2 = 1;
+  // ENUM_COMPLIANCE_PROFILE_HIPAA represents the HIPAA compliance profile.
+  ENUM_COMPLIANCE_PROFILE_HIPAA = 2;
+}
+
 enum EnumComplianceVendor {
   ENUM_COMPLIANCE_VENDOR_UNSPECIFIED = 0;
   // ENUM_COMPLIANCE_VENDOR_VANTA signifies the compliance vendor Vanta.

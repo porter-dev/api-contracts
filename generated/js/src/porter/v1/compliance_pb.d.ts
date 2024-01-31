@@ -7,6 +7,30 @@ import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialM
 import { Message, proto3 } from "@bufbuild/protobuf";
 
 /**
+ * @generated from enum porter.v1.EnumComplianceProfile
+ */
+export declare enum EnumComplianceProfile {
+  /**
+   * @generated from enum value: ENUM_COMPLIANCE_PROFILE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * ENUM_COMPLIANCE_PROFILE_SOC2 represents the SOC2 compliance profile.
+   *
+   * @generated from enum value: ENUM_COMPLIANCE_PROFILE_SOC2 = 1;
+   */
+  SOC2 = 1,
+
+  /**
+   * ENUM_COMPLIANCE_PROFILE_HIPAA represents the HIPAA compliance profile.
+   *
+   * @generated from enum value: ENUM_COMPLIANCE_PROFILE_HIPAA = 2;
+   */
+  HIPAA = 2,
+}
+
+/**
  * @generated from enum porter.v1.EnumComplianceVendor
  */
 export declare enum EnumComplianceVendor {

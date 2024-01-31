@@ -10,7 +10,7 @@ import type { GKEPreflightValues } from "./gke_pb.js";
 import type { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import type { Error } from "./errors_pb.js";
 import type { Contract, ContractRevision } from "./contract_pb.js";
-import type { ContractComplianceCheckGroup, EnumComplianceVendor, VendorComplianceCheck } from "./compliance_pb.js";
+import type { ContractComplianceCheckGroup, EnumComplianceProfile, EnumComplianceVendor, VendorComplianceCheck } from "./compliance_pb.js";
 import type { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import type { Addon } from "./addons_pb.js";
 import type { EnumEnvGroupProviderType } from "./env_group_pb.js";
@@ -1281,6 +1281,13 @@ export declare class ContractComplianceChecksRequest extends Message<ContractCom
    * @generated from field: porter.v1.EnumComplianceVendor vendor = 3;
    */
   vendor: EnumComplianceVendor;
+
+  /**
+   * profile is the name of the profile to run compliance checks for
+   *
+   * @generated from field: porter.v1.EnumComplianceProfile profile = 4;
+   */
+  profile: EnumComplianceProfile;
 
   constructor(data?: PartialMessage<ContractComplianceChecksRequest>);
 

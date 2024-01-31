@@ -6,6 +6,18 @@
 import { proto3 } from "@bufbuild/protobuf";
 
 /**
+ * @generated from enum porter.v1.EnumComplianceProfile
+ */
+export const EnumComplianceProfile = proto3.makeEnum(
+  "porter.v1.EnumComplianceProfile",
+  [
+    {no: 0, name: "ENUM_COMPLIANCE_PROFILE_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "ENUM_COMPLIANCE_PROFILE_SOC2", localName: "SOC2"},
+    {no: 2, name: "ENUM_COMPLIANCE_PROFILE_HIPAA", localName: "HIPAA"},
+  ],
+);
+
+/**
  * @generated from enum porter.v1.EnumComplianceVendor
  */
 export const EnumComplianceVendor = proto3.makeEnum(
