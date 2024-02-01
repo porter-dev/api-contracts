@@ -1084,6 +1084,22 @@ message AppsLinkedToEnvGroupResponse {
   repeated AppInstance linked_apps = 2;
 }
 
+// ListEnvGroupsRequest is the request object for ListEnvGroups.
+message ListEnvGroupsRequest {
+  // project_id is the id of the project where the env group is installed
+  int64 project_id = 1;
+  // cluster_id is the id of the cluster where the env group is installed
+  int64 cluster_id = 2;
+  // include_secrets indicates whether to include secret values in the response. If false, the values will be replaced with a placeholder.
+  bool include_secrets = 3;
+}
+
+// ListEnvGroupsResponse is the response object for ListEnvGroups
+message ListEnvGroupsResponse {
+  // env_groups is the list of env groups installed in the cluster
+  repeated EnvGroup env_groups = 1;
+}
+
 // ConnectHostedProjectRequest is the request object for connecting a hosted project to a host cluster
 message ConnectHostedProjectRequest {
   // project_id is the project id of the new hosted project which should be connected to the host cluster
@@ -1379,6 +1395,9 @@ service ClusterControlPlaneService {
 
   // AppsLinkedToEnvGroup returns the list of app names linked to a given env group.  Note: this should be deprecated in the future in favor of a higher-level ListEnvGroups API (POR-2182)
   rpc AppsLinkedToEnvGroup(AppsLinkedToEnvGroupRequest) returns (AppsLinkedToEnvGroupResponse) {}
+
+  // ListEnvGroups returns the list of env groups configured on a cluster
+  rpc ListEnvGroups(ListEnvGroupsRequest) returns (ListEnvGroupsResponse) {}
 }
 
 message EKSBearerTokenRequest {

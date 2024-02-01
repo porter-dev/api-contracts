@@ -4918,6 +4918,76 @@ export declare class AppsLinkedToEnvGroupResponse extends Message<AppsLinkedToEn
 }
 
 /**
+ * ListEnvGroupsRequest is the request object for ListEnvGroups.
+ *
+ * @generated from message porter.v1.ListEnvGroupsRequest
+ */
+export declare class ListEnvGroupsRequest extends Message<ListEnvGroupsRequest> {
+  /**
+   * project_id is the id of the project where the env group is installed
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * cluster_id is the id of the cluster where the env group is installed
+   *
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  /**
+   * include_secrets indicates whether to include secret values in the response. If false, the values will be replaced with a placeholder.
+   *
+   * @generated from field: bool include_secrets = 3;
+   */
+  includeSecrets: boolean;
+
+  constructor(data?: PartialMessage<ListEnvGroupsRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ListEnvGroupsRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListEnvGroupsRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListEnvGroupsRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListEnvGroupsRequest;
+
+  static equals(a: ListEnvGroupsRequest | PlainMessage<ListEnvGroupsRequest> | undefined, b: ListEnvGroupsRequest | PlainMessage<ListEnvGroupsRequest> | undefined): boolean;
+}
+
+/**
+ * ListEnvGroupsResponse is the response object for ListEnvGroups
+ *
+ * @generated from message porter.v1.ListEnvGroupsResponse
+ */
+export declare class ListEnvGroupsResponse extends Message<ListEnvGroupsResponse> {
+  /**
+   * env_groups is the list of env groups installed in the cluster
+   *
+   * @generated from field: repeated porter.v1.EnvGroup env_groups = 1;
+   */
+  envGroups: EnvGroup[];
+
+  constructor(data?: PartialMessage<ListEnvGroupsResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ListEnvGroupsResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListEnvGroupsResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListEnvGroupsResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListEnvGroupsResponse;
+
+  static equals(a: ListEnvGroupsResponse | PlainMessage<ListEnvGroupsResponse> | undefined, b: ListEnvGroupsResponse | PlainMessage<ListEnvGroupsResponse> | undefined): boolean;
+}
+
+/**
  * ConnectHostedProjectRequest is the request object for connecting a hosted project to a host cluster
  *
  * @generated from message porter.v1.ConnectHostedProjectRequest

@@ -1672,6 +1672,32 @@ export const AppsLinkedToEnvGroupResponse = proto3.makeMessageType(
 );
 
 /**
+ * ListEnvGroupsRequest is the request object for ListEnvGroups.
+ *
+ * @generated from message porter.v1.ListEnvGroupsRequest
+ */
+export const ListEnvGroupsRequest = proto3.makeMessageType(
+  "porter.v1.ListEnvGroupsRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "include_secrets", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
+/**
+ * ListEnvGroupsResponse is the response object for ListEnvGroups
+ *
+ * @generated from message porter.v1.ListEnvGroupsResponse
+ */
+export const ListEnvGroupsResponse = proto3.makeMessageType(
+  "porter.v1.ListEnvGroupsResponse",
+  () => [
+    { no: 1, name: "env_groups", kind: "message", T: EnvGroup, repeated: true },
+  ],
+);
+
+/**
  * ConnectHostedProjectRequest is the request object for connecting a hosted project to a host cluster
  *
  * @generated from message porter.v1.ConnectHostedProjectRequest
