@@ -1693,7 +1693,7 @@ export const ListEnvGroupsRequest = proto3.makeMessageType(
 export const ListEnvGroupsResponse = proto3.makeMessageType(
   "porter.v1.ListEnvGroupsResponse",
   () => [
-    { no: 2, name: "env_groups", kind: "message", T: EnvGroup, repeated: true },
+    { no: 1, name: "env_groups", kind: "message", T: EnvGroup, repeated: true },
   ],
 );
 

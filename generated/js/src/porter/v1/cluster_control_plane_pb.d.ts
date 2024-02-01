@@ -4968,7 +4968,7 @@ export declare class ListEnvGroupsResponse extends Message<ListEnvGroupsResponse
   /**
    * env_groups is the list of env groups installed in the cluster
    *
-   * @generated from field: repeated porter.v1.EnvGroup env_groups = 2;
+   * @generated from field: repeated porter.v1.EnvGroup env_groups = 1;
    */
   envGroups: EnvGroup[];
 

@@ -1097,7 +1097,7 @@ message ListEnvGroupsRequest {
 // ListEnvGroupsResponse is the response object for ListEnvGroups
 message ListEnvGroupsResponse {
   // env_groups is the list of env groups installed in the cluster
-  repeated EnvGroup env_groups = 2;
+  repeated EnvGroup env_groups = 1;
 }
 
 // ConnectHostedProjectRequest is the request object for connecting a hosted project to a host cluster
