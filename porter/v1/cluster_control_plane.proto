@@ -309,6 +309,10 @@ message UpdateAppRequest {
   // addon_overrides contains environment specific overrides for addons if they exist, applied depending on the deployment target
   // if any addons are provided, these will be the only addons deployed alongside the app and the others will be ignored
   repeated Addon addon_overrides = 12;
+  // exact is a flag that indicates whether the app should be updated to the exact state provided, or if it should be merged with the existing state
+  bool exact = 13;
+  // b64_description is a base64-encoded user-generated description of the update
+  string b64_description = 14;
 }
 
 message UpdateAppResponse {
@@ -418,6 +422,8 @@ message AppRevision {
   string app_instance_name = 9;
   // porter_app_id is the id of the porter app
   int64 porter_app_id = 10;
+  // b64_description is a base64-encoded user-generated description of the revision
+  string b64_description = 11;
 }
 
 // AppRevisionStatusRequest is used to query the status of an app revision
@@ -809,6 +815,8 @@ message UpdateAppImageRequest {
   string tag = 5;
   // deployment_target_identifier is the object that identifies the deployment target for the app
   DeploymentTargetIdentifier deployment_target_identifier = 6;
+  // b64_description is a base64-encoded user-generated description of the update
+  string b64_description = 7;
 }
 
 message UpdateAppImageResponse {
@@ -1191,10 +1199,16 @@ service ClusterControlPlaneService {
   rpc ContractComplianceChecks(ContractComplianceChecksRequest) returns (ContractComplianceChecksResponse) {}
 
   // ValidatePorterApp validates and hydrates a definition of a porter app, based on the porter.yaml file
-  rpc ValidatePorterApp(ValidatePorterAppRequest) returns (ValidatePorterAppResponse) {}
+  // Deprecated: Use UpdateApp instead
+  rpc ValidatePorterApp(ValidatePorterAppRequest) returns (ValidatePorterAppResponse) {
+    option deprecated = true;
+  }
 
   // ApplyPorterApp applies a porter app as defined by the provided porter.yaml file to a given deployment id
-  rpc ApplyPorterApp(ApplyPorterAppRequest) returns (ApplyPorterAppResponse) {}
+  // Deprecated: Use UpdateApp instead
+  rpc ApplyPorterApp(ApplyPorterAppRequest) returns (ApplyPorterAppResponse) {
+    option deprecated = true;
+  }
 
   // UpdateApp hydrates a definition of a porter app, and takes necessary actions to update the app on the cluster
   rpc UpdateApp(UpdateAppRequest) returns (UpdateAppResponse) {}

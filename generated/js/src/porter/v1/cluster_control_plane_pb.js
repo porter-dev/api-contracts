@@ -562,6 +562,8 @@ export const UpdateAppRequest = proto3.makeMessageType(
     { no: 10, name: "commit_sha", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 11, name: "addons", kind: "message", T: Addon, repeated: true },
     { no: 12, name: "addon_overrides", kind: "message", T: Addon, repeated: true },
+    { no: 13, name: "exact", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 14, name: "b64_description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -724,6 +726,7 @@ export const AppRevision = proto3.makeMessageType(
     { no: 8, name: "app_instance_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 9, name: "app_instance_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 10, name: "porter_app_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 11, name: "b64_description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -1224,6 +1227,7 @@ export const UpdateAppImageRequest = proto3.makeMessageType(
     { no: 4, name: "repository_url", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "tag", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 6, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+    { no: 7, name: "b64_description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

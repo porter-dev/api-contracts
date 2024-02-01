@@ -289,8 +289,14 @@ type ClusterControlPlaneServiceClient interface {
 	// ContractComplianceChecks returns the current status of the compliance checks for a given cluster and project
 	ContractComplianceChecks(context.Context, *connect.Request[v1.ContractComplianceChecksRequest]) (*connect.Response[v1.ContractComplianceChecksResponse], error)
 	// ValidatePorterApp validates and hydrates a definition of a porter app, based on the porter.yaml file
+	// Deprecated: Use UpdateApp instead
+	//
+	// Deprecated: do not use.
 	ValidatePorterApp(context.Context, *connect.Request[v1.ValidatePorterAppRequest]) (*connect.Response[v1.ValidatePorterAppResponse], error)
 	// ApplyPorterApp applies a porter app as defined by the provided porter.yaml file to a given deployment id
+	// Deprecated: Use UpdateApp instead
+	//
+	// Deprecated: do not use.
 	ApplyPorterApp(context.Context, *connect.Request[v1.ApplyPorterAppRequest]) (*connect.Response[v1.ApplyPorterAppResponse], error)
 	// UpdateApp hydrates a definition of a porter app, and takes necessary actions to update the app on the cluster
 	UpdateApp(context.Context, *connect.Request[v1.UpdateAppRequest]) (*connect.Response[v1.UpdateAppResponse], error)
@@ -962,11 +968,15 @@ func (c *clusterControlPlaneServiceClient) ContractComplianceChecks(ctx context.
 }
 
 // ValidatePorterApp calls porter.v1.ClusterControlPlaneService.ValidatePorterApp.
+//
+// Deprecated: do not use.
 func (c *clusterControlPlaneServiceClient) ValidatePorterApp(ctx context.Context, req *connect.Request[v1.ValidatePorterAppRequest]) (*connect.Response[v1.ValidatePorterAppResponse], error) {
 	return c.validatePorterApp.CallUnary(ctx, req)
 }
 
 // ApplyPorterApp calls porter.v1.ClusterControlPlaneService.ApplyPorterApp.
+//
+// Deprecated: do not use.
 func (c *clusterControlPlaneServiceClient) ApplyPorterApp(ctx context.Context, req *connect.Request[v1.ApplyPorterAppRequest]) (*connect.Response[v1.ApplyPorterAppResponse], error) {
 	return c.applyPorterApp.CallUnary(ctx, req)
 }
@@ -1317,8 +1327,14 @@ type ClusterControlPlaneServiceHandler interface {
 	// ContractComplianceChecks returns the current status of the compliance checks for a given cluster and project
 	ContractComplianceChecks(context.Context, *connect.Request[v1.ContractComplianceChecksRequest]) (*connect.Response[v1.ContractComplianceChecksResponse], error)
 	// ValidatePorterApp validates and hydrates a definition of a porter app, based on the porter.yaml file
+	// Deprecated: Use UpdateApp instead
+	//
+	// Deprecated: do not use.
 	ValidatePorterApp(context.Context, *connect.Request[v1.ValidatePorterAppRequest]) (*connect.Response[v1.ValidatePorterAppResponse], error)
 	// ApplyPorterApp applies a porter app as defined by the provided porter.yaml file to a given deployment id
+	// Deprecated: Use UpdateApp instead
+	//
+	// Deprecated: do not use.
 	ApplyPorterApp(context.Context, *connect.Request[v1.ApplyPorterAppRequest]) (*connect.Response[v1.ApplyPorterAppResponse], error)
 	// UpdateApp hydrates a definition of a porter app, and takes necessary actions to update the app on the cluster
 	UpdateApp(context.Context, *connect.Request[v1.UpdateAppRequest]) (*connect.Response[v1.UpdateAppResponse], error)
