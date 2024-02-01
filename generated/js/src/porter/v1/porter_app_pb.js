@@ -3,8 +3,9 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { proto3 } from "@bufbuild/protobuf";
+import { proto3, Timestamp } from "@bufbuild/protobuf";
 import { Service } from "./service_pb.js";
+import { EnumEnvGroupProviderType } from "./env_group_pb.js";
 
 /**
  * EnvVariableSource is the source type from which to pull the environment variable
@@ -139,6 +140,8 @@ export const EnvGroup = proto3.makeMessageType(
     { no: 3, name: "linked_applications", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 4, name: "variables", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "scalar", T: 9 /* ScalarType.STRING */} },
     { no: 5, name: "secret_variables", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "scalar", T: 9 /* ScalarType.STRING */} },
+    { no: 6, name: "type", kind: "enum", T: proto3.getEnumType(EnumEnvGroupProviderType) },
+    { no: 7, name: "created_at", kind: "message", T: Timestamp },
   ],
 );
 

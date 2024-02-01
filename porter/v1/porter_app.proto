@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package porter.v1;
 
+import "google/protobuf/timestamp.proto";
+import "porter/v1/env_group.proto";
 import "porter/v1/service.proto";
 
 // DeploymentTargetIdentifier is the object that identifies a deployment target. One of id or name must be provided, with id taking precedence.
@@ -82,6 +84,10 @@ message EnvGroup {
   map<string, string> variables = 4;
   // secret is an optional map of sensitive variable names to values
   map<string, string> secret_variables = 5;
+  // type is the type of the environment variable group
+  EnumEnvGroupProviderType type = 6;
+  // created_at is the time the env group was created
+  google.protobuf.Timestamp created_at = 7;
 }
 
 // EnvGroupVariables represents the variables for an env group.

@@ -3,9 +3,10 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
+import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage, Timestamp } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 import type { Service } from "./service_pb.js";
+import type { EnumEnvGroupProviderType } from "./env_group_pb.js";
 
 /**
  * EnvVariableSource is the source type from which to pull the environment variable
@@ -383,6 +384,20 @@ export declare class EnvGroup extends Message<EnvGroup> {
    * @generated from field: map<string, string> secret_variables = 5;
    */
   secretVariables: { [key: string]: string };
+
+  /**
+   * type is the type of the environment variable group
+   *
+   * @generated from field: porter.v1.EnumEnvGroupProviderType type = 6;
+   */
+  type: EnumEnvGroupProviderType;
+
+  /**
+   * created_at is the time the env group was created
+   *
+   * @generated from field: google.protobuf.Timestamp created_at = 7;
+   */
+  createdAt?: Timestamp;
 
   constructor(data?: PartialMessage<EnvGroup>);
 
