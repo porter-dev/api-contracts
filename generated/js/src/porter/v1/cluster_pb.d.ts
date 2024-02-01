@@ -126,8 +126,10 @@ export declare class Cluster extends Message<Cluster> {
 
   /**
    * is_soc2_compliant force enables all the various soc2-related fields on a cluster
+   * deprecated: set soc2 to be enabled under compliance profiles for the contract
    *
-   * @generated from field: bool is_soc2_compliant = 9;
+   * @generated from field: bool is_soc2_compliant = 9 [deprecated = true];
+   * @deprecated
    */
   isSoc2Compliant: boolean;
 

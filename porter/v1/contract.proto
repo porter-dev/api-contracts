@@ -20,9 +20,16 @@ message ContractRevision {
   // This field is a UUID represented as a string, for better compatibility.
   // Best practice is to parse this as a uuid upon receipt
   string revision_id = 3;
+  ComplianceProfile compliance_profiles = 4;
 }
 
 // User represents a user of Porter, who actioned the change to the contract
 message User {
   int32 id = 1;
+}
+
+// ComplianceProfiles are the different compliance profiles that can be enforced on a contract
+message ComplianceProfile {
+  bool soc2 = 1;
+  bool hipaa = 2;
 }

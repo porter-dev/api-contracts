@@ -65,6 +65,11 @@ export declare class ContractRevision extends Message<ContractRevision> {
    */
   revisionId: string;
 
+  /**
+   * @generated from field: porter.v1.ComplianceProfile compliance_profiles = 4;
+   */
+  complianceProfiles?: ComplianceProfile;
+
   constructor(data?: PartialMessage<ContractRevision>);
 
   static readonly runtime: typeof proto3;
@@ -104,5 +109,36 @@ export declare class User extends Message<User> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): User;
 
   static equals(a: User | PlainMessage<User> | undefined, b: User | PlainMessage<User> | undefined): boolean;
+}
+
+/**
+ * ComplianceProfiles are the different compliance profiles that can be enforced on a contract
+ *
+ * @generated from message porter.v1.ComplianceProfile
+ */
+export declare class ComplianceProfile extends Message<ComplianceProfile> {
+  /**
+   * @generated from field: bool soc2 = 1;
+   */
+  soc2: boolean;
+
+  /**
+   * @generated from field: bool hipaa = 2;
+   */
+  hipaa: boolean;
+
+  constructor(data?: PartialMessage<ComplianceProfile>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ComplianceProfile";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ComplianceProfile;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ComplianceProfile;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ComplianceProfile;
+
+  static equals(a: ComplianceProfile | PlainMessage<ComplianceProfile> | undefined, b: ComplianceProfile | PlainMessage<ComplianceProfile> | undefined): boolean;
 }
 
