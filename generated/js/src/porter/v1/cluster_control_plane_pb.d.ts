@@ -1629,6 +1629,20 @@ export declare class UpdateAppRequest extends Message<UpdateAppRequest> {
    */
   addonOverrides: Addon[];
 
+  /**
+   * exact is a flag that indicates whether the app should be updated to the exact state provided, or if it should be merged with the existing state
+   *
+   * @generated from field: bool exact = 13;
+   */
+  exact: boolean;
+
+  /**
+   * b64_description is a base64-encoded user-generated description of the update
+   *
+   * @generated from field: string b64_description = 14;
+   */
+  b64Description: string;
+
   constructor(data?: PartialMessage<UpdateAppRequest>);
 
   static readonly runtime: typeof proto3;
@@ -2133,6 +2147,13 @@ export declare class AppRevision extends Message<AppRevision> {
    * @generated from field: int64 porter_app_id = 10;
    */
   porterAppId: bigint;
+
+  /**
+   * b64_description is a base64-encoded user-generated description of the revision
+   *
+   * @generated from field: string b64_description = 11;
+   */
+  b64Description: string;
 
   constructor(data?: PartialMessage<AppRevision>);
 
@@ -3657,6 +3678,13 @@ export declare class UpdateAppImageRequest extends Message<UpdateAppImageRequest
    * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 6;
    */
   deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  /**
+   * b64_description is a base64-encoded user-generated description of the update
+   *
+   * @generated from field: string b64_description = 7;
+   */
+  b64Description: string;
 
   constructor(data?: PartialMessage<UpdateAppImageRequest>);
 
