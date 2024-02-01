@@ -1090,6 +1090,8 @@ message ListEnvGroupsRequest {
   int64 project_id = 1;
   // cluster_id is the id of the cluster where the env group is installed
   int64 cluster_id = 2;
+  // include_secrets indicates whether to include secret values in the response. If false, the values will be replaced with a placeholder.
+  bool include_secrets = 3;
 }
 
 // ListEnvGroupsResponse is the response object for ListEnvGroups

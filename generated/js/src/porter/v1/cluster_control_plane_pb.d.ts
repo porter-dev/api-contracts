@@ -4937,6 +4937,13 @@ export declare class ListEnvGroupsRequest extends Message<ListEnvGroupsRequest> 
    */
   clusterId: bigint;
 
+  /**
+   * include_secrets indicates whether to include secret values in the response. If false, the values will be replaced with a placeholder.
+   *
+   * @generated from field: bool include_secrets = 3;
+   */
+  includeSecrets: boolean;
+
   constructor(data?: PartialMessage<ListEnvGroupsRequest>);
 
   static readonly runtime: typeof proto3;

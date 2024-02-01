@@ -1681,6 +1681,7 @@ export const ListEnvGroupsRequest = proto3.makeMessageType(
   () => [
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "include_secrets", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
