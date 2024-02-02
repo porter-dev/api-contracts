@@ -16,6 +16,7 @@ export const Contract = proto3.makeMessageType(
   () => [
     { no: 1, name: "cluster", kind: "message", T: Cluster },
     { no: 2, name: "user", kind: "message", T: User },
+    { no: 4, name: "compliance_profiles", kind: "message", T: ComplianceProfile },
   ],
 );
 
@@ -32,7 +33,6 @@ export const ContractRevision = proto3.makeMessageType(
     { no: 1, name: "cluster_id", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
     { no: 2, name: "project_id", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
     { no: 3, name: "revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "compliance_profiles", kind: "message", T: ComplianceProfile },
   ],
 );
 

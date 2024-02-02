@@ -23,6 +23,11 @@ export declare class Contract extends Message<Contract> {
    */
   user?: User;
 
+  /**
+   * @generated from field: porter.v1.ComplianceProfile compliance_profiles = 4;
+   */
+  complianceProfiles?: ComplianceProfile;
+
   constructor(data?: PartialMessage<Contract>);
 
   static readonly runtime: typeof proto3;
@@ -64,11 +69,6 @@ export declare class ContractRevision extends Message<ContractRevision> {
    * @generated from field: string revision_id = 3;
    */
   revisionId: string;
-
-  /**
-   * @generated from field: porter.v1.ComplianceProfile compliance_profiles = 4;
-   */
-  complianceProfiles?: ComplianceProfile;
 
   constructor(data?: PartialMessage<ContractRevision>);
 
