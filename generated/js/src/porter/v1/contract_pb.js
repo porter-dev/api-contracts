@@ -16,6 +16,7 @@ export const Contract = proto3.makeMessageType(
   () => [
     { no: 1, name: "cluster", kind: "message", T: Cluster },
     { no: 2, name: "user", kind: "message", T: User },
+    { no: 4, name: "compliance_profiles", kind: "message", T: ComplianceProfile },
   ],
 );
 
@@ -44,6 +45,19 @@ export const User = proto3.makeMessageType(
   "porter.v1.User",
   () => [
     { no: 1, name: "id", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+  ],
+);
+
+/**
+ * ComplianceProfiles are the different compliance profiles that can be enforced on a contract
+ *
+ * @generated from message porter.v1.ComplianceProfile
+ */
+export const ComplianceProfile = proto3.makeMessageType(
+  "porter.v1.ComplianceProfile",
+  () => [
+    { no: 1, name: "soc2", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 2, name: "hipaa", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
