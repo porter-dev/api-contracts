@@ -24,6 +24,8 @@ export declare class Contract extends Message<Contract> {
   user?: User;
 
   /**
+   * compliance_profiles is a list of compliance profiles that should be enforced on the contract
+   *
    * @generated from field: porter.v1.ComplianceProfile compliance_profiles = 4;
    */
   complianceProfiles?: ComplianceProfile;
@@ -118,11 +120,15 @@ export declare class User extends Message<User> {
  */
 export declare class ComplianceProfile extends Message<ComplianceProfile> {
   /**
+   * soc2 indicates that the contract should be compliant with SOC2
+   *
    * @generated from field: bool soc2 = 1;
    */
   soc2: boolean;
 
   /**
+   * hipaa indicates that the contract should be compliant with HIPAA
+   *
    * @generated from field: bool hipaa = 2;
    */
   hipaa: boolean;

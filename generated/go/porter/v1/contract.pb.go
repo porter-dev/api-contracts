@@ -26,8 +26,9 @@ type Contract struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Cluster            *Cluster           `protobuf:"bytes,1,opt,name=cluster,proto3" json:"cluster,omitempty"`
-	User               *User              `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
+	Cluster *Cluster `protobuf:"bytes,1,opt,name=cluster,proto3" json:"cluster,omitempty"`
+	User    *User    `protobuf:"bytes,2,opt,name=user,proto3" json:"user,omitempty"`
+	// compliance_profiles is a list of compliance profiles that should be enforced on the contract
 	ComplianceProfiles *ComplianceProfile `protobuf:"bytes,4,opt,name=compliance_profiles,json=complianceProfiles,proto3" json:"compliance_profiles,omitempty"`
 }
 
@@ -207,7 +208,9 @@ type ComplianceProfile struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Soc2  bool `protobuf:"varint,1,opt,name=soc2,proto3" json:"soc2,omitempty"`
+	// soc2 indicates that the contract should be compliant with SOC2
+	Soc2 bool `protobuf:"varint,1,opt,name=soc2,proto3" json:"soc2,omitempty"`
+	// hipaa indicates that the contract should be compliant with HIPAA
 	Hipaa bool `protobuf:"varint,2,opt,name=hipaa,proto3" json:"hipaa,omitempty"`
 }
 

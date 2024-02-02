@@ -8,6 +8,7 @@ import "porter/v1/cluster.proto";
 message Contract {
   Cluster cluster = 1;
   User user = 2;
+  // compliance_profiles is a list of compliance profiles that should be enforced on the contract
   ComplianceProfile compliance_profiles = 4;
 }
 
@@ -30,6 +31,8 @@ message User {
 
 // ComplianceProfiles are the different compliance profiles that can be enforced on a contract
 message ComplianceProfile {
+  // soc2 indicates that the contract should be compliant with SOC2
   bool soc2 = 1;
+  // hipaa indicates that the contract should be compliant with HIPAA
   bool hipaa = 2;
 }
