@@ -98,6 +98,7 @@ export const PorterApp = proto3.makeMessageType(
     { no: 9, name: "service_list", kind: "message", T: Service, repeated: true },
     { no: 10, name: "efs_storage", kind: "message", T: EFS },
     { no: 11, name: "required_apps", kind: "message", T: RequiredApp, repeated: true },
+    { no: 12, name: "is_auto_rollback_enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 

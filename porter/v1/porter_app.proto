@@ -54,6 +54,8 @@ message PorterApp {
   EFS efs_storage = 10;
   // required_apps are other porter apps that this app expects to be deployed alongside it
   repeated RequiredApp required_apps = 11;
+  // is_auto_rollback_enabled describes whether the app will be rolled back automatically on deployment failure
+  bool is_auto_rollback_enabled = 12;
 }
 
 // RequiredApp specifies another porter app that this app expects to be deployed alongside it

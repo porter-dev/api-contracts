@@ -264,6 +264,13 @@ export declare class PorterApp extends Message<PorterApp> {
    */
   requiredApps: RequiredApp[];
 
+  /**
+   * is_auto_rollback_enabled describes whether the app will be rolled back automatically on deployment failure
+   *
+   * @generated from field: bool is_auto_rollback_enabled = 12;
+   */
+  isAutoRollbackEnabled: boolean;
+
   constructor(data?: PartialMessage<PorterApp>);
 
   static readonly runtime: typeof proto3;
