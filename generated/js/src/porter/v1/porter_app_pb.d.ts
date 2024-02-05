@@ -264,6 +264,13 @@ export declare class PorterApp extends Message<PorterApp> {
    */
   requiredApps: RequiredApp[];
 
+  /**
+   * AutoRollback describes whether the app will be rolled back automatically on deployment failure
+   *
+   * @generated from field: porter.v1.AutoRollback auto_rollback = 12;
+   */
+  autoRollback?: AutoRollback;
+
   constructor(data?: PartialMessage<PorterApp>);
 
   static readonly runtime: typeof proto3;
@@ -706,6 +713,34 @@ export declare class EFS extends Message<EFS> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EFS;
 
   static equals(a: EFS | PlainMessage<EFS> | undefined, b: EFS | PlainMessage<EFS> | undefined): boolean;
+}
+
+/**
+ * AutoRollback describes whether the app will be rolled back automatically on deployment failure
+ *
+ * @generated from message porter.v1.AutoRollback
+ */
+export declare class AutoRollback extends Message<AutoRollback> {
+  /**
+   * enabled describes if the feature is enabled
+   *
+   * @generated from field: bool enabled = 1;
+   */
+  enabled: boolean;
+
+  constructor(data?: PartialMessage<AutoRollback>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AutoRollback";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AutoRollback;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AutoRollback;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AutoRollback;
+
+  static equals(a: AutoRollback | PlainMessage<AutoRollback> | undefined, b: AutoRollback | PlainMessage<AutoRollback> | undefined): boolean;
 }
 
 /**
