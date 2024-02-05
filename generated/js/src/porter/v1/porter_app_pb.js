@@ -98,7 +98,7 @@ export const PorterApp = proto3.makeMessageType(
     { no: 9, name: "service_list", kind: "message", T: Service, repeated: true },
     { no: 10, name: "efs_storage", kind: "message", T: EFS },
     { no: 11, name: "required_apps", kind: "message", T: RequiredApp, repeated: true },
-    { no: 12, name: "is_auto_rollback_enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 12, name: "auto_rollback", kind: "message", T: AutoRollback },
   ],
 );
 
@@ -239,6 +239,18 @@ export const EFS = proto3.makeMessageType(
   () => [
     { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 2, name: "file_system_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * AutoRollback describes whether the app will be rolled back automatically on deployment failure
+ *
+ * @generated from message porter.v1.AutoRollback
+ */
+export const AutoRollback = proto3.makeMessageType(
+  "porter.v1.AutoRollback",
+  () => [
+    { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
