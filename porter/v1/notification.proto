@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package porter.v1;
+
+// NotificationConfig describes the configuration available for notifications.
+// Empty lists are ignored.
+// Multiple lists are treated as an AND condition.
+// Multiple items in one list are treated as an OR condition.
+// For example, if statuses and cluster_ids are both provided, the notification
+// will only be sent if the event matches one of the statuses AND one of the cluster_ids.
+message NotificationConfig {
+  // app_instance_ids is a list of app instance ids
+  repeated string app_instance_ids = 1;
+  // cluster_ids is a list of cluster ids
+  repeated int64 cluster_ids = 2;
+  // deployment_target_ids is a list of deployment target ids
+  repeated string deployment_target_ids = 3;
+  // statuses is a list of statuses
+  repeated EnumNotificationStatus statuses = 4;
+  // event_types is a list of event types
+  repeated EnumNotificationEventType event_types = 5;
+  // slack_config is the slack-specific configuration for notifications
+  SlackConfig slack_config = 6;
+}
+
+// SlackConfig describes the slack-specific configuration for notifications
+message SlackConfig {
+  // mentions is a list of slack handles to mention on failure
+  repeated string mentions = 1;
+}
+
+// EnumNotificationStatus describes the status of a notification
+enum EnumNotificationStatus {
+  ENUM_NOTIFICATION_STATUS_UNSPECIFIED = 0;
+  ENUM_NOTIFICATION_STATUS_PROGRESSING = 1;
+  ENUM_NOTIFICATION_STATUS_SUCCESSFUL = 2;
+  ENUM_NOTIFICATION_STATUS_FAILED = 3;
+}
+
+// EnumNotificationEventType describes the type of notification event
+enum EnumNotificationEventType {
+  ENUM_NOTIFICATION_EVENT_TYPE_UNSPECIFIED = 0;
+  ENUM_NOTIFICATION_EVENT_TYPE_BUILD = 1;
+  ENUM_NOTIFICATION_EVENT_TYPE_PREDEPLOY = 2;
+  ENUM_NOTIFICATION_EVENT_TYPE_DEPLOY = 3;
+}
