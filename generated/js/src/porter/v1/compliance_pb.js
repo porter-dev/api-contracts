@@ -68,6 +68,7 @@ export const VendorComplianceCheck = proto3.makeMessageType(
     { no: 2, name: "check_group", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "status", kind: "enum", T: proto3.getEnumType(EnumComplianceCheckStatus) },
     { no: 4, name: "reason", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "vendor_check_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

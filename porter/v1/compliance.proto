@@ -47,4 +47,6 @@ message VendorComplianceCheck {
   EnumComplianceCheckStatus status = 3;
   // reason is an optional message indicating why the compliance check is in the current state.
   string reason = 4;
+  // vendor_check_id is the unique identifier for the compliance check in the vendor's system.
+  string vendor_check_id = 5;
 }
