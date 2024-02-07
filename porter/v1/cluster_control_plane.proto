@@ -14,6 +14,7 @@ import "porter/v1/eks.proto";
 import "porter/v1/env_group.proto";
 import "porter/v1/errors.proto";
 import "porter/v1/gke.proto";
+import "porter/v1/notification.proto";
 import "porter/v1/porter_app.proto";
 
 message QuotaIncreaseRequest {
@@ -1108,6 +1109,24 @@ message ListEnvGroupsResponse {
   repeated EnvGroup env_groups = 1;
 }
 
+// UpdateNotificationConfigRequest is the request object for UpdateNotificationConfig.
+message UpdateNotificationConfigRequest {
+  // project_id is the id of the project where the notification config is created
+  int64 project_id = 1;
+  // notification_config_id is the id of the cluster where the env group is installed
+  int64 notification_config_id = 2;
+  // config is the config to update
+  NotificationConfig config = 3;
+  // slack_integration_id is the id of the slack integration to update with the notification_config_id, if any
+  int64 slack_integration_id = 4;
+}
+
+// UpdateNotificationConfigResponse is the response object for UpdateNotificationConfig
+message UpdateNotificationConfigResponse {
+  // env_groups is the list of env groups installed in the cluster
+  int64 notification_config_id = 1;
+}
+
 // ConnectHostedProjectRequest is the request object for connecting a hosted project to a host cluster
 message ConnectHostedProjectRequest {
   // project_id is the project id of the new hosted project which should be connected to the host cluster
@@ -1412,6 +1431,9 @@ service ClusterControlPlaneService {
 
   // ListEnvGroups returns the list of env groups configured on a cluster
   rpc ListEnvGroups(ListEnvGroupsRequest) returns (ListEnvGroupsResponse) {}
+
+  // UpdateNotificationConfig updates the notification config for a given id, or creates a new one if no id is provided
+  rpc UpdateNotificationConfig(UpdateNotificationConfigRequest) returns (UpdateNotificationConfigResponse) {}
 }
 
 message EKSBearerTokenRequest {

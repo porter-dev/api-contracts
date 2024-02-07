@@ -250,6 +250,9 @@ const (
 	// ClusterControlPlaneServiceListEnvGroupsProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's ListEnvGroups RPC.
 	ClusterControlPlaneServiceListEnvGroupsProcedure = "/porter.v1.ClusterControlPlaneService/ListEnvGroups"
+	// ClusterControlPlaneServiceUpdateNotificationConfigProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's UpdateNotificationConfig RPC.
+	ClusterControlPlaneServiceUpdateNotificationConfigProcedure = "/porter.v1.ClusterControlPlaneService/UpdateNotificationConfig"
 )
 
 // ClusterControlPlaneServiceClient is a client for the porter.v1.ClusterControlPlaneService
@@ -444,6 +447,8 @@ type ClusterControlPlaneServiceClient interface {
 	AppsLinkedToEnvGroup(context.Context, *connect.Request[v1.AppsLinkedToEnvGroupRequest]) (*connect.Response[v1.AppsLinkedToEnvGroupResponse], error)
 	// ListEnvGroups returns the list of env groups configured on a cluster
 	ListEnvGroups(context.Context, *connect.Request[v1.ListEnvGroupsRequest]) (*connect.Response[v1.ListEnvGroupsResponse], error)
+	// UpdateNotificationConfig updates the notification config for a given id, or creates a new one if no id is provided
+	UpdateNotificationConfig(context.Context, *connect.Request[v1.UpdateNotificationConfigRequest]) (*connect.Response[v1.UpdateNotificationConfigResponse], error)
 }
 
 // NewClusterControlPlaneServiceClient constructs a client for the
@@ -816,6 +821,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceListEnvGroupsProcedure,
 			opts...,
 		),
+		updateNotificationConfig: connect.NewClient[v1.UpdateNotificationConfigRequest, v1.UpdateNotificationConfigResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceUpdateNotificationConfigProcedure,
+			opts...,
+		),
 	}
 }
 
@@ -893,6 +903,7 @@ type clusterControlPlaneServiceClient struct {
 	deleteEnvGroup                      *connect.Client[v1.DeleteEnvGroupRequest, v1.DeleteEnvGroupResponse]
 	appsLinkedToEnvGroup                *connect.Client[v1.AppsLinkedToEnvGroupRequest, v1.AppsLinkedToEnvGroupResponse]
 	listEnvGroups                       *connect.Client[v1.ListEnvGroupsRequest, v1.ListEnvGroupsResponse]
+	updateNotificationConfig            *connect.Client[v1.UpdateNotificationConfigRequest, v1.UpdateNotificationConfigResponse]
 }
 
 // QuotaIncrease calls porter.v1.ClusterControlPlaneService.QuotaIncrease.
@@ -1290,6 +1301,11 @@ func (c *clusterControlPlaneServiceClient) ListEnvGroups(ctx context.Context, re
 	return c.listEnvGroups.CallUnary(ctx, req)
 }
 
+// UpdateNotificationConfig calls porter.v1.ClusterControlPlaneService.UpdateNotificationConfig.
+func (c *clusterControlPlaneServiceClient) UpdateNotificationConfig(ctx context.Context, req *connect.Request[v1.UpdateNotificationConfigRequest]) (*connect.Response[v1.UpdateNotificationConfigResponse], error) {
+	return c.updateNotificationConfig.CallUnary(ctx, req)
+}
+
 // ClusterControlPlaneServiceHandler is an implementation of the
 // porter.v1.ClusterControlPlaneService service.
 type ClusterControlPlaneServiceHandler interface {
@@ -1482,6 +1498,8 @@ type ClusterControlPlaneServiceHandler interface {
 	AppsLinkedToEnvGroup(context.Context, *connect.Request[v1.AppsLinkedToEnvGroupRequest]) (*connect.Response[v1.AppsLinkedToEnvGroupResponse], error)
 	// ListEnvGroups returns the list of env groups configured on a cluster
 	ListEnvGroups(context.Context, *connect.Request[v1.ListEnvGroupsRequest]) (*connect.Response[v1.ListEnvGroupsResponse], error)
+	// UpdateNotificationConfig updates the notification config for a given id, or creates a new one if no id is provided
+	UpdateNotificationConfig(context.Context, *connect.Request[v1.UpdateNotificationConfigRequest]) (*connect.Response[v1.UpdateNotificationConfigResponse], error)
 }
 
 // NewClusterControlPlaneServiceHandler builds an HTTP handler from the service implementation. It
@@ -1850,6 +1868,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.ListEnvGroups,
 		opts...,
 	)
+	clusterControlPlaneServiceUpdateNotificationConfigHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceUpdateNotificationConfigProcedure,
+		svc.UpdateNotificationConfig,
+		opts...,
+	)
 	return "/porter.v1.ClusterControlPlaneService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ClusterControlPlaneServiceQuotaIncreaseProcedure:
@@ -1996,6 +2019,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceAppsLinkedToEnvGroupHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceListEnvGroupsProcedure:
 			clusterControlPlaneServiceListEnvGroupsHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceUpdateNotificationConfigProcedure:
+			clusterControlPlaneServiceUpdateNotificationConfigHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -2291,4 +2316,8 @@ func (UnimplementedClusterControlPlaneServiceHandler) AppsLinkedToEnvGroup(conte
 
 func (UnimplementedClusterControlPlaneServiceHandler) ListEnvGroups(context.Context, *connect.Request[v1.ListEnvGroupsRequest]) (*connect.Response[v1.ListEnvGroupsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ListEnvGroups is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) UpdateNotificationConfig(context.Context, *connect.Request[v1.UpdateNotificationConfigRequest]) (*connect.Response[v1.UpdateNotificationConfigResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.UpdateNotificationConfig is not implemented"))
 }

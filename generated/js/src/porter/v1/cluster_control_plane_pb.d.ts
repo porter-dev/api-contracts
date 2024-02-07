@@ -14,6 +14,7 @@ import type { ContractComplianceCheckGroup, EnumComplianceProfile, EnumComplianc
 import type { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import type { Addon } from "./addons_pb.js";
 import type { EnumEnvGroupProviderType } from "./env_group_pb.js";
+import type { NotificationConfig } from "./notification_pb.js";
 import type { DatastoreCredential } from "./datastore_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
@@ -5013,6 +5014,83 @@ export declare class ListEnvGroupsResponse extends Message<ListEnvGroupsResponse
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListEnvGroupsResponse;
 
   static equals(a: ListEnvGroupsResponse | PlainMessage<ListEnvGroupsResponse> | undefined, b: ListEnvGroupsResponse | PlainMessage<ListEnvGroupsResponse> | undefined): boolean;
+}
+
+/**
+ * UpdateNotificationConfigRequest is the request object for UpdateNotificationConfig.
+ *
+ * @generated from message porter.v1.UpdateNotificationConfigRequest
+ */
+export declare class UpdateNotificationConfigRequest extends Message<UpdateNotificationConfigRequest> {
+  /**
+   * project_id is the id of the project where the notification config is created
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * notification_config_id is the id of the cluster where the env group is installed
+   *
+   * @generated from field: int64 notification_config_id = 2;
+   */
+  notificationConfigId: bigint;
+
+  /**
+   * config is the config to update
+   *
+   * @generated from field: porter.v1.NotificationConfig config = 3;
+   */
+  config?: NotificationConfig;
+
+  /**
+   * slack_integration_id is the id of the slack integration to update with the notification_config_id, if any
+   *
+   * @generated from field: int64 slack_integration_id = 4;
+   */
+  slackIntegrationId: bigint;
+
+  constructor(data?: PartialMessage<UpdateNotificationConfigRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateNotificationConfigRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateNotificationConfigRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateNotificationConfigRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateNotificationConfigRequest;
+
+  static equals(a: UpdateNotificationConfigRequest | PlainMessage<UpdateNotificationConfigRequest> | undefined, b: UpdateNotificationConfigRequest | PlainMessage<UpdateNotificationConfigRequest> | undefined): boolean;
+}
+
+/**
+ * UpdateNotificationConfigResponse is the response object for UpdateNotificationConfig
+ *
+ * @generated from message porter.v1.UpdateNotificationConfigResponse
+ */
+export declare class UpdateNotificationConfigResponse extends Message<UpdateNotificationConfigResponse> {
+  /**
+   * env_groups is the list of env groups installed in the cluster
+   *
+   * @generated from field: int64 notification_config_id = 1;
+   */
+  notificationConfigId: bigint;
+
+  constructor(data?: PartialMessage<UpdateNotificationConfigResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateNotificationConfigResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateNotificationConfigResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateNotificationConfigResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateNotificationConfigResponse;
+
+  static equals(a: UpdateNotificationConfigResponse | PlainMessage<UpdateNotificationConfigResponse> | undefined, b: UpdateNotificationConfigResponse | PlainMessage<UpdateNotificationConfigResponse> | undefined): boolean;
 }
 
 /**

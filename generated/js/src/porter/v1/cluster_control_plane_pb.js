@@ -13,6 +13,7 @@ import { ContractComplianceCheckGroup, EnumComplianceProfile, EnumComplianceVend
 import { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import { Addon } from "./addons_pb.js";
 import { EnumEnvGroupProviderType } from "./env_group_pb.js";
+import { NotificationConfig } from "./notification_pb.js";
 import { DatastoreCredential } from "./datastore_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
@@ -1698,6 +1699,33 @@ export const ListEnvGroupsResponse = proto3.makeMessageType(
   "porter.v1.ListEnvGroupsResponse",
   () => [
     { no: 1, name: "env_groups", kind: "message", T: EnvGroup, repeated: true },
+  ],
+);
+
+/**
+ * UpdateNotificationConfigRequest is the request object for UpdateNotificationConfig.
+ *
+ * @generated from message porter.v1.UpdateNotificationConfigRequest
+ */
+export const UpdateNotificationConfigRequest = proto3.makeMessageType(
+  "porter.v1.UpdateNotificationConfigRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "notification_config_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "config", kind: "message", T: NotificationConfig },
+    { no: 4, name: "slack_integration_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * UpdateNotificationConfigResponse is the response object for UpdateNotificationConfig
+ *
+ * @generated from message porter.v1.UpdateNotificationConfigResponse
+ */
+export const UpdateNotificationConfigResponse = proto3.makeMessageType(
+  "porter.v1.UpdateNotificationConfigResponse",
+  () => [
+    { no: 1, name: "notification_config_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ],
 );
 
