@@ -155,6 +155,13 @@ export declare class VendorComplianceCheck extends Message<VendorComplianceCheck
    */
   reason: string;
 
+  /**
+   * vendor_check_id is the unique identifier for the compliance check in the vendor's system.
+   *
+   * @generated from field: string vendor_check_id = 5;
+   */
+  vendorCheckId: string;
+
   constructor(data?: PartialMessage<VendorComplianceCheck>);
 
   static readonly runtime: typeof proto3;
