@@ -5030,7 +5030,7 @@ export declare class UpdateNotificationConfigRequest extends Message<UpdateNotif
   projectId: bigint;
 
   /**
-   * notification_config_id is the id of the cluster where the env group is installed
+   * notification_config_id is the id of config. If 0, a new config will be created
    *
    * @generated from field: int64 notification_config_id = 2;
    */
@@ -5091,6 +5091,69 @@ export declare class UpdateNotificationConfigResponse extends Message<UpdateNoti
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateNotificationConfigResponse;
 
   static equals(a: UpdateNotificationConfigResponse | PlainMessage<UpdateNotificationConfigResponse> | undefined, b: UpdateNotificationConfigResponse | PlainMessage<UpdateNotificationConfigResponse> | undefined): boolean;
+}
+
+/**
+ * NotificationConfigRequest is the request object for NotificationConfig.
+ *
+ * @generated from message porter.v1.NotificationConfigRequest
+ */
+export declare class NotificationConfigRequest extends Message<NotificationConfigRequest> {
+  /**
+   * project_id is the id of the project where the notification config is created
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * notification_config_id is the id of the notfication config
+   *
+   * @generated from field: int64 notification_config_id = 2;
+   */
+  notificationConfigId: bigint;
+
+  constructor(data?: PartialMessage<NotificationConfigRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.NotificationConfigRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): NotificationConfigRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): NotificationConfigRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): NotificationConfigRequest;
+
+  static equals(a: NotificationConfigRequest | PlainMessage<NotificationConfigRequest> | undefined, b: NotificationConfigRequest | PlainMessage<NotificationConfigRequest> | undefined): boolean;
+}
+
+/**
+ * NotificationConfigResponse is the response object for NotificationConfig
+ *
+ * @generated from message porter.v1.NotificationConfigResponse
+ */
+export declare class NotificationConfigResponse extends Message<NotificationConfigResponse> {
+  /**
+   * config is the notification config object
+   *
+   * @generated from field: porter.v1.NotificationConfig config = 1;
+   */
+  config?: NotificationConfig;
+
+  constructor(data?: PartialMessage<NotificationConfigResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.NotificationConfigResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): NotificationConfigResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): NotificationConfigResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): NotificationConfigResponse;
+
+  static equals(a: NotificationConfigResponse | PlainMessage<NotificationConfigResponse> | undefined, b: NotificationConfigResponse | PlainMessage<NotificationConfigResponse> | undefined): boolean;
 }
 
 /**

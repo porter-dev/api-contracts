@@ -1730,6 +1730,31 @@ export const UpdateNotificationConfigResponse = proto3.makeMessageType(
 );
 
 /**
+ * NotificationConfigRequest is the request object for NotificationConfig.
+ *
+ * @generated from message porter.v1.NotificationConfigRequest
+ */
+export const NotificationConfigRequest = proto3.makeMessageType(
+  "porter.v1.NotificationConfigRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "notification_config_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * NotificationConfigResponse is the response object for NotificationConfig
+ *
+ * @generated from message porter.v1.NotificationConfigResponse
+ */
+export const NotificationConfigResponse = proto3.makeMessageType(
+  "porter.v1.NotificationConfigResponse",
+  () => [
+    { no: 1, name: "config", kind: "message", T: NotificationConfig },
+  ],
+);
+
+/**
  * ConnectHostedProjectRequest is the request object for connecting a hosted project to a host cluster
  *
  * @generated from message porter.v1.ConnectHostedProjectRequest

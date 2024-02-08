@@ -1113,7 +1113,7 @@ message ListEnvGroupsResponse {
 message UpdateNotificationConfigRequest {
   // project_id is the id of the project where the notification config is created
   int64 project_id = 1;
-  // notification_config_id is the id of the cluster where the env group is installed
+  // notification_config_id is the id of config. If 0, a new config will be created
   int64 notification_config_id = 2;
   // config is the config to update
   NotificationConfig config = 3;
@@ -1125,6 +1125,20 @@ message UpdateNotificationConfigRequest {
 message UpdateNotificationConfigResponse {
   // env_groups is the list of env groups installed in the cluster
   int64 notification_config_id = 1;
+}
+
+// NotificationConfigRequest is the request object for NotificationConfig.
+message NotificationConfigRequest {
+  // project_id is the id of the project where the notification config is created
+  int64 project_id = 1;
+  // notification_config_id is the id of the notfication config
+  int64 notification_config_id = 2;
+}
+
+// NotificationConfigResponse is the response object for NotificationConfig
+message NotificationConfigResponse {
+  // config is the notification config object
+  NotificationConfig config = 1;
 }
 
 // ConnectHostedProjectRequest is the request object for connecting a hosted project to a host cluster
@@ -1434,6 +1448,9 @@ service ClusterControlPlaneService {
 
   // UpdateNotificationConfig updates the notification config for a given id, or creates a new one if no id is provided
   rpc UpdateNotificationConfig(UpdateNotificationConfigRequest) returns (UpdateNotificationConfigResponse) {}
+
+  // NotificationConfig gets the notification config for a given id
+  rpc NotificationConfig(NotificationConfigRequest) returns (NotificationConfigResponse) {}
 }
 
 message EKSBearerTokenRequest {
