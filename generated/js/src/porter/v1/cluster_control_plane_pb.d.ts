@@ -1644,6 +1644,13 @@ export declare class UpdateAppRequest extends Message<UpdateAppRequest> {
    */
   b64Description: string;
 
+  /**
+   * app_env_overrides contains environment specific overrides if they exist, applied depending on the deployment target
+   *
+   * @generated from field: porter.v1.EnvGroupVariables app_env_overrides = 15;
+   */
+  appEnvOverrides?: EnvGroupVariables;
+
   constructor(data?: PartialMessage<UpdateAppRequest>);
 
   static readonly runtime: typeof proto3;

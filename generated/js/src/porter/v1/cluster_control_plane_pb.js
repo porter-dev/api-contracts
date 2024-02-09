@@ -565,6 +565,7 @@ export const UpdateAppRequest = proto3.makeMessageType(
     { no: 12, name: "addon_overrides", kind: "message", T: Addon, repeated: true },
     { no: 13, name: "exact", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 14, name: "b64_description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 15, name: "app_env_overrides", kind: "message", T: EnvGroupVariables },
   ],
 );
 
