@@ -25,6 +25,7 @@ export const EnumComplianceVendor = proto3.makeEnum(
   [
     {no: 0, name: "ENUM_COMPLIANCE_VENDOR_UNSPECIFIED", localName: "UNSPECIFIED"},
     {no: 1, name: "ENUM_COMPLIANCE_VENDOR_VANTA", localName: "VANTA"},
+    {no: 2, name: "ENUM_COMPLIANCE_VENDOR_ONE_LEET", localName: "ONE_LEET"},
   ],
 );
 

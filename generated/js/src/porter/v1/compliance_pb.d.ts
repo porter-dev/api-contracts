@@ -45,6 +45,13 @@ export declare enum EnumComplianceVendor {
    * @generated from enum value: ENUM_COMPLIANCE_VENDOR_VANTA = 1;
    */
   VANTA = 1,
+
+  /**
+   * ENUM_COMPLIANCE_VENDOR_ONE_LEET signifies the compliance vendor One Leet.
+   *
+   * @generated from enum value: ENUM_COMPLIANCE_VENDOR_ONE_LEET = 2;
+   */
+  ONE_LEET = 2,
 }
 
 /**
