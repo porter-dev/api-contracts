@@ -360,6 +360,8 @@ message DeletePorterAppRequest {
   int64 project_id = 1;
   // app_name is the name of the porter app to be deleted
   string app_name = 2;
+  // cluster_id is the id of the cluster that the PorterApp belongs to
+  int64 cluster_id = 3;
 }
 
 // DeletePorterAppResponse is the response object when deleting a porter app from a given project

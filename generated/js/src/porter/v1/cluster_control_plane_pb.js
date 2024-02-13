@@ -635,6 +635,7 @@ export const DeletePorterAppRequest = proto3.makeMessageType(
   () => [
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 2, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ],
 );
 
