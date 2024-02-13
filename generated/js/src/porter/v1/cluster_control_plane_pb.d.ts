@@ -14,7 +14,7 @@ import type { ContractComplianceCheckGroup, EnumComplianceProfile, EnumComplianc
 import type { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import type { Addon } from "./addons_pb.js";
 import type { EnumEnvGroupProviderType } from "./env_group_pb.js";
-import type { NotificationConfig } from "./notification_pb.js";
+import type { Notification, NotificationConfig } from "./notification_pb.js";
 import type { DatastoreCredential } from "./datastore_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
@@ -5168,6 +5168,81 @@ export declare class NotificationConfigResponse extends Message<NotificationConf
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): NotificationConfigResponse;
 
   static equals(a: NotificationConfigResponse | PlainMessage<NotificationConfigResponse> | undefined, b: NotificationConfigResponse | PlainMessage<NotificationConfigResponse> | undefined): boolean;
+}
+
+/**
+ * NotificationsRequest is the request object for Notification.
+ *
+ * @generated from message porter.v1.NotificationsRequest
+ */
+export declare class NotificationsRequest extends Message<NotificationsRequest> {
+  /**
+   * project_id is the id of the project where the notification  is created
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * notification_id is the id of the notification to get
+   *
+   * @generated from field: string notification_id = 2;
+   */
+  notificationId: string;
+
+  /**
+   * app_revision_id is the id of the app revision to get notifications for
+   *
+   * @generated from field: string app_revision_id = 3;
+   */
+  appRevisionId: string;
+
+  /**
+   * app_instance_id is the id of the app instance to get notifications for
+   *
+   * @generated from field: string app_instance_id = 4;
+   */
+  appInstanceId: string;
+
+  constructor(data?: PartialMessage<NotificationsRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.NotificationsRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): NotificationsRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): NotificationsRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): NotificationsRequest;
+
+  static equals(a: NotificationsRequest | PlainMessage<NotificationsRequest> | undefined, b: NotificationsRequest | PlainMessage<NotificationsRequest> | undefined): boolean;
+}
+
+/**
+ * NotificationResponse is the response object for Notification
+ *
+ * @generated from message porter.v1.NotificationsResponse
+ */
+export declare class NotificationsResponse extends Message<NotificationsResponse> {
+  /**
+   * @generated from field: repeated porter.v1.Notification notification = 1;
+   */
+  notification: Notification[];
+
+  constructor(data?: PartialMessage<NotificationsResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.NotificationsResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): NotificationsResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): NotificationsResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): NotificationsResponse;
+
+  static equals(a: NotificationsResponse | PlainMessage<NotificationsResponse> | undefined, b: NotificationsResponse | PlainMessage<NotificationsResponse> | undefined): boolean;
 }
 
 /**

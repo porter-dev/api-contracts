@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { proto3 } from "@bufbuild/protobuf";
+import { proto3, Timestamp } from "@bufbuild/protobuf";
 
 /**
  * EnumNotificationStatus describes the status of a notification
@@ -66,6 +66,38 @@ export const SlackConfig = proto3.makeMessageType(
   "porter.v1.SlackConfig",
   () => [
     { no: 1, name: "mentions", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+  ],
+);
+
+/**
+ * Notification describes a notification
+ *
+ * @generated from message porter.v1.Notification
+ */
+export const Notification = proto3.makeMessageType(
+  "porter.v1.Notification",
+  () => [
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "app_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "details", kind: "message", T: NotificationDetails },
+    { no: 4, name: "timestamp", kind: "message", T: Timestamp },
+  ],
+);
+
+/**
+ * NotificationDetails describes the details of a notification
+ *
+ * @generated from message porter.v1.NotificationDetails
+ */
+export const NotificationDetails = proto3.makeMessageType(
+  "porter.v1.NotificationDetails",
+  () => [
+    { no: 1, name: "code", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "summary", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "detail", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "mitigation_steps", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "documentation", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 6, name: "should_view_logs", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
