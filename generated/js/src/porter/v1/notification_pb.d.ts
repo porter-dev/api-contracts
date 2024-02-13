@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
+import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage, Timestamp } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 
 /**
@@ -58,6 +58,65 @@ export declare enum EnumNotificationEventType {
    * @generated from enum value: ENUM_NOTIFICATION_EVENT_TYPE_DEPLOY = 3;
    */
   DEPLOY = 3,
+}
+
+/**
+ * EnumNotificationScope describes the scope of a notification
+ *
+ * @generated from enum porter.v1.EnumNotificationScope
+ */
+export declare enum EnumNotificationScope {
+  /**
+   * @generated from enum value: ENUM_NOTIFICATION_SCOPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: ENUM_NOTIFICATION_SCOPE_SERVICE = 1;
+   */
+  SERVICE = 1,
+
+  /**
+   * @generated from enum value: ENUM_NOTIFICATION_SCOPE_REVISION = 2;
+   */
+  REVISION = 2,
+
+  /**
+   * @generated from enum value: ENUM_NOTIFICATION_SCOPE_APPLICATION = 3;
+   */
+  APPLICATION = 3,
+}
+
+/**
+ * EnumServiceDeploymentStatus describes the deployment status of a service
+ *
+ * @generated from enum porter.v1.EnumNotificationServiceDeploymentStatus
+ */
+export declare enum EnumNotificationServiceDeploymentStatus {
+  /**
+   * @generated from enum value: ENUM_NOTIFICATION_SERVICE_DEPLOYMENT_STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: ENUM_NOTIFICATION_SERVICE_DEPLOYMENT_STATUS_PENDING = 1;
+   */
+  PENDING = 1,
+
+  /**
+   * @generated from enum value: ENUM_NOTIFICATION_SERVICE_DEPLOYMENT_STATUS_SUCCESS = 2;
+   */
+  SUCCESS = 2,
+
+  /**
+   * @generated from enum value: ENUM_NOTIFICATION_SERVICE_DEPLOYMENT_STATUS_FAILURE = 3;
+   */
+  FAILURE = 3,
+
+  /**
+   * @generated from enum value: ENUM_NOTIFICATION_SERVICE_DEPLOYMENT_STATUS_UNKNOWN = 4;
+   */
+  UNKNOWN = 4,
 }
 
 /**
@@ -154,5 +213,173 @@ export declare class SlackConfig extends Message<SlackConfig> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SlackConfig;
 
   static equals(a: SlackConfig | PlainMessage<SlackConfig> | undefined, b: SlackConfig | PlainMessage<SlackConfig> | undefined): boolean;
+}
+
+/**
+ * Notification describes a notification
+ *
+ * @generated from message porter.v1.Notification
+ */
+export declare class Notification extends Message<Notification> {
+  /**
+   * id is the id for the notification
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * app_revision_id is the id of the app revision
+   *
+   * @generated from field: string app_revision_id = 2;
+   */
+  appRevisionId: string;
+
+  /**
+   * scope is the scope of the notification
+   *
+   * @generated from field: porter.v1.EnumNotificationScope scope = 3;
+   */
+  scope: EnumNotificationScope;
+
+  /**
+   * details is the details of the notification
+   *
+   * @generated from field: porter.v1.NotificationDetails details = 4;
+   */
+  details?: NotificationDetails;
+
+  /**
+   * metadata is the metadata of the notification
+   *
+   * @generated from field: porter.v1.NotificationMetadata metadata = 5;
+   */
+  metadata?: NotificationMetadata;
+
+  /**
+   * timestamp is the timestamp of the notification
+   *
+   * @generated from field: google.protobuf.Timestamp timestamp = 6;
+   */
+  timestamp?: Timestamp;
+
+  constructor(data?: PartialMessage<Notification>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.Notification";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Notification;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Notification;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Notification;
+
+  static equals(a: Notification | PlainMessage<Notification> | undefined, b: Notification | PlainMessage<Notification> | undefined): boolean;
+}
+
+/**
+ * NotificationDetails describes the details of a notification
+ *
+ * @generated from message porter.v1.NotificationDetails
+ */
+export declare class NotificationDetails extends Message<NotificationDetails> {
+  /**
+   * code is the Porter-internal code for the notification
+   *
+   * @generated from field: int64 code = 1;
+   */
+  code: bigint;
+
+  /**
+   * summary is a short summary of the notification
+   *
+   * @generated from field: string summary = 2;
+   */
+  summary: string;
+
+  /**
+   * detail is a detailed description of the notification
+   *
+   * @generated from field: string detail = 3;
+   */
+  detail: string;
+
+  /**
+   * mitigation_steps is a description of mitigation steps for the notification
+   *
+   * @generated from field: string mitigation_steps = 4;
+   */
+  mitigationSteps: string;
+
+  /**
+   * documentation is a list of documentation links for the notification
+   *
+   * @generated from field: repeated string documentation = 5;
+   */
+  documentation: string[];
+
+  /**
+   * should_view_logs is a flag indicating whether logs should be viewed for the notification
+   *
+   * @generated from field: bool should_view_logs = 6;
+   */
+  shouldViewLogs: boolean;
+
+  constructor(data?: PartialMessage<NotificationDetails>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.NotificationDetails";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): NotificationDetails;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): NotificationDetails;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): NotificationDetails;
+
+  static equals(a: NotificationDetails | PlainMessage<NotificationDetails> | undefined, b: NotificationDetails | PlainMessage<NotificationDetails> | undefined): boolean;
+}
+
+/**
+ * NotificationMetadata describes the metadata of a notification
+ *
+ * @generated from message porter.v1.NotificationMetadata
+ */
+export declare class NotificationMetadata extends Message<NotificationMetadata> {
+  /**
+   * service_name is the name of the service that generated the notification
+   *
+   * @generated from field: string service_name = 1;
+   */
+  serviceName: string;
+
+  /**
+   * service_deployment_status is the deployment status of the service
+   *
+   * @generated from field: porter.v1.EnumNotificationServiceDeploymentStatus service_deployment_status = 2;
+   */
+  serviceDeploymentStatus: EnumNotificationServiceDeploymentStatus;
+
+  /**
+   * job_run_id is the id of the job run that generated the notification
+   *
+   * @generated from field: string job_run_id = 3;
+   */
+  jobRunId: string;
+
+  constructor(data?: PartialMessage<NotificationMetadata>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.NotificationMetadata";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): NotificationMetadata;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): NotificationMetadata;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): NotificationMetadata;
+
+  static equals(a: NotificationMetadata | PlainMessage<NotificationMetadata> | undefined, b: NotificationMetadata | PlainMessage<NotificationMetadata> | undefined): boolean;
 }
 

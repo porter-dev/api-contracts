@@ -13,7 +13,7 @@ import { ContractComplianceCheckGroup, EnumComplianceProfile, EnumComplianceVend
 import { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
 import { Addon } from "./addons_pb.js";
 import { EnumEnvGroupProviderType } from "./env_group_pb.js";
-import { NotificationConfig } from "./notification_pb.js";
+import { Notification, NotificationConfig } from "./notification_pb.js";
 import { DatastoreCredential } from "./datastore_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
@@ -1753,6 +1753,33 @@ export const NotificationConfigResponse = proto3.makeMessageType(
   "porter.v1.NotificationConfigResponse",
   () => [
     { no: 1, name: "config", kind: "message", T: NotificationConfig },
+  ],
+);
+
+/**
+ * NotificationsRequest is the request object for Notification.
+ *
+ * @generated from message porter.v1.NotificationsRequest
+ */
+export const NotificationsRequest = proto3.makeMessageType(
+  "porter.v1.NotificationsRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "notification_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "app_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "app_instance_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * NotificationResponse is the response object for Notification
+ *
+ * @generated from message porter.v1.NotificationsResponse
+ */
+export const NotificationsResponse = proto3.makeMessageType(
+  "porter.v1.NotificationsResponse",
+  () => [
+    { no: 1, name: "notification", kind: "message", T: Notification, repeated: true },
   ],
 );
 

@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package porter.v1;
 
+import "google/protobuf/timestamp.proto";
+
 // NotificationConfig describes the configuration available for notifications.
 // Empty lists are ignored.
 // Multiple lists are treated as an AND condition.
@@ -43,4 +45,63 @@ enum EnumNotificationEventType {
   ENUM_NOTIFICATION_EVENT_TYPE_BUILD = 1;
   ENUM_NOTIFICATION_EVENT_TYPE_PREDEPLOY = 2;
   ENUM_NOTIFICATION_EVENT_TYPE_DEPLOY = 3;
+}
+
+// Notification describes a notification
+message Notification {
+  // id is the id for the notification
+  string id = 1;
+  // app_revision_id is the id of the app revision
+  string app_revision_id = 2;
+  // scope is the scope of the notification
+  EnumNotificationScope scope = 3;
+  // details is the details of the notification
+  NotificationDetails details = 4;
+  // metadata is the metadata of the notification
+  NotificationMetadata metadata = 5;
+  // timestamp is the timestamp of the notification
+  google.protobuf.Timestamp timestamp = 6;
+}
+
+// NotificationDetails describes the details of a notification
+message NotificationDetails {
+  // code is the Porter-internal code for the notification
+  int64 code = 1;
+  // summary is a short summary of the notification
+  string summary = 2;
+  // detail is a detailed description of the notification
+  string detail = 3;
+  // mitigation_steps is a description of mitigation steps for the notification
+  string mitigation_steps = 4;
+  // documentation is a list of documentation links for the notification
+  repeated string documentation = 5;
+  // should_view_logs is a flag indicating whether logs should be viewed for the notification
+  bool should_view_logs = 6;
+}
+
+// NotificationMetadata describes the metadata of a notification
+message NotificationMetadata {
+  // service_name is the name of the service that generated the notification
+  string service_name = 1;
+  // service_deployment_status is the deployment status of the service
+  EnumNotificationServiceDeploymentStatus service_deployment_status = 2;
+  // job_run_id is the id of the job run that generated the notification
+  string job_run_id = 3;
+}
+
+// EnumNotificationScope describes the scope of a notification
+enum EnumNotificationScope {
+  ENUM_NOTIFICATION_SCOPE_UNSPECIFIED = 0;
+  ENUM_NOTIFICATION_SCOPE_SERVICE = 1;
+  ENUM_NOTIFICATION_SCOPE_REVISION = 2;
+  ENUM_NOTIFICATION_SCOPE_APPLICATION = 3;
+}
+
+// EnumServiceDeploymentStatus describes the deployment status of a service
+enum EnumNotificationServiceDeploymentStatus {
+  ENUM_NOTIFICATION_SERVICE_DEPLOYMENT_STATUS_UNSPECIFIED = 0;
+  ENUM_NOTIFICATION_SERVICE_DEPLOYMENT_STATUS_PENDING = 1;
+  ENUM_NOTIFICATION_SERVICE_DEPLOYMENT_STATUS_SUCCESS = 2;
+  ENUM_NOTIFICATION_SERVICE_DEPLOYMENT_STATUS_FAILURE = 3;
+  ENUM_NOTIFICATION_SERVICE_DEPLOYMENT_STATUS_UNKNOWN = 4;
 }

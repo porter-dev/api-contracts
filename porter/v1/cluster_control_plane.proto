@@ -1145,6 +1145,23 @@ message NotificationConfigResponse {
   NotificationConfig config = 1;
 }
 
+// NotificationsRequest is the request object for Notification.
+message NotificationsRequest {
+  // project_id is the id of the project where the notification  is created
+  int64 project_id = 1;
+  // notification_id is the id of the notification to get
+  string notification_id = 2;
+  // app_revision_id is the id of the app revision to get notifications for
+  string app_revision_id = 3;
+  // app_instance_id is the id of the app instance to get notifications for
+  string app_instance_id = 4;
+}
+
+// NotificationResponse is the response object for Notification
+message NotificationsResponse {
+  repeated Notification notification = 1;
+}
+
 // ConnectHostedProjectRequest is the request object for connecting a hosted project to a host cluster
 message ConnectHostedProjectRequest {
   // project_id is the project id of the new hosted project which should be connected to the host cluster
@@ -1455,6 +1472,9 @@ service ClusterControlPlaneService {
 
   // NotificationConfig gets the notification config for a given id
   rpc NotificationConfig(NotificationConfigRequest) returns (NotificationConfigResponse) {}
+
+  // Notifications gets the notification config for a given id
+  rpc Notifications(NotificationsRequest) returns (NotificationsResponse) {}
 }
 
 message EKSBearerTokenRequest {

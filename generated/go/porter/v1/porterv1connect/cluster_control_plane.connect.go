@@ -256,6 +256,9 @@ const (
 	// ClusterControlPlaneServiceNotificationConfigProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's NotificationConfig RPC.
 	ClusterControlPlaneServiceNotificationConfigProcedure = "/porter.v1.ClusterControlPlaneService/NotificationConfig"
+	// ClusterControlPlaneServiceNotificationsProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's Notifications RPC.
+	ClusterControlPlaneServiceNotificationsProcedure = "/porter.v1.ClusterControlPlaneService/Notifications"
 )
 
 // ClusterControlPlaneServiceClient is a client for the porter.v1.ClusterControlPlaneService
@@ -454,6 +457,8 @@ type ClusterControlPlaneServiceClient interface {
 	UpdateNotificationConfig(context.Context, *connect.Request[v1.UpdateNotificationConfigRequest]) (*connect.Response[v1.UpdateNotificationConfigResponse], error)
 	// NotificationConfig gets the notification config for a given id
 	NotificationConfig(context.Context, *connect.Request[v1.NotificationConfigRequest]) (*connect.Response[v1.NotificationConfigResponse], error)
+	// Notifications gets the notification config for a given id
+	Notifications(context.Context, *connect.Request[v1.NotificationsRequest]) (*connect.Response[v1.NotificationsResponse], error)
 }
 
 // NewClusterControlPlaneServiceClient constructs a client for the
@@ -836,6 +841,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceNotificationConfigProcedure,
 			opts...,
 		),
+		notifications: connect.NewClient[v1.NotificationsRequest, v1.NotificationsResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceNotificationsProcedure,
+			opts...,
+		),
 	}
 }
 
@@ -915,6 +925,7 @@ type clusterControlPlaneServiceClient struct {
 	listEnvGroups                       *connect.Client[v1.ListEnvGroupsRequest, v1.ListEnvGroupsResponse]
 	updateNotificationConfig            *connect.Client[v1.UpdateNotificationConfigRequest, v1.UpdateNotificationConfigResponse]
 	notificationConfig                  *connect.Client[v1.NotificationConfigRequest, v1.NotificationConfigResponse]
+	notifications                       *connect.Client[v1.NotificationsRequest, v1.NotificationsResponse]
 }
 
 // QuotaIncrease calls porter.v1.ClusterControlPlaneService.QuotaIncrease.
@@ -1322,6 +1333,11 @@ func (c *clusterControlPlaneServiceClient) NotificationConfig(ctx context.Contex
 	return c.notificationConfig.CallUnary(ctx, req)
 }
 
+// Notifications calls porter.v1.ClusterControlPlaneService.Notifications.
+func (c *clusterControlPlaneServiceClient) Notifications(ctx context.Context, req *connect.Request[v1.NotificationsRequest]) (*connect.Response[v1.NotificationsResponse], error) {
+	return c.notifications.CallUnary(ctx, req)
+}
+
 // ClusterControlPlaneServiceHandler is an implementation of the
 // porter.v1.ClusterControlPlaneService service.
 type ClusterControlPlaneServiceHandler interface {
@@ -1518,6 +1534,8 @@ type ClusterControlPlaneServiceHandler interface {
 	UpdateNotificationConfig(context.Context, *connect.Request[v1.UpdateNotificationConfigRequest]) (*connect.Response[v1.UpdateNotificationConfigResponse], error)
 	// NotificationConfig gets the notification config for a given id
 	NotificationConfig(context.Context, *connect.Request[v1.NotificationConfigRequest]) (*connect.Response[v1.NotificationConfigResponse], error)
+	// Notifications gets the notification config for a given id
+	Notifications(context.Context, *connect.Request[v1.NotificationsRequest]) (*connect.Response[v1.NotificationsResponse], error)
 }
 
 // NewClusterControlPlaneServiceHandler builds an HTTP handler from the service implementation. It
@@ -1896,6 +1914,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.NotificationConfig,
 		opts...,
 	)
+	clusterControlPlaneServiceNotificationsHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceNotificationsProcedure,
+		svc.Notifications,
+		opts...,
+	)
 	return "/porter.v1.ClusterControlPlaneService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ClusterControlPlaneServiceQuotaIncreaseProcedure:
@@ -2046,6 +2069,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceUpdateNotificationConfigHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceNotificationConfigProcedure:
 			clusterControlPlaneServiceNotificationConfigHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceNotificationsProcedure:
+			clusterControlPlaneServiceNotificationsHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -2349,4 +2374,8 @@ func (UnimplementedClusterControlPlaneServiceHandler) UpdateNotificationConfig(c
 
 func (UnimplementedClusterControlPlaneServiceHandler) NotificationConfig(context.Context, *connect.Request[v1.NotificationConfigRequest]) (*connect.Response[v1.NotificationConfigResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.NotificationConfig is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) Notifications(context.Context, *connect.Request[v1.NotificationsRequest]) (*connect.Response[v1.NotificationsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.Notifications is not implemented"))
 }
