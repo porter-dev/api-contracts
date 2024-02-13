@@ -1862,6 +1862,13 @@ export declare class DeletePorterAppRequest extends Message<DeletePorterAppReque
    */
   appName: string;
 
+  /**
+   * cluster_id is the id of the cluster that the PorterApp belongs to
+   *
+   * @generated from field: int64 cluster_id = 3;
+   */
+  clusterId: bigint;
+
   constructor(data?: PartialMessage<DeletePorterAppRequest>);
 
   static readonly runtime: typeof proto3;
