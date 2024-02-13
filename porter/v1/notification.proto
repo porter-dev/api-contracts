@@ -53,10 +53,14 @@ message Notification {
   string id = 1;
   // app_revision_id is the id of the app revision
   string app_revision_id = 2;
+  // scope is the scope of the notification
+  EnumNotificationScope scope = 3;
   // details is the details of the notification
-  NotificationDetails details = 3;
+  NotificationDetails details = 4;
+  // metadata is the metadata of the notification
+  NotificationMetadata metadata = 5;
   // timestamp is the timestamp of the notification
-  google.protobuf.Timestamp timestamp = 4;
+  google.protobuf.Timestamp timestamp = 6;
 }
 
 // NotificationDetails describes the details of a notification
@@ -73,4 +77,31 @@ message NotificationDetails {
   repeated string documentation = 5;
   // should_view_logs is a flag indicating whether logs should be viewed for the notification
   bool should_view_logs = 6;
+}
+
+// NotificationMetadata describes the metadata of a notification
+message NotificationMetadata {
+  // service_name is the name of the service that generated the notification
+  string service_name = 1;
+  // service_deployment_status is the deployment status of the service
+  EnumNotificationServiceDeploymentStatus service_deployment_status = 2;
+  // job_run_id is the id of the job run that generated the notification
+  string job_run_id = 3;
+}
+
+// EnumNotificationScope describes the scope of a notification
+enum EnumNotificationScope {
+  ENUM_NOTIFICATION_SCOPE_UNSPECIFIED = 0;
+  ENUM_NOTIFICATION_SCOPE_SERVICE = 1;
+  ENUM_NOTIFICATION_SCOPE_REVISION = 2;
+  ENUM_NOTIFICATION_SCOPE_APPLICATION = 3;
+}
+
+// EnumServiceDeploymentStatus describes the deployment status of a service
+enum EnumNotificationServiceDeploymentStatus {
+  ENUM_NOTIFICATION_SERVICE_DEPLOYMENT_STATUS_UNSPECIFIED = 0;
+  ENUM_NOTIFICATION_SERVICE_DEPLOYMENT_STATUS_PENDING = 1;
+  ENUM_NOTIFICATION_SERVICE_DEPLOYMENT_STATUS_SUCCESS = 2;
+  ENUM_NOTIFICATION_SERVICE_DEPLOYMENT_STATUS_FAILURE = 3;
+  ENUM_NOTIFICATION_SERVICE_DEPLOYMENT_STATUS_UNKNOWN = 4;
 }

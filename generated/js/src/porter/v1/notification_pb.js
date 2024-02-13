@@ -36,6 +36,37 @@ export const EnumNotificationEventType = proto3.makeEnum(
 );
 
 /**
+ * EnumNotificationScope describes the scope of a notification
+ *
+ * @generated from enum porter.v1.EnumNotificationScope
+ */
+export const EnumNotificationScope = proto3.makeEnum(
+  "porter.v1.EnumNotificationScope",
+  [
+    {no: 0, name: "ENUM_NOTIFICATION_SCOPE_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "ENUM_NOTIFICATION_SCOPE_SERVICE", localName: "SERVICE"},
+    {no: 2, name: "ENUM_NOTIFICATION_SCOPE_REVISION", localName: "REVISION"},
+    {no: 3, name: "ENUM_NOTIFICATION_SCOPE_APPLICATION", localName: "APPLICATION"},
+  ],
+);
+
+/**
+ * EnumServiceDeploymentStatus describes the deployment status of a service
+ *
+ * @generated from enum porter.v1.EnumNotificationServiceDeploymentStatus
+ */
+export const EnumNotificationServiceDeploymentStatus = proto3.makeEnum(
+  "porter.v1.EnumNotificationServiceDeploymentStatus",
+  [
+    {no: 0, name: "ENUM_NOTIFICATION_SERVICE_DEPLOYMENT_STATUS_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "ENUM_NOTIFICATION_SERVICE_DEPLOYMENT_STATUS_PENDING", localName: "PENDING"},
+    {no: 2, name: "ENUM_NOTIFICATION_SERVICE_DEPLOYMENT_STATUS_SUCCESS", localName: "SUCCESS"},
+    {no: 3, name: "ENUM_NOTIFICATION_SERVICE_DEPLOYMENT_STATUS_FAILURE", localName: "FAILURE"},
+    {no: 4, name: "ENUM_NOTIFICATION_SERVICE_DEPLOYMENT_STATUS_UNKNOWN", localName: "UNKNOWN"},
+  ],
+);
+
+/**
  * NotificationConfig describes the configuration available for notifications.
  * Empty lists are ignored.
  * Multiple lists are treated as an AND condition.
@@ -79,8 +110,10 @@ export const Notification = proto3.makeMessageType(
   () => [
     { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "app_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "details", kind: "message", T: NotificationDetails },
-    { no: 4, name: "timestamp", kind: "message", T: Timestamp },
+    { no: 3, name: "scope", kind: "enum", T: proto3.getEnumType(EnumNotificationScope) },
+    { no: 4, name: "details", kind: "message", T: NotificationDetails },
+    { no: 5, name: "metadata", kind: "message", T: NotificationMetadata },
+    { no: 6, name: "timestamp", kind: "message", T: Timestamp },
   ],
 );
 
@@ -98,6 +131,20 @@ export const NotificationDetails = proto3.makeMessageType(
     { no: 4, name: "mitigation_steps", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "documentation", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 6, name: "should_view_logs", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
+/**
+ * NotificationMetadata describes the metadata of a notification
+ *
+ * @generated from message porter.v1.NotificationMetadata
+ */
+export const NotificationMetadata = proto3.makeMessageType(
+  "porter.v1.NotificationMetadata",
+  () => [
+    { no: 1, name: "service_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "service_deployment_status", kind: "enum", T: proto3.getEnumType(EnumNotificationServiceDeploymentStatus) },
+    { no: 3, name: "job_run_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
