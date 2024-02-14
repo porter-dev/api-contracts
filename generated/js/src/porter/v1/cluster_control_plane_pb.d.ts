@@ -1767,8 +1767,10 @@ export declare class RollbackRevisionRequest extends Message<RollbackRevisionReq
 
   /**
    * app_id is the id of the PorterApp to roll back
+   * deprecated: use app_name and deployment_target_identifier
    *
-   * @generated from field: int64 app_id = 2;
+   * @generated from field: int64 app_id = 2 [deprecated = true];
+   * @deprecated
    */
   appId: bigint;
 
@@ -1793,6 +1795,14 @@ export declare class RollbackRevisionRequest extends Message<RollbackRevisionReq
    * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 5;
    */
   deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  /**
+   * app_name is the name of the app to retrieve the helm values for
+   * used in conjunction with deployment_target_identifier to get the correct app instance
+   *
+   * @generated from field: string app_name = 6;
+   */
+  appName: string;
 
   constructor(data?: PartialMessage<RollbackRevisionRequest>);
 
@@ -2054,8 +2064,10 @@ export declare class CurrentAppRevisionRequest extends Message<CurrentAppRevisio
 
   /**
    * app_id is the id of the PorterApp that is currently installed
+   * Deprecated: use app_name and deployment_target_identifier instead
    *
-   * @generated from field: int64 app_id = 2;
+   * @generated from field: int64 app_id = 2 [deprecated = true];
+   * @deprecated
    */
   appId: bigint;
 
@@ -2073,6 +2085,14 @@ export declare class CurrentAppRevisionRequest extends Message<CurrentAppRevisio
    * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 4;
    */
   deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  /**
+   * app_name is the name of the app to retrieve the revision for
+   * used in conjunction with deployment_target_identifier to get the correct app instance
+   *
+   * @generated from field: string app_name = 5;
+   */
+  appName: string;
 
   constructor(data?: PartialMessage<CurrentAppRevisionRequest>);
 
@@ -2492,8 +2512,10 @@ export declare class ListAppRevisionsRequest extends Message<ListAppRevisionsReq
 
   /**
    * app_id is the id of the PorterApp that is currently installed
+   * Deprecated: use app_name and deployment_target_identifier instead
    *
-   * @generated from field: int64 app_id = 2;
+   * @generated from field: int64 app_id = 2 [deprecated = true];
+   * @deprecated
    */
   appId: bigint;
 
@@ -2511,6 +2533,14 @@ export declare class ListAppRevisionsRequest extends Message<ListAppRevisionsReq
    * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 4;
    */
   deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  /**
+   * app_name is the name of the app to retrieve the revisions for
+   * used in conjunction with deployment_target_identifier to get the correct app instance
+   *
+   * @generated from field: string app_name = 5;
+   */
+  appName: string;
 
   constructor(data?: PartialMessage<ListAppRevisionsRequest>);
 
@@ -3882,7 +3912,10 @@ export declare class AppHelmValuesRequest extends Message<AppHelmValuesRequest> 
   projectId: bigint;
 
   /**
-   * @generated from field: int64 app_id = 2;
+   * deprecated: use app_name and deployment_target_identifier
+   *
+   * @generated from field: int64 app_id = 2 [deprecated = true];
+   * @deprecated
    */
   appId: bigint;
 
@@ -3907,6 +3940,14 @@ export declare class AppHelmValuesRequest extends Message<AppHelmValuesRequest> 
    * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 5;
    */
   deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  /**
+   * app_name is the name of the app to retrieve the helm values for
+   * used in conjunction with deployment_target_identifier to get the correct app instance
+   *
+   * @generated from field: string app_name = 6;
+   */
+  appName: string;
 
   constructor(data?: PartialMessage<AppHelmValuesRequest>);
 

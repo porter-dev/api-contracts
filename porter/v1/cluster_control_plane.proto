@@ -338,13 +338,17 @@ message UpdateRevisionStatusResponse {}
 message RollbackRevisionRequest {
   int64 project_id = 1;
   // app_id is the id of the PorterApp to roll back
-  int64 app_id = 2;
+  // deprecated: use app_name and deployment_target_identifier
+  int64 app_id = 2 [deprecated = true];
   // deployment_target_id is the id of the deployment target where the app is installed. Deprecated: use deployment_target_identifier.
   string deployment_target_id = 3 [deprecated = true];
   // app_revision_id is the id of the PorterAppRevision
   string app_revision_id = 4;
   // deployment_target_identifier is the object that identifies the deployment target for the app
   DeploymentTargetIdentifier deployment_target_identifier = 5;
+  // app_name is the name of the app to retrieve the helm values for
+  // used in conjunction with deployment_target_identifier to get the correct app instance
+  string app_name = 6;
 }
 
 message RollbackRevisionResponse {
@@ -399,11 +403,15 @@ message DeleteDeploymentTargetResponse {}
 message CurrentAppRevisionRequest {
   int64 project_id = 1;
   // app_id is the id of the PorterApp that is currently installed
-  int64 app_id = 2;
+  // Deprecated: use app_name and deployment_target_identifier instead
+  int64 app_id = 2 [deprecated = true];
   // deployment_target_id is the id of the deployment target where the app is installed. Deprecated: use deployment_target_identifier.
   string deployment_target_id = 3 [deprecated = true];
   // deployment_target_identifier is the object that identifies the deployment target for the app
   DeploymentTargetIdentifier deployment_target_identifier = 4;
+  // app_name is the name of the app to retrieve the revision for
+  // used in conjunction with deployment_target_identifier to get the correct app instance
+  string app_name = 5;
 }
 
 message AppRevision {
@@ -513,11 +521,15 @@ message CurrentAppRevisionResponse {
 message ListAppRevisionsRequest {
   int64 project_id = 1;
   // app_id is the id of the PorterApp that is currently installed
-  int64 app_id = 2;
+  // Deprecated: use app_name and deployment_target_identifier instead
+  int64 app_id = 2 [deprecated = true];
   // deployment_target_id is the id of the deployment target where the app is installed. Deprecated: use deployment_target_identifier.
   string deployment_target_id = 3 [deprecated = true];
   // deployment_target_identifier is the object that identifies the deployment target for the app
   DeploymentTargetIdentifier deployment_target_identifier = 4;
+  // app_name is the name of the app to retrieve the revisions for
+  // used in conjunction with deployment_target_identifier to get the correct app instance
+  string app_name = 5;
 }
 
 message ListAppRevisionsResponse {
@@ -854,13 +866,17 @@ message UpdateAppsLinkedToEnvGroupResponse {}
 // AppHelmValuesRequest is the request object when retrieving the helm values for a given app
 message AppHelmValuesRequest {
   int64 project_id = 1;
-  int64 app_id = 2;
+  // deprecated: use app_name and deployment_target_identifier
+  int64 app_id = 2 [deprecated = true];
   // deployment_target_id is the id of the deployment target where the app is installed. Deprecated: use deployment_target_identifier.
   string deployment_target_id = 3 [deprecated = true];
   // with_defaults indicates whether to merge the default Helm values with the explicitly provided values
   bool with_defaults = 4;
   // deployment_target_identifier is the object that identifies the deployment target for the app
   DeploymentTargetIdentifier deployment_target_identifier = 5;
+  // app_name is the name of the app to retrieve the helm values for
+  // used in conjunction with deployment_target_identifier to get the correct app instance
+  string app_name = 6;
 }
 
 // AppHelmValuesResponse is the response object when retrieving the helm values for a given app

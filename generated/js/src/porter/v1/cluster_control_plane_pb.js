@@ -611,6 +611,7 @@ export const RollbackRevisionRequest = proto3.makeMessageType(
     { no: 3, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "app_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+    { no: 6, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -710,6 +711,7 @@ export const CurrentAppRevisionRequest = proto3.makeMessageType(
     { no: 2, name: "app_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 3, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+    { no: 5, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -830,6 +832,7 @@ export const ListAppRevisionsRequest = proto3.makeMessageType(
     { no: 2, name: "app_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 3, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+    { no: 5, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -1306,6 +1309,7 @@ export const AppHelmValuesRequest = proto3.makeMessageType(
     { no: 3, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "with_defaults", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 5, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+    { no: 6, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
