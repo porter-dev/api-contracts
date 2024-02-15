@@ -484,6 +484,8 @@ message UpdateRevisionPayload {
   AppImage image = 4;
   // triggered_by specifies what triggered the update
   EnumUpdateTrigger triggered_by = 5;
+  // prerequisite_addons is a list of addons that should be installed before proceeding with the update
+  repeated PrerequisiteAddon prerequisite_addons = 6;
 }
 
 // EnumUpdateTrigger describes the action that triggered a porter app revision update

@@ -12,7 +12,7 @@ import type { Error } from "./errors_pb.js";
 import type { Contract, ContractRevision } from "./contract_pb.js";
 import type { ContractComplianceCheckGroup, EnumComplianceProfile, EnumComplianceVendor, VendorComplianceCheck } from "./compliance_pb.js";
 import type { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
-import type { Addon } from "./addons_pb.js";
+import type { Addon, PrerequisiteAddon } from "./addons_pb.js";
 import type { EnumEnvGroupProviderType } from "./env_group_pb.js";
 import type { NotificationConfig } from "./notification_pb.js";
 import type { DatastoreCredential } from "./datastore_pb.js";
@@ -2376,6 +2376,13 @@ export declare class UpdateRevisionPayload extends Message<UpdateRevisionPayload
    * @generated from field: porter.v1.EnumUpdateTrigger triggered_by = 5;
    */
   triggeredBy: EnumUpdateTrigger;
+
+  /**
+   * prerequisite_addons is a list of addons that should be installed before proceeding with the update
+   *
+   * @generated from field: repeated porter.v1.PrerequisiteAddon prerequisite_addons = 6;
+   */
+  prerequisiteAddons: PrerequisiteAddon[];
 
   constructor(data?: PartialMessage<UpdateRevisionPayload>);
 
