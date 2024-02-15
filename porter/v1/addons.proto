@@ -13,6 +13,13 @@ enum AddonType {
   ADDON_TYPE_REDIS = 2;
 }
 
+// PrerequisiteAddon specifies an addon that must be installed before any apps can be installed
+// the addon should be installed with the specified config
+message PrerequisiteAddon {
+  // commit_sha is the commit SHA of the addon
+  string commit_sha = 1;
+}
+
 // Addon is the configuration object for tooling or services that can be applied to the cluster alongside porter apps.
 message Addon {
   // name is the name of the addon

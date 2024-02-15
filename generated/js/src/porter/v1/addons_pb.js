@@ -19,6 +19,19 @@ export const AddonType = proto3.makeEnum(
 );
 
 /**
+ * PrerequisiteAddon specifies an addon that must be installed before any apps can be installed
+ * the addon should be installed with the specified config
+ *
+ * @generated from message porter.v1.PrerequisiteAddon
+ */
+export const PrerequisiteAddon = proto3.makeMessageType(
+  "porter.v1.PrerequisiteAddon",
+  () => [
+    { no: 1, name: "commit_sha", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
  * Addon is the configuration object for tooling or services that can be applied to the cluster alongside porter apps.
  *
  * @generated from message porter.v1.Addon

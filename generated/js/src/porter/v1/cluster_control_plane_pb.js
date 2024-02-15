@@ -11,7 +11,7 @@ import { Error } from "./errors_pb.js";
 import { Contract, ContractRevision } from "./contract_pb.js";
 import { ContractComplianceCheckGroup, EnumComplianceProfile, EnumComplianceVendor, VendorComplianceCheck } from "./compliance_pb.js";
 import { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
-import { Addon } from "./addons_pb.js";
+import { Addon, PrerequisiteAddon } from "./addons_pb.js";
 import { EnumEnvGroupProviderType } from "./env_group_pb.js";
 import { NotificationConfig } from "./notification_pb.js";
 import { DatastoreCredential } from "./datastore_pb.js";
@@ -783,6 +783,7 @@ export const UpdateRevisionPayload = proto3.makeMessageType(
     { no: 3, name: "commit_sha", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "image", kind: "message", T: AppImage },
     { no: 5, name: "triggered_by", kind: "enum", T: proto3.getEnumType(EnumUpdateTrigger) },
+    { no: 6, name: "prerequisite_addons", kind: "message", T: PrerequisiteAddon, repeated: true },
   ],
 );
 
