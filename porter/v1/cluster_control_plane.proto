@@ -931,8 +931,8 @@ message JobRunsRequest {
   int64 project_id = 1;
   // app_name is the name of the app to retrieve the job runs for
   string app_name = 2;
-  // job_name is the name of the job service in the app to retrieve the job runs for
-  string job_name = 4;
+  // job_service_name is the name of the job service in the app to retrieve the job runs for
+  string job_service_name = 4;
   // deployment_target_identifier is the object that identifies the deployment target for the app
   DeploymentTargetIdentifier deployment_target_identifier = 5;
   // limit is the maximum number of job runs to return

@@ -4187,11 +4187,11 @@ export declare class JobRunsRequest extends Message<JobRunsRequest> {
   appName: string;
 
   /**
-   * job_name is the name of the job service in the app to retrieve the job runs for
+   * job_service_name is the name of the job service in the app to retrieve the job runs for
    *
-   * @generated from field: string job_name = 4;
+   * @generated from field: string job_service_name = 4;
    */
-  jobName: string;
+  jobServiceName: string;
 
   /**
    * deployment_target_identifier is the object that identifies the deployment target for the app
