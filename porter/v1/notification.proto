@@ -15,12 +15,28 @@ message NotificationConfig {
   repeated int64 cluster_ids = 2;
   // deployment_target_ids is a list of deployment target ids
   repeated string deployment_target_ids = 3;
-  // statuses is a list of statuses
-  repeated EnumNotificationStatus statuses = 4;
-  // event_types is a list of event types
-  repeated EnumNotificationEventType event_types = 5;
+  // statuses is a list of statuses. Deprecated: use enabled_statuses instead.
+  repeated EnumNotificationStatus statuses = 4 [deprecated = true];
+  // event_types is a list of event types. Deprecated: use enabled_types instead.
+  repeated EnumNotificationEventType event_types = 5 [deprecated = true];
   // slack_config is the slack-specific configuration for notifications
   SlackConfig slack_config = 6;
+  // enabled_types is a list of notification types and whether they are enabled
+  repeated NotificationTypeEnabled enabled_types = 7;
+  // enabled_statuses is a list of notifications status and whether they are enabled
+  repeated NotificationStatusEnabled enabled_statuses = 8;
+}
+
+// NotificationTypeEnabled specifies whether notifications are enabled for a given type
+message NotificationTypeEnabled {
+  EnumNotificationEventType type = 1;
+  bool enabled = 2;
+}
+
+// NotificationStatusEnabled specifies whether notifications are enabled for a given status
+message NotificationStatusEnabled {
+  EnumNotificationStatus status = 1;
+  bool enabled = 2;
 }
 
 // SlackConfig describes the slack-specific configuration for notifications
@@ -43,4 +59,5 @@ enum EnumNotificationEventType {
   ENUM_NOTIFICATION_EVENT_TYPE_BUILD = 1;
   ENUM_NOTIFICATION_EVENT_TYPE_PREDEPLOY = 2;
   ENUM_NOTIFICATION_EVENT_TYPE_DEPLOY = 3;
+  ENUM_NOTIFICATION_EVENT_TYPE_ALERT = 4;
 }

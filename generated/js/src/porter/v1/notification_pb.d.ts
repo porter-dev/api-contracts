@@ -58,6 +58,11 @@ export declare enum EnumNotificationEventType {
    * @generated from enum value: ENUM_NOTIFICATION_EVENT_TYPE_DEPLOY = 3;
    */
   DEPLOY = 3,
+
+  /**
+   * @generated from enum value: ENUM_NOTIFICATION_EVENT_TYPE_ALERT = 4;
+   */
+  ALERT = 4,
 }
 
 /**
@@ -93,16 +98,18 @@ export declare class NotificationConfig extends Message<NotificationConfig> {
   deploymentTargetIds: string[];
 
   /**
-   * statuses is a list of statuses
+   * statuses is a list of statuses. Deprecated: use enabled_statuses instead.
    *
-   * @generated from field: repeated porter.v1.EnumNotificationStatus statuses = 4;
+   * @generated from field: repeated porter.v1.EnumNotificationStatus statuses = 4 [deprecated = true];
+   * @deprecated
    */
   statuses: EnumNotificationStatus[];
 
   /**
-   * event_types is a list of event types
+   * event_types is a list of event types. Deprecated: use enabled_types instead.
    *
-   * @generated from field: repeated porter.v1.EnumNotificationEventType event_types = 5;
+   * @generated from field: repeated porter.v1.EnumNotificationEventType event_types = 5 [deprecated = true];
+   * @deprecated
    */
   eventTypes: EnumNotificationEventType[];
 
@@ -112,6 +119,20 @@ export declare class NotificationConfig extends Message<NotificationConfig> {
    * @generated from field: porter.v1.SlackConfig slack_config = 6;
    */
   slackConfig?: SlackConfig;
+
+  /**
+   * enabled_types is a list of notification types and whether they are enabled
+   *
+   * @generated from field: repeated porter.v1.NotificationTypeEnabled enabled_types = 7;
+   */
+  enabledTypes: NotificationTypeEnabled[];
+
+  /**
+   * enabled_statuses is a list of notifications status and whether they are enabled
+   *
+   * @generated from field: repeated porter.v1.NotificationStatusEnabled enabled_statuses = 8;
+   */
+  enabledStatuses: NotificationStatusEnabled[];
 
   constructor(data?: PartialMessage<NotificationConfig>);
 
@@ -126,6 +147,68 @@ export declare class NotificationConfig extends Message<NotificationConfig> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): NotificationConfig;
 
   static equals(a: NotificationConfig | PlainMessage<NotificationConfig> | undefined, b: NotificationConfig | PlainMessage<NotificationConfig> | undefined): boolean;
+}
+
+/**
+ * NotificationTypeEnabled specifies whether notifications are enabled for a given type
+ *
+ * @generated from message porter.v1.NotificationTypeEnabled
+ */
+export declare class NotificationTypeEnabled extends Message<NotificationTypeEnabled> {
+  /**
+   * @generated from field: porter.v1.EnumNotificationEventType type = 1;
+   */
+  type: EnumNotificationEventType;
+
+  /**
+   * @generated from field: bool enabled = 2;
+   */
+  enabled: boolean;
+
+  constructor(data?: PartialMessage<NotificationTypeEnabled>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.NotificationTypeEnabled";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): NotificationTypeEnabled;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): NotificationTypeEnabled;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): NotificationTypeEnabled;
+
+  static equals(a: NotificationTypeEnabled | PlainMessage<NotificationTypeEnabled> | undefined, b: NotificationTypeEnabled | PlainMessage<NotificationTypeEnabled> | undefined): boolean;
+}
+
+/**
+ * NotificationStatusEnabled specifies whether notifications are enabled for a given status
+ *
+ * @generated from message porter.v1.NotificationStatusEnabled
+ */
+export declare class NotificationStatusEnabled extends Message<NotificationStatusEnabled> {
+  /**
+   * @generated from field: porter.v1.EnumNotificationStatus status = 1;
+   */
+  status: EnumNotificationStatus;
+
+  /**
+   * @generated from field: bool enabled = 2;
+   */
+  enabled: boolean;
+
+  constructor(data?: PartialMessage<NotificationStatusEnabled>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.NotificationStatusEnabled";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): NotificationStatusEnabled;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): NotificationStatusEnabled;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): NotificationStatusEnabled;
+
+  static equals(a: NotificationStatusEnabled | PlainMessage<NotificationStatusEnabled> | undefined, b: NotificationStatusEnabled | PlainMessage<NotificationStatusEnabled> | undefined): boolean;
 }
 
 /**

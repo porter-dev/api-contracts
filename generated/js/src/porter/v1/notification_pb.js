@@ -32,6 +32,7 @@ export const EnumNotificationEventType = proto3.makeEnum(
     {no: 1, name: "ENUM_NOTIFICATION_EVENT_TYPE_BUILD", localName: "BUILD"},
     {no: 2, name: "ENUM_NOTIFICATION_EVENT_TYPE_PREDEPLOY", localName: "PREDEPLOY"},
     {no: 3, name: "ENUM_NOTIFICATION_EVENT_TYPE_DEPLOY", localName: "DEPLOY"},
+    {no: 4, name: "ENUM_NOTIFICATION_EVENT_TYPE_ALERT", localName: "ALERT"},
   ],
 );
 
@@ -54,6 +55,34 @@ export const NotificationConfig = proto3.makeMessageType(
     { no: 4, name: "statuses", kind: "enum", T: proto3.getEnumType(EnumNotificationStatus), repeated: true },
     { no: 5, name: "event_types", kind: "enum", T: proto3.getEnumType(EnumNotificationEventType), repeated: true },
     { no: 6, name: "slack_config", kind: "message", T: SlackConfig },
+    { no: 7, name: "enabled_types", kind: "message", T: NotificationTypeEnabled, repeated: true },
+    { no: 8, name: "enabled_statuses", kind: "message", T: NotificationStatusEnabled, repeated: true },
+  ],
+);
+
+/**
+ * NotificationTypeEnabled specifies whether notifications are enabled for a given type
+ *
+ * @generated from message porter.v1.NotificationTypeEnabled
+ */
+export const NotificationTypeEnabled = proto3.makeMessageType(
+  "porter.v1.NotificationTypeEnabled",
+  () => [
+    { no: 1, name: "type", kind: "enum", T: proto3.getEnumType(EnumNotificationEventType) },
+    { no: 2, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
+/**
+ * NotificationStatusEnabled specifies whether notifications are enabled for a given status
+ *
+ * @generated from message porter.v1.NotificationStatusEnabled
+ */
+export const NotificationStatusEnabled = proto3.makeMessageType(
+  "porter.v1.NotificationStatusEnabled",
+  () => [
+    { no: 1, name: "status", kind: "enum", T: proto3.getEnumType(EnumNotificationStatus) },
+    { no: 2, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
