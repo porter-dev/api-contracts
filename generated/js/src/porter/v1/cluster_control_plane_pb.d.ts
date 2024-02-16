@@ -4189,30 +4189,16 @@ export declare class JobRunsRequest extends Message<JobRunsRequest> {
   /**
    * job_service_name is the name of the job service in the app to retrieve the job runs for
    *
-   * @generated from field: string job_service_name = 4;
+   * @generated from field: string job_service_name = 3;
    */
   jobServiceName: string;
 
   /**
    * deployment_target_identifier is the object that identifies the deployment target for the app
    *
-   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 5;
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 4;
    */
   deploymentTargetIdentifier?: DeploymentTargetIdentifier;
-
-  /**
-   * limit is the maximum number of job runs to return
-   *
-   * @generated from field: int64 limit = 6;
-   */
-  limit: bigint;
-
-  /**
-   * offset is the number of job runs to skip
-   *
-   * @generated from field: int64 offset = 7;
-   */
-  offset: bigint;
 
   constructor(data?: PartialMessage<JobRunsRequest>);
 

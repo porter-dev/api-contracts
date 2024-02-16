@@ -932,13 +932,9 @@ message JobRunsRequest {
   // app_name is the name of the app to retrieve the job runs for
   string app_name = 2;
   // job_service_name is the name of the job service in the app to retrieve the job runs for
-  string job_service_name = 4;
+  string job_service_name = 3;
   // deployment_target_identifier is the object that identifies the deployment target for the app
-  DeploymentTargetIdentifier deployment_target_identifier = 5;
-  // limit is the maximum number of job runs to return
-  int64 limit = 6;
-  // offset is the number of job runs to skip
-  int64 offset = 7;
+  DeploymentTargetIdentifier deployment_target_identifier = 4;
 }
 
 // JobRunsResponse is the response object for ListJobRuns

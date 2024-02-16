@@ -1393,10 +1393,8 @@ export const JobRunsRequest = proto3.makeMessageType(
   () => [
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 2, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "job_service_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 5, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
-    { no: 6, name: "limit", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 7, name: "offset", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "job_service_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
   ],
 );
 
