@@ -308,6 +308,7 @@ export const JobRun = proto3.makeMessageType(
     { no: 4, name: "created_at", kind: "message", T: Timestamp },
     { no: 5, name: "finished_at", kind: "message", T: Timestamp },
     { no: 6, name: "app_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 7, name: "service_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

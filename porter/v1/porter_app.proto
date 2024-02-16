@@ -233,4 +233,6 @@ message JobRun {
   google.protobuf.Timestamp finished_at = 5;
   // app_revision_id is the id of the app revision that the job run is associated with
   string app_revision_id = 6;
+  // service_name is the name of the job service in the app
+  string service_name = 7;
 }
