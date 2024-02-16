@@ -911,6 +911,13 @@ export declare class JobRun extends Message<JobRun> {
    */
   appRevisionId: string;
 
+  /**
+   * service_name is the name of the job service in the app
+   *
+   * @generated from field: string service_name = 7;
+   */
+  serviceName: string;
+
   constructor(data?: PartialMessage<JobRun>);
 
   static readonly runtime: typeof proto3;
