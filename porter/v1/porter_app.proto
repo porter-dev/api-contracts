@@ -210,3 +210,27 @@ enum EnumAppRevisionStatus {
   ENUM_APP_REVISION_STATUS_SUCCESSFUL = 2;
   ENUM_APP_REVISION_STATUS_FAILED = 3;
 }
+
+// EnumJobRunStatus describes the status of a job run
+enum EnumJobRunStatus {
+  ENUM_JOB_RUN_STATUS_UNSPECIFIED = 0;
+  ENUM_JOB_RUN_STATUS_RUNNING = 1;
+  ENUM_JOB_RUN_STATUS_SUCCESSFUL = 2;
+  ENUM_JOB_RUN_STATUS_FAILED = 3;
+}
+
+// JobRun contains details about a job run
+message JobRun {
+  // id is the id of the job run
+  string id = 1;
+  // job_name is the name of the job
+  string job_name = 2;
+  // status is the status of the job run
+  EnumJobRunStatus status = 3;
+  // created_at is the time the job run was created
+  google.protobuf.Timestamp created_at = 4;
+  // finished_at is the time the job run finished
+  google.protobuf.Timestamp finished_at = 5;
+  // app_revision_id is the id of the app revision that the job run is associated with
+  string app_revision_id = 6;
+}

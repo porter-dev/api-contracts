@@ -80,6 +80,33 @@ export declare enum EnumAppRevisionStatus {
 }
 
 /**
+ * EnumJobRunStatus describes the status of a job run
+ *
+ * @generated from enum porter.v1.EnumJobRunStatus
+ */
+export declare enum EnumJobRunStatus {
+  /**
+   * @generated from enum value: ENUM_JOB_RUN_STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: ENUM_JOB_RUN_STATUS_RUNNING = 1;
+   */
+  RUNNING = 1,
+
+  /**
+   * @generated from enum value: ENUM_JOB_RUN_STATUS_SUCCESSFUL = 2;
+   */
+  SUCCESSFUL = 2,
+
+  /**
+   * @generated from enum value: ENUM_JOB_RUN_STATUS_FAILED = 3;
+   */
+  FAILED = 3,
+}
+
+/**
  * DeploymentTargetIdentifier is the object that identifies a deployment target. One of id or name must be provided, with id taking precedence.
  *
  * @generated from message porter.v1.DeploymentTargetIdentifier
@@ -834,5 +861,68 @@ export declare class EnvVariableFromApp extends Message<EnvVariableFromApp> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EnvVariableFromApp;
 
   static equals(a: EnvVariableFromApp | PlainMessage<EnvVariableFromApp> | undefined, b: EnvVariableFromApp | PlainMessage<EnvVariableFromApp> | undefined): boolean;
+}
+
+/**
+ * JobRun contains details about a job run
+ *
+ * @generated from message porter.v1.JobRun
+ */
+export declare class JobRun extends Message<JobRun> {
+  /**
+   * id is the id of the job run
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * job_name is the name of the job
+   *
+   * @generated from field: string job_name = 2;
+   */
+  jobName: string;
+
+  /**
+   * status is the status of the job run
+   *
+   * @generated from field: porter.v1.EnumJobRunStatus status = 3;
+   */
+  status: EnumJobRunStatus;
+
+  /**
+   * created_at is the time the job run was created
+   *
+   * @generated from field: google.protobuf.Timestamp created_at = 4;
+   */
+  createdAt?: Timestamp;
+
+  /**
+   * finished_at is the time the job run finished
+   *
+   * @generated from field: google.protobuf.Timestamp finished_at = 5;
+   */
+  finishedAt?: Timestamp;
+
+  /**
+   * app_revision_id is the id of the app revision that the job run is associated with
+   *
+   * @generated from field: string app_revision_id = 6;
+   */
+  appRevisionId: string;
+
+  constructor(data?: PartialMessage<JobRun>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.JobRun";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): JobRun;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): JobRun;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): JobRun;
+
+  static equals(a: JobRun | PlainMessage<JobRun> | undefined, b: JobRun | PlainMessage<JobRun> | undefined): boolean;
 }
 
