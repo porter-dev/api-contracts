@@ -252,7 +252,7 @@ func (x *NotificationConfig) GetEnabledStatuses() []*NotificationStatusEnabled {
 	return nil
 }
 
-// NotificationTypeEnabled whether notifications are enabled for a given type
+// NotificationTypeEnabled specifies whether notifications are enabled for a given type
 type NotificationTypeEnabled struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -308,7 +308,7 @@ func (x *NotificationTypeEnabled) GetEnabled() bool {
 	return false
 }
 
-// NotificationStatusEnabled whether notifications are enabled for a given status
+// NotificationStatusEnabled specifies whether notifications are enabled for a given status
 type NotificationStatusEnabled struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

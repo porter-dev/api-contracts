@@ -61,7 +61,7 @@ export const NotificationConfig = proto3.makeMessageType(
 );
 
 /**
- * NotificationTypeEnabled whether notifications are enabled for a given type
+ * NotificationTypeEnabled specifies whether notifications are enabled for a given type
  *
  * @generated from message porter.v1.NotificationTypeEnabled
  */
@@ -74,7 +74,7 @@ export const NotificationTypeEnabled = proto3.makeMessageType(
 );
 
 /**
- * NotificationStatusEnabled whether notifications are enabled for a given status
+ * NotificationStatusEnabled specifies whether notifications are enabled for a given status
  *
  * @generated from message porter.v1.NotificationStatusEnabled
  */

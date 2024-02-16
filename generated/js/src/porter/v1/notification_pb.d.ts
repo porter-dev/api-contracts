@@ -150,7 +150,7 @@ export declare class NotificationConfig extends Message<NotificationConfig> {
 }
 
 /**
- * NotificationTypeEnabled whether notifications are enabled for a given type
+ * NotificationTypeEnabled specifies whether notifications are enabled for a given type
  *
  * @generated from message porter.v1.NotificationTypeEnabled
  */
@@ -181,7 +181,7 @@ export declare class NotificationTypeEnabled extends Message<NotificationTypeEna
 }
 
 /**
- * NotificationStatusEnabled whether notifications are enabled for a given status
+ * NotificationStatusEnabled specifies whether notifications are enabled for a given status
  *
  * @generated from message porter.v1.NotificationStatusEnabled
  */

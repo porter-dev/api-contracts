@@ -27,13 +27,13 @@ message NotificationConfig {
   repeated NotificationStatusEnabled enabled_statuses = 8;
 }
 
-// NotificationTypeEnabled whether notifications are enabled for a given type
+// NotificationTypeEnabled specifies whether notifications are enabled for a given type
 message NotificationTypeEnabled {
   EnumNotificationEventType type = 1;
   bool enabled = 2;
 }
 
-// NotificationStatusEnabled whether notifications are enabled for a given status
+// NotificationStatusEnabled specifies whether notifications are enabled for a given status
 message NotificationStatusEnabled {
   EnumNotificationStatus status = 1;
   bool enabled = 2;
