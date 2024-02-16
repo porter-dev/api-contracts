@@ -163,6 +163,12 @@ const (
 	// ClusterControlPlaneServiceManualServiceRunProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's ManualServiceRun RPC.
 	ClusterControlPlaneServiceManualServiceRunProcedure = "/porter.v1.ClusterControlPlaneService/ManualServiceRun"
+	// ClusterControlPlaneServiceJobRunStatusProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's JobRunStatus RPC.
+	ClusterControlPlaneServiceJobRunStatusProcedure = "/porter.v1.ClusterControlPlaneService/JobRunStatus"
+	// ClusterControlPlaneServiceJobRunsProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's JobRuns RPC.
+	ClusterControlPlaneServiceJobRunsProcedure = "/porter.v1.ClusterControlPlaneService/JobRuns"
 	// ClusterControlPlaneServiceClusterNetworkSettingsProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's ClusterNetworkSettings RPC.
 	ClusterControlPlaneServiceClusterNetworkSettingsProcedure = "/porter.v1.ClusterControlPlaneService/ClusterNetworkSettings"
@@ -364,6 +370,10 @@ type ClusterControlPlaneServiceClient interface {
 	// ManualServiceRun creates a pod/job with the same spec as the provided service (as defined in the latest app revision)
 	// and runs the provided command, or if no command is provided, runs the command defined for the service.
 	ManualServiceRun(context.Context, *connect.Request[v1.ManualServiceRunRequest]) (*connect.Response[v1.ManualServiceRunResponse], error)
+	// JobRunStatus returns the status of a given job run
+	JobRunStatus(context.Context, *connect.Request[v1.JobRunStatusRequest]) (*connect.Response[v1.JobRunStatusResponse], error)
+	// JobRuns returns the job runs for a given app and job service in the provided deployment target
+	JobRuns(context.Context, *connect.Request[v1.JobRunsRequest]) (*connect.Response[v1.JobRunsResponse], error)
 	// ClusterNetworkSettings gets the network settings (region, subnets, vpc) for a given project/cluster combination
 	ClusterNetworkSettings(context.Context, *connect.Request[v1.ClusterNetworkSettingsRequest]) (*connect.Response[v1.ClusterNetworkSettingsResponse], error)
 	// SharedNetworkSettings gets the network settings (region, subnets, vpc) for a given project/cluster/service combination
@@ -681,6 +691,16 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceManualServiceRunProcedure,
 			opts...,
 		),
+		jobRunStatus: connect.NewClient[v1.JobRunStatusRequest, v1.JobRunStatusResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceJobRunStatusProcedure,
+			opts...,
+		),
+		jobRuns: connect.NewClient[v1.JobRunsRequest, v1.JobRunsResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceJobRunsProcedure,
+			opts...,
+		),
 		clusterNetworkSettings: connect.NewClient[v1.ClusterNetworkSettingsRequest, v1.ClusterNetworkSettingsResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceClusterNetworkSettingsProcedure,
@@ -884,6 +904,8 @@ type clusterControlPlaneServiceClient struct {
 	updateAppsLinkedToEnvGroup          *connect.Client[v1.UpdateAppsLinkedToEnvGroupRequest, v1.UpdateAppsLinkedToEnvGroupResponse]
 	appHelmValues                       *connect.Client[v1.AppHelmValuesRequest, v1.AppHelmValuesResponse]
 	manualServiceRun                    *connect.Client[v1.ManualServiceRunRequest, v1.ManualServiceRunResponse]
+	jobRunStatus                        *connect.Client[v1.JobRunStatusRequest, v1.JobRunStatusResponse]
+	jobRuns                             *connect.Client[v1.JobRunsRequest, v1.JobRunsResponse]
 	clusterNetworkSettings              *connect.Client[v1.ClusterNetworkSettingsRequest, v1.ClusterNetworkSettingsResponse]
 	sharedNetworkSettings               *connect.Client[v1.SharedNetworkSettingsRequest, v1.SharedNetworkSettingsResponse]
 	images                              *connect.Client[v1.ImagesRequest, v1.ImagesResponse]
@@ -1142,6 +1164,16 @@ func (c *clusterControlPlaneServiceClient) AppHelmValues(ctx context.Context, re
 // ManualServiceRun calls porter.v1.ClusterControlPlaneService.ManualServiceRun.
 func (c *clusterControlPlaneServiceClient) ManualServiceRun(ctx context.Context, req *connect.Request[v1.ManualServiceRunRequest]) (*connect.Response[v1.ManualServiceRunResponse], error) {
 	return c.manualServiceRun.CallUnary(ctx, req)
+}
+
+// JobRunStatus calls porter.v1.ClusterControlPlaneService.JobRunStatus.
+func (c *clusterControlPlaneServiceClient) JobRunStatus(ctx context.Context, req *connect.Request[v1.JobRunStatusRequest]) (*connect.Response[v1.JobRunStatusResponse], error) {
+	return c.jobRunStatus.CallUnary(ctx, req)
+}
+
+// JobRuns calls porter.v1.ClusterControlPlaneService.JobRuns.
+func (c *clusterControlPlaneServiceClient) JobRuns(ctx context.Context, req *connect.Request[v1.JobRunsRequest]) (*connect.Response[v1.JobRunsResponse], error) {
+	return c.jobRuns.CallUnary(ctx, req)
 }
 
 // ClusterNetworkSettings calls porter.v1.ClusterControlPlaneService.ClusterNetworkSettings.
@@ -1428,6 +1460,10 @@ type ClusterControlPlaneServiceHandler interface {
 	// ManualServiceRun creates a pod/job with the same spec as the provided service (as defined in the latest app revision)
 	// and runs the provided command, or if no command is provided, runs the command defined for the service.
 	ManualServiceRun(context.Context, *connect.Request[v1.ManualServiceRunRequest]) (*connect.Response[v1.ManualServiceRunResponse], error)
+	// JobRunStatus returns the status of a given job run
+	JobRunStatus(context.Context, *connect.Request[v1.JobRunStatusRequest]) (*connect.Response[v1.JobRunStatusResponse], error)
+	// JobRuns returns the job runs for a given app and job service in the provided deployment target
+	JobRuns(context.Context, *connect.Request[v1.JobRunsRequest]) (*connect.Response[v1.JobRunsResponse], error)
 	// ClusterNetworkSettings gets the network settings (region, subnets, vpc) for a given project/cluster combination
 	ClusterNetworkSettings(context.Context, *connect.Request[v1.ClusterNetworkSettingsRequest]) (*connect.Response[v1.ClusterNetworkSettingsResponse], error)
 	// SharedNetworkSettings gets the network settings (region, subnets, vpc) for a given project/cluster/service combination
@@ -1741,6 +1777,16 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.ManualServiceRun,
 		opts...,
 	)
+	clusterControlPlaneServiceJobRunStatusHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceJobRunStatusProcedure,
+		svc.JobRunStatus,
+		opts...,
+	)
+	clusterControlPlaneServiceJobRunsHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceJobRunsProcedure,
+		svc.JobRuns,
+		opts...,
+	)
 	clusterControlPlaneServiceClusterNetworkSettingsHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceClusterNetworkSettingsProcedure,
 		svc.ClusterNetworkSettings,
@@ -1984,6 +2030,10 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceAppHelmValuesHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceManualServiceRunProcedure:
 			clusterControlPlaneServiceManualServiceRunHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceJobRunStatusProcedure:
+			clusterControlPlaneServiceJobRunStatusHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceJobRunsProcedure:
+			clusterControlPlaneServiceJobRunsHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceClusterNetworkSettingsProcedure:
 			clusterControlPlaneServiceClusterNetworkSettingsHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceSharedNetworkSettingsProcedure:
@@ -2225,6 +2275,14 @@ func (UnimplementedClusterControlPlaneServiceHandler) AppHelmValues(context.Cont
 
 func (UnimplementedClusterControlPlaneServiceHandler) ManualServiceRun(context.Context, *connect.Request[v1.ManualServiceRunRequest]) (*connect.Response[v1.ManualServiceRunResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ManualServiceRun is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) JobRunStatus(context.Context, *connect.Request[v1.JobRunStatusRequest]) (*connect.Response[v1.JobRunStatusResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.JobRunStatus is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) JobRuns(context.Context, *connect.Request[v1.JobRunsRequest]) (*connect.Response[v1.JobRunsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.JobRuns is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) ClusterNetworkSettings(context.Context, *connect.Request[v1.ClusterNetworkSettingsRequest]) (*connect.Response[v1.ClusterNetworkSettingsResponse], error) {

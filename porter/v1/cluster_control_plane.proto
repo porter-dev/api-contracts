@@ -906,6 +906,45 @@ message ManualServiceRunRequest {
 message ManualServiceRunResponse {
   // job_run_id is the id of the job run that was created, if any
   string job_run_id = 1;
+  // job_run_name is the name of the job run that was created, if any
+  string job_run_name = 2;
+}
+
+// JobRunStatusRequest is the request object for JobRunStatus
+message JobRunStatusRequest {
+  int64 project_id = 1;
+  // deployment_target_identifier is the object that identifies the deployment target for the job run
+  // this is used to retrieve the expected cluster the job run took place in
+  DeploymentTargetIdentifier deployment_target_identifier = 3;
+  // job_run_name is the name of the job run to query
+  string job_run_name = 2;
+}
+
+// JobRunStatusResponse is the response object for JobRunStatus
+message JobRunStatusResponse {
+  // job_run is the job run that was requested
+  JobRun job_run = 1;
+}
+
+// JobRunsRequest is the request object for ListJobRuns
+message JobRunsRequest {
+  int64 project_id = 1;
+  // app_name is the name of the app to retrieve the job runs for
+  string app_name = 2;
+  // job_name is the name of the job service in the app to retrieve the job runs for
+  string job_name = 4;
+  // deployment_target_identifier is the object that identifies the deployment target for the app
+  DeploymentTargetIdentifier deployment_target_identifier = 5;
+  // limit is the maximum number of job runs to return
+  int64 limit = 6;
+  // offset is the number of job runs to skip
+  int64 offset = 7;
+}
+
+// JobRunsResponse is the response object for ListJobRuns
+message JobRunsResponse {
+  // job_runs is the list of job runs for the given app and job
+  repeated JobRun job_runs = 1;
 }
 
 // ImagesRequest is the request object for listing images
@@ -1352,6 +1391,12 @@ service ClusterControlPlaneService {
   // ManualServiceRun creates a pod/job with the same spec as the provided service (as defined in the latest app revision)
   // and runs the provided command, or if no command is provided, runs the command defined for the service.
   rpc ManualServiceRun(ManualServiceRunRequest) returns (ManualServiceRunResponse) {}
+
+  // JobRunStatus returns the status of a given job run
+  rpc JobRunStatus(JobRunStatusRequest) returns (JobRunStatusResponse) {}
+
+  // JobRuns returns the job runs for a given app and job service in the provided deployment target
+  rpc JobRuns(JobRunsRequest) returns (JobRunsResponse) {}
 
   // ClusterNetworkSettings gets the network settings (region, subnets, vpc) for a given project/cluster combination
   rpc ClusterNetworkSettings(ClusterNetworkSettingsRequest) returns (ClusterNetworkSettingsResponse) {}

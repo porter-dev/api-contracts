@@ -51,6 +51,21 @@ export const EnumAppRevisionStatus = proto3.makeEnum(
 );
 
 /**
+ * EnumJobRunStatus describes the status of a job run
+ *
+ * @generated from enum porter.v1.EnumJobRunStatus
+ */
+export const EnumJobRunStatus = proto3.makeEnum(
+  "porter.v1.EnumJobRunStatus",
+  [
+    {no: 0, name: "ENUM_JOB_RUN_STATUS_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "ENUM_JOB_RUN_STATUS_RUNNING", localName: "RUNNING"},
+    {no: 2, name: "ENUM_JOB_RUN_STATUS_SUCCESSFUL", localName: "SUCCESSFUL"},
+    {no: 3, name: "ENUM_JOB_RUN_STATUS_FAILED", localName: "FAILED"},
+  ],
+);
+
+/**
  * DeploymentTargetIdentifier is the object that identifies a deployment target. One of id or name must be provided, with id taking precedence.
  *
  * @generated from message porter.v1.DeploymentTargetIdentifier
@@ -276,6 +291,23 @@ export const EnvVariableFromApp = proto3.makeMessageType(
     { no: 1, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "value", kind: "enum", T: proto3.getEnumType(EnvValueFromApp) },
     { no: 3, name: "service_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * JobRun contains details about a job run
+ *
+ * @generated from message porter.v1.JobRun
+ */
+export const JobRun = proto3.makeMessageType(
+  "porter.v1.JobRun",
+  () => [
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "job_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "status", kind: "enum", T: proto3.getEnumType(EnumJobRunStatus) },
+    { no: 4, name: "created_at", kind: "message", T: Timestamp },
+    { no: 5, name: "finished_at", kind: "message", T: Timestamp },
+    { no: 6, name: "app_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

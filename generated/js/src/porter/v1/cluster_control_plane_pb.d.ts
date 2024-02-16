@@ -11,7 +11,7 @@ import type { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import type { Error } from "./errors_pb.js";
 import type { Contract, ContractRevision } from "./contract_pb.js";
 import type { ContractComplianceCheckGroup, EnumComplianceProfile, EnumComplianceVendor, VendorComplianceCheck } from "./compliance_pb.js";
-import type { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
+import type { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, JobRun, PorterApp } from "./porter_app_pb.js";
 import type { Addon, PrerequisiteAddon } from "./addons_pb.js";
 import type { EnumEnvGroupProviderType } from "./env_group_pb.js";
 import type { NotificationConfig } from "./notification_pb.js";
@@ -4077,6 +4077,13 @@ export declare class ManualServiceRunResponse extends Message<ManualServiceRunRe
    */
   jobRunId: string;
 
+  /**
+   * job_run_name is the name of the job run that was created, if any
+   *
+   * @generated from field: string job_run_name = 2;
+   */
+  jobRunName: string;
+
   constructor(data?: PartialMessage<ManualServiceRunResponse>);
 
   static readonly runtime: typeof proto3;
@@ -4090,6 +4097,164 @@ export declare class ManualServiceRunResponse extends Message<ManualServiceRunRe
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ManualServiceRunResponse;
 
   static equals(a: ManualServiceRunResponse | PlainMessage<ManualServiceRunResponse> | undefined, b: ManualServiceRunResponse | PlainMessage<ManualServiceRunResponse> | undefined): boolean;
+}
+
+/**
+ * JobRunStatusRequest is the request object for JobRunStatus
+ *
+ * @generated from message porter.v1.JobRunStatusRequest
+ */
+export declare class JobRunStatusRequest extends Message<JobRunStatusRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target for the job run
+   * this is used to retrieve the expected cluster the job run took place in
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 3;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  /**
+   * job_run_name is the name of the job run to query
+   *
+   * @generated from field: string job_run_name = 2;
+   */
+  jobRunName: string;
+
+  constructor(data?: PartialMessage<JobRunStatusRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.JobRunStatusRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): JobRunStatusRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): JobRunStatusRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): JobRunStatusRequest;
+
+  static equals(a: JobRunStatusRequest | PlainMessage<JobRunStatusRequest> | undefined, b: JobRunStatusRequest | PlainMessage<JobRunStatusRequest> | undefined): boolean;
+}
+
+/**
+ * JobRunStatusResponse is the response object for JobRunStatus
+ *
+ * @generated from message porter.v1.JobRunStatusResponse
+ */
+export declare class JobRunStatusResponse extends Message<JobRunStatusResponse> {
+  /**
+   * job_run is the job run that was requested
+   *
+   * @generated from field: porter.v1.JobRun job_run = 1;
+   */
+  jobRun?: JobRun;
+
+  constructor(data?: PartialMessage<JobRunStatusResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.JobRunStatusResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): JobRunStatusResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): JobRunStatusResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): JobRunStatusResponse;
+
+  static equals(a: JobRunStatusResponse | PlainMessage<JobRunStatusResponse> | undefined, b: JobRunStatusResponse | PlainMessage<JobRunStatusResponse> | undefined): boolean;
+}
+
+/**
+ * JobRunsRequest is the request object for ListJobRuns
+ *
+ * @generated from message porter.v1.JobRunsRequest
+ */
+export declare class JobRunsRequest extends Message<JobRunsRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * app_name is the name of the app to retrieve the job runs for
+   *
+   * @generated from field: string app_name = 2;
+   */
+  appName: string;
+
+  /**
+   * job_name is the name of the job service in the app to retrieve the job runs for
+   *
+   * @generated from field: string job_name = 4;
+   */
+  jobName: string;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target for the app
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 5;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  /**
+   * limit is the maximum number of job runs to return
+   *
+   * @generated from field: int64 limit = 6;
+   */
+  limit: bigint;
+
+  /**
+   * offset is the number of job runs to skip
+   *
+   * @generated from field: int64 offset = 7;
+   */
+  offset: bigint;
+
+  constructor(data?: PartialMessage<JobRunsRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.JobRunsRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): JobRunsRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): JobRunsRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): JobRunsRequest;
+
+  static equals(a: JobRunsRequest | PlainMessage<JobRunsRequest> | undefined, b: JobRunsRequest | PlainMessage<JobRunsRequest> | undefined): boolean;
+}
+
+/**
+ * JobRunsResponse is the response object for ListJobRuns
+ *
+ * @generated from message porter.v1.JobRunsResponse
+ */
+export declare class JobRunsResponse extends Message<JobRunsResponse> {
+  /**
+   * job_runs is the list of job runs for the given app and job
+   *
+   * @generated from field: repeated porter.v1.JobRun job_runs = 1;
+   */
+  jobRuns: JobRun[];
+
+  constructor(data?: PartialMessage<JobRunsResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.JobRunsResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): JobRunsResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): JobRunsResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): JobRunsResponse;
+
+  static equals(a: JobRunsResponse | PlainMessage<JobRunsResponse> | undefined, b: JobRunsResponse | PlainMessage<JobRunsResponse> | undefined): boolean;
 }
 
 /**

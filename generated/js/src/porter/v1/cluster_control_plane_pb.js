@@ -10,7 +10,7 @@ import { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import { Error } from "./errors_pb.js";
 import { Contract, ContractRevision } from "./contract_pb.js";
 import { ContractComplianceCheckGroup, EnumComplianceProfile, EnumComplianceVendor, VendorComplianceCheck } from "./compliance_pb.js";
-import { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, PorterApp } from "./porter_app_pb.js";
+import { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, JobRun, PorterApp } from "./porter_app_pb.js";
 import { Addon, PrerequisiteAddon } from "./addons_pb.js";
 import { EnumEnvGroupProviderType } from "./env_group_pb.js";
 import { NotificationConfig } from "./notification_pb.js";
@@ -1353,6 +1353,62 @@ export const ManualServiceRunResponse = proto3.makeMessageType(
   "porter.v1.ManualServiceRunResponse",
   () => [
     { no: 1, name: "job_run_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "job_run_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * JobRunStatusRequest is the request object for JobRunStatus
+ *
+ * @generated from message porter.v1.JobRunStatusRequest
+ */
+export const JobRunStatusRequest = proto3.makeMessageType(
+  "porter.v1.JobRunStatusRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+    { no: 2, name: "job_run_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * JobRunStatusResponse is the response object for JobRunStatus
+ *
+ * @generated from message porter.v1.JobRunStatusResponse
+ */
+export const JobRunStatusResponse = proto3.makeMessageType(
+  "porter.v1.JobRunStatusResponse",
+  () => [
+    { no: 1, name: "job_run", kind: "message", T: JobRun },
+  ],
+);
+
+/**
+ * JobRunsRequest is the request object for ListJobRuns
+ *
+ * @generated from message porter.v1.JobRunsRequest
+ */
+export const JobRunsRequest = proto3.makeMessageType(
+  "porter.v1.JobRunsRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "job_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+    { no: 6, name: "limit", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 7, name: "offset", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * JobRunsResponse is the response object for ListJobRuns
+ *
+ * @generated from message porter.v1.JobRunsResponse
+ */
+export const JobRunsResponse = proto3.makeMessageType(
+  "porter.v1.JobRunsResponse",
+  () => [
+    { no: 1, name: "job_runs", kind: "message", T: JobRun, repeated: true },
   ],
 );
 
