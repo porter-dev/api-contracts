@@ -67,7 +67,17 @@ message PreflightCheckRequest {
 
 message PreflightCheckResponse {
   // preflight_checks keys are name of preflight check and error will be if the preflight checks fails, nil if it passes
-  map<string, Error> preflight_checks = 1;
+  // Deprecated: use preflight_check_errors instead.
+  map<string, Error> preflight_checks = 1 [deprecated = true];
+  // preflight_check_errors is a list of failing preflight checks
+  repeated PreflightCheckError preflight_check_errors = 2;
+}
+
+message PreflightCheckError {
+  // key is the key of the preflight check
+  string key = 1;
+  // error is the error that occurred during the preflight check
+  Error error = 2;
 }
 
 message QuotaPreflightCheckRequest {

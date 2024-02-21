@@ -163,6 +163,18 @@ export const PreflightCheckResponse = proto3.makeMessageType(
   "porter.v1.PreflightCheckResponse",
   () => [
     { no: 1, name: "preflight_checks", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Error} },
+    { no: 2, name: "preflight_check_errors", kind: "message", T: PreflightCheckError, repeated: true },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.PreflightCheckError
+ */
+export const PreflightCheckError = proto3.makeMessageType(
+  "porter.v1.PreflightCheckError",
+  () => [
+    { no: 1, name: "key", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "error", kind: "message", T: Error },
   ],
 );
 

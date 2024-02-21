@@ -441,10 +441,19 @@ export declare class PreflightCheckRequest extends Message<PreflightCheckRequest
 export declare class PreflightCheckResponse extends Message<PreflightCheckResponse> {
   /**
    * preflight_checks keys are name of preflight check and error will be if the preflight checks fails, nil if it passes
+   * Deprecated: use preflight_check_errors instead.
    *
-   * @generated from field: map<string, porter.v1.Error> preflight_checks = 1;
+   * @generated from field: map<string, porter.v1.Error> preflight_checks = 1 [deprecated = true];
+   * @deprecated
    */
   preflightChecks: { [key: string]: Error };
+
+  /**
+   * preflight_check_errors is a list of failing preflight checks
+   *
+   * @generated from field: repeated porter.v1.PreflightCheckError preflight_check_errors = 2;
+   */
+  preflightCheckErrors: PreflightCheckError[];
 
   constructor(data?: PartialMessage<PreflightCheckResponse>);
 
@@ -459,6 +468,39 @@ export declare class PreflightCheckResponse extends Message<PreflightCheckRespon
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PreflightCheckResponse;
 
   static equals(a: PreflightCheckResponse | PlainMessage<PreflightCheckResponse> | undefined, b: PreflightCheckResponse | PlainMessage<PreflightCheckResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.PreflightCheckError
+ */
+export declare class PreflightCheckError extends Message<PreflightCheckError> {
+  /**
+   * key is the key of the preflight check
+   *
+   * @generated from field: string key = 1;
+   */
+  key: string;
+
+  /**
+   * error is the error that occurred during the preflight check
+   *
+   * @generated from field: porter.v1.Error error = 2;
+   */
+  error?: Error;
+
+  constructor(data?: PartialMessage<PreflightCheckError>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.PreflightCheckError";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PreflightCheckError;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PreflightCheckError;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PreflightCheckError;
+
+  static equals(a: PreflightCheckError | PlainMessage<PreflightCheckError> | undefined, b: PreflightCheckError | PlainMessage<PreflightCheckError> | undefined): boolean;
 }
 
 /**
