@@ -360,7 +360,10 @@ export declare class QuotaIncreaseResponse extends Message<QuotaIncreaseResponse
 }
 
 /**
+ * Deprecated: use CloudContractPreflightCheckRequest instead
+ *
  * @generated from message porter.v1.PreflightCheckRequest
+ * @deprecated
  */
 export declare class PreflightCheckRequest extends Message<PreflightCheckRequest> {
   /**
@@ -436,7 +439,10 @@ export declare class PreflightCheckRequest extends Message<PreflightCheckRequest
 }
 
 /**
+ * Deprecated: use CloudContractPreflightCheckResponse instead
+ *
  * @generated from message porter.v1.PreflightCheckResponse
+ * @deprecated
  */
 export declare class PreflightCheckResponse extends Message<PreflightCheckResponse> {
   /**
@@ -459,6 +465,104 @@ export declare class PreflightCheckResponse extends Message<PreflightCheckRespon
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PreflightCheckResponse;
 
   static equals(a: PreflightCheckResponse | PlainMessage<PreflightCheckResponse> | undefined, b: PreflightCheckResponse | PlainMessage<PreflightCheckResponse> | undefined): boolean;
+}
+
+/**
+ * CloudContractPreflightCheckRequest is the request object for running preflight checks on a cloud contract
+ *
+ * @generated from message porter.v1.CloudContractPreflightCheckRequest
+ */
+export declare class CloudContractPreflightCheckRequest extends Message<CloudContractPreflightCheckRequest> {
+  /**
+   * contract is the contract to run preflight checks on
+   *
+   * @generated from field: porter.v1.Contract contract = 1;
+   */
+  contract?: Contract;
+
+  constructor(data?: PartialMessage<CloudContractPreflightCheckRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CloudContractPreflightCheckRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CloudContractPreflightCheckRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CloudContractPreflightCheckRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CloudContractPreflightCheckRequest;
+
+  static equals(a: CloudContractPreflightCheckRequest | PlainMessage<CloudContractPreflightCheckRequest> | undefined, b: CloudContractPreflightCheckRequest | PlainMessage<CloudContractPreflightCheckRequest> | undefined): boolean;
+}
+
+/**
+ * CloudContractPreflightCheckResponse is the response object for running preflight checks on a cloud contract
+ *
+ * @generated from message porter.v1.CloudContractPreflightCheckResponse
+ */
+export declare class CloudContractPreflightCheckResponse extends Message<CloudContractPreflightCheckResponse> {
+  /**
+   * preflight_checks is a list the failing preflight checks for the contract
+   *
+   * @generated from field: repeated porter.v1.CloudContractPreflightCheck failing_preflight_checks = 1;
+   */
+  failingPreflightChecks: CloudContractPreflightCheck[];
+
+  constructor(data?: PartialMessage<CloudContractPreflightCheckResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CloudContractPreflightCheckResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CloudContractPreflightCheckResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CloudContractPreflightCheckResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CloudContractPreflightCheckResponse;
+
+  static equals(a: CloudContractPreflightCheckResponse | PlainMessage<CloudContractPreflightCheckResponse> | undefined, b: CloudContractPreflightCheckResponse | PlainMessage<CloudContractPreflightCheckResponse> | undefined): boolean;
+}
+
+/**
+ * CloudContractPreflightCheck represents a failing preflight check for a cloud contract
+ *
+ * @generated from message porter.v1.CloudContractPreflightCheck
+ */
+export declare class CloudContractPreflightCheck extends Message<CloudContractPreflightCheck> {
+  /**
+   * type is the type of the preflight check
+   *
+   * @generated from field: string type = 1;
+   */
+  type: string;
+
+  /**
+   * message is a message accompanying the check
+   *
+   * @generated from field: string message = 2;
+   */
+  message: string;
+
+  /**
+   * metadata is a map of unstructured metadata about the preflight check failure
+   *
+   * @generated from field: map<string, string> metadata = 5;
+   */
+  metadata: { [key: string]: string };
+
+  constructor(data?: PartialMessage<CloudContractPreflightCheck>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CloudContractPreflightCheck";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CloudContractPreflightCheck;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CloudContractPreflightCheck;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CloudContractPreflightCheck;
+
+  static equals(a: CloudContractPreflightCheck | PlainMessage<CloudContractPreflightCheck> | undefined, b: CloudContractPreflightCheck | PlainMessage<CloudContractPreflightCheck> | undefined): boolean;
 }
 
 /**
