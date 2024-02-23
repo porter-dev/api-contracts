@@ -142,7 +142,10 @@ export const QuotaIncreaseResponse = proto3.makeMessageType(
 );
 
 /**
+ * Deprecated: use CloudContractPreflightCheckRequest instead
+ *
  * @generated from message porter.v1.PreflightCheckRequest
+ * @deprecated
  */
 export const PreflightCheckRequest = proto3.makeMessageType(
   "porter.v1.PreflightCheckRequest",
@@ -157,12 +160,53 @@ export const PreflightCheckRequest = proto3.makeMessageType(
 );
 
 /**
+ * Deprecated: use CloudContractPreflightCheckResponse instead
+ *
  * @generated from message porter.v1.PreflightCheckResponse
+ * @deprecated
  */
 export const PreflightCheckResponse = proto3.makeMessageType(
   "porter.v1.PreflightCheckResponse",
   () => [
     { no: 1, name: "preflight_checks", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: Error} },
+  ],
+);
+
+/**
+ * CloudContractPreflightCheckRequest is the request object for running preflight checks on a cloud contract
+ *
+ * @generated from message porter.v1.CloudContractPreflightCheckRequest
+ */
+export const CloudContractPreflightCheckRequest = proto3.makeMessageType(
+  "porter.v1.CloudContractPreflightCheckRequest",
+  () => [
+    { no: 1, name: "contract", kind: "message", T: Contract },
+  ],
+);
+
+/**
+ * CloudContractPreflightCheckResponse is the response object for running preflight checks on a cloud contract
+ *
+ * @generated from message porter.v1.CloudContractPreflightCheckResponse
+ */
+export const CloudContractPreflightCheckResponse = proto3.makeMessageType(
+  "porter.v1.CloudContractPreflightCheckResponse",
+  () => [
+    { no: 1, name: "failing_preflight_checks", kind: "message", T: CloudContractPreflightCheck, repeated: true },
+  ],
+);
+
+/**
+ * CloudContractPreflightCheck represents a failing preflight check for a cloud contract
+ *
+ * @generated from message porter.v1.CloudContractPreflightCheck
+ */
+export const CloudContractPreflightCheck = proto3.makeMessageType(
+  "porter.v1.CloudContractPreflightCheck",
+  () => [
+    { no: 1, name: "type", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "message", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "metadata", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "scalar", T: 9 /* ScalarType.STRING */} },
   ],
 );
 

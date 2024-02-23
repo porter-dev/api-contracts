@@ -41,7 +41,10 @@ message QuotaIncreaseResponse {
   Error error = 1;
 }
 
+// Deprecated: use CloudContractPreflightCheckRequest instead
 message PreflightCheckRequest {
+  option deprecated = true;
+
   // Deprecated: use contract instead
   int64 project_id = 1 [deprecated = true];
   // cloud_provider [REQUIRED] represents the provider that we will provisioning the cluster in
@@ -65,9 +68,33 @@ message PreflightCheckRequest {
   Contract contract = 6;
 }
 
+// Deprecated: use CloudContractPreflightCheckResponse instead
 message PreflightCheckResponse {
+  option deprecated = true;
   // preflight_checks keys are name of preflight check and error will be if the preflight checks fails, nil if it passes
   map<string, Error> preflight_checks = 1;
+}
+
+// CloudContractPreflightCheckRequest is the request object for running preflight checks on a cloud contract
+message CloudContractPreflightCheckRequest {
+  // contract is the contract to run preflight checks on
+  Contract contract = 1;
+}
+
+// CloudContractPreflightCheckResponse is the response object for running preflight checks on a cloud contract
+message CloudContractPreflightCheckResponse {
+  // preflight_checks is a list the failing preflight checks for the contract
+  repeated CloudContractPreflightCheck failing_preflight_checks = 1;
+}
+
+// CloudContractPreflightCheck represents a failing preflight check for a cloud contract
+message CloudContractPreflightCheck {
+  // type is the type of the preflight check
+  string type = 1;
+  // message is a message accompanying the check
+  string message = 2;
+  // metadata is a map of unstructured metadata about the preflight check failure
+  map<string, string> metadata = 3;
 }
 
 message QuotaPreflightCheckRequest {
@@ -1254,7 +1281,14 @@ service ClusterControlPlaneService {
   }
 
   // PreflightCheck checks if the target account is able to provision a cluster
-  rpc PreflightCheck(PreflightCheckRequest) returns (PreflightCheckResponse) {}
+  // Deprecated: Use CloudContractPreflightCheck instead
+  rpc PreflightCheck(PreflightCheckRequest) returns (PreflightCheckResponse) {
+    option deprecated = true;
+  }
+
+  // CloudContractPreflightCheck runs preflight checks on the target account to ensure it is able to provision the resources defined in the contract.
+  // It returns a list of failing checks that must be resolved before  can be provisioned.
+  rpc CloudContractPreflightCheck(CloudContractPreflightCheckRequest) returns (CloudContractPreflightCheckResponse) {}
 
   // CreateAssumeRoleChain creates a new assume role chain for a given project and checks if the target assumed role has sufficient permissions. Use UpdateCloudProviderCredentials instead.
   rpc CreateAssumeRoleChain(CreateAssumeRoleChainRequest) returns (CreateAssumeRoleChainResponse) {
