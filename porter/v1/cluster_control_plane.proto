@@ -94,7 +94,7 @@ message CloudContractPreflightCheck {
   // message is a message accompanying the check
   string message = 2;
   // metadata is a map of unstructured metadata about the preflight check failure
-  map<string, string> metadata = 5;
+  map<string, string> metadata = 3;
 }
 
 message QuotaPreflightCheckRequest {

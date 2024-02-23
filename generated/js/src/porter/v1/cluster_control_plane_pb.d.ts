@@ -546,7 +546,7 @@ export declare class CloudContractPreflightCheck extends Message<CloudContractPr
   /**
    * metadata is a map of unstructured metadata about the preflight check failure
    *
-   * @generated from field: map<string, string> metadata = 5;
+   * @generated from field: map<string, string> metadata = 3;
    */
   metadata: { [key: string]: string };
 
