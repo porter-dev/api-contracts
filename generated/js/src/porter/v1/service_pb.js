@@ -75,6 +75,7 @@ export const WorkerServiceConfig = proto3.makeMessageType(
   "porter.v1.WorkerServiceConfig",
   () => [
     { no: 1, name: "autoscaling", kind: "message", T: Autoscaling },
+    { no: 2, name: "health_check", kind: "message", T: HealthCheck },
   ],
 );
 
@@ -123,7 +124,7 @@ export const Autoscaling = proto3.makeMessageType(
 );
 
 /**
- * HealthCheck is the health check configuration
+ * HealthCheck is the health check configuration. Only one of http_path or command should be set.
  *
  * @generated from message porter.v1.HealthCheck
  */
@@ -132,6 +133,7 @@ export const HealthCheck = proto3.makeMessageType(
   () => [
     { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 2, name: "http_path", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "command", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

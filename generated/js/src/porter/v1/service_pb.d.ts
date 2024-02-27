@@ -262,6 +262,11 @@ export declare class WorkerServiceConfig extends Message<WorkerServiceConfig> {
    */
   autoscaling?: Autoscaling;
 
+  /**
+   * @generated from field: porter.v1.HealthCheck health_check = 2;
+   */
+  healthCheck?: HealthCheck;
+
   constructor(data?: PartialMessage<WorkerServiceConfig>);
 
   static readonly runtime: typeof proto3;
@@ -417,7 +422,7 @@ export declare class Autoscaling extends Message<Autoscaling> {
 }
 
 /**
- * HealthCheck is the health check configuration
+ * HealthCheck is the health check configuration. Only one of http_path or command should be set.
  *
  * @generated from message porter.v1.HealthCheck
  */
@@ -435,6 +440,13 @@ export declare class HealthCheck extends Message<HealthCheck> {
    * @generated from field: string http_path = 2;
    */
   httpPath: string;
+
+  /**
+   * command is the command to run for the health check
+   *
+   * @generated from field: string command = 3;
+   */
+  command: string;
 
   constructor(data?: PartialMessage<HealthCheck>);
 
