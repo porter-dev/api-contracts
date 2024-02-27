@@ -124,7 +124,7 @@ export const Autoscaling = proto3.makeMessageType(
 );
 
 /**
- * HealthCheck is the health check configuration. Only one of http_path or command should be set.
+ * HealthCheck is the health check configuration. Only one of http_path or command should be set, otherwise an error will be returned.
  *
  * @generated from message porter.v1.HealthCheck
  */

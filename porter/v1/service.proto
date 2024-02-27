@@ -64,7 +64,7 @@ message WebServiceConfig {
   Autoscaling autoscaling = 1;
   // domains is the list of custom domains for this service
   repeated Domain domains = 2;
-  // health_check is the health check configuration, used for liveness and readiness probes
+  // health_check is the health check configuration, used to determine if the service is healthy
   HealthCheck health_check = 3;
   // private indicates whether or not the web service should be private (not publicly accessible)
   optional bool private = 4;
@@ -113,7 +113,7 @@ message Autoscaling {
   int32 memory_threshold_percent = 5;
 }
 
-// HealthCheck is the health check configuration. Only one of http_path or command should be set.
+// HealthCheck is the health check configuration. Only one of http_path or command should be set, otherwise an error will be returned.
 message HealthCheck {
   // enabled explicitly enables or disables health checks
   bool enabled = 1;

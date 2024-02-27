@@ -328,7 +328,7 @@ type WebServiceConfig struct {
 	Autoscaling *Autoscaling `protobuf:"bytes,1,opt,name=autoscaling,proto3" json:"autoscaling,omitempty"`
 	// domains is the list of custom domains for this service
 	Domains []*Domain `protobuf:"bytes,2,rep,name=domains,proto3" json:"domains,omitempty"`
-	// health_check is the health check configuration, used for liveness and readiness probes
+	// health_check is the health check configuration, used to determine if the service is healthy
 	HealthCheck *HealthCheck `protobuf:"bytes,3,opt,name=health_check,json=healthCheck,proto3" json:"health_check,omitempty"`
 	// private indicates whether or not the web service should be private (not publicly accessible)
 	Private *bool `protobuf:"varint,4,opt,name=private,proto3,oneof" json:"private,omitempty"`
@@ -689,7 +689,7 @@ func (x *Autoscaling) GetMemoryThresholdPercent() int32 {
 	return 0
 }
 
-// HealthCheck is the health check configuration. Only one of http_path or command should be set.
+// HealthCheck is the health check configuration. Only one of http_path or command should be set, otherwise an error will be returned.
 type HealthCheck struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
