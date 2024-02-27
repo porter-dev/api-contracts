@@ -209,7 +209,7 @@ export declare class WebServiceConfig extends Message<WebServiceConfig> {
   domains: Domain[];
 
   /**
-   * health_check is the health check configuration, used for liveness and readiness probes
+   * health_check is the health check configuration, used to determine if the service is healthy
    *
    * @generated from field: porter.v1.HealthCheck health_check = 3;
    */
@@ -261,6 +261,11 @@ export declare class WorkerServiceConfig extends Message<WorkerServiceConfig> {
    * @generated from field: porter.v1.Autoscaling autoscaling = 1;
    */
   autoscaling?: Autoscaling;
+
+  /**
+   * @generated from field: porter.v1.HealthCheck health_check = 2;
+   */
+  healthCheck?: HealthCheck;
 
   constructor(data?: PartialMessage<WorkerServiceConfig>);
 
@@ -417,7 +422,7 @@ export declare class Autoscaling extends Message<Autoscaling> {
 }
 
 /**
- * HealthCheck is the health check configuration
+ * HealthCheck is the health check configuration. Only one of http_path or command should be set, otherwise an error will be returned.
  *
  * @generated from message porter.v1.HealthCheck
  */
@@ -435,6 +440,13 @@ export declare class HealthCheck extends Message<HealthCheck> {
    * @generated from field: string http_path = 2;
    */
   httpPath: string;
+
+  /**
+   * command is the command to run for the health check
+   *
+   * @generated from field: string command = 3;
+   */
+  command: string;
 
   constructor(data?: PartialMessage<HealthCheck>);
 
