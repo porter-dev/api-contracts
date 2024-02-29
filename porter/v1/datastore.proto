@@ -6,23 +6,27 @@ import "porter/v1/cluster.proto";
 
 // PorterDatastore is the specification for a Porter-managed datastore
 message PorterDatastore {
-  // cloud_provider [REQUIRED] represents the provider that we will provisioning the datastore in
+  // cloud_provider represents the provider that the datastore is provisioned in
   EnumCloudProvider cloud_provider = 1;
-  // cloud_provider_credential_identifier [REQUIRED] is the Porter credentials that will be used for provisioning a datastore.
+  // cloud_provider_credential_identifier is the credential used to provision the datastore
   string cloud_provider_credential_identifier = 2;
-  // id [OPTIONAL] represents the id of the datastore. This is required for update operations, but should be left blank when creating a datastore
-  string id = 3;
-  // kind [REQUIRED] represents the type of the datastore
-  EnumDatastoreKind kind = 4;
+  // region is the region the datastore is provisioned in
+  string region = 3;
+  // id represents the id of the datastore. This is required for update operations, but should be left blank when creating a datastore
+  string id = 4;
+  // name is the name of the datastore
+  string name = 5;
+  // kind represents the type of the datastore
+  EnumDatastoreKind kind = 6;
   // kind_values are the required values depending on kind
   oneof kind_values {
-    RdsPostgres rds_postgres_kind = 5;
+    AwsRdsPostgres aws_rds_postgres_kind = 7;
   }
 }
 
 enum EnumDatastoreKind {
   ENUM_DATASTORE_KIND_UNSPECIFIED = 0;
-  ENUM_DATASTORE_KIND_RDS_POSTGRES = 1;
+  ENUM_DATASTORE_KIND_AWS_RDS_POSTGRES = 1;
 }
 
 message DatastorePasswordSecretRef {
@@ -34,21 +38,19 @@ message DatastorePasswordSecretRef {
   string key = 3;
 }
 
-message RdsPostgres {
-  // name is the name of the datastore
-  string name = 1;
+message AwsRdsPostgres {
   // database_name is the name of the rds database
-  string database_name = 2;
+  string database_name = 1;
   // master_username is the username of the database
-  string master_username = 3;
+  string master_username = 2;
   // master_user_password_literal is the string value of the password; this is only used for creating the database password secret and is wiped when the contract is saved
-  string master_user_password_literal = 4;
+  string master_user_password_literal = 3;
   // master_user_password_secret_ref is the reference to the secret that stores the password of the database
-  DatastorePasswordSecretRef master_user_password_secret_ref = 5;
+  DatastorePasswordSecretRef master_user_password_secret_ref = 4;
   // allocated_storage_gigabytes is the allocated storage of the database in gigabytes
-  int64 allocated_storage_gigabytes = 6;
+  int64 allocated_storage_gigabytes = 5;
   // instance_class is the instance class of the database
-  string instance_class = 7;
+  string instance_class = 6;
 }
 
 // UpdateDatastorePayload is used to send messages via nats to update a datastore

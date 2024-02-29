@@ -17,9 +17,9 @@ export declare enum EnumDatastoreKind {
   UNSPECIFIED = 0,
 
   /**
-   * @generated from enum value: ENUM_DATASTORE_KIND_RDS_POSTGRES = 1;
+   * @generated from enum value: ENUM_DATASTORE_KIND_AWS_RDS_POSTGRES = 1;
    */
-  RDS_POSTGRES = 1,
+  AWS_RDS_POSTGRES = 1,
 }
 
 /**
@@ -29,30 +29,44 @@ export declare enum EnumDatastoreKind {
  */
 export declare class PorterDatastore extends Message<PorterDatastore> {
   /**
-   * cloud_provider [REQUIRED] represents the provider that we will provisioning the datastore in
+   * cloud_provider represents the provider that the datastore is provisioned in
    *
    * @generated from field: porter.v1.EnumCloudProvider cloud_provider = 1;
    */
   cloudProvider: EnumCloudProvider;
 
   /**
-   * cloud_provider_credential_identifier [REQUIRED] is the Porter credentials that will be used for provisioning a datastore.
+   * cloud_provider_credential_identifier is the credential used to provision the datastore
    *
    * @generated from field: string cloud_provider_credential_identifier = 2;
    */
   cloudProviderCredentialIdentifier: string;
 
   /**
-   * id [OPTIONAL] represents the id of the datastore. This is required for update operations, but should be left blank when creating a datastore
+   * region is the region the datastore is provisioned in
    *
-   * @generated from field: string id = 3;
+   * @generated from field: string region = 3;
+   */
+  region: string;
+
+  /**
+   * id represents the id of the datastore. This is required for update operations, but should be left blank when creating a datastore
+   *
+   * @generated from field: string id = 4;
    */
   id: string;
 
   /**
-   * kind [REQUIRED] represents the type of the datastore
+   * name is the name of the datastore
    *
-   * @generated from field: porter.v1.EnumDatastoreKind kind = 4;
+   * @generated from field: string name = 5;
+   */
+  name: string;
+
+  /**
+   * kind represents the type of the datastore
+   *
+   * @generated from field: porter.v1.EnumDatastoreKind kind = 6;
    */
   kind: EnumDatastoreKind;
 
@@ -63,10 +77,10 @@ export declare class PorterDatastore extends Message<PorterDatastore> {
    */
   kindValues: {
     /**
-     * @generated from field: porter.v1.RdsPostgres rds_postgres_kind = 5;
+     * @generated from field: porter.v1.AwsRdsPostgres aws_rds_postgres_kind = 7;
      */
-    value: RdsPostgres;
-    case: "rdsPostgresKind";
+    value: AwsRdsPostgres;
+    case: "awsRdsPostgresKind";
   } | { case: undefined; value?: undefined };
 
   constructor(data?: PartialMessage<PorterDatastore>);
@@ -125,71 +139,64 @@ export declare class DatastorePasswordSecretRef extends Message<DatastorePasswor
 }
 
 /**
- * @generated from message porter.v1.RdsPostgres
+ * @generated from message porter.v1.AwsRdsPostgres
  */
-export declare class RdsPostgres extends Message<RdsPostgres> {
-  /**
-   * name is the name of the datastore
-   *
-   * @generated from field: string name = 1;
-   */
-  name: string;
-
+export declare class AwsRdsPostgres extends Message<AwsRdsPostgres> {
   /**
    * database_name is the name of the rds database
    *
-   * @generated from field: string database_name = 2;
+   * @generated from field: string database_name = 1;
    */
   databaseName: string;
 
   /**
    * master_username is the username of the database
    *
-   * @generated from field: string master_username = 3;
+   * @generated from field: string master_username = 2;
    */
   masterUsername: string;
 
   /**
    * master_user_password_literal is the string value of the password; this is only used for creating the database password secret and is wiped when the contract is saved
    *
-   * @generated from field: string master_user_password_literal = 4;
+   * @generated from field: string master_user_password_literal = 3;
    */
   masterUserPasswordLiteral: string;
 
   /**
    * master_user_password_secret_ref is the reference to the secret that stores the password of the database
    *
-   * @generated from field: porter.v1.DatastorePasswordSecretRef master_user_password_secret_ref = 5;
+   * @generated from field: porter.v1.DatastorePasswordSecretRef master_user_password_secret_ref = 4;
    */
   masterUserPasswordSecretRef?: DatastorePasswordSecretRef;
 
   /**
    * allocated_storage_gigabytes is the allocated storage of the database in gigabytes
    *
-   * @generated from field: int64 allocated_storage_gigabytes = 6;
+   * @generated from field: int64 allocated_storage_gigabytes = 5;
    */
   allocatedStorageGigabytes: bigint;
 
   /**
    * instance_class is the instance class of the database
    *
-   * @generated from field: string instance_class = 7;
+   * @generated from field: string instance_class = 6;
    */
   instanceClass: string;
 
-  constructor(data?: PartialMessage<RdsPostgres>);
+  constructor(data?: PartialMessage<AwsRdsPostgres>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.RdsPostgres";
+  static readonly typeName = "porter.v1.AwsRdsPostgres";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RdsPostgres;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AwsRdsPostgres;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RdsPostgres;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AwsRdsPostgres;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RdsPostgres;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AwsRdsPostgres;
 
-  static equals(a: RdsPostgres | PlainMessage<RdsPostgres> | undefined, b: RdsPostgres | PlainMessage<RdsPostgres> | undefined): boolean;
+  static equals(a: AwsRdsPostgres | PlainMessage<AwsRdsPostgres> | undefined, b: AwsRdsPostgres | PlainMessage<AwsRdsPostgres> | undefined): boolean;
 }
 
 /**
