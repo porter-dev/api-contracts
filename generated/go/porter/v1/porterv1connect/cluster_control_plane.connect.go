@@ -208,9 +208,9 @@ const (
 	// ClusterControlPlaneServiceCreateDatastoreProxyProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's CreateDatastoreProxy RPC.
 	ClusterControlPlaneServiceCreateDatastoreProxyProcedure = "/porter.v1.ClusterControlPlaneService/CreateDatastoreProxy"
-	// ClusterControlPlaneServicePatchCloudContractResourceProcedure is the fully-qualified name of the
-	// ClusterControlPlaneService's PatchCloudContractResource RPC.
-	ClusterControlPlaneServicePatchCloudContractResourceProcedure = "/porter.v1.ClusterControlPlaneService/PatchCloudContractResource"
+	// ClusterControlPlaneServicePatchCloudContractProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's PatchCloudContract RPC.
+	ClusterControlPlaneServicePatchCloudContractProcedure = "/porter.v1.ClusterControlPlaneService/PatchCloudContract"
 	// ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DockerConfigFileForRegistry RPC.
 	ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure = "/porter.v1.ClusterControlPlaneService/DockerConfigFileForRegistry"
@@ -410,8 +410,8 @@ type ClusterControlPlaneServiceClient interface {
 	UpdateDatastore(context.Context, *connect.Request[v1.UpdateDatastoreRequest]) (*connect.Response[v1.UpdateDatastoreResponse], error)
 	// CreateDatastoreProxy creates a proxy for connecting to a datastore
 	CreateDatastoreProxy(context.Context, *connect.Request[v1.CreateDatastoreProxyRequest]) (*connect.Response[v1.CreateDatastoreProxyResponse], error)
-	// PatchCloudContractResource patches a cloud contract by modifying its resources
-	PatchCloudContractResource(context.Context, *connect.Request[v1.PatchCloudContractResourceRequest]) (*connect.Response[v1.PatchCloudContractResourceResponse], error)
+	// PatchCloudContract patches a cloud contract by modifying its resources
+	PatchCloudContract(context.Context, *connect.Request[v1.PatchCloudContractRequest]) (*connect.Response[v1.PatchCloudContractResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -780,9 +780,9 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceCreateDatastoreProxyProcedure,
 			opts...,
 		),
-		patchCloudContractResource: connect.NewClient[v1.PatchCloudContractResourceRequest, v1.PatchCloudContractResourceResponse](
+		patchCloudContract: connect.NewClient[v1.PatchCloudContractRequest, v1.PatchCloudContractResponse](
 			httpClient,
-			baseURL+ClusterControlPlaneServicePatchCloudContractResourceProcedure,
+			baseURL+ClusterControlPlaneServicePatchCloudContractProcedure,
 			opts...,
 		),
 		dockerConfigFileForRegistry: connect.NewClient[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse](
@@ -943,7 +943,7 @@ type clusterControlPlaneServiceClient struct {
 	connectHostedProject                *connect.Client[v1.ConnectHostedProjectRequest, v1.ConnectHostedProjectResponse]
 	updateDatastore                     *connect.Client[v1.UpdateDatastoreRequest, v1.UpdateDatastoreResponse]
 	createDatastoreProxy                *connect.Client[v1.CreateDatastoreProxyRequest, v1.CreateDatastoreProxyResponse]
-	patchCloudContractResource          *connect.Client[v1.PatchCloudContractResourceRequest, v1.PatchCloudContractResourceResponse]
+	patchCloudContract                  *connect.Client[v1.PatchCloudContractRequest, v1.PatchCloudContractResponse]
 	dockerConfigFileForRegistry         *connect.Client[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse]
 	eCRTokenForRegistry                 *connect.Client[v1.ECRTokenForRegistryRequest, v1.ECRTokenForRegistryResponse]
 	assumeRoleCredentials               *connect.Client[v1.AssumeRoleCredentialsRequest, v1.AssumeRoleCredentialsResponse]
@@ -1271,9 +1271,9 @@ func (c *clusterControlPlaneServiceClient) CreateDatastoreProxy(ctx context.Cont
 	return c.createDatastoreProxy.CallUnary(ctx, req)
 }
 
-// PatchCloudContractResource calls porter.v1.ClusterControlPlaneService.PatchCloudContractResource.
-func (c *clusterControlPlaneServiceClient) PatchCloudContractResource(ctx context.Context, req *connect.Request[v1.PatchCloudContractResourceRequest]) (*connect.Response[v1.PatchCloudContractResourceResponse], error) {
-	return c.patchCloudContractResource.CallUnary(ctx, req)
+// PatchCloudContract calls porter.v1.ClusterControlPlaneService.PatchCloudContract.
+func (c *clusterControlPlaneServiceClient) PatchCloudContract(ctx context.Context, req *connect.Request[v1.PatchCloudContractRequest]) (*connect.Response[v1.PatchCloudContractResponse], error) {
+	return c.patchCloudContract.CallUnary(ctx, req)
 }
 
 // DockerConfigFileForRegistry calls
@@ -1533,8 +1533,8 @@ type ClusterControlPlaneServiceHandler interface {
 	UpdateDatastore(context.Context, *connect.Request[v1.UpdateDatastoreRequest]) (*connect.Response[v1.UpdateDatastoreResponse], error)
 	// CreateDatastoreProxy creates a proxy for connecting to a datastore
 	CreateDatastoreProxy(context.Context, *connect.Request[v1.CreateDatastoreProxyRequest]) (*connect.Response[v1.CreateDatastoreProxyResponse], error)
-	// PatchCloudContractResource patches a cloud contract by modifying its resources
-	PatchCloudContractResource(context.Context, *connect.Request[v1.PatchCloudContractResourceRequest]) (*connect.Response[v1.PatchCloudContractResourceResponse], error)
+	// PatchCloudContract patches a cloud contract by modifying its resources
+	PatchCloudContract(context.Context, *connect.Request[v1.PatchCloudContractRequest]) (*connect.Response[v1.PatchCloudContractResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -1899,9 +1899,9 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.CreateDatastoreProxy,
 		opts...,
 	)
-	clusterControlPlaneServicePatchCloudContractResourceHandler := connect.NewUnaryHandler(
-		ClusterControlPlaneServicePatchCloudContractResourceProcedure,
-		svc.PatchCloudContractResource,
+	clusterControlPlaneServicePatchCloudContractHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServicePatchCloudContractProcedure,
+		svc.PatchCloudContract,
 		opts...,
 	)
 	clusterControlPlaneServiceDockerConfigFileForRegistryHandler := connect.NewUnaryHandler(
@@ -2117,8 +2117,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceUpdateDatastoreHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceCreateDatastoreProxyProcedure:
 			clusterControlPlaneServiceCreateDatastoreProxyHandler.ServeHTTP(w, r)
-		case ClusterControlPlaneServicePatchCloudContractResourceProcedure:
-			clusterControlPlaneServicePatchCloudContractResourceHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServicePatchCloudContractProcedure:
+			clusterControlPlaneServicePatchCloudContractHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure:
 			clusterControlPlaneServiceDockerConfigFileForRegistryHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceECRTokenForRegistryProcedure:
@@ -2398,8 +2398,8 @@ func (UnimplementedClusterControlPlaneServiceHandler) CreateDatastoreProxy(conte
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.CreateDatastoreProxy is not implemented"))
 }
 
-func (UnimplementedClusterControlPlaneServiceHandler) PatchCloudContractResource(context.Context, *connect.Request[v1.PatchCloudContractResourceRequest]) (*connect.Response[v1.PatchCloudContractResourceResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.PatchCloudContractResource is not implemented"))
+func (UnimplementedClusterControlPlaneServiceHandler) PatchCloudContract(context.Context, *connect.Request[v1.PatchCloudContractRequest]) (*connect.Response[v1.PatchCloudContractResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.PatchCloudContract is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) DockerConfigFileForRegistry(context.Context, *connect.Request[v1.DockerConfigFileForRegistryRequest]) (*connect.Response[v1.DockerConfigFileForRegistryResponse], error) {

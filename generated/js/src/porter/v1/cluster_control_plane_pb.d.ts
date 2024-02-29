@@ -216,36 +216,36 @@ export declare enum EnumServiceDeploymentStatus {
 }
 
 /**
- * @generated from enum porter.v1.EnumPatchCloudContractResourceOperation
+ * @generated from enum porter.v1.EnumPatchCloudContractOperation
  */
-export declare enum EnumPatchCloudContractResourceOperation {
+export declare enum EnumPatchCloudContractOperation {
   /**
-   * @generated from enum value: ENUM_PATCH_CLOUD_CONTRACT_RESOURCE_OPERATION_UNSPECIFIED = 0;
+   * @generated from enum value: ENUM_PATCH_CLOUD_CONTRACT_OPERATION_UNSPECIFIED = 0;
    */
   UNSPECIFIED = 0,
 
   /**
-   * @generated from enum value: ENUM_PATCH_CLOUD_CONTRACT_RESOURCE_OPERATION_UPDATE = 1;
+   * @generated from enum value: ENUM_PATCH_CLOUD_CONTRACT_OPERATION_UPDATE = 1;
    */
   UPDATE = 1,
 
   /**
-   * @generated from enum value: ENUM_PATCH_CLOUD_CONTRACT_RESOURCE_OPERATION_DELETE = 2;
+   * @generated from enum value: ENUM_PATCH_CLOUD_CONTRACT_OPERATION_DELETE = 2;
    */
   DELETE = 2,
 }
 
 /**
- * @generated from enum porter.v1.EnumPatchCloudContractResourceType
+ * @generated from enum porter.v1.EnumPatchCloudContractType
  */
-export declare enum EnumPatchCloudContractResourceType {
+export declare enum EnumPatchCloudContractType {
   /**
-   * @generated from enum value: ENUM_PATCH_CLOUD_CONTRACT_RESOURCE_TYPE_UNSPECIFIED = 0;
+   * @generated from enum value: ENUM_PATCH_CLOUD_CONTRACT_TYPE_UNSPECIFIED = 0;
    */
   UNSPECIFIED = 0,
 
   /**
-   * @generated from enum value: ENUM_PATCH_CLOUD_CONTRACT_RESOURCE_TYPE_DATASTORE = 1;
+   * @generated from enum value: ENUM_PATCH_CLOUD_CONTRACT_TYPE_DATASTORE = 1;
    */
   DATASTORE = 1,
 }
@@ -5706,11 +5706,11 @@ export declare class CreateDatastoreProxyResponse extends Message<CreateDatastor
 }
 
 /**
- * PatchCloudContractResourceRequest is the request object for patching a cloud contract resource
+ * PatchCloudContractRequest is the request object for patching a cloud contract by updating a resource
  *
- * @generated from message porter.v1.PatchCloudContractResourceRequest
+ * @generated from message porter.v1.PatchCloudContractRequest
  */
-export declare class PatchCloudContractResourceRequest extends Message<PatchCloudContractResourceRequest> {
+export declare class PatchCloudContractRequest extends Message<PatchCloudContractRequest> {
   /**
    * @generated from field: int64 project_id = 1;
    */
@@ -5719,9 +5719,9 @@ export declare class PatchCloudContractResourceRequest extends Message<PatchClou
   /**
    * operation describes the type of the update
    *
-   * @generated from field: porter.v1.EnumPatchCloudContractResourceOperation operation = 2;
+   * @generated from field: porter.v1.EnumPatchCloudContractOperation operation = 2;
    */
-  operation: EnumPatchCloudContractResourceOperation;
+  operation: EnumPatchCloudContractOperation;
 
   /**
    * resource_id is the id of the resource we want to update
@@ -5733,14 +5733,14 @@ export declare class PatchCloudContractResourceRequest extends Message<PatchClou
   /**
    * resource_type is the type of the resource we want to update
    *
-   * @generated from field: porter.v1.EnumPatchCloudContractResourceType resource_type = 4;
+   * @generated from field: porter.v1.EnumPatchCloudContractType resource_type = 4;
    */
-  resourceType: EnumPatchCloudContractResourceType;
+  resourceType: EnumPatchCloudContractType;
 
   /**
    * resource_values is the values we will use to make the update
    *
-   * @generated from oneof porter.v1.PatchCloudContractResourceRequest.resource_values
+   * @generated from oneof porter.v1.PatchCloudContractRequest.resource_values
    */
   resourceValues: {
     /**
@@ -5750,27 +5750,27 @@ export declare class PatchCloudContractResourceRequest extends Message<PatchClou
     case: "datastore";
   } | { case: undefined; value?: undefined };
 
-  constructor(data?: PartialMessage<PatchCloudContractResourceRequest>);
+  constructor(data?: PartialMessage<PatchCloudContractRequest>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.PatchCloudContractResourceRequest";
+  static readonly typeName = "porter.v1.PatchCloudContractRequest";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PatchCloudContractResourceRequest;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PatchCloudContractRequest;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PatchCloudContractResourceRequest;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PatchCloudContractRequest;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PatchCloudContractResourceRequest;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PatchCloudContractRequest;
 
-  static equals(a: PatchCloudContractResourceRequest | PlainMessage<PatchCloudContractResourceRequest> | undefined, b: PatchCloudContractResourceRequest | PlainMessage<PatchCloudContractResourceRequest> | undefined): boolean;
+  static equals(a: PatchCloudContractRequest | PlainMessage<PatchCloudContractRequest> | undefined, b: PatchCloudContractRequest | PlainMessage<PatchCloudContractRequest> | undefined): boolean;
 }
 
 /**
- * PatchCloudContractResourceResponse is the response object from patching a cloud contract resource
+ * PatchCloudContractResponse is the response object from patching a cloud contract resource
  *
- * @generated from message porter.v1.PatchCloudContractResourceResponse
+ * @generated from message porter.v1.PatchCloudContractResponse
  */
-export declare class PatchCloudContractResourceResponse extends Message<PatchCloudContractResourceResponse> {
+export declare class PatchCloudContractResponse extends Message<PatchCloudContractResponse> {
   /**
    * cloud_contract is the resulting cloud contract after the patch has been applied
    *
@@ -5778,19 +5778,19 @@ export declare class PatchCloudContractResourceResponse extends Message<PatchClo
    */
   cloudContract?: CloudContract;
 
-  constructor(data?: PartialMessage<PatchCloudContractResourceResponse>);
+  constructor(data?: PartialMessage<PatchCloudContractResponse>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.PatchCloudContractResourceResponse";
+  static readonly typeName = "porter.v1.PatchCloudContractResponse";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PatchCloudContractResourceResponse;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PatchCloudContractResponse;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PatchCloudContractResourceResponse;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PatchCloudContractResponse;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PatchCloudContractResourceResponse;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PatchCloudContractResponse;
 
-  static equals(a: PatchCloudContractResourceResponse | PlainMessage<PatchCloudContractResourceResponse> | undefined, b: PatchCloudContractResourceResponse | PlainMessage<PatchCloudContractResourceResponse> | undefined): boolean;
+  static equals(a: PatchCloudContractResponse | PlainMessage<PatchCloudContractResponse> | undefined, b: PatchCloudContractResponse | PlainMessage<PatchCloudContractResponse> | undefined): boolean;
 }
 
 /**

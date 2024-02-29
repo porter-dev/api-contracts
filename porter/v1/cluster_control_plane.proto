@@ -1269,36 +1269,36 @@ message CreateDatastoreProxyResponse {
   string namespace = 4;
 }
 
-// PatchCloudContractResourceRequest is the request object for patching a cloud contract resource
-message PatchCloudContractResourceRequest {
+// PatchCloudContractRequest is the request object for patching a cloud contract by updating a resource
+message PatchCloudContractRequest {
   int64 project_id = 1;
   // operation describes the type of the update
-  EnumPatchCloudContractResourceOperation operation = 2;
+  EnumPatchCloudContractOperation operation = 2;
   // resource_id is the id of the resource we want to update
   string resource_id = 3;
   // resource_type is the type of the resource we want to update
-  EnumPatchCloudContractResourceType resource_type = 4;
+  EnumPatchCloudContractType resource_type = 4;
   // resource_values is the values we will use to make the update
   oneof resource_values {
     ManagedDatastore datastore = 5;
   }
 }
 
-// PatchCloudContractResourceResponse is the response object from patching a cloud contract resource
-message PatchCloudContractResourceResponse {
+// PatchCloudContractResponse is the response object from patching a cloud contract resource
+message PatchCloudContractResponse {
   // cloud_contract is the resulting cloud contract after the patch has been applied
   CloudContract cloud_contract = 1;
 }
 
-enum EnumPatchCloudContractResourceOperation {
-  ENUM_PATCH_CLOUD_CONTRACT_RESOURCE_OPERATION_UNSPECIFIED = 0;
-  ENUM_PATCH_CLOUD_CONTRACT_RESOURCE_OPERATION_UPDATE = 1;
-  ENUM_PATCH_CLOUD_CONTRACT_RESOURCE_OPERATION_DELETE = 2;
+enum EnumPatchCloudContractOperation {
+  ENUM_PATCH_CLOUD_CONTRACT_OPERATION_UNSPECIFIED = 0;
+  ENUM_PATCH_CLOUD_CONTRACT_OPERATION_UPDATE = 1;
+  ENUM_PATCH_CLOUD_CONTRACT_OPERATION_DELETE = 2;
 }
 
-enum EnumPatchCloudContractResourceType {
-  ENUM_PATCH_CLOUD_CONTRACT_RESOURCE_TYPE_UNSPECIFIED = 0;
-  ENUM_PATCH_CLOUD_CONTRACT_RESOURCE_TYPE_DATASTORE = 1;
+enum EnumPatchCloudContractType {
+  ENUM_PATCH_CLOUD_CONTRACT_TYPE_UNSPECIFIED = 0;
+  ENUM_PATCH_CLOUD_CONTRACT_TYPE_DATASTORE = 1;
 }
 
 service ClusterControlPlaneService {
@@ -1497,8 +1497,8 @@ service ClusterControlPlaneService {
   // CreateDatastoreProxy creates a proxy for connecting to a datastore
   rpc CreateDatastoreProxy(CreateDatastoreProxyRequest) returns (CreateDatastoreProxyResponse) {}
 
-  // PatchCloudContractResource patches a cloud contract by modifying its resources
-  rpc PatchCloudContractResource(PatchCloudContractResourceRequest) returns (PatchCloudContractResourceResponse) {}
+  // PatchCloudContract patches a cloud contract by modifying its resources
+  rpc PatchCloudContract(PatchCloudContractRequest) returns (PatchCloudContractResponse) {}
 
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
   // Deprecated. Use TokenForRegistry instead.
