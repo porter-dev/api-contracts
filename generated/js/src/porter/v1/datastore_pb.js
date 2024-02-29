@@ -65,12 +65,12 @@ export const DatastorePasswordSecretRef = proto3.makeMessageType(
 export const AwsRds = proto3.makeMessageType(
   "porter.v1.AwsRds",
   () => [
-    { no: 1, name: "database_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "master_username", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "master_user_password_literal", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "database_name", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 2, name: "master_username", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 3, name: "master_user_password_literal", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 4, name: "master_user_password_secret_ref", kind: "message", T: DatastorePasswordSecretRef },
-    { no: 5, name: "allocated_storage_gigabytes", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 6, name: "instance_class", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "allocated_storage_gigabytes", kind: "scalar", T: 3 /* ScalarType.INT64 */, opt: true },
+    { no: 6, name: "instance_class", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 7, name: "engine", kind: "enum", T: proto3.getEnumType(EnumAwsRdsEngine) },
   ],
 );

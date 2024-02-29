@@ -165,23 +165,23 @@ export declare class AwsRds extends Message<AwsRds> {
   /**
    * database_name is the name of the rds database
    *
-   * @generated from field: string database_name = 1;
+   * @generated from field: optional string database_name = 1;
    */
-  databaseName: string;
+  databaseName?: string;
 
   /**
    * master_username is the username of the database
    *
-   * @generated from field: string master_username = 2;
+   * @generated from field: optional string master_username = 2;
    */
-  masterUsername: string;
+  masterUsername?: string;
 
   /**
    * master_user_password_literal is the string value of the password; this is only used for creating the database password secret and is wiped when the contract is saved
    *
-   * @generated from field: string master_user_password_literal = 3;
+   * @generated from field: optional string master_user_password_literal = 3;
    */
-  masterUserPasswordLiteral: string;
+  masterUserPasswordLiteral?: string;
 
   /**
    * master_user_password_secret_ref is the reference to the secret that stores the password of the database
@@ -193,16 +193,16 @@ export declare class AwsRds extends Message<AwsRds> {
   /**
    * allocated_storage_gigabytes is the allocated storage of the database in gigabytes
    *
-   * @generated from field: int64 allocated_storage_gigabytes = 5;
+   * @generated from field: optional int64 allocated_storage_gigabytes = 5;
    */
-  allocatedStorageGigabytes: bigint;
+  allocatedStorageGigabytes?: bigint;
 
   /**
    * instance_class is the instance class of the database
    *
-   * @generated from field: string instance_class = 6;
+   * @generated from field: optional string instance_class = 6;
    */
-  instanceClass: string;
+  instanceClass?: string;
 
   /**
    * engine is the engine of the database

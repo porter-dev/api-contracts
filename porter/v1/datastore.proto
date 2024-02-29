@@ -40,17 +40,17 @@ message DatastorePasswordSecretRef {
 
 message AwsRds {
   // database_name is the name of the rds database
-  string database_name = 1;
+  optional string database_name = 1;
   // master_username is the username of the database
-  string master_username = 2;
+  optional string master_username = 2;
   // master_user_password_literal is the string value of the password; this is only used for creating the database password secret and is wiped when the contract is saved
-  string master_user_password_literal = 3;
+  optional string master_user_password_literal = 3;
   // master_user_password_secret_ref is the reference to the secret that stores the password of the database
   DatastorePasswordSecretRef master_user_password_secret_ref = 4;
   // allocated_storage_gigabytes is the allocated storage of the database in gigabytes
-  int64 allocated_storage_gigabytes = 5;
+  optional int64 allocated_storage_gigabytes = 5;
   // instance_class is the instance class of the database
-  string instance_class = 6;
+  optional string instance_class = 6;
   // engine is the engine of the database
   EnumAwsRdsEngine engine = 7;
 }
