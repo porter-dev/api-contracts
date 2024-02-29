@@ -1279,7 +1279,7 @@ message PatchCloudContractResourceRequest {
   EnumPatchCloudContractResourceType resource_type = 4;
   // resource_values is the values we will use to make the update
   oneof resource_values {
-    PorterDatastore datastore = 5;
+    ManagedDatastore datastore = 5;
   }
 }
 
@@ -1291,7 +1291,7 @@ message PatchCloudContractResourceResponse {
   EnumPatchCloudContractResourceType resource_type = 2;
   // resource_patch_values is the values of what was updated
   oneof resource_patch_values {
-    PorterDatastore datastore = 3;
+    ManagedDatastore datastore = 3;
   }
 }
 
@@ -1723,7 +1723,7 @@ message DatastoreStatusResponse {
   string status = 1;
 }
 
-// deprecated; use PorterDatastore instead
+// deprecated; use ManagedDatastore instead
 message Datastore {
   option deprecated = true;
 

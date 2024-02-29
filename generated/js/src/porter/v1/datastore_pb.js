@@ -18,12 +18,12 @@ export const EnumDatastoreKind = proto3.makeEnum(
 );
 
 /**
- * PorterDatastore is the specification for a Porter-managed datastore
+ * ManagedDatastore is the specification for a Porter-managed datastore
  *
- * @generated from message porter.v1.PorterDatastore
+ * @generated from message porter.v1.ManagedDatastore
  */
-export const PorterDatastore = proto3.makeMessageType(
-  "porter.v1.PorterDatastore",
+export const ManagedDatastore = proto3.makeMessageType(
+  "porter.v1.ManagedDatastore",
   () => [
     { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "cloud_provider", kind: "enum", T: proto3.getEnumType(EnumCloudProvider) },

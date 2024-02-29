@@ -14,7 +14,7 @@ import { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifie
 import { Addon, PrerequisiteAddon } from "./addons_pb.js";
 import { EnumEnvGroupProviderType } from "./env_group_pb.js";
 import { NotificationConfig } from "./notification_pb.js";
-import { DatastoreCredential, PorterDatastore } from "./datastore_pb.js";
+import { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
@@ -1969,7 +1969,7 @@ export const PatchCloudContractResourceRequest = proto3.makeMessageType(
     { no: 2, name: "operation", kind: "enum", T: proto3.getEnumType(EnumPatchCloudContractResourceOperation) },
     { no: 3, name: "resource_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "resource_type", kind: "enum", T: proto3.getEnumType(EnumPatchCloudContractResourceType) },
-    { no: 5, name: "datastore", kind: "message", T: PorterDatastore, oneof: "resource_values" },
+    { no: 5, name: "datastore", kind: "message", T: ManagedDatastore, oneof: "resource_values" },
   ],
 );
 
@@ -1983,7 +1983,7 @@ export const PatchCloudContractResourceResponse = proto3.makeMessageType(
   () => [
     { no: 1, name: "resource_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "resource_type", kind: "enum", T: proto3.getEnumType(EnumPatchCloudContractResourceType) },
-    { no: 3, name: "datastore", kind: "message", T: PorterDatastore, oneof: "resource_patch_values" },
+    { no: 3, name: "datastore", kind: "message", T: ManagedDatastore, oneof: "resource_patch_values" },
   ],
 );
 
@@ -2214,7 +2214,7 @@ export const DatastoreStatusResponse = proto3.makeMessageType(
 );
 
 /**
- * deprecated; use PorterDatastore instead
+ * deprecated; use ManagedDatastore instead
  *
  * @generated from message porter.v1.Datastore
  * @deprecated

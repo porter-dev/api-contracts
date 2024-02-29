@@ -23,11 +23,11 @@ export declare enum EnumDatastoreKind {
 }
 
 /**
- * PorterDatastore is the specification for a Porter-managed datastore
+ * ManagedDatastore is the specification for a Porter-managed datastore
  *
- * @generated from message porter.v1.PorterDatastore
+ * @generated from message porter.v1.ManagedDatastore
  */
-export declare class PorterDatastore extends Message<PorterDatastore> {
+export declare class ManagedDatastore extends Message<ManagedDatastore> {
   /**
    * id represents the id of the datastore. This is required for update operations, but should be left blank when creating a datastore
    *
@@ -73,7 +73,7 @@ export declare class PorterDatastore extends Message<PorterDatastore> {
   /**
    * kind_values are the required values depending on kind
    *
-   * @generated from oneof porter.v1.PorterDatastore.kind_values
+   * @generated from oneof porter.v1.ManagedDatastore.kind_values
    */
   kindValues: {
     /**
@@ -83,19 +83,19 @@ export declare class PorterDatastore extends Message<PorterDatastore> {
     case: "awsRdsPostgresKind";
   } | { case: undefined; value?: undefined };
 
-  constructor(data?: PartialMessage<PorterDatastore>);
+  constructor(data?: PartialMessage<ManagedDatastore>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.PorterDatastore";
+  static readonly typeName = "porter.v1.ManagedDatastore";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PorterDatastore;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ManagedDatastore;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PorterDatastore;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ManagedDatastore;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PorterDatastore;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ManagedDatastore;
 
-  static equals(a: PorterDatastore | PlainMessage<PorterDatastore> | undefined, b: PorterDatastore | PlainMessage<PorterDatastore> | undefined): boolean;
+  static equals(a: ManagedDatastore | PlainMessage<ManagedDatastore> | undefined, b: ManagedDatastore | PlainMessage<ManagedDatastore> | undefined): boolean;
 }
 
 /**

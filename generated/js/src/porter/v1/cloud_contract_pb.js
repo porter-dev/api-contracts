@@ -4,7 +4,7 @@
 // @ts-nocheck
 
 import { proto3 } from "@bufbuild/protobuf";
-import { PorterDatastore } from "./datastore_pb.js";
+import { ManagedDatastore } from "./datastore_pb.js";
 
 /**
  * CloudContract is a contract for all Porter-managed infrastructure within a project
@@ -14,7 +14,7 @@ import { PorterDatastore } from "./datastore_pb.js";
 export const CloudContract = proto3.makeMessageType(
   "porter.v1.CloudContract",
   () => [
-    { no: 1, name: "datastores", kind: "message", T: PorterDatastore, repeated: true },
+    { no: 1, name: "datastores", kind: "message", T: ManagedDatastore, repeated: true },
   ],
 );
 

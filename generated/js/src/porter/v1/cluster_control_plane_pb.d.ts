@@ -15,7 +15,7 @@ import type { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIden
 import type { Addon, PrerequisiteAddon } from "./addons_pb.js";
 import type { EnumEnvGroupProviderType } from "./env_group_pb.js";
 import type { NotificationConfig } from "./notification_pb.js";
-import type { DatastoreCredential, PorterDatastore } from "./datastore_pb.js";
+import type { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
@@ -5743,9 +5743,9 @@ export declare class PatchCloudContractResourceRequest extends Message<PatchClou
    */
   resourceValues: {
     /**
-     * @generated from field: porter.v1.PorterDatastore datastore = 5;
+     * @generated from field: porter.v1.ManagedDatastore datastore = 5;
      */
-    value: PorterDatastore;
+    value: ManagedDatastore;
     case: "datastore";
   } | { case: undefined; value?: undefined };
 
@@ -5791,9 +5791,9 @@ export declare class PatchCloudContractResourceResponse extends Message<PatchClo
    */
   resourcePatchValues: {
     /**
-     * @generated from field: porter.v1.PorterDatastore datastore = 3;
+     * @generated from field: porter.v1.ManagedDatastore datastore = 3;
      */
-    value: PorterDatastore;
+    value: ManagedDatastore;
     case: "datastore";
   } | { case: undefined; value?: undefined };
 
@@ -6421,7 +6421,7 @@ export declare class DatastoreStatusResponse extends Message<DatastoreStatusResp
 }
 
 /**
- * deprecated; use PorterDatastore instead
+ * deprecated; use ManagedDatastore instead
  *
  * @generated from message porter.v1.Datastore
  * @deprecated

@@ -5,7 +5,7 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
-import type { PorterDatastore } from "./datastore_pb.js";
+import type { ManagedDatastore } from "./datastore_pb.js";
 
 /**
  * CloudContract is a contract for all Porter-managed infrastructure within a project
@@ -16,9 +16,9 @@ export declare class CloudContract extends Message<CloudContract> {
   /**
    * datastores is the list of datastores associated with the project
    *
-   * @generated from field: repeated porter.v1.PorterDatastore datastores = 1;
+   * @generated from field: repeated porter.v1.ManagedDatastore datastores = 1;
    */
-  datastores: PorterDatastore[];
+  datastores: ManagedDatastore[];
 
   constructor(data?: PartialMessage<CloudContract>);
 
