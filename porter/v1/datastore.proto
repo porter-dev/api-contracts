@@ -20,13 +20,13 @@ message ManagedDatastore {
   EnumDatastoreKind kind = 6;
   // kind_values are the required values depending on kind
   oneof kind_values {
-    AwsRdsPostgres aws_rds_postgres_kind = 7;
+    AwsRds aws_rds_kind = 7;
   }
 }
 
 enum EnumDatastoreKind {
   ENUM_DATASTORE_KIND_UNSPECIFIED = 0;
-  ENUM_DATASTORE_KIND_AWS_RDS_POSTGRES = 1;
+  ENUM_DATASTORE_KIND_AWS_RDS = 1;
 }
 
 message DatastorePasswordSecretRef {
@@ -38,7 +38,7 @@ message DatastorePasswordSecretRef {
   string key = 3;
 }
 
-message AwsRdsPostgres {
+message AwsRds {
   // database_name is the name of the rds database
   string database_name = 1;
   // master_username is the username of the database
@@ -51,6 +51,14 @@ message AwsRdsPostgres {
   int64 allocated_storage_gigabytes = 5;
   // instance_class is the instance class of the database
   string instance_class = 6;
+  // engine is the engine of the database
+  EnumAwsRdsEngine engine = 7;
+}
+
+enum EnumAwsRdsEngine {
+  ENUM_AWS_RDS_ENGINE_UNSPECIFIED = 0;
+  ENUM_AWS_RDS_ENGINE_POSTGRESQL = 1;
+  ENUM_AWS_RDS_ENGINE_AURORA_POSTGRESQL = 2;
 }
 
 // UpdateDatastorePayload is used to send messages via nats to update a datastore

@@ -13,7 +13,19 @@ export const EnumDatastoreKind = proto3.makeEnum(
   "porter.v1.EnumDatastoreKind",
   [
     {no: 0, name: "ENUM_DATASTORE_KIND_UNSPECIFIED", localName: "UNSPECIFIED"},
-    {no: 1, name: "ENUM_DATASTORE_KIND_AWS_RDS_POSTGRES", localName: "AWS_RDS_POSTGRES"},
+    {no: 1, name: "ENUM_DATASTORE_KIND_AWS_RDS", localName: "AWS_RDS"},
+  ],
+);
+
+/**
+ * @generated from enum porter.v1.EnumAwsRdsEngine
+ */
+export const EnumAwsRdsEngine = proto3.makeEnum(
+  "porter.v1.EnumAwsRdsEngine",
+  [
+    {no: 0, name: "ENUM_AWS_RDS_ENGINE_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "ENUM_AWS_RDS_ENGINE_POSTGRESQL", localName: "POSTGRESQL"},
+    {no: 2, name: "ENUM_AWS_RDS_ENGINE_AURORA_POSTGRESQL", localName: "AURORA_POSTGRESQL"},
   ],
 );
 
@@ -31,7 +43,7 @@ export const ManagedDatastore = proto3.makeMessageType(
     { no: 4, name: "region", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 6, name: "kind", kind: "enum", T: proto3.getEnumType(EnumDatastoreKind) },
-    { no: 7, name: "aws_rds_postgres_kind", kind: "message", T: AwsRdsPostgres, oneof: "kind_values" },
+    { no: 7, name: "aws_rds_kind", kind: "message", T: AwsRds, oneof: "kind_values" },
   ],
 );
 
@@ -48,10 +60,10 @@ export const DatastorePasswordSecretRef = proto3.makeMessageType(
 );
 
 /**
- * @generated from message porter.v1.AwsRdsPostgres
+ * @generated from message porter.v1.AwsRds
  */
-export const AwsRdsPostgres = proto3.makeMessageType(
-  "porter.v1.AwsRdsPostgres",
+export const AwsRds = proto3.makeMessageType(
+  "porter.v1.AwsRds",
   () => [
     { no: 1, name: "database_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "master_username", kind: "scalar", T: 9 /* ScalarType.STRING */ },
@@ -59,6 +71,7 @@ export const AwsRdsPostgres = proto3.makeMessageType(
     { no: 4, name: "master_user_password_secret_ref", kind: "message", T: DatastorePasswordSecretRef },
     { no: 5, name: "allocated_storage_gigabytes", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 6, name: "instance_class", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 7, name: "engine", kind: "enum", T: proto3.getEnumType(EnumAwsRdsEngine) },
   ],
 );
 

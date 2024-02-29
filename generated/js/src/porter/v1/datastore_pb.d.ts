@@ -17,9 +17,29 @@ export declare enum EnumDatastoreKind {
   UNSPECIFIED = 0,
 
   /**
-   * @generated from enum value: ENUM_DATASTORE_KIND_AWS_RDS_POSTGRES = 1;
+   * @generated from enum value: ENUM_DATASTORE_KIND_AWS_RDS = 1;
    */
-  AWS_RDS_POSTGRES = 1,
+  AWS_RDS = 1,
+}
+
+/**
+ * @generated from enum porter.v1.EnumAwsRdsEngine
+ */
+export declare enum EnumAwsRdsEngine {
+  /**
+   * @generated from enum value: ENUM_AWS_RDS_ENGINE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: ENUM_AWS_RDS_ENGINE_POSTGRESQL = 1;
+   */
+  POSTGRESQL = 1,
+
+  /**
+   * @generated from enum value: ENUM_AWS_RDS_ENGINE_AURORA_POSTGRESQL = 2;
+   */
+  AURORA_POSTGRESQL = 2,
 }
 
 /**
@@ -77,10 +97,10 @@ export declare class ManagedDatastore extends Message<ManagedDatastore> {
    */
   kindValues: {
     /**
-     * @generated from field: porter.v1.AwsRdsPostgres aws_rds_postgres_kind = 7;
+     * @generated from field: porter.v1.AwsRds aws_rds_kind = 7;
      */
-    value: AwsRdsPostgres;
-    case: "awsRdsPostgresKind";
+    value: AwsRds;
+    case: "awsRdsKind";
   } | { case: undefined; value?: undefined };
 
   constructor(data?: PartialMessage<ManagedDatastore>);
@@ -139,9 +159,9 @@ export declare class DatastorePasswordSecretRef extends Message<DatastorePasswor
 }
 
 /**
- * @generated from message porter.v1.AwsRdsPostgres
+ * @generated from message porter.v1.AwsRds
  */
-export declare class AwsRdsPostgres extends Message<AwsRdsPostgres> {
+export declare class AwsRds extends Message<AwsRds> {
   /**
    * database_name is the name of the rds database
    *
@@ -184,19 +204,26 @@ export declare class AwsRdsPostgres extends Message<AwsRdsPostgres> {
    */
   instanceClass: string;
 
-  constructor(data?: PartialMessage<AwsRdsPostgres>);
+  /**
+   * engine is the engine of the database
+   *
+   * @generated from field: porter.v1.EnumAwsRdsEngine engine = 7;
+   */
+  engine: EnumAwsRdsEngine;
+
+  constructor(data?: PartialMessage<AwsRds>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.AwsRdsPostgres";
+  static readonly typeName = "porter.v1.AwsRds";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AwsRdsPostgres;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AwsRds;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AwsRdsPostgres;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AwsRds;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AwsRdsPostgres;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AwsRds;
 
-  static equals(a: AwsRdsPostgres | PlainMessage<AwsRdsPostgres> | undefined, b: AwsRdsPostgres | PlainMessage<AwsRdsPostgres> | undefined): boolean;
+  static equals(a: AwsRds | PlainMessage<AwsRds> | undefined, b: AwsRds | PlainMessage<AwsRds> | undefined): boolean;
 }
 
 /**
