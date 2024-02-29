@@ -5711,23 +5711,28 @@ export declare class CreateDatastoreProxyResponse extends Message<CreateDatastor
  */
 export declare class PatchCloudContractResourceRequest extends Message<PatchCloudContractResourceRequest> {
   /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
    * operation describes the type of the update
    *
-   * @generated from field: porter.v1.EnumPatchCloudContractResourceOperation operation = 1;
+   * @generated from field: porter.v1.EnumPatchCloudContractResourceOperation operation = 2;
    */
   operation: EnumPatchCloudContractResourceOperation;
 
   /**
    * resource_id is the id of the resource we want to update
    *
-   * @generated from field: string resource_id = 2;
+   * @generated from field: string resource_id = 3;
    */
   resourceId: string;
 
   /**
    * resource_type is the type of the resource we want to update
    *
-   * @generated from field: porter.v1.EnumPatchCloudContractResourceType resource_type = 3;
+   * @generated from field: porter.v1.EnumPatchCloudContractResourceType resource_type = 4;
    */
   resourceType: EnumPatchCloudContractResourceType;
 
@@ -5738,7 +5743,7 @@ export declare class PatchCloudContractResourceRequest extends Message<PatchClou
    */
   resourceValues: {
     /**
-     * @generated from field: porter.v1.PorterDatastore datastore = 4;
+     * @generated from field: porter.v1.PorterDatastore datastore = 5;
      */
     value: PorterDatastore;
     case: "datastore";

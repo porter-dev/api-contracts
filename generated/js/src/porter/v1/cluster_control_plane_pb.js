@@ -1965,10 +1965,11 @@ export const CreateDatastoreProxyResponse = proto3.makeMessageType(
 export const PatchCloudContractResourceRequest = proto3.makeMessageType(
   "porter.v1.PatchCloudContractResourceRequest",
   () => [
-    { no: 1, name: "operation", kind: "enum", T: proto3.getEnumType(EnumPatchCloudContractResourceOperation) },
-    { no: 2, name: "resource_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "resource_type", kind: "enum", T: proto3.getEnumType(EnumPatchCloudContractResourceType) },
-    { no: 4, name: "datastore", kind: "message", T: PorterDatastore, oneof: "resource_values" },
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "operation", kind: "enum", T: proto3.getEnumType(EnumPatchCloudContractResourceOperation) },
+    { no: 3, name: "resource_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "resource_type", kind: "enum", T: proto3.getEnumType(EnumPatchCloudContractResourceType) },
+    { no: 5, name: "datastore", kind: "message", T: PorterDatastore, oneof: "resource_values" },
   ],
 );
 
