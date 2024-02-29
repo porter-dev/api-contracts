@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package porter.v1;
+
+import "porter/v1/datastore.proto";
+
+// CloudContract is a contract for all Porter-managed infrastructure within a project
+message CloudContract {
+  // datastores is the list of datastores associated with the project
+  repeated PorterDatastore datastores = 1;
+}

@@ -1682,8 +1682,10 @@ message DatastoreStatusResponse {
   string status = 1;
 }
 
-// Datastore represents a single datastore object
+// deprecated; use PorterDatastore instead
 message Datastore {
+  option deprecated = true;
+
   // type is the type of the datastore
   EnumDatastore type = 1;
   // name is the name of the datastore

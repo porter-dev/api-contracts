@@ -6278,9 +6278,10 @@ export declare class DatastoreStatusResponse extends Message<DatastoreStatusResp
 }
 
 /**
- * Datastore represents a single datastore object
+ * deprecated; use PorterDatastore instead
  *
  * @generated from message porter.v1.Datastore
+ * @deprecated
  */
 export declare class Datastore extends Message<Datastore> {
   /**

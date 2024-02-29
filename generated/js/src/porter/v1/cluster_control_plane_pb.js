@@ -2161,9 +2161,10 @@ export const DatastoreStatusResponse = proto3.makeMessageType(
 );
 
 /**
- * Datastore represents a single datastore object
+ * deprecated; use PorterDatastore instead
  *
  * @generated from message porter.v1.Datastore
+ * @deprecated
  */
 export const Datastore = proto3.makeMessageType(
   "porter.v1.Datastore",

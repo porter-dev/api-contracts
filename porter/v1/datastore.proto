@@ -2,6 +2,55 @@ syntax = "proto3";
 
 package porter.v1;
 
+import "porter/v1/cluster.proto";
+
+// PorterDatastore is the specification for a Porter-managed datastore
+message PorterDatastore {
+  // cloud_provider [REQUIRED] represents the provider that we will provisioning the datastore in
+  EnumCloudProvider cloud_provider = 1;
+  // cloud_provider_credential_identifier [REQUIRED] is the Porter credentials that will be used for provisioning a datastore.
+  string cloud_provider_credential_identifier = 2;
+  // id [OPTIONAL] represents the id of the datastore. This is required for update operations, but should be left blank when creating a datastore
+  string id = 3;
+  // kind [REQUIRED] represents the type of the datastore
+  EnumDatastoreKind kind = 4;
+  // kind_values are the required values depending on kind
+  oneof kind_values {
+    RdsPostgres rds_postgres_kind = 5;
+  }
+}
+
+enum EnumDatastoreKind {
+  ENUM_DATASTORE_KIND_UNSPECIFIED = 0;
+  ENUM_DATASTORE_KIND_RDS_POSTGRES = 1;
+}
+
+message DatastorePasswordSecretRef {
+  // name is the name of the secret
+  string name = 1;
+  // namespace is the namespace of the secret
+  string namespace = 2;
+  // key is the key of the password in the secret
+  string key = 3;
+}
+
+message RdsPostgres {
+  // name is the name of the datastore
+  string name = 1;
+  // database_name is the name of the rds database
+  string database_name = 2;
+  // master_username is the username of the database
+  string master_username = 3;
+  // master_user_password_literal is the string value of the password; this is only used for creating the database password secret and is wiped when the contract is saved
+  string master_user_password_literal = 4;
+  // master_user_password_secret_ref is the reference to the secret that stores the password of the database
+  DatastorePasswordSecretRef master_user_password_secret_ref = 5;
+  // allocated_storage_gigabytes is the allocated storage of the database in gigabytes
+  int64 allocated_storage_gigabytes = 6;
+  // instance_class is the instance class of the database
+  string instance_class = 7;
+}
+
 // UpdateDatastorePayload is used to send messages via nats to update a datastore
 message UpdateDatastorePayload {
   // project_id is the id of the project that the datastore belongs to

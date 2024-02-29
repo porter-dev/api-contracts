@@ -5,6 +5,192 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
+import type { EnumCloudProvider } from "./cluster_pb.js";
+
+/**
+ * @generated from enum porter.v1.EnumDatastoreKind
+ */
+export declare enum EnumDatastoreKind {
+  /**
+   * @generated from enum value: ENUM_DATASTORE_KIND_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: ENUM_DATASTORE_KIND_RDS_POSTGRES = 1;
+   */
+  RDS_POSTGRES = 1,
+}
+
+/**
+ * PorterDatastore is the specification for a Porter-managed datastore
+ *
+ * @generated from message porter.v1.PorterDatastore
+ */
+export declare class PorterDatastore extends Message<PorterDatastore> {
+  /**
+   * cloud_provider [REQUIRED] represents the provider that we will provisioning the datastore in
+   *
+   * @generated from field: porter.v1.EnumCloudProvider cloud_provider = 1;
+   */
+  cloudProvider: EnumCloudProvider;
+
+  /**
+   * cloud_provider_credential_identifier [REQUIRED] is the Porter credentials that will be used for provisioning a datastore.
+   *
+   * @generated from field: string cloud_provider_credential_identifier = 2;
+   */
+  cloudProviderCredentialIdentifier: string;
+
+  /**
+   * id [OPTIONAL] represents the id of the datastore. This is required for update operations, but should be left blank when creating a datastore
+   *
+   * @generated from field: string id = 3;
+   */
+  id: string;
+
+  /**
+   * kind [REQUIRED] represents the type of the datastore
+   *
+   * @generated from field: porter.v1.EnumDatastoreKind kind = 4;
+   */
+  kind: EnumDatastoreKind;
+
+  /**
+   * kind_values are the required values depending on kind
+   *
+   * @generated from oneof porter.v1.PorterDatastore.kind_values
+   */
+  kindValues: {
+    /**
+     * @generated from field: porter.v1.RdsPostgres rds_postgres_kind = 5;
+     */
+    value: RdsPostgres;
+    case: "rdsPostgresKind";
+  } | { case: undefined; value?: undefined };
+
+  constructor(data?: PartialMessage<PorterDatastore>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.PorterDatastore";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PorterDatastore;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PorterDatastore;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PorterDatastore;
+
+  static equals(a: PorterDatastore | PlainMessage<PorterDatastore> | undefined, b: PorterDatastore | PlainMessage<PorterDatastore> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.DatastorePasswordSecretRef
+ */
+export declare class DatastorePasswordSecretRef extends Message<DatastorePasswordSecretRef> {
+  /**
+   * name is the name of the secret
+   *
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * namespace is the namespace of the secret
+   *
+   * @generated from field: string namespace = 2;
+   */
+  namespace: string;
+
+  /**
+   * key is the key of the password in the secret
+   *
+   * @generated from field: string key = 3;
+   */
+  key: string;
+
+  constructor(data?: PartialMessage<DatastorePasswordSecretRef>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DatastorePasswordSecretRef";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DatastorePasswordSecretRef;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DatastorePasswordSecretRef;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DatastorePasswordSecretRef;
+
+  static equals(a: DatastorePasswordSecretRef | PlainMessage<DatastorePasswordSecretRef> | undefined, b: DatastorePasswordSecretRef | PlainMessage<DatastorePasswordSecretRef> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.RdsPostgres
+ */
+export declare class RdsPostgres extends Message<RdsPostgres> {
+  /**
+   * name is the name of the datastore
+   *
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * database_name is the name of the rds database
+   *
+   * @generated from field: string database_name = 2;
+   */
+  databaseName: string;
+
+  /**
+   * master_username is the username of the database
+   *
+   * @generated from field: string master_username = 3;
+   */
+  masterUsername: string;
+
+  /**
+   * master_user_password_literal is the string value of the password; this is only used for creating the database password secret and is wiped when the contract is saved
+   *
+   * @generated from field: string master_user_password_literal = 4;
+   */
+  masterUserPasswordLiteral: string;
+
+  /**
+   * master_user_password_secret_ref is the reference to the secret that stores the password of the database
+   *
+   * @generated from field: porter.v1.DatastorePasswordSecretRef master_user_password_secret_ref = 5;
+   */
+  masterUserPasswordSecretRef?: DatastorePasswordSecretRef;
+
+  /**
+   * allocated_storage_gigabytes is the allocated storage of the database in gigabytes
+   *
+   * @generated from field: int64 allocated_storage_gigabytes = 6;
+   */
+  allocatedStorageGigabytes: bigint;
+
+  /**
+   * instance_class is the instance class of the database
+   *
+   * @generated from field: string instance_class = 7;
+   */
+  instanceClass: string;
+
+  constructor(data?: PartialMessage<RdsPostgres>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.RdsPostgres";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RdsPostgres;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RdsPostgres;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RdsPostgres;
+
+  static equals(a: RdsPostgres | PlainMessage<RdsPostgres> | undefined, b: RdsPostgres | PlainMessage<RdsPostgres> | undefined): boolean;
+}
 
 /**
  * UpdateDatastorePayload is used to send messages via nats to update a datastore

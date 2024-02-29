@@ -20,7 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Contract represents the API contract for Porter, commonly known as "porter.yaml"
+// Contract represents a contract for managing clusters and compliance
 type Contract struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

@@ -4,6 +4,62 @@
 // @ts-nocheck
 
 import { proto3 } from "@bufbuild/protobuf";
+import { EnumCloudProvider } from "./cluster_pb.js";
+
+/**
+ * @generated from enum porter.v1.EnumDatastoreKind
+ */
+export const EnumDatastoreKind = proto3.makeEnum(
+  "porter.v1.EnumDatastoreKind",
+  [
+    {no: 0, name: "ENUM_DATASTORE_KIND_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "ENUM_DATASTORE_KIND_RDS_POSTGRES", localName: "RDS_POSTGRES"},
+  ],
+);
+
+/**
+ * PorterDatastore is the specification for a Porter-managed datastore
+ *
+ * @generated from message porter.v1.PorterDatastore
+ */
+export const PorterDatastore = proto3.makeMessageType(
+  "porter.v1.PorterDatastore",
+  () => [
+    { no: 1, name: "cloud_provider", kind: "enum", T: proto3.getEnumType(EnumCloudProvider) },
+    { no: 2, name: "cloud_provider_credential_identifier", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "kind", kind: "enum", T: proto3.getEnumType(EnumDatastoreKind) },
+    { no: 5, name: "rds_postgres_kind", kind: "message", T: RdsPostgres, oneof: "kind_values" },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.DatastorePasswordSecretRef
+ */
+export const DatastorePasswordSecretRef = proto3.makeMessageType(
+  "porter.v1.DatastorePasswordSecretRef",
+  () => [
+    { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "namespace", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "key", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.RdsPostgres
+ */
+export const RdsPostgres = proto3.makeMessageType(
+  "porter.v1.RdsPostgres",
+  () => [
+    { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "database_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "master_username", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "master_user_password_literal", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "master_user_password_secret_ref", kind: "message", T: DatastorePasswordSecretRef },
+    { no: 6, name: "allocated_storage_gigabytes", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 7, name: "instance_class", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
 
 /**
  * UpdateDatastorePayload is used to send messages via nats to update a datastore
