@@ -29,32 +29,32 @@ export declare enum EnumDatastoreKind {
  */
 export declare class PorterDatastore extends Message<PorterDatastore> {
   /**
+   * id represents the id of the datastore. This is required for update operations, but should be left blank when creating a datastore
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
    * cloud_provider represents the provider that the datastore is provisioned in
    *
-   * @generated from field: porter.v1.EnumCloudProvider cloud_provider = 1;
+   * @generated from field: porter.v1.EnumCloudProvider cloud_provider = 2;
    */
   cloudProvider: EnumCloudProvider;
 
   /**
    * cloud_provider_credential_identifier is the credential used to provision the datastore
    *
-   * @generated from field: string cloud_provider_credential_identifier = 2;
+   * @generated from field: string cloud_provider_credential_identifier = 3;
    */
   cloudProviderCredentialIdentifier: string;
 
   /**
    * region is the region the datastore is provisioned in
    *
-   * @generated from field: string region = 3;
+   * @generated from field: string region = 4;
    */
   region: string;
-
-  /**
-   * id represents the id of the datastore. This is required for update operations, but should be left blank when creating a datastore
-   *
-   * @generated from field: string id = 4;
-   */
-  id: string;
 
   /**
    * name is the name of the datastore

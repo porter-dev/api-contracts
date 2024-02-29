@@ -14,7 +14,7 @@ import { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifie
 import { Addon, PrerequisiteAddon } from "./addons_pb.js";
 import { EnumEnvGroupProviderType } from "./env_group_pb.js";
 import { NotificationConfig } from "./notification_pb.js";
-import { DatastoreCredential } from "./datastore_pb.js";
+import { DatastoreCredential, PorterDatastore } from "./datastore_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
@@ -96,6 +96,29 @@ export const EnumServiceDeploymentStatus = proto3.makeEnum(
     {no: 1, name: "ENUM_SERVICE_DEPLOYMENT_STATUS_PROGRESSING", localName: "PROGRESSING"},
     {no: 2, name: "ENUM_SERVICE_DEPLOYMENT_STATUS_SUCCESS", localName: "SUCCESS"},
     {no: 3, name: "ENUM_SERVICE_DEPLOYMENT_STATUS_FAILED", localName: "FAILED"},
+  ],
+);
+
+/**
+ * @generated from enum porter.v1.EnumPatchCloudContractResourceOperation
+ */
+export const EnumPatchCloudContractResourceOperation = proto3.makeEnum(
+  "porter.v1.EnumPatchCloudContractResourceOperation",
+  [
+    {no: 0, name: "ENUM_PATCH_CLOUD_CONTRACT_RESOURCE_OPERATION_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "ENUM_PATCH_CLOUD_CONTRACT_RESOURCE_OPERATION_UPDATE", localName: "UPDATE"},
+    {no: 2, name: "ENUM_PATCH_CLOUD_CONTRACT_RESOURCE_OPERATION_DELETE", localName: "DELETE"},
+  ],
+);
+
+/**
+ * @generated from enum porter.v1.EnumPatchCloudContractResourceType
+ */
+export const EnumPatchCloudContractResourceType = proto3.makeEnum(
+  "porter.v1.EnumPatchCloudContractResourceType",
+  [
+    {no: 0, name: "ENUM_PATCH_CLOUD_CONTRACT_RESOURCE_TYPE_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "ENUM_PATCH_CLOUD_CONTRACT_RESOURCE_TYPE_DATASTORE", localName: "DATASTORE"},
   ],
 );
 
@@ -1931,6 +1954,35 @@ export const CreateDatastoreProxyResponse = proto3.makeMessageType(
     { no: 2, name: "credential", kind: "message", T: DatastoreCredential },
     { no: 3, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 4, name: "namespace", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * PatchCloudContractResourceRequest is the request object for patching a cloud contract resource
+ *
+ * @generated from message porter.v1.PatchCloudContractResourceRequest
+ */
+export const PatchCloudContractResourceRequest = proto3.makeMessageType(
+  "porter.v1.PatchCloudContractResourceRequest",
+  () => [
+    { no: 1, name: "operation", kind: "enum", T: proto3.getEnumType(EnumPatchCloudContractResourceOperation) },
+    { no: 2, name: "resource_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "resource_type", kind: "enum", T: proto3.getEnumType(EnumPatchCloudContractResourceType) },
+    { no: 4, name: "datastore", kind: "message", T: PorterDatastore, oneof: "resource_values" },
+  ],
+);
+
+/**
+ * PatchCloudContractResourceResponse is the response object from patching a cloud contract resource
+ *
+ * @generated from message porter.v1.PatchCloudContractResourceResponse
+ */
+export const PatchCloudContractResourceResponse = proto3.makeMessageType(
+  "porter.v1.PatchCloudContractResourceResponse",
+  () => [
+    { no: 1, name: "resource_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "resource_type", kind: "enum", T: proto3.getEnumType(EnumPatchCloudContractResourceType) },
+    { no: 3, name: "datastore", kind: "message", T: PorterDatastore, oneof: "resource_patch_values" },
   ],
 );
 

@@ -1268,6 +1268,43 @@ message CreateDatastoreProxyResponse {
   string namespace = 4;
 }
 
+// PatchCloudContractResourceRequest is the request object for patching a cloud contract resource
+message PatchCloudContractResourceRequest {
+  // operation describes the type of the update
+  EnumPatchCloudContractResourceOperation operation = 1;
+  // resource_id is the id of the resource we want to update
+  string resource_id = 2;
+  // resource_type is the type of the resource we want to update
+  EnumPatchCloudContractResourceType resource_type = 3;
+  // resource_values is the values we will use to make the update
+  oneof resource_values {
+    PorterDatastore datastore = 4;
+  }
+}
+
+// PatchCloudContractResourceResponse is the response object from patching a cloud contract resource
+message PatchCloudContractResourceResponse {
+  // resource_id is the id of the resource that was updated
+  string resource_id = 1;
+  // resource_type is the type of the resource that was updated
+  EnumPatchCloudContractResourceType resource_type = 2;
+  // resource_patch_values is the values of what was updated
+  oneof resource_patch_values {
+    PorterDatastore datastore = 3;
+  }
+}
+
+enum EnumPatchCloudContractResourceOperation {
+  ENUM_PATCH_CLOUD_CONTRACT_RESOURCE_OPERATION_UNSPECIFIED = 0;
+  ENUM_PATCH_CLOUD_CONTRACT_RESOURCE_OPERATION_UPDATE = 1;
+  ENUM_PATCH_CLOUD_CONTRACT_RESOURCE_OPERATION_DELETE = 2;
+}
+
+enum EnumPatchCloudContractResourceType {
+  ENUM_PATCH_CLOUD_CONTRACT_RESOURCE_TYPE_UNSPECIFIED = 0;
+  ENUM_PATCH_CLOUD_CONTRACT_RESOURCE_TYPE_DATASTORE = 1;
+}
+
 service ClusterControlPlaneService {
   // QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas
   rpc QuotaIncrease(QuotaIncreaseRequest) returns (QuotaIncreaseResponse) {}
@@ -1463,6 +1500,9 @@ service ClusterControlPlaneService {
 
   // CreateDatastoreProxy creates a proxy for connecting to a datastore
   rpc CreateDatastoreProxy(CreateDatastoreProxyRequest) returns (CreateDatastoreProxyResponse) {}
+
+  // PatchCloudContractResource patches a cloud contract by modifying its resources
+  rpc PatchCloudContractResource(PatchCloudContractResourceRequest) returns (PatchCloudContractResourceResponse) {}
 
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
   // Deprecated. Use TokenForRegistry instead.

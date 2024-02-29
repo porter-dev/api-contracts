@@ -15,7 +15,7 @@ import type { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIden
 import type { Addon, PrerequisiteAddon } from "./addons_pb.js";
 import type { EnumEnvGroupProviderType } from "./env_group_pb.js";
 import type { NotificationConfig } from "./notification_pb.js";
-import type { DatastoreCredential } from "./datastore_pb.js";
+import type { DatastoreCredential, PorterDatastore } from "./datastore_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
@@ -212,6 +212,41 @@ export declare enum EnumServiceDeploymentStatus {
    * @generated from enum value: ENUM_SERVICE_DEPLOYMENT_STATUS_FAILED = 3;
    */
   FAILED = 3,
+}
+
+/**
+ * @generated from enum porter.v1.EnumPatchCloudContractResourceOperation
+ */
+export declare enum EnumPatchCloudContractResourceOperation {
+  /**
+   * @generated from enum value: ENUM_PATCH_CLOUD_CONTRACT_RESOURCE_OPERATION_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: ENUM_PATCH_CLOUD_CONTRACT_RESOURCE_OPERATION_UPDATE = 1;
+   */
+  UPDATE = 1,
+
+  /**
+   * @generated from enum value: ENUM_PATCH_CLOUD_CONTRACT_RESOURCE_OPERATION_DELETE = 2;
+   */
+  DELETE = 2,
+}
+
+/**
+ * @generated from enum porter.v1.EnumPatchCloudContractResourceType
+ */
+export declare enum EnumPatchCloudContractResourceType {
+  /**
+   * @generated from enum value: ENUM_PATCH_CLOUD_CONTRACT_RESOURCE_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: ENUM_PATCH_CLOUD_CONTRACT_RESOURCE_TYPE_DATASTORE = 1;
+   */
+  DATASTORE = 1,
 }
 
 /**
@@ -5667,6 +5702,109 @@ export declare class CreateDatastoreProxyResponse extends Message<CreateDatastor
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CreateDatastoreProxyResponse;
 
   static equals(a: CreateDatastoreProxyResponse | PlainMessage<CreateDatastoreProxyResponse> | undefined, b: CreateDatastoreProxyResponse | PlainMessage<CreateDatastoreProxyResponse> | undefined): boolean;
+}
+
+/**
+ * PatchCloudContractResourceRequest is the request object for patching a cloud contract resource
+ *
+ * @generated from message porter.v1.PatchCloudContractResourceRequest
+ */
+export declare class PatchCloudContractResourceRequest extends Message<PatchCloudContractResourceRequest> {
+  /**
+   * operation describes the type of the update
+   *
+   * @generated from field: porter.v1.EnumPatchCloudContractResourceOperation operation = 1;
+   */
+  operation: EnumPatchCloudContractResourceOperation;
+
+  /**
+   * resource_id is the id of the resource we want to update
+   *
+   * @generated from field: string resource_id = 2;
+   */
+  resourceId: string;
+
+  /**
+   * resource_type is the type of the resource we want to update
+   *
+   * @generated from field: porter.v1.EnumPatchCloudContractResourceType resource_type = 3;
+   */
+  resourceType: EnumPatchCloudContractResourceType;
+
+  /**
+   * resource_values is the values we will use to make the update
+   *
+   * @generated from oneof porter.v1.PatchCloudContractResourceRequest.resource_values
+   */
+  resourceValues: {
+    /**
+     * @generated from field: porter.v1.PorterDatastore datastore = 4;
+     */
+    value: PorterDatastore;
+    case: "datastore";
+  } | { case: undefined; value?: undefined };
+
+  constructor(data?: PartialMessage<PatchCloudContractResourceRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.PatchCloudContractResourceRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PatchCloudContractResourceRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PatchCloudContractResourceRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PatchCloudContractResourceRequest;
+
+  static equals(a: PatchCloudContractResourceRequest | PlainMessage<PatchCloudContractResourceRequest> | undefined, b: PatchCloudContractResourceRequest | PlainMessage<PatchCloudContractResourceRequest> | undefined): boolean;
+}
+
+/**
+ * PatchCloudContractResourceResponse is the response object from patching a cloud contract resource
+ *
+ * @generated from message porter.v1.PatchCloudContractResourceResponse
+ */
+export declare class PatchCloudContractResourceResponse extends Message<PatchCloudContractResourceResponse> {
+  /**
+   * resource_id is the id of the resource that was updated
+   *
+   * @generated from field: string resource_id = 1;
+   */
+  resourceId: string;
+
+  /**
+   * resource_type is the type of the resource that was updated
+   *
+   * @generated from field: porter.v1.EnumPatchCloudContractResourceType resource_type = 2;
+   */
+  resourceType: EnumPatchCloudContractResourceType;
+
+  /**
+   * resource_patch_values is the values of what was updated
+   *
+   * @generated from oneof porter.v1.PatchCloudContractResourceResponse.resource_patch_values
+   */
+  resourcePatchValues: {
+    /**
+     * @generated from field: porter.v1.PorterDatastore datastore = 3;
+     */
+    value: PorterDatastore;
+    case: "datastore";
+  } | { case: undefined; value?: undefined };
+
+  constructor(data?: PartialMessage<PatchCloudContractResourceResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.PatchCloudContractResourceResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PatchCloudContractResourceResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PatchCloudContractResourceResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PatchCloudContractResourceResponse;
+
+  static equals(a: PatchCloudContractResourceResponse | PlainMessage<PatchCloudContractResourceResponse> | undefined, b: PatchCloudContractResourceResponse | PlainMessage<PatchCloudContractResourceResponse> | undefined): boolean;
 }
 
 /**

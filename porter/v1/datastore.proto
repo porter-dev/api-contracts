@@ -6,14 +6,14 @@ import "porter/v1/cluster.proto";
 
 // PorterDatastore is the specification for a Porter-managed datastore
 message PorterDatastore {
-  // cloud_provider represents the provider that the datastore is provisioned in
-  EnumCloudProvider cloud_provider = 1;
-  // cloud_provider_credential_identifier is the credential used to provision the datastore
-  string cloud_provider_credential_identifier = 2;
-  // region is the region the datastore is provisioned in
-  string region = 3;
   // id represents the id of the datastore. This is required for update operations, but should be left blank when creating a datastore
-  string id = 4;
+  string id = 1;
+  // cloud_provider represents the provider that the datastore is provisioned in
+  EnumCloudProvider cloud_provider = 2;
+  // cloud_provider_credential_identifier is the credential used to provision the datastore
+  string cloud_provider_credential_identifier = 3;
+  // region is the region the datastore is provisioned in
+  string region = 4;
   // name is the name of the datastore
   string name = 5;
   // kind represents the type of the datastore

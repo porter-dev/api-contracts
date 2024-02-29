@@ -25,10 +25,10 @@ export const EnumDatastoreKind = proto3.makeEnum(
 export const PorterDatastore = proto3.makeMessageType(
   "porter.v1.PorterDatastore",
   () => [
-    { no: 1, name: "cloud_provider", kind: "enum", T: proto3.getEnumType(EnumCloudProvider) },
-    { no: 2, name: "cloud_provider_credential_identifier", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "region", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "cloud_provider", kind: "enum", T: proto3.getEnumType(EnumCloudProvider) },
+    { no: 3, name: "cloud_provider_credential_identifier", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "region", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 6, name: "kind", kind: "enum", T: proto3.getEnumType(EnumDatastoreKind) },
     { no: 7, name: "aws_rds_postgres_kind", kind: "message", T: AwsRdsPostgres, oneof: "kind_values" },
