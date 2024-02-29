@@ -16,6 +16,7 @@ import type { Addon, PrerequisiteAddon } from "./addons_pb.js";
 import type { EnumEnvGroupProviderType } from "./env_group_pb.js";
 import type { NotificationConfig } from "./notification_pb.js";
 import type { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
+import type { CloudContract } from "./cloud_contract_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
@@ -5771,31 +5772,11 @@ export declare class PatchCloudContractResourceRequest extends Message<PatchClou
  */
 export declare class PatchCloudContractResourceResponse extends Message<PatchCloudContractResourceResponse> {
   /**
-   * resource_id is the id of the resource that was updated
+   * cloud_contract is the resulting cloud contract after the patch has been applied
    *
-   * @generated from field: string resource_id = 1;
+   * @generated from field: porter.v1.CloudContract cloud_contract = 1;
    */
-  resourceId: string;
-
-  /**
-   * resource_type is the type of the resource that was updated
-   *
-   * @generated from field: porter.v1.EnumPatchCloudContractResourceType resource_type = 2;
-   */
-  resourceType: EnumPatchCloudContractResourceType;
-
-  /**
-   * resource_patch_values is the values of what was updated
-   *
-   * @generated from oneof porter.v1.PatchCloudContractResourceResponse.resource_patch_values
-   */
-  resourcePatchValues: {
-    /**
-     * @generated from field: porter.v1.ManagedDatastore datastore = 3;
-     */
-    value: ManagedDatastore;
-    case: "datastore";
-  } | { case: undefined; value?: undefined };
+  cloudContract?: CloudContract;
 
   constructor(data?: PartialMessage<PatchCloudContractResourceResponse>);
 

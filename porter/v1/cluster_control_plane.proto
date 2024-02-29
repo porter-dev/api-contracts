@@ -5,6 +5,7 @@ package porter.v1;
 import "google/protobuf/timestamp.proto";
 import "porter/v1/addons.proto";
 import "porter/v1/aws_assume_role.proto";
+import "porter/v1/cloud_contract.proto";
 import "porter/v1/cloud_provider_credentials.proto";
 import "porter/v1/cluster.proto";
 import "porter/v1/compliance.proto";
@@ -1285,14 +1286,8 @@ message PatchCloudContractResourceRequest {
 
 // PatchCloudContractResourceResponse is the response object from patching a cloud contract resource
 message PatchCloudContractResourceResponse {
-  // resource_id is the id of the resource that was updated
-  string resource_id = 1;
-  // resource_type is the type of the resource that was updated
-  EnumPatchCloudContractResourceType resource_type = 2;
-  // resource_patch_values is the values of what was updated
-  oneof resource_patch_values {
-    ManagedDatastore datastore = 3;
-  }
+  // cloud_contract is the resulting cloud contract after the patch has been applied
+  CloudContract cloud_contract = 1;
 }
 
 enum EnumPatchCloudContractResourceOperation {

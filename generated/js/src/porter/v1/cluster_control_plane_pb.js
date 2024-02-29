@@ -15,6 +15,7 @@ import { Addon, PrerequisiteAddon } from "./addons_pb.js";
 import { EnumEnvGroupProviderType } from "./env_group_pb.js";
 import { NotificationConfig } from "./notification_pb.js";
 import { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
+import { CloudContract } from "./cloud_contract_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 
 /**
@@ -1981,9 +1982,7 @@ export const PatchCloudContractResourceRequest = proto3.makeMessageType(
 export const PatchCloudContractResourceResponse = proto3.makeMessageType(
   "porter.v1.PatchCloudContractResourceResponse",
   () => [
-    { no: 1, name: "resource_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "resource_type", kind: "enum", T: proto3.getEnumType(EnumPatchCloudContractResourceType) },
-    { no: 3, name: "datastore", kind: "message", T: ManagedDatastore, oneof: "resource_patch_values" },
+    { no: 1, name: "cloud_contract", kind: "message", T: CloudContract },
   ],
 );
 
