@@ -121,6 +121,10 @@ message HealthCheck {
   string http_path = 2;
   // command is the command to run for the health check
   string command = 3;
+  // timeout_seconds is the number of seconds to wait before timing out the health check. If zero, a default value will be used.
+  int32 timeout_seconds = 4;
+  // initial_delay_seconds is the number of seconds to wait before starting the health check. If nil, a default value will be used.
+  optional int32 initial_delay_seconds = 5;
 }
 
 // GPU is the gpu configuration
