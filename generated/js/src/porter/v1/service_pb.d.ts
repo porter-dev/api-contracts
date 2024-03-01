@@ -448,6 +448,20 @@ export declare class HealthCheck extends Message<HealthCheck> {
    */
   command: string;
 
+  /**
+   * timeout_seconds is the number of seconds to wait before timing out the health check. If zero, a default value will be used.
+   *
+   * @generated from field: int32 timeout_seconds = 4;
+   */
+  timeoutSeconds: number;
+
+  /**
+   * initial_delay_seconds is the number of seconds to wait before starting the health check. If nil, a default value will be used.
+   *
+   * @generated from field: optional int32 initial_delay_seconds = 5;
+   */
+  initialDelaySeconds?: number;
+
   constructor(data?: PartialMessage<HealthCheck>);
 
   static readonly runtime: typeof proto3;
