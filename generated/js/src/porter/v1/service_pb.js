@@ -134,6 +134,8 @@ export const HealthCheck = proto3.makeMessageType(
     { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 2, name: "http_path", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "command", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "timeout_seconds", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 5, name: "initial_delay_seconds", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
   ],
 );
 
