@@ -185,6 +185,8 @@ export declare class UpdateCloudProviderCredentialsResponse extends Message<Upda
   credentialsIdentifier: string;
 
   /**
+   * percent_completed is used to inform the caller of progress on the credential update, for async updates
+   *
    * @generated from field: float percent_completed = 3;
    */
   percentCompleted: number;

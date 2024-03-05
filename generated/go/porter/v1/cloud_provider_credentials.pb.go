@@ -328,9 +328,10 @@ type UpdateCloudProviderCredentialsResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ProjectId             int64   `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
-	CredentialsIdentifier string  `protobuf:"bytes,2,opt,name=credentials_identifier,json=credentialsIdentifier,proto3" json:"credentials_identifier,omitempty"`
-	PercentCompleted      float32 `protobuf:"fixed32,3,opt,name=percent_completed,json=percentCompleted,proto3" json:"percent_completed,omitempty"`
+	ProjectId             int64  `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
+	CredentialsIdentifier string `protobuf:"bytes,2,opt,name=credentials_identifier,json=credentialsIdentifier,proto3" json:"credentials_identifier,omitempty"`
+	// percent_completed is used to inform the caller of progress on the credential update, for async updates
+	PercentCompleted float32 `protobuf:"fixed32,3,opt,name=percent_completed,json=percentCompleted,proto3" json:"percent_completed,omitempty"`
 }
 
 func (x *UpdateCloudProviderCredentialsResponse) Reset() {
