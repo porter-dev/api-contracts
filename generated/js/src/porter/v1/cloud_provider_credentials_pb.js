@@ -63,6 +63,7 @@ export const UpdateCloudProviderCredentialsResponse = proto3.makeMessageType(
   () => [
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 2, name: "credentials_identifier", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "percent_completed", kind: "scalar", T: 2 /* ScalarType.FLOAT */ },
   ],
 );
 

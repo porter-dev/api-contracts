@@ -184,6 +184,11 @@ export declare class UpdateCloudProviderCredentialsResponse extends Message<Upda
    */
   credentialsIdentifier: string;
 
+  /**
+   * @generated from field: float percent_completed = 3;
+   */
+  percentCompleted: number;
+
   constructor(data?: PartialMessage<UpdateCloudProviderCredentialsResponse>);
 
   static readonly runtime: typeof proto3;
