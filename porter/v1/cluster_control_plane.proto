@@ -1464,6 +1464,9 @@ service ClusterControlPlaneService {
   // CreateDatastoreProxy creates a proxy for connecting to a datastore
   rpc CreateDatastoreProxy(CreateDatastoreProxyRequest) returns (CreateDatastoreProxyResponse) {}
 
+  // CloudProviderPermissionsStatus returns the status to poll after a user grants cloud provider permissions to Porter
+  rpc CloudProviderPermissionsStatus(CloudProviderPermissionsStatusRequest) returns (CloudProviderPermissionsStatusResponse) {}
+
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
   // Deprecated. Use TokenForRegistry instead.
   rpc DockerConfigFileForRegistry(DockerConfigFileForRegistryRequest) returns (DockerConfigFileForRegistryResponse) {

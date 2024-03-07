@@ -67,3 +67,27 @@ export const UpdateCloudProviderCredentialsResponse = proto3.makeMessageType(
   ],
 );
 
+/**
+ * @generated from message porter.v1.CloudProviderPermissionsStatusRequest
+ */
+export const CloudProviderPermissionsStatusRequest = proto3.makeMessageType(
+  "porter.v1.CloudProviderPermissionsStatusRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cloud_provider", kind: "enum", T: proto3.getEnumType(EnumCloudProvider) },
+    { no: 3, name: "aws_credentials", kind: "message", T: AWSCredentials, oneof: "cloud_provider_credentials" },
+    { no: 4, name: "azure_credentials", kind: "message", T: AzureCredentials, oneof: "cloud_provider_credentials" },
+    { no: 5, name: "gcp_credentials", kind: "message", T: GCPCredentials, oneof: "cloud_provider_credentials" },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.CloudProviderPermissionsStatusResponse
+ */
+export const CloudProviderPermissionsStatusResponse = proto3.makeMessageType(
+  "porter.v1.CloudProviderPermissionsStatusResponse",
+  () => [
+    { no: 1, name: "percent_completed", kind: "scalar", T: 2 /* ScalarType.FLOAT */ },
+  ],
+);
+

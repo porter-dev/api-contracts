@@ -208,6 +208,9 @@ const (
 	// ClusterControlPlaneServiceCreateDatastoreProxyProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's CreateDatastoreProxy RPC.
 	ClusterControlPlaneServiceCreateDatastoreProxyProcedure = "/porter.v1.ClusterControlPlaneService/CreateDatastoreProxy"
+	// ClusterControlPlaneServiceCloudProviderPermissionsStatusProcedure is the fully-qualified name of
+	// the ClusterControlPlaneService's CloudProviderPermissionsStatus RPC.
+	ClusterControlPlaneServiceCloudProviderPermissionsStatusProcedure = "/porter.v1.ClusterControlPlaneService/CloudProviderPermissionsStatus"
 	// ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DockerConfigFileForRegistry RPC.
 	ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure = "/porter.v1.ClusterControlPlaneService/DockerConfigFileForRegistry"
@@ -407,6 +410,8 @@ type ClusterControlPlaneServiceClient interface {
 	UpdateDatastore(context.Context, *connect.Request[v1.UpdateDatastoreRequest]) (*connect.Response[v1.UpdateDatastoreResponse], error)
 	// CreateDatastoreProxy creates a proxy for connecting to a datastore
 	CreateDatastoreProxy(context.Context, *connect.Request[v1.CreateDatastoreProxyRequest]) (*connect.Response[v1.CreateDatastoreProxyResponse], error)
+	// CloudProviderPermissionsStatus returns the status to poll after a user grants cloud provider permissions to Porter
+	CloudProviderPermissionsStatus(context.Context, *connect.Request[v1.CloudProviderPermissionsStatusRequest]) (*connect.Response[v1.CloudProviderPermissionsStatusResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -775,6 +780,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceCreateDatastoreProxyProcedure,
 			opts...,
 		),
+		cloudProviderPermissionsStatus: connect.NewClient[v1.CloudProviderPermissionsStatusRequest, v1.CloudProviderPermissionsStatusResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceCloudProviderPermissionsStatusProcedure,
+			opts...,
+		),
 		dockerConfigFileForRegistry: connect.NewClient[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
@@ -933,6 +943,7 @@ type clusterControlPlaneServiceClient struct {
 	connectHostedProject                *connect.Client[v1.ConnectHostedProjectRequest, v1.ConnectHostedProjectResponse]
 	updateDatastore                     *connect.Client[v1.UpdateDatastoreRequest, v1.UpdateDatastoreResponse]
 	createDatastoreProxy                *connect.Client[v1.CreateDatastoreProxyRequest, v1.CreateDatastoreProxyResponse]
+	cloudProviderPermissionsStatus      *connect.Client[v1.CloudProviderPermissionsStatusRequest, v1.CloudProviderPermissionsStatusResponse]
 	dockerConfigFileForRegistry         *connect.Client[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse]
 	eCRTokenForRegistry                 *connect.Client[v1.ECRTokenForRegistryRequest, v1.ECRTokenForRegistryResponse]
 	assumeRoleCredentials               *connect.Client[v1.AssumeRoleCredentialsRequest, v1.AssumeRoleCredentialsResponse]
@@ -1260,6 +1271,12 @@ func (c *clusterControlPlaneServiceClient) CreateDatastoreProxy(ctx context.Cont
 	return c.createDatastoreProxy.CallUnary(ctx, req)
 }
 
+// CloudProviderPermissionsStatus calls
+// porter.v1.ClusterControlPlaneService.CloudProviderPermissionsStatus.
+func (c *clusterControlPlaneServiceClient) CloudProviderPermissionsStatus(ctx context.Context, req *connect.Request[v1.CloudProviderPermissionsStatusRequest]) (*connect.Response[v1.CloudProviderPermissionsStatusResponse], error) {
+	return c.cloudProviderPermissionsStatus.CallUnary(ctx, req)
+}
+
 // DockerConfigFileForRegistry calls
 // porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry.
 //
@@ -1517,6 +1534,8 @@ type ClusterControlPlaneServiceHandler interface {
 	UpdateDatastore(context.Context, *connect.Request[v1.UpdateDatastoreRequest]) (*connect.Response[v1.UpdateDatastoreResponse], error)
 	// CreateDatastoreProxy creates a proxy for connecting to a datastore
 	CreateDatastoreProxy(context.Context, *connect.Request[v1.CreateDatastoreProxyRequest]) (*connect.Response[v1.CreateDatastoreProxyResponse], error)
+	// CloudProviderPermissionsStatus returns the status to poll after a user grants cloud provider permissions to Porter
+	CloudProviderPermissionsStatus(context.Context, *connect.Request[v1.CloudProviderPermissionsStatusRequest]) (*connect.Response[v1.CloudProviderPermissionsStatusResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -1881,6 +1900,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.CreateDatastoreProxy,
 		opts...,
 	)
+	clusterControlPlaneServiceCloudProviderPermissionsStatusHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceCloudProviderPermissionsStatusProcedure,
+		svc.CloudProviderPermissionsStatus,
+		opts...,
+	)
 	clusterControlPlaneServiceDockerConfigFileForRegistryHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
 		svc.DockerConfigFileForRegistry,
@@ -2094,6 +2118,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceUpdateDatastoreHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceCreateDatastoreProxyProcedure:
 			clusterControlPlaneServiceCreateDatastoreProxyHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceCloudProviderPermissionsStatusProcedure:
+			clusterControlPlaneServiceCloudProviderPermissionsStatusHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure:
 			clusterControlPlaneServiceDockerConfigFileForRegistryHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceECRTokenForRegistryProcedure:
@@ -2371,6 +2397,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) UpdateDatastore(context.Co
 
 func (UnimplementedClusterControlPlaneServiceHandler) CreateDatastoreProxy(context.Context, *connect.Request[v1.CreateDatastoreProxyRequest]) (*connect.Response[v1.CreateDatastoreProxyResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.CreateDatastoreProxy is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) CloudProviderPermissionsStatus(context.Context, *connect.Request[v1.CloudProviderPermissionsStatusRequest]) (*connect.Response[v1.CloudProviderPermissionsStatusResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.CloudProviderPermissionsStatus is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) DockerConfigFileForRegistry(context.Context, *connect.Request[v1.DockerConfigFileForRegistryRequest]) (*connect.Response[v1.DockerConfigFileForRegistryResponse], error) {
