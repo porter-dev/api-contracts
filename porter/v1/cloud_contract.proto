@@ -9,3 +9,10 @@ message CloudContract {
   // datastores is the list of datastores associated with the project
   repeated ManagedDatastore datastores = 1;
 }
+
+// CloudContractRevision represents a cloud contract revision which should be reconciled
+message CloudContractRevision {
+  int32 project_id = 1;
+  // revision_id is the id of the cloud contract revision that this message applies to
+  string revision_id = 2;
+}

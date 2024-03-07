@@ -18,3 +18,16 @@ export const CloudContract = proto3.makeMessageType(
   ],
 );
 
+/**
+ * CloudContractRevision represents a cloud contract revision which should be reconciled
+ *
+ * @generated from message porter.v1.CloudContractRevision
+ */
+export const CloudContractRevision = proto3.makeMessageType(
+  "porter.v1.CloudContractRevision",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 2, name: "revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+

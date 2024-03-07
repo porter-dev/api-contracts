@@ -35,3 +35,36 @@ export declare class CloudContract extends Message<CloudContract> {
   static equals(a: CloudContract | PlainMessage<CloudContract> | undefined, b: CloudContract | PlainMessage<CloudContract> | undefined): boolean;
 }
 
+/**
+ * CloudContractRevision represents a cloud contract revision which should be reconciled
+ *
+ * @generated from message porter.v1.CloudContractRevision
+ */
+export declare class CloudContractRevision extends Message<CloudContractRevision> {
+  /**
+   * @generated from field: int32 project_id = 1;
+   */
+  projectId: number;
+
+  /**
+   * revision_id is the id of the cloud contract revision that this message applies to
+   *
+   * @generated from field: string revision_id = 2;
+   */
+  revisionId: string;
+
+  constructor(data?: PartialMessage<CloudContractRevision>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CloudContractRevision";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CloudContractRevision;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CloudContractRevision;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CloudContractRevision;
+
+  static equals(a: CloudContractRevision | PlainMessage<CloudContractRevision> | undefined, b: CloudContractRevision | PlainMessage<CloudContractRevision> | undefined): boolean;
+}
+
