@@ -8,7 +8,7 @@ import { Message, proto3 } from "@bufbuild/protobuf";
 import type { Cluster } from "./cluster_pb.js";
 
 /**
- * Contract represents the API contract for Porter, commonly known as "porter.yaml"
+ * Contract represents a contract for managing clusters and compliance
  *
  * @generated from message porter.v1.Contract
  */

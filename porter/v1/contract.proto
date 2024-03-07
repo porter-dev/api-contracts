@@ -4,7 +4,7 @@ package porter.v1;
 
 import "porter/v1/cluster.proto";
 
-// Contract represents the API contract for Porter, commonly known as "porter.yaml"
+// Contract represents a contract for managing clusters and compliance
 message Contract {
   Cluster cluster = 1;
   User user = 2;

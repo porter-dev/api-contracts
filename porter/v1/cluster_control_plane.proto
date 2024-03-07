@@ -5,6 +5,7 @@ package porter.v1;
 import "google/protobuf/timestamp.proto";
 import "porter/v1/addons.proto";
 import "porter/v1/aws_assume_role.proto";
+import "porter/v1/cloud_contract.proto";
 import "porter/v1/cloud_provider_credentials.proto";
 import "porter/v1/cluster.proto";
 import "porter/v1/compliance.proto";
@@ -1268,6 +1269,38 @@ message CreateDatastoreProxyResponse {
   string namespace = 4;
 }
 
+// PatchCloudContractRequest is the request object for patching a cloud contract by updating a resource
+message PatchCloudContractRequest {
+  int64 project_id = 1;
+  // operation describes the type of the update
+  EnumPatchCloudContractOperation operation = 2;
+  // resource_id is the id of the resource we want to update
+  string resource_id = 3;
+  // resource_type is the type of the resource we want to update
+  EnumPatchCloudContractType resource_type = 4;
+  // resource_values is the values we will use to make the update
+  oneof resource_values {
+    ManagedDatastore datastore = 5;
+  }
+}
+
+// PatchCloudContractResponse is the response object from patching a cloud contract resource
+message PatchCloudContractResponse {
+  // cloud_contract is the resulting cloud contract after the patch has been applied
+  CloudContract cloud_contract = 1;
+}
+
+enum EnumPatchCloudContractOperation {
+  ENUM_PATCH_CLOUD_CONTRACT_OPERATION_UNSPECIFIED = 0;
+  ENUM_PATCH_CLOUD_CONTRACT_OPERATION_UPDATE = 1;
+  ENUM_PATCH_CLOUD_CONTRACT_OPERATION_DELETE = 2;
+}
+
+enum EnumPatchCloudContractType {
+  ENUM_PATCH_CLOUD_CONTRACT_TYPE_UNSPECIFIED = 0;
+  ENUM_PATCH_CLOUD_CONTRACT_TYPE_DATASTORE = 1;
+}
+
 service ClusterControlPlaneService {
   // QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas
   rpc QuotaIncrease(QuotaIncreaseRequest) returns (QuotaIncreaseResponse) {}
@@ -1463,6 +1496,9 @@ service ClusterControlPlaneService {
 
   // CreateDatastoreProxy creates a proxy for connecting to a datastore
   rpc CreateDatastoreProxy(CreateDatastoreProxyRequest) returns (CreateDatastoreProxyResponse) {}
+
+  // PatchCloudContract patches a cloud contract by modifying its resources
+  rpc PatchCloudContract(PatchCloudContractRequest) returns (PatchCloudContractResponse) {}
 
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
   // Deprecated. Use TokenForRegistry instead.
@@ -1682,8 +1718,10 @@ message DatastoreStatusResponse {
   string status = 1;
 }
 
-// Datastore represents a single datastore object
+// deprecated; use ManagedDatastore instead
 message Datastore {
+  option deprecated = true;
+
   // type is the type of the datastore
   EnumDatastore type = 1;
   // name is the name of the datastore
