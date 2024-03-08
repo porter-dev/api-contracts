@@ -185,9 +185,10 @@ export declare class UpdateCloudProviderCredentialsResponse extends Message<Upda
   credentialsIdentifier: string;
 
   /**
-   * percent_completed is used to inform the caller of progress on the credential update, for async updates
+   * percent_completed is used to inform the caller of progress on the credential update, for async updates. Deprecated; use CloudProviderPermissionsStatus to get this instead
    *
-   * @generated from field: float percent_completed = 3;
+   * @generated from field: float percent_completed = 3 [deprecated = true];
+   * @deprecated
    */
   percentCompleted: number;
 
@@ -204,5 +205,71 @@ export declare class UpdateCloudProviderCredentialsResponse extends Message<Upda
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateCloudProviderCredentialsResponse;
 
   static equals(a: UpdateCloudProviderCredentialsResponse | PlainMessage<UpdateCloudProviderCredentialsResponse> | undefined, b: UpdateCloudProviderCredentialsResponse | PlainMessage<UpdateCloudProviderCredentialsResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.CloudProviderPermissionsStatusRequest
+ */
+export declare class CloudProviderPermissionsStatusRequest extends Message<CloudProviderPermissionsStatusRequest> {
+  /**
+   * project_id [REQUIRED] is the project that we are checking the credentials for
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * cloud_provider [REQUIRED] represents the provider that we will provisioning the cluster in
+   *
+   * @generated from field: porter.v1.EnumCloudProvider cloud_provider = 2;
+   */
+  cloudProvider: EnumCloudProvider;
+
+  /**
+   * cloud_provider_credential_identifier represents the identifier for the cloud provider credential
+   *
+   * @generated from field: string cloud_provider_credential_identifier = 3;
+   */
+  cloudProviderCredentialIdentifier: string;
+
+  constructor(data?: PartialMessage<CloudProviderPermissionsStatusRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CloudProviderPermissionsStatusRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CloudProviderPermissionsStatusRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CloudProviderPermissionsStatusRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CloudProviderPermissionsStatusRequest;
+
+  static equals(a: CloudProviderPermissionsStatusRequest | PlainMessage<CloudProviderPermissionsStatusRequest> | undefined, b: CloudProviderPermissionsStatusRequest | PlainMessage<CloudProviderPermissionsStatusRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.CloudProviderPermissionsStatusResponse
+ */
+export declare class CloudProviderPermissionsStatusResponse extends Message<CloudProviderPermissionsStatusResponse> {
+  /**
+   * percent_completed is used to inform the caller of progress on the status of cloud provider permissions
+   *
+   * @generated from field: float percent_completed = 1;
+   */
+  percentCompleted: number;
+
+  constructor(data?: PartialMessage<CloudProviderPermissionsStatusResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CloudProviderPermissionsStatusResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CloudProviderPermissionsStatusResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CloudProviderPermissionsStatusResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CloudProviderPermissionsStatusResponse;
+
+  static equals(a: CloudProviderPermissionsStatusResponse | PlainMessage<CloudProviderPermissionsStatusResponse> | undefined, b: CloudProviderPermissionsStatusResponse | PlainMessage<CloudProviderPermissionsStatusResponse> | undefined): boolean;
 }
 

@@ -1497,6 +1497,9 @@ service ClusterControlPlaneService {
   // CreateDatastoreProxy creates a proxy for connecting to a datastore
   rpc CreateDatastoreProxy(CreateDatastoreProxyRequest) returns (CreateDatastoreProxyResponse) {}
 
+  // CloudProviderPermissionsStatus returns the status to poll after a user grants cloud provider permissions to Porter
+  rpc CloudProviderPermissionsStatus(CloudProviderPermissionsStatusRequest) returns (CloudProviderPermissionsStatusResponse) {}
+
   // PatchCloudContract patches a cloud contract by modifying its resources
   rpc PatchCloudContract(PatchCloudContractRequest) returns (PatchCloudContractResponse) {}
 
