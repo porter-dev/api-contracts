@@ -226,29 +226,11 @@ export declare class CloudProviderPermissionsStatusRequest extends Message<Cloud
   cloudProvider: EnumCloudProvider;
 
   /**
-   * cloud_provider_credentials are the credentials for the specified cloud provider
+   * cloud_provider_credential_identifier represents the identifier for the cloud provider credential
    *
-   * @generated from oneof porter.v1.CloudProviderPermissionsStatusRequest.cloud_provider_credentials
+   * @generated from field: string cloud_provider_credential_identifier = 3;
    */
-  cloudProviderCredentials: {
-    /**
-     * @generated from field: porter.v1.AWSCredentials aws_credentials = 3;
-     */
-    value: AWSCredentials;
-    case: "awsCredentials";
-  } | {
-    /**
-     * @generated from field: porter.v1.AzureCredentials azure_credentials = 4;
-     */
-    value: AzureCredentials;
-    case: "azureCredentials";
-  } | {
-    /**
-     * @generated from field: porter.v1.GCPCredentials gcp_credentials = 5;
-     */
-    value: GCPCredentials;
-    case: "gcpCredentials";
-  } | { case: undefined; value?: undefined };
+  cloudProviderCredentialIdentifier: string;
 
   constructor(data?: PartialMessage<CloudProviderPermissionsStatusRequest>);
 

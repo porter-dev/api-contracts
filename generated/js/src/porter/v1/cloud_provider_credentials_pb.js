@@ -75,9 +75,7 @@ export const CloudProviderPermissionsStatusRequest = proto3.makeMessageType(
   () => [
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 2, name: "cloud_provider", kind: "enum", T: proto3.getEnumType(EnumCloudProvider) },
-    { no: 3, name: "aws_credentials", kind: "message", T: AWSCredentials, oneof: "cloud_provider_credentials" },
-    { no: 4, name: "azure_credentials", kind: "message", T: AzureCredentials, oneof: "cloud_provider_credentials" },
-    { no: 5, name: "gcp_credentials", kind: "message", T: GCPCredentials, oneof: "cloud_provider_credentials" },
+    { no: 3, name: "cloud_provider_credential_identifier", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
