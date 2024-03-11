@@ -103,6 +103,13 @@ export declare class ManagedDatastore extends Message<ManagedDatastore> {
     case: "awsRdsKind";
   } | { case: undefined; value?: undefined };
 
+  /**
+   * peering describes the peering of this datastore
+   *
+   * @generated from field: porter.v1.Peering peering = 8;
+   */
+  peering?: Peering;
+
   constructor(data?: PartialMessage<ManagedDatastore>);
 
   static readonly runtime: typeof proto3;
@@ -116,6 +123,32 @@ export declare class ManagedDatastore extends Message<ManagedDatastore> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ManagedDatastore;
 
   static equals(a: ManagedDatastore | PlainMessage<ManagedDatastore> | undefined, b: ManagedDatastore | PlainMessage<ManagedDatastore> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.Peering
+ */
+export declare class Peering extends Message<Peering> {
+  /**
+   * peered_cluster_ids is a list of cluster ids that this datastore is peered to
+   *
+   * @generated from field: repeated int64 peered_cluster_ids = 1;
+   */
+  peeredClusterIds: bigint[];
+
+  constructor(data?: PartialMessage<Peering>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.Peering";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Peering;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Peering;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Peering;
+
+  static equals(a: Peering | PlainMessage<Peering> | undefined, b: Peering | PlainMessage<Peering> | undefined): boolean;
 }
 
 /**
@@ -210,6 +243,13 @@ export declare class AwsRds extends Message<AwsRds> {
    * @generated from field: porter.v1.EnumAwsRdsEngine engine = 7;
    */
   engine: EnumAwsRdsEngine;
+
+  /**
+   * engine_version is the version of the engine
+   *
+   * @generated from field: optional string engine_version = 8;
+   */
+  engineVersion?: string;
 
   constructor(data?: PartialMessage<AwsRds>);
 
