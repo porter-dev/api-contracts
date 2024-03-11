@@ -56,6 +56,8 @@ message PorterApp {
   repeated RequiredApp required_apps = 11;
   // AutoRollback describes whether the app will be rolled back automatically on deployment failure
   AutoRollback auto_rollback = 12;
+  // cloud_sql is the values to configure CloudSQL settings for an app
+  CloudSql cloud_sql = 13;
 }
 
 // RequiredApp specifies another porter app that this app expects to be deployed alongside it
@@ -235,4 +237,16 @@ message JobRun {
   string app_revision_id = 6;
   // service_name is the name of the job service in the app
   string service_name = 7;
+}
+
+// CloudSQL is the values to configure CloudSQL settings
+message CloudSql {
+  // enabled enables cloudsql proxying across all services in the app
+  bool enabled = 1;
+  // service_account_json_secret is the name of the secret where the service account JSON for accessing the CloudSQL instance is stored
+  string service_account_json_secret = 2;
+  // connection_name is the connection name for the CloudSQL instance
+  string connection_name = 3;
+  // db_port is the port for the CloudSQL instance
+  int32 db_port = 4;
 }
