@@ -114,6 +114,7 @@ export const PorterApp = proto3.makeMessageType(
     { no: 10, name: "efs_storage", kind: "message", T: EFS },
     { no: 11, name: "required_apps", kind: "message", T: RequiredApp, repeated: true },
     { no: 12, name: "auto_rollback", kind: "message", T: AutoRollback },
+    { no: 13, name: "cloud_sql", kind: "message", T: CloudSql },
   ],
 );
 
@@ -309,6 +310,21 @@ export const JobRun = proto3.makeMessageType(
     { no: 5, name: "finished_at", kind: "message", T: Timestamp },
     { no: 6, name: "app_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 7, name: "service_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * CloudSQL is the values to configure CloudSQL settings
+ *
+ * @generated from message porter.v1.CloudSql
+ */
+export const CloudSql = proto3.makeMessageType(
+  "porter.v1.CloudSql",
+  () => [
+    { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 2, name: "service_account_json_secret", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "connection_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "db_port", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
   ],
 );
 

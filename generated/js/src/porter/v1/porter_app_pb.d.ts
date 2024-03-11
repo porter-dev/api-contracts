@@ -298,6 +298,13 @@ export declare class PorterApp extends Message<PorterApp> {
    */
   autoRollback?: AutoRollback;
 
+  /**
+   * cloud_sql is the values to configure CloudSQL settings for an app
+   *
+   * @generated from field: porter.v1.CloudSql cloud_sql = 13;
+   */
+  cloudSql?: CloudSql;
+
   constructor(data?: PartialMessage<PorterApp>);
 
   static readonly runtime: typeof proto3;
@@ -931,5 +938,54 @@ export declare class JobRun extends Message<JobRun> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): JobRun;
 
   static equals(a: JobRun | PlainMessage<JobRun> | undefined, b: JobRun | PlainMessage<JobRun> | undefined): boolean;
+}
+
+/**
+ * CloudSQL is the values to configure CloudSQL settings
+ *
+ * @generated from message porter.v1.CloudSql
+ */
+export declare class CloudSql extends Message<CloudSql> {
+  /**
+   * enabled enables shared storage across services
+   *
+   * @generated from field: bool enabled = 1;
+   */
+  enabled: boolean;
+
+  /**
+   * service_account_json_secret is the name of the secret where the service account JSON is stored
+   *
+   * @generated from field: string service_account_json_secret = 2;
+   */
+  serviceAccountJsonSecret: string;
+
+  /**
+   * connection_name is the connection name for the CloudSQL instance
+   *
+   * @generated from field: string connection_name = 3;
+   */
+  connectionName: string;
+
+  /**
+   * db_port is the port for the CloudSQL instance
+   *
+   * @generated from field: int32 db_port = 4;
+   */
+  dbPort: number;
+
+  constructor(data?: PartialMessage<CloudSql>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CloudSql";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CloudSql;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CloudSql;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CloudSql;
+
+  static equals(a: CloudSql | PlainMessage<CloudSql> | undefined, b: CloudSql | PlainMessage<CloudSql> | undefined): boolean;
 }
 
