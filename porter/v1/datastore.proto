@@ -22,13 +22,13 @@ message ManagedDatastore {
   oneof kind_values {
     AwsRds aws_rds_kind = 7;
   }
-  // peering describes the peering of this datastore
-  Peering peering = 8;
+  // connected_clusters describes the connection of this datastore to clusters
+  ConnectedClusters connected_clusters = 8;
 }
 
-message Peering {
-  // peered_cluster_ids is a list of cluster ids that this datastore is peered to
-  repeated int64 peered_cluster_ids = 1;
+message ConnectedClusters {
+  // connected_cluster_ids is a list of cluster ids that this datastore is connected to
+  repeated int64 connected_cluster_ids = 1;
 }
 
 enum EnumDatastoreKind {

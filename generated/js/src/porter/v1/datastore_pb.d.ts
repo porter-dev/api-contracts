@@ -104,11 +104,11 @@ export declare class ManagedDatastore extends Message<ManagedDatastore> {
   } | { case: undefined; value?: undefined };
 
   /**
-   * peering describes the peering of this datastore
+   * connected_clusters describes the connection of this datastore to clusters
    *
-   * @generated from field: porter.v1.Peering peering = 8;
+   * @generated from field: porter.v1.ConnectedClusters connected_clusters = 8;
    */
-  peering?: Peering;
+  connectedClusters?: ConnectedClusters;
 
   constructor(data?: PartialMessage<ManagedDatastore>);
 
@@ -126,29 +126,29 @@ export declare class ManagedDatastore extends Message<ManagedDatastore> {
 }
 
 /**
- * @generated from message porter.v1.Peering
+ * @generated from message porter.v1.ConnectedClusters
  */
-export declare class Peering extends Message<Peering> {
+export declare class ConnectedClusters extends Message<ConnectedClusters> {
   /**
-   * peered_cluster_ids is a list of cluster ids that this datastore is peered to
+   * connected_cluster_ids is a list of cluster ids that this datastore is connected to
    *
-   * @generated from field: repeated int64 peered_cluster_ids = 1;
+   * @generated from field: repeated int64 connected_cluster_ids = 1;
    */
-  peeredClusterIds: bigint[];
+  connectedClusterIds: bigint[];
 
-  constructor(data?: PartialMessage<Peering>);
+  constructor(data?: PartialMessage<ConnectedClusters>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.Peering";
+  static readonly typeName = "porter.v1.ConnectedClusters";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Peering;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ConnectedClusters;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Peering;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ConnectedClusters;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Peering;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ConnectedClusters;
 
-  static equals(a: Peering | PlainMessage<Peering> | undefined, b: Peering | PlainMessage<Peering> | undefined): boolean;
+  static equals(a: ConnectedClusters | PlainMessage<ConnectedClusters> | undefined, b: ConnectedClusters | PlainMessage<ConnectedClusters> | undefined): boolean;
 }
 
 /**

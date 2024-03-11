@@ -44,17 +44,17 @@ export const ManagedDatastore = proto3.makeMessageType(
     { no: 5, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 6, name: "kind", kind: "enum", T: proto3.getEnumType(EnumDatastoreKind) },
     { no: 7, name: "aws_rds_kind", kind: "message", T: AwsRds, oneof: "kind_values" },
-    { no: 8, name: "peering", kind: "message", T: Peering },
+    { no: 8, name: "connected_clusters", kind: "message", T: ConnectedClusters },
   ],
 );
 
 /**
- * @generated from message porter.v1.Peering
+ * @generated from message porter.v1.ConnectedClusters
  */
-export const Peering = proto3.makeMessageType(
-  "porter.v1.Peering",
+export const ConnectedClusters = proto3.makeMessageType(
+  "porter.v1.ConnectedClusters",
   () => [
-    { no: 1, name: "peered_cluster_ids", kind: "scalar", T: 3 /* ScalarType.INT64 */, repeated: true },
+    { no: 1, name: "connected_cluster_ids", kind: "scalar", T: 3 /* ScalarType.INT64 */, repeated: true },
   ],
 );
 
