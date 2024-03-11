@@ -44,6 +44,17 @@ export const ManagedDatastore = proto3.makeMessageType(
     { no: 5, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 6, name: "kind", kind: "enum", T: proto3.getEnumType(EnumDatastoreKind) },
     { no: 7, name: "aws_rds_kind", kind: "message", T: AwsRds, oneof: "kind_values" },
+    { no: 8, name: "connected_clusters", kind: "message", T: ConnectedClusters },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.ConnectedClusters
+ */
+export const ConnectedClusters = proto3.makeMessageType(
+  "porter.v1.ConnectedClusters",
+  () => [
+    { no: 1, name: "connected_cluster_ids", kind: "scalar", T: 3 /* ScalarType.INT64 */, repeated: true },
   ],
 );
 
@@ -72,6 +83,7 @@ export const AwsRds = proto3.makeMessageType(
     { no: 5, name: "allocated_storage_gigabytes", kind: "scalar", T: 3 /* ScalarType.INT64 */, opt: true },
     { no: 6, name: "instance_class", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 7, name: "engine", kind: "enum", T: proto3.getEnumType(EnumAwsRdsEngine) },
+    { no: 8, name: "engine_version", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
   ],
 );
 

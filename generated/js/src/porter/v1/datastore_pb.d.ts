@@ -103,6 +103,13 @@ export declare class ManagedDatastore extends Message<ManagedDatastore> {
     case: "awsRdsKind";
   } | { case: undefined; value?: undefined };
 
+  /**
+   * connected_clusters describes the connection of this datastore to clusters
+   *
+   * @generated from field: porter.v1.ConnectedClusters connected_clusters = 8;
+   */
+  connectedClusters?: ConnectedClusters;
+
   constructor(data?: PartialMessage<ManagedDatastore>);
 
   static readonly runtime: typeof proto3;
@@ -116,6 +123,32 @@ export declare class ManagedDatastore extends Message<ManagedDatastore> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ManagedDatastore;
 
   static equals(a: ManagedDatastore | PlainMessage<ManagedDatastore> | undefined, b: ManagedDatastore | PlainMessage<ManagedDatastore> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.ConnectedClusters
+ */
+export declare class ConnectedClusters extends Message<ConnectedClusters> {
+  /**
+   * connected_cluster_ids is a list of cluster ids that this datastore is connected to
+   *
+   * @generated from field: repeated int64 connected_cluster_ids = 1;
+   */
+  connectedClusterIds: bigint[];
+
+  constructor(data?: PartialMessage<ConnectedClusters>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ConnectedClusters";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ConnectedClusters;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ConnectedClusters;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ConnectedClusters;
+
+  static equals(a: ConnectedClusters | PlainMessage<ConnectedClusters> | undefined, b: ConnectedClusters | PlainMessage<ConnectedClusters> | undefined): boolean;
 }
 
 /**
@@ -210,6 +243,13 @@ export declare class AwsRds extends Message<AwsRds> {
    * @generated from field: porter.v1.EnumAwsRdsEngine engine = 7;
    */
   engine: EnumAwsRdsEngine;
+
+  /**
+   * engine_version is the version of the engine
+   *
+   * @generated from field: optional string engine_version = 8;
+   */
+  engineVersion?: string;
 
   constructor(data?: PartialMessage<AwsRds>);
 
