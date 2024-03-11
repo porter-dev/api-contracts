@@ -1552,9 +1552,9 @@ type CloudSql struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// enabled enables shared storage across services
+	// enabled enables cloudsql proxying across all services in the app
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	// service_account_json_secret is the name of the secret where the service account JSON is stored
+	// service_account_json_secret is the name of the secret where the service account JSON for accessing the CloudSQL instance is stored
 	ServiceAccountJsonSecret string `protobuf:"bytes,2,opt,name=service_account_json_secret,json=serviceAccountJsonSecret,proto3" json:"service_account_json_secret,omitempty"`
 	// connection_name is the connection name for the CloudSQL instance
 	ConnectionName string `protobuf:"bytes,3,opt,name=connection_name,json=connectionName,proto3" json:"connection_name,omitempty"`

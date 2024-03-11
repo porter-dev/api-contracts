@@ -241,9 +241,9 @@ message JobRun {
 
 // CloudSQL is the values to configure CloudSQL settings
 message CloudSql {
-  // enabled enables shared storage across services
+  // enabled enables cloudsql proxying across all services in the app
   bool enabled = 1;
-  // service_account_json_secret is the name of the secret where the service account JSON is stored
+  // service_account_json_secret is the name of the secret where the service account JSON for accessing the CloudSQL instance is stored
   string service_account_json_secret = 2;
   // connection_name is the connection name for the CloudSQL instance
   string connection_name = 3;

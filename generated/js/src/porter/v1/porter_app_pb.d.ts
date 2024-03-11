@@ -947,14 +947,14 @@ export declare class JobRun extends Message<JobRun> {
  */
 export declare class CloudSql extends Message<CloudSql> {
   /**
-   * enabled enables shared storage across services
+   * enabled enables cloudsql proxying across all services in the app
    *
    * @generated from field: bool enabled = 1;
    */
   enabled: boolean;
 
   /**
-   * service_account_json_secret is the name of the secret where the service account JSON is stored
+   * service_account_json_secret is the name of the secret where the service account JSON for accessing the CloudSQL instance is stored
    *
    * @generated from field: string service_account_json_secret = 2;
    */
