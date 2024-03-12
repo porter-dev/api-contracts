@@ -634,6 +634,7 @@ export const UpdateAppRequest = proto3.makeMessageType(
     { no: 13, name: "exact", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 14, name: "b64_description", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 15, name: "app_env_overrides", kind: "message", T: EnvGroupVariables },
+    { no: 16, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
   ],
 );
 
@@ -1739,6 +1740,8 @@ export const CreateOrUpdateEnvGroupRequest = proto3.makeMessageType(
     { no: 3, name: "env_group_provider_type", kind: "enum", T: proto3.getEnumType(EnumEnvGroupProviderType) },
     { no: 4, name: "env_group_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "env_group_auth_token", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 6, name: "env_vars", kind: "message", T: EnvGroupVariables },
+    { no: 7, name: "is_env_override", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 

@@ -1791,6 +1791,13 @@ export declare class UpdateAppRequest extends Message<UpdateAppRequest> {
    */
   appEnvOverrides?: EnvGroupVariables;
 
+  /**
+   * cluster_id is the id of the cluster to use if no deployment target identifier is provided
+   *
+   * @generated from field: int64 cluster_id = 16;
+   */
+  clusterId: bigint;
+
   constructor(data?: PartialMessage<UpdateAppRequest>);
 
   static readonly runtime: typeof proto3;
@@ -5108,6 +5115,20 @@ export declare class CreateOrUpdateEnvGroupRequest extends Message<CreateOrUpdat
    * @generated from field: string env_group_auth_token = 5;
    */
   envGroupAuthToken: string;
+
+  /**
+   * env_vars is the set of environment variables to create or update the env group with
+   *
+   * @generated from field: porter.v1.EnvGroupVariables env_vars = 6;
+   */
+  envVars?: EnvGroupVariables;
+
+  /**
+   * is_env_override indicates whether the provided env_vars should override or merge with the existing env vars
+   *
+   * @generated from field: bool is_env_override = 7;
+   */
+  isEnvOverride: boolean;
 
   constructor(data?: PartialMessage<CreateOrUpdateEnvGroupRequest>);
 
