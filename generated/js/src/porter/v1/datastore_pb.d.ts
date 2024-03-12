@@ -20,6 +20,11 @@ export declare enum EnumDatastoreKind {
    * @generated from enum value: ENUM_DATASTORE_KIND_AWS_RDS = 1;
    */
   AWS_RDS = 1,
+
+  /**
+   * @generated from enum value: ENUM_DATASTORE_KIND_AWS_ELASTICACHE = 2;
+   */
+  AWS_ELASTICACHE = 2,
 }
 
 /**
@@ -40,6 +45,26 @@ export declare enum EnumAwsRdsEngine {
    * @generated from enum value: ENUM_AWS_RDS_ENGINE_AURORA_POSTGRESQL = 2;
    */
   AURORA_POSTGRESQL = 2,
+}
+
+/**
+ * @generated from enum porter.v1.EnumAwsElasticacheEngine
+ */
+export declare enum EnumAwsElasticacheEngine {
+  /**
+   * @generated from enum value: ENUM_AWS_ELASTICACHE_ENGINE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: ENUM_AWS_ELASTICACHE_ENGINE_REDIS = 1;
+   */
+  REDIS = 1,
+
+  /**
+   * @generated from enum value: ENUM_AWS_ELASTICACHE_ENGINE_MEMCACHED = 2;
+   */
+  MEMCACHED = 2,
 }
 
 /**
@@ -101,6 +126,12 @@ export declare class ManagedDatastore extends Message<ManagedDatastore> {
      */
     value: AwsRds;
     case: "awsRdsKind";
+  } | {
+    /**
+     * @generated from field: porter.v1.AwsElasticache aws_elasticache_kind = 9;
+     */
+    value: AwsElasticache;
+    case: "awsElasticacheKind";
   } | { case: undefined; value?: undefined };
 
   /**
@@ -264,6 +295,53 @@ export declare class AwsRds extends Message<AwsRds> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AwsRds;
 
   static equals(a: AwsRds | PlainMessage<AwsRds> | undefined, b: AwsRds | PlainMessage<AwsRds> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.AwsElasticache
+ */
+export declare class AwsElasticache extends Message<AwsElasticache> {
+  /**
+   * instance_class is the instance class of the database
+   *
+   * @generated from field: optional string instance_class = 1;
+   */
+  instanceClass?: string;
+
+  /**
+   * master_user_password_literal is the string value of the password; this is only used for creating the database password secret and is wiped when the contract is saved
+   *
+   * @generated from field: optional string master_user_password_literal = 2;
+   */
+  masterUserPasswordLiteral?: string;
+
+  /**
+   * engine is the engine of the datastore
+   *
+   * @generated from field: porter.v1.EnumAwsElasticacheEngine engine = 3;
+   */
+  engine: EnumAwsElasticacheEngine;
+
+  /**
+   * engine_version is the version of the engine
+   *
+   * @generated from field: optional string engine_version = 4;
+   */
+  engineVersion?: string;
+
+  constructor(data?: PartialMessage<AwsElasticache>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AwsElasticache";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AwsElasticache;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AwsElasticache;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AwsElasticache;
+
+  static equals(a: AwsElasticache | PlainMessage<AwsElasticache> | undefined, b: AwsElasticache | PlainMessage<AwsElasticache> | undefined): boolean;
 }
 
 /**

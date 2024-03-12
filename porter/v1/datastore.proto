@@ -21,6 +21,7 @@ message ManagedDatastore {
   // kind_values are the required values depending on kind
   oneof kind_values {
     AwsRds aws_rds_kind = 7;
+    AwsElasticache aws_elasticache_kind = 9;
   }
   // connected_clusters describes the connection of this datastore to clusters
   ConnectedClusters connected_clusters = 8;
@@ -34,6 +35,7 @@ message ConnectedClusters {
 enum EnumDatastoreKind {
   ENUM_DATASTORE_KIND_UNSPECIFIED = 0;
   ENUM_DATASTORE_KIND_AWS_RDS = 1;
+  ENUM_DATASTORE_KIND_AWS_ELASTICACHE = 2;
 }
 
 message DatastorePasswordSecretRef {
@@ -68,6 +70,23 @@ enum EnumAwsRdsEngine {
   ENUM_AWS_RDS_ENGINE_UNSPECIFIED = 0;
   ENUM_AWS_RDS_ENGINE_POSTGRESQL = 1;
   ENUM_AWS_RDS_ENGINE_AURORA_POSTGRESQL = 2;
+}
+
+message AwsElasticache {
+  // instance_class is the instance class of the database
+  optional string instance_class = 1;
+  // master_user_password_literal is the string value of the password; this is only used for creating the database password secret and is wiped when the contract is saved
+  optional string master_user_password_literal = 2;
+  // engine is the engine of the datastore
+  EnumAwsElasticacheEngine engine = 3;
+  // engine_version is the version of the engine
+  optional string engine_version = 4;
+}
+
+enum EnumAwsElasticacheEngine {
+  ENUM_AWS_ELASTICACHE_ENGINE_UNSPECIFIED = 0;
+  ENUM_AWS_ELASTICACHE_ENGINE_REDIS = 1;
+  ENUM_AWS_ELASTICACHE_ENGINE_MEMCACHED = 2;
 }
 
 // UpdateDatastorePayload is used to send messages via nats to update a datastore
