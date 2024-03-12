@@ -14,6 +14,7 @@ export const EnumDatastoreKind = proto3.makeEnum(
   [
     {no: 0, name: "ENUM_DATASTORE_KIND_UNSPECIFIED", localName: "UNSPECIFIED"},
     {no: 1, name: "ENUM_DATASTORE_KIND_AWS_RDS", localName: "AWS_RDS"},
+    {no: 2, name: "ENUM_DATASTORE_KIND_AWS_ELASTICACHE", localName: "AWS_ELASTICACHE"},
   ],
 );
 
@@ -26,6 +27,18 @@ export const EnumAwsRdsEngine = proto3.makeEnum(
     {no: 0, name: "ENUM_AWS_RDS_ENGINE_UNSPECIFIED", localName: "UNSPECIFIED"},
     {no: 1, name: "ENUM_AWS_RDS_ENGINE_POSTGRESQL", localName: "POSTGRESQL"},
     {no: 2, name: "ENUM_AWS_RDS_ENGINE_AURORA_POSTGRESQL", localName: "AURORA_POSTGRESQL"},
+  ],
+);
+
+/**
+ * @generated from enum porter.v1.EnumAwsElasticacheEngine
+ */
+export const EnumAwsElasticacheEngine = proto3.makeEnum(
+  "porter.v1.EnumAwsElasticacheEngine",
+  [
+    {no: 0, name: "ENUM_AWS_ELASTICACHE_ENGINE_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "ENUM_AWS_ELASTICACHE_ENGINE_REDIS", localName: "REDIS"},
+    {no: 2, name: "ENUM_AWS_ELASTICACHE_ENGINE_MEMCACHED", localName: "MEMCACHED"},
   ],
 );
 
@@ -44,6 +57,7 @@ export const ManagedDatastore = proto3.makeMessageType(
     { no: 5, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 6, name: "kind", kind: "enum", T: proto3.getEnumType(EnumDatastoreKind) },
     { no: 7, name: "aws_rds_kind", kind: "message", T: AwsRds, oneof: "kind_values" },
+    { no: 9, name: "aws_elasticache_kind", kind: "message", T: AwsElasticache, oneof: "kind_values" },
     { no: 8, name: "connected_clusters", kind: "message", T: ConnectedClusters },
   ],
 );
@@ -84,6 +98,19 @@ export const AwsRds = proto3.makeMessageType(
     { no: 6, name: "instance_class", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 7, name: "engine", kind: "enum", T: proto3.getEnumType(EnumAwsRdsEngine) },
     { no: 8, name: "engine_version", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.AwsElasticache
+ */
+export const AwsElasticache = proto3.makeMessageType(
+  "porter.v1.AwsElasticache",
+  () => [
+    { no: 1, name: "instance_class", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 2, name: "master_user_password_literal", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 3, name: "engine", kind: "enum", T: proto3.getEnumType(EnumAwsElasticacheEngine) },
+    { no: 4, name: "engine_version", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
   ],
 );
 
