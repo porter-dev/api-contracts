@@ -344,6 +344,9 @@ message UpdateAppRequest {
   string b64_description = 14;
   // app_env_overrides contains environment specific overrides if they exist, applied depending on the deployment target
   EnvGroupVariables app_env_overrides = 15;
+
+  // cluster_id is the id of the cluster to use if no deployment target identifier is provided
+  int64 cluster_id = 16;
 }
 
 message UpdateAppResponse {
@@ -1138,6 +1141,10 @@ message CreateOrUpdateEnvGroupRequest {
   string env_group_name = 4;
   // env_group_auth_token is the auth token for the env group. Not required for Porter env groups.
   string env_group_auth_token = 5;
+  // env_vars is the set of environment variables to create or update the env group with
+  EnvGroupVariables env_vars = 6;
+  // is_env_override indicates whether the provided env_vars should override or merge with the existing env vars
+  bool is_env_override = 7;
 }
 
 // CreateOrUpdateEnvGroupResponse is the response object for CreateOrUpdateEnvGroup
