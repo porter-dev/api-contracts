@@ -10,7 +10,7 @@ import { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import { Error } from "./errors_pb.js";
 import { Contract, ContractRevision } from "./contract_pb.js";
 import { ContractComplianceCheckGroup, EnumComplianceProfile, EnumComplianceVendor, VendorComplianceCheck } from "./compliance_pb.js";
-import { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, JobRun, PorterApp } from "./porter_app_pb.js";
+import { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, EnvVariableDeletions, JobRun, PorterApp } from "./porter_app_pb.js";
 import { Addon, PrerequisiteAddon } from "./addons_pb.js";
 import { EnumEnvGroupProviderType } from "./env_group_pb.js";
 import { NotificationConfig } from "./notification_pb.js";
@@ -1742,6 +1742,7 @@ export const CreateOrUpdateEnvGroupRequest = proto3.makeMessageType(
     { no: 5, name: "env_group_auth_token", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 6, name: "env_vars", kind: "message", T: EnvGroupVariables },
     { no: 7, name: "is_env_override", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 8, name: "env_variable_deletions", kind: "message", T: EnvVariableDeletions },
   ],
 );
 
