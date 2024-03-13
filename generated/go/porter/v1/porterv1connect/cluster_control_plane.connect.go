@@ -214,6 +214,9 @@ const (
 	// ClusterControlPlaneServicePatchCloudContractProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's PatchCloudContract RPC.
 	ClusterControlPlaneServicePatchCloudContractProcedure = "/porter.v1.ClusterControlPlaneService/PatchCloudContract"
+	// ClusterControlPlaneServiceReadCloudContractProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's ReadCloudContract RPC.
+	ClusterControlPlaneServiceReadCloudContractProcedure = "/porter.v1.ClusterControlPlaneService/ReadCloudContract"
 	// ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DockerConfigFileForRegistry RPC.
 	ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure = "/porter.v1.ClusterControlPlaneService/DockerConfigFileForRegistry"
@@ -417,6 +420,8 @@ type ClusterControlPlaneServiceClient interface {
 	CloudProviderPermissionsStatus(context.Context, *connect.Request[v1.CloudProviderPermissionsStatusRequest]) (*connect.Response[v1.CloudProviderPermissionsStatusResponse], error)
 	// PatchCloudContract patches a cloud contract by modifying its resources
 	PatchCloudContract(context.Context, *connect.Request[v1.PatchCloudContractRequest]) (*connect.Response[v1.PatchCloudContractResponse], error)
+	// ReadCloudContract returns a cloud contract
+	ReadCloudContract(context.Context, *connect.Request[v1.ReadCloudContractRequest]) (*connect.Response[v1.ReadCloudContractResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -795,6 +800,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServicePatchCloudContractProcedure,
 			opts...,
 		),
+		readCloudContract: connect.NewClient[v1.ReadCloudContractRequest, v1.ReadCloudContractResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceReadCloudContractProcedure,
+			opts...,
+		),
 		dockerConfigFileForRegistry: connect.NewClient[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
@@ -955,6 +965,7 @@ type clusterControlPlaneServiceClient struct {
 	createDatastoreProxy                *connect.Client[v1.CreateDatastoreProxyRequest, v1.CreateDatastoreProxyResponse]
 	cloudProviderPermissionsStatus      *connect.Client[v1.CloudProviderPermissionsStatusRequest, v1.CloudProviderPermissionsStatusResponse]
 	patchCloudContract                  *connect.Client[v1.PatchCloudContractRequest, v1.PatchCloudContractResponse]
+	readCloudContract                   *connect.Client[v1.ReadCloudContractRequest, v1.ReadCloudContractResponse]
 	dockerConfigFileForRegistry         *connect.Client[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse]
 	eCRTokenForRegistry                 *connect.Client[v1.ECRTokenForRegistryRequest, v1.ECRTokenForRegistryResponse]
 	assumeRoleCredentials               *connect.Client[v1.AssumeRoleCredentialsRequest, v1.AssumeRoleCredentialsResponse]
@@ -1293,6 +1304,11 @@ func (c *clusterControlPlaneServiceClient) PatchCloudContract(ctx context.Contex
 	return c.patchCloudContract.CallUnary(ctx, req)
 }
 
+// ReadCloudContract calls porter.v1.ClusterControlPlaneService.ReadCloudContract.
+func (c *clusterControlPlaneServiceClient) ReadCloudContract(ctx context.Context, req *connect.Request[v1.ReadCloudContractRequest]) (*connect.Response[v1.ReadCloudContractResponse], error) {
+	return c.readCloudContract.CallUnary(ctx, req)
+}
+
 // DockerConfigFileForRegistry calls
 // porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry.
 //
@@ -1554,6 +1570,8 @@ type ClusterControlPlaneServiceHandler interface {
 	CloudProviderPermissionsStatus(context.Context, *connect.Request[v1.CloudProviderPermissionsStatusRequest]) (*connect.Response[v1.CloudProviderPermissionsStatusResponse], error)
 	// PatchCloudContract patches a cloud contract by modifying its resources
 	PatchCloudContract(context.Context, *connect.Request[v1.PatchCloudContractRequest]) (*connect.Response[v1.PatchCloudContractResponse], error)
+	// ReadCloudContract returns a cloud contract
+	ReadCloudContract(context.Context, *connect.Request[v1.ReadCloudContractRequest]) (*connect.Response[v1.ReadCloudContractResponse], error)
 	// DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
 	// Deprecated. Use TokenForRegistry instead.
 	//
@@ -1928,6 +1946,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.PatchCloudContract,
 		opts...,
 	)
+	clusterControlPlaneServiceReadCloudContractHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceReadCloudContractProcedure,
+		svc.ReadCloudContract,
+		opts...,
+	)
 	clusterControlPlaneServiceDockerConfigFileForRegistryHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
 		svc.DockerConfigFileForRegistry,
@@ -2145,6 +2168,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceCloudProviderPermissionsStatusHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServicePatchCloudContractProcedure:
 			clusterControlPlaneServicePatchCloudContractHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceReadCloudContractProcedure:
+			clusterControlPlaneServiceReadCloudContractHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure:
 			clusterControlPlaneServiceDockerConfigFileForRegistryHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceECRTokenForRegistryProcedure:
@@ -2430,6 +2455,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) CloudProviderPermissionsSt
 
 func (UnimplementedClusterControlPlaneServiceHandler) PatchCloudContract(context.Context, *connect.Request[v1.PatchCloudContractRequest]) (*connect.Response[v1.PatchCloudContractResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.PatchCloudContract is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) ReadCloudContract(context.Context, *connect.Request[v1.ReadCloudContractRequest]) (*connect.Response[v1.ReadCloudContractResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ReadCloudContract is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) DockerConfigFileForRegistry(context.Context, *connect.Request[v1.DockerConfigFileForRegistryRequest]) (*connect.Response[v1.DockerConfigFileForRegistryResponse], error) {

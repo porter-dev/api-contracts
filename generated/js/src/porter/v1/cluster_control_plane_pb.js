@@ -1990,6 +1990,30 @@ export const PatchCloudContractResponse = proto3.makeMessageType(
 );
 
 /**
+ * ReadCloudContractRequest is the request object for fetching a cloud contract
+ *
+ * @generated from message porter.v1.ReadCloudContractRequest
+ */
+export const ReadCloudContractRequest = proto3.makeMessageType(
+  "porter.v1.ReadCloudContractRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * ReadCloudContractResponse is the response object from fetching a cloud contract
+ *
+ * @generated from message porter.v1.ReadCloudContractResponse
+ */
+export const ReadCloudContractResponse = proto3.makeMessageType(
+  "porter.v1.ReadCloudContractResponse",
+  () => [
+    { no: 1, name: "cloud_contract", kind: "message", T: CloudContract },
+  ],
+);
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  * @deprecated
  */
