@@ -5137,6 +5137,13 @@ export declare class CreateOrUpdateEnvGroupRequest extends Message<CreateOrUpdat
    */
   envVariableDeletions?: EnvVariableDeletions;
 
+  /**
+   * skip_app_auto_deploy indicates whether to skip auto-deploying apps linked to the env group
+   *
+   * @generated from field: bool skip_app_auto_deploy = 9;
+   */
+  skipAppAutoDeploy: boolean;
+
   constructor(data?: PartialMessage<CreateOrUpdateEnvGroupRequest>);
 
   static readonly runtime: typeof proto3;
