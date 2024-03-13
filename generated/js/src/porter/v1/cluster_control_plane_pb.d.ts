@@ -5829,6 +5829,60 @@ export declare class PatchCloudContractResponse extends Message<PatchCloudContra
 }
 
 /**
+ * ReadCloudContractRequest is the request object for fetching a cloud contract
+ *
+ * @generated from message porter.v1.ReadCloudContractRequest
+ */
+export declare class ReadCloudContractRequest extends Message<ReadCloudContractRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  constructor(data?: PartialMessage<ReadCloudContractRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ReadCloudContractRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ReadCloudContractRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ReadCloudContractRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ReadCloudContractRequest;
+
+  static equals(a: ReadCloudContractRequest | PlainMessage<ReadCloudContractRequest> | undefined, b: ReadCloudContractRequest | PlainMessage<ReadCloudContractRequest> | undefined): boolean;
+}
+
+/**
+ * ReadCloudContractResponse is the response object from fetching a cloud contract
+ *
+ * @generated from message porter.v1.ReadCloudContractResponse
+ */
+export declare class ReadCloudContractResponse extends Message<ReadCloudContractResponse> {
+  /**
+   * cloud_contract is the contract
+   *
+   * @generated from field: porter.v1.CloudContract cloud_contract = 1;
+   */
+  cloudContract?: CloudContract;
+
+  constructor(data?: PartialMessage<ReadCloudContractResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ReadCloudContractResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ReadCloudContractResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ReadCloudContractResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ReadCloudContractResponse;
+
+  static equals(a: ReadCloudContractResponse | PlainMessage<ReadCloudContractResponse> | undefined, b: ReadCloudContractResponse | PlainMessage<ReadCloudContractResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  * @deprecated
  */

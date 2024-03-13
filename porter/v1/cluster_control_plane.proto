@@ -1312,6 +1312,17 @@ enum EnumPatchCloudContractType {
   ENUM_PATCH_CLOUD_CONTRACT_TYPE_DATASTORE = 1;
 }
 
+// ReadCloudContractRequest is the request object for fetching a cloud contract
+message ReadCloudContractRequest {
+  int64 project_id = 1;
+}
+
+// ReadCloudContractResponse is the response object from fetching a cloud contract
+message ReadCloudContractResponse {
+  // cloud_contract is the contract
+  CloudContract cloud_contract = 1;
+}
+
 service ClusterControlPlaneService {
   // QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas
   rpc QuotaIncrease(QuotaIncreaseRequest) returns (QuotaIncreaseResponse) {}
@@ -1513,6 +1524,9 @@ service ClusterControlPlaneService {
 
   // PatchCloudContract patches a cloud contract by modifying its resources
   rpc PatchCloudContract(PatchCloudContractRequest) returns (PatchCloudContractResponse) {}
+
+  // ReadCloudContract returns a cloud contract
+  rpc ReadCloudContract(ReadCloudContractRequest) returns (ReadCloudContractResponse) {}
 
   // DockerConfigFileForRegistry returns a stringified config.json for accessing a given registry.
   // Deprecated. Use TokenForRegistry instead.
