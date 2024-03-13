@@ -1743,6 +1743,7 @@ export const CreateOrUpdateEnvGroupRequest = proto3.makeMessageType(
     { no: 6, name: "env_vars", kind: "message", T: EnvGroupVariables },
     { no: 7, name: "is_env_override", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 8, name: "env_variable_deletions", kind: "message", T: EnvVariableDeletions },
+    { no: 9, name: "skip_app_auto_deploy", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
