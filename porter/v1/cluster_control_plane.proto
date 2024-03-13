@@ -1145,6 +1145,8 @@ message CreateOrUpdateEnvGroupRequest {
   EnvGroupVariables env_vars = 6;
   // is_env_override indicates whether the provided env_vars should override or merge with the existing env vars
   bool is_env_override = 7;
+  // env_variable_deletions contains the keys to remove from the env group's normal and secret environment variables
+  EnvVariableDeletions env_variable_deletions = 8;
 }
 
 // CreateOrUpdateEnvGroupResponse is the response object for CreateOrUpdateEnvGroup

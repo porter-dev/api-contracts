@@ -110,6 +110,14 @@ message ServiceDeletions {
   repeated string ingress_annotations = 2;
 }
 
+// EnvVariableDeletions contains the keys to remove from the app's normal and secret environment variables
+message EnvVariableDeletions {
+  // variables is a list of environment variable names to delete
+  repeated string variables = 1;
+  // secrets is a list of secret environment variable names to delete
+  repeated string secrets = 2;
+}
+
 // Deletions contains all explicit deletions from a PorterApp
 message Deletions {
   // service_names is a list of service names to delete
@@ -124,6 +132,8 @@ message Deletions {
   map<string, DomainNameList> service_domains = 5 [deprecated = true];
   // service_deletions is a map of service names to a list of deletions to perform on the service
   map<string, ServiceDeletions> service_deletions = 6;
+  // env_variable_deletions contains the keys to remove from the app's normal and secret environment variables
+  EnvVariableDeletions env_variable_deletions = 7;
 }
 
 message DomainNameList {
