@@ -189,6 +189,19 @@ export const ServiceDeletions = proto3.makeMessageType(
 );
 
 /**
+ * EnvVariableDeletions contains the keys to remove from the app's normal and secret environment variables
+ *
+ * @generated from message porter.v1.EnvVariableDeletions
+ */
+export const EnvVariableDeletions = proto3.makeMessageType(
+  "porter.v1.EnvVariableDeletions",
+  () => [
+    { no: 1, name: "variables", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 2, name: "secrets", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+  ],
+);
+
+/**
  * Deletions contains all explicit deletions from a PorterApp
  *
  * @generated from message porter.v1.Deletions
@@ -202,6 +215,7 @@ export const Deletions = proto3.makeMessageType(
     { no: 4, name: "env_variable_names", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 5, name: "service_domains", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: DomainNameList} },
     { no: 6, name: "service_deletions", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: ServiceDeletions} },
+    { no: 7, name: "env_variable_deletions", kind: "message", T: EnvVariableDeletions },
   ],
 );
 

@@ -11,7 +11,7 @@ import type { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import type { Error } from "./errors_pb.js";
 import type { Contract, ContractRevision } from "./contract_pb.js";
 import type { ContractComplianceCheckGroup, EnumComplianceProfile, EnumComplianceVendor, VendorComplianceCheck } from "./compliance_pb.js";
-import type { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, JobRun, PorterApp } from "./porter_app_pb.js";
+import type { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, EnvVariableDeletions, JobRun, PorterApp } from "./porter_app_pb.js";
 import type { Addon, PrerequisiteAddon } from "./addons_pb.js";
 import type { EnumEnvGroupProviderType } from "./env_group_pb.js";
 import type { NotificationConfig } from "./notification_pb.js";
@@ -5129,6 +5129,20 @@ export declare class CreateOrUpdateEnvGroupRequest extends Message<CreateOrUpdat
    * @generated from field: bool is_env_override = 7;
    */
   isEnvOverride: boolean;
+
+  /**
+   * env_variable_deletions contains the keys to remove from the env group's normal and secret environment variables
+   *
+   * @generated from field: porter.v1.EnvVariableDeletions env_variable_deletions = 8;
+   */
+  envVariableDeletions?: EnvVariableDeletions;
+
+  /**
+   * skip_app_auto_deploy indicates whether to skip auto-deploying apps linked to the env group
+   *
+   * @generated from field: bool skip_app_auto_deploy = 9;
+   */
+  skipAppAutoDeploy: boolean;
 
   constructor(data?: PartialMessage<CreateOrUpdateEnvGroupRequest>);
 

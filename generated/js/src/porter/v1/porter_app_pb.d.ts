@@ -526,6 +526,41 @@ export declare class ServiceDeletions extends Message<ServiceDeletions> {
 }
 
 /**
+ * EnvVariableDeletions contains the keys to remove from the app's normal and secret environment variables
+ *
+ * @generated from message porter.v1.EnvVariableDeletions
+ */
+export declare class EnvVariableDeletions extends Message<EnvVariableDeletions> {
+  /**
+   * variables is a list of environment variable names to delete
+   *
+   * @generated from field: repeated string variables = 1;
+   */
+  variables: string[];
+
+  /**
+   * secrets is a list of secret environment variable names to delete
+   *
+   * @generated from field: repeated string secrets = 2;
+   */
+  secrets: string[];
+
+  constructor(data?: PartialMessage<EnvVariableDeletions>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.EnvVariableDeletions";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EnvVariableDeletions;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): EnvVariableDeletions;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EnvVariableDeletions;
+
+  static equals(a: EnvVariableDeletions | PlainMessage<EnvVariableDeletions> | undefined, b: EnvVariableDeletions | PlainMessage<EnvVariableDeletions> | undefined): boolean;
+}
+
+/**
  * Deletions contains all explicit deletions from a PorterApp
  *
  * @generated from message porter.v1.Deletions
@@ -574,6 +609,13 @@ export declare class Deletions extends Message<Deletions> {
    * @generated from field: map<string, porter.v1.ServiceDeletions> service_deletions = 6;
    */
   serviceDeletions: { [key: string]: ServiceDeletions };
+
+  /**
+   * env_variable_deletions contains the keys to remove from the app's normal and secret environment variables
+   *
+   * @generated from field: porter.v1.EnvVariableDeletions env_variable_deletions = 7;
+   */
+  envVariableDeletions?: EnvVariableDeletions;
 
   constructor(data?: PartialMessage<Deletions>);
 
