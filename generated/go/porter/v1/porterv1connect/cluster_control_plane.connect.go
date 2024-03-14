@@ -208,6 +208,9 @@ const (
 	// ClusterControlPlaneServiceCreateDatastoreProxyProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's CreateDatastoreProxy RPC.
 	ClusterControlPlaneServiceCreateDatastoreProxyProcedure = "/porter.v1.ClusterControlPlaneService/CreateDatastoreProxy"
+	// ClusterControlPlaneServiceDatastoreCredentialProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's DatastoreCredential RPC.
+	ClusterControlPlaneServiceDatastoreCredentialProcedure = "/porter.v1.ClusterControlPlaneService/DatastoreCredential"
 	// ClusterControlPlaneServiceCloudProviderPermissionsStatusProcedure is the fully-qualified name of
 	// the ClusterControlPlaneService's CloudProviderPermissionsStatus RPC.
 	ClusterControlPlaneServiceCloudProviderPermissionsStatusProcedure = "/porter.v1.ClusterControlPlaneService/CloudProviderPermissionsStatus"
@@ -416,6 +419,8 @@ type ClusterControlPlaneServiceClient interface {
 	UpdateDatastore(context.Context, *connect.Request[v1.UpdateDatastoreRequest]) (*connect.Response[v1.UpdateDatastoreResponse], error)
 	// CreateDatastoreProxy creates a proxy for connecting to a datastore
 	CreateDatastoreProxy(context.Context, *connect.Request[v1.CreateDatastoreProxyRequest]) (*connect.Response[v1.CreateDatastoreProxyResponse], error)
+	// DatastoreCredential returns the set of credentials for connecting to a datastore
+	DatastoreCredential(context.Context, *connect.Request[v1.DatastoreCredentialRequest]) (*connect.Response[v1.DatastoreCredentialResponse], error)
 	// CloudProviderPermissionsStatus returns the status to poll after a user grants cloud provider permissions to Porter
 	CloudProviderPermissionsStatus(context.Context, *connect.Request[v1.CloudProviderPermissionsStatusRequest]) (*connect.Response[v1.CloudProviderPermissionsStatusResponse], error)
 	// PatchCloudContract patches a cloud contract by modifying its resources
@@ -790,6 +795,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceCreateDatastoreProxyProcedure,
 			opts...,
 		),
+		datastoreCredential: connect.NewClient[v1.DatastoreCredentialRequest, v1.DatastoreCredentialResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceDatastoreCredentialProcedure,
+			opts...,
+		),
 		cloudProviderPermissionsStatus: connect.NewClient[v1.CloudProviderPermissionsStatusRequest, v1.CloudProviderPermissionsStatusResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceCloudProviderPermissionsStatusProcedure,
@@ -963,6 +973,7 @@ type clusterControlPlaneServiceClient struct {
 	connectHostedProject                *connect.Client[v1.ConnectHostedProjectRequest, v1.ConnectHostedProjectResponse]
 	updateDatastore                     *connect.Client[v1.UpdateDatastoreRequest, v1.UpdateDatastoreResponse]
 	createDatastoreProxy                *connect.Client[v1.CreateDatastoreProxyRequest, v1.CreateDatastoreProxyResponse]
+	datastoreCredential                 *connect.Client[v1.DatastoreCredentialRequest, v1.DatastoreCredentialResponse]
 	cloudProviderPermissionsStatus      *connect.Client[v1.CloudProviderPermissionsStatusRequest, v1.CloudProviderPermissionsStatusResponse]
 	patchCloudContract                  *connect.Client[v1.PatchCloudContractRequest, v1.PatchCloudContractResponse]
 	readCloudContract                   *connect.Client[v1.ReadCloudContractRequest, v1.ReadCloudContractResponse]
@@ -1293,6 +1304,11 @@ func (c *clusterControlPlaneServiceClient) CreateDatastoreProxy(ctx context.Cont
 	return c.createDatastoreProxy.CallUnary(ctx, req)
 }
 
+// DatastoreCredential calls porter.v1.ClusterControlPlaneService.DatastoreCredential.
+func (c *clusterControlPlaneServiceClient) DatastoreCredential(ctx context.Context, req *connect.Request[v1.DatastoreCredentialRequest]) (*connect.Response[v1.DatastoreCredentialResponse], error) {
+	return c.datastoreCredential.CallUnary(ctx, req)
+}
+
 // CloudProviderPermissionsStatus calls
 // porter.v1.ClusterControlPlaneService.CloudProviderPermissionsStatus.
 func (c *clusterControlPlaneServiceClient) CloudProviderPermissionsStatus(ctx context.Context, req *connect.Request[v1.CloudProviderPermissionsStatusRequest]) (*connect.Response[v1.CloudProviderPermissionsStatusResponse], error) {
@@ -1566,6 +1582,8 @@ type ClusterControlPlaneServiceHandler interface {
 	UpdateDatastore(context.Context, *connect.Request[v1.UpdateDatastoreRequest]) (*connect.Response[v1.UpdateDatastoreResponse], error)
 	// CreateDatastoreProxy creates a proxy for connecting to a datastore
 	CreateDatastoreProxy(context.Context, *connect.Request[v1.CreateDatastoreProxyRequest]) (*connect.Response[v1.CreateDatastoreProxyResponse], error)
+	// DatastoreCredential returns the set of credentials for connecting to a datastore
+	DatastoreCredential(context.Context, *connect.Request[v1.DatastoreCredentialRequest]) (*connect.Response[v1.DatastoreCredentialResponse], error)
 	// CloudProviderPermissionsStatus returns the status to poll after a user grants cloud provider permissions to Porter
 	CloudProviderPermissionsStatus(context.Context, *connect.Request[v1.CloudProviderPermissionsStatusRequest]) (*connect.Response[v1.CloudProviderPermissionsStatusResponse], error)
 	// PatchCloudContract patches a cloud contract by modifying its resources
@@ -1936,6 +1954,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.CreateDatastoreProxy,
 		opts...,
 	)
+	clusterControlPlaneServiceDatastoreCredentialHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceDatastoreCredentialProcedure,
+		svc.DatastoreCredential,
+		opts...,
+	)
 	clusterControlPlaneServiceCloudProviderPermissionsStatusHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceCloudProviderPermissionsStatusProcedure,
 		svc.CloudProviderPermissionsStatus,
@@ -2164,6 +2187,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceUpdateDatastoreHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceCreateDatastoreProxyProcedure:
 			clusterControlPlaneServiceCreateDatastoreProxyHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceDatastoreCredentialProcedure:
+			clusterControlPlaneServiceDatastoreCredentialHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceCloudProviderPermissionsStatusProcedure:
 			clusterControlPlaneServiceCloudProviderPermissionsStatusHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServicePatchCloudContractProcedure:
@@ -2447,6 +2472,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) UpdateDatastore(context.Co
 
 func (UnimplementedClusterControlPlaneServiceHandler) CreateDatastoreProxy(context.Context, *connect.Request[v1.CreateDatastoreProxyRequest]) (*connect.Response[v1.CreateDatastoreProxyResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.CreateDatastoreProxy is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) DatastoreCredential(context.Context, *connect.Request[v1.DatastoreCredentialRequest]) (*connect.Response[v1.DatastoreCredentialResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.DatastoreCredential is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) CloudProviderPermissionsStatus(context.Context, *connect.Request[v1.CloudProviderPermissionsStatusRequest]) (*connect.Response[v1.CloudProviderPermissionsStatusResponse], error) {

@@ -1280,6 +1280,18 @@ message CreateDatastoreProxyResponse {
   string namespace = 4;
 }
 
+// DatastoreCredentialRequest is the request object for getting a set of datastore credentials
+message DatastoreCredentialRequest {
+  int64 project_id = 1;
+  // datastore_id is the id of the datastore
+  string datastore_id = 2;
+}
+
+// DatastoreCredentialResponse is the response object from getting a set of datastore credentials
+message DatastoreCredentialResponse {
+  DatastoreCredential credential = 1;
+}
+
 // PatchCloudContractRequest is the request object for patching a cloud contract by updating a resource
 message PatchCloudContractRequest {
   int64 project_id = 1;
@@ -1518,6 +1530,9 @@ service ClusterControlPlaneService {
 
   // CreateDatastoreProxy creates a proxy for connecting to a datastore
   rpc CreateDatastoreProxy(CreateDatastoreProxyRequest) returns (CreateDatastoreProxyResponse) {}
+
+  // DatastoreCredential returns the set of credentials for connecting to a datastore
+  rpc DatastoreCredential(DatastoreCredentialRequest) returns (DatastoreCredentialResponse) {}
 
   // CloudProviderPermissionsStatus returns the status to poll after a user grants cloud provider permissions to Porter
   rpc CloudProviderPermissionsStatus(CloudProviderPermissionsStatusRequest) returns (CloudProviderPermissionsStatusResponse) {}
