@@ -1964,6 +1964,31 @@ export const CreateDatastoreProxyResponse = proto3.makeMessageType(
 );
 
 /**
+ * DatastoreCredentialRequest is the request object for getting a set of datastore credentials
+ *
+ * @generated from message porter.v1.DatastoreCredentialRequest
+ */
+export const DatastoreCredentialRequest = proto3.makeMessageType(
+  "porter.v1.DatastoreCredentialRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "datastore_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * DatastoreCredentialResponse is the response object from getting a set of datastore credentials
+ *
+ * @generated from message porter.v1.DatastoreCredentialResponse
+ */
+export const DatastoreCredentialResponse = proto3.makeMessageType(
+  "porter.v1.DatastoreCredentialResponse",
+  () => [
+    { no: 1, name: "credential", kind: "message", T: DatastoreCredential },
+  ],
+);
+
+/**
  * PatchCloudContractRequest is the request object for patching a cloud contract by updating a resource
  *
  * @generated from message porter.v1.PatchCloudContractRequest

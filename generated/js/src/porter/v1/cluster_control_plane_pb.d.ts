@@ -5741,6 +5741,65 @@ export declare class CreateDatastoreProxyResponse extends Message<CreateDatastor
 }
 
 /**
+ * DatastoreCredentialRequest is the request object for getting a set of datastore credentials
+ *
+ * @generated from message porter.v1.DatastoreCredentialRequest
+ */
+export declare class DatastoreCredentialRequest extends Message<DatastoreCredentialRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * datastore_id is the id of the datastore
+   *
+   * @generated from field: string datastore_id = 2;
+   */
+  datastoreId: string;
+
+  constructor(data?: PartialMessage<DatastoreCredentialRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DatastoreCredentialRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DatastoreCredentialRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DatastoreCredentialRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DatastoreCredentialRequest;
+
+  static equals(a: DatastoreCredentialRequest | PlainMessage<DatastoreCredentialRequest> | undefined, b: DatastoreCredentialRequest | PlainMessage<DatastoreCredentialRequest> | undefined): boolean;
+}
+
+/**
+ * DatastoreCredentialResponse is the response object from getting a set of datastore credentials
+ *
+ * @generated from message porter.v1.DatastoreCredentialResponse
+ */
+export declare class DatastoreCredentialResponse extends Message<DatastoreCredentialResponse> {
+  /**
+   * @generated from field: porter.v1.DatastoreCredential credential = 1;
+   */
+  credential?: DatastoreCredential;
+
+  constructor(data?: PartialMessage<DatastoreCredentialResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DatastoreCredentialResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DatastoreCredentialResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DatastoreCredentialResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DatastoreCredentialResponse;
+
+  static equals(a: DatastoreCredentialResponse | PlainMessage<DatastoreCredentialResponse> | undefined, b: DatastoreCredentialResponse | PlainMessage<DatastoreCredentialResponse> | undefined): boolean;
+}
+
+/**
  * PatchCloudContractRequest is the request object for patching a cloud contract by updating a resource
  *
  * @generated from message porter.v1.PatchCloudContractRequest
