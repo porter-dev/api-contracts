@@ -29,5 +29,12 @@ export declare enum EnumEnvGroupProviderType {
    * @generated from enum value: ENUM_ENV_GROUP_PROVIDER_TYPE_DOPPLER = 2;
    */
   DOPPLER = 2,
+
+  /**
+   * ENUM_ENV_GROUP_PROVIDER_TYPE_DATASTORE repesents an env group sourced from a managed datastore
+   *
+   * @generated from enum value: ENUM_ENV_GROUP_PROVIDER_TYPE_DATASTORE = 3;
+   */
+  DATASTORE = 3,
 }
 

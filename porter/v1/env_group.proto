@@ -10,4 +10,6 @@ enum EnumEnvGroupProviderType {
   ENUM_ENV_GROUP_PROVIDER_TYPE_PORTER = 1;
   // ENUM_ENV_GROUP_PROVIDER_TYPE_DOPPLER represents an env group sourced from Doppler
   ENUM_ENV_GROUP_PROVIDER_TYPE_DOPPLER = 2;
+  // ENUM_ENV_GROUP_PROVIDER_TYPE_DATASTORE repesents an env group sourced from a managed datastore
+  ENUM_ENV_GROUP_PROVIDER_TYPE_DATASTORE = 3;
 }

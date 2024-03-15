@@ -16,6 +16,7 @@ export const EnumEnvGroupProviderType = proto3.makeEnum(
     {no: 0, name: "ENUM_ENV_GROUP_PROVIDER_TYPE_UNSPECIFIED", localName: "UNSPECIFIED"},
     {no: 1, name: "ENUM_ENV_GROUP_PROVIDER_TYPE_PORTER", localName: "PORTER"},
     {no: 2, name: "ENUM_ENV_GROUP_PROVIDER_TYPE_DOPPLER", localName: "DOPPLER"},
+    {no: 3, name: "ENUM_ENV_GROUP_PROVIDER_TYPE_DATASTORE", localName: "DATASTORE"},
   ],
 );
 
