@@ -6584,6 +6584,13 @@ export declare class Datastore extends Message<Datastore> {
    */
   env?: EnvGroup;
 
+  /**
+   * connected_cluster_id is the id of the cluster that this datastore is connected to
+   *
+   * @generated from field: int64 connected_cluster_id = 5;
+   */
+  connectedClusterId: bigint;
+
   constructor(data?: PartialMessage<Datastore>);
 
   static readonly runtime: typeof proto3;
