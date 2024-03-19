@@ -80,11 +80,11 @@ export declare class CloudContractDeletionRevision extends Message<CloudContract
   projectId: number;
 
   /**
-   * cloud_contract includes all resources that should be deleted
+   * cloud_contract_deletions includes all resources that should be deleted
    *
-   * @generated from field: porter.v1.CloudContract cloud_contract = 2;
+   * @generated from field: porter.v1.CloudContract cloud_contract_deletions = 2;
    */
-  cloudContract?: CloudContract;
+  cloudContractDeletions?: CloudContract;
 
   constructor(data?: PartialMessage<CloudContractDeletionRevision>);
 
