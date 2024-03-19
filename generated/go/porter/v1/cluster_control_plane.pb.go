@@ -8144,6 +8144,8 @@ type CreateNotificationRequest struct {
 	RawDetail string `protobuf:"bytes,9,opt,name=raw_detail,json=rawDetail,proto3" json:"raw_detail,omitempty"`
 	// job_run_id is the id of the job run, if the service is a job type service
 	JobRunId string `protobuf:"bytes,10,opt,name=job_run_id,json=jobRunId,proto3" json:"job_run_id,omitempty"`
+	// app_event_type is the type of the event
+	Type string `protbuf:"bytes,10,opt,name=app_event_type,json=appEventType,proto3" json="tapp_event_type,omitempty"`
 }
 
 func (x *CreateNotificationRequest) Reset() {
