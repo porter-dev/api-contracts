@@ -380,15 +380,19 @@ export declare class Autoscaling extends Message<Autoscaling> {
 
   /**
    * min_instances is the minimum number of instances to run
+   * Deprecated: use min_instances_optional instead, as this allows us to tell if the field was explicitly set or not.
    *
-   * @generated from field: int32 min_instances = 2;
+   * @generated from field: int32 min_instances = 2 [deprecated = true];
+   * @deprecated
    */
   minInstances: number;
 
   /**
    * max_instances is the maximum number of instances to run
+   * Deprecated: use max_instances_optional instead, as this allows us to tell if the field was explicitly set or not.
    *
-   * @generated from field: int32 max_instances = 3;
+   * @generated from field: int32 max_instances = 3 [deprecated = true];
+   * @deprecated
    */
   maxInstances: number;
 
@@ -405,6 +409,20 @@ export declare class Autoscaling extends Message<Autoscaling> {
    * @generated from field: int32 memory_threshold_percent = 5;
    */
   memoryThresholdPercent: number;
+
+  /**
+   * min_instances_optional is the minimum number of instances to run
+   *
+   * @generated from field: optional int32 min_instances_optional = 6;
+   */
+  minInstancesOptional?: number;
+
+  /**
+   * max_instances_optional is the maximum number of instances to run
+   *
+   * @generated from field: optional int32 max_instances_optional = 7;
+   */
+  maxInstancesOptional?: number;
 
   constructor(data?: PartialMessage<Autoscaling>);
 
