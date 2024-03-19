@@ -68,3 +68,36 @@ export declare class CloudContractRevision extends Message<CloudContractRevision
   static equals(a: CloudContractRevision | PlainMessage<CloudContractRevision> | undefined, b: CloudContractRevision | PlainMessage<CloudContractRevision> | undefined): boolean;
 }
 
+/**
+ * CloudContractDeletionRevision represents a collection of resources that should be deleted
+ *
+ * @generated from message porter.v1.CloudContractDeletionRevision
+ */
+export declare class CloudContractDeletionRevision extends Message<CloudContractDeletionRevision> {
+  /**
+   * @generated from field: int32 project_id = 1;
+   */
+  projectId: number;
+
+  /**
+   * cloud_contract_deletions includes all resources that should be deleted
+   *
+   * @generated from field: porter.v1.CloudContract cloud_contract_deletions = 2;
+   */
+  cloudContractDeletions?: CloudContract;
+
+  constructor(data?: PartialMessage<CloudContractDeletionRevision>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CloudContractDeletionRevision";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CloudContractDeletionRevision;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CloudContractDeletionRevision;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CloudContractDeletionRevision;
+
+  static equals(a: CloudContractDeletionRevision | PlainMessage<CloudContractDeletionRevision> | undefined, b: CloudContractDeletionRevision | PlainMessage<CloudContractDeletionRevision> | undefined): boolean;
+}
+

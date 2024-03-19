@@ -31,3 +31,16 @@ export const CloudContractRevision = proto3.makeMessageType(
   ],
 );
 
+/**
+ * CloudContractDeletionRevision represents a collection of resources that should be deleted
+ *
+ * @generated from message porter.v1.CloudContractDeletionRevision
+ */
+export const CloudContractDeletionRevision = proto3.makeMessageType(
+  "porter.v1.CloudContractDeletionRevision",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 2, name: "cloud_contract_deletions", kind: "message", T: CloudContract },
+  ],
+);
+
