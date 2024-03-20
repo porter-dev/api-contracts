@@ -46,6 +46,7 @@ export const Service = proto3.makeMessageType(
     { no: 16, name: "gpu_cores", kind: "scalar", T: 2 /* ScalarType.FLOAT */, opt: true },
     { no: 17, name: "gpu", kind: "message", T: GPU },
     { no: 18, name: "termination_grace_period_seconds", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
+    { no: 19, name: "sleep", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
   ],
 );
 

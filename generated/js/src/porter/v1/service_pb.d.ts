@@ -173,6 +173,14 @@ export declare class Service extends Message<Service> {
    */
   terminationGracePeriodSeconds?: number;
 
+  /**
+   * sleep is a flag to indicate that the service should be put to sleep
+   * services that are asleep will have replicas set to 0 and autoscaling disabled
+   *
+   * @generated from field: optional bool sleep = 19;
+   */
+  sleep?: boolean;
+
   constructor(data?: PartialMessage<Service>);
 
   static readonly runtime: typeof proto3;
