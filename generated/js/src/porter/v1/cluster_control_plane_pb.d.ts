@@ -4831,6 +4831,11 @@ export declare class CreateNotificationRequest extends Message<CreateNotificatio
    */
   jobRunId: string;
 
+  /**
+   * @generated from field: string app_event_type = 11;
+   */
+  appEventType: string;
+
   constructor(data?: PartialMessage<CreateNotificationRequest>);
 
   static readonly runtime: typeof proto3;

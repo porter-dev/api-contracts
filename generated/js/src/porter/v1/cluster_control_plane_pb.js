@@ -1638,6 +1638,7 @@ export const CreateNotificationRequest = /*@__PURE__*/ proto3.makeMessageType(
     { no: 8, name: "raw_summary", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 9, name: "raw_detail", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 10, name: "job_run_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 11, name: "app_event_type", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
