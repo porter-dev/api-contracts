@@ -20,3 +20,16 @@ export const EnumEnvGroupProviderType = proto3.makeEnum(
   ],
 );
 
+/**
+ * @generated from message porter.v1.UpdateAppsLinkedToEnvGroupPayload
+ */
+export const UpdateAppsLinkedToEnvGroupPayload = proto3.makeMessageType(
+  "porter.v1.UpdateAppsLinkedToEnvGroupPayload",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "env_group_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "remove_env_group", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+

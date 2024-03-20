@@ -3,6 +3,9 @@
 /* eslint-disable */
 // @ts-nocheck
 
+import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
+import { Message, proto3 } from "@bufbuild/protobuf";
+
 /**
  * EnvGroupProviderType is the type of the EnvGroupProvider.
  *
@@ -36,5 +39,46 @@ export declare enum EnumEnvGroupProviderType {
    * @generated from enum value: ENUM_ENV_GROUP_PROVIDER_TYPE_DATASTORE = 3;
    */
   DATASTORE = 3,
+}
+
+/**
+ * @generated from message porter.v1.UpdateAppsLinkedToEnvGroupPayload
+ */
+export declare class UpdateAppsLinkedToEnvGroupPayload extends Message<UpdateAppsLinkedToEnvGroupPayload> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  /**
+   * @generated from field: string env_group_name = 3;
+   */
+  envGroupName: string;
+
+  /**
+   * remove_env_group_link specifies whether this update operation should remove the specified env group from all linked apps before updating them
+   *
+   * @generated from field: bool remove_env_group = 4;
+   */
+  removeEnvGroup: boolean;
+
+  constructor(data?: PartialMessage<UpdateAppsLinkedToEnvGroupPayload>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateAppsLinkedToEnvGroupPayload";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateAppsLinkedToEnvGroupPayload;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateAppsLinkedToEnvGroupPayload;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateAppsLinkedToEnvGroupPayload;
+
+  static equals(a: UpdateAppsLinkedToEnvGroupPayload | PlainMessage<UpdateAppsLinkedToEnvGroupPayload> | undefined, b: UpdateAppsLinkedToEnvGroupPayload | PlainMessage<UpdateAppsLinkedToEnvGroupPayload> | undefined): boolean;
 }
 
