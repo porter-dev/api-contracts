@@ -104,19 +104,13 @@ message Autoscaling {
   // enabled explicitly enables or disables autoscaling
   bool enabled = 1;
   // min_instances is the minimum number of instances to run
-  // Deprecated: use min_instances_optional instead, as this allows us to tell if the field was explicitly set or not.
-  int32 min_instances = 2 [deprecated = true];
+  int32 min_instances = 2;
   // max_instances is the maximum number of instances to run
-  // Deprecated: use max_instances_optional instead, as this allows us to tell if the field was explicitly set or not.
-  int32 max_instances = 3 [deprecated = true];
+  int32 max_instances = 3;
   // cpu_threshold_percent is the CPU threshold percentage to trigger scaling
   int32 cpu_threshold_percent = 4;
   // memory_threshold_percent is the memory threshold percentage to trigger scaling
   int32 memory_threshold_percent = 5;
-  // min_instances_optional is the minimum number of instances to run
-  optional int32 min_instances_optional = 6;
-  // max_instances_optional is the maximum number of instances to run
-  optional int32 max_instances_optional = 7;
 }
 
 // HealthCheck is the health check configuration. Only one of http_path or command should be set, otherwise an error will be returned.

@@ -120,8 +120,6 @@ export const Autoscaling = proto3.makeMessageType(
     { no: 3, name: "max_instances", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
     { no: 4, name: "cpu_threshold_percent", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
     { no: 5, name: "memory_threshold_percent", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 6, name: "min_instances_optional", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
-    { no: 7, name: "max_instances_optional", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
   ],
 );
 
