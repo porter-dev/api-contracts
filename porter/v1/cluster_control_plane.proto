@@ -235,6 +235,8 @@ message ImageArtifact {
 message TokenForRegistryRequest {
   int64 project_id = 1;
   string registry_uri = 2;
+  // app_name is optional and is used to scope the token name to a specific app
+  string app_name = 3;
 }
 
 message TokenForRegistryResponse {
