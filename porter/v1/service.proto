@@ -56,6 +56,10 @@ message Service {
 
   // terminationGracePeriodSeconds is the number of seconds to wait before terminating the service
   optional int32 termination_grace_period_seconds = 18;
+
+  // sleep is a flag to indicate that the service should be put to sleep
+  // services that are asleep will have replicas set to 0 and autoscaling disabled
+  optional bool sleep = 19;
 }
 
 // WebServiceConfig is the configuration for a web service
