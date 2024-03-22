@@ -12,6 +12,7 @@ import { Contract, ContractRevision } from "./contract_pb.js";
 import { ContractComplianceCheckGroup, EnumComplianceProfile, EnumComplianceVendor, VendorComplianceCheck } from "./compliance_pb.js";
 import { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, EnvVariableDeletions, JobRun, PorterApp } from "./porter_app_pb.js";
 import { Addon, PrerequisiteAddon } from "./addons_pb.js";
+import { AppEventType } from "./agent_app_event_types_pb.js";
 import { EnumEnvGroupProviderType } from "./env_group_pb.js";
 import { NotificationConfig } from "./notification_pb.js";
 import { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
@@ -1638,6 +1639,7 @@ export const CreateNotificationRequest = /*@__PURE__*/ proto3.makeMessageType(
     { no: 8, name: "raw_summary", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 9, name: "raw_detail", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 10, name: "job_run_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 11, name: "app_event_type", kind: "enum", T: proto3.getEnumType(AppEventType) },
   ],
 );
 

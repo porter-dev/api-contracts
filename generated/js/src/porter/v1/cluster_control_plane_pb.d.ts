@@ -13,6 +13,7 @@ import type { Contract, ContractRevision } from "./contract_pb.js";
 import type { ContractComplianceCheckGroup, EnumComplianceProfile, EnumComplianceVendor, VendorComplianceCheck } from "./compliance_pb.js";
 import type { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, EnvVariableDeletions, JobRun, PorterApp } from "./porter_app_pb.js";
 import type { Addon, PrerequisiteAddon } from "./addons_pb.js";
+import type { AppEventType } from "./agent_app_event_types_pb.js";
 import type { EnumEnvGroupProviderType } from "./env_group_pb.js";
 import type { NotificationConfig } from "./notification_pb.js";
 import type { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
@@ -4830,6 +4831,13 @@ export declare class CreateNotificationRequest extends Message<CreateNotificatio
    * @generated from field: string job_run_id = 10;
    */
   jobRunId: string;
+
+  /**
+   * app_event_type is the type of event generating the request
+   *
+   * @generated from field: porter.v1.AppEventType app_event_type = 11;
+   */
+  appEventType: AppEventType;
 
   constructor(data?: PartialMessage<CreateNotificationRequest>);
 
