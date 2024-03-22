@@ -6,6 +6,7 @@
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 import type { EnumCloudProvider } from "./cluster_pb.js";
+import type { Postgres, Redis } from "./addons_pb.js";
 
 /**
  * @generated from enum porter.v1.EnumDatastoreKind
@@ -132,6 +133,18 @@ export declare class ManagedDatastore extends Message<ManagedDatastore> {
      */
     value: AwsElasticache;
     case: "awsElasticacheKind";
+  } | {
+    /**
+     * @generated from field: porter.v1.Postgres managed_postgres_kind = 10;
+     */
+    value: Postgres;
+    case: "managedPostgresKind";
+  } | {
+    /**
+     * @generated from field: porter.v1.Redis managed_redis_kind = 11;
+     */
+    value: Redis;
+    case: "managedRedisKind";
   } | { case: undefined; value?: undefined };
 
   /**

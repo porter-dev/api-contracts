@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package porter.v1;
 
+import "porter/v1/addons.proto";
 import "porter/v1/cluster.proto";
 
 // ManagedDatastore is the specification for a Porter-managed datastore
@@ -22,6 +23,8 @@ message ManagedDatastore {
   oneof kind_values {
     AwsRds aws_rds_kind = 7;
     AwsElasticache aws_elasticache_kind = 9;
+    Postgres managed_postgres_kind = 10;
+    Redis managed_redis_kind = 11;
   }
   // connected_clusters describes the connection of this datastore to clusters
   ConnectedClusters connected_clusters = 8;

@@ -5,6 +5,7 @@
 
 import { proto3 } from "@bufbuild/protobuf";
 import { EnumCloudProvider } from "./cluster_pb.js";
+import { Postgres, Redis } from "./addons_pb.js";
 
 /**
  * @generated from enum porter.v1.EnumDatastoreKind
@@ -58,6 +59,8 @@ export const ManagedDatastore = /*@__PURE__*/ proto3.makeMessageType(
     { no: 6, name: "kind", kind: "enum", T: proto3.getEnumType(EnumDatastoreKind) },
     { no: 7, name: "aws_rds_kind", kind: "message", T: AwsRds, oneof: "kind_values" },
     { no: 9, name: "aws_elasticache_kind", kind: "message", T: AwsElasticache, oneof: "kind_values" },
+    { no: 10, name: "managed_postgres_kind", kind: "message", T: Postgres, oneof: "kind_values" },
+    { no: 11, name: "managed_redis_kind", kind: "message", T: Redis, oneof: "kind_values" },
     { no: 8, name: "connected_clusters", kind: "message", T: ConnectedClusters },
   ],
 );
