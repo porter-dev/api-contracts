@@ -4,6 +4,7 @@ package porter.v1;
 
 import "google/protobuf/timestamp.proto";
 import "porter/v1/addons.proto";
+import "porter/v1/agent_app_event_types.proto";
 import "porter/v1/aws_assume_role.proto";
 import "porter/v1/cloud_contract.proto";
 import "porter/v1/cloud_provider_credentials.proto";
@@ -1072,7 +1073,8 @@ message CreateNotificationRequest {
   string raw_detail = 9;
   // job_run_id is the id of the job run, if the service is a job type service
   string job_run_id = 10;
-  string app_event_type = 11;
+  // app_event_type is the type of event generating the request
+  AppEventType app_event_type = 11;
 }
 
 // CreateNotificationResponse is the response object for creating notifications

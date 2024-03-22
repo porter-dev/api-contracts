@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package porter.v1;
+
+enum AppEventType {
+  // APP_EVENT_TYPE_UNSPECIFIED is the default value
+  APP_EVENT_TYPE_UNSPECIFIED = 0;
+
+  // APP_EVENT_TYPE_INSUFFICIENT_RESOURCES is generated when pods can't be scheduled becase of a resource shortage
+  // This is either CPU or Memory, but agent cannot resolve
+  APP_EVENT_TYPE_INSUFFICIENT_RESOURCES = 1;
+
+  // APP_EVENT_TYPE_INSUFFICIENT_CPU is generated when pods can't be scheduled because there is insufficient CPU
+  APP_EVENT_TYPE_INSUFFICIENT_CPU = 5;
+
+  // APP_EVENT_TYPE_INSUFFICIENT_MEMORY is generated when pods can't be scheduled because there is insufficient memory
+  APP_EVENT_TYPE_INSUFFICIENT_MEMORY = 10;
+
+  // APP_EVENT_TYPE_STUCK_PENDING is generated when pods can't be scheduled for other reasons
+  APP_EVENT_TYPE_STUCK_PENDING = 15;
+
+  // APP_EVENT_TYPE_INVALID_IMAGE is generated when the image specified in containers is not valid
+  APP_EVENT_TYPE_INVALID_IMAGE = 20;
+
+  // APP_EVENT_TYPE_INVALID_START_COMMAND is generated when a start command in a container is not valid
+  APP_EVENT_TYPE_INVALID_START_COMMAND = 25;
+
+  // APP_EVENT_TYPE_OUT_OF_MEMORY is generated when a container OOMs
+  APP_EVENT_TYPE_OUT_OF_MEMORY = 30;
+
+  // APP_EVENT_TYPE_NON_ZERO_EXIT_CODE is generated when a container terminates with another non-zero code
+  APP_EVENT_TYPE_NON_ZERO_EXIT_CODE = 35;
+
+  // APP_EVENT_TYPE_FAILING_HEALTH_CHECK is generated when a container is restarted due to a failing health check
+  APP_EVENT_TYPE_FAILING_HEALTH_CHECK = 40;
+}
