@@ -23,6 +23,13 @@ export declare enum AppEventType {
   INSUFFICIENT_RESOURCES = 1,
 
   /**
+   * APP_EVENT_TYPE_MAX_RESOURCE_LIMIT_EXCEEDED is generated when pods can't be scheduled because the node group has reached maximum capacity
+   *
+   * @generated from enum value: APP_EVENT_TYPE_MAX_RESOURCE_LIMIT_EXCEEDED = 3;
+   */
+  MAX_RESOURCE_LIMIT_EXCEEDED = 3,
+
+  /**
    * APP_EVENT_TYPE_INSUFFICIENT_CPU is generated when pods can't be scheduled because there is insufficient CPU
    *
    * @generated from enum value: APP_EVENT_TYPE_INSUFFICIENT_CPU = 5;
@@ -77,5 +84,12 @@ export declare enum AppEventType {
    * @generated from enum value: APP_EVENT_TYPE_FAILING_HEALTH_CHECK = 40;
    */
   FAILING_HEALTH_CHECK = 40,
+
+  /**
+   * APP_EVENT_TYPE_JOB_TIMEOUT is generated when a job container runs for more than the timeout period set for it
+   *
+   * @generated from enum value: APP_EVENT_TYPE_JOB_TIMEOUT = 45;
+   */
+  JOB_TIMEOUT = 45,
 }
 

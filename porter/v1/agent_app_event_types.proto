@@ -10,6 +10,9 @@ enum AppEventType {
   // This is either CPU or Memory, but agent cannot resolve
   APP_EVENT_TYPE_INSUFFICIENT_RESOURCES = 1;
 
+  // APP_EVENT_TYPE_MAX_RESOURCE_LIMIT_EXCEEDED is generated when pods can't be scheduled because the node group has reached maximum capacity
+  APP_EVENT_TYPE_MAX_RESOURCE_LIMIT_EXCEEDED = 3;
+
   // APP_EVENT_TYPE_INSUFFICIENT_CPU is generated when pods can't be scheduled because there is insufficient CPU
   APP_EVENT_TYPE_INSUFFICIENT_CPU = 5;
 
@@ -33,4 +36,7 @@ enum AppEventType {
 
   // APP_EVENT_TYPE_FAILING_HEALTH_CHECK is generated when a container is restarted due to a failing health check
   APP_EVENT_TYPE_FAILING_HEALTH_CHECK = 40;
+
+  // APP_EVENT_TYPE_JOB_TIMEOUT is generated when a job container runs for more than the timeout period set for it
+  APP_EVENT_TYPE_JOB_TIMEOUT = 45;
 }
