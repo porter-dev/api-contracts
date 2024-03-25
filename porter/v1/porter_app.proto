@@ -58,6 +58,8 @@ message PorterApp {
   AutoRollback auto_rollback = 12;
   // cloud_sql is the values to configure CloudSQL settings for an app
   CloudSql cloud_sql = 13;
+  // initial_deploy is a job service that should run once after the first deployment of the app in a deployment target
+  Service initial_deploy = 14;
 }
 
 // RequiredApp specifies another porter app that this app expects to be deployed alongside it

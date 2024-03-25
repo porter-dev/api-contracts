@@ -305,6 +305,13 @@ export declare class PorterApp extends Message<PorterApp> {
    */
   cloudSql?: CloudSql;
 
+  /**
+   * initial_deploy is a job service that should run once after the first deployment of the app in a deployment target
+   *
+   * @generated from field: porter.v1.Service initial_deploy = 14;
+   */
+  initialDeploy?: Service;
+
   constructor(data?: PartialMessage<PorterApp>);
 
   static readonly runtime: typeof proto3;
