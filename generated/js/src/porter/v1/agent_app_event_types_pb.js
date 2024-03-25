@@ -13,7 +13,7 @@ export const AppEventType = /*@__PURE__*/ proto3.makeEnum(
   [
     {no: 0, name: "APP_EVENT_TYPE_UNSPECIFIED", localName: "UNSPECIFIED"},
     {no: 1, name: "APP_EVENT_TYPE_INSUFFICIENT_RESOURCES", localName: "INSUFFICIENT_RESOURCES"},
-    {no: 3, name: "APP_EVENT_TYPE_MAX_RESOURCE_LIMIT", localName: "MAX_RESOURCE_LIMIT"},
+    {no: 3, name: "APP_EVENT_TYPE_MAX_RESOURCE_LIMIT_EXCEEDED", localName: "MAX_RESOURCE_LIMIT_EXCEEDED"},
     {no: 5, name: "APP_EVENT_TYPE_INSUFFICIENT_CPU", localName: "INSUFFICIENT_CPU"},
     {no: 10, name: "APP_EVENT_TYPE_INSUFFICIENT_MEMORY", localName: "INSUFFICIENT_MEMORY"},
     {no: 15, name: "APP_EVENT_TYPE_STUCK_PENDING", localName: "STUCK_PENDING"},

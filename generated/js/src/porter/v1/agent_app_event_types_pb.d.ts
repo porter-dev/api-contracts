@@ -23,11 +23,11 @@ export declare enum AppEventType {
   INSUFFICIENT_RESOURCES = 1,
 
   /**
-   * APP_EVENT_TYPE_MAX_RESOURCE_LIMIT is generated when pods can't be scheduled because the node group has reached maximum capacity
+   * APP_EVENT_TYPE_MAX_RESOURCE_LIMIT_EXCEEDED is generated when pods can't be scheduled because the node group has reached maximum capacity
    *
-   * @generated from enum value: APP_EVENT_TYPE_MAX_RESOURCE_LIMIT = 3;
+   * @generated from enum value: APP_EVENT_TYPE_MAX_RESOURCE_LIMIT_EXCEEDED = 3;
    */
-  MAX_RESOURCE_LIMIT = 3,
+  MAX_RESOURCE_LIMIT_EXCEEDED = 3,
 
   /**
    * APP_EVENT_TYPE_INSUFFICIENT_CPU is generated when pods can't be scheduled because there is insufficient CPU
