@@ -115,7 +115,7 @@ export const PorterApp = /*@__PURE__*/ proto3.makeMessageType(
     { no: 11, name: "required_apps", kind: "message", T: RequiredApp, repeated: true },
     { no: 12, name: "auto_rollback", kind: "message", T: AutoRollback },
     { no: 13, name: "cloud_sql", kind: "message", T: CloudSql },
-    { no: 14, name: "initial_deploy_job", kind: "message", T: Service },
+    { no: 14, name: "initial_deploy", kind: "message", T: Service },
   ],
 );
 
