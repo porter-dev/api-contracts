@@ -936,6 +936,19 @@ message ManualServiceRunRequest {
   AppImage image = 7;
 }
 
+// CancelJobRunRequest is the request object for CancelJobRun
+message CancelJobRunRequest {
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+  // deployment_target_identifier is the object that identifies the deployment target for the job run
+  DeploymentTargetIdentifier deployment_target_identifier = 3;
+  // job_run_name is the name of the job run to cancel
+  string job_run_name = 4;
+}
+
+// CancelJobRunResponse is the response object for CancelJobRun
+message CancelJobRunResponse {}
+
 // ManualServiceRunResponse is the response object for ManualServiceRun
 message ManualServiceRunResponse {
   // job_run_id is the id of the job run that was created, if any
@@ -1493,6 +1506,9 @@ service ClusterControlPlaneService {
   // ManualServiceRun creates a pod/job with the same spec as the provided service (as defined in the latest app revision)
   // and runs the provided command, or if no command is provided, runs the command defined for the service.
   rpc ManualServiceRun(ManualServiceRunRequest) returns (ManualServiceRunResponse) {}
+
+  // CancelJobRun cancels a job run for a given app and job service in the provided deployment target
+  rpc CancelJobRun(CancelJobRunRequest) returns (CancelJobRunResponse) {}
 
   // JobRunStatus returns the status of a given job run
   rpc JobRunStatus(JobRunStatusRequest) returns (JobRunStatusResponse) {}

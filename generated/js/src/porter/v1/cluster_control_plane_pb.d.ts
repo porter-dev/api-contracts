@@ -4220,6 +4220,72 @@ export declare class ManualServiceRunRequest extends Message<ManualServiceRunReq
 }
 
 /**
+ * CancelJobRunRequest is the request object for CancelJobRun
+ *
+ * @generated from message porter.v1.CancelJobRunRequest
+ */
+export declare class CancelJobRunRequest extends Message<CancelJobRunRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target for the job run
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 3;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  /**
+   * job_run_name is the name of the job run to cancel
+   *
+   * @generated from field: string job_run_name = 4;
+   */
+  jobRunName: string;
+
+  constructor(data?: PartialMessage<CancelJobRunRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CancelJobRunRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CancelJobRunRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CancelJobRunRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CancelJobRunRequest;
+
+  static equals(a: CancelJobRunRequest | PlainMessage<CancelJobRunRequest> | undefined, b: CancelJobRunRequest | PlainMessage<CancelJobRunRequest> | undefined): boolean;
+}
+
+/**
+ * CancelJobRunResponse is the response object for CancelJobRun
+ *
+ * @generated from message porter.v1.CancelJobRunResponse
+ */
+export declare class CancelJobRunResponse extends Message<CancelJobRunResponse> {
+  constructor(data?: PartialMessage<CancelJobRunResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CancelJobRunResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CancelJobRunResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CancelJobRunResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CancelJobRunResponse;
+
+  static equals(a: CancelJobRunResponse | PlainMessage<CancelJobRunResponse> | undefined, b: CancelJobRunResponse | PlainMessage<CancelJobRunResponse> | undefined): boolean;
+}
+
+/**
  * ManualServiceRunResponse is the response object for ManualServiceRun
  *
  * @generated from message porter.v1.ManualServiceRunResponse

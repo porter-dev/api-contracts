@@ -62,6 +62,7 @@ export const EnumJobRunStatus = /*@__PURE__*/ proto3.makeEnum(
     {no: 1, name: "ENUM_JOB_RUN_STATUS_RUNNING", localName: "RUNNING"},
     {no: 2, name: "ENUM_JOB_RUN_STATUS_SUCCESSFUL", localName: "SUCCESSFUL"},
     {no: 3, name: "ENUM_JOB_RUN_STATUS_FAILED", localName: "FAILED"},
+    {no: 4, name: "ENUM_JOB_RUN_STATUS_CANCELED", localName: "CANCELED"},
   ],
 );
 
