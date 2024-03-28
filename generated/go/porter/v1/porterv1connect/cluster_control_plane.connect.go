@@ -166,6 +166,9 @@ const (
 	// ClusterControlPlaneServiceManualServiceRunProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's ManualServiceRun RPC.
 	ClusterControlPlaneServiceManualServiceRunProcedure = "/porter.v1.ClusterControlPlaneService/ManualServiceRun"
+	// ClusterControlPlaneServiceCancelJobRunProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's CancelJobRun RPC.
+	ClusterControlPlaneServiceCancelJobRunProcedure = "/porter.v1.ClusterControlPlaneService/CancelJobRun"
 	// ClusterControlPlaneServiceJobRunStatusProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's JobRunStatus RPC.
 	ClusterControlPlaneServiceJobRunStatusProcedure = "/porter.v1.ClusterControlPlaneService/JobRunStatus"
@@ -391,6 +394,8 @@ type ClusterControlPlaneServiceClient interface {
 	// ManualServiceRun creates a pod/job with the same spec as the provided service (as defined in the latest app revision)
 	// and runs the provided command, or if no command is provided, runs the command defined for the service.
 	ManualServiceRun(context.Context, *connect.Request[v1.ManualServiceRunRequest]) (*connect.Response[v1.ManualServiceRunResponse], error)
+	// CancelJobRun cancels a job run for a given app and job service in the provided deployment target
+	CancelJobRun(context.Context, *connect.Request[v1.CancelJobRunRequest]) (*connect.Response[v1.CancelJobRunResponse], error)
 	// JobRunStatus returns the status of a given job run
 	JobRunStatus(context.Context, *connect.Request[v1.JobRunStatusRequest]) (*connect.Response[v1.JobRunStatusResponse], error)
 	// JobRuns returns the job runs for a given app and job service in the provided deployment target
@@ -725,6 +730,11 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			baseURL+ClusterControlPlaneServiceManualServiceRunProcedure,
 			opts...,
 		),
+		cancelJobRun: connect.NewClient[v1.CancelJobRunRequest, v1.CancelJobRunResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceCancelJobRunProcedure,
+			opts...,
+		),
 		jobRunStatus: connect.NewClient[v1.JobRunStatusRequest, v1.JobRunStatusResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceJobRunStatusProcedure,
@@ -959,6 +969,7 @@ type clusterControlPlaneServiceClient struct {
 	updateAppsLinkedToEnvGroup          *connect.Client[v1.UpdateAppsLinkedToEnvGroupRequest, v1.UpdateAppsLinkedToEnvGroupResponse]
 	appHelmValues                       *connect.Client[v1.AppHelmValuesRequest, v1.AppHelmValuesResponse]
 	manualServiceRun                    *connect.Client[v1.ManualServiceRunRequest, v1.ManualServiceRunResponse]
+	cancelJobRun                        *connect.Client[v1.CancelJobRunRequest, v1.CancelJobRunResponse]
 	jobRunStatus                        *connect.Client[v1.JobRunStatusRequest, v1.JobRunStatusResponse]
 	jobRuns                             *connect.Client[v1.JobRunsRequest, v1.JobRunsResponse]
 	clusterNetworkSettings              *connect.Client[v1.ClusterNetworkSettingsRequest, v1.ClusterNetworkSettingsResponse]
@@ -1231,6 +1242,11 @@ func (c *clusterControlPlaneServiceClient) AppHelmValues(ctx context.Context, re
 // ManualServiceRun calls porter.v1.ClusterControlPlaneService.ManualServiceRun.
 func (c *clusterControlPlaneServiceClient) ManualServiceRun(ctx context.Context, req *connect.Request[v1.ManualServiceRunRequest]) (*connect.Response[v1.ManualServiceRunResponse], error) {
 	return c.manualServiceRun.CallUnary(ctx, req)
+}
+
+// CancelJobRun calls porter.v1.ClusterControlPlaneService.CancelJobRun.
+func (c *clusterControlPlaneServiceClient) CancelJobRun(ctx context.Context, req *connect.Request[v1.CancelJobRunRequest]) (*connect.Response[v1.CancelJobRunResponse], error) {
+	return c.cancelJobRun.CallUnary(ctx, req)
 }
 
 // JobRunStatus calls porter.v1.ClusterControlPlaneService.JobRunStatus.
@@ -1554,6 +1570,8 @@ type ClusterControlPlaneServiceHandler interface {
 	// ManualServiceRun creates a pod/job with the same spec as the provided service (as defined in the latest app revision)
 	// and runs the provided command, or if no command is provided, runs the command defined for the service.
 	ManualServiceRun(context.Context, *connect.Request[v1.ManualServiceRunRequest]) (*connect.Response[v1.ManualServiceRunResponse], error)
+	// CancelJobRun cancels a job run for a given app and job service in the provided deployment target
+	CancelJobRun(context.Context, *connect.Request[v1.CancelJobRunRequest]) (*connect.Response[v1.CancelJobRunResponse], error)
 	// JobRunStatus returns the status of a given job run
 	JobRunStatus(context.Context, *connect.Request[v1.JobRunStatusRequest]) (*connect.Response[v1.JobRunStatusResponse], error)
 	// JobRuns returns the job runs for a given app and job service in the provided deployment target
@@ -1884,6 +1902,11 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		svc.ManualServiceRun,
 		opts...,
 	)
+	clusterControlPlaneServiceCancelJobRunHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceCancelJobRunProcedure,
+		svc.CancelJobRun,
+		opts...,
+	)
 	clusterControlPlaneServiceJobRunStatusHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceJobRunStatusProcedure,
 		svc.JobRunStatus,
@@ -2159,6 +2182,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceAppHelmValuesHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceManualServiceRunProcedure:
 			clusterControlPlaneServiceManualServiceRunHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceCancelJobRunProcedure:
+			clusterControlPlaneServiceCancelJobRunHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceJobRunStatusProcedure:
 			clusterControlPlaneServiceJobRunStatusHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceJobRunsProcedure:
@@ -2416,6 +2441,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) AppHelmValues(context.Cont
 
 func (UnimplementedClusterControlPlaneServiceHandler) ManualServiceRun(context.Context, *connect.Request[v1.ManualServiceRunRequest]) (*connect.Response[v1.ManualServiceRunResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ManualServiceRun is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) CancelJobRun(context.Context, *connect.Request[v1.CancelJobRunRequest]) (*connect.Response[v1.CancelJobRunResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.CancelJobRun is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) JobRunStatus(context.Context, *connect.Request[v1.JobRunStatusRequest]) (*connect.Response[v1.JobRunStatusResponse], error) {

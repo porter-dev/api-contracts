@@ -1416,6 +1416,31 @@ export const ManualServiceRunRequest = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * CancelJobRunRequest is the request object for CancelJobRun
+ *
+ * @generated from message porter.v1.CancelJobRunRequest
+ */
+export const CancelJobRunRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.CancelJobRunRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+    { no: 4, name: "job_run_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * CancelJobRunResponse is the response object for CancelJobRun
+ *
+ * @generated from message porter.v1.CancelJobRunResponse
+ */
+export const CancelJobRunResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.CancelJobRunResponse",
+  [],
+);
+
+/**
  * ManualServiceRunResponse is the response object for ManualServiceRun
  *
  * @generated from message porter.v1.ManualServiceRunResponse

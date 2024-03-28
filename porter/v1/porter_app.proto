@@ -231,6 +231,7 @@ enum EnumJobRunStatus {
   ENUM_JOB_RUN_STATUS_RUNNING = 1;
   ENUM_JOB_RUN_STATUS_SUCCESSFUL = 2;
   ENUM_JOB_RUN_STATUS_FAILED = 3;
+  ENUM_JOB_RUN_STATUS_CANCELED = 4;
 }
 
 // JobRun contains details about a job run

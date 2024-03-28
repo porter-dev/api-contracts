@@ -104,6 +104,11 @@ export declare enum EnumJobRunStatus {
    * @generated from enum value: ENUM_JOB_RUN_STATUS_FAILED = 3;
    */
   FAILED = 3,
+
+  /**
+   * @generated from enum value: ENUM_JOB_RUN_STATUS_CANCELED = 4;
+   */
+  CANCELED = 4,
 }
 
 /**
