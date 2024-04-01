@@ -359,6 +359,19 @@ message UpdateAppResponse {
   EnumCLIAction cli_action = 2;
 }
 
+message UpdateAddonRequest {
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+  // deployment_target_identifier is the object that identifies the deployment target for the app
+  DeploymentTargetIdentifier deployment_target_identifier = 3;
+  // addon specifies all the addon config that we will update
+  Addon addon = 4;
+  // addon_env is the set of environment variables for the addon
+  EnvGroupVariables addon_env = 5;
+}
+
+message UpdateAddonResponse {}
+
 message UpdateRevisionStatusRequest {
   int64 project_id = 1;
   // app_revision_id is the id of the PorterAppRevision
@@ -1421,6 +1434,9 @@ service ClusterControlPlaneService {
 
   // UpdateApp hydrates a definition of a porter app, and takes necessary actions to update the app on the cluster
   rpc UpdateApp(UpdateAppRequest) returns (UpdateAppResponse) {}
+
+  // UpdateAddon hydrates a definition of a porter add-on, and takes necessary actions to update the add-on on the cluster
+  rpc UpdateAddon(UpdateAddonRequest) returns (UpdateAddonResponse) {}
 
   // RollbackRevision reverts an app to the previous revision, or optionally to the revision specified
   rpc RollbackRevision(RollbackRevisionRequest) returns (RollbackRevisionResponse) {}
