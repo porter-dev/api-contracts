@@ -18,7 +18,7 @@ import (
 // generated with a version of connect newer than the one compiled into your binary. You can fix the
 // problem by either regenerating this code with an older version of connect or updating the connect
 // version compiled into your binary.
-const _ = connect.IsAtLeastVersion0_1_0
+const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// ClusterControlPlaneServiceName is the fully-qualified name of the ClusterControlPlaneService
@@ -285,6 +285,94 @@ const (
 	ClusterControlPlaneServiceNotificationConfigProcedure = "/porter.v1.ClusterControlPlaneService/NotificationConfig"
 )
 
+// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
+var (
+	clusterControlPlaneServiceServiceDescriptor                                   = v1.File_porter_v1_cluster_control_plane_proto.Services().ByName("ClusterControlPlaneService")
+	clusterControlPlaneServiceQuotaIncreaseMethodDescriptor                       = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("QuotaIncrease")
+	clusterControlPlaneServiceUpdateCloudProviderCredentialsMethodDescriptor      = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateCloudProviderCredentials")
+	clusterControlPlaneServiceQuotaPreflightCheckMethodDescriptor                 = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("QuotaPreflightCheck")
+	clusterControlPlaneServicePreflightCheckMethodDescriptor                      = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("PreflightCheck")
+	clusterControlPlaneServiceCloudContractPreflightCheckMethodDescriptor         = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("CloudContractPreflightCheck")
+	clusterControlPlaneServiceCreateAssumeRoleChainMethodDescriptor               = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("CreateAssumeRoleChain")
+	clusterControlPlaneServiceSaveAzureCredentialsMethodDescriptor                = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("SaveAzureCredentials")
+	clusterControlPlaneServiceKubeConfigForClusterMethodDescriptor                = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("KubeConfigForCluster")
+	clusterControlPlaneServiceUpdateContractMethodDescriptor                      = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateContract")
+	clusterControlPlaneServiceReadContractMethodDescriptor                        = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ReadContract")
+	clusterControlPlaneServiceClusterStatusMethodDescriptor                       = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ClusterStatus")
+	clusterControlPlaneServiceDeleteClusterMethodDescriptor                       = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("DeleteCluster")
+	clusterControlPlaneServiceTokenForRegistryMethodDescriptor                    = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("TokenForRegistry")
+	clusterControlPlaneServiceContractComplianceChecksMethodDescriptor            = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ContractComplianceChecks")
+	clusterControlPlaneServiceValidatePorterAppMethodDescriptor                   = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ValidatePorterApp")
+	clusterControlPlaneServiceApplyPorterAppMethodDescriptor                      = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ApplyPorterApp")
+	clusterControlPlaneServiceUpdateAppMethodDescriptor                           = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateApp")
+	clusterControlPlaneServiceUpdateAddonMethodDescriptor                         = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateAddon")
+	clusterControlPlaneServiceRollbackRevisionMethodDescriptor                    = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("RollbackRevision")
+	clusterControlPlaneServiceUpdateRevisionStatusMethodDescriptor                = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateRevisionStatus")
+	clusterControlPlaneServiceAppRevisionStatusMethodDescriptor                   = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("AppRevisionStatus")
+	clusterControlPlaneServiceDeletePorterAppMethodDescriptor                     = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("DeletePorterApp")
+	clusterControlPlaneServiceDeleteAppDeploymentMethodDescriptor                 = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("DeleteAppDeployment")
+	clusterControlPlaneServiceDeleteDeploymentTargetMethodDescriptor              = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("DeleteDeploymentTarget")
+	clusterControlPlaneServiceCurrentAppRevisionMethodDescriptor                  = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("CurrentAppRevision")
+	clusterControlPlaneServiceListAppRevisionsMethodDescriptor                    = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ListAppRevisions")
+	clusterControlPlaneServiceLatestAppRevisionsMethodDescriptor                  = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("LatestAppRevisions")
+	clusterControlPlaneServiceGetAppRevisionMethodDescriptor                      = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("GetAppRevision")
+	clusterControlPlaneServiceAppTemplateMethodDescriptor                         = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("AppTemplate")
+	clusterControlPlaneServiceUpdateAppTemplateMethodDescriptor                   = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateAppTemplate")
+	clusterControlPlaneServiceLatestAddonsMethodDescriptor                        = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("LatestAddons")
+	clusterControlPlaneServicePredeployStatusMethodDescriptor                     = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("PredeployStatus")
+	clusterControlPlaneServiceDeploymentTargetDetailsMethodDescriptor             = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("DeploymentTargetDetails")
+	clusterControlPlaneServiceCreateDeploymentTargetMethodDescriptor              = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("CreateDeploymentTarget")
+	clusterControlPlaneServiceDeploymentTargetsMethodDescriptor                   = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("DeploymentTargets")
+	clusterControlPlaneServiceDefaultDeploymentTargetMethodDescriptor             = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("DefaultDeploymentTarget")
+	clusterControlPlaneServiceSeedAppRevisionsMethodDescriptor                    = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("SeedAppRevisions")
+	clusterControlPlaneServiceEnvGroupVariablesMethodDescriptor                   = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("EnvGroupVariables")
+	clusterControlPlaneServiceLatestEnvGroupWithVariablesMethodDescriptor         = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("LatestEnvGroupWithVariables")
+	clusterControlPlaneServiceAppEnvVariablesMethodDescriptor                     = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("AppEnvVariables")
+	clusterControlPlaneServiceUpdateAppImageMethodDescriptor                      = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateAppImage")
+	clusterControlPlaneServiceUpdateAppBuildSettingsMethodDescriptor              = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateAppBuildSettings")
+	clusterControlPlaneServiceUpdateAppsLinkedToEnvGroupMethodDescriptor          = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateAppsLinkedToEnvGroup")
+	clusterControlPlaneServiceAppHelmValuesMethodDescriptor                       = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("AppHelmValues")
+	clusterControlPlaneServiceManualServiceRunMethodDescriptor                    = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ManualServiceRun")
+	clusterControlPlaneServiceCancelJobRunMethodDescriptor                        = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("CancelJobRun")
+	clusterControlPlaneServiceJobRunStatusMethodDescriptor                        = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("JobRunStatus")
+	clusterControlPlaneServiceJobRunsMethodDescriptor                             = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("JobRuns")
+	clusterControlPlaneServiceClusterNetworkSettingsMethodDescriptor              = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ClusterNetworkSettings")
+	clusterControlPlaneServiceSharedNetworkSettingsMethodDescriptor               = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("SharedNetworkSettings")
+	clusterControlPlaneServiceImagesMethodDescriptor                              = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("Images")
+	clusterControlPlaneServiceCreateAppInstanceMethodDescriptor                   = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("CreateAppInstance")
+	clusterControlPlaneServiceDeleteAppInstanceMethodDescriptor                   = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("DeleteAppInstance")
+	clusterControlPlaneServiceListAppInstancesMethodDescriptor                    = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ListAppInstances")
+	clusterControlPlaneServiceTemplateAppManifestsMethodDescriptor                = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("TemplateAppManifests")
+	clusterControlPlaneServiceCreateNotificationMethodDescriptor                  = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("CreateNotification")
+	clusterControlPlaneServiceUpdateServiceDeploymentStatusMethodDescriptor       = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateServiceDeploymentStatus")
+	clusterControlPlaneServiceConnectHostedProjectMethodDescriptor                = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ConnectHostedProject")
+	clusterControlPlaneServiceUpdateDatastoreMethodDescriptor                     = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateDatastore")
+	clusterControlPlaneServiceCreateDatastoreProxyMethodDescriptor                = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("CreateDatastoreProxy")
+	clusterControlPlaneServiceDatastoreCredentialMethodDescriptor                 = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("DatastoreCredential")
+	clusterControlPlaneServiceCloudProviderPermissionsStatusMethodDescriptor      = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("CloudProviderPermissionsStatus")
+	clusterControlPlaneServicePatchCloudContractMethodDescriptor                  = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("PatchCloudContract")
+	clusterControlPlaneServiceReadCloudContractMethodDescriptor                   = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ReadCloudContract")
+	clusterControlPlaneServiceDockerConfigFileForRegistryMethodDescriptor         = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("DockerConfigFileForRegistry")
+	clusterControlPlaneServiceECRTokenForRegistryMethodDescriptor                 = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ECRTokenForRegistry")
+	clusterControlPlaneServiceAssumeRoleCredentialsMethodDescriptor               = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("AssumeRoleCredentials")
+	clusterControlPlaneServiceAssumeRoleChainTargetsMethodDescriptor              = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("AssumeRoleChainTargets")
+	clusterControlPlaneServiceCertificateAuthorityDataMethodDescriptor            = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("CertificateAuthorityData")
+	clusterControlPlaneServiceEKSBearerTokenMethodDescriptor                      = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("EKSBearerToken")
+	clusterControlPlaneServiceListRepositoriesForRegistryMethodDescriptor         = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ListRepositoriesForRegistry")
+	clusterControlPlaneServiceListImagesForRepositoryMethodDescriptor             = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ListImagesForRepository")
+	clusterControlPlaneServiceListDatastoresMethodDescriptor                      = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ListDatastores")
+	clusterControlPlaneServiceDatastoreStatusMethodDescriptor                     = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("DatastoreStatus")
+	clusterControlPlaneServiceRegistryStatusMethodDescriptor                      = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("RegistryStatus")
+	clusterControlPlaneServiceEnableExternalEnvGroupProvidersMethodDescriptor     = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("EnableExternalEnvGroupProviders")
+	clusterControlPlaneServiceAreExternalEnvGroupProvidersEnabledMethodDescriptor = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("AreExternalEnvGroupProvidersEnabled")
+	clusterControlPlaneServiceCreateOrUpdateEnvGroupMethodDescriptor              = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("CreateOrUpdateEnvGroup")
+	clusterControlPlaneServiceDeleteEnvGroupMethodDescriptor                      = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("DeleteEnvGroup")
+	clusterControlPlaneServiceAppsLinkedToEnvGroupMethodDescriptor                = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("AppsLinkedToEnvGroup")
+	clusterControlPlaneServiceListEnvGroupsMethodDescriptor                       = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ListEnvGroups")
+	clusterControlPlaneServiceUpdateNotificationConfigMethodDescriptor            = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateNotificationConfig")
+	clusterControlPlaneServiceNotificationConfigMethodDescriptor                  = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("NotificationConfig")
+)
+
 // ClusterControlPlaneServiceClient is a client for the porter.v1.ClusterControlPlaneService
 // service.
 type ClusterControlPlaneServiceClient interface {
@@ -518,417 +606,500 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 		quotaIncrease: connect.NewClient[v1.QuotaIncreaseRequest, v1.QuotaIncreaseResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceQuotaIncreaseProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceQuotaIncreaseMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		updateCloudProviderCredentials: connect.NewClient[v1.UpdateCloudProviderCredentialsRequest, v1.UpdateCloudProviderCredentialsResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceUpdateCloudProviderCredentialsProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceUpdateCloudProviderCredentialsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		quotaPreflightCheck: connect.NewClient[v1.QuotaPreflightCheckRequest, v1.QuotaPreflightCheckResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceQuotaPreflightCheckProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceQuotaPreflightCheckMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		preflightCheck: connect.NewClient[v1.PreflightCheckRequest, v1.PreflightCheckResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServicePreflightCheckProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServicePreflightCheckMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		cloudContractPreflightCheck: connect.NewClient[v1.CloudContractPreflightCheckRequest, v1.CloudContractPreflightCheckResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceCloudContractPreflightCheckProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceCloudContractPreflightCheckMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		createAssumeRoleChain: connect.NewClient[v1.CreateAssumeRoleChainRequest, v1.CreateAssumeRoleChainResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceCreateAssumeRoleChainProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceCreateAssumeRoleChainMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		saveAzureCredentials: connect.NewClient[v1.SaveAzureCredentialsRequest, v1.SaveAzureCredentialsResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceSaveAzureCredentialsProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceSaveAzureCredentialsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		kubeConfigForCluster: connect.NewClient[v1.KubeConfigForClusterRequest, v1.KubeConfigForClusterResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceKubeConfigForClusterProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceKubeConfigForClusterMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		updateContract: connect.NewClient[v1.UpdateContractRequest, v1.UpdateContractResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceUpdateContractProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceUpdateContractMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		readContract: connect.NewClient[v1.ReadContractRequest, v1.ReadContractResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceReadContractProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceReadContractMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		clusterStatus: connect.NewClient[v1.ClusterStatusRequest, v1.ClusterStatusResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceClusterStatusProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceClusterStatusMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		deleteCluster: connect.NewClient[v1.DeleteClusterRequest, v1.DeleteClusterResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDeleteClusterProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceDeleteClusterMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		tokenForRegistry: connect.NewClient[v1.TokenForRegistryRequest, v1.TokenForRegistryResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceTokenForRegistryProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceTokenForRegistryMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		contractComplianceChecks: connect.NewClient[v1.ContractComplianceChecksRequest, v1.ContractComplianceChecksResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceContractComplianceChecksProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceContractComplianceChecksMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		validatePorterApp: connect.NewClient[v1.ValidatePorterAppRequest, v1.ValidatePorterAppResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceValidatePorterAppProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceValidatePorterAppMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		applyPorterApp: connect.NewClient[v1.ApplyPorterAppRequest, v1.ApplyPorterAppResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceApplyPorterAppProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceApplyPorterAppMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		updateApp: connect.NewClient[v1.UpdateAppRequest, v1.UpdateAppResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceUpdateAppProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceUpdateAppMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		updateAddon: connect.NewClient[v1.UpdateAddonRequest, v1.UpdateAddonResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceUpdateAddonProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceUpdateAddonMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		rollbackRevision: connect.NewClient[v1.RollbackRevisionRequest, v1.RollbackRevisionResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceRollbackRevisionProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceRollbackRevisionMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		updateRevisionStatus: connect.NewClient[v1.UpdateRevisionStatusRequest, v1.UpdateRevisionStatusResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceUpdateRevisionStatusProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceUpdateRevisionStatusMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		appRevisionStatus: connect.NewClient[v1.AppRevisionStatusRequest, v1.AppRevisionStatusResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceAppRevisionStatusProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceAppRevisionStatusMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		deletePorterApp: connect.NewClient[v1.DeletePorterAppRequest, v1.DeletePorterAppResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDeletePorterAppProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceDeletePorterAppMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		deleteAppDeployment: connect.NewClient[v1.DeleteAppDeploymentRequest, v1.DeleteAppDeploymentResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDeleteAppDeploymentProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceDeleteAppDeploymentMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		deleteDeploymentTarget: connect.NewClient[v1.DeleteDeploymentTargetRequest, v1.DeleteDeploymentTargetResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDeleteDeploymentTargetProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceDeleteDeploymentTargetMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		currentAppRevision: connect.NewClient[v1.CurrentAppRevisionRequest, v1.CurrentAppRevisionResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceCurrentAppRevisionProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceCurrentAppRevisionMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		listAppRevisions: connect.NewClient[v1.ListAppRevisionsRequest, v1.ListAppRevisionsResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceListAppRevisionsProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceListAppRevisionsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		latestAppRevisions: connect.NewClient[v1.LatestAppRevisionsRequest, v1.LatestAppRevisionsResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceLatestAppRevisionsProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceLatestAppRevisionsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		getAppRevision: connect.NewClient[v1.GetAppRevisionRequest, v1.GetAppRevisionResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceGetAppRevisionProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceGetAppRevisionMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		appTemplate: connect.NewClient[v1.AppTemplateRequest, v1.AppTemplateResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceAppTemplateProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceAppTemplateMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		updateAppTemplate: connect.NewClient[v1.UpdateAppTemplateRequest, v1.UpdateAppTemplateResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceUpdateAppTemplateProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceUpdateAppTemplateMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		latestAddons: connect.NewClient[v1.LatestAddonsRequest, v1.LatestAddonsResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceLatestAddonsProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceLatestAddonsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		predeployStatus: connect.NewClient[v1.PredeployStatusRequest, v1.PredeployStatusResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServicePredeployStatusProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServicePredeployStatusMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		deploymentTargetDetails: connect.NewClient[v1.DeploymentTargetDetailsRequest, v1.DeploymentTargetDetailsResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDeploymentTargetDetailsProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceDeploymentTargetDetailsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		createDeploymentTarget: connect.NewClient[v1.CreateDeploymentTargetRequest, v1.CreateDeploymentTargetResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceCreateDeploymentTargetProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceCreateDeploymentTargetMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		deploymentTargets: connect.NewClient[v1.DeploymentTargetsRequest, v1.DeploymentTargetsResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDeploymentTargetsProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceDeploymentTargetsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		defaultDeploymentTarget: connect.NewClient[v1.DefaultDeploymentTargetRequest, v1.DefaultDeploymentTargetResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDefaultDeploymentTargetProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceDefaultDeploymentTargetMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		seedAppRevisions: connect.NewClient[v1.SeedAppRevisionsRequest, v1.SeedAppRevisionsResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceSeedAppRevisionsProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceSeedAppRevisionsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		envGroupVariables: connect.NewClient[v1.EnvGroupVariablesRequest, v1.EnvGroupVariablesResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceEnvGroupVariablesProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceEnvGroupVariablesMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		latestEnvGroupWithVariables: connect.NewClient[v1.LatestEnvGroupWithVariablesRequest, v1.LatestEnvGroupWithVariablesResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceLatestEnvGroupWithVariablesProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceLatestEnvGroupWithVariablesMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		appEnvVariables: connect.NewClient[v1.AppEnvVariablesRequest, v1.AppEnvVariablesResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceAppEnvVariablesProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceAppEnvVariablesMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		updateAppImage: connect.NewClient[v1.UpdateAppImageRequest, v1.UpdateAppImageResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceUpdateAppImageProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceUpdateAppImageMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		updateAppBuildSettings: connect.NewClient[v1.UpdateAppBuildSettingsRequest, v1.UpdateAppBuildSettingsResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceUpdateAppBuildSettingsProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceUpdateAppBuildSettingsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		updateAppsLinkedToEnvGroup: connect.NewClient[v1.UpdateAppsLinkedToEnvGroupRequest, v1.UpdateAppsLinkedToEnvGroupResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceUpdateAppsLinkedToEnvGroupProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceUpdateAppsLinkedToEnvGroupMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		appHelmValues: connect.NewClient[v1.AppHelmValuesRequest, v1.AppHelmValuesResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceAppHelmValuesProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceAppHelmValuesMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		manualServiceRun: connect.NewClient[v1.ManualServiceRunRequest, v1.ManualServiceRunResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceManualServiceRunProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceManualServiceRunMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		cancelJobRun: connect.NewClient[v1.CancelJobRunRequest, v1.CancelJobRunResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceCancelJobRunProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceCancelJobRunMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		jobRunStatus: connect.NewClient[v1.JobRunStatusRequest, v1.JobRunStatusResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceJobRunStatusProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceJobRunStatusMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		jobRuns: connect.NewClient[v1.JobRunsRequest, v1.JobRunsResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceJobRunsProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceJobRunsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		clusterNetworkSettings: connect.NewClient[v1.ClusterNetworkSettingsRequest, v1.ClusterNetworkSettingsResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceClusterNetworkSettingsProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceClusterNetworkSettingsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		sharedNetworkSettings: connect.NewClient[v1.SharedNetworkSettingsRequest, v1.SharedNetworkSettingsResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceSharedNetworkSettingsProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceSharedNetworkSettingsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		images: connect.NewClient[v1.ImagesRequest, v1.ImagesResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceImagesProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceImagesMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		createAppInstance: connect.NewClient[v1.CreateAppInstanceRequest, v1.CreateAppInstanceResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceCreateAppInstanceProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceCreateAppInstanceMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		deleteAppInstance: connect.NewClient[v1.DeleteAppInstanceRequest, v1.DeleteAppInstanceResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDeleteAppInstanceProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceDeleteAppInstanceMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		listAppInstances: connect.NewClient[v1.ListAppInstancesRequest, v1.ListAppInstancesResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceListAppInstancesProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceListAppInstancesMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		templateAppManifests: connect.NewClient[v1.TemplateAppManifestsRequest, v1.TemplateAppManifestsResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceTemplateAppManifestsProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceTemplateAppManifestsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		createNotification: connect.NewClient[v1.CreateNotificationRequest, v1.CreateNotificationResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceCreateNotificationProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceCreateNotificationMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		updateServiceDeploymentStatus: connect.NewClient[v1.UpdateServiceDeploymentStatusRequest, v1.UpdateServiceDeploymentStatusResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceUpdateServiceDeploymentStatusProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceUpdateServiceDeploymentStatusMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		connectHostedProject: connect.NewClient[v1.ConnectHostedProjectRequest, v1.ConnectHostedProjectResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceConnectHostedProjectProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceConnectHostedProjectMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		updateDatastore: connect.NewClient[v1.UpdateDatastoreRequest, v1.UpdateDatastoreResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceUpdateDatastoreProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceUpdateDatastoreMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		createDatastoreProxy: connect.NewClient[v1.CreateDatastoreProxyRequest, v1.CreateDatastoreProxyResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceCreateDatastoreProxyProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceCreateDatastoreProxyMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		datastoreCredential: connect.NewClient[v1.DatastoreCredentialRequest, v1.DatastoreCredentialResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDatastoreCredentialProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceDatastoreCredentialMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		cloudProviderPermissionsStatus: connect.NewClient[v1.CloudProviderPermissionsStatusRequest, v1.CloudProviderPermissionsStatusResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceCloudProviderPermissionsStatusProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceCloudProviderPermissionsStatusMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		patchCloudContract: connect.NewClient[v1.PatchCloudContractRequest, v1.PatchCloudContractResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServicePatchCloudContractProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServicePatchCloudContractMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		readCloudContract: connect.NewClient[v1.ReadCloudContractRequest, v1.ReadCloudContractResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceReadCloudContractProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceReadCloudContractMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		dockerConfigFileForRegistry: connect.NewClient[v1.DockerConfigFileForRegistryRequest, v1.DockerConfigFileForRegistryResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceDockerConfigFileForRegistryMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		eCRTokenForRegistry: connect.NewClient[v1.ECRTokenForRegistryRequest, v1.ECRTokenForRegistryResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceECRTokenForRegistryProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceECRTokenForRegistryMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		assumeRoleCredentials: connect.NewClient[v1.AssumeRoleCredentialsRequest, v1.AssumeRoleCredentialsResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceAssumeRoleCredentialsProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceAssumeRoleCredentialsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		assumeRoleChainTargets: connect.NewClient[v1.AssumeRoleChainTargetsRequest, v1.AssumeRoleChainTargetsResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceAssumeRoleChainTargetsProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceAssumeRoleChainTargetsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		certificateAuthorityData: connect.NewClient[v1.CertificateAuthorityDataRequest, v1.CertificateAuthorityDataResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceCertificateAuthorityDataProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceCertificateAuthorityDataMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		eKSBearerToken: connect.NewClient[v1.EKSBearerTokenRequest, v1.EKSBearerTokenResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceEKSBearerTokenProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceEKSBearerTokenMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		listRepositoriesForRegistry: connect.NewClient[v1.ListRepositoriesForRegistryRequest, v1.ListRepositoriesForRegistryResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceListRepositoriesForRegistryProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceListRepositoriesForRegistryMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		listImagesForRepository: connect.NewClient[v1.ListImagesForRepositoryRequest, v1.ListImagesForRepositoryResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceListImagesForRepositoryProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceListImagesForRepositoryMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		listDatastores: connect.NewClient[v1.ListDatastoresRequest, v1.ListDatastoresResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceListDatastoresProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceListDatastoresMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		datastoreStatus: connect.NewClient[v1.DatastoreStatusRequest, v1.DatastoreStatusResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDatastoreStatusProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceDatastoreStatusMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		registryStatus: connect.NewClient[v1.RegistryStatusRequest, v1.RegistryStatusResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceRegistryStatusProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceRegistryStatusMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		enableExternalEnvGroupProviders: connect.NewClient[v1.EnableExternalEnvGroupProvidersRequest, v1.EnableExternalEnvGroupProvidersResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceEnableExternalEnvGroupProvidersProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceEnableExternalEnvGroupProvidersMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		areExternalEnvGroupProvidersEnabled: connect.NewClient[v1.AreExternalEnvGroupProvidersEnabledRequest, v1.AreExternalEnvGroupProvidersEnabledResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceAreExternalEnvGroupProvidersEnabledProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceAreExternalEnvGroupProvidersEnabledMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		createOrUpdateEnvGroup: connect.NewClient[v1.CreateOrUpdateEnvGroupRequest, v1.CreateOrUpdateEnvGroupResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceCreateOrUpdateEnvGroupProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceCreateOrUpdateEnvGroupMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		deleteEnvGroup: connect.NewClient[v1.DeleteEnvGroupRequest, v1.DeleteEnvGroupResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDeleteEnvGroupProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceDeleteEnvGroupMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		appsLinkedToEnvGroup: connect.NewClient[v1.AppsLinkedToEnvGroupRequest, v1.AppsLinkedToEnvGroupResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceAppsLinkedToEnvGroupProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceAppsLinkedToEnvGroupMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		listEnvGroups: connect.NewClient[v1.ListEnvGroupsRequest, v1.ListEnvGroupsResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceListEnvGroupsProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceListEnvGroupsMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		updateNotificationConfig: connect.NewClient[v1.UpdateNotificationConfigRequest, v1.UpdateNotificationConfigResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceUpdateNotificationConfigProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceUpdateNotificationConfigMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 		notificationConfig: connect.NewClient[v1.NotificationConfigRequest, v1.NotificationConfigResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceNotificationConfigProcedure,
-			opts...,
+			connect.WithSchema(clusterControlPlaneServiceNotificationConfigMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 	}
 }
@@ -1703,417 +1874,500 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 	clusterControlPlaneServiceQuotaIncreaseHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceQuotaIncreaseProcedure,
 		svc.QuotaIncrease,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceQuotaIncreaseMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceUpdateCloudProviderCredentialsHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceUpdateCloudProviderCredentialsProcedure,
 		svc.UpdateCloudProviderCredentials,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceUpdateCloudProviderCredentialsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceQuotaPreflightCheckHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceQuotaPreflightCheckProcedure,
 		svc.QuotaPreflightCheck,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceQuotaPreflightCheckMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServicePreflightCheckHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServicePreflightCheckProcedure,
 		svc.PreflightCheck,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServicePreflightCheckMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceCloudContractPreflightCheckHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceCloudContractPreflightCheckProcedure,
 		svc.CloudContractPreflightCheck,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceCloudContractPreflightCheckMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceCreateAssumeRoleChainHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceCreateAssumeRoleChainProcedure,
 		svc.CreateAssumeRoleChain,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceCreateAssumeRoleChainMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceSaveAzureCredentialsHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceSaveAzureCredentialsProcedure,
 		svc.SaveAzureCredentials,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceSaveAzureCredentialsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceKubeConfigForClusterHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceKubeConfigForClusterProcedure,
 		svc.KubeConfigForCluster,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceKubeConfigForClusterMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceUpdateContractHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceUpdateContractProcedure,
 		svc.UpdateContract,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceUpdateContractMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceReadContractHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceReadContractProcedure,
 		svc.ReadContract,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceReadContractMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceClusterStatusHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceClusterStatusProcedure,
 		svc.ClusterStatus,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceClusterStatusMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceDeleteClusterHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDeleteClusterProcedure,
 		svc.DeleteCluster,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceDeleteClusterMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceTokenForRegistryHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceTokenForRegistryProcedure,
 		svc.TokenForRegistry,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceTokenForRegistryMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceContractComplianceChecksHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceContractComplianceChecksProcedure,
 		svc.ContractComplianceChecks,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceContractComplianceChecksMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceValidatePorterAppHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceValidatePorterAppProcedure,
 		svc.ValidatePorterApp,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceValidatePorterAppMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceApplyPorterAppHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceApplyPorterAppProcedure,
 		svc.ApplyPorterApp,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceApplyPorterAppMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceUpdateAppHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceUpdateAppProcedure,
 		svc.UpdateApp,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceUpdateAppMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceUpdateAddonHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceUpdateAddonProcedure,
 		svc.UpdateAddon,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceUpdateAddonMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceRollbackRevisionHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceRollbackRevisionProcedure,
 		svc.RollbackRevision,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceRollbackRevisionMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceUpdateRevisionStatusHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceUpdateRevisionStatusProcedure,
 		svc.UpdateRevisionStatus,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceUpdateRevisionStatusMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceAppRevisionStatusHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceAppRevisionStatusProcedure,
 		svc.AppRevisionStatus,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceAppRevisionStatusMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceDeletePorterAppHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDeletePorterAppProcedure,
 		svc.DeletePorterApp,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceDeletePorterAppMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceDeleteAppDeploymentHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDeleteAppDeploymentProcedure,
 		svc.DeleteAppDeployment,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceDeleteAppDeploymentMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceDeleteDeploymentTargetHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDeleteDeploymentTargetProcedure,
 		svc.DeleteDeploymentTarget,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceDeleteDeploymentTargetMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceCurrentAppRevisionHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceCurrentAppRevisionProcedure,
 		svc.CurrentAppRevision,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceCurrentAppRevisionMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceListAppRevisionsHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceListAppRevisionsProcedure,
 		svc.ListAppRevisions,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceListAppRevisionsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceLatestAppRevisionsHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceLatestAppRevisionsProcedure,
 		svc.LatestAppRevisions,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceLatestAppRevisionsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceGetAppRevisionHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceGetAppRevisionProcedure,
 		svc.GetAppRevision,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceGetAppRevisionMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceAppTemplateHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceAppTemplateProcedure,
 		svc.AppTemplate,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceAppTemplateMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceUpdateAppTemplateHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceUpdateAppTemplateProcedure,
 		svc.UpdateAppTemplate,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceUpdateAppTemplateMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceLatestAddonsHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceLatestAddonsProcedure,
 		svc.LatestAddons,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceLatestAddonsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServicePredeployStatusHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServicePredeployStatusProcedure,
 		svc.PredeployStatus,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServicePredeployStatusMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceDeploymentTargetDetailsHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDeploymentTargetDetailsProcedure,
 		svc.DeploymentTargetDetails,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceDeploymentTargetDetailsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceCreateDeploymentTargetHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceCreateDeploymentTargetProcedure,
 		svc.CreateDeploymentTarget,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceCreateDeploymentTargetMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceDeploymentTargetsHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDeploymentTargetsProcedure,
 		svc.DeploymentTargets,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceDeploymentTargetsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceDefaultDeploymentTargetHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDefaultDeploymentTargetProcedure,
 		svc.DefaultDeploymentTarget,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceDefaultDeploymentTargetMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceSeedAppRevisionsHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceSeedAppRevisionsProcedure,
 		svc.SeedAppRevisions,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceSeedAppRevisionsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceEnvGroupVariablesHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceEnvGroupVariablesProcedure,
 		svc.EnvGroupVariables,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceEnvGroupVariablesMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceLatestEnvGroupWithVariablesHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceLatestEnvGroupWithVariablesProcedure,
 		svc.LatestEnvGroupWithVariables,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceLatestEnvGroupWithVariablesMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceAppEnvVariablesHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceAppEnvVariablesProcedure,
 		svc.AppEnvVariables,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceAppEnvVariablesMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceUpdateAppImageHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceUpdateAppImageProcedure,
 		svc.UpdateAppImage,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceUpdateAppImageMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceUpdateAppBuildSettingsHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceUpdateAppBuildSettingsProcedure,
 		svc.UpdateAppBuildSettings,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceUpdateAppBuildSettingsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceUpdateAppsLinkedToEnvGroupHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceUpdateAppsLinkedToEnvGroupProcedure,
 		svc.UpdateAppsLinkedToEnvGroup,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceUpdateAppsLinkedToEnvGroupMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceAppHelmValuesHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceAppHelmValuesProcedure,
 		svc.AppHelmValues,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceAppHelmValuesMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceManualServiceRunHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceManualServiceRunProcedure,
 		svc.ManualServiceRun,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceManualServiceRunMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceCancelJobRunHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceCancelJobRunProcedure,
 		svc.CancelJobRun,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceCancelJobRunMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceJobRunStatusHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceJobRunStatusProcedure,
 		svc.JobRunStatus,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceJobRunStatusMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceJobRunsHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceJobRunsProcedure,
 		svc.JobRuns,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceJobRunsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceClusterNetworkSettingsHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceClusterNetworkSettingsProcedure,
 		svc.ClusterNetworkSettings,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceClusterNetworkSettingsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceSharedNetworkSettingsHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceSharedNetworkSettingsProcedure,
 		svc.SharedNetworkSettings,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceSharedNetworkSettingsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceImagesHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceImagesProcedure,
 		svc.Images,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceImagesMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceCreateAppInstanceHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceCreateAppInstanceProcedure,
 		svc.CreateAppInstance,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceCreateAppInstanceMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceDeleteAppInstanceHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDeleteAppInstanceProcedure,
 		svc.DeleteAppInstance,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceDeleteAppInstanceMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceListAppInstancesHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceListAppInstancesProcedure,
 		svc.ListAppInstances,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceListAppInstancesMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceTemplateAppManifestsHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceTemplateAppManifestsProcedure,
 		svc.TemplateAppManifests,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceTemplateAppManifestsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceCreateNotificationHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceCreateNotificationProcedure,
 		svc.CreateNotification,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceCreateNotificationMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceUpdateServiceDeploymentStatusHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceUpdateServiceDeploymentStatusProcedure,
 		svc.UpdateServiceDeploymentStatus,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceUpdateServiceDeploymentStatusMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceConnectHostedProjectHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceConnectHostedProjectProcedure,
 		svc.ConnectHostedProject,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceConnectHostedProjectMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceUpdateDatastoreHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceUpdateDatastoreProcedure,
 		svc.UpdateDatastore,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceUpdateDatastoreMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceCreateDatastoreProxyHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceCreateDatastoreProxyProcedure,
 		svc.CreateDatastoreProxy,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceCreateDatastoreProxyMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceDatastoreCredentialHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDatastoreCredentialProcedure,
 		svc.DatastoreCredential,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceDatastoreCredentialMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceCloudProviderPermissionsStatusHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceCloudProviderPermissionsStatusProcedure,
 		svc.CloudProviderPermissionsStatus,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceCloudProviderPermissionsStatusMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServicePatchCloudContractHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServicePatchCloudContractProcedure,
 		svc.PatchCloudContract,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServicePatchCloudContractMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceReadCloudContractHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceReadCloudContractProcedure,
 		svc.ReadCloudContract,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceReadCloudContractMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceDockerConfigFileForRegistryHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDockerConfigFileForRegistryProcedure,
 		svc.DockerConfigFileForRegistry,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceDockerConfigFileForRegistryMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceECRTokenForRegistryHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceECRTokenForRegistryProcedure,
 		svc.ECRTokenForRegistry,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceECRTokenForRegistryMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceAssumeRoleCredentialsHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceAssumeRoleCredentialsProcedure,
 		svc.AssumeRoleCredentials,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceAssumeRoleCredentialsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceAssumeRoleChainTargetsHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceAssumeRoleChainTargetsProcedure,
 		svc.AssumeRoleChainTargets,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceAssumeRoleChainTargetsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceCertificateAuthorityDataHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceCertificateAuthorityDataProcedure,
 		svc.CertificateAuthorityData,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceCertificateAuthorityDataMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceEKSBearerTokenHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceEKSBearerTokenProcedure,
 		svc.EKSBearerToken,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceEKSBearerTokenMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceListRepositoriesForRegistryHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceListRepositoriesForRegistryProcedure,
 		svc.ListRepositoriesForRegistry,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceListRepositoriesForRegistryMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceListImagesForRepositoryHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceListImagesForRepositoryProcedure,
 		svc.ListImagesForRepository,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceListImagesForRepositoryMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceListDatastoresHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceListDatastoresProcedure,
 		svc.ListDatastores,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceListDatastoresMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceDatastoreStatusHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDatastoreStatusProcedure,
 		svc.DatastoreStatus,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceDatastoreStatusMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceRegistryStatusHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceRegistryStatusProcedure,
 		svc.RegistryStatus,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceRegistryStatusMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceEnableExternalEnvGroupProvidersHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceEnableExternalEnvGroupProvidersProcedure,
 		svc.EnableExternalEnvGroupProviders,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceEnableExternalEnvGroupProvidersMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceAreExternalEnvGroupProvidersEnabledHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceAreExternalEnvGroupProvidersEnabledProcedure,
 		svc.AreExternalEnvGroupProvidersEnabled,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceAreExternalEnvGroupProvidersEnabledMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceCreateOrUpdateEnvGroupHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceCreateOrUpdateEnvGroupProcedure,
 		svc.CreateOrUpdateEnvGroup,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceCreateOrUpdateEnvGroupMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceDeleteEnvGroupHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceDeleteEnvGroupProcedure,
 		svc.DeleteEnvGroup,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceDeleteEnvGroupMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceAppsLinkedToEnvGroupHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceAppsLinkedToEnvGroupProcedure,
 		svc.AppsLinkedToEnvGroup,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceAppsLinkedToEnvGroupMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceListEnvGroupsHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceListEnvGroupsProcedure,
 		svc.ListEnvGroups,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceListEnvGroupsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceUpdateNotificationConfigHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceUpdateNotificationConfigProcedure,
 		svc.UpdateNotificationConfig,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceUpdateNotificationConfigMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceNotificationConfigHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceNotificationConfigProcedure,
 		svc.NotificationConfig,
-		opts...,
+		connect.WithSchema(clusterControlPlaneServiceNotificationConfigMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	return "/porter.v1.ClusterControlPlaneService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
