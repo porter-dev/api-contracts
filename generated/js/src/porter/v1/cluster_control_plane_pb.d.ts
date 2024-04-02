@@ -1855,6 +1855,75 @@ export declare class UpdateAppResponse extends Message<UpdateAppResponse> {
 }
 
 /**
+ * @generated from message porter.v1.UpdateAddonRequest
+ */
+export declare class UpdateAddonRequest extends Message<UpdateAddonRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target for the app
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 3;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  /**
+   * addon specifies all the addon config that we will update
+   *
+   * @generated from field: porter.v1.Addon addon = 4;
+   */
+  addon?: Addon;
+
+  /**
+   * addon_env is the set of environment variables for the addon
+   *
+   * @generated from field: porter.v1.EnvGroupVariables addon_env = 5;
+   */
+  addonEnv?: EnvGroupVariables;
+
+  constructor(data?: PartialMessage<UpdateAddonRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateAddonRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateAddonRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateAddonRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateAddonRequest;
+
+  static equals(a: UpdateAddonRequest | PlainMessage<UpdateAddonRequest> | undefined, b: UpdateAddonRequest | PlainMessage<UpdateAddonRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.UpdateAddonResponse
+ */
+export declare class UpdateAddonResponse extends Message<UpdateAddonResponse> {
+  constructor(data?: PartialMessage<UpdateAddonResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateAddonResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateAddonResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateAddonResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateAddonResponse;
+
+  static equals(a: UpdateAddonResponse | PlainMessage<UpdateAddonResponse> | undefined, b: UpdateAddonResponse | PlainMessage<UpdateAddonResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.UpdateRevisionStatusRequest
  */
 export declare class UpdateRevisionStatusRequest extends Message<UpdateRevisionStatusRequest> {
@@ -3129,11 +3198,19 @@ export declare class LatestAddonsRequest extends Message<LatestAddonsRequest> {
  */
 export declare class LatestAddonsResponse extends Message<LatestAddonsResponse> {
   /**
-   * addons is the list of addons for the given deployment target
+   * addons is the list of addons for the given deployment target. Deprecated; use AddonsWithEnv
    *
-   * @generated from field: repeated porter.v1.Addon addons = 1;
+   * @generated from field: repeated porter.v1.Addon addons = 1 [deprecated = true];
+   * @deprecated
    */
   addons: Addon[];
+
+  /**
+   * addons is the list of addons for the given deployment target, with env variables from the latest default env group for that addon
+   *
+   * @generated from field: repeated porter.v1.AddonWithEnvVars addons_with_env = 2;
+   */
+  addonsWithEnv: AddonWithEnvVars[];
 
   constructor(data?: PartialMessage<LatestAddonsResponse>);
 

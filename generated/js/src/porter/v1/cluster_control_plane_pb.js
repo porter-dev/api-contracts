@@ -652,6 +652,28 @@ export const UpdateAppResponse = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * @generated from message porter.v1.UpdateAddonRequest
+ */
+export const UpdateAddonRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.UpdateAddonRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+    { no: 4, name: "addon", kind: "message", T: Addon },
+    { no: 5, name: "addon_env", kind: "message", T: EnvGroupVariables },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.UpdateAddonResponse
+ */
+export const UpdateAddonResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.UpdateAddonResponse",
+  [],
+);
+
+/**
  * @generated from message porter.v1.UpdateRevisionStatusRequest
  */
 export const UpdateRevisionStatusRequest = /*@__PURE__*/ proto3.makeMessageType(
@@ -1051,6 +1073,7 @@ export const LatestAddonsResponse = /*@__PURE__*/ proto3.makeMessageType(
   "porter.v1.LatestAddonsResponse",
   () => [
     { no: 1, name: "addons", kind: "message", T: Addon, repeated: true },
+    { no: 2, name: "addons_with_env", kind: "message", T: AddonWithEnvVars, repeated: true },
   ],
 );
 
