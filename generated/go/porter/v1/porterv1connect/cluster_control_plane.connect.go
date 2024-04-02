@@ -211,6 +211,9 @@ const (
 	// ClusterControlPlaneServiceUpdateDatastoreProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's UpdateDatastore RPC.
 	ClusterControlPlaneServiceUpdateDatastoreProcedure = "/porter.v1.ClusterControlPlaneService/UpdateDatastore"
+	// ClusterControlPlaneServiceDeleteDatastoreProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's DeleteDatastore RPC.
+	ClusterControlPlaneServiceDeleteDatastoreProcedure = "/porter.v1.ClusterControlPlaneService/DeleteDatastore"
 	// ClusterControlPlaneServiceCreateDatastoreProxyProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's CreateDatastoreProxy RPC.
 	ClusterControlPlaneServiceCreateDatastoreProxyProcedure = "/porter.v1.ClusterControlPlaneService/CreateDatastoreProxy"
@@ -347,6 +350,7 @@ var (
 	clusterControlPlaneServiceUpdateServiceDeploymentStatusMethodDescriptor       = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateServiceDeploymentStatus")
 	clusterControlPlaneServiceConnectHostedProjectMethodDescriptor                = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ConnectHostedProject")
 	clusterControlPlaneServiceUpdateDatastoreMethodDescriptor                     = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateDatastore")
+	clusterControlPlaneServiceDeleteDatastoreMethodDescriptor                     = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("DeleteDatastore")
 	clusterControlPlaneServiceCreateDatastoreProxyMethodDescriptor                = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("CreateDatastoreProxy")
 	clusterControlPlaneServiceDatastoreCredentialMethodDescriptor                 = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("DatastoreCredential")
 	clusterControlPlaneServiceCloudProviderPermissionsStatusMethodDescriptor      = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("CloudProviderPermissionsStatus")
@@ -515,6 +519,8 @@ type ClusterControlPlaneServiceClient interface {
 	ConnectHostedProject(context.Context, *connect.Request[v1.ConnectHostedProjectRequest]) (*connect.Response[v1.ConnectHostedProjectResponse], error)
 	// UpdateDatastore updates a porter-managed datastore
 	UpdateDatastore(context.Context, *connect.Request[v1.UpdateDatastoreRequest]) (*connect.Response[v1.UpdateDatastoreResponse], error)
+	// DeleteDatastore deletes a porter-managed datastore
+	DeleteDatastore(context.Context, *connect.Request[v1.DeleteDatastoreRequest]) (*connect.Response[v1.DeleteDatastoreResponse], error)
 	// CreateDatastoreProxy creates a proxy for connecting to a datastore
 	CreateDatastoreProxy(context.Context, *connect.Request[v1.CreateDatastoreProxyRequest]) (*connect.Response[v1.CreateDatastoreProxyResponse], error)
 	// DatastoreCredential returns the set of credentials for connecting to a datastore
@@ -957,6 +963,12 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			connect.WithSchema(clusterControlPlaneServiceUpdateDatastoreMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		deleteDatastore: connect.NewClient[v1.DeleteDatastoreRequest, v1.DeleteDatastoreResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceDeleteDatastoreProcedure,
+			connect.WithSchema(clusterControlPlaneServiceDeleteDatastoreMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 		createDatastoreProxy: connect.NewClient[v1.CreateDatastoreProxyRequest, v1.CreateDatastoreProxyResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceCreateDatastoreProxyProcedure,
@@ -1165,6 +1177,7 @@ type clusterControlPlaneServiceClient struct {
 	updateServiceDeploymentStatus       *connect.Client[v1.UpdateServiceDeploymentStatusRequest, v1.UpdateServiceDeploymentStatusResponse]
 	connectHostedProject                *connect.Client[v1.ConnectHostedProjectRequest, v1.ConnectHostedProjectResponse]
 	updateDatastore                     *connect.Client[v1.UpdateDatastoreRequest, v1.UpdateDatastoreResponse]
+	deleteDatastore                     *connect.Client[v1.DeleteDatastoreRequest, v1.DeleteDatastoreResponse]
 	createDatastoreProxy                *connect.Client[v1.CreateDatastoreProxyRequest, v1.CreateDatastoreProxyResponse]
 	datastoreCredential                 *connect.Client[v1.DatastoreCredentialRequest, v1.DatastoreCredentialResponse]
 	cloudProviderPermissionsStatus      *connect.Client[v1.CloudProviderPermissionsStatusRequest, v1.CloudProviderPermissionsStatusResponse]
@@ -1502,6 +1515,11 @@ func (c *clusterControlPlaneServiceClient) UpdateDatastore(ctx context.Context, 
 	return c.updateDatastore.CallUnary(ctx, req)
 }
 
+// DeleteDatastore calls porter.v1.ClusterControlPlaneService.DeleteDatastore.
+func (c *clusterControlPlaneServiceClient) DeleteDatastore(ctx context.Context, req *connect.Request[v1.DeleteDatastoreRequest]) (*connect.Response[v1.DeleteDatastoreResponse], error) {
+	return c.deleteDatastore.CallUnary(ctx, req)
+}
+
 // CreateDatastoreProxy calls porter.v1.ClusterControlPlaneService.CreateDatastoreProxy.
 func (c *clusterControlPlaneServiceClient) CreateDatastoreProxy(ctx context.Context, req *connect.Request[v1.CreateDatastoreProxyRequest]) (*connect.Response[v1.CreateDatastoreProxyResponse], error) {
 	return c.createDatastoreProxy.CallUnary(ctx, req)
@@ -1787,6 +1805,8 @@ type ClusterControlPlaneServiceHandler interface {
 	ConnectHostedProject(context.Context, *connect.Request[v1.ConnectHostedProjectRequest]) (*connect.Response[v1.ConnectHostedProjectResponse], error)
 	// UpdateDatastore updates a porter-managed datastore
 	UpdateDatastore(context.Context, *connect.Request[v1.UpdateDatastoreRequest]) (*connect.Response[v1.UpdateDatastoreResponse], error)
+	// DeleteDatastore deletes a porter-managed datastore
+	DeleteDatastore(context.Context, *connect.Request[v1.DeleteDatastoreRequest]) (*connect.Response[v1.DeleteDatastoreResponse], error)
 	// CreateDatastoreProxy creates a proxy for connecting to a datastore
 	CreateDatastoreProxy(context.Context, *connect.Request[v1.CreateDatastoreProxyRequest]) (*connect.Response[v1.CreateDatastoreProxyResponse], error)
 	// DatastoreCredential returns the set of credentials for connecting to a datastore
@@ -2225,6 +2245,12 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		connect.WithSchema(clusterControlPlaneServiceUpdateDatastoreMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	clusterControlPlaneServiceDeleteDatastoreHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceDeleteDatastoreProcedure,
+		svc.DeleteDatastore,
+		connect.WithSchema(clusterControlPlaneServiceDeleteDatastoreMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	clusterControlPlaneServiceCreateDatastoreProxyHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceCreateDatastoreProxyProcedure,
 		svc.CreateDatastoreProxy,
@@ -2489,6 +2515,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceConnectHostedProjectHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceUpdateDatastoreProcedure:
 			clusterControlPlaneServiceUpdateDatastoreHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceDeleteDatastoreProcedure:
+			clusterControlPlaneServiceDeleteDatastoreHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceCreateDatastoreProxyProcedure:
 			clusterControlPlaneServiceCreateDatastoreProxyHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDatastoreCredentialProcedure:
@@ -2780,6 +2808,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) ConnectHostedProject(conte
 
 func (UnimplementedClusterControlPlaneServiceHandler) UpdateDatastore(context.Context, *connect.Request[v1.UpdateDatastoreRequest]) (*connect.Response[v1.UpdateDatastoreResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.UpdateDatastore is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) DeleteDatastore(context.Context, *connect.Request[v1.DeleteDatastoreRequest]) (*connect.Response[v1.DeleteDatastoreResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.DeleteDatastore is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) CreateDatastoreProxy(context.Context, *connect.Request[v1.CreateDatastoreProxyRequest]) (*connect.Response[v1.CreateDatastoreProxyResponse], error) {
