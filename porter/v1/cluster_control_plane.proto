@@ -667,8 +667,10 @@ message LatestAddonsRequest {
 }
 
 message LatestAddonsResponse {
-  // addons is the list of addons for the given deployment target
-  repeated Addon addons = 1;
+  // addons is the list of addons for the given deployment target. Deprecated; use AddonsWithEnv
+  repeated Addon addons = 1 [deprecated = true];
+  // addons is the list of addons for the given deployment target, with env variables from the latest default env group for that addon
+  repeated AddonWithEnvVars addons_with_env = 2;
 }
 
 message PredeployStatusRequest {

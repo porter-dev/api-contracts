@@ -3198,11 +3198,19 @@ export declare class LatestAddonsRequest extends Message<LatestAddonsRequest> {
  */
 export declare class LatestAddonsResponse extends Message<LatestAddonsResponse> {
   /**
-   * addons is the list of addons for the given deployment target
+   * addons is the list of addons for the given deployment target. Deprecated; use AddonsWithEnv
    *
-   * @generated from field: repeated porter.v1.Addon addons = 1;
+   * @generated from field: repeated porter.v1.Addon addons = 1 [deprecated = true];
+   * @deprecated
    */
   addons: Addon[];
+
+  /**
+   * addons is the list of addons for the given deployment target, with env variables from the latest default env group for that addon
+   *
+   * @generated from field: repeated porter.v1.AddonWithEnvVars addons_with_env = 2;
+   */
+  addonsWithEnv: AddonWithEnvVars[];
 
   constructor(data?: PartialMessage<LatestAddonsResponse>);
 
