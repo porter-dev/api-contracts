@@ -1987,6 +1987,29 @@ export const UpdateDatastoreResponse = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * LegacyUpdateDatastoreRequest is the legacy request object for updating a datastore
+ *
+ * @generated from message porter.v1.LegacyUpdateDatastoreRequest
+ */
+export const LegacyUpdateDatastoreRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.LegacyUpdateDatastoreRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "datastore_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * LegacyUpdateDatastoreResponse is the legacy response object for updating a datastore
+ *
+ * @generated from message porter.v1.LegacyUpdateDatastoreResponse
+ */
+export const LegacyUpdateDatastoreResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.LegacyUpdateDatastoreResponse",
+  [],
+);
+
+/**
  * CreateDatastoreProxyRequest is the request object for creating a datastore proxy
  *
  * @generated from message porter.v1.CreateDatastoreProxyRequest

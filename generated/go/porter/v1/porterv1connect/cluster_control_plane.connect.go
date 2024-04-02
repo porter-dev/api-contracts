@@ -208,6 +208,9 @@ const (
 	// ClusterControlPlaneServiceConnectHostedProjectProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's ConnectHostedProject RPC.
 	ClusterControlPlaneServiceConnectHostedProjectProcedure = "/porter.v1.ClusterControlPlaneService/ConnectHostedProject"
+	// ClusterControlPlaneServiceLegacyUpdateDatastoreProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's LegacyUpdateDatastore RPC.
+	ClusterControlPlaneServiceLegacyUpdateDatastoreProcedure = "/porter.v1.ClusterControlPlaneService/LegacyUpdateDatastore"
 	// ClusterControlPlaneServiceUpdateDatastoreProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's UpdateDatastore RPC.
 	ClusterControlPlaneServiceUpdateDatastoreProcedure = "/porter.v1.ClusterControlPlaneService/UpdateDatastore"
@@ -346,6 +349,7 @@ var (
 	clusterControlPlaneServiceCreateNotificationMethodDescriptor                  = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("CreateNotification")
 	clusterControlPlaneServiceUpdateServiceDeploymentStatusMethodDescriptor       = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateServiceDeploymentStatus")
 	clusterControlPlaneServiceConnectHostedProjectMethodDescriptor                = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ConnectHostedProject")
+	clusterControlPlaneServiceLegacyUpdateDatastoreMethodDescriptor               = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("LegacyUpdateDatastore")
 	clusterControlPlaneServiceUpdateDatastoreMethodDescriptor                     = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateDatastore")
 	clusterControlPlaneServiceCreateDatastoreProxyMethodDescriptor                = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("CreateDatastoreProxy")
 	clusterControlPlaneServiceDatastoreCredentialMethodDescriptor                 = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("DatastoreCredential")
@@ -513,6 +517,10 @@ type ClusterControlPlaneServiceClient interface {
 	UpdateServiceDeploymentStatus(context.Context, *connect.Request[v1.UpdateServiceDeploymentStatusRequest]) (*connect.Response[v1.UpdateServiceDeploymentStatusResponse], error)
 	// ConnectHostedProject connects a hosted project to a host cluster, returning the cluster id of the symbolic cluster associated with this project that is linked to the host cluster
 	ConnectHostedProject(context.Context, *connect.Request[v1.ConnectHostedProjectRequest]) (*connect.Response[v1.ConnectHostedProjectResponse], error)
+	// LegacyUpdateDatastore is the legacy method for updating a porter-managed datastore
+	//
+	// Deprecated: do not use.
+	LegacyUpdateDatastore(context.Context, *connect.Request[v1.LegacyUpdateDatastoreRequest]) (*connect.Response[v1.LegacyUpdateDatastoreResponse], error)
 	// UpdateDatastore updates a porter-managed datastore
 	UpdateDatastore(context.Context, *connect.Request[v1.UpdateDatastoreRequest]) (*connect.Response[v1.UpdateDatastoreResponse], error)
 	// CreateDatastoreProxy creates a proxy for connecting to a datastore
@@ -951,6 +959,12 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			connect.WithSchema(clusterControlPlaneServiceConnectHostedProjectMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		legacyUpdateDatastore: connect.NewClient[v1.LegacyUpdateDatastoreRequest, v1.LegacyUpdateDatastoreResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceLegacyUpdateDatastoreProcedure,
+			connect.WithSchema(clusterControlPlaneServiceLegacyUpdateDatastoreMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 		updateDatastore: connect.NewClient[v1.UpdateDatastoreRequest, v1.UpdateDatastoreResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceUpdateDatastoreProcedure,
@@ -1164,6 +1178,7 @@ type clusterControlPlaneServiceClient struct {
 	createNotification                  *connect.Client[v1.CreateNotificationRequest, v1.CreateNotificationResponse]
 	updateServiceDeploymentStatus       *connect.Client[v1.UpdateServiceDeploymentStatusRequest, v1.UpdateServiceDeploymentStatusResponse]
 	connectHostedProject                *connect.Client[v1.ConnectHostedProjectRequest, v1.ConnectHostedProjectResponse]
+	legacyUpdateDatastore               *connect.Client[v1.LegacyUpdateDatastoreRequest, v1.LegacyUpdateDatastoreResponse]
 	updateDatastore                     *connect.Client[v1.UpdateDatastoreRequest, v1.UpdateDatastoreResponse]
 	createDatastoreProxy                *connect.Client[v1.CreateDatastoreProxyRequest, v1.CreateDatastoreProxyResponse]
 	datastoreCredential                 *connect.Client[v1.DatastoreCredentialRequest, v1.DatastoreCredentialResponse]
@@ -1497,6 +1512,13 @@ func (c *clusterControlPlaneServiceClient) ConnectHostedProject(ctx context.Cont
 	return c.connectHostedProject.CallUnary(ctx, req)
 }
 
+// LegacyUpdateDatastore calls porter.v1.ClusterControlPlaneService.LegacyUpdateDatastore.
+//
+// Deprecated: do not use.
+func (c *clusterControlPlaneServiceClient) LegacyUpdateDatastore(ctx context.Context, req *connect.Request[v1.LegacyUpdateDatastoreRequest]) (*connect.Response[v1.LegacyUpdateDatastoreResponse], error) {
+	return c.legacyUpdateDatastore.CallUnary(ctx, req)
+}
+
 // UpdateDatastore calls porter.v1.ClusterControlPlaneService.UpdateDatastore.
 func (c *clusterControlPlaneServiceClient) UpdateDatastore(ctx context.Context, req *connect.Request[v1.UpdateDatastoreRequest]) (*connect.Response[v1.UpdateDatastoreResponse], error) {
 	return c.updateDatastore.CallUnary(ctx, req)
@@ -1785,6 +1807,10 @@ type ClusterControlPlaneServiceHandler interface {
 	UpdateServiceDeploymentStatus(context.Context, *connect.Request[v1.UpdateServiceDeploymentStatusRequest]) (*connect.Response[v1.UpdateServiceDeploymentStatusResponse], error)
 	// ConnectHostedProject connects a hosted project to a host cluster, returning the cluster id of the symbolic cluster associated with this project that is linked to the host cluster
 	ConnectHostedProject(context.Context, *connect.Request[v1.ConnectHostedProjectRequest]) (*connect.Response[v1.ConnectHostedProjectResponse], error)
+	// LegacyUpdateDatastore is the legacy method for updating a porter-managed datastore
+	//
+	// Deprecated: do not use.
+	LegacyUpdateDatastore(context.Context, *connect.Request[v1.LegacyUpdateDatastoreRequest]) (*connect.Response[v1.LegacyUpdateDatastoreResponse], error)
 	// UpdateDatastore updates a porter-managed datastore
 	UpdateDatastore(context.Context, *connect.Request[v1.UpdateDatastoreRequest]) (*connect.Response[v1.UpdateDatastoreResponse], error)
 	// CreateDatastoreProxy creates a proxy for connecting to a datastore
@@ -2219,6 +2245,12 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		connect.WithSchema(clusterControlPlaneServiceConnectHostedProjectMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	clusterControlPlaneServiceLegacyUpdateDatastoreHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceLegacyUpdateDatastoreProcedure,
+		svc.LegacyUpdateDatastore,
+		connect.WithSchema(clusterControlPlaneServiceLegacyUpdateDatastoreMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	clusterControlPlaneServiceUpdateDatastoreHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceUpdateDatastoreProcedure,
 		svc.UpdateDatastore,
@@ -2487,6 +2519,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceUpdateServiceDeploymentStatusHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceConnectHostedProjectProcedure:
 			clusterControlPlaneServiceConnectHostedProjectHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceLegacyUpdateDatastoreProcedure:
+			clusterControlPlaneServiceLegacyUpdateDatastoreHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceUpdateDatastoreProcedure:
 			clusterControlPlaneServiceUpdateDatastoreHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceCreateDatastoreProxyProcedure:
@@ -2776,6 +2810,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) UpdateServiceDeploymentSta
 
 func (UnimplementedClusterControlPlaneServiceHandler) ConnectHostedProject(context.Context, *connect.Request[v1.ConnectHostedProjectRequest]) (*connect.Response[v1.ConnectHostedProjectResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ConnectHostedProject is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) LegacyUpdateDatastore(context.Context, *connect.Request[v1.LegacyUpdateDatastoreRequest]) (*connect.Response[v1.LegacyUpdateDatastoreResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.LegacyUpdateDatastore is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) UpdateDatastore(context.Context, *connect.Request[v1.UpdateDatastoreRequest]) (*connect.Response[v1.UpdateDatastoreResponse], error) {

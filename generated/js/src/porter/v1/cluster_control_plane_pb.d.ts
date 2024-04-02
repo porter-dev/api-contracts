@@ -5815,6 +5815,62 @@ export declare class UpdateDatastoreResponse extends Message<UpdateDatastoreResp
 }
 
 /**
+ * LegacyUpdateDatastoreRequest is the legacy request object for updating a datastore
+ *
+ * @generated from message porter.v1.LegacyUpdateDatastoreRequest
+ */
+export declare class LegacyUpdateDatastoreRequest extends Message<LegacyUpdateDatastoreRequest> {
+  /**
+   * project_id is the project id that the datastore is provisioned in
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * datastore_id is the id of the datastore
+   *
+   * @generated from field: string datastore_id = 2;
+   */
+  datastoreId: string;
+
+  constructor(data?: PartialMessage<LegacyUpdateDatastoreRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.LegacyUpdateDatastoreRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LegacyUpdateDatastoreRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LegacyUpdateDatastoreRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LegacyUpdateDatastoreRequest;
+
+  static equals(a: LegacyUpdateDatastoreRequest | PlainMessage<LegacyUpdateDatastoreRequest> | undefined, b: LegacyUpdateDatastoreRequest | PlainMessage<LegacyUpdateDatastoreRequest> | undefined): boolean;
+}
+
+/**
+ * LegacyUpdateDatastoreResponse is the legacy response object for updating a datastore
+ *
+ * @generated from message porter.v1.LegacyUpdateDatastoreResponse
+ */
+export declare class LegacyUpdateDatastoreResponse extends Message<LegacyUpdateDatastoreResponse> {
+  constructor(data?: PartialMessage<LegacyUpdateDatastoreResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.LegacyUpdateDatastoreResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): LegacyUpdateDatastoreResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): LegacyUpdateDatastoreResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LegacyUpdateDatastoreResponse;
+
+  static equals(a: LegacyUpdateDatastoreResponse | PlainMessage<LegacyUpdateDatastoreResponse> | undefined, b: LegacyUpdateDatastoreResponse | PlainMessage<LegacyUpdateDatastoreResponse> | undefined): boolean;
+}
+
+/**
  * CreateDatastoreProxyRequest is the request object for creating a datastore proxy
  *
  * @generated from message porter.v1.CreateDatastoreProxyRequest

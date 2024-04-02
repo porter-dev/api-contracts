@@ -1293,6 +1293,17 @@ message UpdateDatastoreRequest {
 // UpdateDatastoreResponse is the response object for updating a datastore
 message UpdateDatastoreResponse {}
 
+// LegacyUpdateDatastoreRequest is the legacy request object for updating a datastore
+message LegacyUpdateDatastoreRequest {
+  // project_id is the project id that the datastore is provisioned in
+  int64 project_id = 1;
+  // datastore_id is the id of the datastore
+  string datastore_id = 2;
+}
+
+// LegacyUpdateDatastoreResponse is the legacy response object for updating a datastore
+message LegacyUpdateDatastoreResponse {}
+
 // CreateDatastoreProxyRequest is the request object for creating a datastore proxy
 message CreateDatastoreProxyRequest {
   // project_id is the project id that the datastore is provisioned in
@@ -1563,6 +1574,11 @@ service ClusterControlPlaneService {
 
   // ConnectHostedProject connects a hosted project to a host cluster, returning the cluster id of the symbolic cluster associated with this project that is linked to the host cluster
   rpc ConnectHostedProject(ConnectHostedProjectRequest) returns (ConnectHostedProjectResponse) {}
+
+  // LegacyUpdateDatastore is the legacy method for updating a porter-managed datastore
+  rpc LegacyUpdateDatastore(LegacyUpdateDatastoreRequest) returns (LegacyUpdateDatastoreResponse) {
+    option deprecated = true;
+  }
 
   // UpdateDatastore updates a porter-managed datastore
   rpc UpdateDatastore(UpdateDatastoreRequest) returns (UpdateDatastoreResponse) {}
