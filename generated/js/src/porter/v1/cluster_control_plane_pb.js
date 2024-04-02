@@ -1987,6 +1987,29 @@ export const UpdateDatastoreResponse = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * DeleteDatastoreRequest is the request object for deleting a datastore
+ *
+ * @generated from message porter.v1.DeleteDatastoreRequest
+ */
+export const DeleteDatastoreRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.DeleteDatastoreRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "datastore_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * DeleteDatastoreResponse is the response object for deleting a datastore
+ *
+ * @generated from message porter.v1.DeleteDatastoreResponse
+ */
+export const DeleteDatastoreResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.DeleteDatastoreResponse",
+  [],
+);
+
+/**
  * CreateDatastoreProxyRequest is the request object for creating a datastore proxy
  *
  * @generated from message porter.v1.CreateDatastoreProxyRequest

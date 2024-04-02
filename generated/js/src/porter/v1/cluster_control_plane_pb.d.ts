@@ -5815,6 +5815,62 @@ export declare class UpdateDatastoreResponse extends Message<UpdateDatastoreResp
 }
 
 /**
+ * DeleteDatastoreRequest is the request object for deleting a datastore
+ *
+ * @generated from message porter.v1.DeleteDatastoreRequest
+ */
+export declare class DeleteDatastoreRequest extends Message<DeleteDatastoreRequest> {
+  /**
+   * project_id is the project id that the datastore is provisioned in
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * datastore_id is the id of the datastore
+   *
+   * @generated from field: string datastore_id = 2;
+   */
+  datastoreId: string;
+
+  constructor(data?: PartialMessage<DeleteDatastoreRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeleteDatastoreRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteDatastoreRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteDatastoreRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteDatastoreRequest;
+
+  static equals(a: DeleteDatastoreRequest | PlainMessage<DeleteDatastoreRequest> | undefined, b: DeleteDatastoreRequest | PlainMessage<DeleteDatastoreRequest> | undefined): boolean;
+}
+
+/**
+ * DeleteDatastoreResponse is the response object for deleting a datastore
+ *
+ * @generated from message porter.v1.DeleteDatastoreResponse
+ */
+export declare class DeleteDatastoreResponse extends Message<DeleteDatastoreResponse> {
+  constructor(data?: PartialMessage<DeleteDatastoreResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeleteDatastoreResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteDatastoreResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteDatastoreResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteDatastoreResponse;
+
+  static equals(a: DeleteDatastoreResponse | PlainMessage<DeleteDatastoreResponse> | undefined, b: DeleteDatastoreResponse | PlainMessage<DeleteDatastoreResponse> | undefined): boolean;
+}
+
+/**
  * CreateDatastoreProxyRequest is the request object for creating a datastore proxy
  *
  * @generated from message porter.v1.CreateDatastoreProxyRequest

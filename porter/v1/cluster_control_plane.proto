@@ -1293,6 +1293,17 @@ message UpdateDatastoreRequest {
 // UpdateDatastoreResponse is the response object for updating a datastore
 message UpdateDatastoreResponse {}
 
+// DeleteDatastoreRequest is the request object for deleting a datastore
+message DeleteDatastoreRequest {
+  // project_id is the project id that the datastore is provisioned in
+  int64 project_id = 1;
+  // datastore_id is the id of the datastore
+  string datastore_id = 2;
+}
+
+// DeleteDatastoreResponse is the response object for deleting a datastore
+message DeleteDatastoreResponse {}
+
 // CreateDatastoreProxyRequest is the request object for creating a datastore proxy
 message CreateDatastoreProxyRequest {
   // project_id is the project id that the datastore is provisioned in
@@ -1566,6 +1577,9 @@ service ClusterControlPlaneService {
 
   // UpdateDatastore updates a porter-managed datastore
   rpc UpdateDatastore(UpdateDatastoreRequest) returns (UpdateDatastoreResponse) {}
+
+  // DeleteDatastore deletes a porter-managed datastore
+  rpc DeleteDatastore(DeleteDatastoreRequest) returns (DeleteDatastoreResponse) {}
 
   // CreateDatastoreProxy creates a proxy for connecting to a datastore
   rpc CreateDatastoreProxy(CreateDatastoreProxyRequest) returns (CreateDatastoreProxyResponse) {}
