@@ -45,6 +45,10 @@ message Postgres {
   int32 ram_megabytes = 2;
   // storage_gigabytes is the amount of storage to allocate to the database
   int32 storage_gigabytes = 3;
+  // master_username is the username of the database
+  optional string master_username = 4;
+  // master_user_password_literal is the string value of the password; this is only used for creating the datastore password secret and is wiped when the contract is saved
+  optional string master_user_password_literal = 5;
 }
 
 // Redis is the configuration for redis
@@ -55,4 +59,6 @@ message Redis {
   int32 ram_megabytes = 2;
   // storage_gigabytes is the amount of storage to allocate to redis
   int32 storage_gigabytes = 3;
+  // master_user_password_literal is the string value of the password; this is only used for creating the datastore password secret and is wiped when the contract is saved
+  optional string master_user_password_literal = 4;
 }

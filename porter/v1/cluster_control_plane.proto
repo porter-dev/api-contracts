@@ -1282,12 +1282,14 @@ message ConnectHostedProjectResponse {
   int64 cluster_id = 1;
 }
 
-// UpdateDatastoreRequest is the request object for updating a datastore
+// UpdateDatastoreRequest is the request object for creating or updating a datastore
 message UpdateDatastoreRequest {
   // project_id is the project id that the datastore is provisioned in
   int64 project_id = 1;
-  // datastore_id is the id of the datastore
-  string datastore_id = 2;
+  // datastore_id is the id of the datastore. Deprecated; use datastore instead
+  string datastore_id = 2 [deprecated = true];
+  // datastore is the datastore to create or update. If the datastore that is submitted does not have an ID, then a new datastore will be created; otherwise, the datastore matching the ID will be updated
+  ManagedDatastore datastore = 3;
 }
 
 // UpdateDatastoreResponse is the response object for updating a datastore

@@ -154,6 +154,20 @@ export declare class Postgres extends Message<Postgres> {
    */
   storageGigabytes: number;
 
+  /**
+   * master_username is the username of the database
+   *
+   * @generated from field: optional string master_username = 4;
+   */
+  masterUsername?: string;
+
+  /**
+   * master_user_password_literal is the string value of the password; this is only used for creating the datastore password secret and is wiped when the contract is saved
+   *
+   * @generated from field: optional string master_user_password_literal = 5;
+   */
+  masterUserPasswordLiteral?: string;
+
   constructor(data?: PartialMessage<Postgres>);
 
   static readonly runtime: typeof proto3;
@@ -195,6 +209,13 @@ export declare class Redis extends Message<Redis> {
    * @generated from field: int32 storage_gigabytes = 3;
    */
   storageGigabytes: number;
+
+  /**
+   * master_user_password_literal is the string value of the password; this is only used for creating the datastore password secret and is wiped when the contract is saved
+   *
+   * @generated from field: optional string master_user_password_literal = 4;
+   */
+  masterUserPasswordLiteral?: string;
 
   constructor(data?: PartialMessage<Redis>);
 
