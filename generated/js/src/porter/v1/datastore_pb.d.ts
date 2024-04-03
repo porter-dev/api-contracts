@@ -26,6 +26,18 @@ export declare enum EnumDatastoreKind {
    * @generated from enum value: ENUM_DATASTORE_KIND_AWS_ELASTICACHE = 2;
    */
   AWS_ELASTICACHE = 2,
+
+  /**
+   * the 'managed' types refer to addons
+   *
+   * @generated from enum value: ENUM_DATASTORE_KIND_MANAGED_POSTGRES = 3;
+   */
+  MANAGED_POSTGRES = 3,
+
+  /**
+   * @generated from enum value: ENUM_DATASTORE_KIND_MANAGED_REDIS = 4;
+   */
+  MANAGED_REDIS = 4,
 }
 
 /**
