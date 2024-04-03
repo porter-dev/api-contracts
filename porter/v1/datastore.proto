@@ -39,6 +39,10 @@ enum EnumDatastoreKind {
   ENUM_DATASTORE_KIND_UNSPECIFIED = 0;
   ENUM_DATASTORE_KIND_AWS_RDS = 1;
   ENUM_DATASTORE_KIND_AWS_ELASTICACHE = 2;
+  // ENUM_DATASTORE_KIND_MANAGED_POSTGRES refers to the postgres helm chart deployed on customer cluster
+  ENUM_DATASTORE_KIND_MANAGED_POSTGRES = 3;
+  // ENUM_DATASTORE_KIND_MANAGED_REDIS refers to the redis helm chart deployed on customer cluster
+  ENUM_DATASTORE_KIND_MANAGED_REDIS = 4;
 }
 
 message DatastorePasswordSecretRef {

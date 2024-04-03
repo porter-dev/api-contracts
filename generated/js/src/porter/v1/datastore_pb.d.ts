@@ -26,6 +26,20 @@ export declare enum EnumDatastoreKind {
    * @generated from enum value: ENUM_DATASTORE_KIND_AWS_ELASTICACHE = 2;
    */
   AWS_ELASTICACHE = 2,
+
+  /**
+   * ENUM_DATASTORE_KIND_MANAGED_POSTGRES refers to the postgres helm chart deployed on customer cluster
+   *
+   * @generated from enum value: ENUM_DATASTORE_KIND_MANAGED_POSTGRES = 3;
+   */
+  MANAGED_POSTGRES = 3,
+
+  /**
+   * ENUM_DATASTORE_KIND_MANAGED_REDIS refers to the redis helm chart deployed on customer cluster
+   *
+   * @generated from enum value: ENUM_DATASTORE_KIND_MANAGED_REDIS = 4;
+   */
+  MANAGED_REDIS = 4,
 }
 
 /**

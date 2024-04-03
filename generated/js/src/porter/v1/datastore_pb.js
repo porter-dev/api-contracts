@@ -16,6 +16,8 @@ export const EnumDatastoreKind = /*@__PURE__*/ proto3.makeEnum(
     {no: 0, name: "ENUM_DATASTORE_KIND_UNSPECIFIED", localName: "UNSPECIFIED"},
     {no: 1, name: "ENUM_DATASTORE_KIND_AWS_RDS", localName: "AWS_RDS"},
     {no: 2, name: "ENUM_DATASTORE_KIND_AWS_ELASTICACHE", localName: "AWS_ELASTICACHE"},
+    {no: 3, name: "ENUM_DATASTORE_KIND_MANAGED_POSTGRES", localName: "MANAGED_POSTGRES"},
+    {no: 4, name: "ENUM_DATASTORE_KIND_MANAGED_REDIS", localName: "MANAGED_REDIS"},
   ],
 );
 
