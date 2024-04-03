@@ -5759,7 +5759,7 @@ export declare class ConnectHostedProjectResponse extends Message<ConnectHostedP
 }
 
 /**
- * UpdateDatastoreRequest is the request object for updating a datastore
+ * UpdateDatastoreRequest is the request object for creating or updating a datastore
  *
  * @generated from message porter.v1.UpdateDatastoreRequest
  */
@@ -5772,11 +5772,19 @@ export declare class UpdateDatastoreRequest extends Message<UpdateDatastoreReque
   projectId: bigint;
 
   /**
-   * datastore_id is the id of the datastore
+   * datastore_id is the id of the datastore. Deprecated; use datastore instead
    *
-   * @generated from field: string datastore_id = 2;
+   * @generated from field: string datastore_id = 2 [deprecated = true];
+   * @deprecated
    */
   datastoreId: string;
+
+  /**
+   * datastore is the datastore to create or update. If the datastore that is submitted does not have an ID, then a new datastore will be created; otherwise, the datastore matching the ID will be updated
+   *
+   * @generated from field: porter.v1.ManagedDatastore datastore = 3;
+   */
+  datastore?: ManagedDatastore;
 
   constructor(data?: PartialMessage<UpdateDatastoreRequest>);
 

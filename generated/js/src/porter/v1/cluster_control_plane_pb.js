@@ -1964,7 +1964,7 @@ export const ConnectHostedProjectResponse = /*@__PURE__*/ proto3.makeMessageType
 );
 
 /**
- * UpdateDatastoreRequest is the request object for updating a datastore
+ * UpdateDatastoreRequest is the request object for creating or updating a datastore
  *
  * @generated from message porter.v1.UpdateDatastoreRequest
  */
@@ -1973,6 +1973,7 @@ export const UpdateDatastoreRequest = /*@__PURE__*/ proto3.makeMessageType(
   () => [
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 2, name: "datastore_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "datastore", kind: "message", T: ManagedDatastore },
   ],
 );
 

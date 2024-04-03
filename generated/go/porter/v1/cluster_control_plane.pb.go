@@ -9759,7 +9759,7 @@ func (x *ConnectHostedProjectResponse) GetClusterId() int64 {
 	return 0
 }
 
-// UpdateDatastoreRequest is the request object for updating a datastore
+// UpdateDatastoreRequest is the request object for creating or updating a datastore
 type UpdateDatastoreRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -9767,8 +9767,12 @@ type UpdateDatastoreRequest struct {
 
 	// project_id is the project id that the datastore is provisioned in
 	ProjectId int64 `protobuf:"varint,1,opt,name=project_id,json=projectId,proto3" json:"project_id,omitempty"`
-	// datastore_id is the id of the datastore
+	// datastore_id is the id of the datastore. Deprecated; use datastore instead
+	//
+	// Deprecated: Marked as deprecated in porter/v1/cluster_control_plane.proto.
 	DatastoreId string `protobuf:"bytes,2,opt,name=datastore_id,json=datastoreId,proto3" json:"datastore_id,omitempty"`
+	// datastore is the datastore to create or update. If the datastore that is submitted does not have an ID, then a new datastore will be created; otherwise, the datastore matching the ID will be updated
+	Datastore *ManagedDatastore `protobuf:"bytes,3,opt,name=datastore,proto3" json:"datastore,omitempty"`
 }
 
 func (x *UpdateDatastoreRequest) Reset() {
@@ -9810,11 +9814,19 @@ func (x *UpdateDatastoreRequest) GetProjectId() int64 {
 	return 0
 }
 
+// Deprecated: Marked as deprecated in porter/v1/cluster_control_plane.proto.
 func (x *UpdateDatastoreRequest) GetDatastoreId() string {
 	if x != nil {
 		return x.DatastoreId
 	}
 	return ""
+}
+
+func (x *UpdateDatastoreRequest) GetDatastore() *ManagedDatastore {
+	if x != nil {
+		return x.Datastore
+	}
+	return nil
 }
 
 // UpdateDatastoreResponse is the response object for updating a datastore
@@ -13420,13 +13432,17 @@ var file_porter_v1_cluster_control_plane_proto_rawDesc = []byte{
 	0x63, 0x74, 0x48, 0x6f, 0x73, 0x74, 0x65, 0x64, 0x50, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x52,
 	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x1d, 0x0a, 0x0a, 0x63, 0x6c, 0x75, 0x73, 0x74,
 	0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x63, 0x6c, 0x75,
-	0x73, 0x74, 0x65, 0x72, 0x49, 0x64, 0x22, 0x5a, 0x0a, 0x16, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65,
-	0x44, 0x61, 0x74, 0x61, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x5f, 0x69, 0x64, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x64, 0x12,
-	0x21, 0x0a, 0x0c, 0x64, 0x61, 0x74, 0x61, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x5f, 0x69, 0x64, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x61, 0x74, 0x61, 0x73, 0x74, 0x6f, 0x72, 0x65,
-	0x49, 0x64, 0x22, 0x19, 0x0a, 0x17, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x44, 0x61, 0x74, 0x61,
+	0x73, 0x74, 0x65, 0x72, 0x49, 0x64, 0x22, 0x99, 0x01, 0x0a, 0x16, 0x55, 0x70, 0x64, 0x61, 0x74,
+	0x65, 0x44, 0x61, 0x74, 0x61, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x5f, 0x69, 0x64, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x09, 0x70, 0x72, 0x6f, 0x6a, 0x65, 0x63, 0x74, 0x49, 0x64,
+	0x12, 0x25, 0x0a, 0x0c, 0x64, 0x61, 0x74, 0x61, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x5f, 0x69, 0x64,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x42, 0x02, 0x18, 0x01, 0x52, 0x0b, 0x64, 0x61, 0x74, 0x61,
+	0x73, 0x74, 0x6f, 0x72, 0x65, 0x49, 0x64, 0x12, 0x39, 0x0a, 0x09, 0x64, 0x61, 0x74, 0x61, 0x73,
+	0x74, 0x6f, 0x72, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x70, 0x6f, 0x72,
+	0x74, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x4d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x64, 0x44, 0x61,
+	0x74, 0x61, 0x73, 0x74, 0x6f, 0x72, 0x65, 0x52, 0x09, 0x64, 0x61, 0x74, 0x61, 0x73, 0x74, 0x6f,
+	0x72, 0x65, 0x22, 0x19, 0x0a, 0x17, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x44, 0x61, 0x74, 0x61,
 	0x73, 0x74, 0x6f, 0x72, 0x65, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x5a, 0x0a,
 	0x16, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x44, 0x61, 0x74, 0x61, 0x73, 0x74, 0x6f, 0x72, 0x65,
 	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1d, 0x0a, 0x0a, 0x70, 0x72, 0x6f, 0x6a, 0x65,
@@ -14584,8 +14600,8 @@ var file_porter_v1_cluster_control_plane_proto_goTypes = []interface{}{
 	(EnumEnvGroupProviderType)(0),                       // 213: porter.v1.EnumEnvGroupProviderType
 	(*EnvVariableDeletions)(nil),                        // 214: porter.v1.EnvVariableDeletions
 	(*NotificationConfig)(nil),                          // 215: porter.v1.NotificationConfig
-	(*DatastoreCredential)(nil),                         // 216: porter.v1.DatastoreCredential
-	(*ManagedDatastore)(nil),                            // 217: porter.v1.ManagedDatastore
+	(*ManagedDatastore)(nil),                            // 216: porter.v1.ManagedDatastore
+	(*DatastoreCredential)(nil),                         // 217: porter.v1.DatastoreCredential
 	(*CloudContract)(nil),                               // 218: porter.v1.CloudContract
 	(*AssumeRoleChainLink)(nil),                         // 219: porter.v1.AssumeRoleChainLink
 	(*AWSVpc)(nil),                                      // 220: porter.v1.AWSVpc
@@ -14716,200 +14732,201 @@ var file_porter_v1_cluster_control_plane_proto_depIdxs = []int32{
 	209, // 118: porter.v1.ListEnvGroupsResponse.env_groups:type_name -> porter.v1.EnvGroup
 	215, // 119: porter.v1.UpdateNotificationConfigRequest.config:type_name -> porter.v1.NotificationConfig
 	215, // 120: porter.v1.NotificationConfigResponse.config:type_name -> porter.v1.NotificationConfig
-	216, // 121: porter.v1.CreateDatastoreProxyResponse.credential:type_name -> porter.v1.DatastoreCredential
-	216, // 122: porter.v1.DatastoreCredentialResponse.credential:type_name -> porter.v1.DatastoreCredential
-	6,   // 123: porter.v1.PatchCloudContractRequest.operation:type_name -> porter.v1.EnumPatchCloudContractOperation
-	7,   // 124: porter.v1.PatchCloudContractRequest.resource_type:type_name -> porter.v1.EnumPatchCloudContractType
-	217, // 125: porter.v1.PatchCloudContractRequest.datastore:type_name -> porter.v1.ManagedDatastore
-	218, // 126: porter.v1.PatchCloudContractResponse.cloud_contract:type_name -> porter.v1.CloudContract
-	218, // 127: porter.v1.ReadCloudContractResponse.cloud_contract:type_name -> porter.v1.CloudContract
-	219, // 128: porter.v1.AssumeRoleChainTargetsResponse.chain_links:type_name -> porter.v1.AssumeRoleChainLink
-	195, // 129: porter.v1.ECRTokenForRegistryResponse.expiry:type_name -> google.protobuf.Timestamp
-	189, // 130: porter.v1.ClusterNetworkSettingsResponse.cloud_provider:type_name -> porter.v1.EnumCloudProvider
-	220, // 131: porter.v1.ClusterNetworkSettingsResponse.eks_cloud_provider_network:type_name -> porter.v1.AWSVpc
-	189, // 132: porter.v1.ListDatastoresRequest.cloud_provider:type_name -> porter.v1.EnumCloudProvider
-	8,   // 133: porter.v1.ListDatastoresRequest.type:type_name -> porter.v1.EnumDatastore
-	181, // 134: porter.v1.ListDatastoresResponse.datastores:type_name -> porter.v1.Datastore
-	8,   // 135: porter.v1.DatastoreStatusRequest.type:type_name -> porter.v1.EnumDatastore
-	8,   // 136: porter.v1.Datastore.type:type_name -> porter.v1.EnumDatastore
-	182, // 137: porter.v1.Datastore.metadata:type_name -> porter.v1.DatastoreMetadata
-	209, // 138: porter.v1.Datastore.env:type_name -> porter.v1.EnvGroup
-	189, // 139: porter.v1.SharedNetworkSettingsResponse.cloud_provider:type_name -> porter.v1.EnumCloudProvider
-	220, // 140: porter.v1.SharedNetworkSettingsResponse.eks_cloud_provider_network:type_name -> porter.v1.AWSVpc
-	192, // 141: porter.v1.PreflightCheckResponse.PreflightChecksEntry.value:type_name -> porter.v1.Error
-	9,   // 142: porter.v1.ClusterControlPlaneService.QuotaIncrease:input_type -> porter.v1.QuotaIncreaseRequest
-	221, // 143: porter.v1.ClusterControlPlaneService.UpdateCloudProviderCredentials:input_type -> porter.v1.UpdateCloudProviderCredentialsRequest
-	16,  // 144: porter.v1.ClusterControlPlaneService.QuotaPreflightCheck:input_type -> porter.v1.QuotaPreflightCheckRequest
-	11,  // 145: porter.v1.ClusterControlPlaneService.PreflightCheck:input_type -> porter.v1.PreflightCheckRequest
-	13,  // 146: porter.v1.ClusterControlPlaneService.CloudContractPreflightCheck:input_type -> porter.v1.CloudContractPreflightCheckRequest
-	18,  // 147: porter.v1.ClusterControlPlaneService.CreateAssumeRoleChain:input_type -> porter.v1.CreateAssumeRoleChainRequest
-	20,  // 148: porter.v1.ClusterControlPlaneService.SaveAzureCredentials:input_type -> porter.v1.SaveAzureCredentialsRequest
-	22,  // 149: porter.v1.ClusterControlPlaneService.KubeConfigForCluster:input_type -> porter.v1.KubeConfigForClusterRequest
-	24,  // 150: porter.v1.ClusterControlPlaneService.UpdateContract:input_type -> porter.v1.UpdateContractRequest
-	40,  // 151: porter.v1.ClusterControlPlaneService.ReadContract:input_type -> porter.v1.ReadContractRequest
-	26,  // 152: porter.v1.ClusterControlPlaneService.ClusterStatus:input_type -> porter.v1.ClusterStatusRequest
-	28,  // 153: porter.v1.ClusterControlPlaneService.DeleteCluster:input_type -> porter.v1.DeleteClusterRequest
-	38,  // 154: porter.v1.ClusterControlPlaneService.TokenForRegistry:input_type -> porter.v1.TokenForRegistryRequest
-	42,  // 155: porter.v1.ClusterControlPlaneService.ContractComplianceChecks:input_type -> porter.v1.ContractComplianceChecksRequest
-	44,  // 156: porter.v1.ClusterControlPlaneService.ValidatePorterApp:input_type -> porter.v1.ValidatePorterAppRequest
-	46,  // 157: porter.v1.ClusterControlPlaneService.ApplyPorterApp:input_type -> porter.v1.ApplyPorterAppRequest
-	48,  // 158: porter.v1.ClusterControlPlaneService.UpdateApp:input_type -> porter.v1.UpdateAppRequest
-	50,  // 159: porter.v1.ClusterControlPlaneService.UpdateAddon:input_type -> porter.v1.UpdateAddonRequest
-	54,  // 160: porter.v1.ClusterControlPlaneService.RollbackRevision:input_type -> porter.v1.RollbackRevisionRequest
-	52,  // 161: porter.v1.ClusterControlPlaneService.UpdateRevisionStatus:input_type -> porter.v1.UpdateRevisionStatusRequest
-	64,  // 162: porter.v1.ClusterControlPlaneService.AppRevisionStatus:input_type -> porter.v1.AppRevisionStatusRequest
-	56,  // 163: porter.v1.ClusterControlPlaneService.DeletePorterApp:input_type -> porter.v1.DeletePorterAppRequest
-	58,  // 164: porter.v1.ClusterControlPlaneService.DeleteAppDeployment:input_type -> porter.v1.DeleteAppDeploymentRequest
-	60,  // 165: porter.v1.ClusterControlPlaneService.DeleteDeploymentTarget:input_type -> porter.v1.DeleteDeploymentTargetRequest
-	62,  // 166: porter.v1.ClusterControlPlaneService.CurrentAppRevision:input_type -> porter.v1.CurrentAppRevisionRequest
-	70,  // 167: porter.v1.ClusterControlPlaneService.ListAppRevisions:input_type -> porter.v1.ListAppRevisionsRequest
-	72,  // 168: porter.v1.ClusterControlPlaneService.LatestAppRevisions:input_type -> porter.v1.LatestAppRevisionsRequest
-	74,  // 169: porter.v1.ClusterControlPlaneService.GetAppRevision:input_type -> porter.v1.GetAppRevisionRequest
-	76,  // 170: porter.v1.ClusterControlPlaneService.AppTemplate:input_type -> porter.v1.AppTemplateRequest
-	80,  // 171: porter.v1.ClusterControlPlaneService.UpdateAppTemplate:input_type -> porter.v1.UpdateAppTemplateRequest
-	82,  // 172: porter.v1.ClusterControlPlaneService.LatestAddons:input_type -> porter.v1.LatestAddonsRequest
-	84,  // 173: porter.v1.ClusterControlPlaneService.PredeployStatus:input_type -> porter.v1.PredeployStatusRequest
-	86,  // 174: porter.v1.ClusterControlPlaneService.DeploymentTargetDetails:input_type -> porter.v1.DeploymentTargetDetailsRequest
-	88,  // 175: porter.v1.ClusterControlPlaneService.CreateDeploymentTarget:input_type -> porter.v1.CreateDeploymentTargetRequest
-	90,  // 176: porter.v1.ClusterControlPlaneService.DeploymentTargets:input_type -> porter.v1.DeploymentTargetsRequest
-	92,  // 177: porter.v1.ClusterControlPlaneService.DefaultDeploymentTarget:input_type -> porter.v1.DefaultDeploymentTargetRequest
-	94,  // 178: porter.v1.ClusterControlPlaneService.SeedAppRevisions:input_type -> porter.v1.SeedAppRevisionsRequest
-	96,  // 179: porter.v1.ClusterControlPlaneService.EnvGroupVariables:input_type -> porter.v1.EnvGroupVariablesRequest
-	98,  // 180: porter.v1.ClusterControlPlaneService.LatestEnvGroupWithVariables:input_type -> porter.v1.LatestEnvGroupWithVariablesRequest
-	100, // 181: porter.v1.ClusterControlPlaneService.AppEnvVariables:input_type -> porter.v1.AppEnvVariablesRequest
-	102, // 182: porter.v1.ClusterControlPlaneService.UpdateAppImage:input_type -> porter.v1.UpdateAppImageRequest
-	104, // 183: porter.v1.ClusterControlPlaneService.UpdateAppBuildSettings:input_type -> porter.v1.UpdateAppBuildSettingsRequest
-	106, // 184: porter.v1.ClusterControlPlaneService.UpdateAppsLinkedToEnvGroup:input_type -> porter.v1.UpdateAppsLinkedToEnvGroupRequest
-	108, // 185: porter.v1.ClusterControlPlaneService.AppHelmValues:input_type -> porter.v1.AppHelmValuesRequest
-	110, // 186: porter.v1.ClusterControlPlaneService.ManualServiceRun:input_type -> porter.v1.ManualServiceRunRequest
-	111, // 187: porter.v1.ClusterControlPlaneService.CancelJobRun:input_type -> porter.v1.CancelJobRunRequest
-	114, // 188: porter.v1.ClusterControlPlaneService.JobRunStatus:input_type -> porter.v1.JobRunStatusRequest
-	116, // 189: porter.v1.ClusterControlPlaneService.JobRuns:input_type -> porter.v1.JobRunsRequest
-	175, // 190: porter.v1.ClusterControlPlaneService.ClusterNetworkSettings:input_type -> porter.v1.ClusterNetworkSettingsRequest
-	185, // 191: porter.v1.ClusterControlPlaneService.SharedNetworkSettings:input_type -> porter.v1.SharedNetworkSettingsRequest
-	118, // 192: porter.v1.ClusterControlPlaneService.Images:input_type -> porter.v1.ImagesRequest
-	120, // 193: porter.v1.ClusterControlPlaneService.CreateAppInstance:input_type -> porter.v1.CreateAppInstanceRequest
-	122, // 194: porter.v1.ClusterControlPlaneService.DeleteAppInstance:input_type -> porter.v1.DeleteAppInstanceRequest
-	124, // 195: porter.v1.ClusterControlPlaneService.ListAppInstances:input_type -> porter.v1.ListAppInstancesRequest
-	126, // 196: porter.v1.ClusterControlPlaneService.TemplateAppManifests:input_type -> porter.v1.TemplateAppManifestsRequest
-	129, // 197: porter.v1.ClusterControlPlaneService.CreateNotification:input_type -> porter.v1.CreateNotificationRequest
-	131, // 198: porter.v1.ClusterControlPlaneService.UpdateServiceDeploymentStatus:input_type -> porter.v1.UpdateServiceDeploymentStatusRequest
-	149, // 199: porter.v1.ClusterControlPlaneService.ConnectHostedProject:input_type -> porter.v1.ConnectHostedProjectRequest
-	151, // 200: porter.v1.ClusterControlPlaneService.UpdateDatastore:input_type -> porter.v1.UpdateDatastoreRequest
-	153, // 201: porter.v1.ClusterControlPlaneService.DeleteDatastore:input_type -> porter.v1.DeleteDatastoreRequest
-	155, // 202: porter.v1.ClusterControlPlaneService.CreateDatastoreProxy:input_type -> porter.v1.CreateDatastoreProxyRequest
-	157, // 203: porter.v1.ClusterControlPlaneService.DatastoreCredential:input_type -> porter.v1.DatastoreCredentialRequest
-	222, // 204: porter.v1.ClusterControlPlaneService.CloudProviderPermissionsStatus:input_type -> porter.v1.CloudProviderPermissionsStatusRequest
-	159, // 205: porter.v1.ClusterControlPlaneService.PatchCloudContract:input_type -> porter.v1.PatchCloudContractRequest
-	161, // 206: porter.v1.ClusterControlPlaneService.ReadCloudContract:input_type -> porter.v1.ReadCloudContractRequest
-	173, // 207: porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry:input_type -> porter.v1.DockerConfigFileForRegistryRequest
-	169, // 208: porter.v1.ClusterControlPlaneService.ECRTokenForRegistry:input_type -> porter.v1.ECRTokenForRegistryRequest
-	171, // 209: porter.v1.ClusterControlPlaneService.AssumeRoleCredentials:input_type -> porter.v1.AssumeRoleCredentialsRequest
-	167, // 210: porter.v1.ClusterControlPlaneService.AssumeRoleChainTargets:input_type -> porter.v1.AssumeRoleChainTargetsRequest
-	165, // 211: porter.v1.ClusterControlPlaneService.CertificateAuthorityData:input_type -> porter.v1.CertificateAuthorityDataRequest
-	163, // 212: porter.v1.ClusterControlPlaneService.EKSBearerToken:input_type -> porter.v1.EKSBearerTokenRequest
-	30,  // 213: porter.v1.ClusterControlPlaneService.ListRepositoriesForRegistry:input_type -> porter.v1.ListRepositoriesForRegistryRequest
-	33,  // 214: porter.v1.ClusterControlPlaneService.ListImagesForRepository:input_type -> porter.v1.ListImagesForRepositoryRequest
-	177, // 215: porter.v1.ClusterControlPlaneService.ListDatastores:input_type -> porter.v1.ListDatastoresRequest
-	179, // 216: porter.v1.ClusterControlPlaneService.DatastoreStatus:input_type -> porter.v1.DatastoreStatusRequest
-	183, // 217: porter.v1.ClusterControlPlaneService.RegistryStatus:input_type -> porter.v1.RegistryStatusRequest
-	135, // 218: porter.v1.ClusterControlPlaneService.EnableExternalEnvGroupProviders:input_type -> porter.v1.EnableExternalEnvGroupProvidersRequest
-	133, // 219: porter.v1.ClusterControlPlaneService.AreExternalEnvGroupProvidersEnabled:input_type -> porter.v1.AreExternalEnvGroupProvidersEnabledRequest
-	137, // 220: porter.v1.ClusterControlPlaneService.CreateOrUpdateEnvGroup:input_type -> porter.v1.CreateOrUpdateEnvGroupRequest
-	139, // 221: porter.v1.ClusterControlPlaneService.DeleteEnvGroup:input_type -> porter.v1.DeleteEnvGroupRequest
-	141, // 222: porter.v1.ClusterControlPlaneService.AppsLinkedToEnvGroup:input_type -> porter.v1.AppsLinkedToEnvGroupRequest
-	143, // 223: porter.v1.ClusterControlPlaneService.ListEnvGroups:input_type -> porter.v1.ListEnvGroupsRequest
-	145, // 224: porter.v1.ClusterControlPlaneService.UpdateNotificationConfig:input_type -> porter.v1.UpdateNotificationConfigRequest
-	147, // 225: porter.v1.ClusterControlPlaneService.NotificationConfig:input_type -> porter.v1.NotificationConfigRequest
-	10,  // 226: porter.v1.ClusterControlPlaneService.QuotaIncrease:output_type -> porter.v1.QuotaIncreaseResponse
-	223, // 227: porter.v1.ClusterControlPlaneService.UpdateCloudProviderCredentials:output_type -> porter.v1.UpdateCloudProviderCredentialsResponse
-	17,  // 228: porter.v1.ClusterControlPlaneService.QuotaPreflightCheck:output_type -> porter.v1.QuotaPreflightCheckResponse
-	12,  // 229: porter.v1.ClusterControlPlaneService.PreflightCheck:output_type -> porter.v1.PreflightCheckResponse
-	14,  // 230: porter.v1.ClusterControlPlaneService.CloudContractPreflightCheck:output_type -> porter.v1.CloudContractPreflightCheckResponse
-	19,  // 231: porter.v1.ClusterControlPlaneService.CreateAssumeRoleChain:output_type -> porter.v1.CreateAssumeRoleChainResponse
-	21,  // 232: porter.v1.ClusterControlPlaneService.SaveAzureCredentials:output_type -> porter.v1.SaveAzureCredentialsResponse
-	23,  // 233: porter.v1.ClusterControlPlaneService.KubeConfigForCluster:output_type -> porter.v1.KubeConfigForClusterResponse
-	25,  // 234: porter.v1.ClusterControlPlaneService.UpdateContract:output_type -> porter.v1.UpdateContractResponse
-	41,  // 235: porter.v1.ClusterControlPlaneService.ReadContract:output_type -> porter.v1.ReadContractResponse
-	27,  // 236: porter.v1.ClusterControlPlaneService.ClusterStatus:output_type -> porter.v1.ClusterStatusResponse
-	29,  // 237: porter.v1.ClusterControlPlaneService.DeleteCluster:output_type -> porter.v1.DeleteClusterResponse
-	39,  // 238: porter.v1.ClusterControlPlaneService.TokenForRegistry:output_type -> porter.v1.TokenForRegistryResponse
-	43,  // 239: porter.v1.ClusterControlPlaneService.ContractComplianceChecks:output_type -> porter.v1.ContractComplianceChecksResponse
-	45,  // 240: porter.v1.ClusterControlPlaneService.ValidatePorterApp:output_type -> porter.v1.ValidatePorterAppResponse
-	47,  // 241: porter.v1.ClusterControlPlaneService.ApplyPorterApp:output_type -> porter.v1.ApplyPorterAppResponse
-	49,  // 242: porter.v1.ClusterControlPlaneService.UpdateApp:output_type -> porter.v1.UpdateAppResponse
-	51,  // 243: porter.v1.ClusterControlPlaneService.UpdateAddon:output_type -> porter.v1.UpdateAddonResponse
-	55,  // 244: porter.v1.ClusterControlPlaneService.RollbackRevision:output_type -> porter.v1.RollbackRevisionResponse
-	53,  // 245: porter.v1.ClusterControlPlaneService.UpdateRevisionStatus:output_type -> porter.v1.UpdateRevisionStatusResponse
-	65,  // 246: porter.v1.ClusterControlPlaneService.AppRevisionStatus:output_type -> porter.v1.AppRevisionStatusResponse
-	57,  // 247: porter.v1.ClusterControlPlaneService.DeletePorterApp:output_type -> porter.v1.DeletePorterAppResponse
-	59,  // 248: porter.v1.ClusterControlPlaneService.DeleteAppDeployment:output_type -> porter.v1.DeleteAppDeploymentResponse
-	61,  // 249: porter.v1.ClusterControlPlaneService.DeleteDeploymentTarget:output_type -> porter.v1.DeleteDeploymentTargetResponse
-	69,  // 250: porter.v1.ClusterControlPlaneService.CurrentAppRevision:output_type -> porter.v1.CurrentAppRevisionResponse
-	71,  // 251: porter.v1.ClusterControlPlaneService.ListAppRevisions:output_type -> porter.v1.ListAppRevisionsResponse
-	73,  // 252: porter.v1.ClusterControlPlaneService.LatestAppRevisions:output_type -> porter.v1.LatestAppRevisionsResponse
-	75,  // 253: porter.v1.ClusterControlPlaneService.GetAppRevision:output_type -> porter.v1.GetAppRevisionResponse
-	77,  // 254: porter.v1.ClusterControlPlaneService.AppTemplate:output_type -> porter.v1.AppTemplateResponse
-	81,  // 255: porter.v1.ClusterControlPlaneService.UpdateAppTemplate:output_type -> porter.v1.UpdateAppTemplateResponse
-	83,  // 256: porter.v1.ClusterControlPlaneService.LatestAddons:output_type -> porter.v1.LatestAddonsResponse
-	85,  // 257: porter.v1.ClusterControlPlaneService.PredeployStatus:output_type -> porter.v1.PredeployStatusResponse
-	87,  // 258: porter.v1.ClusterControlPlaneService.DeploymentTargetDetails:output_type -> porter.v1.DeploymentTargetDetailsResponse
-	89,  // 259: porter.v1.ClusterControlPlaneService.CreateDeploymentTarget:output_type -> porter.v1.CreateDeploymentTargetResponse
-	91,  // 260: porter.v1.ClusterControlPlaneService.DeploymentTargets:output_type -> porter.v1.DeploymentTargetsResponse
-	93,  // 261: porter.v1.ClusterControlPlaneService.DefaultDeploymentTarget:output_type -> porter.v1.DefaultDeploymentTargetResponse
-	95,  // 262: porter.v1.ClusterControlPlaneService.SeedAppRevisions:output_type -> porter.v1.SeedAppRevisionsResponse
-	97,  // 263: porter.v1.ClusterControlPlaneService.EnvGroupVariables:output_type -> porter.v1.EnvGroupVariablesResponse
-	99,  // 264: porter.v1.ClusterControlPlaneService.LatestEnvGroupWithVariables:output_type -> porter.v1.LatestEnvGroupWithVariablesResponse
-	101, // 265: porter.v1.ClusterControlPlaneService.AppEnvVariables:output_type -> porter.v1.AppEnvVariablesResponse
-	103, // 266: porter.v1.ClusterControlPlaneService.UpdateAppImage:output_type -> porter.v1.UpdateAppImageResponse
-	105, // 267: porter.v1.ClusterControlPlaneService.UpdateAppBuildSettings:output_type -> porter.v1.UpdateAppBuildSettingsResponse
-	107, // 268: porter.v1.ClusterControlPlaneService.UpdateAppsLinkedToEnvGroup:output_type -> porter.v1.UpdateAppsLinkedToEnvGroupResponse
-	109, // 269: porter.v1.ClusterControlPlaneService.AppHelmValues:output_type -> porter.v1.AppHelmValuesResponse
-	113, // 270: porter.v1.ClusterControlPlaneService.ManualServiceRun:output_type -> porter.v1.ManualServiceRunResponse
-	112, // 271: porter.v1.ClusterControlPlaneService.CancelJobRun:output_type -> porter.v1.CancelJobRunResponse
-	115, // 272: porter.v1.ClusterControlPlaneService.JobRunStatus:output_type -> porter.v1.JobRunStatusResponse
-	117, // 273: porter.v1.ClusterControlPlaneService.JobRuns:output_type -> porter.v1.JobRunsResponse
-	176, // 274: porter.v1.ClusterControlPlaneService.ClusterNetworkSettings:output_type -> porter.v1.ClusterNetworkSettingsResponse
-	186, // 275: porter.v1.ClusterControlPlaneService.SharedNetworkSettings:output_type -> porter.v1.SharedNetworkSettingsResponse
-	119, // 276: porter.v1.ClusterControlPlaneService.Images:output_type -> porter.v1.ImagesResponse
-	121, // 277: porter.v1.ClusterControlPlaneService.CreateAppInstance:output_type -> porter.v1.CreateAppInstanceResponse
-	123, // 278: porter.v1.ClusterControlPlaneService.DeleteAppInstance:output_type -> porter.v1.DeleteAppInstanceResponse
-	125, // 279: porter.v1.ClusterControlPlaneService.ListAppInstances:output_type -> porter.v1.ListAppInstancesResponse
-	127, // 280: porter.v1.ClusterControlPlaneService.TemplateAppManifests:output_type -> porter.v1.TemplateAppManifestsResponse
-	130, // 281: porter.v1.ClusterControlPlaneService.CreateNotification:output_type -> porter.v1.CreateNotificationResponse
-	132, // 282: porter.v1.ClusterControlPlaneService.UpdateServiceDeploymentStatus:output_type -> porter.v1.UpdateServiceDeploymentStatusResponse
-	150, // 283: porter.v1.ClusterControlPlaneService.ConnectHostedProject:output_type -> porter.v1.ConnectHostedProjectResponse
-	152, // 284: porter.v1.ClusterControlPlaneService.UpdateDatastore:output_type -> porter.v1.UpdateDatastoreResponse
-	154, // 285: porter.v1.ClusterControlPlaneService.DeleteDatastore:output_type -> porter.v1.DeleteDatastoreResponse
-	156, // 286: porter.v1.ClusterControlPlaneService.CreateDatastoreProxy:output_type -> porter.v1.CreateDatastoreProxyResponse
-	158, // 287: porter.v1.ClusterControlPlaneService.DatastoreCredential:output_type -> porter.v1.DatastoreCredentialResponse
-	224, // 288: porter.v1.ClusterControlPlaneService.CloudProviderPermissionsStatus:output_type -> porter.v1.CloudProviderPermissionsStatusResponse
-	160, // 289: porter.v1.ClusterControlPlaneService.PatchCloudContract:output_type -> porter.v1.PatchCloudContractResponse
-	162, // 290: porter.v1.ClusterControlPlaneService.ReadCloudContract:output_type -> porter.v1.ReadCloudContractResponse
-	174, // 291: porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry:output_type -> porter.v1.DockerConfigFileForRegistryResponse
-	170, // 292: porter.v1.ClusterControlPlaneService.ECRTokenForRegistry:output_type -> porter.v1.ECRTokenForRegistryResponse
-	172, // 293: porter.v1.ClusterControlPlaneService.AssumeRoleCredentials:output_type -> porter.v1.AssumeRoleCredentialsResponse
-	168, // 294: porter.v1.ClusterControlPlaneService.AssumeRoleChainTargets:output_type -> porter.v1.AssumeRoleChainTargetsResponse
-	166, // 295: porter.v1.ClusterControlPlaneService.CertificateAuthorityData:output_type -> porter.v1.CertificateAuthorityDataResponse
-	164, // 296: porter.v1.ClusterControlPlaneService.EKSBearerToken:output_type -> porter.v1.EKSBearerTokenResponse
-	31,  // 297: porter.v1.ClusterControlPlaneService.ListRepositoriesForRegistry:output_type -> porter.v1.ListRepositoriesForRegistryResponse
-	34,  // 298: porter.v1.ClusterControlPlaneService.ListImagesForRepository:output_type -> porter.v1.ListImagesForRepositoryResponse
-	178, // 299: porter.v1.ClusterControlPlaneService.ListDatastores:output_type -> porter.v1.ListDatastoresResponse
-	180, // 300: porter.v1.ClusterControlPlaneService.DatastoreStatus:output_type -> porter.v1.DatastoreStatusResponse
-	184, // 301: porter.v1.ClusterControlPlaneService.RegistryStatus:output_type -> porter.v1.RegistryStatusResponse
-	136, // 302: porter.v1.ClusterControlPlaneService.EnableExternalEnvGroupProviders:output_type -> porter.v1.EnableExternalEnvGroupProvidersResponse
-	134, // 303: porter.v1.ClusterControlPlaneService.AreExternalEnvGroupProvidersEnabled:output_type -> porter.v1.AreExternalEnvGroupProvidersEnabledResponse
-	138, // 304: porter.v1.ClusterControlPlaneService.CreateOrUpdateEnvGroup:output_type -> porter.v1.CreateOrUpdateEnvGroupResponse
-	140, // 305: porter.v1.ClusterControlPlaneService.DeleteEnvGroup:output_type -> porter.v1.DeleteEnvGroupResponse
-	142, // 306: porter.v1.ClusterControlPlaneService.AppsLinkedToEnvGroup:output_type -> porter.v1.AppsLinkedToEnvGroupResponse
-	144, // 307: porter.v1.ClusterControlPlaneService.ListEnvGroups:output_type -> porter.v1.ListEnvGroupsResponse
-	146, // 308: porter.v1.ClusterControlPlaneService.UpdateNotificationConfig:output_type -> porter.v1.UpdateNotificationConfigResponse
-	148, // 309: porter.v1.ClusterControlPlaneService.NotificationConfig:output_type -> porter.v1.NotificationConfigResponse
-	226, // [226:310] is the sub-list for method output_type
-	142, // [142:226] is the sub-list for method input_type
-	142, // [142:142] is the sub-list for extension type_name
-	142, // [142:142] is the sub-list for extension extendee
-	0,   // [0:142] is the sub-list for field type_name
+	216, // 121: porter.v1.UpdateDatastoreRequest.datastore:type_name -> porter.v1.ManagedDatastore
+	217, // 122: porter.v1.CreateDatastoreProxyResponse.credential:type_name -> porter.v1.DatastoreCredential
+	217, // 123: porter.v1.DatastoreCredentialResponse.credential:type_name -> porter.v1.DatastoreCredential
+	6,   // 124: porter.v1.PatchCloudContractRequest.operation:type_name -> porter.v1.EnumPatchCloudContractOperation
+	7,   // 125: porter.v1.PatchCloudContractRequest.resource_type:type_name -> porter.v1.EnumPatchCloudContractType
+	216, // 126: porter.v1.PatchCloudContractRequest.datastore:type_name -> porter.v1.ManagedDatastore
+	218, // 127: porter.v1.PatchCloudContractResponse.cloud_contract:type_name -> porter.v1.CloudContract
+	218, // 128: porter.v1.ReadCloudContractResponse.cloud_contract:type_name -> porter.v1.CloudContract
+	219, // 129: porter.v1.AssumeRoleChainTargetsResponse.chain_links:type_name -> porter.v1.AssumeRoleChainLink
+	195, // 130: porter.v1.ECRTokenForRegistryResponse.expiry:type_name -> google.protobuf.Timestamp
+	189, // 131: porter.v1.ClusterNetworkSettingsResponse.cloud_provider:type_name -> porter.v1.EnumCloudProvider
+	220, // 132: porter.v1.ClusterNetworkSettingsResponse.eks_cloud_provider_network:type_name -> porter.v1.AWSVpc
+	189, // 133: porter.v1.ListDatastoresRequest.cloud_provider:type_name -> porter.v1.EnumCloudProvider
+	8,   // 134: porter.v1.ListDatastoresRequest.type:type_name -> porter.v1.EnumDatastore
+	181, // 135: porter.v1.ListDatastoresResponse.datastores:type_name -> porter.v1.Datastore
+	8,   // 136: porter.v1.DatastoreStatusRequest.type:type_name -> porter.v1.EnumDatastore
+	8,   // 137: porter.v1.Datastore.type:type_name -> porter.v1.EnumDatastore
+	182, // 138: porter.v1.Datastore.metadata:type_name -> porter.v1.DatastoreMetadata
+	209, // 139: porter.v1.Datastore.env:type_name -> porter.v1.EnvGroup
+	189, // 140: porter.v1.SharedNetworkSettingsResponse.cloud_provider:type_name -> porter.v1.EnumCloudProvider
+	220, // 141: porter.v1.SharedNetworkSettingsResponse.eks_cloud_provider_network:type_name -> porter.v1.AWSVpc
+	192, // 142: porter.v1.PreflightCheckResponse.PreflightChecksEntry.value:type_name -> porter.v1.Error
+	9,   // 143: porter.v1.ClusterControlPlaneService.QuotaIncrease:input_type -> porter.v1.QuotaIncreaseRequest
+	221, // 144: porter.v1.ClusterControlPlaneService.UpdateCloudProviderCredentials:input_type -> porter.v1.UpdateCloudProviderCredentialsRequest
+	16,  // 145: porter.v1.ClusterControlPlaneService.QuotaPreflightCheck:input_type -> porter.v1.QuotaPreflightCheckRequest
+	11,  // 146: porter.v1.ClusterControlPlaneService.PreflightCheck:input_type -> porter.v1.PreflightCheckRequest
+	13,  // 147: porter.v1.ClusterControlPlaneService.CloudContractPreflightCheck:input_type -> porter.v1.CloudContractPreflightCheckRequest
+	18,  // 148: porter.v1.ClusterControlPlaneService.CreateAssumeRoleChain:input_type -> porter.v1.CreateAssumeRoleChainRequest
+	20,  // 149: porter.v1.ClusterControlPlaneService.SaveAzureCredentials:input_type -> porter.v1.SaveAzureCredentialsRequest
+	22,  // 150: porter.v1.ClusterControlPlaneService.KubeConfigForCluster:input_type -> porter.v1.KubeConfigForClusterRequest
+	24,  // 151: porter.v1.ClusterControlPlaneService.UpdateContract:input_type -> porter.v1.UpdateContractRequest
+	40,  // 152: porter.v1.ClusterControlPlaneService.ReadContract:input_type -> porter.v1.ReadContractRequest
+	26,  // 153: porter.v1.ClusterControlPlaneService.ClusterStatus:input_type -> porter.v1.ClusterStatusRequest
+	28,  // 154: porter.v1.ClusterControlPlaneService.DeleteCluster:input_type -> porter.v1.DeleteClusterRequest
+	38,  // 155: porter.v1.ClusterControlPlaneService.TokenForRegistry:input_type -> porter.v1.TokenForRegistryRequest
+	42,  // 156: porter.v1.ClusterControlPlaneService.ContractComplianceChecks:input_type -> porter.v1.ContractComplianceChecksRequest
+	44,  // 157: porter.v1.ClusterControlPlaneService.ValidatePorterApp:input_type -> porter.v1.ValidatePorterAppRequest
+	46,  // 158: porter.v1.ClusterControlPlaneService.ApplyPorterApp:input_type -> porter.v1.ApplyPorterAppRequest
+	48,  // 159: porter.v1.ClusterControlPlaneService.UpdateApp:input_type -> porter.v1.UpdateAppRequest
+	50,  // 160: porter.v1.ClusterControlPlaneService.UpdateAddon:input_type -> porter.v1.UpdateAddonRequest
+	54,  // 161: porter.v1.ClusterControlPlaneService.RollbackRevision:input_type -> porter.v1.RollbackRevisionRequest
+	52,  // 162: porter.v1.ClusterControlPlaneService.UpdateRevisionStatus:input_type -> porter.v1.UpdateRevisionStatusRequest
+	64,  // 163: porter.v1.ClusterControlPlaneService.AppRevisionStatus:input_type -> porter.v1.AppRevisionStatusRequest
+	56,  // 164: porter.v1.ClusterControlPlaneService.DeletePorterApp:input_type -> porter.v1.DeletePorterAppRequest
+	58,  // 165: porter.v1.ClusterControlPlaneService.DeleteAppDeployment:input_type -> porter.v1.DeleteAppDeploymentRequest
+	60,  // 166: porter.v1.ClusterControlPlaneService.DeleteDeploymentTarget:input_type -> porter.v1.DeleteDeploymentTargetRequest
+	62,  // 167: porter.v1.ClusterControlPlaneService.CurrentAppRevision:input_type -> porter.v1.CurrentAppRevisionRequest
+	70,  // 168: porter.v1.ClusterControlPlaneService.ListAppRevisions:input_type -> porter.v1.ListAppRevisionsRequest
+	72,  // 169: porter.v1.ClusterControlPlaneService.LatestAppRevisions:input_type -> porter.v1.LatestAppRevisionsRequest
+	74,  // 170: porter.v1.ClusterControlPlaneService.GetAppRevision:input_type -> porter.v1.GetAppRevisionRequest
+	76,  // 171: porter.v1.ClusterControlPlaneService.AppTemplate:input_type -> porter.v1.AppTemplateRequest
+	80,  // 172: porter.v1.ClusterControlPlaneService.UpdateAppTemplate:input_type -> porter.v1.UpdateAppTemplateRequest
+	82,  // 173: porter.v1.ClusterControlPlaneService.LatestAddons:input_type -> porter.v1.LatestAddonsRequest
+	84,  // 174: porter.v1.ClusterControlPlaneService.PredeployStatus:input_type -> porter.v1.PredeployStatusRequest
+	86,  // 175: porter.v1.ClusterControlPlaneService.DeploymentTargetDetails:input_type -> porter.v1.DeploymentTargetDetailsRequest
+	88,  // 176: porter.v1.ClusterControlPlaneService.CreateDeploymentTarget:input_type -> porter.v1.CreateDeploymentTargetRequest
+	90,  // 177: porter.v1.ClusterControlPlaneService.DeploymentTargets:input_type -> porter.v1.DeploymentTargetsRequest
+	92,  // 178: porter.v1.ClusterControlPlaneService.DefaultDeploymentTarget:input_type -> porter.v1.DefaultDeploymentTargetRequest
+	94,  // 179: porter.v1.ClusterControlPlaneService.SeedAppRevisions:input_type -> porter.v1.SeedAppRevisionsRequest
+	96,  // 180: porter.v1.ClusterControlPlaneService.EnvGroupVariables:input_type -> porter.v1.EnvGroupVariablesRequest
+	98,  // 181: porter.v1.ClusterControlPlaneService.LatestEnvGroupWithVariables:input_type -> porter.v1.LatestEnvGroupWithVariablesRequest
+	100, // 182: porter.v1.ClusterControlPlaneService.AppEnvVariables:input_type -> porter.v1.AppEnvVariablesRequest
+	102, // 183: porter.v1.ClusterControlPlaneService.UpdateAppImage:input_type -> porter.v1.UpdateAppImageRequest
+	104, // 184: porter.v1.ClusterControlPlaneService.UpdateAppBuildSettings:input_type -> porter.v1.UpdateAppBuildSettingsRequest
+	106, // 185: porter.v1.ClusterControlPlaneService.UpdateAppsLinkedToEnvGroup:input_type -> porter.v1.UpdateAppsLinkedToEnvGroupRequest
+	108, // 186: porter.v1.ClusterControlPlaneService.AppHelmValues:input_type -> porter.v1.AppHelmValuesRequest
+	110, // 187: porter.v1.ClusterControlPlaneService.ManualServiceRun:input_type -> porter.v1.ManualServiceRunRequest
+	111, // 188: porter.v1.ClusterControlPlaneService.CancelJobRun:input_type -> porter.v1.CancelJobRunRequest
+	114, // 189: porter.v1.ClusterControlPlaneService.JobRunStatus:input_type -> porter.v1.JobRunStatusRequest
+	116, // 190: porter.v1.ClusterControlPlaneService.JobRuns:input_type -> porter.v1.JobRunsRequest
+	175, // 191: porter.v1.ClusterControlPlaneService.ClusterNetworkSettings:input_type -> porter.v1.ClusterNetworkSettingsRequest
+	185, // 192: porter.v1.ClusterControlPlaneService.SharedNetworkSettings:input_type -> porter.v1.SharedNetworkSettingsRequest
+	118, // 193: porter.v1.ClusterControlPlaneService.Images:input_type -> porter.v1.ImagesRequest
+	120, // 194: porter.v1.ClusterControlPlaneService.CreateAppInstance:input_type -> porter.v1.CreateAppInstanceRequest
+	122, // 195: porter.v1.ClusterControlPlaneService.DeleteAppInstance:input_type -> porter.v1.DeleteAppInstanceRequest
+	124, // 196: porter.v1.ClusterControlPlaneService.ListAppInstances:input_type -> porter.v1.ListAppInstancesRequest
+	126, // 197: porter.v1.ClusterControlPlaneService.TemplateAppManifests:input_type -> porter.v1.TemplateAppManifestsRequest
+	129, // 198: porter.v1.ClusterControlPlaneService.CreateNotification:input_type -> porter.v1.CreateNotificationRequest
+	131, // 199: porter.v1.ClusterControlPlaneService.UpdateServiceDeploymentStatus:input_type -> porter.v1.UpdateServiceDeploymentStatusRequest
+	149, // 200: porter.v1.ClusterControlPlaneService.ConnectHostedProject:input_type -> porter.v1.ConnectHostedProjectRequest
+	151, // 201: porter.v1.ClusterControlPlaneService.UpdateDatastore:input_type -> porter.v1.UpdateDatastoreRequest
+	153, // 202: porter.v1.ClusterControlPlaneService.DeleteDatastore:input_type -> porter.v1.DeleteDatastoreRequest
+	155, // 203: porter.v1.ClusterControlPlaneService.CreateDatastoreProxy:input_type -> porter.v1.CreateDatastoreProxyRequest
+	157, // 204: porter.v1.ClusterControlPlaneService.DatastoreCredential:input_type -> porter.v1.DatastoreCredentialRequest
+	222, // 205: porter.v1.ClusterControlPlaneService.CloudProviderPermissionsStatus:input_type -> porter.v1.CloudProviderPermissionsStatusRequest
+	159, // 206: porter.v1.ClusterControlPlaneService.PatchCloudContract:input_type -> porter.v1.PatchCloudContractRequest
+	161, // 207: porter.v1.ClusterControlPlaneService.ReadCloudContract:input_type -> porter.v1.ReadCloudContractRequest
+	173, // 208: porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry:input_type -> porter.v1.DockerConfigFileForRegistryRequest
+	169, // 209: porter.v1.ClusterControlPlaneService.ECRTokenForRegistry:input_type -> porter.v1.ECRTokenForRegistryRequest
+	171, // 210: porter.v1.ClusterControlPlaneService.AssumeRoleCredentials:input_type -> porter.v1.AssumeRoleCredentialsRequest
+	167, // 211: porter.v1.ClusterControlPlaneService.AssumeRoleChainTargets:input_type -> porter.v1.AssumeRoleChainTargetsRequest
+	165, // 212: porter.v1.ClusterControlPlaneService.CertificateAuthorityData:input_type -> porter.v1.CertificateAuthorityDataRequest
+	163, // 213: porter.v1.ClusterControlPlaneService.EKSBearerToken:input_type -> porter.v1.EKSBearerTokenRequest
+	30,  // 214: porter.v1.ClusterControlPlaneService.ListRepositoriesForRegistry:input_type -> porter.v1.ListRepositoriesForRegistryRequest
+	33,  // 215: porter.v1.ClusterControlPlaneService.ListImagesForRepository:input_type -> porter.v1.ListImagesForRepositoryRequest
+	177, // 216: porter.v1.ClusterControlPlaneService.ListDatastores:input_type -> porter.v1.ListDatastoresRequest
+	179, // 217: porter.v1.ClusterControlPlaneService.DatastoreStatus:input_type -> porter.v1.DatastoreStatusRequest
+	183, // 218: porter.v1.ClusterControlPlaneService.RegistryStatus:input_type -> porter.v1.RegistryStatusRequest
+	135, // 219: porter.v1.ClusterControlPlaneService.EnableExternalEnvGroupProviders:input_type -> porter.v1.EnableExternalEnvGroupProvidersRequest
+	133, // 220: porter.v1.ClusterControlPlaneService.AreExternalEnvGroupProvidersEnabled:input_type -> porter.v1.AreExternalEnvGroupProvidersEnabledRequest
+	137, // 221: porter.v1.ClusterControlPlaneService.CreateOrUpdateEnvGroup:input_type -> porter.v1.CreateOrUpdateEnvGroupRequest
+	139, // 222: porter.v1.ClusterControlPlaneService.DeleteEnvGroup:input_type -> porter.v1.DeleteEnvGroupRequest
+	141, // 223: porter.v1.ClusterControlPlaneService.AppsLinkedToEnvGroup:input_type -> porter.v1.AppsLinkedToEnvGroupRequest
+	143, // 224: porter.v1.ClusterControlPlaneService.ListEnvGroups:input_type -> porter.v1.ListEnvGroupsRequest
+	145, // 225: porter.v1.ClusterControlPlaneService.UpdateNotificationConfig:input_type -> porter.v1.UpdateNotificationConfigRequest
+	147, // 226: porter.v1.ClusterControlPlaneService.NotificationConfig:input_type -> porter.v1.NotificationConfigRequest
+	10,  // 227: porter.v1.ClusterControlPlaneService.QuotaIncrease:output_type -> porter.v1.QuotaIncreaseResponse
+	223, // 228: porter.v1.ClusterControlPlaneService.UpdateCloudProviderCredentials:output_type -> porter.v1.UpdateCloudProviderCredentialsResponse
+	17,  // 229: porter.v1.ClusterControlPlaneService.QuotaPreflightCheck:output_type -> porter.v1.QuotaPreflightCheckResponse
+	12,  // 230: porter.v1.ClusterControlPlaneService.PreflightCheck:output_type -> porter.v1.PreflightCheckResponse
+	14,  // 231: porter.v1.ClusterControlPlaneService.CloudContractPreflightCheck:output_type -> porter.v1.CloudContractPreflightCheckResponse
+	19,  // 232: porter.v1.ClusterControlPlaneService.CreateAssumeRoleChain:output_type -> porter.v1.CreateAssumeRoleChainResponse
+	21,  // 233: porter.v1.ClusterControlPlaneService.SaveAzureCredentials:output_type -> porter.v1.SaveAzureCredentialsResponse
+	23,  // 234: porter.v1.ClusterControlPlaneService.KubeConfigForCluster:output_type -> porter.v1.KubeConfigForClusterResponse
+	25,  // 235: porter.v1.ClusterControlPlaneService.UpdateContract:output_type -> porter.v1.UpdateContractResponse
+	41,  // 236: porter.v1.ClusterControlPlaneService.ReadContract:output_type -> porter.v1.ReadContractResponse
+	27,  // 237: porter.v1.ClusterControlPlaneService.ClusterStatus:output_type -> porter.v1.ClusterStatusResponse
+	29,  // 238: porter.v1.ClusterControlPlaneService.DeleteCluster:output_type -> porter.v1.DeleteClusterResponse
+	39,  // 239: porter.v1.ClusterControlPlaneService.TokenForRegistry:output_type -> porter.v1.TokenForRegistryResponse
+	43,  // 240: porter.v1.ClusterControlPlaneService.ContractComplianceChecks:output_type -> porter.v1.ContractComplianceChecksResponse
+	45,  // 241: porter.v1.ClusterControlPlaneService.ValidatePorterApp:output_type -> porter.v1.ValidatePorterAppResponse
+	47,  // 242: porter.v1.ClusterControlPlaneService.ApplyPorterApp:output_type -> porter.v1.ApplyPorterAppResponse
+	49,  // 243: porter.v1.ClusterControlPlaneService.UpdateApp:output_type -> porter.v1.UpdateAppResponse
+	51,  // 244: porter.v1.ClusterControlPlaneService.UpdateAddon:output_type -> porter.v1.UpdateAddonResponse
+	55,  // 245: porter.v1.ClusterControlPlaneService.RollbackRevision:output_type -> porter.v1.RollbackRevisionResponse
+	53,  // 246: porter.v1.ClusterControlPlaneService.UpdateRevisionStatus:output_type -> porter.v1.UpdateRevisionStatusResponse
+	65,  // 247: porter.v1.ClusterControlPlaneService.AppRevisionStatus:output_type -> porter.v1.AppRevisionStatusResponse
+	57,  // 248: porter.v1.ClusterControlPlaneService.DeletePorterApp:output_type -> porter.v1.DeletePorterAppResponse
+	59,  // 249: porter.v1.ClusterControlPlaneService.DeleteAppDeployment:output_type -> porter.v1.DeleteAppDeploymentResponse
+	61,  // 250: porter.v1.ClusterControlPlaneService.DeleteDeploymentTarget:output_type -> porter.v1.DeleteDeploymentTargetResponse
+	69,  // 251: porter.v1.ClusterControlPlaneService.CurrentAppRevision:output_type -> porter.v1.CurrentAppRevisionResponse
+	71,  // 252: porter.v1.ClusterControlPlaneService.ListAppRevisions:output_type -> porter.v1.ListAppRevisionsResponse
+	73,  // 253: porter.v1.ClusterControlPlaneService.LatestAppRevisions:output_type -> porter.v1.LatestAppRevisionsResponse
+	75,  // 254: porter.v1.ClusterControlPlaneService.GetAppRevision:output_type -> porter.v1.GetAppRevisionResponse
+	77,  // 255: porter.v1.ClusterControlPlaneService.AppTemplate:output_type -> porter.v1.AppTemplateResponse
+	81,  // 256: porter.v1.ClusterControlPlaneService.UpdateAppTemplate:output_type -> porter.v1.UpdateAppTemplateResponse
+	83,  // 257: porter.v1.ClusterControlPlaneService.LatestAddons:output_type -> porter.v1.LatestAddonsResponse
+	85,  // 258: porter.v1.ClusterControlPlaneService.PredeployStatus:output_type -> porter.v1.PredeployStatusResponse
+	87,  // 259: porter.v1.ClusterControlPlaneService.DeploymentTargetDetails:output_type -> porter.v1.DeploymentTargetDetailsResponse
+	89,  // 260: porter.v1.ClusterControlPlaneService.CreateDeploymentTarget:output_type -> porter.v1.CreateDeploymentTargetResponse
+	91,  // 261: porter.v1.ClusterControlPlaneService.DeploymentTargets:output_type -> porter.v1.DeploymentTargetsResponse
+	93,  // 262: porter.v1.ClusterControlPlaneService.DefaultDeploymentTarget:output_type -> porter.v1.DefaultDeploymentTargetResponse
+	95,  // 263: porter.v1.ClusterControlPlaneService.SeedAppRevisions:output_type -> porter.v1.SeedAppRevisionsResponse
+	97,  // 264: porter.v1.ClusterControlPlaneService.EnvGroupVariables:output_type -> porter.v1.EnvGroupVariablesResponse
+	99,  // 265: porter.v1.ClusterControlPlaneService.LatestEnvGroupWithVariables:output_type -> porter.v1.LatestEnvGroupWithVariablesResponse
+	101, // 266: porter.v1.ClusterControlPlaneService.AppEnvVariables:output_type -> porter.v1.AppEnvVariablesResponse
+	103, // 267: porter.v1.ClusterControlPlaneService.UpdateAppImage:output_type -> porter.v1.UpdateAppImageResponse
+	105, // 268: porter.v1.ClusterControlPlaneService.UpdateAppBuildSettings:output_type -> porter.v1.UpdateAppBuildSettingsResponse
+	107, // 269: porter.v1.ClusterControlPlaneService.UpdateAppsLinkedToEnvGroup:output_type -> porter.v1.UpdateAppsLinkedToEnvGroupResponse
+	109, // 270: porter.v1.ClusterControlPlaneService.AppHelmValues:output_type -> porter.v1.AppHelmValuesResponse
+	113, // 271: porter.v1.ClusterControlPlaneService.ManualServiceRun:output_type -> porter.v1.ManualServiceRunResponse
+	112, // 272: porter.v1.ClusterControlPlaneService.CancelJobRun:output_type -> porter.v1.CancelJobRunResponse
+	115, // 273: porter.v1.ClusterControlPlaneService.JobRunStatus:output_type -> porter.v1.JobRunStatusResponse
+	117, // 274: porter.v1.ClusterControlPlaneService.JobRuns:output_type -> porter.v1.JobRunsResponse
+	176, // 275: porter.v1.ClusterControlPlaneService.ClusterNetworkSettings:output_type -> porter.v1.ClusterNetworkSettingsResponse
+	186, // 276: porter.v1.ClusterControlPlaneService.SharedNetworkSettings:output_type -> porter.v1.SharedNetworkSettingsResponse
+	119, // 277: porter.v1.ClusterControlPlaneService.Images:output_type -> porter.v1.ImagesResponse
+	121, // 278: porter.v1.ClusterControlPlaneService.CreateAppInstance:output_type -> porter.v1.CreateAppInstanceResponse
+	123, // 279: porter.v1.ClusterControlPlaneService.DeleteAppInstance:output_type -> porter.v1.DeleteAppInstanceResponse
+	125, // 280: porter.v1.ClusterControlPlaneService.ListAppInstances:output_type -> porter.v1.ListAppInstancesResponse
+	127, // 281: porter.v1.ClusterControlPlaneService.TemplateAppManifests:output_type -> porter.v1.TemplateAppManifestsResponse
+	130, // 282: porter.v1.ClusterControlPlaneService.CreateNotification:output_type -> porter.v1.CreateNotificationResponse
+	132, // 283: porter.v1.ClusterControlPlaneService.UpdateServiceDeploymentStatus:output_type -> porter.v1.UpdateServiceDeploymentStatusResponse
+	150, // 284: porter.v1.ClusterControlPlaneService.ConnectHostedProject:output_type -> porter.v1.ConnectHostedProjectResponse
+	152, // 285: porter.v1.ClusterControlPlaneService.UpdateDatastore:output_type -> porter.v1.UpdateDatastoreResponse
+	154, // 286: porter.v1.ClusterControlPlaneService.DeleteDatastore:output_type -> porter.v1.DeleteDatastoreResponse
+	156, // 287: porter.v1.ClusterControlPlaneService.CreateDatastoreProxy:output_type -> porter.v1.CreateDatastoreProxyResponse
+	158, // 288: porter.v1.ClusterControlPlaneService.DatastoreCredential:output_type -> porter.v1.DatastoreCredentialResponse
+	224, // 289: porter.v1.ClusterControlPlaneService.CloudProviderPermissionsStatus:output_type -> porter.v1.CloudProviderPermissionsStatusResponse
+	160, // 290: porter.v1.ClusterControlPlaneService.PatchCloudContract:output_type -> porter.v1.PatchCloudContractResponse
+	162, // 291: porter.v1.ClusterControlPlaneService.ReadCloudContract:output_type -> porter.v1.ReadCloudContractResponse
+	174, // 292: porter.v1.ClusterControlPlaneService.DockerConfigFileForRegistry:output_type -> porter.v1.DockerConfigFileForRegistryResponse
+	170, // 293: porter.v1.ClusterControlPlaneService.ECRTokenForRegistry:output_type -> porter.v1.ECRTokenForRegistryResponse
+	172, // 294: porter.v1.ClusterControlPlaneService.AssumeRoleCredentials:output_type -> porter.v1.AssumeRoleCredentialsResponse
+	168, // 295: porter.v1.ClusterControlPlaneService.AssumeRoleChainTargets:output_type -> porter.v1.AssumeRoleChainTargetsResponse
+	166, // 296: porter.v1.ClusterControlPlaneService.CertificateAuthorityData:output_type -> porter.v1.CertificateAuthorityDataResponse
+	164, // 297: porter.v1.ClusterControlPlaneService.EKSBearerToken:output_type -> porter.v1.EKSBearerTokenResponse
+	31,  // 298: porter.v1.ClusterControlPlaneService.ListRepositoriesForRegistry:output_type -> porter.v1.ListRepositoriesForRegistryResponse
+	34,  // 299: porter.v1.ClusterControlPlaneService.ListImagesForRepository:output_type -> porter.v1.ListImagesForRepositoryResponse
+	178, // 300: porter.v1.ClusterControlPlaneService.ListDatastores:output_type -> porter.v1.ListDatastoresResponse
+	180, // 301: porter.v1.ClusterControlPlaneService.DatastoreStatus:output_type -> porter.v1.DatastoreStatusResponse
+	184, // 302: porter.v1.ClusterControlPlaneService.RegistryStatus:output_type -> porter.v1.RegistryStatusResponse
+	136, // 303: porter.v1.ClusterControlPlaneService.EnableExternalEnvGroupProviders:output_type -> porter.v1.EnableExternalEnvGroupProvidersResponse
+	134, // 304: porter.v1.ClusterControlPlaneService.AreExternalEnvGroupProvidersEnabled:output_type -> porter.v1.AreExternalEnvGroupProvidersEnabledResponse
+	138, // 305: porter.v1.ClusterControlPlaneService.CreateOrUpdateEnvGroup:output_type -> porter.v1.CreateOrUpdateEnvGroupResponse
+	140, // 306: porter.v1.ClusterControlPlaneService.DeleteEnvGroup:output_type -> porter.v1.DeleteEnvGroupResponse
+	142, // 307: porter.v1.ClusterControlPlaneService.AppsLinkedToEnvGroup:output_type -> porter.v1.AppsLinkedToEnvGroupResponse
+	144, // 308: porter.v1.ClusterControlPlaneService.ListEnvGroups:output_type -> porter.v1.ListEnvGroupsResponse
+	146, // 309: porter.v1.ClusterControlPlaneService.UpdateNotificationConfig:output_type -> porter.v1.UpdateNotificationConfigResponse
+	148, // 310: porter.v1.ClusterControlPlaneService.NotificationConfig:output_type -> porter.v1.NotificationConfigResponse
+	227, // [227:311] is the sub-list for method output_type
+	143, // [143:227] is the sub-list for method input_type
+	143, // [143:143] is the sub-list for extension type_name
+	143, // [143:143] is the sub-list for extension extendee
+	0,   // [0:143] is the sub-list for field type_name
 }
 
 func init() { file_porter_v1_cluster_control_plane_proto_init() }

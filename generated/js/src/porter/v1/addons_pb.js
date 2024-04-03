@@ -58,6 +58,8 @@ export const Postgres = /*@__PURE__*/ proto3.makeMessageType(
     { no: 1, name: "cpu_cores", kind: "scalar", T: 2 /* ScalarType.FLOAT */ },
     { no: 2, name: "ram_megabytes", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
     { no: 3, name: "storage_gigabytes", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 4, name: "master_username", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 5, name: "master_user_password_literal", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
   ],
 );
 
@@ -72,6 +74,7 @@ export const Redis = /*@__PURE__*/ proto3.makeMessageType(
     { no: 1, name: "cpu_cores", kind: "scalar", T: 2 /* ScalarType.FLOAT */ },
     { no: 2, name: "ram_megabytes", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
     { no: 3, name: "storage_gigabytes", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 4, name: "master_user_password_literal", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
   ],
 );
 
