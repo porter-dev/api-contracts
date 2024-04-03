@@ -26,9 +26,10 @@ const (
 	EnumDatastoreKind_ENUM_DATASTORE_KIND_UNSPECIFIED     EnumDatastoreKind = 0
 	EnumDatastoreKind_ENUM_DATASTORE_KIND_AWS_RDS         EnumDatastoreKind = 1
 	EnumDatastoreKind_ENUM_DATASTORE_KIND_AWS_ELASTICACHE EnumDatastoreKind = 2
-	// the 'managed' types refer to addons
+	// ENUM_DATASTORE_KIND_MANAGED_POSTGRES refers to the postgres helm chart deployed on customer cluster
 	EnumDatastoreKind_ENUM_DATASTORE_KIND_MANAGED_POSTGRES EnumDatastoreKind = 3
-	EnumDatastoreKind_ENUM_DATASTORE_KIND_MANAGED_REDIS    EnumDatastoreKind = 4
+	// ENUM_DATASTORE_KIND_MANAGED_REDIS refers to the redis helm chart deployed on customer cluster
+	EnumDatastoreKind_ENUM_DATASTORE_KIND_MANAGED_REDIS EnumDatastoreKind = 4
 )
 
 // Enum value maps for EnumDatastoreKind.
