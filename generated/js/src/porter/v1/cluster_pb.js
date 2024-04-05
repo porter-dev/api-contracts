@@ -45,6 +45,7 @@ export const Cluster = /*@__PURE__*/ proto3.makeMessageType(
     { no: 3, name: "kind", kind: "enum", T: proto3.getEnumType(EnumKubernetesKind) },
     { no: 4, name: "cloud_provider", kind: "enum", T: proto3.getEnumType(EnumCloudProvider) },
     { no: 5, name: "cloud_provider_credentials_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 10, name: "control_plane_ip_whitelist", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 6, name: "eks_kind", kind: "message", T: EKS, oneof: "kind_values" },
     { no: 7, name: "gke_kind", kind: "message", T: GKE, oneof: "kind_values" },
     { no: 8, name: "aks_kind", kind: "message", T: AKS, oneof: "kind_values" },

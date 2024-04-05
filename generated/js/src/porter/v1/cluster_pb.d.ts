@@ -100,6 +100,13 @@ export declare class Cluster extends Message<Cluster> {
   cloudProviderCredentialsId: string;
 
   /**
+   * control_plane_ip_whitelist [OPTIONAL] is a list of CIDR ranges that are allowed to access the control plane
+   *
+   * @generated from field: repeated string control_plane_ip_whitelist = 10;
+   */
+  controlPlaneIpWhitelist: string[];
+
+  /**
    * kind_values are the required values, depending on the selected cloud_provider and kind
    *
    * @generated from oneof porter.v1.Cluster.kind_values
