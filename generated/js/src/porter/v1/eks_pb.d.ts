@@ -132,6 +132,13 @@ export declare class EKS extends Message<EKS> {
    */
   cloudwatchAlarm?: CloudwatchAlarm;
 
+  /**
+   * control_plane_cidr_allowlist is an optional list of CIDRs that are allowed to access the control plane
+   *
+   * @generated from field: repeated string control_plane_cidr_allowlist = 13;
+   */
+  controlPlaneCidrAllowlist: string[];
+
   constructor(data?: PartialMessage<EKS>);
 
   static readonly runtime: typeof proto3;

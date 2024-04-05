@@ -100,13 +100,6 @@ export declare class Cluster extends Message<Cluster> {
   cloudProviderCredentialsId: string;
 
   /**
-   * control_plane_cidr_allowlist [OPTIONAL] is a list of CIDRs that are allowed to access the control plane
-   *
-   * @generated from field: repeated string control_plane_cidr_allowlist = 10;
-   */
-  controlPlaneCidrAllowlist: string[];
-
-  /**
    * kind_values are the required values, depending on the selected cloud_provider and kind
    *
    * @generated from oneof porter.v1.Cluster.kind_values

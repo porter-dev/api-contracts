@@ -49,6 +49,7 @@ export const EKS = /*@__PURE__*/ proto3.makeMessageType(
     { no: 10, name: "network", kind: "message", T: AWSClusterNetwork },
     { no: 11, name: "enable_ecr_scanning", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 12, name: "cloudwatch_alarm", kind: "message", T: CloudwatchAlarm },
+    { no: 13, name: "control_plane_cidr_allowlist", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
   ],
 );
 
