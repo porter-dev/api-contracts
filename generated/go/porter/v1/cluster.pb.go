@@ -140,7 +140,7 @@ type Cluster struct {
 	// cloud_provider_credentials_id [REQUIRED] is the Porter credentials that will be used for provisioning a cluster.
 	// These must be stored within Porter, prior to cluster creation. For AWS this refers to the last link in an assume role chain
 	CloudProviderCredentialsId string `protobuf:"bytes,5,opt,name=cloud_provider_credentials_id,json=cloudProviderCredentialsId,proto3" json:"cloud_provider_credentials_id,omitempty"`
-	// control_plane_cidr_allowlist [OPTIONAL] is a list of CIDR ranges that are allowed to access the control plane
+	// control_plane_cidr_allowlist [OPTIONAL] is a list of CIDRs that are allowed to access the control plane
 	ControlPlaneCidrAllowlist []string `protobuf:"bytes,10,rep,name=control_plane_cidr_allowlist,json=controlPlaneCidrAllowlist,proto3" json:"control_plane_cidr_allowlist,omitempty"`
 	// kind_values are the required values, depending on the selected cloud_provider and kind
 	//
