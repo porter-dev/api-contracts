@@ -18,7 +18,7 @@ import (
 // generated with a version of connect newer than the one compiled into your binary. You can fix the
 // problem by either regenerating this code with an older version of connect or updating the connect
 // version compiled into your binary.
-const _ = connect.IsAtLeastVersion0_1_0
+const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// AuthManagementServiceName is the fully-qualified name of the AuthManagementService service.
@@ -36,6 +36,12 @@ const (
 	// AuthManagementServiceAPITokenProcedure is the fully-qualified name of the AuthManagementService's
 	// APIToken RPC.
 	AuthManagementServiceAPITokenProcedure = "/porter.v1.AuthManagementService/APIToken"
+)
+
+// These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
+var (
+	authManagementServiceServiceDescriptor        = v1.File_porter_v1_auth_management_proto.Services().ByName("AuthManagementService")
+	authManagementServiceAPITokenMethodDescriptor = authManagementServiceServiceDescriptor.Methods().ByName("APIToken")
 )
 
 // AuthManagementServiceClient is a client for the porter.v1.AuthManagementService service.
@@ -57,7 +63,8 @@ func NewAuthManagementServiceClient(httpClient connect.HTTPClient, baseURL strin
 		aPIToken: connect.NewClient[v1.APITokenRequest, v1.APITokenResponse](
 			httpClient,
 			baseURL+AuthManagementServiceAPITokenProcedure,
-			opts...,
+			connect.WithSchema(authManagementServiceAPITokenMethodDescriptor),
+			connect.WithClientOptions(opts...),
 		),
 	}
 }
@@ -87,7 +94,8 @@ func NewAuthManagementServiceHandler(svc AuthManagementServiceHandler, opts ...c
 	authManagementServiceAPITokenHandler := connect.NewUnaryHandler(
 		AuthManagementServiceAPITokenProcedure,
 		svc.APIToken,
-		opts...,
+		connect.WithSchema(authManagementServiceAPITokenMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
 	)
 	return "/porter.v1.AuthManagementService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {

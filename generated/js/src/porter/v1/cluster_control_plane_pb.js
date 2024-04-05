@@ -13,6 +13,7 @@ import { ContractComplianceCheckGroup, EnumComplianceProfile, EnumComplianceVend
 import { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, EnvVariableDeletions, JobRun, PorterApp } from "./porter_app_pb.js";
 import { Addon, PrerequisiteAddon } from "./addons_pb.js";
 import { AppEventType } from "./agent_app_event_types_pb.js";
+import { Alert } from "./prometheus_alerts_pb.js";
 import { EnumEnvGroupProviderType } from "./env_group_pb.js";
 import { NotificationConfig } from "./notification_pb.js";
 import { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
@@ -1715,6 +1716,32 @@ export const UpdateServiceDeploymentStatusRequest = /*@__PURE__*/ proto3.makeMes
     { no: 4, name: "app_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "service_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 6, name: "status", kind: "enum", T: proto3.getEnumType(EnumServiceDeploymentStatus) },
+  ],
+);
+
+/**
+ * RecordPrometheusAlertRequest is sent to record an alert sent from prometheus
+ *
+ * @generated from message porter.v1.RecordPrometheusAlertRequest
+ */
+export const RecordPrometheusAlertRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.RecordPrometheusAlertRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "alerts", kind: "message", T: Alert, repeated: true },
+  ],
+);
+
+/**
+ * RecordPrometheusAlertResponse is the response
+ *
+ * @generated from message porter.v1.RecordPrometheusAlertResponse
+ */
+export const RecordPrometheusAlertResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.RecordPrometheusAlertResponse",
+  () => [
+    { no: 1, name: "error", kind: "message", T: Error },
   ],
 );
 
