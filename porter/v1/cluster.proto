@@ -18,8 +18,8 @@ message Cluster {
   // cloud_provider_credentials_id [REQUIRED] is the Porter credentials that will be used for provisioning a cluster.
   // These must be stored within Porter, prior to cluster creation. For AWS this refers to the last link in an assume role chain
   string cloud_provider_credentials_id = 5;
-  // control_plane_ip_allowlist [OPTIONAL] is a list of CIDR ranges that are allowed to access the control plane
-  repeated string control_plane_ip_allowlist = 10;
+  // control_plane_cidr_allowlist [OPTIONAL] is a list of CIDR ranges that are allowed to access the control plane
+  repeated string control_plane_cidr_allowlist = 10;
   // kind_values are the required values, depending on the selected cloud_provider and kind
   oneof kind_values {
     EKS eks_kind = 6;
