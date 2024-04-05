@@ -23,6 +23,9 @@ message EKS {
 
   // cloudwatch_alarm contains the configuration for setting up cloudwatch on a cluster
   CloudwatchAlarm cloudwatch_alarm = 12;
+
+  // control_plane_cidr_allowlist is an optional list of CIDRs that are allowed to access the control plane
+  repeated string control_plane_cidr_allowlist = 13;
 }
 
 // CloudwatchAlarm contains all the information required to configure cloudwatch alarms on a cluster
