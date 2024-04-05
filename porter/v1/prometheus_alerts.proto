@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package porter.v1;
+
+enum InvolvedObjectType {
+  INVOLVED_OBJECT_TYPE_UNSPECIFIED = 0;
+
+  INVOLVED_OBJECT_TYPE_DEPLOYMENT = 2;
+
+  INVOLVED_OBJECT_TYPE_STATEFULSET = 3;
+
+  INVOLVED_OBJECT_TYPE_DAEMONSET = 4;
+}
+
+message Alert {
+  string name = 1;
+  string namespace = 2;
+  InvolvedObjectType type = 3;
+  int32 desired_replicas = 4;
+  int32 available_replicas = 5;
+  int32 max_unavailable = 6;
+}

@@ -18,6 +18,7 @@ import "porter/v1/errors.proto";
 import "porter/v1/gke.proto";
 import "porter/v1/notification.proto";
 import "porter/v1/porter_app.proto";
+import "porter/v1/prometheus_alerts.proto";
 
 message QuotaIncreaseRequest {
   int64 project_id = 1;
@@ -1123,6 +1124,19 @@ message UpdateServiceDeploymentStatusRequest {
   EnumServiceDeploymentStatus status = 6;
 }
 
+// RecordPrometheusAlertRequest is sent to record an alert sent from prometheus
+message RecordPrometheusAlertRequest {
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+  repeated Alert alerts = 3;
+}
+
+// RecordPrometheusAlertResponse is the response
+message RecordPrometheusAlertResponse {
+  //error if recording failed
+  Error error = 1;
+}
+
 enum EnumServiceDeploymentStatus {
   ENUM_SERVICE_DEPLOYMENT_STATUS_UNSPECIFIED = 0;
   ENUM_SERVICE_DEPLOYMENT_STATUS_PROGRESSING = 1;
@@ -1570,6 +1584,9 @@ service ClusterControlPlaneService {
 
   // CreateNotification creates a notification for a porter app and service at a given app revision
   rpc CreateNotification(CreateNotificationRequest) returns (CreateNotificationResponse) {}
+
+  // RecordPrometheusAlert creates a notification for a porter app and service at a given app revision
+  rpc RecordPrometheusAlert(RecordPrometheusAlertRequest) returns (RecordPrometheusAlertResponse) {}
 
   // UpdateServiceDeploymentStatus updates the current deployment status of a service with a new status
   rpc UpdateServiceDeploymentStatus(UpdateServiceDeploymentStatusRequest) returns (UpdateServiceDeploymentStatusResponse) {}
