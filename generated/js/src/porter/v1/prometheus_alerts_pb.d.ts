@@ -7,6 +7,9 @@ import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialM
 import { Message, proto3 } from "@bufbuild/protobuf";
 
 /**
+ * InvolvedObjectType is the kubernetes object type the notification targets
+ * We currently alert for deployments, statefulsets and daemonsets
+ *
  * @generated from enum porter.v1.InvolvedObjectType
  */
 export declare enum InvolvedObjectType {
@@ -32,6 +35,8 @@ export declare enum InvolvedObjectType {
 }
 
 /**
+ * Alert represents a prometheus alert for one target object that is a daemonset, statefulset or deployment
+ *
  * @generated from message porter.v1.Alert
  */
 export declare class Alert extends Message<Alert> {

@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package porter.v1;
 
+// InvolvedObjectType is the kubernetes object type the notification targets
+// We currently alert for deployments, statefulsets and daemonsets
 enum InvolvedObjectType {
   INVOLVED_OBJECT_TYPE_UNSPECIFIED = 0;
 
@@ -12,6 +14,7 @@ enum InvolvedObjectType {
   INVOLVED_OBJECT_TYPE_DAEMONSET = 3;
 }
 
+// Alert represents a prometheus alert for one target object that is a daemonset, statefulset or deployment
 message Alert {
   string name = 1;
   string namespace = 2;

@@ -6,6 +6,9 @@
 import { proto3 } from "@bufbuild/protobuf";
 
 /**
+ * InvolvedObjectType is the kubernetes object type the notification targets
+ * We currently alert for deployments, statefulsets and daemonsets
+ *
  * @generated from enum porter.v1.InvolvedObjectType
  */
 export const InvolvedObjectType = /*@__PURE__*/ proto3.makeEnum(
@@ -19,6 +22,8 @@ export const InvolvedObjectType = /*@__PURE__*/ proto3.makeEnum(
 );
 
 /**
+ * Alert represents a prometheus alert for one target object that is a daemonset, statefulset or deployment
+ *
  * @generated from message porter.v1.Alert
  */
 export const Alert = /*@__PURE__*/ proto3.makeMessageType(
