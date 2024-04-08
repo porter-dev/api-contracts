@@ -1131,7 +1131,7 @@ message RecordPrometheusAlertRequest {
   repeated Alert alerts = 3;
 }
 
-// RecordPrometheusAlertResponse is the response
+// RecordPrometheusAlertResponse is the response to a RecordPrometheusAlert request
 message RecordPrometheusAlertResponse {
   //error if recording failed
   Error error = 1;
@@ -1585,7 +1585,7 @@ service ClusterControlPlaneService {
   // CreateNotification creates a notification for a porter app and service at a given app revision
   rpc CreateNotification(CreateNotificationRequest) returns (CreateNotificationResponse) {}
 
-  // RecordPrometheusAlert creates a notification for a porter app and service at a given app revision
+  // RecordPrometheusAlert records a prometheus alert and generates slack notifications when appropriate
   rpc RecordPrometheusAlert(RecordPrometheusAlertRequest) returns (RecordPrometheusAlertResponse) {}
 
   // UpdateServiceDeploymentStatus updates the current deployment status of a service with a new status

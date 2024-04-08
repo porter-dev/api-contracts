@@ -517,7 +517,7 @@ type ClusterControlPlaneServiceClient interface {
 	TemplateAppManifests(context.Context, *connect.Request[v1.TemplateAppManifestsRequest]) (*connect.Response[v1.TemplateAppManifestsResponse], error)
 	// CreateNotification creates a notification for a porter app and service at a given app revision
 	CreateNotification(context.Context, *connect.Request[v1.CreateNotificationRequest]) (*connect.Response[v1.CreateNotificationResponse], error)
-	// RecordPrometheusAlert creates a notification for a porter app and service at a given app revision
+	// RecordPrometheusAlert records a prometheus alert and generates slack notifications when appropriate
 	RecordPrometheusAlert(context.Context, *connect.Request[v1.RecordPrometheusAlertRequest]) (*connect.Response[v1.RecordPrometheusAlertResponse], error)
 	// UpdateServiceDeploymentStatus updates the current deployment status of a service with a new status
 	UpdateServiceDeploymentStatus(context.Context, *connect.Request[v1.UpdateServiceDeploymentStatusRequest]) (*connect.Response[v1.UpdateServiceDeploymentStatusResponse], error)
@@ -1817,7 +1817,7 @@ type ClusterControlPlaneServiceHandler interface {
 	TemplateAppManifests(context.Context, *connect.Request[v1.TemplateAppManifestsRequest]) (*connect.Response[v1.TemplateAppManifestsResponse], error)
 	// CreateNotification creates a notification for a porter app and service at a given app revision
 	CreateNotification(context.Context, *connect.Request[v1.CreateNotificationRequest]) (*connect.Response[v1.CreateNotificationResponse], error)
-	// RecordPrometheusAlert creates a notification for a porter app and service at a given app revision
+	// RecordPrometheusAlert records a prometheus alert and generates slack notifications when appropriate
 	RecordPrometheusAlert(context.Context, *connect.Request[v1.RecordPrometheusAlertRequest]) (*connect.Response[v1.RecordPrometheusAlertResponse], error)
 	// UpdateServiceDeploymentStatus updates the current deployment status of a service with a new status
 	UpdateServiceDeploymentStatus(context.Context, *connect.Request[v1.UpdateServiceDeploymentStatusRequest]) (*connect.Response[v1.UpdateServiceDeploymentStatusResponse], error)

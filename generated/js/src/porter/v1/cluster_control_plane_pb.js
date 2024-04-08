@@ -1734,7 +1734,7 @@ export const RecordPrometheusAlertRequest = /*@__PURE__*/ proto3.makeMessageType
 );
 
 /**
- * RecordPrometheusAlertResponse is the response
+ * RecordPrometheusAlertResponse is the response to a RecordPrometheusAlert request
  *
  * @generated from message porter.v1.RecordPrometheusAlertResponse
  */

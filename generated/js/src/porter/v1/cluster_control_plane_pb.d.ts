@@ -5117,7 +5117,7 @@ export declare class RecordPrometheusAlertRequest extends Message<RecordPromethe
 }
 
 /**
- * RecordPrometheusAlertResponse is the response
+ * RecordPrometheusAlertResponse is the response to a RecordPrometheusAlert request
  *
  * @generated from message porter.v1.RecordPrometheusAlertResponse
  */

@@ -8707,7 +8707,7 @@ func (x *RecordPrometheusAlertRequest) GetAlerts() []*Alert {
 	return nil
 }
 
-// RecordPrometheusAlertResponse is the response
+// RecordPrometheusAlertResponse is the response to a RecordPrometheusAlert request
 type RecordPrometheusAlertResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

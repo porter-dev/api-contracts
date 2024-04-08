@@ -12,9 +12,9 @@ export const InvolvedObjectType = /*@__PURE__*/ proto3.makeEnum(
   "porter.v1.InvolvedObjectType",
   [
     {no: 0, name: "INVOLVED_OBJECT_TYPE_UNSPECIFIED", localName: "UNSPECIFIED"},
-    {no: 2, name: "INVOLVED_OBJECT_TYPE_DEPLOYMENT", localName: "DEPLOYMENT"},
-    {no: 3, name: "INVOLVED_OBJECT_TYPE_STATEFULSET", localName: "STATEFULSET"},
-    {no: 4, name: "INVOLVED_OBJECT_TYPE_DAEMONSET", localName: "DAEMONSET"},
+    {no: 1, name: "INVOLVED_OBJECT_TYPE_DEPLOYMENT", localName: "DEPLOYMENT"},
+    {no: 2, name: "INVOLVED_OBJECT_TYPE_STATEFULSET", localName: "STATEFULSET"},
+    {no: 3, name: "INVOLVED_OBJECT_TYPE_DAEMONSET", localName: "DAEMONSET"},
   ],
 );
 

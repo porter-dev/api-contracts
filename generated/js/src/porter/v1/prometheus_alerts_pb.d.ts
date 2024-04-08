@@ -16,19 +16,19 @@ export declare enum InvolvedObjectType {
   UNSPECIFIED = 0,
 
   /**
-   * @generated from enum value: INVOLVED_OBJECT_TYPE_DEPLOYMENT = 2;
+   * @generated from enum value: INVOLVED_OBJECT_TYPE_DEPLOYMENT = 1;
    */
-  DEPLOYMENT = 2,
+  DEPLOYMENT = 1,
 
   /**
-   * @generated from enum value: INVOLVED_OBJECT_TYPE_STATEFULSET = 3;
+   * @generated from enum value: INVOLVED_OBJECT_TYPE_STATEFULSET = 2;
    */
-  STATEFULSET = 3,
+  STATEFULSET = 2,
 
   /**
-   * @generated from enum value: INVOLVED_OBJECT_TYPE_DAEMONSET = 4;
+   * @generated from enum value: INVOLVED_OBJECT_TYPE_DAEMONSET = 3;
    */
-  DAEMONSET = 4,
+  DAEMONSET = 3,
 }
 
 /**
