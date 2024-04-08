@@ -20,6 +20,8 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// InvolvedObjectType is the kubernetes object type the notification targets
+// We currently alert for deployments, statefulsets and daemonsets
 type InvolvedObjectType int32
 
 const (
@@ -72,6 +74,7 @@ func (InvolvedObjectType) EnumDescriptor() ([]byte, []int) {
 	return file_porter_v1_prometheus_alerts_proto_rawDescGZIP(), []int{0}
 }
 
+// Alert represents a prometheus alert for one target object that is a daemonset, statefulset or deployment
 type Alert struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
