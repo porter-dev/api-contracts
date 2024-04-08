@@ -14,6 +14,7 @@ import type { ContractComplianceCheckGroup, EnumComplianceProfile, EnumComplianc
 import type { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, EnvVariableDeletions, JobRun, PorterApp } from "./porter_app_pb.js";
 import type { Addon, PrerequisiteAddon } from "./addons_pb.js";
 import type { AppEventType } from "./agent_app_event_types_pb.js";
+import type { Alert } from "./prometheus_alerts_pb.js";
 import type { EnumEnvGroupProviderType } from "./env_group_pb.js";
 import type { NotificationConfig } from "./notification_pb.js";
 import type { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
@@ -5077,6 +5078,70 @@ export declare class UpdateServiceDeploymentStatusRequest extends Message<Update
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateServiceDeploymentStatusRequest;
 
   static equals(a: UpdateServiceDeploymentStatusRequest | PlainMessage<UpdateServiceDeploymentStatusRequest> | undefined, b: UpdateServiceDeploymentStatusRequest | PlainMessage<UpdateServiceDeploymentStatusRequest> | undefined): boolean;
+}
+
+/**
+ * RecordPrometheusAlertRequest is sent to record an alert sent from prometheus
+ *
+ * @generated from message porter.v1.RecordPrometheusAlertRequest
+ */
+export declare class RecordPrometheusAlertRequest extends Message<RecordPrometheusAlertRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  /**
+   * @generated from field: repeated porter.v1.Alert alerts = 3;
+   */
+  alerts: Alert[];
+
+  constructor(data?: PartialMessage<RecordPrometheusAlertRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.RecordPrometheusAlertRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RecordPrometheusAlertRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RecordPrometheusAlertRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RecordPrometheusAlertRequest;
+
+  static equals(a: RecordPrometheusAlertRequest | PlainMessage<RecordPrometheusAlertRequest> | undefined, b: RecordPrometheusAlertRequest | PlainMessage<RecordPrometheusAlertRequest> | undefined): boolean;
+}
+
+/**
+ * RecordPrometheusAlertResponse is the response to a RecordPrometheusAlert request
+ *
+ * @generated from message porter.v1.RecordPrometheusAlertResponse
+ */
+export declare class RecordPrometheusAlertResponse extends Message<RecordPrometheusAlertResponse> {
+  /**
+   * error if recording failed
+   *
+   * @generated from field: porter.v1.Error error = 1;
+   */
+  error?: Error;
+
+  constructor(data?: PartialMessage<RecordPrometheusAlertResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.RecordPrometheusAlertResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): RecordPrometheusAlertResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): RecordPrometheusAlertResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): RecordPrometheusAlertResponse;
+
+  static equals(a: RecordPrometheusAlertResponse | PlainMessage<RecordPrometheusAlertResponse> | undefined, b: RecordPrometheusAlertResponse | PlainMessage<RecordPrometheusAlertResponse> | undefined): boolean;
 }
 
 /**
