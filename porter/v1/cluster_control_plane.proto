@@ -19,6 +19,7 @@ import "porter/v1/gke.proto";
 import "porter/v1/notification.proto";
 import "porter/v1/porter_app.proto";
 import "porter/v1/prometheus_alerts.proto";
+import "porter/v1/system_service.proto";
 
 message QuotaIncreaseRequest {
   int64 project_id = 1;
@@ -1699,6 +1700,9 @@ service ClusterControlPlaneService {
 
   // NotificationConfig gets the notification config for a given id
   rpc NotificationConfig(NotificationConfigRequest) returns (NotificationConfigResponse) {}
+
+  // ListSystemServiceStatus fetches system service statuses for system services in a cluster
+  rpc ListSystemServiceStatus(ListSystemServiceStatusRequest) returns (ListSystemServiceStatusResponse) {}
 }
 
 message EKSBearerTokenRequest {
@@ -1913,4 +1917,22 @@ message SharedNetworkSettingsResponse {
     //eks_cloud_provider_network is the aws vpc for the cluster
     AWSVpc eks_cloud_provider_network = 5;
   }
+}
+
+// ListSystemServiceStatusRequest is the request object for listing system service status in a cluster
+message ListSystemServiceStatusRequest {
+  // project_id is the id of the project this cluster is in
+  int64 project_id = 1;
+  // cluster_id is the id of the cluster
+  int64 cluster_id = 2;
+  // cloud_provider is the cloud provider this cluster is located in
+  EnumCloudProvider cloud_provider = 3;
+}
+
+// ListSystemServiceStatusResponse is the response object for listing system service status
+message ListSystemServiceStatusResponse {
+  // cluster_unresponsive is set to true if we haven't had contact with the cluster in the last 10 minutes
+  bool cluster_unresponsive = 1;
+  // system_service_status is a list of system service statuses. Users can assume there is only one entry per a system service.
+  repeated SystemServiceStatus system_service_status = 2;
 }

@@ -19,6 +19,7 @@ import { NotificationConfig } from "./notification_pb.js";
 import { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
 import { CloudContract } from "./cloud_contract_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
+import { SystemServiceStatus } from "./system_service_pb.js";
 
 /**
  * EnumUpdateTrigger describes the action that triggered a porter app revision update
@@ -2450,6 +2451,33 @@ export const SharedNetworkSettingsResponse = /*@__PURE__*/ proto3.makeMessageTyp
     { no: 3, name: "subnet_ids", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 4, name: "cloud_provider", kind: "enum", T: proto3.getEnumType(EnumCloudProvider) },
     { no: 5, name: "eks_cloud_provider_network", kind: "message", T: AWSVpc, oneof: "cloud_provider_network" },
+  ],
+);
+
+/**
+ * ListSystemServiceStatusRequest is the request object for listing system service status in a cluster
+ *
+ * @generated from message porter.v1.ListSystemServiceStatusRequest
+ */
+export const ListSystemServiceStatusRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.ListSystemServiceStatusRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "cloud_provider", kind: "enum", T: proto3.getEnumType(EnumCloudProvider) },
+  ],
+);
+
+/**
+ * ListSystemServiceStatusResponse is the response object for listing system service status
+ *
+ * @generated from message porter.v1.ListSystemServiceStatusResponse
+ */
+export const ListSystemServiceStatusResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.ListSystemServiceStatusResponse",
+  () => [
+    { no: 1, name: "cluster_unresponsive", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 2, name: "system_service_status", kind: "message", T: SystemServiceStatus, repeated: true },
   ],
 );
 

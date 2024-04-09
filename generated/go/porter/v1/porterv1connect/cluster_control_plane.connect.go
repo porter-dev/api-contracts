@@ -289,6 +289,9 @@ const (
 	// ClusterControlPlaneServiceNotificationConfigProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's NotificationConfig RPC.
 	ClusterControlPlaneServiceNotificationConfigProcedure = "/porter.v1.ClusterControlPlaneService/NotificationConfig"
+	// ClusterControlPlaneServiceListSystemServiceStatusProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's ListSystemServiceStatus RPC.
+	ClusterControlPlaneServiceListSystemServiceStatusProcedure = "/porter.v1.ClusterControlPlaneService/ListSystemServiceStatus"
 )
 
 // These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
@@ -379,6 +382,7 @@ var (
 	clusterControlPlaneServiceListEnvGroupsMethodDescriptor                       = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ListEnvGroups")
 	clusterControlPlaneServiceUpdateNotificationConfigMethodDescriptor            = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateNotificationConfig")
 	clusterControlPlaneServiceNotificationConfigMethodDescriptor                  = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("NotificationConfig")
+	clusterControlPlaneServiceListSystemServiceStatusMethodDescriptor             = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ListSystemServiceStatus")
 )
 
 // ClusterControlPlaneServiceClient is a client for the porter.v1.ClusterControlPlaneService
@@ -603,6 +607,8 @@ type ClusterControlPlaneServiceClient interface {
 	UpdateNotificationConfig(context.Context, *connect.Request[v1.UpdateNotificationConfigRequest]) (*connect.Response[v1.UpdateNotificationConfigResponse], error)
 	// NotificationConfig gets the notification config for a given id
 	NotificationConfig(context.Context, *connect.Request[v1.NotificationConfigRequest]) (*connect.Response[v1.NotificationConfigResponse], error)
+	// ListSystemServiceStatus fetches system service statuses for system services in a cluster
+	ListSystemServiceStatus(context.Context, *connect.Request[v1.ListSystemServiceStatusRequest]) (*connect.Response[v1.ListSystemServiceStatusResponse], error)
 }
 
 // NewClusterControlPlaneServiceClient constructs a client for the
@@ -1125,6 +1131,12 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			connect.WithSchema(clusterControlPlaneServiceNotificationConfigMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		listSystemServiceStatus: connect.NewClient[v1.ListSystemServiceStatusRequest, v1.ListSystemServiceStatusResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceListSystemServiceStatusProcedure,
+			connect.WithSchema(clusterControlPlaneServiceListSystemServiceStatusMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -1215,6 +1227,7 @@ type clusterControlPlaneServiceClient struct {
 	listEnvGroups                       *connect.Client[v1.ListEnvGroupsRequest, v1.ListEnvGroupsResponse]
 	updateNotificationConfig            *connect.Client[v1.UpdateNotificationConfigRequest, v1.UpdateNotificationConfigResponse]
 	notificationConfig                  *connect.Client[v1.NotificationConfigRequest, v1.NotificationConfigResponse]
+	listSystemServiceStatus             *connect.Client[v1.ListSystemServiceStatusRequest, v1.ListSystemServiceStatusResponse]
 }
 
 // QuotaIncrease calls porter.v1.ClusterControlPlaneService.QuotaIncrease.
@@ -1681,6 +1694,11 @@ func (c *clusterControlPlaneServiceClient) NotificationConfig(ctx context.Contex
 	return c.notificationConfig.CallUnary(ctx, req)
 }
 
+// ListSystemServiceStatus calls porter.v1.ClusterControlPlaneService.ListSystemServiceStatus.
+func (c *clusterControlPlaneServiceClient) ListSystemServiceStatus(ctx context.Context, req *connect.Request[v1.ListSystemServiceStatusRequest]) (*connect.Response[v1.ListSystemServiceStatusResponse], error) {
+	return c.listSystemServiceStatus.CallUnary(ctx, req)
+}
+
 // ClusterControlPlaneServiceHandler is an implementation of the
 // porter.v1.ClusterControlPlaneService service.
 type ClusterControlPlaneServiceHandler interface {
@@ -1903,6 +1921,8 @@ type ClusterControlPlaneServiceHandler interface {
 	UpdateNotificationConfig(context.Context, *connect.Request[v1.UpdateNotificationConfigRequest]) (*connect.Response[v1.UpdateNotificationConfigResponse], error)
 	// NotificationConfig gets the notification config for a given id
 	NotificationConfig(context.Context, *connect.Request[v1.NotificationConfigRequest]) (*connect.Response[v1.NotificationConfigResponse], error)
+	// ListSystemServiceStatus fetches system service statuses for system services in a cluster
+	ListSystemServiceStatus(context.Context, *connect.Request[v1.ListSystemServiceStatusRequest]) (*connect.Response[v1.ListSystemServiceStatusResponse], error)
 }
 
 // NewClusterControlPlaneServiceHandler builds an HTTP handler from the service implementation. It
@@ -2421,6 +2441,12 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		connect.WithSchema(clusterControlPlaneServiceNotificationConfigMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	clusterControlPlaneServiceListSystemServiceStatusHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceListSystemServiceStatusProcedure,
+		svc.ListSystemServiceStatus,
+		connect.WithSchema(clusterControlPlaneServiceListSystemServiceStatusMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/porter.v1.ClusterControlPlaneService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ClusterControlPlaneServiceQuotaIncreaseProcedure:
@@ -2593,6 +2619,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceUpdateNotificationConfigHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceNotificationConfigProcedure:
 			clusterControlPlaneServiceNotificationConfigHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceListSystemServiceStatusProcedure:
+			clusterControlPlaneServiceListSystemServiceStatusHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -2940,4 +2968,8 @@ func (UnimplementedClusterControlPlaneServiceHandler) UpdateNotificationConfig(c
 
 func (UnimplementedClusterControlPlaneServiceHandler) NotificationConfig(context.Context, *connect.Request[v1.NotificationConfigRequest]) (*connect.Response[v1.NotificationConfigResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.NotificationConfig is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) ListSystemServiceStatus(context.Context, *connect.Request[v1.ListSystemServiceStatusRequest]) (*connect.Response[v1.ListSystemServiceStatusResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ListSystemServiceStatus is not implemented"))
 }

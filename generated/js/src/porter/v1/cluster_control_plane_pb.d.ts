@@ -20,6 +20,7 @@ import type { NotificationConfig } from "./notification_pb.js";
 import type { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
 import type { CloudContract } from "./cloud_contract_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
+import type { SystemServiceStatus } from "./system_service_pb.js";
 
 /**
  * EnumUpdateTrigger describes the action that triggered a porter app revision update
@@ -7095,5 +7096,82 @@ export declare class SharedNetworkSettingsResponse extends Message<SharedNetwork
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SharedNetworkSettingsResponse;
 
   static equals(a: SharedNetworkSettingsResponse | PlainMessage<SharedNetworkSettingsResponse> | undefined, b: SharedNetworkSettingsResponse | PlainMessage<SharedNetworkSettingsResponse> | undefined): boolean;
+}
+
+/**
+ * ListSystemServiceStatusRequest is the request object for listing system service status in a cluster
+ *
+ * @generated from message porter.v1.ListSystemServiceStatusRequest
+ */
+export declare class ListSystemServiceStatusRequest extends Message<ListSystemServiceStatusRequest> {
+  /**
+   * project_id is the id of the project this cluster is in
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * cluster_id is the id of the cluster
+   *
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  /**
+   * cloud_provider is the cloud provider this cluster is located in
+   *
+   * @generated from field: porter.v1.EnumCloudProvider cloud_provider = 3;
+   */
+  cloudProvider: EnumCloudProvider;
+
+  constructor(data?: PartialMessage<ListSystemServiceStatusRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ListSystemServiceStatusRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListSystemServiceStatusRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListSystemServiceStatusRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListSystemServiceStatusRequest;
+
+  static equals(a: ListSystemServiceStatusRequest | PlainMessage<ListSystemServiceStatusRequest> | undefined, b: ListSystemServiceStatusRequest | PlainMessage<ListSystemServiceStatusRequest> | undefined): boolean;
+}
+
+/**
+ * ListSystemServiceStatusResponse is the response object for listing system service status
+ *
+ * @generated from message porter.v1.ListSystemServiceStatusResponse
+ */
+export declare class ListSystemServiceStatusResponse extends Message<ListSystemServiceStatusResponse> {
+  /**
+   * cluster_unresponsive is set to true if we haven't had contact with the cluster in the last 10 minutes
+   *
+   * @generated from field: bool cluster_unresponsive = 1;
+   */
+  clusterUnresponsive: boolean;
+
+  /**
+   * system_service_status is a list of system service statuses. Users can assume there is only one entry per a system service.
+   *
+   * @generated from field: repeated porter.v1.SystemServiceStatus system_service_status = 2;
+   */
+  systemServiceStatus: SystemServiceStatus[];
+
+  constructor(data?: PartialMessage<ListSystemServiceStatusResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ListSystemServiceStatusResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListSystemServiceStatusResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListSystemServiceStatusResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListSystemServiceStatusResponse;
+
+  static equals(a: ListSystemServiceStatusResponse | PlainMessage<ListSystemServiceStatusResponse> | undefined, b: ListSystemServiceStatusResponse | PlainMessage<ListSystemServiceStatusResponse> | undefined): boolean;
 }
 

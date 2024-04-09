@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package porter.v1;
+
+import "porter/v1/prometheus_alerts.proto";
+
+// SystemService identifies a system service by its name, namespace and the type of k8s object it runs
+message SystemService {
+  // name is the name of the service
+  string name = 1;
+  // namespace is the namespace where it is deployed
+  string namespace = 2;
+  // involved_object_type is the k8s object type the service runs
+  InvolvedObjectType involved_object_type = 3;
+}
+
+// ServiceStatus represents the status of a service
+enum ServiceStatus {
+  // SERVICE_STATUS_UNSPECIFIED is the default value
+  SERVICE_STATUS_UNSPECIFIED = 0;
+  // SERVICE_STATUS_HEALTHY is the value for a fully healthy service
+  SERVICE_STATUS_HEALTHY = 1;
+  // SERVICE_STATUS_PARTIAL_FAILURE is the health status for a partially failed service
+  // a service is in partial failure if only less than the max unavailable number of replicas declared on the service are failed
+  SERVICE_STATUS_PARTIAL_FAILURE = 2;
+  // SERVICE_STATUS_FAILURE is the health status for a fully failed service
+  SERVICE_STATUS_FAILURE = 3;
+}
+
+// SystemServiceStatus is the status for a single system service
+message SystemServiceStatus {
+  // system_service identifies the service in question
+  SystemService system_service = 1;
+  // service_status gives the status for the system service identified by system_service
+  ServiceStatus service_status = 2;
+}
