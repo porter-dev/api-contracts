@@ -7147,11 +7147,11 @@ export declare class ListSystemServiceStatusRequest extends Message<ListSystemSe
  */
 export declare class ListSystemServiceStatusResponse extends Message<ListSystemServiceStatusResponse> {
   /**
-   * no_cluster_hearbeat is set to true if the cluster has not heartbeat in the last 10 minutes
+   * cluster_unresponsive is set to true if we haven't had contact with the cluster in the last 10 minutes
    *
-   * @generated from field: bool no_cluster_hearbeat = 1;
+   * @generated from field: bool cluster_unresponsive = 1;
    */
-  noClusterHearbeat: boolean;
+  clusterUnresponsive: boolean;
 
   /**
    * system_service_status is a list of system service statuses. Users can assume there is only one entry per a system service.

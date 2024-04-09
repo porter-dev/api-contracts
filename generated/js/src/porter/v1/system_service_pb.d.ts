@@ -29,6 +29,7 @@ export declare enum ServiceStatus {
 
   /**
    * SERVICE_STATUS_PARTIAL_FAILURE is the health status for a partially failed service
+   * a service is in partial failure if only less than the max unavailable number of replicas declared on the service are failed
    *
    * @generated from enum value: SERVICE_STATUS_PARTIAL_FAILURE = 2;
    */

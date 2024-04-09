@@ -1700,6 +1700,9 @@ service ClusterControlPlaneService {
 
   // NotificationConfig gets the notification config for a given id
   rpc NotificationConfig(NotificationConfigRequest) returns (NotificationConfigResponse) {}
+
+  // ListSystemServiceStatus fetches system service statuses for system services in a cluster
+  rpc ListSystemServiceStatus(ListSystemServiceStatusRequest) returns (ListSystemServiceStatusResponse) {}
 }
 
 message EKSBearerTokenRequest {
@@ -1928,8 +1931,8 @@ message ListSystemServiceStatusRequest {
 
 // ListSystemServiceStatusResponse is the response object for listing system service status
 message ListSystemServiceStatusResponse {
-  // no_cluster_hearbeat is set to true if the cluster has not heartbeat in the last 10 minutes
-  bool no_cluster_hearbeat = 1;
+  // cluster_unresponsive is set to true if we haven't had contact with the cluster in the last 10 minutes
+  bool cluster_unresponsive = 1;
   // system_service_status is a list of system service statuses. Users can assume there is only one entry per a system service.
   repeated SystemServiceStatus system_service_status = 2;
 }

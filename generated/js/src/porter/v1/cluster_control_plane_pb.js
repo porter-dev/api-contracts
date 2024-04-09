@@ -2476,7 +2476,7 @@ export const ListSystemServiceStatusRequest = /*@__PURE__*/ proto3.makeMessageTy
 export const ListSystemServiceStatusResponse = /*@__PURE__*/ proto3.makeMessageType(
   "porter.v1.ListSystemServiceStatusResponse",
   () => [
-    { no: 1, name: "no_cluster_hearbeat", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 1, name: "cluster_unresponsive", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 2, name: "system_service_status", kind: "message", T: SystemServiceStatus, repeated: true },
   ],
 );

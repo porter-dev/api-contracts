@@ -29,6 +29,7 @@ const (
 	// SERVICE_STATUS_HEALTHY is the value for a fully healthy service
 	ServiceStatus_SERVICE_STATUS_HEALTHY ServiceStatus = 1
 	// SERVICE_STATUS_PARTIAL_FAILURE is the health status for a partially failed service
+	// a service is in partial failure if only less than the max unavailable number of replicas declared on the service are failed
 	ServiceStatus_SERVICE_STATUS_PARTIAL_FAILURE ServiceStatus = 2
 	// SERVICE_STATUS_FAILURE is the health status for a fully failed service
 	ServiceStatus_SERVICE_STATUS_FAILURE ServiceStatus = 3
