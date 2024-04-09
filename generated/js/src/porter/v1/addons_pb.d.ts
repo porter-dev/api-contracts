@@ -288,6 +288,20 @@ export declare class Datadog extends Message<Datadog> {
    */
   apmEnabled?: boolean;
 
+  /**
+   * cpu_cores is the number of CPU cores to allocate to datadog
+   *
+   * @generated from field: optional float cpu_cores = 6;
+   */
+  cpuCores?: number;
+
+  /**
+   * ram_megabytes is the amount of memory to allocate to datadog
+   *
+   * @generated from field: optional int32 ram_megabytes = 7;
+   */
+  ramMegabytes?: number;
+
   constructor(data?: PartialMessage<Datadog>);
 
   static readonly runtime: typeof proto3;

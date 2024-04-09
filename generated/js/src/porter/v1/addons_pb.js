@@ -93,6 +93,8 @@ export const Datadog = /*@__PURE__*/ proto3.makeMessageType(
     { no: 3, name: "logging_enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
     { no: 4, name: "dogstatsd_enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
     { no: 5, name: "apm_enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
+    { no: 6, name: "cpu_cores", kind: "scalar", T: 2 /* ScalarType.FLOAT */, opt: true },
+    { no: 7, name: "ram_megabytes", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
   ],
 );
 

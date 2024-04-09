@@ -79,4 +79,8 @@ message Datadog {
   optional bool dogstatsd_enabled = 4;
   // apm_enabled determines whether apm is enabled
   optional bool apm_enabled = 5;
+  // cpu_cores is the number of CPU cores to allocate to datadog
+  optional float cpu_cores = 6;
+  // ram_megabytes is the amount of memory to allocate to datadog
+  optional int32 ram_megabytes = 7;
 }
