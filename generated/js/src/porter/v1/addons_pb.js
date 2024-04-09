@@ -15,6 +15,7 @@ export const AddonType = /*@__PURE__*/ proto3.makeEnum(
     {no: 0, name: "ADDON_TYPE_UNSPECIFIED", localName: "UNSPECIFIED"},
     {no: 1, name: "ADDON_TYPE_POSTGRES", localName: "POSTGRES"},
     {no: 2, name: "ADDON_TYPE_REDIS", localName: "REDIS"},
+    {no: 3, name: "ADDON_TYPE_DATADOG", localName: "DATADOG"},
   ],
 );
 
@@ -44,6 +45,7 @@ export const Addon = /*@__PURE__*/ proto3.makeMessageType(
     { no: 3, name: "env_groups", kind: "message", T: EnvGroup, repeated: true },
     { no: 4, name: "postgres", kind: "message", T: Postgres, oneof: "config" },
     { no: 5, name: "redis", kind: "message", T: Redis, oneof: "config" },
+    { no: 6, name: "datadog", kind: "message", T: Datadog, oneof: "config" },
   ],
 );
 
@@ -75,6 +77,22 @@ export const Redis = /*@__PURE__*/ proto3.makeMessageType(
     { no: 2, name: "ram_megabytes", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
     { no: 3, name: "storage_gigabytes", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
     { no: 4, name: "master_user_password_literal", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+  ],
+);
+
+/**
+ * Datadog is the configuration for Datadog
+ *
+ * @generated from message porter.v1.Datadog
+ */
+export const Datadog = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.Datadog",
+  () => [
+    { no: 1, name: "site", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 2, name: "api_key", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 3, name: "logging_enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
+    { no: 4, name: "dogstatsd_enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
+    { no: 5, name: "apm_enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
   ],
 );
 

@@ -31,6 +31,13 @@ export declare enum AddonType {
    * @generated from enum value: ADDON_TYPE_REDIS = 2;
    */
   REDIS = 2,
+
+  /**
+   * ADDON_TYPE_DATADOG is the datadog addon type
+   *
+   * @generated from enum value: ADDON_TYPE_DATADOG = 3;
+   */
+  DATADOG = 3,
 }
 
 /**
@@ -110,6 +117,14 @@ export declare class Addon extends Message<Addon> {
      */
     value: Redis;
     case: "redis";
+  } | {
+    /**
+     * datadog is the configuration for the datadog addon
+     *
+     * @generated from field: porter.v1.Datadog datadog = 6;
+     */
+    value: Datadog;
+    case: "datadog";
   } | { case: undefined; value?: undefined };
 
   constructor(data?: PartialMessage<Addon>);
@@ -230,5 +245,61 @@ export declare class Redis extends Message<Redis> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Redis;
 
   static equals(a: Redis | PlainMessage<Redis> | undefined, b: Redis | PlainMessage<Redis> | undefined): boolean;
+}
+
+/**
+ * Datadog is the configuration for Datadog
+ *
+ * @generated from message porter.v1.Datadog
+ */
+export declare class Datadog extends Message<Datadog> {
+  /**
+   * site is the datadog site url
+   *
+   * @generated from field: optional string site = 1;
+   */
+  site?: string;
+
+  /**
+   * api_key is the api key
+   *
+   * @generated from field: optional string api_key = 2;
+   */
+  apiKey?: string;
+
+  /**
+   * logging_enabled determines whether all container logs go to datadog
+   *
+   * @generated from field: optional bool logging_enabled = 3;
+   */
+  loggingEnabled?: boolean;
+
+  /**
+   * dogstatsd_enabled determines whether dogstatsd is enabled
+   *
+   * @generated from field: optional bool dogstatsd_enabled = 4;
+   */
+  dogstatsdEnabled?: boolean;
+
+  /**
+   * apm_enabled determines whether apm is enabled
+   *
+   * @generated from field: optional bool apm_enabled = 5;
+   */
+  apmEnabled?: boolean;
+
+  constructor(data?: PartialMessage<Datadog>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.Datadog";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Datadog;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Datadog;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Datadog;
+
+  static equals(a: Datadog | PlainMessage<Datadog> | undefined, b: Datadog | PlainMessage<Datadog> | undefined): boolean;
 }
 

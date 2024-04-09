@@ -6,6 +6,7 @@
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 import type { ManagedDatastore } from "./datastore_pb.js";
+import type { Addon } from "./addons_pb.js";
 
 /**
  * CloudContract is a contract for all Porter-managed infrastructure within a project
@@ -20,6 +21,13 @@ export declare class CloudContract extends Message<CloudContract> {
    */
   datastores: ManagedDatastore[];
 
+  /**
+   * addons is the list of addons associated with the project
+   *
+   * @generated from field: repeated porter.v1.CloudContractAddon addons = 2;
+   */
+  addons: CloudContractAddon[];
+
   constructor(data?: PartialMessage<CloudContract>);
 
   static readonly runtime: typeof proto3;
@@ -33,6 +41,41 @@ export declare class CloudContract extends Message<CloudContract> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CloudContract;
 
   static equals(a: CloudContract | PlainMessage<CloudContract> | undefined, b: CloudContract | PlainMessage<CloudContract> | undefined): boolean;
+}
+
+/**
+ * CloudContractAddon is a contract for an addon managed by the cloud contract
+ *
+ * @generated from message porter.v1.CloudContractAddon
+ */
+export declare class CloudContractAddon extends Message<CloudContractAddon> {
+  /**
+   * cluster_id is the id of the cluster that the addon is deployed on
+   *
+   * @generated from field: int32 cluster_id = 1;
+   */
+  clusterId: number;
+
+  /**
+   * addon is the addon configuration
+   *
+   * @generated from field: porter.v1.Addon addon = 2;
+   */
+  addon?: Addon;
+
+  constructor(data?: PartialMessage<CloudContractAddon>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.CloudContractAddon";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): CloudContractAddon;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): CloudContractAddon;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): CloudContractAddon;
+
+  static equals(a: CloudContractAddon | PlainMessage<CloudContractAddon> | undefined, b: CloudContractAddon | PlainMessage<CloudContractAddon> | undefined): boolean;
 }
 
 /**
