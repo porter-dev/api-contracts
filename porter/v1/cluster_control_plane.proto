@@ -549,8 +549,6 @@ message UpdateAddonPayload {
   int64 project_id = 1;
   // commit_sha is the commit containing the latest values for the addon in the config repo
   string commit_sha = 2;
-  // is_preview describes whether this addon belongs to a preview app or not
-  bool is_preview = 3;
 }
 
 message RequireAppPayload {

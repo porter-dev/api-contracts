@@ -2644,13 +2644,6 @@ export declare class UpdateAddonPayload extends Message<UpdateAddonPayload> {
    */
   commitSha: string;
 
-  /**
-   * is_preview describes whether this addon belongs to a preview app or not
-   *
-   * @generated from field: bool is_preview = 3;
-   */
-  isPreview: boolean;
-
   constructor(data?: PartialMessage<UpdateAddonPayload>);
 
   static readonly runtime: typeof proto3;
