@@ -5,6 +5,7 @@
 
 import { proto3 } from "@bufbuild/protobuf";
 import { ManagedDatastore } from "./datastore_pb.js";
+import { Addon } from "./addons_pb.js";
 
 /**
  * CloudContract is a contract for all Porter-managed infrastructure within a project
@@ -15,6 +16,20 @@ export const CloudContract = /*@__PURE__*/ proto3.makeMessageType(
   "porter.v1.CloudContract",
   () => [
     { no: 1, name: "datastores", kind: "message", T: ManagedDatastore, repeated: true },
+    { no: 2, name: "addons", kind: "message", T: CloudContractAddon, repeated: true },
+  ],
+);
+
+/**
+ * CloudContractAddon is a contract for an addon managed by the cloud contract
+ *
+ * @generated from message porter.v1.CloudContractAddon
+ */
+export const CloudContractAddon = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.CloudContractAddon",
+  () => [
+    { no: 1, name: "cluster_id", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 2, name: "addon", kind: "message", T: Addon },
   ],
 );
 

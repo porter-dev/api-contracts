@@ -11,6 +11,8 @@ enum AddonType {
   ADDON_TYPE_POSTGRES = 1;
   // ADDON_TYPE_REDIS is the redis addon type
   ADDON_TYPE_REDIS = 2;
+  // ADDON_TYPE_DATADOG is the datadog addon type
+  ADDON_TYPE_DATADOG = 3;
 }
 
 // PrerequisiteAddon specifies an addon that must be installed before any apps can be installed
@@ -34,6 +36,8 @@ message Addon {
     Postgres postgres = 4;
     // redis is the configuration for the redis addon
     Redis redis = 5;
+    // datadog is the configuration for the datadog addon
+    Datadog datadog = 6;
   }
 }
 
@@ -61,4 +65,22 @@ message Redis {
   int32 storage_gigabytes = 3;
   // master_user_password_literal is the string value of the password; this is only used for creating the datastore password secret and is wiped when the contract is saved
   optional string master_user_password_literal = 4;
+}
+
+// Datadog is the configuration for Datadog
+message Datadog {
+  // site is the datadog site url
+  optional string site = 1;
+  // api_key is the api key
+  optional string api_key = 2;
+  // logging_enabled determines whether all container logs go to datadog
+  optional bool logging_enabled = 3;
+  // dogstatsd_enabled determines whether dogstatsd is enabled
+  optional bool dogstatsd_enabled = 4;
+  // apm_enabled determines whether apm is enabled
+  optional bool apm_enabled = 5;
+  // cpu_cores is the number of CPU cores to allocate to datadog
+  optional float cpu_cores = 6;
+  // ram_megabytes is the amount of memory to allocate to datadog
+  optional int32 ram_megabytes = 7;
 }

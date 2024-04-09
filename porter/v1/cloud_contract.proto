@@ -2,12 +2,23 @@ syntax = "proto3";
 
 package porter.v1;
 
+import "porter/v1/addons.proto";
 import "porter/v1/datastore.proto";
 
 // CloudContract is a contract for all Porter-managed infrastructure within a project
 message CloudContract {
   // datastores is the list of datastores associated with the project
   repeated ManagedDatastore datastores = 1;
+  // addons is the list of addons associated with the project
+  repeated CloudContractAddon addons = 2;
+}
+
+// CloudContractAddon is a contract for an addon managed by the cloud contract
+message CloudContractAddon {
+  // cluster_id is the id of the cluster that the addon is deployed on
+  int32 cluster_id = 1;
+  // addon is the addon configuration
+  Addon addon = 2;
 }
 
 // CloudContractRevision represents a cloud contract revision which should be reconciled
