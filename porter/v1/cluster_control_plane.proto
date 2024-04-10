@@ -1933,6 +1933,6 @@ message SystemStatusHistoryRequest {
 message SystemStatusHistoryResponse {
   // cluster_status_history is a timeseries of the cluster's status
   repeated ClusterStatus cluster_status_history = 1;
-  // system_service_status_history is a list of status timeseries for system services. Users can assume there is only one entry per a system service.
-  repeated SystemServiceStatusHistory system_service_status_history = 2;
+  // system_service_status_histories is a list of status timeseries for system services. Users can assume there is only one entry per a system service.
+  repeated SystemServiceStatusHistory system_service_status_histories = 2;
 }

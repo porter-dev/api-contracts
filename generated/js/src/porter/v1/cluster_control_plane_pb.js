@@ -2477,7 +2477,7 @@ export const SystemStatusHistoryResponse = /*@__PURE__*/ proto3.makeMessageType(
   "porter.v1.SystemStatusHistoryResponse",
   () => [
     { no: 1, name: "cluster_status_history", kind: "message", T: ClusterStatus, repeated: true },
-    { no: 2, name: "system_service_status_history", kind: "message", T: SystemServiceStatusHistory, repeated: true },
+    { no: 2, name: "system_service_status_histories", kind: "message", T: SystemServiceStatusHistory, repeated: true },
   ],
 );
 

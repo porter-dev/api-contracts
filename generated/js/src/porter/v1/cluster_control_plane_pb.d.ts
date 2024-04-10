@@ -7154,11 +7154,11 @@ export declare class SystemStatusHistoryResponse extends Message<SystemStatusHis
   clusterStatusHistory: ClusterStatus[];
 
   /**
-   * system_service_status_history is a list of status timeseries for system services. Users can assume there is only one entry per a system service.
+   * system_service_status_histories is a list of status timeseries for system services. Users can assume there is only one entry per a system service.
    *
-   * @generated from field: repeated porter.v1.SystemServiceStatusHistory system_service_status_history = 2;
+   * @generated from field: repeated porter.v1.SystemServiceStatusHistory system_service_status_histories = 2;
    */
-  systemServiceStatusHistory: SystemServiceStatusHistory[];
+  systemServiceStatusHistories: SystemServiceStatusHistory[];
 
   constructor(data?: PartialMessage<SystemStatusHistoryResponse>);
 
