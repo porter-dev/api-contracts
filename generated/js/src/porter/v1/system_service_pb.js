@@ -3,21 +3,21 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { proto3 } from "@bufbuild/protobuf";
+import { proto3, Timestamp } from "@bufbuild/protobuf";
 import { InvolvedObjectType } from "./prometheus_alerts_pb.js";
 
 /**
- * ServiceStatus represents the status of a service
+ * Status represents the health status of a service
  *
- * @generated from enum porter.v1.ServiceStatus
+ * @generated from enum porter.v1.Status
  */
-export const ServiceStatus = /*@__PURE__*/ proto3.makeEnum(
-  "porter.v1.ServiceStatus",
+export const Status = /*@__PURE__*/ proto3.makeEnum(
+  "porter.v1.Status",
   [
-    {no: 0, name: "SERVICE_STATUS_UNSPECIFIED", localName: "UNSPECIFIED"},
-    {no: 1, name: "SERVICE_STATUS_HEALTHY", localName: "HEALTHY"},
-    {no: 2, name: "SERVICE_STATUS_PARTIAL_FAILURE", localName: "PARTIAL_FAILURE"},
-    {no: 3, name: "SERVICE_STATUS_FAILURE", localName: "FAILURE"},
+    {no: 0, name: "STATUS_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "STATUS_HEALTHY", localName: "HEALTHY"},
+    {no: 2, name: "STATUS_PARTIAL_FAILURE", localName: "PARTIAL_FAILURE"},
+    {no: 3, name: "STATUS_FAILURE", localName: "FAILURE"},
   ],
 );
 
@@ -36,15 +36,41 @@ export const SystemService = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
- * SystemServiceStatus is the status for a single system service
+ * ServiceStatus is the status for a single system service at a certain time stamp
  *
- * @generated from message porter.v1.SystemServiceStatus
+ * @generated from message porter.v1.ServiceStatus
  */
-export const SystemServiceStatus = /*@__PURE__*/ proto3.makeMessageType(
-  "porter.v1.SystemServiceStatus",
+export const ServiceStatus = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.ServiceStatus",
+  () => [
+    { no: 1, name: "timestamp_field", kind: "message", T: Timestamp },
+    { no: 2, name: "status", kind: "enum", T: proto3.getEnumType(Status) },
+  ],
+);
+
+/**
+ * SystemServiceStatusHistory is a system service's status timeseries
+ *
+ * @generated from message porter.v1.SystemServiceStatusHistory
+ */
+export const SystemServiceStatusHistory = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.SystemServiceStatusHistory",
   () => [
     { no: 1, name: "system_service", kind: "message", T: SystemService },
-    { no: 2, name: "service_status", kind: "enum", T: proto3.getEnumType(ServiceStatus) },
+    { no: 2, name: "status_history", kind: "message", T: ServiceStatus, repeated: true },
+  ],
+);
+
+/**
+ * ClusterStatus is the status for a cluster at a certain timestamp
+ *
+ * @generated from message porter.v1.ClusterStatus
+ */
+export const ClusterStatus = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.ClusterStatus",
+  () => [
+    { no: 1, name: "timestamp_field", kind: "message", T: Timestamp },
+    { no: 2, name: "responsive", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
