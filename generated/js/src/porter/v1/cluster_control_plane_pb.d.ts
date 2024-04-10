@@ -20,7 +20,7 @@ import type { NotificationConfig } from "./notification_pb.js";
 import type { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
 import type { CloudContract } from "./cloud_contract_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
-import type { SystemServiceStatus } from "./system_service_pb.js";
+import type { ClusterStatus, SystemServiceStatusHistory } from "./system_service_pb.js";
 
 /**
  * EnumUpdateTrigger describes the action that triggered a porter app revision update
@@ -7099,11 +7099,11 @@ export declare class SharedNetworkSettingsResponse extends Message<SharedNetwork
 }
 
 /**
- * ListSystemServiceStatusRequest is the request object for listing system service status in a cluster
+ * SystemStatusHistoryRequest is the request object for fetching the system status history in a cluster
  *
- * @generated from message porter.v1.ListSystemServiceStatusRequest
+ * @generated from message porter.v1.SystemStatusHistoryRequest
  */
-export declare class ListSystemServiceStatusRequest extends Message<ListSystemServiceStatusRequest> {
+export declare class SystemStatusHistoryRequest extends Message<SystemStatusHistoryRequest> {
   /**
    * project_id is the id of the project this cluster is in
    *
@@ -7125,53 +7125,53 @@ export declare class ListSystemServiceStatusRequest extends Message<ListSystemSe
    */
   cloudProvider: EnumCloudProvider;
 
-  constructor(data?: PartialMessage<ListSystemServiceStatusRequest>);
+  constructor(data?: PartialMessage<SystemStatusHistoryRequest>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.ListSystemServiceStatusRequest";
+  static readonly typeName = "porter.v1.SystemStatusHistoryRequest";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListSystemServiceStatusRequest;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SystemStatusHistoryRequest;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListSystemServiceStatusRequest;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SystemStatusHistoryRequest;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListSystemServiceStatusRequest;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SystemStatusHistoryRequest;
 
-  static equals(a: ListSystemServiceStatusRequest | PlainMessage<ListSystemServiceStatusRequest> | undefined, b: ListSystemServiceStatusRequest | PlainMessage<ListSystemServiceStatusRequest> | undefined): boolean;
+  static equals(a: SystemStatusHistoryRequest | PlainMessage<SystemStatusHistoryRequest> | undefined, b: SystemStatusHistoryRequest | PlainMessage<SystemStatusHistoryRequest> | undefined): boolean;
 }
 
 /**
- * ListSystemServiceStatusResponse is the response object for listing system service status
+ * SystemStatusHistoryResponse is the response object for fetching the system status history in a cluster
  *
- * @generated from message porter.v1.ListSystemServiceStatusResponse
+ * @generated from message porter.v1.SystemStatusHistoryResponse
  */
-export declare class ListSystemServiceStatusResponse extends Message<ListSystemServiceStatusResponse> {
+export declare class SystemStatusHistoryResponse extends Message<SystemStatusHistoryResponse> {
   /**
-   * cluster_unresponsive is set to true if we haven't had contact with the cluster in the last 10 minutes
+   * cluster_status_history is a timeseries of the cluster's status
    *
-   * @generated from field: bool cluster_unresponsive = 1;
+   * @generated from field: repeated porter.v1.ClusterStatus cluster_status_history = 1;
    */
-  clusterUnresponsive: boolean;
+  clusterStatusHistory: ClusterStatus[];
 
   /**
-   * system_service_status is a list of system service statuses. Users can assume there is only one entry per a system service.
+   * system_service_status_history is a list of status timeseries for system services. Users can assume there is only one entry per a system service.
    *
-   * @generated from field: repeated porter.v1.SystemServiceStatus system_service_status = 2;
+   * @generated from field: repeated porter.v1.SystemServiceStatusHistory system_service_status_history = 2;
    */
-  systemServiceStatus: SystemServiceStatus[];
+  systemServiceStatusHistory: SystemServiceStatusHistory[];
 
-  constructor(data?: PartialMessage<ListSystemServiceStatusResponse>);
+  constructor(data?: PartialMessage<SystemStatusHistoryResponse>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.ListSystemServiceStatusResponse";
+  static readonly typeName = "porter.v1.SystemStatusHistoryResponse";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListSystemServiceStatusResponse;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SystemStatusHistoryResponse;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListSystemServiceStatusResponse;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SystemStatusHistoryResponse;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListSystemServiceStatusResponse;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SystemStatusHistoryResponse;
 
-  static equals(a: ListSystemServiceStatusResponse | PlainMessage<ListSystemServiceStatusResponse> | undefined, b: ListSystemServiceStatusResponse | PlainMessage<ListSystemServiceStatusResponse> | undefined): boolean;
+  static equals(a: SystemStatusHistoryResponse | PlainMessage<SystemStatusHistoryResponse> | undefined, b: SystemStatusHistoryResponse | PlainMessage<SystemStatusHistoryResponse> | undefined): boolean;
 }
 

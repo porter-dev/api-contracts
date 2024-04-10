@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package porter.v1;
 
+import "google/protobuf/timestamp.proto";
 import "porter/v1/prometheus_alerts.proto";
 
 // SystemService identifies a system service by its name, namespace and the type of k8s object it runs
@@ -14,23 +15,39 @@ message SystemService {
   InvolvedObjectType involved_object_type = 3;
 }
 
-// ServiceStatus represents the status of a service
-enum ServiceStatus {
-  // SERVICE_STATUS_UNSPECIFIED is the default value
-  SERVICE_STATUS_UNSPECIFIED = 0;
-  // SERVICE_STATUS_HEALTHY is the value for a fully healthy service
-  SERVICE_STATUS_HEALTHY = 1;
-  // SERVICE_STATUS_PARTIAL_FAILURE is the health status for a partially failed service
+// Status represents the health status of a service
+enum Status {
+  // STATUS_UNSPECIFIED is the default value
+  STATUS_UNSPECIFIED = 0;
+  // STATUS_HEALTHY is the value for a fully healthy service
+  STATUS_HEALTHY = 1;
+  // STATUS_PARTIAL_FAILURE is the health status for a partially failed service
   // a service is in partial failure if only less than the max unavailable number of replicas declared on the service are failed
-  SERVICE_STATUS_PARTIAL_FAILURE = 2;
-  // SERVICE_STATUS_FAILURE is the health status for a fully failed service
-  SERVICE_STATUS_FAILURE = 3;
+  STATUS_PARTIAL_FAILURE = 2;
+  // STATUS_FAILURE is the health status for a fully failed service
+  STATUS_FAILURE = 3;
 }
 
-// SystemServiceStatus is the status for a single system service
-message SystemServiceStatus {
-  // system_service identifies the service in question
+// ServiceStatus is the status for a single system service at a certain time stamp
+message ServiceStatus {
+  // timestamp_field holds the timestamp for this status
+  google.protobuf.Timestamp timestamp_field = 1;
+  // status gives the status for a service
+  Status status = 2;
+}
+
+// SystemServiceStatusHistory is a system service's status timeseries
+message SystemServiceStatusHistory {
+  // system_service identifies the service
   SystemService system_service = 1;
-  // service_status gives the status for the system service identified by system_service
-  ServiceStatus service_status = 2;
+  // status_history is a list of statuses for the service sorted in a descending order (so most recent comes first)
+  repeated ServiceStatus status_history = 2;
+}
+
+// ClusterStatus is the status for a cluster at a certain timestamp
+message ClusterStatus {
+  // timestamp_field holds the timestamp for this status
+  google.protobuf.Timestamp timestamp_field = 1;
+  // responsive is true if the cluster sent all the expected heartbeats in the time range represented by the timestamp
+  bool responsive = 2;
 }
