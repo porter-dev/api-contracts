@@ -298,6 +298,18 @@ const (
 	// ClusterControlPlaneServiceSystemStatusHistoryProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's SystemStatusHistory RPC.
 	ClusterControlPlaneServiceSystemStatusHistoryProcedure = "/porter.v1.ClusterControlPlaneService/SystemStatusHistory"
+	// ClusterControlPlaneServiceAddAppEventWebhookProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's AddAppEventWebhook RPC.
+	ClusterControlPlaneServiceAddAppEventWebhookProcedure = "/porter.v1.ClusterControlPlaneService/AddAppEventWebhook"
+	// ClusterControlPlaneServiceAppEventWebhookPayloadEncryptionKeyProcedure is the fully-qualified
+	// name of the ClusterControlPlaneService's AppEventWebhookPayloadEncryptionKey RPC.
+	ClusterControlPlaneServiceAppEventWebhookPayloadEncryptionKeyProcedure = "/porter.v1.ClusterControlPlaneService/AppEventWebhookPayloadEncryptionKey"
+	// ClusterControlPlaneServiceDeleteAppEventWebhookProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's DeleteAppEventWebhook RPC.
+	ClusterControlPlaneServiceDeleteAppEventWebhookProcedure = "/porter.v1.ClusterControlPlaneService/DeleteAppEventWebhook"
+	// ClusterControlPlaneServiceAppEventWebhooksProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's AppEventWebhooks RPC.
+	ClusterControlPlaneServiceAppEventWebhooksProcedure = "/porter.v1.ClusterControlPlaneService/AppEventWebhooks"
 )
 
 // These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
@@ -391,6 +403,10 @@ var (
 	clusterControlPlaneServiceUpdateNotificationConfigMethodDescriptor            = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateNotificationConfig")
 	clusterControlPlaneServiceNotificationConfigMethodDescriptor                  = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("NotificationConfig")
 	clusterControlPlaneServiceSystemStatusHistoryMethodDescriptor                 = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("SystemStatusHistory")
+	clusterControlPlaneServiceAddAppEventWebhookMethodDescriptor                  = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("AddAppEventWebhook")
+	clusterControlPlaneServiceAppEventWebhookPayloadEncryptionKeyMethodDescriptor = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("AppEventWebhookPayloadEncryptionKey")
+	clusterControlPlaneServiceDeleteAppEventWebhookMethodDescriptor               = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("DeleteAppEventWebhook")
+	clusterControlPlaneServiceAppEventWebhooksMethodDescriptor                    = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("AppEventWebhooks")
 )
 
 // ClusterControlPlaneServiceClient is a client for the porter.v1.ClusterControlPlaneService
@@ -620,6 +636,14 @@ type ClusterControlPlaneServiceClient interface {
 	NotificationConfig(context.Context, *connect.Request[v1.NotificationConfigRequest]) (*connect.Response[v1.NotificationConfigResponse], error)
 	// SystemStatusHistory fetches the system status history in a cluster
 	SystemStatusHistory(context.Context, *connect.Request[v1.SystemStatusHistoryRequest]) (*connect.Response[v1.SystemStatusHistoryResponse], error)
+	// AddAppEventWebhook configures a webhook to have requests sent on in reaction to events on an app
+	AddAppEventWebhook(context.Context, *connect.Request[v1.AddAppEventWebhookRequest]) (*connect.Response[v1.AddAppEventWebhookResponse], error)
+	// AppEventWebhookPayloadEncryptionKey fetches the payload encryption key set on a webhook
+	AppEventWebhookPayloadEncryptionKey(context.Context, *connect.Request[v1.AppEventWebhookPayloadEncryptionKeyRequest]) (*connect.Response[v1.AppEventWebhookPayloadEncryptionKeyResponse], error)
+	// DeleteAppEventWebhook removes an AppEventWebhook
+	DeleteAppEventWebhook(context.Context, *connect.Request[v1.DeleteAppEventWebhookRequest]) (*connect.Response[v1.DeleteAppEventWebhookResponse], error)
+	// AppEventWebhooks retrieves a list of AppEventWebhook configuration on an app
+	AppEventWebhooks(context.Context, *connect.Request[v1.AppEventWebhooksRequest]) (*connect.Response[v1.AppEventWebhooksResponse], error)
 }
 
 // NewClusterControlPlaneServiceClient constructs a client for the
@@ -1160,6 +1184,30 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			connect.WithSchema(clusterControlPlaneServiceSystemStatusHistoryMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		addAppEventWebhook: connect.NewClient[v1.AddAppEventWebhookRequest, v1.AddAppEventWebhookResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceAddAppEventWebhookProcedure,
+			connect.WithSchema(clusterControlPlaneServiceAddAppEventWebhookMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		appEventWebhookPayloadEncryptionKey: connect.NewClient[v1.AppEventWebhookPayloadEncryptionKeyRequest, v1.AppEventWebhookPayloadEncryptionKeyResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceAppEventWebhookPayloadEncryptionKeyProcedure,
+			connect.WithSchema(clusterControlPlaneServiceAppEventWebhookPayloadEncryptionKeyMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		deleteAppEventWebhook: connect.NewClient[v1.DeleteAppEventWebhookRequest, v1.DeleteAppEventWebhookResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceDeleteAppEventWebhookProcedure,
+			connect.WithSchema(clusterControlPlaneServiceDeleteAppEventWebhookMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		appEventWebhooks: connect.NewClient[v1.AppEventWebhooksRequest, v1.AppEventWebhooksResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceAppEventWebhooksProcedure,
+			connect.WithSchema(clusterControlPlaneServiceAppEventWebhooksMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -1253,6 +1301,10 @@ type clusterControlPlaneServiceClient struct {
 	updateNotificationConfig            *connect.Client[v1.UpdateNotificationConfigRequest, v1.UpdateNotificationConfigResponse]
 	notificationConfig                  *connect.Client[v1.NotificationConfigRequest, v1.NotificationConfigResponse]
 	systemStatusHistory                 *connect.Client[v1.SystemStatusHistoryRequest, v1.SystemStatusHistoryResponse]
+	addAppEventWebhook                  *connect.Client[v1.AddAppEventWebhookRequest, v1.AddAppEventWebhookResponse]
+	appEventWebhookPayloadEncryptionKey *connect.Client[v1.AppEventWebhookPayloadEncryptionKeyRequest, v1.AppEventWebhookPayloadEncryptionKeyResponse]
+	deleteAppEventWebhook               *connect.Client[v1.DeleteAppEventWebhookRequest, v1.DeleteAppEventWebhookResponse]
+	appEventWebhooks                    *connect.Client[v1.AppEventWebhooksRequest, v1.AppEventWebhooksResponse]
 }
 
 // MachineTypes calls porter.v1.ClusterControlPlaneService.MachineTypes.
@@ -1734,6 +1786,27 @@ func (c *clusterControlPlaneServiceClient) SystemStatusHistory(ctx context.Conte
 	return c.systemStatusHistory.CallUnary(ctx, req)
 }
 
+// AddAppEventWebhook calls porter.v1.ClusterControlPlaneService.AddAppEventWebhook.
+func (c *clusterControlPlaneServiceClient) AddAppEventWebhook(ctx context.Context, req *connect.Request[v1.AddAppEventWebhookRequest]) (*connect.Response[v1.AddAppEventWebhookResponse], error) {
+	return c.addAppEventWebhook.CallUnary(ctx, req)
+}
+
+// AppEventWebhookPayloadEncryptionKey calls
+// porter.v1.ClusterControlPlaneService.AppEventWebhookPayloadEncryptionKey.
+func (c *clusterControlPlaneServiceClient) AppEventWebhookPayloadEncryptionKey(ctx context.Context, req *connect.Request[v1.AppEventWebhookPayloadEncryptionKeyRequest]) (*connect.Response[v1.AppEventWebhookPayloadEncryptionKeyResponse], error) {
+	return c.appEventWebhookPayloadEncryptionKey.CallUnary(ctx, req)
+}
+
+// DeleteAppEventWebhook calls porter.v1.ClusterControlPlaneService.DeleteAppEventWebhook.
+func (c *clusterControlPlaneServiceClient) DeleteAppEventWebhook(ctx context.Context, req *connect.Request[v1.DeleteAppEventWebhookRequest]) (*connect.Response[v1.DeleteAppEventWebhookResponse], error) {
+	return c.deleteAppEventWebhook.CallUnary(ctx, req)
+}
+
+// AppEventWebhooks calls porter.v1.ClusterControlPlaneService.AppEventWebhooks.
+func (c *clusterControlPlaneServiceClient) AppEventWebhooks(ctx context.Context, req *connect.Request[v1.AppEventWebhooksRequest]) (*connect.Response[v1.AppEventWebhooksResponse], error) {
+	return c.appEventWebhooks.CallUnary(ctx, req)
+}
+
 // ClusterControlPlaneServiceHandler is an implementation of the
 // porter.v1.ClusterControlPlaneService service.
 type ClusterControlPlaneServiceHandler interface {
@@ -1961,6 +2034,14 @@ type ClusterControlPlaneServiceHandler interface {
 	NotificationConfig(context.Context, *connect.Request[v1.NotificationConfigRequest]) (*connect.Response[v1.NotificationConfigResponse], error)
 	// SystemStatusHistory fetches the system status history in a cluster
 	SystemStatusHistory(context.Context, *connect.Request[v1.SystemStatusHistoryRequest]) (*connect.Response[v1.SystemStatusHistoryResponse], error)
+	// AddAppEventWebhook configures a webhook to have requests sent on in reaction to events on an app
+	AddAppEventWebhook(context.Context, *connect.Request[v1.AddAppEventWebhookRequest]) (*connect.Response[v1.AddAppEventWebhookResponse], error)
+	// AppEventWebhookPayloadEncryptionKey fetches the payload encryption key set on a webhook
+	AppEventWebhookPayloadEncryptionKey(context.Context, *connect.Request[v1.AppEventWebhookPayloadEncryptionKeyRequest]) (*connect.Response[v1.AppEventWebhookPayloadEncryptionKeyResponse], error)
+	// DeleteAppEventWebhook removes an AppEventWebhook
+	DeleteAppEventWebhook(context.Context, *connect.Request[v1.DeleteAppEventWebhookRequest]) (*connect.Response[v1.DeleteAppEventWebhookResponse], error)
+	// AppEventWebhooks retrieves a list of AppEventWebhook configuration on an app
+	AppEventWebhooks(context.Context, *connect.Request[v1.AppEventWebhooksRequest]) (*connect.Response[v1.AppEventWebhooksResponse], error)
 }
 
 // NewClusterControlPlaneServiceHandler builds an HTTP handler from the service implementation. It
@@ -2497,6 +2578,30 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		connect.WithSchema(clusterControlPlaneServiceSystemStatusHistoryMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	clusterControlPlaneServiceAddAppEventWebhookHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceAddAppEventWebhookProcedure,
+		svc.AddAppEventWebhook,
+		connect.WithSchema(clusterControlPlaneServiceAddAppEventWebhookMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	clusterControlPlaneServiceAppEventWebhookPayloadEncryptionKeyHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceAppEventWebhookPayloadEncryptionKeyProcedure,
+		svc.AppEventWebhookPayloadEncryptionKey,
+		connect.WithSchema(clusterControlPlaneServiceAppEventWebhookPayloadEncryptionKeyMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	clusterControlPlaneServiceDeleteAppEventWebhookHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceDeleteAppEventWebhookProcedure,
+		svc.DeleteAppEventWebhook,
+		connect.WithSchema(clusterControlPlaneServiceDeleteAppEventWebhookMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	clusterControlPlaneServiceAppEventWebhooksHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceAppEventWebhooksProcedure,
+		svc.AppEventWebhooks,
+		connect.WithSchema(clusterControlPlaneServiceAppEventWebhooksMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/porter.v1.ClusterControlPlaneService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ClusterControlPlaneServiceMachineTypesProcedure:
@@ -2675,6 +2780,14 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceNotificationConfigHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceSystemStatusHistoryProcedure:
 			clusterControlPlaneServiceSystemStatusHistoryHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceAddAppEventWebhookProcedure:
+			clusterControlPlaneServiceAddAppEventWebhookHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceAppEventWebhookPayloadEncryptionKeyProcedure:
+			clusterControlPlaneServiceAppEventWebhookPayloadEncryptionKeyHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceDeleteAppEventWebhookProcedure:
+			clusterControlPlaneServiceDeleteAppEventWebhookHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceAppEventWebhooksProcedure:
+			clusterControlPlaneServiceAppEventWebhooksHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -3034,4 +3147,20 @@ func (UnimplementedClusterControlPlaneServiceHandler) NotificationConfig(context
 
 func (UnimplementedClusterControlPlaneServiceHandler) SystemStatusHistory(context.Context, *connect.Request[v1.SystemStatusHistoryRequest]) (*connect.Response[v1.SystemStatusHistoryResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.SystemStatusHistory is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) AddAppEventWebhook(context.Context, *connect.Request[v1.AddAppEventWebhookRequest]) (*connect.Response[v1.AddAppEventWebhookResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.AddAppEventWebhook is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) AppEventWebhookPayloadEncryptionKey(context.Context, *connect.Request[v1.AppEventWebhookPayloadEncryptionKeyRequest]) (*connect.Response[v1.AppEventWebhookPayloadEncryptionKeyResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.AppEventWebhookPayloadEncryptionKey is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) DeleteAppEventWebhook(context.Context, *connect.Request[v1.DeleteAppEventWebhookRequest]) (*connect.Response[v1.DeleteAppEventWebhookResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.DeleteAppEventWebhook is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) AppEventWebhooks(context.Context, *connect.Request[v1.AppEventWebhooksRequest]) (*connect.Response[v1.AppEventWebhooksResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.AppEventWebhooks is not implemented"))
 }

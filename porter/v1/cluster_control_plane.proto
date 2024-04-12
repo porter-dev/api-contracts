@@ -5,6 +5,7 @@ package porter.v1;
 import "google/protobuf/timestamp.proto";
 import "porter/v1/addons.proto";
 import "porter/v1/agent_app_event_types.proto";
+import "porter/v1/app_event_webhook.proto";
 import "porter/v1/aws_assume_role.proto";
 import "porter/v1/cloud_contract.proto";
 import "porter/v1/cloud_provider_credentials.proto";
@@ -20,7 +21,6 @@ import "porter/v1/notification.proto";
 import "porter/v1/porter_app.proto";
 import "porter/v1/prometheus_alerts.proto";
 import "porter/v1/system_service.proto";
-import "porter/v1/app_event_webhook.proto";
 
 message MachineTypesRequest {
   int64 project_id = 1;
@@ -1733,6 +1733,18 @@ service ClusterControlPlaneService {
 
   // SystemStatusHistory fetches the system status history in a cluster
   rpc SystemStatusHistory(SystemStatusHistoryRequest) returns (SystemStatusHistoryResponse) {}
+
+  // AddAppEventWebhook configures a webhook to have requests sent on in reaction to events on an app
+  rpc AddAppEventWebhook(AddAppEventWebhookRequest) returns (AddAppEventWebhookResponse) {}
+
+  // AppEventWebhookPayloadEncryptionKey fetches the payload encryption key set on a webhook
+  rpc AppEventWebhookPayloadEncryptionKey(AppEventWebhookPayloadEncryptionKeyRequest) returns (AppEventWebhookPayloadEncryptionKeyResponse) {}
+
+  // DeleteAppEventWebhook removes an AppEventWebhook
+  rpc DeleteAppEventWebhook(DeleteAppEventWebhookRequest) returns (DeleteAppEventWebhookResponse) {}
+
+  // AppEventWebhooks retrieves a list of AppEventWebhook configuration on an app
+  rpc AppEventWebhooks(AppEventWebhooksRequest) returns (AppEventWebhooksResponse) {}
 }
 
 message EKSBearerTokenRequest {
@@ -1967,18 +1979,62 @@ message SystemStatusHistoryResponse {
   repeated SystemServiceStatusHistory system_service_status_histories = 2;
 }
 
-
+// AddAppEventWebhookRequest is teh request to add a webhook that will have requests sent to upon events related to a certain app
 message AddAppEventWebhookRequest {
-  // project_id is the id of the project 
-  string project_id = 1; 
-  // cluster_id is the id of the cluster
-  string cluster_id = 2;  
+  // project_id is the id of the project
+  int64 project_id = 1;
+  // deployment_target_identifier is the object that identifies the deployment target where the app is installed
+  DeploymentTargetIdentifier deployment_target_identifier = 2;
   // app_name is the name of the application
-  string app_name = 3; 
-  // webhook_url is the url of the webhook
-  bytes webhook_url = 4; 
-  // app_event_type is the type of the app event this webhook is being added for 
-  WebhookAppEventType app_event_type = 5; 
-  // app_event_status is the status of the app event this webhook is being added for 
-  WebhookAppEventStatus app_event_status = 6;
+  string app_name = 3;
+  // app_event_webhook is the webhook configuration
+  AppEventWebhook app_event_webhook = 4;
+}
+
+// AddAppEventWebhookResponse is a response to a request to add a webhook
+message AddAppEventWebhookResponse {
+  // id is a unique identifier for a configured webhook
+  string id = 1;
+  // payload_encryption_key is the key that will be used to encrypt payloads to the webhook
+  bytes payload_encryption_key = 2;
+}
+
+// AppEventWebhookPayloadEncryptionKeyRequest is a request to get the payload encryption key on an AppEventWebhook
+message AppEventWebhookPayloadEncryptionKeyRequest {
+  // id uniquely identifies an AppEventWebhook
+  string id = 1;
+}
+
+// AppEventWebhookPayloadEncryptionKeyResponse is a response to  a request to get the payload encryption key on an AppEventWebhook
+message AppEventWebhookPayloadEncryptionKeyResponse {
+  // payload_encryption_key is the key that will be used to encrypt payloads to the webhook
+  bytes payload_encryption_key = 1;
+}
+
+// DeleteAppEventWebhookRequest deletes an AppEventWebhook with a certain ID
+message DeleteAppEventWebhookRequest {
+  // id is a unique identifier for a configured webhook
+  string id = 1;
+}
+
+// DeleteAppEventWebhookResponse is the response to a request to delete an AppEventWebhook
+message DeleteAppEventWebhookResponse {
+  // id is a unique identifier for a configured webhook
+  string id = 1;
+}
+
+// AppEventWebhooksRequest is a request to list AppEventWebhooks configured on an app
+message AppEventWebhooksRequest {
+  // project_id is the id of the project
+  int64 project_id = 1;
+  // deployment_target_identifier is the object that identifies the deployment target where the app is installed
+  DeploymentTargetIdentifier deployment_target_identifier = 2;
+  // app_name is the name of the application
+  string app_name = 3;
+}
+
+// AppEventWebhooks is a response to a request to list AppEventWebhook
+message AppEventWebhooksResponse {
+  // app_event_webhooks are all webhooks configured on a certain app
+  repeated AppEventWebhook app_event_webhooks = 1;
 }
