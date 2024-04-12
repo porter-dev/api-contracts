@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package porter.v1; 
+
+// WebhookAppEventType is the app event type a webhook can be configured for
+enum WebhookAppEventType {
+    // WEBHOOK_APP_EVENT_TYPE_UNSPECIFIED is the default value
+    WEBHOOK_APP_EVENT_TYPE_UNSPECIFIED = 0;
+
+    // WEBHOOK_APP_EVENT_TYPE_DEPLOY is when the webhook is configured for deploy events
+    WEBHOOK_APP_EVENT_TYPE_DEPLOY = 1; 
+
+    // WEBHOOK_APP_EVENT_TYPE_BUILD is when the webhook is configured for build events
+    WEBHOOK_APP_EVENT_TYPE_BUILD = 2; 
+
+    // WEBHOOK_APP_EVENT_TYPE_PREDEPLOYT is when the webhook is configured for predeploy events 
+    WEBHOOK_APP_EVENT_TYPE_PREDEPLOY = 3; 
+
+    // WEBHOOK_APP_EVENT_TYPE_INIT_DEPLOY is when the webhook is configured for initial deploy
+    WEBHOOK_APP_EVENT_TYPE_INIT_DEPLOY = 4;
+}
+
+// WebhookAppEventStatus is the app evnet status a webhook can be configured for
+enum WebhookAppEventStatus {
+    // WEBHOOK_APP_EVENT_STATUS_UNSPECIFIED is the default value
+    WEBHOOK_APP_EVENT_STATUS_UNSPECIFIED = 0;
+
+    // WEBHOOK_APP_EVENT_STATUS_SUCCESS configures webhook for success events
+    WEBHOOK_APP_EVENT_STATUS_SUCCESS = 1; 
+
+    // WEBHOOK_APP_EVENT_STATUS_FAILED configures whebhook for failed events 
+    WEBHOOK_APP_EVENT_STATUS_FAILED = 2; 
+   
+    // WEBHOOK_APP_EVENT_STATUS_PROGRESSING configures webhook for progressing events
+    WEBHOOK_APP_EVENT_STATUS_PROGRESSING = 3;
+
+    // WEBHOOK_APP_EVENT_STATUS_PROGRESSING configures webhook for canceled events
+    WEBHOOK_APP_EVENT_STATUS_CANCELED = 4;
+}

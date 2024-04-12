@@ -20,6 +20,7 @@ import "porter/v1/notification.proto";
 import "porter/v1/porter_app.proto";
 import "porter/v1/prometheus_alerts.proto";
 import "porter/v1/system_service.proto";
+import "porter/v1/app_event_webhook.proto";
 
 message MachineTypesRequest {
   int64 project_id = 1;
@@ -1964,4 +1965,20 @@ message SystemStatusHistoryResponse {
   repeated ClusterStatus cluster_status_history = 1;
   // system_service_status_histories is a list of status timeseries for system services. Users can assume there is only one entry per a system service.
   repeated SystemServiceStatusHistory system_service_status_histories = 2;
+}
+
+
+message AddAppEventWebhookRequest {
+  // project_id is the id of the project 
+  string project_id = 1; 
+  // cluster_id is the id of the cluster
+  string cluster_id = 2;  
+  // app_name is the name of the application
+  string app_name = 3; 
+  // webhook_url is the url of the webhook
+  bytes webhook_url = 4; 
+  // app_event_type is the type of the app event this webhook is being added for 
+  WebhookAppEventType app_event_type = 5; 
+  // app_event_status is the status of the app event this webhook is being added for 
+  WebhookAppEventStatus app_event_status = 6;
 }
