@@ -19,7 +19,7 @@ import { NotificationConfig } from "./notification_pb.js";
 import { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
 import { CloudContract } from "./cloud_contract_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
-import { SystemServiceStatus } from "./system_service_pb.js";
+import { ClusterStatus, SystemServiceStatusHistory } from "./system_service_pb.js";
 
 /**
  * EnumUpdateTrigger describes the action that triggered a porter app revision update
@@ -2476,12 +2476,12 @@ export const SharedNetworkSettingsResponse = /*@__PURE__*/ proto3.makeMessageTyp
 );
 
 /**
- * ListSystemServiceStatusRequest is the request object for listing system service status in a cluster
+ * SystemStatusHistoryRequest is the request object for fetching the system status history in a cluster
  *
- * @generated from message porter.v1.ListSystemServiceStatusRequest
+ * @generated from message porter.v1.SystemStatusHistoryRequest
  */
-export const ListSystemServiceStatusRequest = /*@__PURE__*/ proto3.makeMessageType(
-  "porter.v1.ListSystemServiceStatusRequest",
+export const SystemStatusHistoryRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.SystemStatusHistoryRequest",
   () => [
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
@@ -2490,15 +2490,15 @@ export const ListSystemServiceStatusRequest = /*@__PURE__*/ proto3.makeMessageTy
 );
 
 /**
- * ListSystemServiceStatusResponse is the response object for listing system service status
+ * SystemStatusHistoryResponse is the response object for fetching the system status history in a cluster
  *
- * @generated from message porter.v1.ListSystemServiceStatusResponse
+ * @generated from message porter.v1.SystemStatusHistoryResponse
  */
-export const ListSystemServiceStatusResponse = /*@__PURE__*/ proto3.makeMessageType(
-  "porter.v1.ListSystemServiceStatusResponse",
+export const SystemStatusHistoryResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.SystemStatusHistoryResponse",
   () => [
-    { no: 1, name: "cluster_unresponsive", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 2, name: "system_service_status", kind: "message", T: SystemServiceStatus, repeated: true },
+    { no: 1, name: "cluster_status_history", kind: "message", T: ClusterStatus, repeated: true },
+    { no: 2, name: "system_service_status_histories", kind: "message", T: SystemServiceStatusHistory, repeated: true },
   ],
 );
 
