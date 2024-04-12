@@ -676,6 +676,27 @@ export const UpdateAddonResponse = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * @generated from message porter.v1.DeleteAddonRequest
+ */
+export const DeleteAddonRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.DeleteAddonRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+    { no: 4, name: "addon_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.DeleteAddonResponse
+ */
+export const DeleteAddonResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.DeleteAddonResponse",
+  [],
+);
+
+/**
  * @generated from message porter.v1.UpdateRevisionStatusRequest
  */
 export const UpdateRevisionStatusRequest = /*@__PURE__*/ proto3.makeMessageType(

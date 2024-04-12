@@ -1871,7 +1871,8 @@ export declare class UpdateAddonRequest extends Message<UpdateAddonRequest> {
   clusterId: bigint;
 
   /**
-   * deployment_target_identifier is the object that identifies the deployment target for the app
+   * deployment_target_identifier is the object that identifies the deployment target for the addon.
+   * If cluster_id is specified and deployment_target_identifier is not, then the default deployment target for the provided cluster will be used
    *
    * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 3;
    */
@@ -1923,6 +1924,69 @@ export declare class UpdateAddonResponse extends Message<UpdateAddonResponse> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateAddonResponse;
 
   static equals(a: UpdateAddonResponse | PlainMessage<UpdateAddonResponse> | undefined, b: UpdateAddonResponse | PlainMessage<UpdateAddonResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.DeleteAddonRequest
+ */
+export declare class DeleteAddonRequest extends Message<DeleteAddonRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target for the addon
+   * If cluster_id is specified and deployment_target_identifier is not, then the default deployment target for the provided cluster will be used
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 3;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  /**
+   * addon_name specifies the addon we would like to delete in the deployment target
+   *
+   * @generated from field: string addon_name = 4;
+   */
+  addonName: string;
+
+  constructor(data?: PartialMessage<DeleteAddonRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeleteAddonRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteAddonRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteAddonRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteAddonRequest;
+
+  static equals(a: DeleteAddonRequest | PlainMessage<DeleteAddonRequest> | undefined, b: DeleteAddonRequest | PlainMessage<DeleteAddonRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.DeleteAddonResponse
+ */
+export declare class DeleteAddonResponse extends Message<DeleteAddonResponse> {
+  constructor(data?: PartialMessage<DeleteAddonResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeleteAddonResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteAddonResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteAddonResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteAddonResponse;
+
+  static equals(a: DeleteAddonResponse | PlainMessage<DeleteAddonResponse> | undefined, b: DeleteAddonResponse | PlainMessage<DeleteAddonResponse> | undefined): boolean;
 }
 
 /**
