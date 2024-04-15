@@ -97,32 +97,32 @@ export declare enum WebhookAppEventStatus {
  */
 export declare class AppEventWebhook extends Message<AppEventWebhook> {
   /**
-   * id is a unique identifier for a webhook
-   *
-   * @generated from field: string id = 1;
-   */
-  id: string;
-
-  /**
    * webhook_url is the url of the webhook
    *
-   * @generated from field: bytes webhook_url = 2;
+   * @generated from field: bytes webhook_url = 1;
    */
   webhookUrl: Uint8Array;
 
   /**
    * app_event_type is the type of the app event this webhook is being added for
    *
-   * @generated from field: porter.v1.WebhookAppEventType app_event_type = 3;
+   * @generated from field: porter.v1.WebhookAppEventType app_event_type = 2;
    */
   appEventType: WebhookAppEventType;
 
   /**
    * app_event_status is the status of the app event this webhook is being added for
    *
-   * @generated from field: porter.v1.WebhookAppEventStatus app_event_status = 4;
+   * @generated from field: porter.v1.WebhookAppEventStatus app_event_status = 3;
    */
   appEventStatus: WebhookAppEventStatus;
+
+  /**
+   * payload_encryption_key is the key that will be used to encrypt the payload
+   *
+   * @generated from field: bytes payload_encryption_key = 4;
+   */
+  payloadEncryptionKey: Uint8Array;
 
   constructor(data?: PartialMessage<AppEventWebhook>);
 

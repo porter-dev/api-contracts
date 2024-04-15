@@ -40,12 +40,12 @@ enum WebhookAppEventStatus {
 
 // AppEventWebhook is a webhook configured to have requests sent to on app events
 message AppEventWebhook {
-  // id is a unique identifier for a webhook
-  string id = 1;
   // webhook_url is the url of the webhook
-  bytes webhook_url = 2;
+  bytes webhook_url = 1;
   // app_event_type is the type of the app event this webhook is being added for
-  WebhookAppEventType app_event_type = 3;
+  WebhookAppEventType app_event_type = 2;
   // app_event_status is the status of the app event this webhook is being added for
-  WebhookAppEventStatus app_event_status = 4;
+  WebhookAppEventStatus app_event_status = 3;
+  // payload_encryption_key is the key that will be used to encrypt the payload
+  bytes payload_encryption_key = 4;
 }

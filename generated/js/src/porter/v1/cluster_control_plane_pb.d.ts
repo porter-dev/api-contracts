@@ -7304,202 +7304,6 @@ export declare class SystemStatusHistoryResponse extends Message<SystemStatusHis
 }
 
 /**
- * AddAppEventWebhookRequest is teh request to add a webhook that will have requests sent to upon events related to a certain app
- *
- * @generated from message porter.v1.AddAppEventWebhookRequest
- */
-export declare class AddAppEventWebhookRequest extends Message<AddAppEventWebhookRequest> {
-  /**
-   * project_id is the id of the project
-   *
-   * @generated from field: int64 project_id = 1;
-   */
-  projectId: bigint;
-
-  /**
-   * deployment_target_identifier is the object that identifies the deployment target where the app is installed
-   *
-   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 2;
-   */
-  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
-
-  /**
-   * app_name is the name of the application
-   *
-   * @generated from field: string app_name = 3;
-   */
-  appName: string;
-
-  /**
-   * app_event_webhook is the webhook configuration
-   *
-   * @generated from field: porter.v1.AppEventWebhook app_event_webhook = 4;
-   */
-  appEventWebhook?: AppEventWebhook;
-
-  constructor(data?: PartialMessage<AddAppEventWebhookRequest>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.AddAppEventWebhookRequest";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AddAppEventWebhookRequest;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AddAppEventWebhookRequest;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AddAppEventWebhookRequest;
-
-  static equals(a: AddAppEventWebhookRequest | PlainMessage<AddAppEventWebhookRequest> | undefined, b: AddAppEventWebhookRequest | PlainMessage<AddAppEventWebhookRequest> | undefined): boolean;
-}
-
-/**
- * AddAppEventWebhookResponse is a response to a request to add a webhook
- *
- * @generated from message porter.v1.AddAppEventWebhookResponse
- */
-export declare class AddAppEventWebhookResponse extends Message<AddAppEventWebhookResponse> {
-  /**
-   * id is a unique identifier for a configured webhook
-   *
-   * @generated from field: string id = 1;
-   */
-  id: string;
-
-  /**
-   * payload_encryption_key is the key that will be used to encrypt payloads to the webhook
-   *
-   * @generated from field: bytes payload_encryption_key = 2;
-   */
-  payloadEncryptionKey: Uint8Array;
-
-  constructor(data?: PartialMessage<AddAppEventWebhookResponse>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.AddAppEventWebhookResponse";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AddAppEventWebhookResponse;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AddAppEventWebhookResponse;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AddAppEventWebhookResponse;
-
-  static equals(a: AddAppEventWebhookResponse | PlainMessage<AddAppEventWebhookResponse> | undefined, b: AddAppEventWebhookResponse | PlainMessage<AddAppEventWebhookResponse> | undefined): boolean;
-}
-
-/**
- * AppEventWebhookPayloadEncryptionKeyRequest is a request to get the payload encryption key on an AppEventWebhook
- *
- * @generated from message porter.v1.AppEventWebhookPayloadEncryptionKeyRequest
- */
-export declare class AppEventWebhookPayloadEncryptionKeyRequest extends Message<AppEventWebhookPayloadEncryptionKeyRequest> {
-  /**
-   * id uniquely identifies an AppEventWebhook
-   *
-   * @generated from field: string id = 1;
-   */
-  id: string;
-
-  constructor(data?: PartialMessage<AppEventWebhookPayloadEncryptionKeyRequest>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.AppEventWebhookPayloadEncryptionKeyRequest";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AppEventWebhookPayloadEncryptionKeyRequest;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AppEventWebhookPayloadEncryptionKeyRequest;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AppEventWebhookPayloadEncryptionKeyRequest;
-
-  static equals(a: AppEventWebhookPayloadEncryptionKeyRequest | PlainMessage<AppEventWebhookPayloadEncryptionKeyRequest> | undefined, b: AppEventWebhookPayloadEncryptionKeyRequest | PlainMessage<AppEventWebhookPayloadEncryptionKeyRequest> | undefined): boolean;
-}
-
-/**
- * AppEventWebhookPayloadEncryptionKeyResponse is a response to  a request to get the payload encryption key on an AppEventWebhook
- *
- * @generated from message porter.v1.AppEventWebhookPayloadEncryptionKeyResponse
- */
-export declare class AppEventWebhookPayloadEncryptionKeyResponse extends Message<AppEventWebhookPayloadEncryptionKeyResponse> {
-  /**
-   * payload_encryption_key is the key that will be used to encrypt payloads to the webhook
-   *
-   * @generated from field: bytes payload_encryption_key = 1;
-   */
-  payloadEncryptionKey: Uint8Array;
-
-  constructor(data?: PartialMessage<AppEventWebhookPayloadEncryptionKeyResponse>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.AppEventWebhookPayloadEncryptionKeyResponse";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AppEventWebhookPayloadEncryptionKeyResponse;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AppEventWebhookPayloadEncryptionKeyResponse;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AppEventWebhookPayloadEncryptionKeyResponse;
-
-  static equals(a: AppEventWebhookPayloadEncryptionKeyResponse | PlainMessage<AppEventWebhookPayloadEncryptionKeyResponse> | undefined, b: AppEventWebhookPayloadEncryptionKeyResponse | PlainMessage<AppEventWebhookPayloadEncryptionKeyResponse> | undefined): boolean;
-}
-
-/**
- * DeleteAppEventWebhookRequest deletes an AppEventWebhook with a certain ID
- *
- * @generated from message porter.v1.DeleteAppEventWebhookRequest
- */
-export declare class DeleteAppEventWebhookRequest extends Message<DeleteAppEventWebhookRequest> {
-  /**
-   * id is a unique identifier for a configured webhook
-   *
-   * @generated from field: string id = 1;
-   */
-  id: string;
-
-  constructor(data?: PartialMessage<DeleteAppEventWebhookRequest>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.DeleteAppEventWebhookRequest";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteAppEventWebhookRequest;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteAppEventWebhookRequest;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteAppEventWebhookRequest;
-
-  static equals(a: DeleteAppEventWebhookRequest | PlainMessage<DeleteAppEventWebhookRequest> | undefined, b: DeleteAppEventWebhookRequest | PlainMessage<DeleteAppEventWebhookRequest> | undefined): boolean;
-}
-
-/**
- * DeleteAppEventWebhookResponse is the response to a request to delete an AppEventWebhook
- *
- * @generated from message porter.v1.DeleteAppEventWebhookResponse
- */
-export declare class DeleteAppEventWebhookResponse extends Message<DeleteAppEventWebhookResponse> {
-  /**
-   * id is a unique identifier for a configured webhook
-   *
-   * @generated from field: string id = 1;
-   */
-  id: string;
-
-  constructor(data?: PartialMessage<DeleteAppEventWebhookResponse>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.DeleteAppEventWebhookResponse";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteAppEventWebhookResponse;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteAppEventWebhookResponse;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteAppEventWebhookResponse;
-
-  static equals(a: DeleteAppEventWebhookResponse | PlainMessage<DeleteAppEventWebhookResponse> | undefined, b: DeleteAppEventWebhookResponse | PlainMessage<DeleteAppEventWebhookResponse> | undefined): boolean;
-}
-
-/**
  * AppEventWebhooksRequest is a request to list AppEventWebhooks configured on an app
  *
  * @generated from message porter.v1.AppEventWebhooksRequest
@@ -7567,5 +7371,75 @@ export declare class AppEventWebhooksResponse extends Message<AppEventWebhooksRe
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AppEventWebhooksResponse;
 
   static equals(a: AppEventWebhooksResponse | PlainMessage<AppEventWebhooksResponse> | undefined, b: AppEventWebhooksResponse | PlainMessage<AppEventWebhooksResponse> | undefined): boolean;
+}
+
+/**
+ * UpdateAppEventWebhooksRequest is the request to update the webhook config for an application
+ *
+ * @generated from message porter.v1.UpdateAppEventWebhooksRequest
+ */
+export declare class UpdateAppEventWebhooksRequest extends Message<UpdateAppEventWebhooksRequest> {
+  /**
+   * project_id is the id of the project
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target where the app is installed
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 2;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  /**
+   * app_name is the name of the application
+   *
+   * @generated from field: string app_name = 3;
+   */
+  appName: string;
+
+  /**
+   * app_event_webhook is a list of webhooks to configure
+   *
+   * @generated from field: repeated porter.v1.AppEventWebhook app_event_webhooks = 4;
+   */
+  appEventWebhooks: AppEventWebhook[];
+
+  constructor(data?: PartialMessage<UpdateAppEventWebhooksRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateAppEventWebhooksRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateAppEventWebhooksRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateAppEventWebhooksRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateAppEventWebhooksRequest;
+
+  static equals(a: UpdateAppEventWebhooksRequest | PlainMessage<UpdateAppEventWebhooksRequest> | undefined, b: UpdateAppEventWebhooksRequest | PlainMessage<UpdateAppEventWebhooksRequest> | undefined): boolean;
+}
+
+/**
+ * UpdateAppEventWebhooksResposne is a response to a request to update webhook config for an app
+ *
+ * @generated from message porter.v1.UpdateAppEventWebhooksResponse
+ */
+export declare class UpdateAppEventWebhooksResponse extends Message<UpdateAppEventWebhooksResponse> {
+  constructor(data?: PartialMessage<UpdateAppEventWebhooksResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateAppEventWebhooksResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateAppEventWebhooksResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateAppEventWebhooksResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateAppEventWebhooksResponse;
+
+  static equals(a: UpdateAppEventWebhooksResponse | PlainMessage<UpdateAppEventWebhooksResponse> | undefined, b: UpdateAppEventWebhooksResponse | PlainMessage<UpdateAppEventWebhooksResponse> | undefined): boolean;
 }
 
