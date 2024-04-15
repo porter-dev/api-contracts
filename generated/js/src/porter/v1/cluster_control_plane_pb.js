@@ -144,6 +144,27 @@ export const EnumDatastore = /*@__PURE__*/ proto3.makeEnum(
 );
 
 /**
+ * @generated from message porter.v1.MachineTypesRequest
+ */
+export const MachineTypesRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.MachineTypesRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cloud_provider", kind: "enum", T: proto3.getEnumType(EnumCloudProvider) },
+    { no: 3, name: "cloud_provider_credentials_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "region", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.MachineTypesResponse
+ */
+export const MachineTypesResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.MachineTypesResponse",
+  [],
+);
+
+/**
  * @generated from message porter.v1.QuotaIncreaseRequest
  */
 export const QuotaIncreaseRequest = /*@__PURE__*/ proto3.makeMessageType(
