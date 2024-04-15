@@ -6,6 +6,7 @@
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage, Timestamp } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 import type { EnumCloudProvider } from "./cluster_pb.js";
+import type { CloudContract, MachineType } from "./cloud_contract_pb.js";
 import type { GKEPreflightValues } from "./gke_pb.js";
 import type { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import type { Error } from "./errors_pb.js";
@@ -18,7 +19,6 @@ import type { Alert } from "./prometheus_alerts_pb.js";
 import type { EnumEnvGroupProviderType } from "./env_group_pb.js";
 import type { NotificationConfig } from "./notification_pb.js";
 import type { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
-import type { CloudContract } from "./cloud_contract_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 import type { ClusterStatus, SystemServiceStatusHistory } from "./system_service_pb.js";
 
@@ -301,6 +301,69 @@ export declare enum EnumDatastore {
    * @generated from enum value: ENUM_DATASTORE_RDS_MYSQL = 5;
    */
   RDS_MYSQL = 5,
+}
+
+/**
+ * @generated from message porter.v1.MachineTypesRequest
+ */
+export declare class MachineTypesRequest extends Message<MachineTypesRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: porter.v1.EnumCloudProvider cloud_provider = 2;
+   */
+  cloudProvider: EnumCloudProvider;
+
+  /**
+   * @generated from field: string cloud_provider_credentials_id = 3;
+   */
+  cloudProviderCredentialsId: string;
+
+  /**
+   * @generated from field: string region = 4;
+   */
+  region: string;
+
+  constructor(data?: PartialMessage<MachineTypesRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.MachineTypesRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MachineTypesRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MachineTypesRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MachineTypesRequest;
+
+  static equals(a: MachineTypesRequest | PlainMessage<MachineTypesRequest> | undefined, b: MachineTypesRequest | PlainMessage<MachineTypesRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.MachineTypesResponse
+ */
+export declare class MachineTypesResponse extends Message<MachineTypesResponse> {
+  /**
+   * @generated from field: repeated porter.v1.MachineType machine_types = 1;
+   */
+  machineTypes: MachineType[];
+
+  constructor(data?: PartialMessage<MachineTypesResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.MachineTypesResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MachineTypesResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MachineTypesResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MachineTypesResponse;
+
+  static equals(a: MachineTypesResponse | PlainMessage<MachineTypesResponse> | undefined, b: MachineTypesResponse | PlainMessage<MachineTypesResponse> | undefined): boolean;
 }
 
 /**

@@ -34,6 +34,9 @@ const (
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
+	// ClusterControlPlaneServiceMachineTypesProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's MachineTypes RPC.
+	ClusterControlPlaneServiceMachineTypesProcedure = "/porter.v1.ClusterControlPlaneService/MachineTypes"
 	// ClusterControlPlaneServiceQuotaIncreaseProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's QuotaIncrease RPC.
 	ClusterControlPlaneServiceQuotaIncreaseProcedure = "/porter.v1.ClusterControlPlaneService/QuotaIncrease"
@@ -300,6 +303,7 @@ const (
 // These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
 var (
 	clusterControlPlaneServiceServiceDescriptor                                   = v1.File_porter_v1_cluster_control_plane_proto.Services().ByName("ClusterControlPlaneService")
+	clusterControlPlaneServiceMachineTypesMethodDescriptor                        = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("MachineTypes")
 	clusterControlPlaneServiceQuotaIncreaseMethodDescriptor                       = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("QuotaIncrease")
 	clusterControlPlaneServiceUpdateCloudProviderCredentialsMethodDescriptor      = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateCloudProviderCredentials")
 	clusterControlPlaneServiceQuotaPreflightCheckMethodDescriptor                 = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("QuotaPreflightCheck")
@@ -392,6 +396,7 @@ var (
 // ClusterControlPlaneServiceClient is a client for the porter.v1.ClusterControlPlaneService
 // service.
 type ClusterControlPlaneServiceClient interface {
+	MachineTypes(context.Context, *connect.Request[v1.MachineTypesRequest]) (*connect.Response[v1.MachineTypesResponse], error)
 	// QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas
 	QuotaIncrease(context.Context, *connect.Request[v1.QuotaIncreaseRequest]) (*connect.Response[v1.QuotaIncreaseResponse], error)
 	// UpdateCloudProviderCredentials creates or updates the credentials used for accessing the specific cloud
@@ -627,6 +632,12 @@ type ClusterControlPlaneServiceClient interface {
 func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) ClusterControlPlaneServiceClient {
 	baseURL = strings.TrimRight(baseURL, "/")
 	return &clusterControlPlaneServiceClient{
+		machineTypes: connect.NewClient[v1.MachineTypesRequest, v1.MachineTypesResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceMachineTypesProcedure,
+			connect.WithSchema(clusterControlPlaneServiceMachineTypesMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 		quotaIncrease: connect.NewClient[v1.QuotaIncreaseRequest, v1.QuotaIncreaseResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceQuotaIncreaseProcedure,
@@ -1154,6 +1165,7 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 
 // clusterControlPlaneServiceClient implements ClusterControlPlaneServiceClient.
 type clusterControlPlaneServiceClient struct {
+	machineTypes                        *connect.Client[v1.MachineTypesRequest, v1.MachineTypesResponse]
 	quotaIncrease                       *connect.Client[v1.QuotaIncreaseRequest, v1.QuotaIncreaseResponse]
 	updateCloudProviderCredentials      *connect.Client[v1.UpdateCloudProviderCredentialsRequest, v1.UpdateCloudProviderCredentialsResponse]
 	quotaPreflightCheck                 *connect.Client[v1.QuotaPreflightCheckRequest, v1.QuotaPreflightCheckResponse]
@@ -1241,6 +1253,11 @@ type clusterControlPlaneServiceClient struct {
 	updateNotificationConfig            *connect.Client[v1.UpdateNotificationConfigRequest, v1.UpdateNotificationConfigResponse]
 	notificationConfig                  *connect.Client[v1.NotificationConfigRequest, v1.NotificationConfigResponse]
 	systemStatusHistory                 *connect.Client[v1.SystemStatusHistoryRequest, v1.SystemStatusHistoryResponse]
+}
+
+// MachineTypes calls porter.v1.ClusterControlPlaneService.MachineTypes.
+func (c *clusterControlPlaneServiceClient) MachineTypes(ctx context.Context, req *connect.Request[v1.MachineTypesRequest]) (*connect.Response[v1.MachineTypesResponse], error) {
+	return c.machineTypes.CallUnary(ctx, req)
 }
 
 // QuotaIncrease calls porter.v1.ClusterControlPlaneService.QuotaIncrease.
@@ -1720,6 +1737,7 @@ func (c *clusterControlPlaneServiceClient) SystemStatusHistory(ctx context.Conte
 // ClusterControlPlaneServiceHandler is an implementation of the
 // porter.v1.ClusterControlPlaneService service.
 type ClusterControlPlaneServiceHandler interface {
+	MachineTypes(context.Context, *connect.Request[v1.MachineTypesRequest]) (*connect.Response[v1.MachineTypesResponse], error)
 	// QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas
 	QuotaIncrease(context.Context, *connect.Request[v1.QuotaIncreaseRequest]) (*connect.Response[v1.QuotaIncreaseResponse], error)
 	// UpdateCloudProviderCredentials creates or updates the credentials used for accessing the specific cloud
@@ -1951,6 +1969,12 @@ type ClusterControlPlaneServiceHandler interface {
 // By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
 // and JSON codecs. They also support gzip compression.
 func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler, opts ...connect.HandlerOption) (string, http.Handler) {
+	clusterControlPlaneServiceMachineTypesHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceMachineTypesProcedure,
+		svc.MachineTypes,
+		connect.WithSchema(clusterControlPlaneServiceMachineTypesMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	clusterControlPlaneServiceQuotaIncreaseHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceQuotaIncreaseProcedure,
 		svc.QuotaIncrease,
@@ -2475,6 +2499,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 	)
 	return "/porter.v1.ClusterControlPlaneService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
+		case ClusterControlPlaneServiceMachineTypesProcedure:
+			clusterControlPlaneServiceMachineTypesHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceQuotaIncreaseProcedure:
 			clusterControlPlaneServiceQuotaIncreaseHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceUpdateCloudProviderCredentialsProcedure:
@@ -2657,6 +2683,10 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 
 // UnimplementedClusterControlPlaneServiceHandler returns CodeUnimplemented from all methods.
 type UnimplementedClusterControlPlaneServiceHandler struct{}
+
+func (UnimplementedClusterControlPlaneServiceHandler) MachineTypes(context.Context, *connect.Request[v1.MachineTypesRequest]) (*connect.Response[v1.MachineTypesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.MachineTypes is not implemented"))
+}
 
 func (UnimplementedClusterControlPlaneServiceHandler) QuotaIncrease(context.Context, *connect.Request[v1.QuotaIncreaseRequest]) (*connect.Response[v1.QuotaIncreaseResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.QuotaIncrease is not implemented"))

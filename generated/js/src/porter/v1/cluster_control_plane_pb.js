@@ -5,6 +5,7 @@
 
 import { proto3, Timestamp } from "@bufbuild/protobuf";
 import { EnumCloudProvider } from "./cluster_pb.js";
+import { CloudContract, MachineType } from "./cloud_contract_pb.js";
 import { GKEPreflightValues } from "./gke_pb.js";
 import { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import { Error } from "./errors_pb.js";
@@ -17,7 +18,6 @@ import { Alert } from "./prometheus_alerts_pb.js";
 import { EnumEnvGroupProviderType } from "./env_group_pb.js";
 import { NotificationConfig } from "./notification_pb.js";
 import { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
-import { CloudContract } from "./cloud_contract_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 import { ClusterStatus, SystemServiceStatusHistory } from "./system_service_pb.js";
 
@@ -140,6 +140,29 @@ export const EnumDatastore = /*@__PURE__*/ proto3.makeEnum(
     {no: 3, name: "ENUM_DATASTORE_ELASTICACHE_REDIS", localName: "ELASTICACHE_REDIS"},
     {no: 4, name: "ENUM_DATASTORE_ELASTICACHE_MEMCACHED", localName: "ELASTICACHE_MEMCACHED"},
     {no: 5, name: "ENUM_DATASTORE_RDS_MYSQL", localName: "RDS_MYSQL"},
+  ],
+);
+
+/**
+ * @generated from message porter.v1.MachineTypesRequest
+ */
+export const MachineTypesRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.MachineTypesRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cloud_provider", kind: "enum", T: proto3.getEnumType(EnumCloudProvider) },
+    { no: 3, name: "cloud_provider_credentials_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "region", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.MachineTypesResponse
+ */
+export const MachineTypesResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.MachineTypesResponse",
+  () => [
+    { no: 1, name: "machine_types", kind: "message", T: MachineType, repeated: true },
   ],
 );
 

@@ -21,6 +21,17 @@ import "porter/v1/porter_app.proto";
 import "porter/v1/prometheus_alerts.proto";
 import "porter/v1/system_service.proto";
 
+message MachineTypesRequest {
+  int64 project_id = 1;
+  EnumCloudProvider cloud_provider = 2;
+  string cloud_provider_credentials_id = 3;
+  string region = 4;
+}
+
+message MachineTypesResponse {
+  repeated MachineType machine_types = 1;
+}
+
 message QuotaIncreaseRequest {
   int64 project_id = 1;
   //cloud_provider the given cloud provider will use to make quota increases
@@ -1410,6 +1421,8 @@ message ReadCloudContractResponse {
 }
 
 service ClusterControlPlaneService {
+  rpc MachineTypes(MachineTypesRequest) returns (MachineTypesResponse) {}
+
   // QuotaIncrease will auto request increases to the quota in a specific region given a list of quotas
   rpc QuotaIncrease(QuotaIncreaseRequest) returns (QuotaIncreaseResponse) {}
 

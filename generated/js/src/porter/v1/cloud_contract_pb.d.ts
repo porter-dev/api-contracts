@@ -144,3 +144,31 @@ export declare class CloudContractDeletionRevision extends Message<CloudContract
   static equals(a: CloudContractDeletionRevision | PlainMessage<CloudContractDeletionRevision> | undefined, b: CloudContractDeletionRevision | PlainMessage<CloudContractDeletionRevision> | undefined): boolean;
 }
 
+/**
+ * MachineType is a virtual machine type
+ *
+ * @generated from message porter.v1.MachineType
+ */
+export declare class MachineType extends Message<MachineType> {
+  /**
+   * name is the name of the machine type
+   *
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  constructor(data?: PartialMessage<MachineType>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.MachineType";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MachineType;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MachineType;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MachineType;
+
+  static equals(a: MachineType | PlainMessage<MachineType> | undefined, b: MachineType | PlainMessage<MachineType> | undefined): boolean;
+}
+
