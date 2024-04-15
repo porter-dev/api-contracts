@@ -21,6 +21,7 @@ import type { NotificationConfig } from "./notification_pb.js";
 import type { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 import type { ClusterStatus, SystemServiceStatusHistory } from "./system_service_pb.js";
+import type { AppEventWebhook } from "./app_event_webhook_pb.js";
 
 /**
  * EnumUpdateTrigger describes the action that triggered a porter app revision update
@@ -7300,5 +7301,145 @@ export declare class SystemStatusHistoryResponse extends Message<SystemStatusHis
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SystemStatusHistoryResponse;
 
   static equals(a: SystemStatusHistoryResponse | PlainMessage<SystemStatusHistoryResponse> | undefined, b: SystemStatusHistoryResponse | PlainMessage<SystemStatusHistoryResponse> | undefined): boolean;
+}
+
+/**
+ * AppEventWebhooksRequest is a request to list AppEventWebhooks configured on an app
+ *
+ * @generated from message porter.v1.AppEventWebhooksRequest
+ */
+export declare class AppEventWebhooksRequest extends Message<AppEventWebhooksRequest> {
+  /**
+   * project_id is the id of the project
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target where the app is installed
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 2;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  /**
+   * app_name is the name of the application
+   *
+   * @generated from field: string app_name = 3;
+   */
+  appName: string;
+
+  constructor(data?: PartialMessage<AppEventWebhooksRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AppEventWebhooksRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AppEventWebhooksRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AppEventWebhooksRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AppEventWebhooksRequest;
+
+  static equals(a: AppEventWebhooksRequest | PlainMessage<AppEventWebhooksRequest> | undefined, b: AppEventWebhooksRequest | PlainMessage<AppEventWebhooksRequest> | undefined): boolean;
+}
+
+/**
+ * AppEventWebhooks is a response to a request to list AppEventWebhook
+ *
+ * @generated from message porter.v1.AppEventWebhooksResponse
+ */
+export declare class AppEventWebhooksResponse extends Message<AppEventWebhooksResponse> {
+  /**
+   * app_event_webhooks are all webhooks configured on a certain app
+   *
+   * @generated from field: repeated porter.v1.AppEventWebhook app_event_webhooks = 1;
+   */
+  appEventWebhooks: AppEventWebhook[];
+
+  constructor(data?: PartialMessage<AppEventWebhooksResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AppEventWebhooksResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AppEventWebhooksResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AppEventWebhooksResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AppEventWebhooksResponse;
+
+  static equals(a: AppEventWebhooksResponse | PlainMessage<AppEventWebhooksResponse> | undefined, b: AppEventWebhooksResponse | PlainMessage<AppEventWebhooksResponse> | undefined): boolean;
+}
+
+/**
+ * UpdateAppEventWebhooksRequest is the request to update the webhook config for an application
+ *
+ * @generated from message porter.v1.UpdateAppEventWebhooksRequest
+ */
+export declare class UpdateAppEventWebhooksRequest extends Message<UpdateAppEventWebhooksRequest> {
+  /**
+   * project_id is the id of the project
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target where the app is installed
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 2;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  /**
+   * app_name is the name of the application
+   *
+   * @generated from field: string app_name = 3;
+   */
+  appName: string;
+
+  /**
+   * app_event_webhook is a list of webhooks to configure
+   *
+   * @generated from field: repeated porter.v1.AppEventWebhook app_event_webhooks = 4;
+   */
+  appEventWebhooks: AppEventWebhook[];
+
+  constructor(data?: PartialMessage<UpdateAppEventWebhooksRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateAppEventWebhooksRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateAppEventWebhooksRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateAppEventWebhooksRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateAppEventWebhooksRequest;
+
+  static equals(a: UpdateAppEventWebhooksRequest | PlainMessage<UpdateAppEventWebhooksRequest> | undefined, b: UpdateAppEventWebhooksRequest | PlainMessage<UpdateAppEventWebhooksRequest> | undefined): boolean;
+}
+
+/**
+ * UpdateAppEventWebhooksResposne is a response to a request to update webhook config for an app
+ *
+ * @generated from message porter.v1.UpdateAppEventWebhooksResponse
+ */
+export declare class UpdateAppEventWebhooksResponse extends Message<UpdateAppEventWebhooksResponse> {
+  constructor(data?: PartialMessage<UpdateAppEventWebhooksResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateAppEventWebhooksResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateAppEventWebhooksResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateAppEventWebhooksResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateAppEventWebhooksResponse;
+
+  static equals(a: UpdateAppEventWebhooksResponse | PlainMessage<UpdateAppEventWebhooksResponse> | undefined, b: UpdateAppEventWebhooksResponse | PlainMessage<UpdateAppEventWebhooksResponse> | undefined): boolean;
 }
 

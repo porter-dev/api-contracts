@@ -5,6 +5,7 @@ package porter.v1;
 import "google/protobuf/timestamp.proto";
 import "porter/v1/addons.proto";
 import "porter/v1/agent_app_event_types.proto";
+import "porter/v1/app_event_webhook.proto";
 import "porter/v1/aws_assume_role.proto";
 import "porter/v1/cloud_contract.proto";
 import "porter/v1/cloud_provider_credentials.proto";
@@ -1732,6 +1733,12 @@ service ClusterControlPlaneService {
 
   // SystemStatusHistory fetches the system status history in a cluster
   rpc SystemStatusHistory(SystemStatusHistoryRequest) returns (SystemStatusHistoryResponse) {}
+
+  // AppEventWebhooks retrieves AppEventWebhooks configured on an app
+  rpc AppEventWebhooks(AppEventWebhooksRequest) returns (AppEventWebhooksResponse) {}
+
+  // UpdateAppEventWebhooks configures webhooks on an app that are triggered on events on the app
+  rpc UpdateAppEventWebhooks(UpdateAppEventWebhooksRequest) returns (UpdateAppEventWebhooksResponse) {}
 }
 
 message EKSBearerTokenRequest {
@@ -1965,3 +1972,34 @@ message SystemStatusHistoryResponse {
   // system_service_status_histories is a list of status timeseries for system services. Users can assume there is only one entry per a system service.
   repeated SystemServiceStatusHistory system_service_status_histories = 2;
 }
+
+// AppEventWebhooksRequest is a request to list AppEventWebhooks configured on an app
+message AppEventWebhooksRequest {
+  // project_id is the id of the project
+  int64 project_id = 1;
+  // deployment_target_identifier is the object that identifies the deployment target where the app is installed
+  DeploymentTargetIdentifier deployment_target_identifier = 2;
+  // app_name is the name of the application
+  string app_name = 3;
+}
+
+// AppEventWebhooks is a response to a request to list AppEventWebhook
+message AppEventWebhooksResponse {
+  // app_event_webhooks are all webhooks configured on a certain app
+  repeated AppEventWebhook app_event_webhooks = 1;
+}
+
+// UpdateAppEventWebhooksRequest is the request to update the webhook config for an application
+message UpdateAppEventWebhooksRequest {
+  // project_id is the id of the project
+  int64 project_id = 1;
+  // deployment_target_identifier is the object that identifies the deployment target where the app is installed
+  DeploymentTargetIdentifier deployment_target_identifier = 2;
+  // app_name is the name of the application
+  string app_name = 3;
+  // app_event_webhook is a list of webhooks to configure
+  repeated AppEventWebhook app_event_webhooks = 4;
+}
+
+// UpdateAppEventWebhooksResposne is a response to a request to update webhook config for an app
+message UpdateAppEventWebhooksResponse {}

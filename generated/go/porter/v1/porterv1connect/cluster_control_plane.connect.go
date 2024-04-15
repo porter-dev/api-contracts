@@ -298,6 +298,12 @@ const (
 	// ClusterControlPlaneServiceSystemStatusHistoryProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's SystemStatusHistory RPC.
 	ClusterControlPlaneServiceSystemStatusHistoryProcedure = "/porter.v1.ClusterControlPlaneService/SystemStatusHistory"
+	// ClusterControlPlaneServiceAppEventWebhooksProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's AppEventWebhooks RPC.
+	ClusterControlPlaneServiceAppEventWebhooksProcedure = "/porter.v1.ClusterControlPlaneService/AppEventWebhooks"
+	// ClusterControlPlaneServiceUpdateAppEventWebhooksProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's UpdateAppEventWebhooks RPC.
+	ClusterControlPlaneServiceUpdateAppEventWebhooksProcedure = "/porter.v1.ClusterControlPlaneService/UpdateAppEventWebhooks"
 )
 
 // These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
@@ -391,6 +397,8 @@ var (
 	clusterControlPlaneServiceUpdateNotificationConfigMethodDescriptor            = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateNotificationConfig")
 	clusterControlPlaneServiceNotificationConfigMethodDescriptor                  = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("NotificationConfig")
 	clusterControlPlaneServiceSystemStatusHistoryMethodDescriptor                 = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("SystemStatusHistory")
+	clusterControlPlaneServiceAppEventWebhooksMethodDescriptor                    = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("AppEventWebhooks")
+	clusterControlPlaneServiceUpdateAppEventWebhooksMethodDescriptor              = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateAppEventWebhooks")
 )
 
 // ClusterControlPlaneServiceClient is a client for the porter.v1.ClusterControlPlaneService
@@ -620,6 +628,10 @@ type ClusterControlPlaneServiceClient interface {
 	NotificationConfig(context.Context, *connect.Request[v1.NotificationConfigRequest]) (*connect.Response[v1.NotificationConfigResponse], error)
 	// SystemStatusHistory fetches the system status history in a cluster
 	SystemStatusHistory(context.Context, *connect.Request[v1.SystemStatusHistoryRequest]) (*connect.Response[v1.SystemStatusHistoryResponse], error)
+	// AppEventWebhooks retrieves AppEventWebhooks configured on an app
+	AppEventWebhooks(context.Context, *connect.Request[v1.AppEventWebhooksRequest]) (*connect.Response[v1.AppEventWebhooksResponse], error)
+	// UpdateAppEventWebhooks configures webhooks on an app that are triggered on events on the app
+	UpdateAppEventWebhooks(context.Context, *connect.Request[v1.UpdateAppEventWebhooksRequest]) (*connect.Response[v1.UpdateAppEventWebhooksResponse], error)
 }
 
 // NewClusterControlPlaneServiceClient constructs a client for the
@@ -1160,6 +1172,18 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			connect.WithSchema(clusterControlPlaneServiceSystemStatusHistoryMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		appEventWebhooks: connect.NewClient[v1.AppEventWebhooksRequest, v1.AppEventWebhooksResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceAppEventWebhooksProcedure,
+			connect.WithSchema(clusterControlPlaneServiceAppEventWebhooksMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		updateAppEventWebhooks: connect.NewClient[v1.UpdateAppEventWebhooksRequest, v1.UpdateAppEventWebhooksResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceUpdateAppEventWebhooksProcedure,
+			connect.WithSchema(clusterControlPlaneServiceUpdateAppEventWebhooksMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -1253,6 +1277,8 @@ type clusterControlPlaneServiceClient struct {
 	updateNotificationConfig            *connect.Client[v1.UpdateNotificationConfigRequest, v1.UpdateNotificationConfigResponse]
 	notificationConfig                  *connect.Client[v1.NotificationConfigRequest, v1.NotificationConfigResponse]
 	systemStatusHistory                 *connect.Client[v1.SystemStatusHistoryRequest, v1.SystemStatusHistoryResponse]
+	appEventWebhooks                    *connect.Client[v1.AppEventWebhooksRequest, v1.AppEventWebhooksResponse]
+	updateAppEventWebhooks              *connect.Client[v1.UpdateAppEventWebhooksRequest, v1.UpdateAppEventWebhooksResponse]
 }
 
 // MachineTypes calls porter.v1.ClusterControlPlaneService.MachineTypes.
@@ -1734,6 +1760,16 @@ func (c *clusterControlPlaneServiceClient) SystemStatusHistory(ctx context.Conte
 	return c.systemStatusHistory.CallUnary(ctx, req)
 }
 
+// AppEventWebhooks calls porter.v1.ClusterControlPlaneService.AppEventWebhooks.
+func (c *clusterControlPlaneServiceClient) AppEventWebhooks(ctx context.Context, req *connect.Request[v1.AppEventWebhooksRequest]) (*connect.Response[v1.AppEventWebhooksResponse], error) {
+	return c.appEventWebhooks.CallUnary(ctx, req)
+}
+
+// UpdateAppEventWebhooks calls porter.v1.ClusterControlPlaneService.UpdateAppEventWebhooks.
+func (c *clusterControlPlaneServiceClient) UpdateAppEventWebhooks(ctx context.Context, req *connect.Request[v1.UpdateAppEventWebhooksRequest]) (*connect.Response[v1.UpdateAppEventWebhooksResponse], error) {
+	return c.updateAppEventWebhooks.CallUnary(ctx, req)
+}
+
 // ClusterControlPlaneServiceHandler is an implementation of the
 // porter.v1.ClusterControlPlaneService service.
 type ClusterControlPlaneServiceHandler interface {
@@ -1961,6 +1997,10 @@ type ClusterControlPlaneServiceHandler interface {
 	NotificationConfig(context.Context, *connect.Request[v1.NotificationConfigRequest]) (*connect.Response[v1.NotificationConfigResponse], error)
 	// SystemStatusHistory fetches the system status history in a cluster
 	SystemStatusHistory(context.Context, *connect.Request[v1.SystemStatusHistoryRequest]) (*connect.Response[v1.SystemStatusHistoryResponse], error)
+	// AppEventWebhooks retrieves AppEventWebhooks configured on an app
+	AppEventWebhooks(context.Context, *connect.Request[v1.AppEventWebhooksRequest]) (*connect.Response[v1.AppEventWebhooksResponse], error)
+	// UpdateAppEventWebhooks configures webhooks on an app that are triggered on events on the app
+	UpdateAppEventWebhooks(context.Context, *connect.Request[v1.UpdateAppEventWebhooksRequest]) (*connect.Response[v1.UpdateAppEventWebhooksResponse], error)
 }
 
 // NewClusterControlPlaneServiceHandler builds an HTTP handler from the service implementation. It
@@ -2497,6 +2537,18 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		connect.WithSchema(clusterControlPlaneServiceSystemStatusHistoryMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	clusterControlPlaneServiceAppEventWebhooksHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceAppEventWebhooksProcedure,
+		svc.AppEventWebhooks,
+		connect.WithSchema(clusterControlPlaneServiceAppEventWebhooksMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	clusterControlPlaneServiceUpdateAppEventWebhooksHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceUpdateAppEventWebhooksProcedure,
+		svc.UpdateAppEventWebhooks,
+		connect.WithSchema(clusterControlPlaneServiceUpdateAppEventWebhooksMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/porter.v1.ClusterControlPlaneService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ClusterControlPlaneServiceMachineTypesProcedure:
@@ -2675,6 +2727,10 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceNotificationConfigHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceSystemStatusHistoryProcedure:
 			clusterControlPlaneServiceSystemStatusHistoryHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceAppEventWebhooksProcedure:
+			clusterControlPlaneServiceAppEventWebhooksHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceUpdateAppEventWebhooksProcedure:
+			clusterControlPlaneServiceUpdateAppEventWebhooksHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -3034,4 +3090,12 @@ func (UnimplementedClusterControlPlaneServiceHandler) NotificationConfig(context
 
 func (UnimplementedClusterControlPlaneServiceHandler) SystemStatusHistory(context.Context, *connect.Request[v1.SystemStatusHistoryRequest]) (*connect.Response[v1.SystemStatusHistoryResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.SystemStatusHistory is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) AppEventWebhooks(context.Context, *connect.Request[v1.AppEventWebhooksRequest]) (*connect.Response[v1.AppEventWebhooksResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.AppEventWebhooks is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) UpdateAppEventWebhooks(context.Context, *connect.Request[v1.UpdateAppEventWebhooksRequest]) (*connect.Response[v1.UpdateAppEventWebhooksResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.UpdateAppEventWebhooks is not implemented"))
 }

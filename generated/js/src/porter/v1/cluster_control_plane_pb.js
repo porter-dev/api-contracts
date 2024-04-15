@@ -20,6 +20,7 @@ import { NotificationConfig } from "./notification_pb.js";
 import { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 import { ClusterStatus, SystemServiceStatusHistory } from "./system_service_pb.js";
+import { AppEventWebhook } from "./app_event_webhook_pb.js";
 
 /**
  * EnumUpdateTrigger describes the action that triggered a porter app revision update
@@ -2523,5 +2524,56 @@ export const SystemStatusHistoryResponse = /*@__PURE__*/ proto3.makeMessageType(
     { no: 1, name: "cluster_status_history", kind: "message", T: ClusterStatus, repeated: true },
     { no: 2, name: "system_service_status_histories", kind: "message", T: SystemServiceStatusHistory, repeated: true },
   ],
+);
+
+/**
+ * AppEventWebhooksRequest is a request to list AppEventWebhooks configured on an app
+ *
+ * @generated from message porter.v1.AppEventWebhooksRequest
+ */
+export const AppEventWebhooksRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.AppEventWebhooksRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+    { no: 3, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * AppEventWebhooks is a response to a request to list AppEventWebhook
+ *
+ * @generated from message porter.v1.AppEventWebhooksResponse
+ */
+export const AppEventWebhooksResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.AppEventWebhooksResponse",
+  () => [
+    { no: 1, name: "app_event_webhooks", kind: "message", T: AppEventWebhook, repeated: true },
+  ],
+);
+
+/**
+ * UpdateAppEventWebhooksRequest is the request to update the webhook config for an application
+ *
+ * @generated from message porter.v1.UpdateAppEventWebhooksRequest
+ */
+export const UpdateAppEventWebhooksRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.UpdateAppEventWebhooksRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+    { no: 3, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "app_event_webhooks", kind: "message", T: AppEventWebhook, repeated: true },
+  ],
+);
+
+/**
+ * UpdateAppEventWebhooksResposne is a response to a request to update webhook config for an app
+ *
+ * @generated from message porter.v1.UpdateAppEventWebhooksResponse
+ */
+export const UpdateAppEventWebhooksResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.UpdateAppEventWebhooksResponse",
+  [],
 );
 
