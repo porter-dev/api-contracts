@@ -29,7 +29,7 @@ message MachineTypesRequest {
 }
 
 message MachineTypesResponse {
-  repeated string machine_types = 1;
+  repeated MachineType machine_types = 1;
 }
 
 message QuotaIncreaseRequest {

@@ -59,3 +59,15 @@ export const CloudContractDeletionRevision = /*@__PURE__*/ proto3.makeMessageTyp
   ],
 );
 
+/**
+ * MachineType is a virtual machine type
+ *
+ * @generated from message porter.v1.MachineType
+ */
+export const MachineType = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.MachineType",
+  () => [
+    { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+

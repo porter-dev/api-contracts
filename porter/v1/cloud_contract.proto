@@ -34,3 +34,9 @@ message CloudContractDeletionRevision {
   // cloud_contract_deletions includes all resources that should be deleted
   CloudContract cloud_contract_deletions = 2;
 }
+
+// MachineType is a virtual machine type
+message MachineType {
+  // name is the name of the machine type
+  string name = 1;
+}

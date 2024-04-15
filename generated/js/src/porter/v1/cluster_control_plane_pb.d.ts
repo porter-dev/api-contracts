@@ -6,6 +6,7 @@
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage, Timestamp } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 import type { EnumCloudProvider } from "./cluster_pb.js";
+import type { CloudContract, MachineType } from "./cloud_contract_pb.js";
 import type { GKEPreflightValues } from "./gke_pb.js";
 import type { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import type { Error } from "./errors_pb.js";
@@ -18,7 +19,6 @@ import type { Alert } from "./prometheus_alerts_pb.js";
 import type { EnumEnvGroupProviderType } from "./env_group_pb.js";
 import type { NotificationConfig } from "./notification_pb.js";
 import type { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
-import type { CloudContract } from "./cloud_contract_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 import type { ClusterStatus, SystemServiceStatusHistory } from "./system_service_pb.js";
 
@@ -347,9 +347,9 @@ export declare class MachineTypesRequest extends Message<MachineTypesRequest> {
  */
 export declare class MachineTypesResponse extends Message<MachineTypesResponse> {
   /**
-   * @generated from field: repeated string machine_types = 1;
+   * @generated from field: repeated porter.v1.MachineType machine_types = 1;
    */
-  machineTypes: string[];
+  machineTypes: MachineType[];
 
   constructor(data?: PartialMessage<MachineTypesResponse>);
 
