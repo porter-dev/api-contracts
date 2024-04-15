@@ -15,9 +15,6 @@ enum WebhookAppEventType {
 
   // WEBHOOK_APP_EVENT_TYPE_PREDEPLOYT is when the webhook is configured for predeploy events
   WEBHOOK_APP_EVENT_TYPE_PREDEPLOY = 3;
-
-  // WEBHOOK_APP_EVENT_TYPE_INIT_DEPLOY is when the webhook is configured for initial deploy
-  WEBHOOK_APP_EVENT_TYPE_INIT_DEPLOY = 4;
 }
 
 // WebhookAppEventStatus is the app evnet status a webhook can be configured for
@@ -31,11 +28,8 @@ enum WebhookAppEventStatus {
   // WEBHOOK_APP_EVENT_STATUS_FAILED configures whebhook for failed events
   WEBHOOK_APP_EVENT_STATUS_FAILED = 2;
 
-  // WEBHOOK_APP_EVENT_STATUS_PROGRESSING configures webhook for progressing events
-  WEBHOOK_APP_EVENT_STATUS_PROGRESSING = 3;
-
-  // WEBHOOK_APP_EVENT_STATUS_PROGRESSING configures webhook for canceled events
-  WEBHOOK_APP_EVENT_STATUS_CANCELED = 4;
+  // WEBHOOK_APP_EVENT_STATUS_CANCELED configures webhook for canceled events
+  WEBHOOK_APP_EVENT_STATUS_CANCELED = 3;
 }
 
 // AppEventWebhook is a webhook configured to have requests sent to on app events

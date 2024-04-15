@@ -17,7 +17,6 @@ export const WebhookAppEventType = /*@__PURE__*/ proto3.makeEnum(
     {no: 1, name: "WEBHOOK_APP_EVENT_TYPE_DEPLOY", localName: "DEPLOY"},
     {no: 2, name: "WEBHOOK_APP_EVENT_TYPE_BUILD", localName: "BUILD"},
     {no: 3, name: "WEBHOOK_APP_EVENT_TYPE_PREDEPLOY", localName: "PREDEPLOY"},
-    {no: 4, name: "WEBHOOK_APP_EVENT_TYPE_INIT_DEPLOY", localName: "INIT_DEPLOY"},
   ],
 );
 
@@ -32,8 +31,7 @@ export const WebhookAppEventStatus = /*@__PURE__*/ proto3.makeEnum(
     {no: 0, name: "WEBHOOK_APP_EVENT_STATUS_UNSPECIFIED", localName: "UNSPECIFIED"},
     {no: 1, name: "WEBHOOK_APP_EVENT_STATUS_SUCCESS", localName: "SUCCESS"},
     {no: 2, name: "WEBHOOK_APP_EVENT_STATUS_FAILED", localName: "FAILED"},
-    {no: 3, name: "WEBHOOK_APP_EVENT_STATUS_PROGRESSING", localName: "PROGRESSING"},
-    {no: 4, name: "WEBHOOK_APP_EVENT_STATUS_CANCELED", localName: "CANCELED"},
+    {no: 3, name: "WEBHOOK_APP_EVENT_STATUS_CANCELED", localName: "CANCELED"},
   ],
 );
 

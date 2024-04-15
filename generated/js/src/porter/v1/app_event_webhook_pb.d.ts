@@ -39,13 +39,6 @@ export declare enum WebhookAppEventType {
    * @generated from enum value: WEBHOOK_APP_EVENT_TYPE_PREDEPLOY = 3;
    */
   PREDEPLOY = 3,
-
-  /**
-   * WEBHOOK_APP_EVENT_TYPE_INIT_DEPLOY is when the webhook is configured for initial deploy
-   *
-   * @generated from enum value: WEBHOOK_APP_EVENT_TYPE_INIT_DEPLOY = 4;
-   */
-  INIT_DEPLOY = 4,
 }
 
 /**
@@ -76,18 +69,11 @@ export declare enum WebhookAppEventStatus {
   FAILED = 2,
 
   /**
-   * WEBHOOK_APP_EVENT_STATUS_PROGRESSING configures webhook for progressing events
+   * WEBHOOK_APP_EVENT_STATUS_CANCELED configures webhook for canceled events
    *
-   * @generated from enum value: WEBHOOK_APP_EVENT_STATUS_PROGRESSING = 3;
+   * @generated from enum value: WEBHOOK_APP_EVENT_STATUS_CANCELED = 3;
    */
-  PROGRESSING = 3,
-
-  /**
-   * WEBHOOK_APP_EVENT_STATUS_PROGRESSING configures webhook for canceled events
-   *
-   * @generated from enum value: WEBHOOK_APP_EVENT_STATUS_CANCELED = 4;
-   */
-  CANCELED = 4,
+  CANCELED = 3,
 }
 
 /**
