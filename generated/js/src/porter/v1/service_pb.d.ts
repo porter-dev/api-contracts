@@ -34,6 +34,23 @@ export declare enum ServiceType {
 }
 
 /**
+ * @generated from enum porter.v1.DomainType
+ */
+export declare enum DomainType {
+  /**
+   * @generated from enum value: DOMAIN_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * DOMAIN_TYPE_PORTER refers to a domain that porter provisioned
+   *
+   * @generated from enum value: DOMAIN_TYPE_PORTER = 1;
+   */
+  PORTER = 1,
+}
+
+/**
  * Service is the top-level configuration for a service
  *
  * @generated from message porter.v1.Service
@@ -348,7 +365,7 @@ export declare class JobServiceConfig extends Message<JobServiceConfig> {
 }
 
 /**
- * Domain is the configuration for a custom domain for a web service
+ * Domain is the configuration for a domain
  *
  * @generated from message porter.v1.Domain
  */
@@ -357,6 +374,11 @@ export declare class Domain extends Message<Domain> {
    * @generated from field: string name = 1;
    */
   name: string;
+
+  /**
+   * @generated from field: porter.v1.DomainType type = 2;
+   */
+  type: DomainType;
 
   constructor(data?: PartialMessage<Domain>);
 

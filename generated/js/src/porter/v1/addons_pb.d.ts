@@ -6,6 +6,7 @@
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 import type { EnvGroup } from "./porter_app_pb.js";
+import type { Domain } from "./service_pb.js";
 
 /**
  * @generated from enum porter.v1.AddonType
@@ -38,6 +39,34 @@ export declare enum AddonType {
    * @generated from enum value: ADDON_TYPE_DATADOG = 3;
    */
   DATADOG = 3,
+
+  /**
+   * ADDON_TYPE_MEZMO is the mezmo addon type
+   *
+   * @generated from enum value: ADDON_TYPE_MEZMO = 4;
+   */
+  MEZMO = 4,
+
+  /**
+   * ADDON_TYPE_METABASE is the metabase addon type
+   *
+   * @generated from enum value: ADDON_TYPE_METABASE = 5;
+   */
+  METABASE = 5,
+
+  /**
+   * ADDON_TYPE_NEWRELIC is the newrelic addon type
+   *
+   * @generated from enum value: ADDON_TYPE_NEWRELIC = 6;
+   */
+  NEWRELIC = 6,
+
+  /**
+   * ADDON_TYPE_TAILSCALE is the tailscale addon type
+   *
+   * @generated from enum value: ADDON_TYPE_TAILSCALE = 7;
+   */
+  TAILSCALE = 7,
 }
 
 /**
@@ -125,6 +154,38 @@ export declare class Addon extends Message<Addon> {
      */
     value: Datadog;
     case: "datadog";
+  } | {
+    /**
+     * mezmo is the configuration for the mezmo addon
+     *
+     * @generated from field: porter.v1.Mezmo mezmo = 7;
+     */
+    value: Mezmo;
+    case: "mezmo";
+  } | {
+    /**
+     * metabase is the configuration for the metabase addon
+     *
+     * @generated from field: porter.v1.Metabase metabase = 8;
+     */
+    value: Metabase;
+    case: "metabase";
+  } | {
+    /**
+     * Newrelic is the configuration for the newrelic addon
+     *
+     * @generated from field: porter.v1.Newrelic newrelic = 9;
+     */
+    value: Newrelic;
+    case: "newrelic";
+  } | {
+    /**
+     * Tailscale is the configuration for the tailscale addon
+     *
+     * @generated from field: porter.v1.Tailscale tailscale = 10;
+     */
+    value: Tailscale;
+    case: "tailscale";
   } | { case: undefined; value?: undefined };
 
   constructor(data?: PartialMessage<Addon>);
@@ -315,5 +376,247 @@ export declare class Datadog extends Message<Datadog> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Datadog;
 
   static equals(a: Datadog | PlainMessage<Datadog> | undefined, b: Datadog | PlainMessage<Datadog> | undefined): boolean;
+}
+
+/**
+ * Mezmo is the configuration for Mezmo
+ *
+ * @generated from message porter.v1.Mezmo
+ */
+export declare class Mezmo extends Message<Mezmo> {
+  /**
+   * ingestion_key is the mezmo ingestion key. This is stored as a secret on the client cluster
+   *
+   * @generated from field: optional string ingestion_key = 1;
+   */
+  ingestionKey?: string;
+
+  constructor(data?: PartialMessage<Mezmo>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.Mezmo";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Mezmo;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Mezmo;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Mezmo;
+
+  static equals(a: Mezmo | PlainMessage<Mezmo> | undefined, b: Mezmo | PlainMessage<Mezmo> | undefined): boolean;
+}
+
+/**
+ * MetabaseDatastore is the configuration for a datastore linked with Metabase
+ *
+ * @generated from message porter.v1.MetabaseDatastore
+ */
+export declare class MetabaseDatastore extends Message<MetabaseDatastore> {
+  /**
+   * @generated from field: string host = 1;
+   */
+  host: string;
+
+  /**
+   * @generated from field: int64 port = 2;
+   */
+  port: bigint;
+
+  /**
+   * @generated from field: string database_name = 3;
+   */
+  databaseName: string;
+
+  /**
+   * @generated from field: string master_username = 4;
+   */
+  masterUsername: string;
+
+  /**
+   * @generated from field: string master_user_password_literal = 5;
+   */
+  masterUserPasswordLiteral: string;
+
+  constructor(data?: PartialMessage<MetabaseDatastore>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.MetabaseDatastore";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): MetabaseDatastore;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): MetabaseDatastore;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): MetabaseDatastore;
+
+  static equals(a: MetabaseDatastore | PlainMessage<MetabaseDatastore> | undefined, b: MetabaseDatastore | PlainMessage<MetabaseDatastore> | undefined): boolean;
+}
+
+/**
+ * Metabase is the configuration for Metabase
+ *
+ * @generated from message porter.v1.Metabase
+ */
+export declare class Metabase extends Message<Metabase> {
+  /**
+   * domains is the list of domains for this service
+   *
+   * @generated from field: repeated porter.v1.Domain domains = 1;
+   */
+  domains: Domain[];
+
+  /**
+   * cpu_cores is the number of CPU cores to allocate to metabase
+   *
+   * @generated from field: optional float cpu_cores = 2;
+   */
+  cpuCores?: number;
+
+  /**
+   * ram_megabytes is the amount of memory to allocate to metabase
+   *
+   * @generated from field: optional int32 ram_megabytes = 3;
+   */
+  ramMegabytes?: number;
+
+  /**
+   * datastore is the configuration of the datastore that metabase is connected to
+   *
+   * @generated from field: optional porter.v1.MetabaseDatastore datastore = 4;
+   */
+  datastore?: MetabaseDatastore;
+
+  constructor(data?: PartialMessage<Metabase>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.Metabase";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Metabase;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Metabase;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Metabase;
+
+  static equals(a: Metabase | PlainMessage<Metabase> | undefined, b: Metabase | PlainMessage<Metabase> | undefined): boolean;
+}
+
+/**
+ * Newrelic is the configuration for Newrelic
+ *
+ * @generated from message porter.v1.Newrelic
+ */
+export declare class Newrelic extends Message<Newrelic> {
+  /**
+   * cluster_name is the name of the cluster
+   *
+   * @generated from field: optional string cluster_name = 1;
+   */
+  clusterName?: string;
+
+  /**
+   * license_key is the license key
+   *
+   * @generated from field: optional string license_key = 2;
+   */
+  licenseKey?: string;
+
+  /**
+   * insights_key is the insights key
+   *
+   * @generated from field: optional string insights_key = 3;
+   */
+  insightsKey?: string;
+
+  /**
+   * personal_api_key is the personal api key
+   *
+   * @generated from field: optional string personal_api_key = 4;
+   */
+  personalApiKey?: string;
+
+  /**
+   * account_id is the account id
+   *
+   * @generated from field: optional string account_id = 5;
+   */
+  accountId?: string;
+
+  /**
+   * logging_enabled determines whether logging is enabled
+   *
+   * @generated from field: optional bool logging_enabled = 6;
+   */
+  loggingEnabled?: boolean;
+
+  /**
+   * metrics_adapter_enabled determines whether metrics adapter is enabled
+   *
+   * @generated from field: optional bool metrics_adapter_enabled = 7;
+   */
+  metricsAdapterEnabled?: boolean;
+
+  /**
+   * prometheus_enabled determines whether prometheus is enabled
+   *
+   * @generated from field: optional bool prometheus_enabled = 8;
+   */
+  prometheusEnabled?: boolean;
+
+  /**
+   * pixie_enabled determines whether pixie is enabled
+   *
+   * @generated from field: optional bool pixie_enabled = 9;
+   */
+  pixieEnabled?: boolean;
+
+  constructor(data?: PartialMessage<Newrelic>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.Newrelic";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Newrelic;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Newrelic;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Newrelic;
+
+  static equals(a: Newrelic | PlainMessage<Newrelic> | undefined, b: Newrelic | PlainMessage<Newrelic> | undefined): boolean;
+}
+
+/**
+ * Tailscale is the configuration for Tailscale
+ *
+ * @generated from message porter.v1.Tailscale
+ */
+export declare class Tailscale extends Message<Tailscale> {
+  /**
+   * auth_key is the auth key for Tailscale
+   *
+   * @generated from field: optional string auth_key = 1;
+   */
+  authKey?: string;
+
+  /**
+   * subnet_routes are the subnet routes for Tailscale
+   *
+   * @generated from field: repeated string subnet_routes = 2;
+   */
+  subnetRoutes: string[];
+
+  constructor(data?: PartialMessage<Tailscale>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.Tailscale";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Tailscale;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Tailscale;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Tailscale;
+
+  static equals(a: Tailscale | PlainMessage<Tailscale> | undefined, b: Tailscale | PlainMessage<Tailscale> | undefined): boolean;
 }
 
