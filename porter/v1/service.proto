@@ -98,9 +98,16 @@ message JobServiceConfig {
   int64 timeout_seconds = 5;
 }
 
-// Domain is the configuration for a custom domain for a web service
+enum DomainType {
+  DOMAIN_TYPE_UNSPECIFIED = 0;
+  // DOMAIN_TYPE_PORTER refers to a domain that porter provisioned
+  DOMAIN_TYPE_PORTER = 1;
+}
+
+// Domain is the configuration for a domain
 message Domain {
   string name = 1;
+  DomainType type = 2;
 }
 
 // Autoscaling is the autoscaling configuration

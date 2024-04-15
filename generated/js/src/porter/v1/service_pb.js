@@ -21,6 +21,17 @@ export const ServiceType = /*@__PURE__*/ proto3.makeEnum(
 );
 
 /**
+ * @generated from enum porter.v1.DomainType
+ */
+export const DomainType = /*@__PURE__*/ proto3.makeEnum(
+  "porter.v1.DomainType",
+  [
+    {no: 0, name: "DOMAIN_TYPE_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "DOMAIN_TYPE_PORTER", localName: "PORTER"},
+  ],
+);
+
+/**
  * Service is the top-level configuration for a service
  *
  * @generated from message porter.v1.Service
@@ -97,7 +108,7 @@ export const JobServiceConfig = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
- * Domain is the configuration for a custom domain for a web service
+ * Domain is the configuration for a domain
  *
  * @generated from message porter.v1.Domain
  */
@@ -105,6 +116,7 @@ export const Domain = /*@__PURE__*/ proto3.makeMessageType(
   "porter.v1.Domain",
   () => [
     { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "type", kind: "enum", T: proto3.getEnumType(DomainType) },
   ],
 );
 

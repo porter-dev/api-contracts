@@ -3,6 +3,7 @@ syntax = "proto3";
 package porter.v1;
 
 import "porter/v1/porter_app.proto";
+import "porter/v1/service.proto";
 
 enum AddonType {
   // ADDON_TYPE_UNSPECIFIED is the default value
@@ -13,6 +14,14 @@ enum AddonType {
   ADDON_TYPE_REDIS = 2;
   // ADDON_TYPE_DATADOG is the datadog addon type
   ADDON_TYPE_DATADOG = 3;
+  // ADDON_TYPE_MEZMO is the mezmo addon type
+  ADDON_TYPE_MEZMO = 4;
+  // ADDON_TYPE_METABASE is the metabase addon type
+  ADDON_TYPE_METABASE = 5;
+  // ADDON_TYPE_NEWRELIC is the newrelic addon type
+  ADDON_TYPE_NEWRELIC = 6;
+  // ADDON_TYPE_TAILSCALE is the tailscale addon type
+  ADDON_TYPE_TAILSCALE = 7;
 }
 
 // PrerequisiteAddon specifies an addon that must be installed before any apps can be installed
@@ -38,6 +47,14 @@ message Addon {
     Redis redis = 5;
     // datadog is the configuration for the datadog addon
     Datadog datadog = 6;
+    // mezmo is the configuration for the mezmo addon
+    Mezmo mezmo = 7;
+    // metabase is the configuration for the metabase addon
+    Metabase metabase = 8;
+    // Newrelic is the configuration for the newrelic addon
+    Newrelic newrelic = 9;
+    // Tailscale is the configuration for the tailscale addon
+    Tailscale tailscale = 10;
   }
 }
 
@@ -83,4 +100,61 @@ message Datadog {
   optional float cpu_cores = 6;
   // ram_megabytes is the amount of memory to allocate to datadog
   optional int32 ram_megabytes = 7;
+}
+
+// Mezmo is the configuration for Mezmo
+message Mezmo {
+  // ingestion_key is the mezmo ingestion key. This is stored as a secret on the client cluster
+  optional string ingestion_key = 1;
+}
+
+// MetabaseDatastore is the configuration for a datastore linked with Metabase
+message MetabaseDatastore {
+  string host = 1;
+  int64 port = 2;
+  string database_name = 3;
+  string master_username = 4;
+  string master_user_password_literal = 5;
+}
+
+// Metabase is the configuration for Metabase
+message Metabase {
+  // domains is the list of domains for this service
+  repeated Domain domains = 1;
+  // cpu_cores is the number of CPU cores to allocate to metabase
+  optional float cpu_cores = 2;
+  // ram_megabytes is the amount of memory to allocate to metabase
+  optional int32 ram_megabytes = 3;
+  // datastore is the configuration of the datastore that metabase is connected to
+  optional MetabaseDatastore datastore = 4;
+}
+
+// Newrelic is the configuration for Newrelic
+message Newrelic {
+  // cluster_name is the name of the cluster
+  optional string cluster_name = 1;
+  // license_key is the license key
+  optional string license_key = 2;
+  // insights_key is the insights key
+  optional string insights_key = 3;
+  // personal_api_key is the personal api key
+  optional string personal_api_key = 4;
+  // account_id is the account id
+  optional string account_id = 5;
+  // logging_enabled determines whether logging is enabled
+  optional bool logging_enabled = 6;
+  // metrics_adapter_enabled determines whether metrics adapter is enabled
+  optional bool metrics_adapter_enabled = 7;
+  // prometheus_enabled determines whether prometheus is enabled
+  optional bool prometheus_enabled = 8;
+  // pixie_enabled determines whether pixie is enabled
+  optional bool pixie_enabled = 9;
+}
+
+// Tailscale is the configuration for Tailscale
+message Tailscale {
+  // auth_key is the auth key for Tailscale
+  optional string auth_key = 1;
+  // subnet_routes are the subnet routes for Tailscale
+  repeated string subnet_routes = 2;
 }
