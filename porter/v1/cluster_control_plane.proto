@@ -28,7 +28,9 @@ message MachineTypesRequest {
   string region = 4;
 }
 
-message MachineTypesResponse {}
+message MachineTypesResponse {
+  repeated string machine_types = 1;
+}
 
 message QuotaIncreaseRequest {
   int64 project_id = 1;

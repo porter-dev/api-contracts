@@ -161,7 +161,9 @@ export const MachineTypesRequest = /*@__PURE__*/ proto3.makeMessageType(
  */
 export const MachineTypesResponse = /*@__PURE__*/ proto3.makeMessageType(
   "porter.v1.MachineTypesResponse",
-  [],
+  () => [
+    { no: 1, name: "machine_types", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+  ],
 );
 
 /**

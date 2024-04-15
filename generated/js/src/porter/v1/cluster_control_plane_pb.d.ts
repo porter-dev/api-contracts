@@ -346,6 +346,11 @@ export declare class MachineTypesRequest extends Message<MachineTypesRequest> {
  * @generated from message porter.v1.MachineTypesResponse
  */
 export declare class MachineTypesResponse extends Message<MachineTypesResponse> {
+  /**
+   * @generated from field: repeated string machine_types = 1;
+   */
+  machineTypes: string[];
+
   constructor(data?: PartialMessage<MachineTypesResponse>);
 
   static readonly runtime: typeof proto3;
