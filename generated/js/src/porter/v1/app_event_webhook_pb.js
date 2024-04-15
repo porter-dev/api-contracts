@@ -43,10 +43,10 @@ export const WebhookAppEventStatus = /*@__PURE__*/ proto3.makeEnum(
 export const AppEventWebhook = /*@__PURE__*/ proto3.makeMessageType(
   "porter.v1.AppEventWebhook",
   () => [
-    { no: 1, name: "webhook_url", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+    { no: 1, name: "webhook_url", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "app_event_type", kind: "enum", T: proto3.getEnumType(WebhookAppEventType) },
     { no: 3, name: "app_event_status", kind: "enum", T: proto3.getEnumType(WebhookAppEventStatus) },
-    { no: 4, name: "payload_encryption_key", kind: "scalar", T: 12 /* ScalarType.BYTES */ },
+    { no: 4, name: "payload_encryption_key", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

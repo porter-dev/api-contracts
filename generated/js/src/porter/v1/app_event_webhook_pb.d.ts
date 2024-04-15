@@ -85,9 +85,9 @@ export declare class AppEventWebhook extends Message<AppEventWebhook> {
   /**
    * webhook_url is the url of the webhook
    *
-   * @generated from field: bytes webhook_url = 1;
+   * @generated from field: string webhook_url = 1;
    */
-  webhookUrl: Uint8Array;
+  webhookUrl: string;
 
   /**
    * app_event_type is the type of the app event this webhook is being added for
@@ -106,9 +106,9 @@ export declare class AppEventWebhook extends Message<AppEventWebhook> {
   /**
    * payload_encryption_key is the key that will be used to encrypt the payload
    *
-   * @generated from field: bytes payload_encryption_key = 4;
+   * @generated from field: string payload_encryption_key = 4;
    */
-  payloadEncryptionKey: Uint8Array;
+  payloadEncryptionKey: string;
 
   constructor(data?: PartialMessage<AppEventWebhook>);
 
