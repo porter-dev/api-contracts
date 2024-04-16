@@ -486,6 +486,13 @@ export declare class Metabase extends Message<Metabase> {
    */
   datastore?: MetabaseDatastore;
 
+  /**
+   * ingress_enabled describes whether the metabase instance has ingress enabled
+   *
+   * @generated from field: optional bool ingress_enabled = 5;
+   */
+  ingressEnabled?: boolean;
+
   constructor(data?: PartialMessage<Metabase>);
 
   static readonly runtime: typeof proto3;
