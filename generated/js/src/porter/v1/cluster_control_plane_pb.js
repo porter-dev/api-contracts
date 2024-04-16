@@ -163,6 +163,7 @@ export const MachineTypesResponse = /*@__PURE__*/ proto3.makeMessageType(
   "porter.v1.MachineTypesResponse",
   () => [
     { no: 1, name: "machine_types", kind: "message", T: MachineType, repeated: true },
+    { no: 2, name: "unsupported_machine_types", kind: "message", T: MachineType, repeated: true },
   ],
 );
 
