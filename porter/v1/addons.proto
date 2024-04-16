@@ -127,6 +127,8 @@ message Metabase {
   optional int32 ram_megabytes = 3;
   // datastore is the configuration of the datastore that metabase is connected to
   optional MetabaseDatastore datastore = 4;
+  // ingress_enabled describes whether the metabase instance has ingress enabled
+  optional bool ingress_enabled = 5;
 }
 
 // Newrelic is the configuration for Newrelic

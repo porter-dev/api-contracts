@@ -147,6 +147,7 @@ export const Metabase = /*@__PURE__*/ proto3.makeMessageType(
     { no: 2, name: "cpu_cores", kind: "scalar", T: 2 /* ScalarType.FLOAT */, opt: true },
     { no: 3, name: "ram_megabytes", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
     { no: 4, name: "datastore", kind: "message", T: MetabaseDatastore, opt: true },
+    { no: 5, name: "ingress_enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
   ],
 );
 
