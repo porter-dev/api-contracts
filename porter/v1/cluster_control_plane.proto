@@ -31,6 +31,9 @@ message MachineTypesRequest {
 
 message MachineTypesResponse {
   repeated MachineType machine_types = 1;
+  // unsupported_machine_types is a list of machine types that are not supported by Porter, but are available to the user.
+  // This field is included to ease debugging.
+  repeated MachineType unsupported_machine_types = 2;
 }
 
 message QuotaIncreaseRequest {

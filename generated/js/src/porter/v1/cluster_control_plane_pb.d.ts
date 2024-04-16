@@ -352,6 +352,14 @@ export declare class MachineTypesResponse extends Message<MachineTypesResponse> 
    */
   machineTypes: MachineType[];
 
+  /**
+   * unsupported_machine_types is a list of machine types that are not supported by Porter, but are available to the user.
+   * This field is included to ease debugging.
+   *
+   * @generated from field: repeated porter.v1.MachineType unsupported_machine_types = 2;
+   */
+  unsupportedMachineTypes: MachineType[];
+
   constructor(data?: PartialMessage<MachineTypesResponse>);
 
   static readonly runtime: typeof proto3;
