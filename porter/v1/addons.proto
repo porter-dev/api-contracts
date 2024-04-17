@@ -151,6 +151,8 @@ message Newrelic {
   optional bool prometheus_enabled = 8;
   // pixie_enabled determines whether pixie is enabled
   optional bool pixie_enabled = 9;
+  // kube_events_enabled determines whether tracking for kube events is enabled
+  optional bool kube_events_enabled = 10;
 }
 
 // Tailscale is the configuration for Tailscale

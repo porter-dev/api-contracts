@@ -577,6 +577,13 @@ export declare class Newrelic extends Message<Newrelic> {
    */
   pixieEnabled?: boolean;
 
+  /**
+   * kube_events_enabled determines whether tracking for kube events is enabled
+   *
+   * @generated from field: optional bool kube_events_enabled = 10;
+   */
+  kubeEventsEnabled?: boolean;
+
   constructor(data?: PartialMessage<Newrelic>);
 
   static readonly runtime: typeof proto3;
