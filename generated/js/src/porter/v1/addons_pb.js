@@ -168,6 +168,7 @@ export const Newrelic = /*@__PURE__*/ proto3.makeMessageType(
     { no: 7, name: "metrics_adapter_enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
     { no: 8, name: "prometheus_enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
     { no: 9, name: "pixie_enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
+    { no: 10, name: "kube_events_enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
   ],
 );
 
