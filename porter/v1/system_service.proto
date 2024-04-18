@@ -28,26 +28,64 @@ enum Status {
   STATUS_FAILURE = 3;
 }
 
-// ServiceStatus is the status for a single system service at a certain time stamp
-message ServiceStatus {
-  // timestamp_field holds the timestamp for this status
-  google.protobuf.Timestamp timestamp_field = 1;
-  // status gives the status for a service
-  Status status = 2;
+// ClusterHealthType represents types of health history we generate for the cluster
+enum ClusterHealthType {
+  // CLUSTER_HEALTH_TYPE_UNSPECIFIED is the default value
+  CLUSTER_HEALTH_TYPE_UNSPECIFIED = 0;
+  // CLUSTER_HEALTH_TYPE_PINGABLE is history of whether we were able to ping the api-server
+  CLUSTER_HEALTH_TYPE_CONNECTED = 1;
+  // CLUSTER_HEALTH_TYPE_CONNECTED is history of weather we were able to connect to the cluster
+  CLUSTER_HEALTH_TYPE_PINGABLE = 2;
+  // CLUSTER_HEALTH_TYPE_METRICS is whether the metrics services in the cluster were healthy
+  CLUSTER_HEALTH_TYPE_METRICS = 3;
 }
 
-// SystemServiceStatusHistory is a system service's status timeseries
-message SystemServiceStatusHistory {
+// HealthStatus is a single status observed over a certain period of time
+message HealthStatus {
+  // start_time holds the timestamp for when this status began
+  google.protobuf.Timestamp start_time = 1;
+  // end_time holds the timestamp for when this status ended if provided
+  // if not provided, the status is considered ongoing
+  optional google.protobuf.Timestamp end_time = 2;
+  // status gives the status for a service
+  Status status = 3;
+  // description provides more information on a status
+  string description = 4;
+}
+
+// StatusPercentage is the percentage in a day that a certain status was observed
+message StatusPercentage {
+  Status status = 1;
+  float percentage = 2;
+}
+
+// DailyHealthStatus represents health status over a day
+message DailyHealthStatus {
+  // status_percentages holds information on what percentage of the day different statuses were observed
+  // there should be only one entry for the different Status types
+  repeated StatusPercentage status_percentages = 1;
+  // health_statuses is the different statuses observed over a day
+  // if there is a missing time gap, the service can be considered to have been healthy during that gap
+  repeated HealthStatus health_statuses = 2;
+}
+
+// ServiceStatusHistory holds the health status history for a particualr service over multiple days
+message ServiceStatusHistory {
   // system_service identifies the service
   SystemService system_service = 1;
-  // status_history is a list of statuses for the service sorted in a descending order (so most recent comes first)
-  repeated ServiceStatus status_history = 2;
+  // daily_status_history is daily health status for a service over multiple days
+  // the keys are the number of days before today the DailyHealthStatus is from
+  map<int32, DailyHealthStatus> daily_status_history = 2;
 }
 
-// ClusterStatus is the status for a cluster at a certain timestamp
-message ClusterStatus {
-  // timestamp_field holds the timestamp for this status
-  google.protobuf.Timestamp timestamp_field = 1;
-  // responsive is true if the cluster sent all the expected heartbeats in the time range represented by the timestamp
-  bool responsive = 2;
+// ClusterStatusHistory holds health status history of a certain type for a cluster
+message ClusterStatusHistory {
+  // cluster_health_type is the type this history is generated for
+  ClusterHealthType cluster_health_type = 1;
+  // status_percentages holds information on what percentage of the day different statuses were observed
+  // there should be only one entry for the different Status types
+  repeated StatusPercentage status_percentages = 2;
+  // daily_status_history is daily health status for the cluster over multiple days for the cluster_health_type
+  // the keys are the number of days before today the DailyHealthStatus is from
+  repeated DailyHealthStatus daily_status_history = 3;
 }
