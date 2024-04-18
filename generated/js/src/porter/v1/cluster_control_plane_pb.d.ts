@@ -20,7 +20,7 @@ import type { EnumEnvGroupProviderType, ExternalEnvGroupProviderEnabledStatus, I
 import type { NotificationConfig } from "./notification_pb.js";
 import type { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
-import type { ClusterStatusHistory, ServiceStatusHistory } from "./system_service_pb.js";
+import type { ClusterStatusHistory, SystemServiceStatusHistory } from "./system_service_pb.js";
 import type { AppEventWebhook } from "./app_event_webhook_pb.js";
 
 /**
@@ -7310,9 +7310,9 @@ export declare class SystemStatusHistoryResponse extends Message<SystemStatusHis
   /**
    * system_service_status_histories is a list of status timeseries for system services. Users can assume there is only one entry per a system service.
    *
-   * @generated from field: repeated porter.v1.ServiceStatusHistory system_service_status_histories = 2;
+   * @generated from field: repeated porter.v1.SystemServiceStatusHistory system_service_status_histories = 2;
    */
-  systemServiceStatusHistories: ServiceStatusHistory[];
+  systemServiceStatusHistories: SystemServiceStatusHistory[];
 
   constructor(data?: PartialMessage<SystemStatusHistoryResponse>);
 

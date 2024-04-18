@@ -69,8 +69,8 @@ message DailyHealthStatus {
   repeated HealthStatus health_statuses = 2;
 }
 
-// ServiceStatusHistory holds the health status history for a particualr service over multiple days
-message ServiceStatusHistory {
+// SystemServiceStatusHistory holds the health status history for a particular system service over multiple days
+message SystemServiceStatusHistory {
   // system_service identifies the service
   SystemService system_service = 1;
   // daily_status_history is daily health status for a service over multiple days

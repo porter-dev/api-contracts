@@ -92,12 +92,12 @@ export const DailyHealthStatus = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
- * ServiceStatusHistory holds the health status history for a particualr service over multiple days
+ * SystemServiceStatusHistory holds the health status history for a particular system service over multiple days
  *
- * @generated from message porter.v1.ServiceStatusHistory
+ * @generated from message porter.v1.SystemServiceStatusHistory
  */
-export const ServiceStatusHistory = /*@__PURE__*/ proto3.makeMessageType(
-  "porter.v1.ServiceStatusHistory",
+export const SystemServiceStatusHistory = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.SystemServiceStatusHistory",
   () => [
     { no: 1, name: "system_service", kind: "message", T: SystemService },
     { no: 2, name: "daily_status_history", kind: "map", K: 5 /* ScalarType.INT32 */, V: {kind: "message", T: DailyHealthStatus} },

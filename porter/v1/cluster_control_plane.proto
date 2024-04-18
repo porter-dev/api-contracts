@@ -1978,7 +1978,7 @@ message SystemStatusHistoryResponse {
   // there should be a maximum of one timeseries per health type
   repeated ClusterStatusHistory cluster_status_histories = 1;
   // system_service_status_histories is a list of status timeseries for system services. Users can assume there is only one entry per a system service.
-  repeated ServiceStatusHistory system_service_status_histories = 2;
+  repeated SystemServiceStatusHistory system_service_status_histories = 2;
 }
 
 // AppEventWebhooksRequest is a request to list AppEventWebhooks configured on an app

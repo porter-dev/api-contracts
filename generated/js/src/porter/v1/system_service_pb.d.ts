@@ -239,11 +239,11 @@ export declare class DailyHealthStatus extends Message<DailyHealthStatus> {
 }
 
 /**
- * ServiceStatusHistory holds the health status history for a particualr service over multiple days
+ * SystemServiceStatusHistory holds the health status history for a particular system service over multiple days
  *
- * @generated from message porter.v1.ServiceStatusHistory
+ * @generated from message porter.v1.SystemServiceStatusHistory
  */
-export declare class ServiceStatusHistory extends Message<ServiceStatusHistory> {
+export declare class SystemServiceStatusHistory extends Message<SystemServiceStatusHistory> {
   /**
    * system_service identifies the service
    *
@@ -259,19 +259,19 @@ export declare class ServiceStatusHistory extends Message<ServiceStatusHistory> 
    */
   dailyStatusHistory: { [key: number]: DailyHealthStatus };
 
-  constructor(data?: PartialMessage<ServiceStatusHistory>);
+  constructor(data?: PartialMessage<SystemServiceStatusHistory>);
 
   static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.ServiceStatusHistory";
+  static readonly typeName = "porter.v1.SystemServiceStatusHistory";
   static readonly fields: FieldList;
 
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ServiceStatusHistory;
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): SystemServiceStatusHistory;
 
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ServiceStatusHistory;
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): SystemServiceStatusHistory;
 
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ServiceStatusHistory;
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): SystemServiceStatusHistory;
 
-  static equals(a: ServiceStatusHistory | PlainMessage<ServiceStatusHistory> | undefined, b: ServiceStatusHistory | PlainMessage<ServiceStatusHistory> | undefined): boolean;
+  static equals(a: SystemServiceStatusHistory | PlainMessage<SystemServiceStatusHistory> | undefined, b: SystemServiceStatusHistory | PlainMessage<SystemServiceStatusHistory> | undefined): boolean;
 }
 
 /**
