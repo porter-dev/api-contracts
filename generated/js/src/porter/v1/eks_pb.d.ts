@@ -277,6 +277,13 @@ export declare class EKSNodeGroup extends Message<EKSNodeGroup> {
    */
   additionalTaints: string[];
 
+  /**
+   * disk_size_gb is the size of the disk in GB for the node group instances. If unspecified, this will default to 50.
+   *
+   * @generated from field: uint32 disk_size_gb = 8;
+   */
+  diskSizeGb: number;
+
   constructor(data?: PartialMessage<EKSNodeGroup>);
 
   static readonly runtime: typeof proto3;

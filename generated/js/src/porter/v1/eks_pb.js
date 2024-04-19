@@ -94,6 +94,7 @@ export const EKSNodeGroup = /*@__PURE__*/ proto3.makeMessageType(
     { no: 5, name: "is_stateful", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 6, name: "additional_policies", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 7, name: "additional_taints", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 8, name: "disk_size_gb", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
   ],
 );
 
