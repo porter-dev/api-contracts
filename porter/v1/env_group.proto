@@ -12,4 +12,27 @@ enum EnumEnvGroupProviderType {
   ENUM_ENV_GROUP_PROVIDER_TYPE_DOPPLER = 2;
   // ENUM_ENV_GROUP_PROVIDER_TYPE_DATASTORE repesents an env group sourced from a managed datastore
   ENUM_ENV_GROUP_PROVIDER_TYPE_DATASTORE = 3;
+  // ENUM_ENV_GROUP_PROVIDER_TYPE_INFISICAL represents an env group sourced from Infisical
+  ENUM_ENV_GROUP_PROVIDER_TYPE_INFISICAL = 4;
+}
+
+// EnumExternalEnvGroupProviderType is the type of external env group provider.
+enum EnumExternalEnvGroupProviderType {
+  // ENUM_EXTERNAL_ENV_GROUP_PROVIDER_TYPE_UNSPECIFIED represents the nil value
+  ENUM_EXTERNAL_ENV_GROUP_PROVIDER_TYPE_UNSPECIFIED = 0;
+  // ENUM_EXTERNAL_ENV_GROUP_PROVIDER_TYPE_EXTERNAL_SECRETS represents the external-secrets env group provider
+  ENUM_EXTERNAL_ENV_GROUP_PROVIDER_TYPE_EXTERNAL_SECRETS = 1;
+  // ENUM_EXTERNAL_ENV_GROUP_PROVIDER_TYPE_INFISICAL represents the Infisical env group provider
+  ENUM_EXTERNAL_ENV_GROUP_PROVIDER_TYPE_INFISICAL = 2;
+}
+
+message ExternalEnvGroupProviderEnabledStatus {
+  // type is the type of the external env group provider
+  EnumExternalEnvGroupProviderType type = 1;
+  // enabled is a flag that indicates whether the external env group provider is enabled
+  bool enabled = 2;
+  // reprovision_required is a flag that indicates whether the cluster needs to be reprovisioned to enable external env group providers
+  bool reprovision_required = 3;
+  // k8s_upgrade_required is a flag that indicates whether the cluster needs to be upgraded to enable external env group providers
+  bool k8s_upgrade_required = 4;
 }

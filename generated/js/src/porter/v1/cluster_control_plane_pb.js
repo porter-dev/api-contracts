@@ -15,7 +15,7 @@ import { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifie
 import { Addon, PrerequisiteAddon } from "./addons_pb.js";
 import { AppEventType } from "./agent_app_event_types_pb.js";
 import { Alert } from "./prometheus_alerts_pb.js";
-import { EnumEnvGroupProviderType } from "./env_group_pb.js";
+import { EnumEnvGroupProviderType, ExternalEnvGroupProviderEnabledStatus } from "./env_group_pb.js";
 import { NotificationConfig } from "./notification_pb.js";
 import { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
@@ -1826,6 +1826,7 @@ export const AreExternalEnvGroupProvidersEnabledResponse = /*@__PURE__*/ proto3.
     { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 2, name: "reprovision_required", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 3, name: "k8s_upgrade_required", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 4, name: "providers", kind: "message", T: ExternalEnvGroupProviderEnabledStatus, repeated: true },
   ],
 );
 
