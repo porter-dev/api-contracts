@@ -117,6 +117,7 @@ export const PorterApp = /*@__PURE__*/ proto3.makeMessageType(
     { no: 12, name: "auto_rollback", kind: "message", T: AutoRollback },
     { no: 13, name: "cloud_sql", kind: "message", T: CloudSql },
     { no: 14, name: "initial_deploy", kind: "message", T: Service },
+    { no: 15, name: "mounted_filenames", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
   ],
 );
 
@@ -218,6 +219,7 @@ export const Deletions = /*@__PURE__*/ proto3.makeMessageType(
     { no: 5, name: "service_domains", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: DomainNameList} },
     { no: 6, name: "service_deletions", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: ServiceDeletions} },
     { no: 7, name: "env_variable_deletions", kind: "message", T: EnvVariableDeletions },
+    { no: 8, name: "mounted_filename_deletions", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
   ],
 );
 

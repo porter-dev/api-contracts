@@ -317,6 +317,13 @@ export declare class PorterApp extends Message<PorterApp> {
    */
   initialDeploy?: Service;
 
+  /**
+   * mounted_filenames is a list of file names that should be mounted to the app. If a filename is added to the app contract, it is assumed that the file already exists in some backing datastore that the app can access.
+   *
+   * @generated from field: repeated string mounted_filenames = 15;
+   */
+  mountedFilenames: string[];
+
   constructor(data?: PartialMessage<PorterApp>);
 
   static readonly runtime: typeof proto3;
@@ -628,6 +635,13 @@ export declare class Deletions extends Message<Deletions> {
    * @generated from field: porter.v1.EnvVariableDeletions env_variable_deletions = 7;
    */
   envVariableDeletions?: EnvVariableDeletions;
+
+  /**
+   * mounted_filename_deletions contains the filenames to unmount from the app
+   *
+   * @generated from field: repeated string mounted_filename_deletions = 8;
+   */
+  mountedFilenameDeletions: string[];
 
   constructor(data?: PartialMessage<Deletions>);
 
