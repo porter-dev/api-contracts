@@ -60,6 +60,9 @@ message EKSNodeGroup {
   // additional_taints is a list of NoSchedule taints to apply to the node group.
   // These will be applied on top of the default porter.run/workload-kind taints.
   repeated string additional_taints = 7;
+
+  // disk_size_gb is the size of the disk in GB for the node group instances. If unspecified, this will default to 50.
+  uint32 disk_size_gb = 8;
 }
 
 enum NodeGroupType {
