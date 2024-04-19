@@ -1187,11 +1187,13 @@ message AreExternalEnvGroupProvidersEnabledRequest {
 // AreExternalEnvGroupProvidersEnabledResponse is the response object for AreExternalEnvGroupProvidersEnabled
 message AreExternalEnvGroupProvidersEnabledResponse {
   // enabled is a flag that indicates whether external env group providers are enabled
-  bool enabled = 1;
+  bool enabled = 1 [deprecated = true];
   // reprovision_required is a flag that indicates whether the cluster needs to be reprovisioned to enable external env group providers
-  bool reprovision_required = 2;
+  bool reprovision_required = 2 [deprecated = true];
   // k8s_upgrade_required is a flag that indicates whether the cluster needs to be upgraded to enable external env group providers
-  bool k8s_upgrade_required = 3;
+  bool k8s_upgrade_required = 3 [deprecated = true];
+  // operators is the list of external env group operators that are enabled
+  repeated ExternalEnvGroupProviderEnabledStatus operators = 4;
 }
 
 // EnableExternalEnvGroupProvidersRequest is the request object for EnableExternalEnvGroupProviders

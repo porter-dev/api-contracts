@@ -3,6 +3,9 @@
 /* eslint-disable */
 // @ts-nocheck
 
+import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
+import { Message, proto3 } from "@bufbuild/protobuf";
+
 /**
  * EnvGroupProviderType is the type of the EnvGroupProvider.
  *
@@ -36,5 +39,87 @@ export declare enum EnumEnvGroupProviderType {
    * @generated from enum value: ENUM_ENV_GROUP_PROVIDER_TYPE_DATASTORE = 3;
    */
   DATASTORE = 3,
+
+  /**
+   * ENUM_ENV_GROUP_PROVIDER_TYPE_INFISICAL represents an env group sourced from Infisical
+   *
+   * @generated from enum value: ENUM_ENV_GROUP_PROVIDER_TYPE_INFISICAL = 4;
+   */
+  INFISICAL = 4,
+}
+
+/**
+ * EnumExternalEnvGroupOperatorType is the type of external env group provider.
+ *
+ * @generated from enum porter.v1.EnumExternalEnvGroupOperatorType
+ */
+export declare enum EnumExternalEnvGroupOperatorType {
+  /**
+   * ENUM_EXTERNAL_ENV_GROUP_OPERATOR_TYPE_UNSPECIFIED represents the nil value
+   *
+   * @generated from enum value: ENUM_EXTERNAL_ENV_GROUP_OPERATOR_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * ENUM_EXTERNAL_ENV_GROUP_OPERATOR_TYPE_EXTERNAL_SECRETS represents the external-secrets env group operator
+   *
+   * @generated from enum value: ENUM_EXTERNAL_ENV_GROUP_OPERATOR_TYPE_EXTERNAL_SECRETS = 1;
+   */
+  EXTERNAL_SECRETS = 1,
+
+  /**
+   * ENUM_EXTERNAL_ENV_GROUP_OPERATOR_TYPE_INFISICAL represents the Infisical env group operator
+   *
+   * @generated from enum value: ENUM_EXTERNAL_ENV_GROUP_OPERATOR_TYPE_INFISICAL = 2;
+   */
+  INFISICAL = 2,
+}
+
+/**
+ * @generated from message porter.v1.ExternalEnvGroupProviderEnabledStatus
+ */
+export declare class ExternalEnvGroupProviderEnabledStatus extends Message<ExternalEnvGroupProviderEnabledStatus> {
+  /**
+   * operator is the type of the external env group operator
+   *
+   * @generated from field: porter.v1.EnumExternalEnvGroupOperatorType operator = 1;
+   */
+  operator: EnumExternalEnvGroupOperatorType;
+
+  /**
+   * enabled is a flag that indicates whether the external env group provider is enabled
+   *
+   * @generated from field: bool enabled = 2;
+   */
+  enabled: boolean;
+
+  /**
+   * reprovision_required is a flag that indicates whether the cluster needs to be reprovisioned to enable the external env group operator
+   *
+   * @generated from field: bool reprovision_required = 3;
+   */
+  reprovisionRequired: boolean;
+
+  /**
+   * k8s_upgrade_required is a flag that indicates whether the cluster needs to be upgraded to enable the external env group operator
+   *
+   * @generated from field: bool k8s_upgrade_required = 4;
+   */
+  k8sUpgradeRequired: boolean;
+
+  constructor(data?: PartialMessage<ExternalEnvGroupProviderEnabledStatus>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ExternalEnvGroupProviderEnabledStatus";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ExternalEnvGroupProviderEnabledStatus;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ExternalEnvGroupProviderEnabledStatus;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ExternalEnvGroupProviderEnabledStatus;
+
+  static equals(a: ExternalEnvGroupProviderEnabledStatus | PlainMessage<ExternalEnvGroupProviderEnabledStatus> | undefined, b: ExternalEnvGroupProviderEnabledStatus | PlainMessage<ExternalEnvGroupProviderEnabledStatus> | undefined): boolean;
 }
 

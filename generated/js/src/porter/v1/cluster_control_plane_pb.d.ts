@@ -16,7 +16,7 @@ import type { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIden
 import type { Addon, PrerequisiteAddon } from "./addons_pb.js";
 import type { AppEventType } from "./agent_app_event_types_pb.js";
 import type { Alert } from "./prometheus_alerts_pb.js";
-import type { EnumEnvGroupProviderType } from "./env_group_pb.js";
+import type { EnumEnvGroupProviderType, ExternalEnvGroupProviderEnabledStatus } from "./env_group_pb.js";
 import type { NotificationConfig } from "./notification_pb.js";
 import type { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
@@ -5346,23 +5346,33 @@ export declare class AreExternalEnvGroupProvidersEnabledResponse extends Message
   /**
    * enabled is a flag that indicates whether external env group providers are enabled
    *
-   * @generated from field: bool enabled = 1;
+   * @generated from field: bool enabled = 1 [deprecated = true];
+   * @deprecated
    */
   enabled: boolean;
 
   /**
    * reprovision_required is a flag that indicates whether the cluster needs to be reprovisioned to enable external env group providers
    *
-   * @generated from field: bool reprovision_required = 2;
+   * @generated from field: bool reprovision_required = 2 [deprecated = true];
+   * @deprecated
    */
   reprovisionRequired: boolean;
 
   /**
    * k8s_upgrade_required is a flag that indicates whether the cluster needs to be upgraded to enable external env group providers
    *
-   * @generated from field: bool k8s_upgrade_required = 3;
+   * @generated from field: bool k8s_upgrade_required = 3 [deprecated = true];
+   * @deprecated
    */
   k8sUpgradeRequired: boolean;
+
+  /**
+   * operators is the list of external env group operators that are enabled
+   *
+   * @generated from field: repeated porter.v1.ExternalEnvGroupProviderEnabledStatus operators = 4;
+   */
+  operators: ExternalEnvGroupProviderEnabledStatus[];
 
   constructor(data?: PartialMessage<AreExternalEnvGroupProvidersEnabledResponse>);
 
