@@ -27,7 +27,7 @@ enum EnumExternalEnvGroupOperatorType {
 }
 
 message ExternalEnvGroupProviderEnabledStatus {
-  // type is the type of the external env group provider
+  // operator is the type of the external env group operator
   EnumExternalEnvGroupOperatorType operator = 1;
   // enabled is a flag that indicates whether the external env group provider is enabled
   bool enabled = 2;

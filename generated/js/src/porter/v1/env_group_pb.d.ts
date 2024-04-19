@@ -81,7 +81,7 @@ export declare enum EnumExternalEnvGroupOperatorType {
  */
 export declare class ExternalEnvGroupProviderEnabledStatus extends Message<ExternalEnvGroupProviderEnabledStatus> {
   /**
-   * type is the type of the external env group provider
+   * operator is the type of the external env group operator
    *
    * @generated from field: porter.v1.EnumExternalEnvGroupOperatorType operator = 1;
    */

@@ -139,7 +139,7 @@ type ExternalEnvGroupProviderEnabledStatus struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// type is the type of the external env group provider
+	// operator is the type of the external env group operator
 	Operator EnumExternalEnvGroupOperatorType `protobuf:"varint,1,opt,name=operator,proto3,enum=porter.v1.EnumExternalEnvGroupOperatorType" json:"operator,omitempty"`
 	// enabled is a flag that indicates whether the external env group provider is enabled
 	Enabled bool `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
