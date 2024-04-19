@@ -25,6 +25,20 @@ export const AddonType = /*@__PURE__*/ proto3.makeEnum(
 );
 
 /**
+ * @generated from enum porter.v1.TailscaleServiceSourceType
+ */
+export const TailscaleServiceSourceType = /*@__PURE__*/ proto3.makeEnum(
+  "porter.v1.TailscaleServiceSourceType",
+  [
+    {no: 0, name: "TAILSCALE_SERVICE_SOURCE_TYPE_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "TAILSCALE_SERVICE_SOURCE_TYPE_APPLICATION_WEB_SERVICE", localName: "APPLICATION_WEB_SERVICE"},
+    {no: 2, name: "TAILSCALE_SERVICE_SOURCE_TYPE_ADDON_METABASE", localName: "ADDON_METABASE"},
+    {no: 3, name: "TAILSCALE_SERVICE_SOURCE_TYPE_ADDON_MANAGED_POSTGRES", localName: "ADDON_MANAGED_POSTGRES"},
+    {no: 4, name: "TAILSCALE_SERVICE_SOURCE_TYPE_ADDON_MANAGED_REDIS", localName: "ADDON_MANAGED_REDIS"},
+  ],
+);
+
+/**
  * PrerequisiteAddon specifies an addon that must be installed before any apps can be installed
  * the addon should be installed with the specified config
  *
@@ -182,6 +196,33 @@ export const Tailscale = /*@__PURE__*/ proto3.makeMessageType(
   () => [
     { no: 1, name: "auth_key", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 2, name: "subnet_routes", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+  ],
+);
+
+/**
+ * TailscaleService is a service that is networkable through Tailscale
+ *
+ * @generated from message porter.v1.TailscaleService
+ */
+export const TailscaleService = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.TailscaleService",
+  () => [
+    { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "ip", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "source", kind: "message", T: TailscaleServiceSource },
+  ],
+);
+
+/**
+ * TailscaleServiceSource describes the source that created a tailscale service
+ *
+ * @generated from message porter.v1.TailscaleServiceSource
+ */
+export const TailscaleServiceSource = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.TailscaleServiceSource",
+  () => [
+    { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "type", kind: "enum", T: proto3.getEnumType(TailscaleServiceSourceType) },
   ],
 );
 

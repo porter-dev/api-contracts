@@ -70,6 +70,36 @@ export declare enum AddonType {
 }
 
 /**
+ * @generated from enum porter.v1.TailscaleServiceSourceType
+ */
+export declare enum TailscaleServiceSourceType {
+  /**
+   * @generated from enum value: TAILSCALE_SERVICE_SOURCE_TYPE_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * @generated from enum value: TAILSCALE_SERVICE_SOURCE_TYPE_APPLICATION_WEB_SERVICE = 1;
+   */
+  APPLICATION_WEB_SERVICE = 1,
+
+  /**
+   * @generated from enum value: TAILSCALE_SERVICE_SOURCE_TYPE_ADDON_METABASE = 2;
+   */
+  ADDON_METABASE = 2,
+
+  /**
+   * @generated from enum value: TAILSCALE_SERVICE_SOURCE_TYPE_ADDON_MANAGED_POSTGRES = 3;
+   */
+  ADDON_MANAGED_POSTGRES = 3,
+
+  /**
+   * @generated from enum value: TAILSCALE_SERVICE_SOURCE_TYPE_ADDON_MANAGED_REDIS = 4;
+   */
+  ADDON_MANAGED_REDIS = 4,
+}
+
+/**
  * PrerequisiteAddon specifies an addon that must be installed before any apps can be installed
  * the addon should be installed with the specified config
  *
@@ -632,5 +662,72 @@ export declare class Tailscale extends Message<Tailscale> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Tailscale;
 
   static equals(a: Tailscale | PlainMessage<Tailscale> | undefined, b: Tailscale | PlainMessage<Tailscale> | undefined): boolean;
+}
+
+/**
+ * TailscaleService is a service that is networkable through Tailscale
+ *
+ * @generated from message porter.v1.TailscaleService
+ */
+export declare class TailscaleService extends Message<TailscaleService> {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * @generated from field: string ip = 2;
+   */
+  ip: string;
+
+  /**
+   * @generated from field: porter.v1.TailscaleServiceSource source = 3;
+   */
+  source?: TailscaleServiceSource;
+
+  constructor(data?: PartialMessage<TailscaleService>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.TailscaleService";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): TailscaleService;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): TailscaleService;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): TailscaleService;
+
+  static equals(a: TailscaleService | PlainMessage<TailscaleService> | undefined, b: TailscaleService | PlainMessage<TailscaleService> | undefined): boolean;
+}
+
+/**
+ * TailscaleServiceSource describes the source that created a tailscale service
+ *
+ * @generated from message porter.v1.TailscaleServiceSource
+ */
+export declare class TailscaleServiceSource extends Message<TailscaleServiceSource> {
+  /**
+   * @generated from field: string name = 1;
+   */
+  name: string;
+
+  /**
+   * @generated from field: porter.v1.TailscaleServiceSourceType type = 2;
+   */
+  type: TailscaleServiceSourceType;
+
+  constructor(data?: PartialMessage<TailscaleServiceSource>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.TailscaleServiceSource";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): TailscaleServiceSource;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): TailscaleServiceSource;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): TailscaleServiceSource;
+
+  static equals(a: TailscaleServiceSource | PlainMessage<TailscaleServiceSource> | undefined, b: TailscaleServiceSource | PlainMessage<TailscaleServiceSource> | undefined): boolean;
 }
 

@@ -162,3 +162,24 @@ message Tailscale {
   // subnet_routes are the subnet routes for Tailscale
   repeated string subnet_routes = 2;
 }
+
+// TailscaleService is a service that is networkable through Tailscale
+message TailscaleService {
+  string name = 1;
+  string ip = 2;
+  TailscaleServiceSource source = 3;
+}
+
+// TailscaleServiceSource describes the source that created a tailscale service
+message TailscaleServiceSource {
+  string name = 1;
+  TailscaleServiceSourceType type = 2;
+}
+
+enum TailscaleServiceSourceType {
+  TAILSCALE_SERVICE_SOURCE_TYPE_UNSPECIFIED = 0;
+  TAILSCALE_SERVICE_SOURCE_TYPE_APPLICATION_WEB_SERVICE = 1;
+  TAILSCALE_SERVICE_SOURCE_TYPE_ADDON_METABASE = 2;
+  TAILSCALE_SERVICE_SOURCE_TYPE_ADDON_MANAGED_POSTGRES = 3;
+  TAILSCALE_SERVICE_SOURCE_TYPE_ADDON_MANAGED_REDIS = 4;
+}
