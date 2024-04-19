@@ -22,16 +22,16 @@ export const EnumEnvGroupProviderType = /*@__PURE__*/ proto3.makeEnum(
 );
 
 /**
- * EnumExternalEnvGroupProviderType is the type of external env group provider.
+ * EnumExternalEnvGroupOperatorType is the type of external env group provider.
  *
- * @generated from enum porter.v1.EnumExternalEnvGroupProviderType
+ * @generated from enum porter.v1.EnumExternalEnvGroupOperatorType
  */
-export const EnumExternalEnvGroupProviderType = /*@__PURE__*/ proto3.makeEnum(
-  "porter.v1.EnumExternalEnvGroupProviderType",
+export const EnumExternalEnvGroupOperatorType = /*@__PURE__*/ proto3.makeEnum(
+  "porter.v1.EnumExternalEnvGroupOperatorType",
   [
-    {no: 0, name: "ENUM_EXTERNAL_ENV_GROUP_PROVIDER_TYPE_UNSPECIFIED", localName: "UNSPECIFIED"},
-    {no: 1, name: "ENUM_EXTERNAL_ENV_GROUP_PROVIDER_TYPE_EXTERNAL_SECRETS", localName: "EXTERNAL_SECRETS"},
-    {no: 2, name: "ENUM_EXTERNAL_ENV_GROUP_PROVIDER_TYPE_INFISICAL", localName: "INFISICAL"},
+    {no: 0, name: "ENUM_EXTERNAL_ENV_GROUP_OPERATOR_TYPE_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "ENUM_EXTERNAL_ENV_GROUP_OPERATOR_TYPE_EXTERNAL_SECRETS", localName: "EXTERNAL_SECRETS"},
+    {no: 2, name: "ENUM_EXTERNAL_ENV_GROUP_OPERATOR_TYPE_INFISICAL", localName: "INFISICAL"},
   ],
 );
 
@@ -41,7 +41,7 @@ export const EnumExternalEnvGroupProviderType = /*@__PURE__*/ proto3.makeEnum(
 export const ExternalEnvGroupProviderEnabledStatus = /*@__PURE__*/ proto3.makeMessageType(
   "porter.v1.ExternalEnvGroupProviderEnabledStatus",
   () => [
-    { no: 1, name: "type", kind: "enum", T: proto3.getEnumType(EnumExternalEnvGroupProviderType) },
+    { no: 1, name: "operator", kind: "enum", T: proto3.getEnumType(EnumExternalEnvGroupOperatorType) },
     { no: 2, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 3, name: "reprovision_required", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 4, name: "k8s_upgrade_required", kind: "scalar", T: 8 /* ScalarType.BOOL */ },

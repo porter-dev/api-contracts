@@ -49,29 +49,29 @@ export declare enum EnumEnvGroupProviderType {
 }
 
 /**
- * EnumExternalEnvGroupProviderType is the type of external env group provider.
+ * EnumExternalEnvGroupOperatorType is the type of external env group provider.
  *
- * @generated from enum porter.v1.EnumExternalEnvGroupProviderType
+ * @generated from enum porter.v1.EnumExternalEnvGroupOperatorType
  */
-export declare enum EnumExternalEnvGroupProviderType {
+export declare enum EnumExternalEnvGroupOperatorType {
   /**
-   * ENUM_EXTERNAL_ENV_GROUP_PROVIDER_TYPE_UNSPECIFIED represents the nil value
+   * ENUM_EXTERNAL_ENV_GROUP_OPERATOR_TYPE_UNSPECIFIED represents the nil value
    *
-   * @generated from enum value: ENUM_EXTERNAL_ENV_GROUP_PROVIDER_TYPE_UNSPECIFIED = 0;
+   * @generated from enum value: ENUM_EXTERNAL_ENV_GROUP_OPERATOR_TYPE_UNSPECIFIED = 0;
    */
   UNSPECIFIED = 0,
 
   /**
-   * ENUM_EXTERNAL_ENV_GROUP_PROVIDER_TYPE_EXTERNAL_SECRETS represents the external-secrets env group provider
+   * ENUM_EXTERNAL_ENV_GROUP_OPERATOR_TYPE_EXTERNAL_SECRETS represents the external-secrets env group operator
    *
-   * @generated from enum value: ENUM_EXTERNAL_ENV_GROUP_PROVIDER_TYPE_EXTERNAL_SECRETS = 1;
+   * @generated from enum value: ENUM_EXTERNAL_ENV_GROUP_OPERATOR_TYPE_EXTERNAL_SECRETS = 1;
    */
   EXTERNAL_SECRETS = 1,
 
   /**
-   * ENUM_EXTERNAL_ENV_GROUP_PROVIDER_TYPE_INFISICAL represents the Infisical env group provider
+   * ENUM_EXTERNAL_ENV_GROUP_OPERATOR_TYPE_INFISICAL represents the Infisical env group operator
    *
-   * @generated from enum value: ENUM_EXTERNAL_ENV_GROUP_PROVIDER_TYPE_INFISICAL = 2;
+   * @generated from enum value: ENUM_EXTERNAL_ENV_GROUP_OPERATOR_TYPE_INFISICAL = 2;
    */
   INFISICAL = 2,
 }
@@ -83,9 +83,9 @@ export declare class ExternalEnvGroupProviderEnabledStatus extends Message<Exter
   /**
    * type is the type of the external env group provider
    *
-   * @generated from field: porter.v1.EnumExternalEnvGroupProviderType type = 1;
+   * @generated from field: porter.v1.EnumExternalEnvGroupOperatorType operator = 1;
    */
-  type: EnumExternalEnvGroupProviderType;
+  operator: EnumExternalEnvGroupOperatorType;
 
   /**
    * enabled is a flag that indicates whether the external env group provider is enabled
@@ -95,14 +95,14 @@ export declare class ExternalEnvGroupProviderEnabledStatus extends Message<Exter
   enabled: boolean;
 
   /**
-   * reprovision_required is a flag that indicates whether the cluster needs to be reprovisioned to enable external env group providers
+   * reprovision_required is a flag that indicates whether the cluster needs to be reprovisioned to enable the external env group operator
    *
    * @generated from field: bool reprovision_required = 3;
    */
   reprovisionRequired: boolean;
 
   /**
-   * k8s_upgrade_required is a flag that indicates whether the cluster needs to be upgraded to enable external env group providers
+   * k8s_upgrade_required is a flag that indicates whether the cluster needs to be upgraded to enable the external env group operator
    *
    * @generated from field: bool k8s_upgrade_required = 4;
    */

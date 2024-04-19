@@ -1192,8 +1192,8 @@ message AreExternalEnvGroupProvidersEnabledResponse {
   bool reprovision_required = 2 [deprecated = true];
   // k8s_upgrade_required is a flag that indicates whether the cluster needs to be upgraded to enable external env group providers
   bool k8s_upgrade_required = 3 [deprecated = true];
-  // providers is the list of external env group providers and their status
-  repeated ExternalEnvGroupProviderEnabledStatus providers = 4;
+  // operators is the list of external env group operators that are enabled
+  repeated ExternalEnvGroupProviderEnabledStatus operators = 4;
 }
 
 // EnableExternalEnvGroupProvidersRequest is the request object for EnableExternalEnvGroupProviders

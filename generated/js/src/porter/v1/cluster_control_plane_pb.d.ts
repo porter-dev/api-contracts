@@ -5368,11 +5368,11 @@ export declare class AreExternalEnvGroupProvidersEnabledResponse extends Message
   k8sUpgradeRequired: boolean;
 
   /**
-   * providers is the list of external env group providers and their status
+   * operators is the list of external env group operators that are enabled
    *
-   * @generated from field: repeated porter.v1.ExternalEnvGroupProviderEnabledStatus providers = 4;
+   * @generated from field: repeated porter.v1.ExternalEnvGroupProviderEnabledStatus operators = 4;
    */
-  providers: ExternalEnvGroupProviderEnabledStatus[];
+  operators: ExternalEnvGroupProviderEnabledStatus[];
 
   constructor(data?: PartialMessage<AreExternalEnvGroupProvidersEnabledResponse>);
 

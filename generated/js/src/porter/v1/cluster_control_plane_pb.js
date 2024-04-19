@@ -1826,7 +1826,7 @@ export const AreExternalEnvGroupProvidersEnabledResponse = /*@__PURE__*/ proto3.
     { no: 1, name: "enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 2, name: "reprovision_required", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 3, name: "k8s_upgrade_required", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 4, name: "providers", kind: "message", T: ExternalEnvGroupProviderEnabledStatus, repeated: true },
+    { no: 4, name: "operators", kind: "message", T: ExternalEnvGroupProviderEnabledStatus, repeated: true },
   ],
 );
 
