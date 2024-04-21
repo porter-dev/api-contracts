@@ -60,6 +60,8 @@ message PorterApp {
   CloudSql cloud_sql = 13;
   // initial_deploy is a job service that should run once after the first deployment of the app in a deployment target
   Service initial_deploy = 14;
+  // mounted_filenames is a list of file names that should be mounted to the app. If a filename is added to the app contract, it is assumed that the file already exists in some backing datastore that the app can access.
+  repeated string mounted_filenames = 15;
 }
 
 // RequiredApp specifies another porter app that this app expects to be deployed alongside it
@@ -136,6 +138,8 @@ message Deletions {
   map<string, ServiceDeletions> service_deletions = 6;
   // env_variable_deletions contains the keys to remove from the app's normal and secret environment variables
   EnvVariableDeletions env_variable_deletions = 7;
+  // mounted_filename_deletions contains the filenames to unmount from the app
+  repeated string mounted_filename_deletions = 8;
 }
 
 message DomainNameList {
