@@ -16,7 +16,7 @@ import type { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIden
 import type { Addon, PrerequisiteAddon } from "./addons_pb.js";
 import type { AppEventType } from "./agent_app_event_types_pb.js";
 import type { Alert } from "./prometheus_alerts_pb.js";
-import type { EnumEnvGroupProviderType, ExternalEnvGroupProviderEnabledStatus } from "./env_group_pb.js";
+import type { EnumEnvGroupProviderType, ExternalEnvGroupProviderEnabledStatus, InfisicalEnv } from "./env_group_pb.js";
 import type { NotificationConfig } from "./notification_pb.js";
 import type { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
@@ -5513,6 +5513,13 @@ export declare class CreateOrUpdateEnvGroupRequest extends Message<CreateOrUpdat
    * @generated from field: bool skip_app_auto_deploy = 9;
    */
   skipAppAutoDeploy: boolean;
+
+  /**
+   * infisical_env specifies where to pull the env vars from in Infisical, if applicable
+   *
+   * @generated from field: porter.v1.InfisicalEnv infisical_env = 10;
+   */
+  infisicalEnv?: InfisicalEnv;
 
   constructor(data?: PartialMessage<CreateOrUpdateEnvGroupRequest>);
 
