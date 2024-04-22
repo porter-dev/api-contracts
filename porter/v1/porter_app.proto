@@ -94,6 +94,14 @@ message EnvGroup {
   EnumEnvGroupProviderType type = 6;
   // created_at is the time the env group was created
   google.protobuf.Timestamp created_at = 7;
+  // files is a list of encoded files associated with the env group
+  repeated EnvGroupFile files = 8;
+}
+
+// EnvGroupFile is an object representing file data
+message EnvGroupFile {
+  string name = 1;
+  string b64_contents = 2;
 }
 
 // EnvGroupVariables represents the variables for an env group.
@@ -102,6 +110,8 @@ message EnvGroupVariables {
   map<string, string> normal = 1;
   // secret is a map of sensitive variable names to values
   map<string, string> secret = 2;
+  // files is a list of encoded files associated with the env group
+  repeated EnvGroupFile files = 3;
 }
 
 // ServiceDeletions contains all explicit deletions from a service
