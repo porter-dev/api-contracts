@@ -128,11 +128,11 @@ export declare class ExternalEnvGroupProviderEnabledStatus extends Message<Exter
  */
 export declare class InfisicalEnv extends Message<InfisicalEnv> {
   /**
-   * environment_name is the name of the environment in Infisical to pull secrets from
+   * environment_slug is the slug referring to the environment in Infisical to pull secrets from
    *
-   * @generated from field: string environment_name = 1;
+   * @generated from field: string environment_slug = 1;
    */
-  environmentName: string;
+  environmentSlug: string;
 
   /**
    * environment_path is the path in the environment to scope secrets to

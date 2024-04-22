@@ -54,7 +54,7 @@ export const ExternalEnvGroupProviderEnabledStatus = /*@__PURE__*/ proto3.makeMe
 export const InfisicalEnv = /*@__PURE__*/ proto3.makeMessageType(
   "porter.v1.InfisicalEnv",
   () => [
-    { no: 1, name: "environment_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "environment_slug", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "environment_path", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
