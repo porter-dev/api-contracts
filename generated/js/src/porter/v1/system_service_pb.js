@@ -32,7 +32,7 @@ export const ClusterHealthType = /*@__PURE__*/ proto3.makeEnum(
     {no: 0, name: "CLUSTER_HEALTH_TYPE_UNSPECIFIED", localName: "UNSPECIFIED"},
     {no: 1, name: "CLUSTER_HEALTH_TYPE_CONNECTED", localName: "CONNECTED"},
     {no: 2, name: "CLUSTER_HEALTH_TYPE_PINGABLE", localName: "PINGABLE"},
-    {no: 3, name: "CLUSTER_HEALTH_TYPE_METRICS", localName: "METRICS"},
+    {no: 3, name: "CLUSTER_HEALTH_TYPE_METRICS_HEALTHY", localName: "METRICS_HEALTHY"},
   ],
 );
 
@@ -113,8 +113,7 @@ export const ClusterStatusHistory = /*@__PURE__*/ proto3.makeMessageType(
   "porter.v1.ClusterStatusHistory",
   () => [
     { no: 1, name: "cluster_health_type", kind: "enum", T: proto3.getEnumType(ClusterHealthType) },
-    { no: 2, name: "status_percentages", kind: "message", T: StatusPercentage, repeated: true },
-    { no: 3, name: "daily_status_history", kind: "message", T: DailyHealthStatus, repeated: true },
+    { no: 2, name: "daily_status_history", kind: "map", K: 5 /* ScalarType.INT32 */, V: {kind: "message", T: DailyHealthStatus} },
   ],
 );
 

@@ -71,11 +71,11 @@ export declare enum ClusterHealthType {
   PINGABLE = 2,
 
   /**
-   * CLUSTER_HEALTH_TYPE_METRICS is whether the metrics services in the cluster were healthy
+   * CLUSTER_HEALTH_TYPE_METRICS_HEALTHY is whether the metrics services in the cluster were healthy
    *
-   * @generated from enum value: CLUSTER_HEALTH_TYPE_METRICS = 3;
+   * @generated from enum value: CLUSTER_HEALTH_TYPE_METRICS_HEALTHY = 3;
    */
-  METRICS = 3,
+  METRICS_HEALTHY = 3,
 }
 
 /**
@@ -288,20 +288,12 @@ export declare class ClusterStatusHistory extends Message<ClusterStatusHistory> 
   clusterHealthType: ClusterHealthType;
 
   /**
-   * status_percentages holds information on what percentage of the day different statuses were observed
-   * there should be only one entry for the different Status types
-   *
-   * @generated from field: repeated porter.v1.StatusPercentage status_percentages = 2;
-   */
-  statusPercentages: StatusPercentage[];
-
-  /**
    * daily_status_history is daily health status for the cluster over multiple days for the cluster_health_type
    * the keys are the number of days before today the DailyHealthStatus is from
    *
-   * @generated from field: repeated porter.v1.DailyHealthStatus daily_status_history = 3;
+   * @generated from field: map<int32, porter.v1.DailyHealthStatus> daily_status_history = 2;
    */
-  dailyStatusHistory: DailyHealthStatus[];
+  dailyStatusHistory: { [key: number]: DailyHealthStatus };
 
   constructor(data?: PartialMessage<ClusterStatusHistory>);
 

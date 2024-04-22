@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import { proto3 } from "@bufbuild/protobuf";
+import { proto3, Timestamp } from "@bufbuild/protobuf";
 
 /**
  * InvolvedObjectType is the kubernetes object type the notification targets
@@ -32,9 +32,9 @@ export const Alert = /*@__PURE__*/ proto3.makeMessageType(
     { no: 1, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 2, name: "namespace", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 3, name: "type", kind: "enum", T: proto3.getEnumType(InvolvedObjectType) },
-    { no: 4, name: "desired_replicas", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 5, name: "available_replicas", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
-    { no: 6, name: "max_unavailable", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 4, name: "severity", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "start_time", kind: "message", T: Timestamp },
+    { no: 6, name: "end_time", kind: "message", T: Timestamp, opt: true },
   ],
 );
 

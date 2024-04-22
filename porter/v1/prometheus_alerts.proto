@@ -2,6 +2,8 @@ syntax = "proto3";
 
 package porter.v1;
 
+import "google/protobuf/timestamp.proto";
+
 // InvolvedObjectType is the kubernetes object type the notification targets
 // We currently alert for deployments, statefulsets and daemonsets
 enum InvolvedObjectType {
@@ -19,7 +21,11 @@ message Alert {
   string name = 1;
   string namespace = 2;
   InvolvedObjectType type = 3;
-  int32 desired_replicas = 4;
-  int32 available_replicas = 5;
-  int32 max_unavailable = 6;
+  // severity should be a string specifying how severe the alert is
+  string severity = 4;
+  // start_time holds the timestamp for when this status began
+  google.protobuf.Timestamp start_time = 5;
+  // end_time holds the timestamp for when this status ended
+  // if provided, this Alert is considered as a resolution alert
+  optional google.protobuf.Timestamp end_time = 6;
 }

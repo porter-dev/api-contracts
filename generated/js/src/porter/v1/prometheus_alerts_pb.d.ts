@@ -3,7 +3,7 @@
 /* eslint-disable */
 // @ts-nocheck
 
-import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
+import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage, Timestamp } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 
 /**
@@ -56,19 +56,26 @@ export declare class Alert extends Message<Alert> {
   type: InvolvedObjectType;
 
   /**
-   * @generated from field: int32 desired_replicas = 4;
+   * severity should be a string specifying how severe the alert is
+   *
+   * @generated from field: string severity = 4;
    */
-  desiredReplicas: number;
+  severity: string;
 
   /**
-   * @generated from field: int32 available_replicas = 5;
+   * start_time holds the timestamp for when this status began
+   *
+   * @generated from field: google.protobuf.Timestamp start_time = 5;
    */
-  availableReplicas: number;
+  startTime?: Timestamp;
 
   /**
-   * @generated from field: int32 max_unavailable = 6;
+   * end_time holds the timestamp for when this status ended
+   * if provided, this Alert is considered as a resolution alert
+   *
+   * @generated from field: optional google.protobuf.Timestamp end_time = 6;
    */
-  maxUnavailable: number;
+  endTime?: Timestamp;
 
   constructor(data?: PartialMessage<Alert>);
 

@@ -36,8 +36,8 @@ enum ClusterHealthType {
   CLUSTER_HEALTH_TYPE_CONNECTED = 1;
   // CLUSTER_HEALTH_TYPE_CONNECTED is history of weather we were able to connect to the cluster
   CLUSTER_HEALTH_TYPE_PINGABLE = 2;
-  // CLUSTER_HEALTH_TYPE_METRICS is whether the metrics services in the cluster were healthy
-  CLUSTER_HEALTH_TYPE_METRICS = 3;
+  // CLUSTER_HEALTH_TYPE_METRICS_HEALTHY is whether the metrics services in the cluster were healthy
+  CLUSTER_HEALTH_TYPE_METRICS_HEALTHY = 3;
 }
 
 // HealthStatus is a single status observed over a certain period of time
@@ -82,10 +82,7 @@ message SystemServiceStatusHistory {
 message ClusterStatusHistory {
   // cluster_health_type is the type this history is generated for
   ClusterHealthType cluster_health_type = 1;
-  // status_percentages holds information on what percentage of the day different statuses were observed
-  // there should be only one entry for the different Status types
-  repeated StatusPercentage status_percentages = 2;
   // daily_status_history is daily health status for the cluster over multiple days for the cluster_health_type
   // the keys are the number of days before today the DailyHealthStatus is from
-  repeated DailyHealthStatus daily_status_history = 3;
+  map<int32, DailyHealthStatus> daily_status_history = 2;
 }
