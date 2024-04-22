@@ -15,7 +15,7 @@ import { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifie
 import { Addon, PrerequisiteAddon } from "./addons_pb.js";
 import { AppEventType } from "./agent_app_event_types_pb.js";
 import { Alert } from "./prometheus_alerts_pb.js";
-import { EnumEnvGroupProviderType, ExternalEnvGroupProviderEnabledStatus } from "./env_group_pb.js";
+import { EnumEnvGroupProviderType, ExternalEnvGroupProviderEnabledStatus, InfisicalEnv } from "./env_group_pb.js";
 import { NotificationConfig } from "./notification_pb.js";
 import { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
@@ -1870,6 +1870,7 @@ export const CreateOrUpdateEnvGroupRequest = /*@__PURE__*/ proto3.makeMessageTyp
     { no: 7, name: "is_env_override", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
     { no: 8, name: "env_variable_deletions", kind: "message", T: EnvVariableDeletions },
     { no: 9, name: "skip_app_auto_deploy", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 10, name: "infisical_env", kind: "message", T: InfisicalEnv },
   ],
 );
 

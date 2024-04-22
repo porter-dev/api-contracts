@@ -123,3 +123,36 @@ export declare class ExternalEnvGroupProviderEnabledStatus extends Message<Exter
   static equals(a: ExternalEnvGroupProviderEnabledStatus | PlainMessage<ExternalEnvGroupProviderEnabledStatus> | undefined, b: ExternalEnvGroupProviderEnabledStatus | PlainMessage<ExternalEnvGroupProviderEnabledStatus> | undefined): boolean;
 }
 
+/**
+ * @generated from message porter.v1.InfisicalEnv
+ */
+export declare class InfisicalEnv extends Message<InfisicalEnv> {
+  /**
+   * environment_name is the name of the environment in Infisical to pull secrets from
+   *
+   * @generated from field: string environment_name = 1;
+   */
+  environmentName: string;
+
+  /**
+   * environment_path is the path in the environment to scope secrets to
+   *
+   * @generated from field: string environment_path = 2;
+   */
+  environmentPath: string;
+
+  constructor(data?: PartialMessage<InfisicalEnv>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.InfisicalEnv";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): InfisicalEnv;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): InfisicalEnv;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): InfisicalEnv;
+
+  static equals(a: InfisicalEnv | PlainMessage<InfisicalEnv> | undefined, b: InfisicalEnv | PlainMessage<InfisicalEnv> | undefined): boolean;
+}
+

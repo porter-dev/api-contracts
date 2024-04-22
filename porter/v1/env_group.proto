@@ -36,3 +36,10 @@ message ExternalEnvGroupProviderEnabledStatus {
   // k8s_upgrade_required is a flag that indicates whether the cluster needs to be upgraded to enable the external env group operator
   bool k8s_upgrade_required = 4;
 }
+
+message InfisicalEnv {
+  // environment_name is the name of the environment in Infisical to pull secrets from
+  string environment_name = 1;
+  // environment_path is the path in the environment to scope secrets to
+  string environment_path = 2;
+}

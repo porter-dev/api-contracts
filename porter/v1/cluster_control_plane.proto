@@ -1227,6 +1227,8 @@ message CreateOrUpdateEnvGroupRequest {
   EnvVariableDeletions env_variable_deletions = 8;
   // skip_app_auto_deploy indicates whether to skip auto-deploying apps linked to the env group
   bool skip_app_auto_deploy = 9;
+  // infisical_env specifies where to pull the env vars from in Infisical, if applicable
+  InfisicalEnv infisical_env = 10;
 }
 
 // CreateOrUpdateEnvGroupResponse is the response object for CreateOrUpdateEnvGroup
