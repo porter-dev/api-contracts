@@ -19,7 +19,7 @@ import { EnumEnvGroupProviderType, ExternalEnvGroupProviderEnabledStatus, Infisi
 import { NotificationConfig } from "./notification_pb.js";
 import { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
-import { ClusterStatus, SystemServiceStatusHistory } from "./system_service_pb.js";
+import { ClusterStatusHistory, SystemServiceStatusHistory } from "./system_service_pb.js";
 import { AppEventWebhook } from "./app_event_webhook_pb.js";
 
 /**
@@ -2524,7 +2524,7 @@ export const SystemStatusHistoryRequest = /*@__PURE__*/ proto3.makeMessageType(
 export const SystemStatusHistoryResponse = /*@__PURE__*/ proto3.makeMessageType(
   "porter.v1.SystemStatusHistoryResponse",
   () => [
-    { no: 1, name: "cluster_status_history", kind: "message", T: ClusterStatus, repeated: true },
+    { no: 1, name: "cluster_status_histories", kind: "message", T: ClusterStatusHistory, repeated: true },
     { no: 2, name: "system_service_status_histories", kind: "message", T: SystemServiceStatusHistory, repeated: true },
   ],
 );

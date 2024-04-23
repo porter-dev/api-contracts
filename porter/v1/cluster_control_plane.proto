@@ -1974,8 +1974,9 @@ message SystemStatusHistoryRequest {
 
 // SystemStatusHistoryResponse is the response object for fetching the system status history in a cluster
 message SystemStatusHistoryResponse {
-  // cluster_status_history is a timeseries of the cluster's status
-  repeated ClusterStatus cluster_status_history = 1;
+  // cluster_status_histories holds  timeseries for the different cluster health types
+  // there should be a maximum of one timeseries per health type
+  repeated ClusterStatusHistory cluster_status_histories = 1;
   // system_service_status_histories is a list of status timeseries for system services. Users can assume there is only one entry per a system service.
   repeated SystemServiceStatusHistory system_service_status_histories = 2;
 }
