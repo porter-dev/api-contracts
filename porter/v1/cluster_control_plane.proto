@@ -376,6 +376,19 @@ message UpdateAppResponse {
   EnumCLIAction cli_action = 2;
 }
 
+message AddonRequest {
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+  // deployment_target_identifier is the object that identifies the deployment target for the addon.
+  // If cluster_id is specified and deployment_target_identifier is not, then the default deployment target for the provided cluster will be used
+  DeploymentTargetIdentifier deployment_target_identifier = 3;
+  string addon_name = 4;
+}
+
+message AddonResponse {
+  Addon addon = 1;
+}
+
 message UpdateAddonRequest {
   int64 project_id = 1;
   int64 cluster_id = 2;
@@ -1542,6 +1555,9 @@ service ClusterControlPlaneService {
 
   // LatestAddons returns the currently deployed addons for a given deployment_target
   rpc LatestAddons(LatestAddonsRequest) returns (LatestAddonsResponse) {}
+
+  // Addon returns an addon
+  rpc Addon(AddonRequest) returns (AddonResponse) {}
 
   // PredeployStatus returns the status of the predeploy job for a given app revision
   rpc PredeployStatus(PredeployStatusRequest) returns (PredeployStatusResponse) {}

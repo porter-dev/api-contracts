@@ -1929,6 +1929,72 @@ export declare class UpdateAppResponse extends Message<UpdateAppResponse> {
 }
 
 /**
+ * @generated from message porter.v1.AddonRequest
+ */
+export declare class AddonRequest extends Message<AddonRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target for the addon.
+   * If cluster_id is specified and deployment_target_identifier is not, then the default deployment target for the provided cluster will be used
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 3;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  /**
+   * @generated from field: string addon_name = 4;
+   */
+  addonName: string;
+
+  constructor(data?: PartialMessage<AddonRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AddonRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AddonRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AddonRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AddonRequest;
+
+  static equals(a: AddonRequest | PlainMessage<AddonRequest> | undefined, b: AddonRequest | PlainMessage<AddonRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.AddonResponse
+ */
+export declare class AddonResponse extends Message<AddonResponse> {
+  /**
+   * @generated from field: porter.v1.Addon addon = 1;
+   */
+  addon?: Addon;
+
+  constructor(data?: PartialMessage<AddonResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AddonResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AddonResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AddonResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AddonResponse;
+
+  static equals(a: AddonResponse | PlainMessage<AddonResponse> | undefined, b: AddonResponse | PlainMessage<AddonResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.UpdateAddonRequest
  */
 export declare class UpdateAddonRequest extends Message<UpdateAddonRequest> {

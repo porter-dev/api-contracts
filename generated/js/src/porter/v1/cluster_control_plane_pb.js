@@ -679,6 +679,29 @@ export const UpdateAppResponse = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * @generated from message porter.v1.AddonRequest
+ */
+export const AddonRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.AddonRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+    { no: 4, name: "addon_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.AddonResponse
+ */
+export const AddonResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.AddonResponse",
+  () => [
+    { no: 1, name: "addon", kind: "message", T: Addon },
+  ],
+);
+
+/**
  * @generated from message porter.v1.UpdateAddonRequest
  */
 export const UpdateAddonRequest = /*@__PURE__*/ proto3.makeMessageType(
