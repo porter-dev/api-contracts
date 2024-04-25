@@ -133,6 +133,9 @@ const (
 	// ClusterControlPlaneServiceLatestAddonsProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's LatestAddons RPC.
 	ClusterControlPlaneServiceLatestAddonsProcedure = "/porter.v1.ClusterControlPlaneService/LatestAddons"
+	// ClusterControlPlaneServiceAddonProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's Addon RPC.
+	ClusterControlPlaneServiceAddonProcedure = "/porter.v1.ClusterControlPlaneService/Addon"
 	// ClusterControlPlaneServicePredeployStatusProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's PredeployStatus RPC.
 	ClusterControlPlaneServicePredeployStatusProcedure = "/porter.v1.ClusterControlPlaneService/PredeployStatus"
@@ -342,6 +345,7 @@ var (
 	clusterControlPlaneServiceAppTemplateMethodDescriptor                         = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("AppTemplate")
 	clusterControlPlaneServiceUpdateAppTemplateMethodDescriptor                   = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateAppTemplate")
 	clusterControlPlaneServiceLatestAddonsMethodDescriptor                        = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("LatestAddons")
+	clusterControlPlaneServiceAddonMethodDescriptor                               = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("Addon")
 	clusterControlPlaneServicePredeployStatusMethodDescriptor                     = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("PredeployStatus")
 	clusterControlPlaneServiceDeploymentTargetDetailsMethodDescriptor             = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("DeploymentTargetDetails")
 	clusterControlPlaneServiceCreateDeploymentTargetMethodDescriptor              = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("CreateDeploymentTarget")
@@ -485,6 +489,8 @@ type ClusterControlPlaneServiceClient interface {
 	UpdateAppTemplate(context.Context, *connect.Request[v1.UpdateAppTemplateRequest]) (*connect.Response[v1.UpdateAppTemplateResponse], error)
 	// LatestAddons returns the currently deployed addons for a given deployment_target
 	LatestAddons(context.Context, *connect.Request[v1.LatestAddonsRequest]) (*connect.Response[v1.LatestAddonsResponse], error)
+	// Addon returns an addon
+	Addon(context.Context, *connect.Request[v1.AddonRequest]) (*connect.Response[v1.AddonResponse], error)
 	// PredeployStatus returns the status of the predeploy job for a given app revision
 	PredeployStatus(context.Context, *connect.Request[v1.PredeployStatusRequest]) (*connect.Response[v1.PredeployStatusResponse], error)
 	// DeploymentTargetDetails returns the details of a deployment target job given the id.  This is a work-around to moving all namespace-related
@@ -840,6 +846,12 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			httpClient,
 			baseURL+ClusterControlPlaneServiceLatestAddonsProcedure,
 			connect.WithSchema(clusterControlPlaneServiceLatestAddonsMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		addon: connect.NewClient[v1.AddonRequest, v1.AddonResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceAddonProcedure,
+			connect.WithSchema(clusterControlPlaneServiceAddonMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		predeployStatus: connect.NewClient[v1.PredeployStatusRequest, v1.PredeployStatusResponse](
@@ -1222,6 +1234,7 @@ type clusterControlPlaneServiceClient struct {
 	appTemplate                         *connect.Client[v1.AppTemplateRequest, v1.AppTemplateResponse]
 	updateAppTemplate                   *connect.Client[v1.UpdateAppTemplateRequest, v1.UpdateAppTemplateResponse]
 	latestAddons                        *connect.Client[v1.LatestAddonsRequest, v1.LatestAddonsResponse]
+	addon                               *connect.Client[v1.AddonRequest, v1.AddonResponse]
 	predeployStatus                     *connect.Client[v1.PredeployStatusRequest, v1.PredeployStatusResponse]
 	deploymentTargetDetails             *connect.Client[v1.DeploymentTargetDetailsRequest, v1.DeploymentTargetDetailsResponse]
 	createDeploymentTarget              *connect.Client[v1.CreateDeploymentTargetRequest, v1.CreateDeploymentTargetResponse]
@@ -1458,6 +1471,11 @@ func (c *clusterControlPlaneServiceClient) UpdateAppTemplate(ctx context.Context
 // LatestAddons calls porter.v1.ClusterControlPlaneService.LatestAddons.
 func (c *clusterControlPlaneServiceClient) LatestAddons(ctx context.Context, req *connect.Request[v1.LatestAddonsRequest]) (*connect.Response[v1.LatestAddonsResponse], error) {
 	return c.latestAddons.CallUnary(ctx, req)
+}
+
+// Addon calls porter.v1.ClusterControlPlaneService.Addon.
+func (c *clusterControlPlaneServiceClient) Addon(ctx context.Context, req *connect.Request[v1.AddonRequest]) (*connect.Response[v1.AddonResponse], error) {
+	return c.addon.CallUnary(ctx, req)
 }
 
 // PredeployStatus calls porter.v1.ClusterControlPlaneService.PredeployStatus.
@@ -1854,6 +1872,8 @@ type ClusterControlPlaneServiceHandler interface {
 	UpdateAppTemplate(context.Context, *connect.Request[v1.UpdateAppTemplateRequest]) (*connect.Response[v1.UpdateAppTemplateResponse], error)
 	// LatestAddons returns the currently deployed addons for a given deployment_target
 	LatestAddons(context.Context, *connect.Request[v1.LatestAddonsRequest]) (*connect.Response[v1.LatestAddonsResponse], error)
+	// Addon returns an addon
+	Addon(context.Context, *connect.Request[v1.AddonRequest]) (*connect.Response[v1.AddonResponse], error)
 	// PredeployStatus returns the status of the predeploy job for a given app revision
 	PredeployStatus(context.Context, *connect.Request[v1.PredeployStatusRequest]) (*connect.Response[v1.PredeployStatusResponse], error)
 	// DeploymentTargetDetails returns the details of a deployment target job given the id.  This is a work-around to moving all namespace-related
@@ -2205,6 +2225,12 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		ClusterControlPlaneServiceLatestAddonsProcedure,
 		svc.LatestAddons,
 		connect.WithSchema(clusterControlPlaneServiceLatestAddonsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	clusterControlPlaneServiceAddonHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceAddonProcedure,
+		svc.Addon,
+		connect.WithSchema(clusterControlPlaneServiceAddonMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServicePredeployStatusHandler := connect.NewUnaryHandler(
@@ -2617,6 +2643,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceUpdateAppTemplateHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceLatestAddonsProcedure:
 			clusterControlPlaneServiceLatestAddonsHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceAddonProcedure:
+			clusterControlPlaneServiceAddonHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServicePredeployStatusProcedure:
 			clusterControlPlaneServicePredeployStatusHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDeploymentTargetDetailsProcedure:
@@ -2870,6 +2898,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) UpdateAppTemplate(context.
 
 func (UnimplementedClusterControlPlaneServiceHandler) LatestAddons(context.Context, *connect.Request[v1.LatestAddonsRequest]) (*connect.Response[v1.LatestAddonsResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.LatestAddons is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) Addon(context.Context, *connect.Request[v1.AddonRequest]) (*connect.Response[v1.AddonResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.Addon is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) PredeployStatus(context.Context, *connect.Request[v1.PredeployStatusRequest]) (*connect.Response[v1.PredeployStatusResponse], error) {
