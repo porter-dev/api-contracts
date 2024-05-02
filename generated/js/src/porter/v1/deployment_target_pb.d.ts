@@ -159,16 +159,9 @@ export declare class PullRequest extends Message<PullRequest> {
   number: bigint;
 
   /**
-   * title is the title of the pull request
-   *
-   * @generated from field: string title = 3;
-   */
-  title: string;
-
-  /**
    * head_ref is the head ref of the pull request
    *
-   * @generated from field: string head_ref = 4;
+   * @generated from field: string head_ref = 3;
    */
   headRef: string;
 

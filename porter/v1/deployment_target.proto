@@ -38,8 +38,6 @@ message PullRequest {
   string repository = 1;
   // number is the number of the pull request
   int64 number = 2;
-  // title is the title of the pull request
-  string title = 3;
   // head_ref is the head ref of the pull request
-  string head_ref = 4;
+  string head_ref = 3;
 }
