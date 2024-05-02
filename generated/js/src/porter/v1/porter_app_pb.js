@@ -5,6 +5,7 @@
 
 import { proto3, Timestamp } from "@bufbuild/protobuf";
 import { Service } from "./service_pb.js";
+import { DeploymentTargetIdentifier } from "./deployment_target_pb.js";
 import { EnumEnvGroupProviderType } from "./env_group_pb.js";
 
 /**
@@ -63,35 +64,6 @@ export const EnumJobRunStatus = /*@__PURE__*/ proto3.makeEnum(
     {no: 2, name: "ENUM_JOB_RUN_STATUS_SUCCESSFUL", localName: "SUCCESSFUL"},
     {no: 3, name: "ENUM_JOB_RUN_STATUS_FAILED", localName: "FAILED"},
     {no: 4, name: "ENUM_JOB_RUN_STATUS_CANCELED", localName: "CANCELED"},
-  ],
-);
-
-/**
- * DeploymentTargetIdentifier is the object that identifies a deployment target. One of id or name must be provided, with id taking precedence.
- *
- * @generated from message porter.v1.DeploymentTargetIdentifier
- */
-export const DeploymentTargetIdentifier = /*@__PURE__*/ proto3.makeMessageType(
-  "porter.v1.DeploymentTargetIdentifier",
-  () => [
-    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-  ],
-);
-
-/**
- * @generated from message porter.v1.DeploymentTarget
- */
-export const DeploymentTarget = /*@__PURE__*/ proto3.makeMessageType(
-  "porter.v1.DeploymentTarget",
-  () => [
-    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "namespace", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
-    { no: 5, name: "is_preview", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 6, name: "is_default", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
-    { no: 7, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

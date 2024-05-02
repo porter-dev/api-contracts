@@ -12,7 +12,8 @@ import type { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import type { Error } from "./errors_pb.js";
 import type { Contract, ContractRevision } from "./contract_pb.js";
 import type { ContractComplianceCheckGroup, EnumComplianceProfile, EnumComplianceVendor, VendorComplianceCheck } from "./compliance_pb.js";
-import type { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, EnvVariableDeletions, JobRun, PorterApp } from "./porter_app_pb.js";
+import type { AppImage, Build, Deletions, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, EnvVariableDeletions, JobRun, PorterApp } from "./porter_app_pb.js";
+import type { DeploymentTarget, DeploymentTargetIdentifier, DeploymentTargetMeta } from "./deployment_target_pb.js";
 import type { Addon, PrerequisiteAddon } from "./addons_pb.js";
 import type { AppEventType } from "./agent_app_event_types_pb.js";
 import type { Alert } from "./prometheus_alerts_pb.js";
@@ -3623,6 +3624,13 @@ export declare class CreateDeploymentTargetRequest extends Message<CreateDeploym
    * @generated from field: bool is_preview = 5;
    */
   isPreview: boolean;
+
+  /**
+   * metadata is a metadata object that can be used to store additional information about the deployment target
+   *
+   * @generated from field: porter.v1.DeploymentTargetMeta metadata = 6;
+   */
+  metadata?: DeploymentTargetMeta;
 
   constructor(data?: PartialMessage<CreateDeploymentTargetRequest>);
 

@@ -6,6 +6,7 @@
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage, Timestamp } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 import type { Service } from "./service_pb.js";
+import type { DeploymentTargetIdentifier } from "./deployment_target_pb.js";
 import type { EnumEnvGroupProviderType } from "./env_group_pb.js";
 
 /**
@@ -109,107 +110,6 @@ export declare enum EnumJobRunStatus {
    * @generated from enum value: ENUM_JOB_RUN_STATUS_CANCELED = 4;
    */
   CANCELED = 4,
-}
-
-/**
- * DeploymentTargetIdentifier is the object that identifies a deployment target. One of id or name must be provided, with id taking precedence.
- *
- * @generated from message porter.v1.DeploymentTargetIdentifier
- */
-export declare class DeploymentTargetIdentifier extends Message<DeploymentTargetIdentifier> {
-  /**
-   * id is the id of the deployment target
-   *
-   * @generated from field: string id = 1;
-   */
-  id: string;
-
-  /**
-   * name is the name of the deployment target
-   *
-   * @generated from field: string name = 2;
-   */
-  name: string;
-
-  constructor(data?: PartialMessage<DeploymentTargetIdentifier>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.DeploymentTargetIdentifier";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeploymentTargetIdentifier;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeploymentTargetIdentifier;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeploymentTargetIdentifier;
-
-  static equals(a: DeploymentTargetIdentifier | PlainMessage<DeploymentTargetIdentifier> | undefined, b: DeploymentTargetIdentifier | PlainMessage<DeploymentTargetIdentifier> | undefined): boolean;
-}
-
-/**
- * @generated from message porter.v1.DeploymentTarget
- */
-export declare class DeploymentTarget extends Message<DeploymentTarget> {
-  /**
-   * @generated from field: int64 project_id = 1;
-   */
-  projectId: bigint;
-
-  /**
-   * name is the vanity name for the deployment target
-   *
-   * @generated from field: string name = 2;
-   */
-  name: string;
-
-  /**
-   * namespace is the namespace that the deployment target points to
-   *
-   * @generated from field: string namespace = 3;
-   */
-  namespace: string;
-
-  /**
-   * cluster_id is the id of the cluster that the deployment target points to
-   *
-   * @generated from field: int64 cluster_id = 4;
-   */
-  clusterId: bigint;
-
-  /**
-   * is_preview indicates whether this is a preview deployment target or not
-   *
-   * @generated from field: bool is_preview = 5;
-   */
-  isPreview: boolean;
-
-  /**
-   * is_default indicates whether this is the default deployment target for the cluster
-   *
-   * @generated from field: bool is_default = 6;
-   */
-  isDefault: boolean;
-
-  /**
-   * id is the id of the deployment target
-   *
-   * @generated from field: string id = 7;
-   */
-  id: string;
-
-  constructor(data?: PartialMessage<DeploymentTarget>);
-
-  static readonly runtime: typeof proto3;
-  static readonly typeName = "porter.v1.DeploymentTarget";
-  static readonly fields: FieldList;
-
-  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeploymentTarget;
-
-  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeploymentTarget;
-
-  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeploymentTarget;
-
-  static equals(a: DeploymentTarget | PlainMessage<DeploymentTarget> | undefined, b: DeploymentTarget | PlainMessage<DeploymentTarget> | undefined): boolean;
 }
 
 /**

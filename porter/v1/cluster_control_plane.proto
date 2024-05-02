@@ -13,6 +13,7 @@ import "porter/v1/cluster.proto";
 import "porter/v1/compliance.proto";
 import "porter/v1/contract.proto";
 import "porter/v1/datastore.proto";
+import "porter/v1/deployment_target.proto";
 import "porter/v1/eks.proto";
 import "porter/v1/env_group.proto";
 import "porter/v1/errors.proto";
@@ -785,6 +786,8 @@ message CreateDeploymentTargetRequest {
   int64 cluster_id = 4;
   // is_preview indicates whether this is a preview deployment target or not
   bool is_preview = 5;
+  // metadata is a metadata object that can be used to store additional information about the deployment target
+  DeploymentTargetMeta metadata = 6;
 }
 
 // CreateDeploymentTargetResponse is the response object for CreateDeploymentTarget
