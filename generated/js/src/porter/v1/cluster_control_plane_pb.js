@@ -11,7 +11,8 @@ import { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import { Error } from "./errors_pb.js";
 import { Contract, ContractRevision } from "./contract_pb.js";
 import { ContractComplianceCheckGroup, EnumComplianceProfile, EnumComplianceVendor, VendorComplianceCheck } from "./compliance_pb.js";
-import { AppImage, Build, Deletions, DeploymentTarget, DeploymentTargetIdentifier, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, EnvVariableDeletions, JobRun, PorterApp } from "./porter_app_pb.js";
+import { AppImage, Build, Deletions, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, EnvVariableDeletions, JobRun, PorterApp } from "./porter_app_pb.js";
+import { DeploymentTarget, DeploymentTargetIdentifier, DeploymentTargetMeta } from "./deployment_target_pb.js";
 import { Addon, PrerequisiteAddon } from "./addons_pb.js";
 import { AppEventType } from "./agent_app_event_types_pb.js";
 import { Alert } from "./prometheus_alerts_pb.js";
@@ -1208,6 +1209,7 @@ export const CreateDeploymentTargetRequest = /*@__PURE__*/ proto3.makeMessageTyp
     { no: 3, name: "namespace", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 5, name: "is_preview", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 6, name: "metadata", kind: "message", T: DeploymentTargetMeta },
   ],
 );
 

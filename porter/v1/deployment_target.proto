@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package porter.v1;
+
+// DeploymentTargetIdentifier is the object that identifies a deployment target. One of id or name must be provided, with id taking precedence.
+message DeploymentTargetIdentifier {
+  // id is the id of the deployment target
+  string id = 1;
+  // name is the name of the deployment target
+  string name = 2;
+}
+
+message DeploymentTarget {
+  int64 project_id = 1;
+  // name is the vanity name for the deployment target
+  string name = 2;
+  // namespace is the namespace that the deployment target points to
+  string namespace = 3;
+  // cluster_id is the id of the cluster that the deployment target points to
+  int64 cluster_id = 4;
+  // is_preview indicates whether this is a preview deployment target or not
+  bool is_preview = 5;
+  // is_default indicates whether this is the default deployment target for the cluster
+  bool is_default = 6;
+  // id is the id of the deployment target
+  string id = 7;
+  // metadata is the metadata for the deployment target, if any
+  DeploymentTargetMeta metadata = 8;
+}
+
+message DeploymentTargetMeta {
+  // pull_request is information about the pull request that triggered the deployment, if applicable
+  PullRequest pull_request = 1;
+}
+
+message PullRequest {
+  // repository is the repository that the pull request is in
+  string repository = 1;
+  // number is the number of the pull request
+  int64 number = 2;
+  // head_ref is the head ref of the pull request
+  string head_ref = 3;
+}
