@@ -18,6 +18,7 @@ export const EnumDatastoreKind = /*@__PURE__*/ proto3.makeEnum(
     {no: 2, name: "ENUM_DATASTORE_KIND_AWS_ELASTICACHE", localName: "AWS_ELASTICACHE"},
     {no: 3, name: "ENUM_DATASTORE_KIND_MANAGED_POSTGRES", localName: "MANAGED_POSTGRES"},
     {no: 4, name: "ENUM_DATASTORE_KIND_MANAGED_REDIS", localName: "MANAGED_REDIS"},
+    {no: 5, name: "ENUM_DATASTORE_KIND_NEON", localName: "NEON"},
   ],
 );
 
@@ -63,6 +64,7 @@ export const ManagedDatastore = /*@__PURE__*/ proto3.makeMessageType(
     { no: 9, name: "aws_elasticache_kind", kind: "message", T: AwsElasticache, oneof: "kind_values" },
     { no: 10, name: "managed_postgres_kind", kind: "message", T: Postgres, oneof: "kind_values" },
     { no: 11, name: "managed_redis_kind", kind: "message", T: Redis, oneof: "kind_values" },
+    { no: 12, name: "neon_kind", kind: "message", T: Neon, oneof: "kind_values" },
     { no: 8, name: "connected_clusters", kind: "message", T: ConnectedClusters },
   ],
 );
@@ -117,6 +119,14 @@ export const AwsElasticache = /*@__PURE__*/ proto3.makeMessageType(
     { no: 3, name: "engine", kind: "enum", T: proto3.getEnumType(EnumAwsElasticacheEngine) },
     { no: 4, name: "engine_version", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
   ],
+);
+
+/**
+ * @generated from message porter.v1.Neon
+ */
+export const Neon = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.Neon",
+  [],
 );
 
 /**
