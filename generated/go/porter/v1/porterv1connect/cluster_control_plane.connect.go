@@ -130,6 +130,9 @@ const (
 	// ClusterControlPlaneServiceUpdateAppTemplateProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's UpdateAppTemplate RPC.
 	ClusterControlPlaneServiceUpdateAppTemplateProcedure = "/porter.v1.ClusterControlPlaneService/UpdateAppTemplate"
+	// ClusterControlPlaneServiceListTemplatesProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's ListTemplates RPC.
+	ClusterControlPlaneServiceListTemplatesProcedure = "/porter.v1.ClusterControlPlaneService/ListTemplates"
 	// ClusterControlPlaneServiceLatestAddonsProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's LatestAddons RPC.
 	ClusterControlPlaneServiceLatestAddonsProcedure = "/porter.v1.ClusterControlPlaneService/LatestAddons"
@@ -344,6 +347,7 @@ var (
 	clusterControlPlaneServiceGetAppRevisionMethodDescriptor                      = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("GetAppRevision")
 	clusterControlPlaneServiceAppTemplateMethodDescriptor                         = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("AppTemplate")
 	clusterControlPlaneServiceUpdateAppTemplateMethodDescriptor                   = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateAppTemplate")
+	clusterControlPlaneServiceListTemplatesMethodDescriptor                       = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ListTemplates")
 	clusterControlPlaneServiceLatestAddonsMethodDescriptor                        = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("LatestAddons")
 	clusterControlPlaneServiceAddonMethodDescriptor                               = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("Addon")
 	clusterControlPlaneServicePredeployStatusMethodDescriptor                     = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("PredeployStatus")
@@ -487,6 +491,8 @@ type ClusterControlPlaneServiceClient interface {
 	AppTemplate(context.Context, *connect.Request[v1.AppTemplateRequest]) (*connect.Response[v1.AppTemplateResponse], error)
 	// UpdateAppTemplate updates the app template for a given app
 	UpdateAppTemplate(context.Context, *connect.Request[v1.UpdateAppTemplateRequest]) (*connect.Response[v1.UpdateAppTemplateResponse], error)
+	// ListTemplates returns the templates for a given project and cluster
+	ListTemplates(context.Context, *connect.Request[v1.ListTemplatesRequest]) (*connect.Response[v1.ListTemplatesResponse], error)
 	// LatestAddons returns the currently deployed addons for a given deployment_target
 	LatestAddons(context.Context, *connect.Request[v1.LatestAddonsRequest]) (*connect.Response[v1.LatestAddonsResponse], error)
 	// Addon returns an addon
@@ -840,6 +846,12 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			httpClient,
 			baseURL+ClusterControlPlaneServiceUpdateAppTemplateProcedure,
 			connect.WithSchema(clusterControlPlaneServiceUpdateAppTemplateMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		listTemplates: connect.NewClient[v1.ListTemplatesRequest, v1.ListTemplatesResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceListTemplatesProcedure,
+			connect.WithSchema(clusterControlPlaneServiceListTemplatesMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		latestAddons: connect.NewClient[v1.LatestAddonsRequest, v1.LatestAddonsResponse](
@@ -1233,6 +1245,7 @@ type clusterControlPlaneServiceClient struct {
 	getAppRevision                      *connect.Client[v1.GetAppRevisionRequest, v1.GetAppRevisionResponse]
 	appTemplate                         *connect.Client[v1.AppTemplateRequest, v1.AppTemplateResponse]
 	updateAppTemplate                   *connect.Client[v1.UpdateAppTemplateRequest, v1.UpdateAppTemplateResponse]
+	listTemplates                       *connect.Client[v1.ListTemplatesRequest, v1.ListTemplatesResponse]
 	latestAddons                        *connect.Client[v1.LatestAddonsRequest, v1.LatestAddonsResponse]
 	addon                               *connect.Client[v1.AddonRequest, v1.AddonResponse]
 	predeployStatus                     *connect.Client[v1.PredeployStatusRequest, v1.PredeployStatusResponse]
@@ -1466,6 +1479,11 @@ func (c *clusterControlPlaneServiceClient) AppTemplate(ctx context.Context, req 
 // UpdateAppTemplate calls porter.v1.ClusterControlPlaneService.UpdateAppTemplate.
 func (c *clusterControlPlaneServiceClient) UpdateAppTemplate(ctx context.Context, req *connect.Request[v1.UpdateAppTemplateRequest]) (*connect.Response[v1.UpdateAppTemplateResponse], error) {
 	return c.updateAppTemplate.CallUnary(ctx, req)
+}
+
+// ListTemplates calls porter.v1.ClusterControlPlaneService.ListTemplates.
+func (c *clusterControlPlaneServiceClient) ListTemplates(ctx context.Context, req *connect.Request[v1.ListTemplatesRequest]) (*connect.Response[v1.ListTemplatesResponse], error) {
+	return c.listTemplates.CallUnary(ctx, req)
 }
 
 // LatestAddons calls porter.v1.ClusterControlPlaneService.LatestAddons.
@@ -1870,6 +1888,8 @@ type ClusterControlPlaneServiceHandler interface {
 	AppTemplate(context.Context, *connect.Request[v1.AppTemplateRequest]) (*connect.Response[v1.AppTemplateResponse], error)
 	// UpdateAppTemplate updates the app template for a given app
 	UpdateAppTemplate(context.Context, *connect.Request[v1.UpdateAppTemplateRequest]) (*connect.Response[v1.UpdateAppTemplateResponse], error)
+	// ListTemplates returns the templates for a given project and cluster
+	ListTemplates(context.Context, *connect.Request[v1.ListTemplatesRequest]) (*connect.Response[v1.ListTemplatesResponse], error)
 	// LatestAddons returns the currently deployed addons for a given deployment_target
 	LatestAddons(context.Context, *connect.Request[v1.LatestAddonsRequest]) (*connect.Response[v1.LatestAddonsResponse], error)
 	// Addon returns an addon
@@ -2219,6 +2239,12 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		ClusterControlPlaneServiceUpdateAppTemplateProcedure,
 		svc.UpdateAppTemplate,
 		connect.WithSchema(clusterControlPlaneServiceUpdateAppTemplateMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	clusterControlPlaneServiceListTemplatesHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceListTemplatesProcedure,
+		svc.ListTemplates,
+		connect.WithSchema(clusterControlPlaneServiceListTemplatesMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceLatestAddonsHandler := connect.NewUnaryHandler(
@@ -2641,6 +2667,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceAppTemplateHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceUpdateAppTemplateProcedure:
 			clusterControlPlaneServiceUpdateAppTemplateHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceListTemplatesProcedure:
+			clusterControlPlaneServiceListTemplatesHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceLatestAddonsProcedure:
 			clusterControlPlaneServiceLatestAddonsHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceAddonProcedure:
@@ -2894,6 +2922,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) AppTemplate(context.Contex
 
 func (UnimplementedClusterControlPlaneServiceHandler) UpdateAppTemplate(context.Context, *connect.Request[v1.UpdateAppTemplateRequest]) (*connect.Response[v1.UpdateAppTemplateResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.UpdateAppTemplate is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) ListTemplates(context.Context, *connect.Request[v1.ListTemplatesRequest]) (*connect.Response[v1.ListTemplatesResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ListTemplates is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) LatestAddons(context.Context, *connect.Request[v1.LatestAddonsRequest]) (*connect.Response[v1.LatestAddonsResponse], error) {

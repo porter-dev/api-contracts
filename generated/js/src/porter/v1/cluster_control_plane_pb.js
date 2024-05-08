@@ -14,6 +14,7 @@ import { ContractComplianceCheckGroup, EnumComplianceProfile, EnumComplianceVend
 import { AppImage, Build, Deletions, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, EnvVariableDeletions, JobRun, PorterApp } from "./porter_app_pb.js";
 import { DeploymentTarget, DeploymentTargetIdentifier, DeploymentTargetMeta } from "./deployment_target_pb.js";
 import { Addon, PrerequisiteAddon } from "./addons_pb.js";
+import { Environment } from "./environment_pb.js";
 import { AppEventType } from "./agent_app_event_types_pb.js";
 import { Alert } from "./prometheus_alerts_pb.js";
 import { EnumEnvGroupProviderType, ExternalEnvGroupProviderEnabledStatus, InfisicalEnv } from "./env_group_pb.js";
@@ -1064,6 +1065,7 @@ export const AppTemplateRequest = /*@__PURE__*/ proto3.makeMessageType(
   () => [
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 2, name: "app_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -1076,6 +1078,27 @@ export const AppTemplateResponse = /*@__PURE__*/ proto3.makeMessageType(
     { no: 1, name: "app_template", kind: "message", T: PorterApp },
     { no: 2, name: "app_env", kind: "message", T: EnvGroupVariables },
     { no: 3, name: "addon_templates", kind: "message", T: AddonWithEnvVars, repeated: true },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.ListTemplatesRequest
+ */
+export const ListTemplatesRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.ListTemplatesRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.ListTemplatesResponse
+ */
+export const ListTemplatesResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.ListTemplatesResponse",
+  () => [
+    { no: 1, name: "environment_templates", kind: "message", T: Environment, repeated: true },
   ],
 );
 

@@ -16,6 +16,7 @@ import "porter/v1/datastore.proto";
 import "porter/v1/deployment_target.proto";
 import "porter/v1/eks.proto";
 import "porter/v1/env_group.proto";
+import "porter/v1/environment.proto";
 import "porter/v1/errors.proto";
 import "porter/v1/gke.proto";
 import "porter/v1/notification.proto";
@@ -659,7 +660,9 @@ message GetAppRevisionResponse {
 message AppTemplateRequest {
   int64 project_id = 1;
   // app_id is the id of the PorterApp to return the template for
-  int64 app_id = 2;
+  int64 app_id = 2 [deprecated = true];
+  // name is the name of the template, usually corresponding to an app name
+  string name = 3;
 }
 
 message AppTemplateResponse {
@@ -669,6 +672,16 @@ message AppTemplateResponse {
   EnvGroupVariables app_env = 2;
   // addon_templates is the list of addons to be included alongside the app template
   repeated AddonWithEnvVars addon_templates = 3;
+}
+
+message ListTemplatesRequest {
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+}
+
+message ListTemplatesResponse {
+  // environment_templates is the list of environment templates for the given cluster
+  repeated Environment environment_templates = 1;
 }
 
 // AddonTemplatesPayload is an object containg a list of addons to be included alongside an app template
@@ -1555,6 +1568,9 @@ service ClusterControlPlaneService {
 
   // UpdateAppTemplate updates the app template for a given app
   rpc UpdateAppTemplate(UpdateAppTemplateRequest) returns (UpdateAppTemplateResponse) {}
+
+  // ListTemplates returns the templates for a given project and cluster
+  rpc ListTemplates(ListTemplatesRequest) returns (ListTemplatesResponse) {}
 
   // LatestAddons returns the currently deployed addons for a given deployment_target
   rpc LatestAddons(LatestAddonsRequest) returns (LatestAddonsResponse) {}

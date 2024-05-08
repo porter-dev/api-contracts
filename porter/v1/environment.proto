@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package porter.v1;
+
+import "porter/v1/addons.proto";
+import "porter/v1/porter_app.proto";
+
+message Environment {
+  // name is the name of the environment
+  string name = 1;
+  // apps is a list of apps that should be included in the environment
+  repeated PorterApp apps = 2;
+  // addons is a list of addons that should be included in the environment
+  repeated Addon addons = 3;
+}
