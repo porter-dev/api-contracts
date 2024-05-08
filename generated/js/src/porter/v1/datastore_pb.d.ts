@@ -40,6 +40,11 @@ export declare enum EnumDatastoreKind {
    * @generated from enum value: ENUM_DATASTORE_KIND_MANAGED_REDIS = 4;
    */
   MANAGED_REDIS = 4,
+
+  /**
+   * @generated from enum value: ENUM_DATASTORE_KIND_NEON = 5;
+   */
+  NEON = 5,
 }
 
 /**
@@ -159,6 +164,12 @@ export declare class ManagedDatastore extends Message<ManagedDatastore> {
      */
     value: Redis;
     case: "managedRedisKind";
+  } | {
+    /**
+     * @generated from field: porter.v1.Neon neon_kind = 12;
+     */
+    value: Neon;
+    case: "neonKind";
   } | { case: undefined; value?: undefined };
 
   /**
@@ -369,6 +380,25 @@ export declare class AwsElasticache extends Message<AwsElasticache> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AwsElasticache;
 
   static equals(a: AwsElasticache | PlainMessage<AwsElasticache> | undefined, b: AwsElasticache | PlainMessage<AwsElasticache> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.Neon
+ */
+export declare class Neon extends Message<Neon> {
+  constructor(data?: PartialMessage<Neon>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.Neon";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Neon;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Neon;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Neon;
+
+  static equals(a: Neon | PlainMessage<Neon> | undefined, b: Neon | PlainMessage<Neon> | undefined): boolean;
 }
 
 /**
