@@ -15,6 +15,7 @@ import type { ContractComplianceCheckGroup, EnumComplianceProfile, EnumComplianc
 import type { AppImage, Build, Deletions, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, EnvVariableDeletions, JobRun, PorterApp } from "./porter_app_pb.js";
 import type { DeploymentTarget, DeploymentTargetIdentifier, DeploymentTargetMeta } from "./deployment_target_pb.js";
 import type { Addon, PrerequisiteAddon } from "./addons_pb.js";
+import type { Environment } from "./environment_pb.js";
 import type { AppEventType } from "./agent_app_event_types_pb.js";
 import type { Alert } from "./prometheus_alerts_pb.js";
 import type { EnumEnvGroupProviderType, ExternalEnvGroupProviderEnabledStatus, InfisicalEnv } from "./env_group_pb.js";
@@ -3160,9 +3161,17 @@ export declare class AppTemplateRequest extends Message<AppTemplateRequest> {
   /**
    * app_id is the id of the PorterApp to return the template for
    *
-   * @generated from field: int64 app_id = 2;
+   * @generated from field: int64 app_id = 2 [deprecated = true];
+   * @deprecated
    */
   appId: bigint;
+
+  /**
+   * name is the name of the template, usually corresponding to an app name
+   *
+   * @generated from field: string name = 3;
+   */
+  name: string;
 
   constructor(data?: PartialMessage<AppTemplateRequest>);
 
@@ -3217,6 +3226,61 @@ export declare class AppTemplateResponse extends Message<AppTemplateResponse> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AppTemplateResponse;
 
   static equals(a: AppTemplateResponse | PlainMessage<AppTemplateResponse> | undefined, b: AppTemplateResponse | PlainMessage<AppTemplateResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.ListTemplatesRequest
+ */
+export declare class ListTemplatesRequest extends Message<ListTemplatesRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  constructor(data?: PartialMessage<ListTemplatesRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ListTemplatesRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListTemplatesRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListTemplatesRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListTemplatesRequest;
+
+  static equals(a: ListTemplatesRequest | PlainMessage<ListTemplatesRequest> | undefined, b: ListTemplatesRequest | PlainMessage<ListTemplatesRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.ListTemplatesResponse
+ */
+export declare class ListTemplatesResponse extends Message<ListTemplatesResponse> {
+  /**
+   * environment_templates is the list of environment templates for the given cluster
+   *
+   * @generated from field: repeated porter.v1.Environment environment_templates = 1;
+   */
+  environmentTemplates: Environment[];
+
+  constructor(data?: PartialMessage<ListTemplatesResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ListTemplatesResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ListTemplatesResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ListTemplatesResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ListTemplatesResponse;
+
+  static equals(a: ListTemplatesResponse | PlainMessage<ListTemplatesResponse> | undefined, b: ListTemplatesResponse | PlainMessage<ListTemplatesResponse> | undefined): boolean;
 }
 
 /**
