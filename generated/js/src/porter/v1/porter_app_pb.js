@@ -232,6 +232,7 @@ export const Build = /*@__PURE__*/ proto3.makeMessageType(
     { no: 4, name: "buildpacks", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 5, name: "dockerfile", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 6, name: "commit_sha", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 15, name: "repo", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
   ],
 );
 
