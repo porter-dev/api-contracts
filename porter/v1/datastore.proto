@@ -46,6 +46,7 @@ enum EnumDatastoreKind {
   // ENUM_DATASTORE_KIND_MANAGED_REDIS refers to the redis helm chart deployed on customer cluster
   ENUM_DATASTORE_KIND_MANAGED_REDIS = 4;
   ENUM_DATASTORE_KIND_NEON = 5;
+  ENUM_DATASTORE_KIND_UPSTASH = 6;
 }
 
 message DatastorePasswordSecretRef {

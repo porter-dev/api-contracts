@@ -45,6 +45,11 @@ export declare enum EnumDatastoreKind {
    * @generated from enum value: ENUM_DATASTORE_KIND_NEON = 5;
    */
   NEON = 5,
+
+  /**
+   * @generated from enum value: ENUM_DATASTORE_KIND_UPSTASH = 6;
+   */
+  UPSTASH = 6,
 }
 
 /**

@@ -19,6 +19,7 @@ export const EnumDatastoreKind = /*@__PURE__*/ proto3.makeEnum(
     {no: 3, name: "ENUM_DATASTORE_KIND_MANAGED_POSTGRES", localName: "MANAGED_POSTGRES"},
     {no: 4, name: "ENUM_DATASTORE_KIND_MANAGED_REDIS", localName: "MANAGED_REDIS"},
     {no: 5, name: "ENUM_DATASTORE_KIND_NEON", localName: "NEON"},
+    {no: 6, name: "ENUM_DATASTORE_KIND_UPSTASH", localName: "UPSTASH"},
   ],
 );
 
