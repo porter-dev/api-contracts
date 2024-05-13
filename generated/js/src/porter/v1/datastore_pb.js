@@ -65,6 +65,7 @@ export const ManagedDatastore = /*@__PURE__*/ proto3.makeMessageType(
     { no: 10, name: "managed_postgres_kind", kind: "message", T: Postgres, oneof: "kind_values" },
     { no: 11, name: "managed_redis_kind", kind: "message", T: Redis, oneof: "kind_values" },
     { no: 12, name: "neon_kind", kind: "message", T: Neon, oneof: "kind_values" },
+    { no: 13, name: "upstash_kind", kind: "message", T: Upstash, oneof: "kind_values" },
     { no: 8, name: "connected_clusters", kind: "message", T: ConnectedClusters },
   ],
 );
@@ -126,6 +127,14 @@ export const AwsElasticache = /*@__PURE__*/ proto3.makeMessageType(
  */
 export const Neon = /*@__PURE__*/ proto3.makeMessageType(
   "porter.v1.Neon",
+  [],
+);
+
+/**
+ * @generated from message porter.v1.Upstash
+ */
+export const Upstash = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.Upstash",
   [],
 );
 
