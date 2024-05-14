@@ -45,6 +45,11 @@ export declare enum EnumDatastoreKind {
    * @generated from enum value: ENUM_DATASTORE_KIND_NEON = 5;
    */
   NEON = 5,
+
+  /**
+   * @generated from enum value: ENUM_DATASTORE_KIND_UPSTASH = 6;
+   */
+  UPSTASH = 6,
 }
 
 /**
@@ -170,6 +175,12 @@ export declare class ManagedDatastore extends Message<ManagedDatastore> {
      */
     value: Neon;
     case: "neonKind";
+  } | {
+    /**
+     * @generated from field: porter.v1.Upstash upstash_kind = 13;
+     */
+    value: Upstash;
+    case: "upstashKind";
   } | { case: undefined; value?: undefined };
 
   /**
@@ -399,6 +410,25 @@ export declare class Neon extends Message<Neon> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Neon;
 
   static equals(a: Neon | PlainMessage<Neon> | undefined, b: Neon | PlainMessage<Neon> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.Upstash
+ */
+export declare class Upstash extends Message<Upstash> {
+  constructor(data?: PartialMessage<Upstash>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.Upstash";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Upstash;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Upstash;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Upstash;
+
+  static equals(a: Upstash | PlainMessage<Upstash> | undefined, b: Upstash | PlainMessage<Upstash> | undefined): boolean;
 }
 
 /**

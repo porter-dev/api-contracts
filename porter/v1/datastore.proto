@@ -26,6 +26,7 @@ message ManagedDatastore {
     Postgres managed_postgres_kind = 10;
     Redis managed_redis_kind = 11;
     Neon neon_kind = 12;
+    Upstash upstash_kind = 13;
   }
   // connected_clusters describes the connection of this datastore to clusters
   ConnectedClusters connected_clusters = 8;
@@ -45,6 +46,7 @@ enum EnumDatastoreKind {
   // ENUM_DATASTORE_KIND_MANAGED_REDIS refers to the redis helm chart deployed on customer cluster
   ENUM_DATASTORE_KIND_MANAGED_REDIS = 4;
   ENUM_DATASTORE_KIND_NEON = 5;
+  ENUM_DATASTORE_KIND_UPSTASH = 6;
 }
 
 message DatastorePasswordSecretRef {
@@ -99,6 +101,8 @@ enum EnumAwsElasticacheEngine {
 }
 
 message Neon {}
+
+message Upstash {}
 
 // UpdateDatastorePayload is used to send messages via nats to update a datastore
 message UpdateDatastorePayload {
