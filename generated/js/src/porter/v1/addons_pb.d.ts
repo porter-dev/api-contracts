@@ -67,6 +67,13 @@ export declare enum AddonType {
    * @generated from enum value: ADDON_TYPE_TAILSCALE = 7;
    */
   TAILSCALE = 7,
+
+  /**
+   * ADDON_TYPE_DEEPGRAM is the deepgram addon type
+   *
+   * @generated from enum value: ADDON_TYPE_DEEPGRAM = 8;
+   */
+  DEEPGRAM = 8,
 }
 
 /**
@@ -186,6 +193,14 @@ export declare class Addon extends Message<Addon> {
      */
     value: Tailscale;
     case: "tailscale";
+  } | {
+    /**
+     * Deepgram is the configuration for the deepgram addon
+     *
+     * @generated from field: porter.v1.Deepgram deepgram = 11;
+     */
+    value: Deepgram;
+    case: "deepgram";
   } | { case: undefined; value?: undefined };
 
   constructor(data?: PartialMessage<Addon>);
@@ -632,5 +647,68 @@ export declare class Tailscale extends Message<Tailscale> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Tailscale;
 
   static equals(a: Tailscale | PlainMessage<Tailscale> | undefined, b: Tailscale | PlainMessage<Tailscale> | undefined): boolean;
+}
+
+/**
+ * Deepgram is the configuration for Deepgram
+ *
+ * @generated from message porter.v1.Deepgram
+ */
+export declare class Deepgram extends Message<Deepgram> {
+  /**
+   * api_key is the deepgram API key
+   *
+   * @generated from field: string api_key = 1;
+   */
+  apiKey: string;
+
+  /**
+   * ecr_username is the username to fetch the proprietary image
+   *
+   * @generated from field: string ecr_username = 2;
+   */
+  ecrUsername: string;
+
+  /**
+   * ecr_password is the password to fetch the proprietary image
+   *
+   * @generated from field: string ecr_password = 3;
+   */
+  ecrPassword: string;
+
+  /**
+   * ecr_email is email to fetch the proprietary image
+   *
+   * @generated from field: string ecr_email = 4;
+   */
+  ecrEmail: string;
+
+  /**
+   * release_tag is the version of the deepgram application
+   *
+   * @generated from field: string release_tag = 5;
+   */
+  releaseTag: string;
+
+  /**
+   * instance_type is the instance type preferred for running the addon
+   *
+   * @generated from field: string instance_type = 6;
+   */
+  instanceType: string;
+
+  constructor(data?: PartialMessage<Deepgram>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.Deepgram";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Deepgram;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Deepgram;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Deepgram;
+
+  static equals(a: Deepgram | PlainMessage<Deepgram> | undefined, b: Deepgram | PlainMessage<Deepgram> | undefined): boolean;
 }
 
