@@ -67,6 +67,13 @@ export declare enum AddonType {
    * @generated from enum value: ADDON_TYPE_TAILSCALE = 7;
    */
   TAILSCALE = 7,
+
+  /**
+   * ADDON_TYPE_QUIVR is the quivr addon type
+   *
+   * @generated from enum value: ADDON_TYPE_QUIVR = 8;
+   */
+  QUIVR = 8,
 }
 
 /**
@@ -186,6 +193,14 @@ export declare class Addon extends Message<Addon> {
      */
     value: Tailscale;
     case: "tailscale";
+  } | {
+    /**
+     * Quivr is the configuration for the quivr addon
+     *
+     * @generated from field: porter.v1.Quivr quivr = 11;
+     */
+    value: Quivr;
+    case: "quivr";
   } | { case: undefined; value?: undefined };
 
   constructor(data?: PartialMessage<Addon>);
@@ -632,5 +647,80 @@ export declare class Tailscale extends Message<Tailscale> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Tailscale;
 
   static equals(a: Tailscale | PlainMessage<Tailscale> | undefined, b: Tailscale | PlainMessage<Tailscale> | undefined): boolean;
+}
+
+/**
+ * Quivr is the configuration for Quivr
+ *
+ * @generated from message porter.v1.Quivr
+ */
+export declare class Quivr extends Message<Quivr> {
+  /**
+   * domains is the list of domains for the service
+   *
+   * @generated from field: repeated porter.v1.Domain domains = 1;
+   */
+  domains: Domain[];
+
+  /**
+   * ingress_enabled describes whether the quivr instance has external ingress enabled
+   *
+   * @generated from field: optional bool ingress_enabled = 2;
+   */
+  ingressEnabled?: boolean;
+
+  /**
+   * @generated from field: optional string openai_api_key = 3;
+   */
+  openaiApiKey?: string;
+
+  /**
+   * @generated from field: optional string supabase_url = 4;
+   */
+  supabaseUrl?: string;
+
+  /**
+   * @generated from field: optional string supabase_service_key = 5;
+   */
+  supabaseServiceKey?: string;
+
+  /**
+   * @generated from field: optional string pg_database_url = 6;
+   */
+  pgDatabaseUrl?: string;
+
+  /**
+   * @generated from field: optional string jwt_secret_key = 7;
+   */
+  jwtSecretKey?: string;
+
+  /**
+   * @generated from field: optional string cohere_api_key = 8;
+   */
+  cohereApiKey?: string;
+
+  /**
+   * @generated from field: optional string anthropic_api_key = 9;
+   */
+  anthropicApiKey?: string;
+
+  /**
+   * @generated from field: optional string quivr_domain = 10;
+   */
+  quivrDomain?: string;
+
+  constructor(data?: PartialMessage<Quivr>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.Quivr";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Quivr;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Quivr;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Quivr;
+
+  static equals(a: Quivr | PlainMessage<Quivr> | undefined, b: Quivr | PlainMessage<Quivr> | undefined): boolean;
 }
 

@@ -22,6 +22,8 @@ enum AddonType {
   ADDON_TYPE_NEWRELIC = 6;
   // ADDON_TYPE_TAILSCALE is the tailscale addon type
   ADDON_TYPE_TAILSCALE = 7;
+  // ADDON_TYPE_QUIVR is the quivr addon type
+  ADDON_TYPE_QUIVR = 8;
 }
 
 // PrerequisiteAddon specifies an addon that must be installed before any apps can be installed
@@ -55,6 +57,8 @@ message Addon {
     Newrelic newrelic = 9;
     // Tailscale is the configuration for the tailscale addon
     Tailscale tailscale = 10;
+    // Quivr is the configuration for the quivr addon
+    Quivr quivr = 11;
   }
 }
 
@@ -161,4 +165,20 @@ message Tailscale {
   optional string auth_key = 1;
   // subnet_routes are the subnet routes for Tailscale
   repeated string subnet_routes = 2;
+}
+
+// Quivr is the configuration for Quivr
+message Quivr {
+  // domains is the list of domains for the service
+  repeated Domain domains = 1;
+  // ingress_enabled describes whether the quivr instance has external ingress enabled
+  optional bool ingress_enabled = 2;
+  optional string openai_api_key = 3;
+  optional string supabase_url = 4;
+  optional string supabase_service_key = 5;
+  optional string pg_database_url = 6;
+  optional string jwt_secret_key = 7;
+  optional string cohere_api_key = 8;
+  optional string anthropic_api_key = 9;
+  optional string quivr_domain = 10;
 }
