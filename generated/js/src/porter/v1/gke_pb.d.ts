@@ -34,6 +34,11 @@ export declare enum GKENodePoolType {
    * @generated from enum value: GKE_NODE_POOL_TYPE_CUSTOM = 4;
    */
   GKE_NODE_POOL_TYPE_CUSTOM = 4,
+
+  /**
+   * @generated from enum value: GKE_NODE_POOL_TYPE_USER = 5;
+   */
+  GKE_NODE_POOL_TYPE_USER = 5,
 }
 
 /**
@@ -100,14 +105,14 @@ export declare class GKENodePool extends Message<GKENodePool> {
   maxInstances: number;
 
   /**
-   * node_pool_type is used to specify the type of node group. This is used to specify what node groups are used by Porter, vs users.
+   * node_pool_type is used to specify the type of node pool. This is used to specify what node pools are used by Porter, vs users.
    *
    * @generated from field: porter.v1.GKENodePoolType node_pool_type = 4;
    */
   nodePoolType: GKENodePoolType;
 
   /**
-   * additional_taints is a list of NoSchedule taints to apply to the node group.
+   * additional_taints is a list of NoSchedule taints to apply to the node pool.
    * These will be applied on top of the default porter.run/workload-kind taints.
    *
    * @generated from field: repeated string additional_taints = 5;
@@ -115,11 +120,25 @@ export declare class GKENodePool extends Message<GKENodePool> {
   additionalTaints: string[];
 
   /**
-   * is_spot_instance is used to specify whether the node group should use spot instances.
+   * is_spot_instance is used to specify whether the node pool should use spot instances.
    *
    * @generated from field: bool is_spot_instance = 6;
    */
   isSpotInstance: boolean;
+
+  /**
+   * node_pool_id is the id of the node pool. This uniquely identifies GKENodePoolType=User and is generated on creation if not provided.
+   *
+   * @generated from field: string node_pool_id = 7;
+   */
+  nodePoolId: string;
+
+  /**
+   * node_pool_name is the vanity name of the node pool. This is required for GKENodePoolType=User and can be changed by the user.
+   *
+   * @generated from field: string node_pool_name = 8;
+   */
+  nodePoolName: string;
 
   constructor(data?: PartialMessage<GKENodePool>);
 

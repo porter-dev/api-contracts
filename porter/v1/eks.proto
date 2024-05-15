@@ -63,6 +63,11 @@ message EKSNodeGroup {
 
   // disk_size_gb is the size of the disk in GB for the node group instances. If unspecified, this will default to 50.
   uint32 disk_size_gb = 8;
+
+  // node_group_id is the id of the node group. This uniquely identifies NodeGroupType=User and is generated on creation if not provided.
+  string node_group_id = 9;
+  // node_group_name is the vanity name of the node group. This is required for NodeGroupType=User and can be changed by the user.
+  string node_group_name = 10;
 }
 
 enum NodeGroupType {
@@ -70,7 +75,10 @@ enum NodeGroupType {
   NODE_GROUP_TYPE_SYSTEM = 1;
   NODE_GROUP_TYPE_MONITORING = 2;
   NODE_GROUP_TYPE_APPLICATION = 3;
+  // NODE_GROUP_TYPE_CUSTOM indicates a GPU node group. For custom node group management, use NODE_GROUP_TYPE_USER.
   NODE_GROUP_TYPE_CUSTOM = 4;
+  // NODE_GROUP_TYPE_USER indicates a user-managed node group (can be created, edited, and deleted). Node groups of this type must specify a unique node_group_name.
+  NODE_GROUP_TYPE_USER = 5;
 }
 
 message LoadBalancer {
