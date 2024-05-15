@@ -16,6 +16,7 @@ export const NodeGroupType = /*@__PURE__*/ proto3.makeEnum(
     {no: 2, name: "NODE_GROUP_TYPE_MONITORING", localName: "MONITORING"},
     {no: 3, name: "NODE_GROUP_TYPE_APPLICATION", localName: "APPLICATION"},
     {no: 4, name: "NODE_GROUP_TYPE_CUSTOM", localName: "CUSTOM"},
+    {no: 5, name: "NODE_GROUP_TYPE_USER", localName: "USER"},
   ],
 );
 
@@ -95,6 +96,8 @@ export const EKSNodeGroup = /*@__PURE__*/ proto3.makeMessageType(
     { no: 6, name: "additional_policies", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 7, name: "additional_taints", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 8, name: "disk_size_gb", kind: "scalar", T: 13 /* ScalarType.UINT32 */ },
+    { no: 9, name: "node_group_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 10, name: "node_group_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

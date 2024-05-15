@@ -31,9 +31,18 @@ export declare enum NodeGroupType {
   APPLICATION = 3,
 
   /**
+   * NODE_GROUP_TYPE_CUSTOM indicates a GPU node group. For custom node group management, use NODE_GROUP_TYPE_USER.
+   *
    * @generated from enum value: NODE_GROUP_TYPE_CUSTOM = 4;
    */
   CUSTOM = 4,
+
+  /**
+   * NODE_GROUP_TYPE_USER indicates a user-managed node group (can be created, edited, and deleted). Node groups of this type must specify a unique node_group_name.
+   *
+   * @generated from enum value: NODE_GROUP_TYPE_USER = 5;
+   */
+  USER = 5,
 }
 
 /**
@@ -283,6 +292,20 @@ export declare class EKSNodeGroup extends Message<EKSNodeGroup> {
    * @generated from field: uint32 disk_size_gb = 8;
    */
   diskSizeGb: number;
+
+  /**
+   * node_group_id is the id of the node group. This uniquely identifies NodeGroupType=User and is generated on creation if not provided.
+   *
+   * @generated from field: string node_group_id = 9;
+   */
+  nodeGroupId: string;
+
+  /**
+   * node_group_name is the vanity name of the node group. This is required for NodeGroupType=User and can be changed by the user.
+   *
+   * @generated from field: string node_group_name = 10;
+   */
+  nodeGroupName: string;
 
   constructor(data?: PartialMessage<EKSNodeGroup>);
 

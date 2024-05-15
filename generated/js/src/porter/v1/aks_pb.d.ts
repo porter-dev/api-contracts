@@ -54,6 +54,13 @@ export declare enum NodePoolType {
    * @generated from enum value: NODE_POOL_TYPE_CUSTOM = 4;
    */
   CUSTOM = 4,
+
+  /**
+   * NODE_POOL_TYPE_USER indicates a user-managed node pool (can be created, edited, and deleted by users). Node pools of this type must specify a unique node_pool_name.
+   *
+   * @generated from enum value: NODE_POOL_TYPE_USER = 5;
+   */
+  USER = 5,
 }
 
 /**
@@ -151,12 +158,26 @@ export declare class AKSNodePool extends Message<AKSNodePool> {
   nodePoolType: NodePoolType;
 
   /**
-   * additional_taints is a list of NoSchedule taints to apply to the node group.
+   * additional_taints is a list of NoSchedule taints to apply to the node pool.
    * These will be applied on top of the default porter.run/workload-kind taints.
    *
    * @generated from field: repeated string additional_taints = 6;
    */
   additionalTaints: string[];
+
+  /**
+   * node_pool_id is the id of the node pool. This uniquely identifies NodePoolType=User and is generated on creation if not provided.
+   *
+   * @generated from field: string node_pool_id = 9;
+   */
+  nodePoolId: string;
+
+  /**
+   * node_pool_name is the vanity name of the node pool. This is required for NodePoolType=User and can be changed by the user.
+   *
+   * @generated from field: string node_pool_name = 10;
+   */
+  nodePoolName: string;
 
   constructor(data?: PartialMessage<AKSNodePool>);
 
