@@ -32,9 +32,9 @@ message AKSNodePool {
   // These will be applied on top of the default porter.run/workload-kind taints.
   repeated string additional_taints = 6;
   // node_pool_id is the id of the node pool. This uniquely identifies NodePoolType=User and is generated on creation if not provided.
-  string node_pool_id = 9;
+  string node_pool_id = 7;
   // node_pool_name is the vanity name of the node pool. This is required for NodePoolType=User and can be changed by the user.
-  string node_pool_name = 10;
+  string node_pool_name = 8;
 }
 
 enum NodePoolType {

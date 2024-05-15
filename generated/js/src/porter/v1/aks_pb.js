@@ -61,8 +61,8 @@ export const AKSNodePool = /*@__PURE__*/ proto3.makeMessageType(
     { no: 4, name: "mode", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 5, name: "node_pool_type", kind: "enum", T: proto3.getEnumType(NodePoolType) },
     { no: 6, name: "additional_taints", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
-    { no: 9, name: "node_pool_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 10, name: "node_pool_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 7, name: "node_pool_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 8, name: "node_pool_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

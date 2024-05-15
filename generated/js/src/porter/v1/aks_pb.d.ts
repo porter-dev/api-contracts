@@ -168,14 +168,14 @@ export declare class AKSNodePool extends Message<AKSNodePool> {
   /**
    * node_pool_id is the id of the node pool. This uniquely identifies NodePoolType=User and is generated on creation if not provided.
    *
-   * @generated from field: string node_pool_id = 9;
+   * @generated from field: string node_pool_id = 7;
    */
   nodePoolId: string;
 
   /**
    * node_pool_name is the vanity name of the node pool. This is required for NodePoolType=User and can be changed by the user.
    *
-   * @generated from field: string node_pool_name = 10;
+   * @generated from field: string node_pool_name = 8;
    */
   nodePoolName: string;
 
