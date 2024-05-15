@@ -663,6 +663,14 @@ export declare class Build extends Message<Build> {
    */
   commitSha: string;
 
+  /**
+   * repo is the repository url where the app source is located
+   * for example, "https://github.com/porter-dev/porter.git"
+   *
+   * @generated from field: optional string repo = 15;
+   */
+  repo?: string;
+
   constructor(data?: PartialMessage<Build>);
 
   static readonly runtime: typeof proto3;
