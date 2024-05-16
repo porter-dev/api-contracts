@@ -4,7 +4,7 @@
 // @ts-nocheck
 
 import { proto3, Timestamp } from "@bufbuild/protobuf";
-import { EnumCloudProvider } from "./cluster_pb.js";
+import { EnumCloudProvider, UserNodeGroup } from "./cluster_pb.js";
 import { CloudContract, MachineType } from "./cloud_contract_pb.js";
 import { GKEPreflightValues } from "./gke_pb.js";
 import { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
@@ -2236,6 +2236,55 @@ export const ReadCloudContractResponse = /*@__PURE__*/ proto3.makeMessageType(
   "porter.v1.ReadCloudContractResponse",
   () => [
     { no: 1, name: "cloud_contract", kind: "message", T: CloudContract },
+  ],
+);
+
+/**
+ * UserNodeGroupsRequest is the request object for fetching user node groups
+ *
+ * @generated from message porter.v1.UserNodeGroupsRequest
+ */
+export const UserNodeGroupsRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.UserNodeGroupsRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * UserNodeGroupsResponse is the response object from fetching user node groups
+ *
+ * @generated from message porter.v1.UserNodeGroupsResponse
+ */
+export const UserNodeGroupsResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.UserNodeGroupsResponse",
+  () => [
+    { no: 1, name: "user_node_groups", kind: "message", T: UserNodeGroup, repeated: true },
+  ],
+);
+
+/**
+ * CreateUserNodeGroupRequest is the request object for creating a user node group
+ *
+ * @generated from message porter.v1.DeleteUserNodeGroupRequest
+ */
+export const DeleteUserNodeGroupRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.DeleteUserNodeGroupRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "user_node_group_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.DeleteUserNodeGroupResponse
+ */
+export const DeleteUserNodeGroupResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.DeleteUserNodeGroupResponse",
+  () => [
+    { no: 1, name: "contract_revision_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

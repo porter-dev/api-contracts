@@ -5,7 +5,7 @@
 
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage, Timestamp } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
-import type { EnumCloudProvider } from "./cluster_pb.js";
+import type { EnumCloudProvider, UserNodeGroup } from "./cluster_pb.js";
 import type { CloudContract, MachineType } from "./cloud_contract_pb.js";
 import type { GKEPreflightValues } from "./gke_pb.js";
 import type { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
@@ -6518,6 +6518,135 @@ export declare class ReadCloudContractResponse extends Message<ReadCloudContract
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ReadCloudContractResponse;
 
   static equals(a: ReadCloudContractResponse | PlainMessage<ReadCloudContractResponse> | undefined, b: ReadCloudContractResponse | PlainMessage<ReadCloudContractResponse> | undefined): boolean;
+}
+
+/**
+ * UserNodeGroupsRequest is the request object for fetching user node groups
+ *
+ * @generated from message porter.v1.UserNodeGroupsRequest
+ */
+export declare class UserNodeGroupsRequest extends Message<UserNodeGroupsRequest> {
+  /**
+   * project_id is the id of the project that the user node groups are associated with
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * cluster_id is the id of the cluster that the user node groups are associated with
+   *
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  constructor(data?: PartialMessage<UserNodeGroupsRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UserNodeGroupsRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserNodeGroupsRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserNodeGroupsRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserNodeGroupsRequest;
+
+  static equals(a: UserNodeGroupsRequest | PlainMessage<UserNodeGroupsRequest> | undefined, b: UserNodeGroupsRequest | PlainMessage<UserNodeGroupsRequest> | undefined): boolean;
+}
+
+/**
+ * UserNodeGroupsResponse is the response object from fetching user node groups
+ *
+ * @generated from message porter.v1.UserNodeGroupsResponse
+ */
+export declare class UserNodeGroupsResponse extends Message<UserNodeGroupsResponse> {
+  /**
+   * user_node_groups is the list of user node groups
+   *
+   * @generated from field: repeated porter.v1.UserNodeGroup user_node_groups = 1;
+   */
+  userNodeGroups: UserNodeGroup[];
+
+  constructor(data?: PartialMessage<UserNodeGroupsResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UserNodeGroupsResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserNodeGroupsResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserNodeGroupsResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserNodeGroupsResponse;
+
+  static equals(a: UserNodeGroupsResponse | PlainMessage<UserNodeGroupsResponse> | undefined, b: UserNodeGroupsResponse | PlainMessage<UserNodeGroupsResponse> | undefined): boolean;
+}
+
+/**
+ * CreateUserNodeGroupRequest is the request object for creating a user node group
+ *
+ * @generated from message porter.v1.DeleteUserNodeGroupRequest
+ */
+export declare class DeleteUserNodeGroupRequest extends Message<DeleteUserNodeGroupRequest> {
+  /**
+   * project_id is the id of the project that the user node group is associated with
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * cluster_id is the id of the cluster that the user node group is associated with
+   *
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  /**
+   * user_node_group_id is the id of the user node group to delete
+   *
+   * @generated from field: string user_node_group_id = 3;
+   */
+  userNodeGroupId: string;
+
+  constructor(data?: PartialMessage<DeleteUserNodeGroupRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeleteUserNodeGroupRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteUserNodeGroupRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteUserNodeGroupRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteUserNodeGroupRequest;
+
+  static equals(a: DeleteUserNodeGroupRequest | PlainMessage<DeleteUserNodeGroupRequest> | undefined, b: DeleteUserNodeGroupRequest | PlainMessage<DeleteUserNodeGroupRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.DeleteUserNodeGroupResponse
+ */
+export declare class DeleteUserNodeGroupResponse extends Message<DeleteUserNodeGroupResponse> {
+  /**
+   * @generated from field: string contract_revision_id = 1;
+   */
+  contractRevisionId: string;
+
+  constructor(data?: PartialMessage<DeleteUserNodeGroupResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeleteUserNodeGroupResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteUserNodeGroupResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteUserNodeGroupResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteUserNodeGroupResponse;
+
+  static equals(a: DeleteUserNodeGroupResponse | PlainMessage<DeleteUserNodeGroupResponse> | undefined, b: DeleteUserNodeGroupResponse | PlainMessage<DeleteUserNodeGroupResponse> | undefined): boolean;
 }
 
 /**
