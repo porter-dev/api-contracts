@@ -780,13 +780,6 @@ export declare class Deepgram extends Message<Deepgram> {
    */
   releaseTag?: string;
 
-  /**
-   * instance_type is the instance type preferred for running the addon
-   *
-   * @generated from field: optional string instance_type = 6;
-   */
-  instanceType?: string;
-
   constructor(data?: PartialMessage<Deepgram>);
 
   static readonly runtime: typeof proto3;
