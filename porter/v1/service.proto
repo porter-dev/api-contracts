@@ -60,6 +60,23 @@ message Service {
   // sleep is a flag to indicate that the service should be put to sleep
   // services that are asleep will have replicas set to 0 and autoscaling disabled
   optional bool sleep = 19;
+
+  // ComputeResources represents the compute resources that the service should run on.
+  ComputeResources compute_resources = 20;
+}
+
+// ComputeResources represents a list of compute resources. This allows us to distinguish between a nil list and an empty list.
+message ComputeResources {
+  // compute_resources is the list of compute resources
+  repeated ComputeResource compute_resources = 1;
+}
+
+// ComputeResource represents a workload that the service should run on
+message ComputeResource {
+  // id is the id of the compute resource
+  string id = 1;
+  // name is the vanity name of the compute resource
+  string name = 2;
 }
 
 // WebServiceConfig is the configuration for a web service
