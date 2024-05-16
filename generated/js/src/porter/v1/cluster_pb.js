@@ -52,3 +52,18 @@ export const Cluster = /*@__PURE__*/ proto3.makeMessageType(
   ],
 );
 
+/**
+ * @generated from message porter.v1.UserNodeGroup
+ */
+export const UserNodeGroup = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.UserNodeGroup",
+  () => [
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 3, name: "instance_type", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "ram_mb", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+    { no: 5, name: "cpu_cores", kind: "scalar", T: 2 /* ScalarType.FLOAT */ },
+    { no: 6, name: "gpu_cores", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
+  ],
+);
+

@@ -310,6 +310,12 @@ const (
 	// ClusterControlPlaneServiceUpdateAppEventWebhooksProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's UpdateAppEventWebhooks RPC.
 	ClusterControlPlaneServiceUpdateAppEventWebhooksProcedure = "/porter.v1.ClusterControlPlaneService/UpdateAppEventWebhooks"
+	// ClusterControlPlaneServiceUserNodeGroupsProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's UserNodeGroups RPC.
+	ClusterControlPlaneServiceUserNodeGroupsProcedure = "/porter.v1.ClusterControlPlaneService/UserNodeGroups"
+	// ClusterControlPlaneServiceDeleteUserNodeGroupProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's DeleteUserNodeGroup RPC.
+	ClusterControlPlaneServiceDeleteUserNodeGroupProcedure = "/porter.v1.ClusterControlPlaneService/DeleteUserNodeGroup"
 )
 
 // These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
@@ -407,6 +413,8 @@ var (
 	clusterControlPlaneServiceSystemStatusHistoryMethodDescriptor                 = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("SystemStatusHistory")
 	clusterControlPlaneServiceAppEventWebhooksMethodDescriptor                    = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("AppEventWebhooks")
 	clusterControlPlaneServiceUpdateAppEventWebhooksMethodDescriptor              = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateAppEventWebhooks")
+	clusterControlPlaneServiceUserNodeGroupsMethodDescriptor                      = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UserNodeGroups")
+	clusterControlPlaneServiceDeleteUserNodeGroupMethodDescriptor                 = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("DeleteUserNodeGroup")
 )
 
 // ClusterControlPlaneServiceClient is a client for the porter.v1.ClusterControlPlaneService
@@ -644,6 +652,11 @@ type ClusterControlPlaneServiceClient interface {
 	AppEventWebhooks(context.Context, *connect.Request[v1.AppEventWebhooksRequest]) (*connect.Response[v1.AppEventWebhooksResponse], error)
 	// UpdateAppEventWebhooks configures webhooks on an app that are triggered on events on the app
 	UpdateAppEventWebhooks(context.Context, *connect.Request[v1.UpdateAppEventWebhooksRequest]) (*connect.Response[v1.UpdateAppEventWebhooksResponse], error)
+	// UserNodeGroups returns the list of user configured node groups for a cluster
+	UserNodeGroups(context.Context, *connect.Request[v1.UserNodeGroupsRequest]) (*connect.Response[v1.UserNodeGroupsResponse], error)
+	// DeleteUserNodeGroup deletes the specified user node group and returns the new contract revision id.
+	// This request will fail if there is an ongoing operation on the user node group.
+	DeleteUserNodeGroup(context.Context, *connect.Request[v1.DeleteUserNodeGroupRequest]) (*connect.Response[v1.DeleteUserNodeGroupResponse], error)
 }
 
 // NewClusterControlPlaneServiceClient constructs a client for the
@@ -1208,6 +1221,18 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			connect.WithSchema(clusterControlPlaneServiceUpdateAppEventWebhooksMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		userNodeGroups: connect.NewClient[v1.UserNodeGroupsRequest, v1.UserNodeGroupsResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceUserNodeGroupsProcedure,
+			connect.WithSchema(clusterControlPlaneServiceUserNodeGroupsMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		deleteUserNodeGroup: connect.NewClient[v1.DeleteUserNodeGroupRequest, v1.DeleteUserNodeGroupResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceDeleteUserNodeGroupProcedure,
+			connect.WithSchema(clusterControlPlaneServiceDeleteUserNodeGroupMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -1305,6 +1330,8 @@ type clusterControlPlaneServiceClient struct {
 	systemStatusHistory                 *connect.Client[v1.SystemStatusHistoryRequest, v1.SystemStatusHistoryResponse]
 	appEventWebhooks                    *connect.Client[v1.AppEventWebhooksRequest, v1.AppEventWebhooksResponse]
 	updateAppEventWebhooks              *connect.Client[v1.UpdateAppEventWebhooksRequest, v1.UpdateAppEventWebhooksResponse]
+	userNodeGroups                      *connect.Client[v1.UserNodeGroupsRequest, v1.UserNodeGroupsResponse]
+	deleteUserNodeGroup                 *connect.Client[v1.DeleteUserNodeGroupRequest, v1.DeleteUserNodeGroupResponse]
 }
 
 // MachineTypes calls porter.v1.ClusterControlPlaneService.MachineTypes.
@@ -1806,6 +1833,16 @@ func (c *clusterControlPlaneServiceClient) UpdateAppEventWebhooks(ctx context.Co
 	return c.updateAppEventWebhooks.CallUnary(ctx, req)
 }
 
+// UserNodeGroups calls porter.v1.ClusterControlPlaneService.UserNodeGroups.
+func (c *clusterControlPlaneServiceClient) UserNodeGroups(ctx context.Context, req *connect.Request[v1.UserNodeGroupsRequest]) (*connect.Response[v1.UserNodeGroupsResponse], error) {
+	return c.userNodeGroups.CallUnary(ctx, req)
+}
+
+// DeleteUserNodeGroup calls porter.v1.ClusterControlPlaneService.DeleteUserNodeGroup.
+func (c *clusterControlPlaneServiceClient) DeleteUserNodeGroup(ctx context.Context, req *connect.Request[v1.DeleteUserNodeGroupRequest]) (*connect.Response[v1.DeleteUserNodeGroupResponse], error) {
+	return c.deleteUserNodeGroup.CallUnary(ctx, req)
+}
+
 // ClusterControlPlaneServiceHandler is an implementation of the
 // porter.v1.ClusterControlPlaneService service.
 type ClusterControlPlaneServiceHandler interface {
@@ -2041,6 +2078,11 @@ type ClusterControlPlaneServiceHandler interface {
 	AppEventWebhooks(context.Context, *connect.Request[v1.AppEventWebhooksRequest]) (*connect.Response[v1.AppEventWebhooksResponse], error)
 	// UpdateAppEventWebhooks configures webhooks on an app that are triggered on events on the app
 	UpdateAppEventWebhooks(context.Context, *connect.Request[v1.UpdateAppEventWebhooksRequest]) (*connect.Response[v1.UpdateAppEventWebhooksResponse], error)
+	// UserNodeGroups returns the list of user configured node groups for a cluster
+	UserNodeGroups(context.Context, *connect.Request[v1.UserNodeGroupsRequest]) (*connect.Response[v1.UserNodeGroupsResponse], error)
+	// DeleteUserNodeGroup deletes the specified user node group and returns the new contract revision id.
+	// This request will fail if there is an ongoing operation on the user node group.
+	DeleteUserNodeGroup(context.Context, *connect.Request[v1.DeleteUserNodeGroupRequest]) (*connect.Response[v1.DeleteUserNodeGroupResponse], error)
 }
 
 // NewClusterControlPlaneServiceHandler builds an HTTP handler from the service implementation. It
@@ -2601,6 +2643,18 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		connect.WithSchema(clusterControlPlaneServiceUpdateAppEventWebhooksMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	clusterControlPlaneServiceUserNodeGroupsHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceUserNodeGroupsProcedure,
+		svc.UserNodeGroups,
+		connect.WithSchema(clusterControlPlaneServiceUserNodeGroupsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	clusterControlPlaneServiceDeleteUserNodeGroupHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceDeleteUserNodeGroupProcedure,
+		svc.DeleteUserNodeGroup,
+		connect.WithSchema(clusterControlPlaneServiceDeleteUserNodeGroupMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/porter.v1.ClusterControlPlaneService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ClusterControlPlaneServiceMachineTypesProcedure:
@@ -2787,6 +2841,10 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceAppEventWebhooksHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceUpdateAppEventWebhooksProcedure:
 			clusterControlPlaneServiceUpdateAppEventWebhooksHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceUserNodeGroupsProcedure:
+			clusterControlPlaneServiceUserNodeGroupsHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceDeleteUserNodeGroupProcedure:
+			clusterControlPlaneServiceDeleteUserNodeGroupHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -3162,4 +3220,12 @@ func (UnimplementedClusterControlPlaneServiceHandler) AppEventWebhooks(context.C
 
 func (UnimplementedClusterControlPlaneServiceHandler) UpdateAppEventWebhooks(context.Context, *connect.Request[v1.UpdateAppEventWebhooksRequest]) (*connect.Response[v1.UpdateAppEventWebhooksResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.UpdateAppEventWebhooks is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) UserNodeGroups(context.Context, *connect.Request[v1.UserNodeGroupsRequest]) (*connect.Response[v1.UserNodeGroupsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.UserNodeGroups is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) DeleteUserNodeGroup(context.Context, *connect.Request[v1.DeleteUserNodeGroupRequest]) (*connect.Response[v1.DeleteUserNodeGroupResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.DeleteUserNodeGroup is not implemented"))
 }

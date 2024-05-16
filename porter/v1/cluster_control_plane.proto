@@ -1457,6 +1457,34 @@ message ReadCloudContractResponse {
   CloudContract cloud_contract = 1;
 }
 
+// UserNodeGroupsRequest is the request object for fetching user node groups
+message UserNodeGroupsRequest {
+  // project_id is the id of the project that the user node groups are associated with
+  int64 project_id = 1;
+  // cluster_id is the id of the cluster that the user node groups are associated with
+  int64 cluster_id = 2;
+}
+
+// UserNodeGroupsResponse is the response object from fetching user node groups
+message UserNodeGroupsResponse {
+  // user_node_groups is the list of user node groups
+  repeated UserNodeGroup user_node_groups = 1;
+}
+
+// CreateUserNodeGroupRequest is the request object for creating a user node group
+message DeleteUserNodeGroupRequest {
+  // project_id is the id of the project that the user node group is associated with
+  int64 project_id = 1;
+  // cluster_id is the id of the cluster that the user node group is associated with
+  int64 cluster_id = 2;
+  // user_node_group_id is the id of the user node group to delete
+  string user_node_group_id = 3;
+}
+
+message DeleteUserNodeGroupResponse {
+  string contract_revision_id = 1;
+}
+
 service ClusterControlPlaneService {
   rpc MachineTypes(MachineTypesRequest) returns (MachineTypesResponse) {}
 
@@ -1781,6 +1809,13 @@ service ClusterControlPlaneService {
 
   // UpdateAppEventWebhooks configures webhooks on an app that are triggered on events on the app
   rpc UpdateAppEventWebhooks(UpdateAppEventWebhooksRequest) returns (UpdateAppEventWebhooksResponse) {}
+
+  // UserNodeGroups returns the list of user configured node groups for a cluster
+  rpc UserNodeGroups(UserNodeGroupsRequest) returns (UserNodeGroupsResponse) {}
+
+  // DeleteUserNodeGroup deletes the specified user node group and returns the new contract revision id.
+  // This request will fail if there is an ongoing operation on the user node group.
+  rpc DeleteUserNodeGroup(DeleteUserNodeGroupRequest) returns (DeleteUserNodeGroupResponse) {}
 }
 
 message EKSBearerTokenRequest {

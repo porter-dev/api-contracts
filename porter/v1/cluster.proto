@@ -42,3 +42,18 @@ enum EnumCloudProvider {
   ENUM_CLOUD_PROVIDER_GCP = 2;
   ENUM_CLOUD_PROVIDER_AZURE = 3;
 }
+
+message UserNodeGroup {
+  // id is the unique identifier for the node group
+  string id = 1;
+  // name is the name of the node group
+  string name = 2;
+  // instance_type is the type of instance used for the node group
+  string instance_type = 3;
+  // ram_mb is the amount of ram in MB available for the node group
+  int32 ram_mb = 4;
+  // cpu_cores is the number of cpu cores available for the node group
+  float cpu_cores = 5;
+  // gpu_cores is the number of gpu cores available for the node group
+  int32 gpu_cores = 6;
+}

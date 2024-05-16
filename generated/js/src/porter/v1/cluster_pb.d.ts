@@ -148,3 +148,64 @@ export declare class Cluster extends Message<Cluster> {
   static equals(a: Cluster | PlainMessage<Cluster> | undefined, b: Cluster | PlainMessage<Cluster> | undefined): boolean;
 }
 
+/**
+ * @generated from message porter.v1.UserNodeGroup
+ */
+export declare class UserNodeGroup extends Message<UserNodeGroup> {
+  /**
+   * id is the unique identifier for the node group
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  /**
+   * name is the name of the node group
+   *
+   * @generated from field: string name = 2;
+   */
+  name: string;
+
+  /**
+   * instance_type is the type of instance used for the node group
+   *
+   * @generated from field: string instance_type = 3;
+   */
+  instanceType: string;
+
+  /**
+   * ram_mb is the amount of ram in MB available for the node group
+   *
+   * @generated from field: int32 ram_mb = 4;
+   */
+  ramMb: number;
+
+  /**
+   * cpu_cores is the number of cpu cores available for the node group
+   *
+   * @generated from field: float cpu_cores = 5;
+   */
+  cpuCores: number;
+
+  /**
+   * gpu_cores is the number of gpu cores available for the node group
+   *
+   * @generated from field: int32 gpu_cores = 6;
+   */
+  gpuCores: number;
+
+  constructor(data?: PartialMessage<UserNodeGroup>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UserNodeGroup";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UserNodeGroup;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UserNodeGroup;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UserNodeGroup;
+
+  static equals(a: UserNodeGroup | PlainMessage<UserNodeGroup> | undefined, b: UserNodeGroup | PlainMessage<UserNodeGroup> | undefined): boolean;
+}
+
