@@ -21,7 +21,8 @@ export const AddonType = /*@__PURE__*/ proto3.makeEnum(
     {no: 5, name: "ADDON_TYPE_METABASE", localName: "METABASE"},
     {no: 6, name: "ADDON_TYPE_NEWRELIC", localName: "NEWRELIC"},
     {no: 7, name: "ADDON_TYPE_TAILSCALE", localName: "TAILSCALE"},
-    {no: 8, name: "ADDON_TYPE_DEEPGRAM", localName: "DEEPGRAM"},
+    {no: 8, name: "ADDON_TYPE_QUIVR", localName: "QUIVR"},
+    {no: 9, name: "ADDON_TYPE_DEEPGRAM", localName: "DEEPGRAM"},
   ],
 );
 
@@ -56,7 +57,8 @@ export const Addon = /*@__PURE__*/ proto3.makeMessageType(
     { no: 8, name: "metabase", kind: "message", T: Metabase, oneof: "config" },
     { no: 9, name: "newrelic", kind: "message", T: Newrelic, oneof: "config" },
     { no: 10, name: "tailscale", kind: "message", T: Tailscale, oneof: "config" },
-    { no: 11, name: "deepgram", kind: "message", T: Deepgram, oneof: "config" },
+    { no: 11, name: "quivr", kind: "message", T: Quivr, oneof: "config" },
+    { no: 12, name: "deepgram", kind: "message", T: Deepgram, oneof: "config" },
   ],
 );
 
@@ -188,6 +190,27 @@ export const Tailscale = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * Quivr is the configuration for Quivr
+ *
+ * @generated from message porter.v1.Quivr
+ */
+export const Quivr = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.Quivr",
+  () => [
+    { no: 1, name: "domains", kind: "message", T: Domain, repeated: true },
+    { no: 2, name: "ingress_enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
+    { no: 3, name: "openai_api_key", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 4, name: "supabase_url", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 5, name: "supabase_service_key", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 6, name: "pg_database_url", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 7, name: "jwt_secret_key", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 8, name: "cohere_api_key", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 9, name: "anthropic_api_key", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 10, name: "quivr_domain", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+  ],
+);
+
+/**
  * Deepgram is the configuration for Deepgram
  *
  * @generated from message porter.v1.Deepgram
@@ -195,12 +218,12 @@ export const Tailscale = /*@__PURE__*/ proto3.makeMessageType(
 export const Deepgram = /*@__PURE__*/ proto3.makeMessageType(
   "porter.v1.Deepgram",
   () => [
-    { no: 1, name: "api_key", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "ecr_username", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 3, name: "ecr_password", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 4, name: "ecr_email", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 5, name: "release_tag", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 6, name: "instance_type", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 1, name: "api_key", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 2, name: "ecr_username", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 3, name: "ecr_password", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 4, name: "ecr_email", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 5, name: "release_tag", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 6, name: "instance_type", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
   ],
 );
 

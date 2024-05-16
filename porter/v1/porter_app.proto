@@ -144,6 +144,9 @@ message Build {
   string dockerfile = 5;
   // commit_sha is the commit SHA at which to build the application
   string commit_sha = 6;
+  // repo is the repository url where the app source is located
+  // for example, "https://github.com/porter-dev/porter.git"
+  optional string repo = 15;
 }
 
 // AppImage is the image to use for a given revision of the application

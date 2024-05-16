@@ -69,11 +69,18 @@ export declare enum AddonType {
   TAILSCALE = 7,
 
   /**
+   * ADDON_TYPE_QUIVR is the quivr addon type
+   *
+   * @generated from enum value: ADDON_TYPE_QUIVR = 8;
+   */
+  QUIVR = 8,
+
+  /**
    * ADDON_TYPE_DEEPGRAM is the deepgram addon type
    *
-   * @generated from enum value: ADDON_TYPE_DEEPGRAM = 8;
+   * @generated from enum value: ADDON_TYPE_DEEPGRAM = 9;
    */
-  DEEPGRAM = 8,
+  DEEPGRAM = 9,
 }
 
 /**
@@ -195,9 +202,17 @@ export declare class Addon extends Message<Addon> {
     case: "tailscale";
   } | {
     /**
+     * Quivr is the configuration for the quivr addon
+     *
+     * @generated from field: porter.v1.Quivr quivr = 11;
+     */
+    value: Quivr;
+    case: "quivr";
+  } | {
+    /**
      * Deepgram is the configuration for the deepgram addon
      *
-     * @generated from field: porter.v1.Deepgram deepgram = 11;
+     * @generated from field: porter.v1.Deepgram deepgram = 12;
      */
     value: Deepgram;
     case: "deepgram";
@@ -650,6 +665,81 @@ export declare class Tailscale extends Message<Tailscale> {
 }
 
 /**
+ * Quivr is the configuration for Quivr
+ *
+ * @generated from message porter.v1.Quivr
+ */
+export declare class Quivr extends Message<Quivr> {
+  /**
+   * domains is the list of domains for the service
+   *
+   * @generated from field: repeated porter.v1.Domain domains = 1;
+   */
+  domains: Domain[];
+
+  /**
+   * ingress_enabled describes whether the quivr instance has external ingress enabled
+   *
+   * @generated from field: optional bool ingress_enabled = 2;
+   */
+  ingressEnabled?: boolean;
+
+  /**
+   * @generated from field: optional string openai_api_key = 3;
+   */
+  openaiApiKey?: string;
+
+  /**
+   * @generated from field: optional string supabase_url = 4;
+   */
+  supabaseUrl?: string;
+
+  /**
+   * @generated from field: optional string supabase_service_key = 5;
+   */
+  supabaseServiceKey?: string;
+
+  /**
+   * @generated from field: optional string pg_database_url = 6;
+   */
+  pgDatabaseUrl?: string;
+
+  /**
+   * @generated from field: optional string jwt_secret_key = 7;
+   */
+  jwtSecretKey?: string;
+
+  /**
+   * @generated from field: optional string cohere_api_key = 8;
+   */
+  cohereApiKey?: string;
+
+  /**
+   * @generated from field: optional string anthropic_api_key = 9;
+   */
+  anthropicApiKey?: string;
+
+  /**
+   * @generated from field: optional string quivr_domain = 10;
+   */
+  quivrDomain?: string;
+
+  constructor(data?: PartialMessage<Quivr>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.Quivr";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Quivr;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Quivr;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Quivr;
+
+  static equals(a: Quivr | PlainMessage<Quivr> | undefined, b: Quivr | PlainMessage<Quivr> | undefined): boolean;
+}
+
+/**
  * Deepgram is the configuration for Deepgram
  *
  * @generated from message porter.v1.Deepgram
@@ -658,44 +748,44 @@ export declare class Deepgram extends Message<Deepgram> {
   /**
    * api_key is the deepgram API key
    *
-   * @generated from field: string api_key = 1;
+   * @generated from field: optional string api_key = 1;
    */
-  apiKey: string;
+  apiKey?: string;
 
   /**
    * ecr_username is the username to fetch the proprietary image
    *
-   * @generated from field: string ecr_username = 2;
+   * @generated from field: optional string ecr_username = 2;
    */
-  ecrUsername: string;
+  ecrUsername?: string;
 
   /**
    * ecr_password is the password to fetch the proprietary image
    *
-   * @generated from field: string ecr_password = 3;
+   * @generated from field: optional string ecr_password = 3;
    */
-  ecrPassword: string;
+  ecrPassword?: string;
 
   /**
    * ecr_email is email to fetch the proprietary image
    *
-   * @generated from field: string ecr_email = 4;
+   * @generated from field: optional string ecr_email = 4;
    */
-  ecrEmail: string;
+  ecrEmail?: string;
 
   /**
    * release_tag is the version of the deepgram application
    *
-   * @generated from field: string release_tag = 5;
+   * @generated from field: optional string release_tag = 5;
    */
-  releaseTag: string;
+  releaseTag?: string;
 
   /**
    * instance_type is the instance type preferred for running the addon
    *
-   * @generated from field: string instance_type = 6;
+   * @generated from field: optional string instance_type = 6;
    */
-  instanceType: string;
+  instanceType?: string;
 
   constructor(data?: PartialMessage<Deepgram>);
 

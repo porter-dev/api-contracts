@@ -16,6 +16,7 @@ export const GKENodePoolType = /*@__PURE__*/ proto3.makeEnum(
     {no: 2, name: "GKE_NODE_POOL_TYPE_MONITORING"},
     {no: 3, name: "GKE_NODE_POOL_TYPE_APPLICATION"},
     {no: 4, name: "GKE_NODE_POOL_TYPE_CUSTOM"},
+    {no: 5, name: "GKE_NODE_POOL_TYPE_USER"},
   ],
 );
 
@@ -45,6 +46,8 @@ export const GKENodePool = /*@__PURE__*/ proto3.makeMessageType(
     { no: 4, name: "node_pool_type", kind: "enum", T: proto3.getEnumType(GKENodePoolType) },
     { no: 5, name: "additional_taints", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
     { no: 6, name: "is_spot_instance", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 7, name: "node_pool_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 8, name: "node_pool_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
