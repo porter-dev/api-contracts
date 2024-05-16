@@ -199,6 +199,4 @@ message Deepgram {
   optional string ecr_email = 4;
   // release_tag is the version of the deepgram application
   optional string release_tag = 5;
-  // instance_type is the instance type preferred for running the addon
-  optional string instance_type = 6;
 }
