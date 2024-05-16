@@ -24,6 +24,8 @@ enum AddonType {
   ADDON_TYPE_TAILSCALE = 7;
   // ADDON_TYPE_QUIVR is the quivr addon type
   ADDON_TYPE_QUIVR = 8;
+  // ADDON_TYPE_DEEPGRAM is the deepgram addon type
+  ADDON_TYPE_DEEPGRAM = 9;
 }
 
 // PrerequisiteAddon specifies an addon that must be installed before any apps can be installed
@@ -59,6 +61,8 @@ message Addon {
     Tailscale tailscale = 10;
     // Quivr is the configuration for the quivr addon
     Quivr quivr = 11;
+    // Deepgram is the configuration for the deepgram addon
+    Deepgram deepgram = 12;
   }
 }
 
@@ -181,4 +185,18 @@ message Quivr {
   optional string cohere_api_key = 8;
   optional string anthropic_api_key = 9;
   optional string quivr_domain = 10;
+}
+
+// Deepgram is the configuration for Deepgram
+message Deepgram {
+  // api_key is the deepgram API key
+  optional string api_key = 1;
+  // ecr_username is the username to fetch the proprietary image
+  optional string ecr_username = 2;
+  // ecr_password is the password to fetch the proprietary image
+  optional string ecr_password = 3;
+  // ecr_email is email to fetch the proprietary image
+  optional string ecr_email = 4;
+  // release_tag is the version of the deepgram application
+  optional string release_tag = 5;
 }

@@ -22,6 +22,7 @@ export const AddonType = /*@__PURE__*/ proto3.makeEnum(
     {no: 6, name: "ADDON_TYPE_NEWRELIC", localName: "NEWRELIC"},
     {no: 7, name: "ADDON_TYPE_TAILSCALE", localName: "TAILSCALE"},
     {no: 8, name: "ADDON_TYPE_QUIVR", localName: "QUIVR"},
+    {no: 9, name: "ADDON_TYPE_DEEPGRAM", localName: "DEEPGRAM"},
   ],
 );
 
@@ -57,6 +58,7 @@ export const Addon = /*@__PURE__*/ proto3.makeMessageType(
     { no: 9, name: "newrelic", kind: "message", T: Newrelic, oneof: "config" },
     { no: 10, name: "tailscale", kind: "message", T: Tailscale, oneof: "config" },
     { no: 11, name: "quivr", kind: "message", T: Quivr, oneof: "config" },
+    { no: 12, name: "deepgram", kind: "message", T: Deepgram, oneof: "config" },
   ],
 );
 
@@ -205,6 +207,22 @@ export const Quivr = /*@__PURE__*/ proto3.makeMessageType(
     { no: 8, name: "cohere_api_key", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 9, name: "anthropic_api_key", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 10, name: "quivr_domain", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+  ],
+);
+
+/**
+ * Deepgram is the configuration for Deepgram
+ *
+ * @generated from message porter.v1.Deepgram
+ */
+export const Deepgram = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.Deepgram",
+  () => [
+    { no: 1, name: "api_key", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 2, name: "ecr_username", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 3, name: "ecr_password", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 4, name: "ecr_email", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 5, name: "release_tag", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
   ],
 );
 

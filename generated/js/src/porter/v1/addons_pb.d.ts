@@ -74,6 +74,13 @@ export declare enum AddonType {
    * @generated from enum value: ADDON_TYPE_QUIVR = 8;
    */
   QUIVR = 8,
+
+  /**
+   * ADDON_TYPE_DEEPGRAM is the deepgram addon type
+   *
+   * @generated from enum value: ADDON_TYPE_DEEPGRAM = 9;
+   */
+  DEEPGRAM = 9,
 }
 
 /**
@@ -201,6 +208,14 @@ export declare class Addon extends Message<Addon> {
      */
     value: Quivr;
     case: "quivr";
+  } | {
+    /**
+     * Deepgram is the configuration for the deepgram addon
+     *
+     * @generated from field: porter.v1.Deepgram deepgram = 12;
+     */
+    value: Deepgram;
+    case: "deepgram";
   } | { case: undefined; value?: undefined };
 
   constructor(data?: PartialMessage<Addon>);
@@ -722,5 +737,61 @@ export declare class Quivr extends Message<Quivr> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Quivr;
 
   static equals(a: Quivr | PlainMessage<Quivr> | undefined, b: Quivr | PlainMessage<Quivr> | undefined): boolean;
+}
+
+/**
+ * Deepgram is the configuration for Deepgram
+ *
+ * @generated from message porter.v1.Deepgram
+ */
+export declare class Deepgram extends Message<Deepgram> {
+  /**
+   * api_key is the deepgram API key
+   *
+   * @generated from field: optional string api_key = 1;
+   */
+  apiKey?: string;
+
+  /**
+   * ecr_username is the username to fetch the proprietary image
+   *
+   * @generated from field: optional string ecr_username = 2;
+   */
+  ecrUsername?: string;
+
+  /**
+   * ecr_password is the password to fetch the proprietary image
+   *
+   * @generated from field: optional string ecr_password = 3;
+   */
+  ecrPassword?: string;
+
+  /**
+   * ecr_email is email to fetch the proprietary image
+   *
+   * @generated from field: optional string ecr_email = 4;
+   */
+  ecrEmail?: string;
+
+  /**
+   * release_tag is the version of the deepgram application
+   *
+   * @generated from field: optional string release_tag = 5;
+   */
+  releaseTag?: string;
+
+  constructor(data?: PartialMessage<Deepgram>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.Deepgram";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Deepgram;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Deepgram;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Deepgram;
+
+  static equals(a: Deepgram | PlainMessage<Deepgram> | undefined, b: Deepgram | PlainMessage<Deepgram> | undefined): boolean;
 }
 
