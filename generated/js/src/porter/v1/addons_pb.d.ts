@@ -780,6 +780,13 @@ export declare class Deepgram extends Message<Deepgram> {
    */
   releaseTag?: string;
 
+  /**
+   * model_urls is the list of urls to download deepgram models from
+   *
+   * @generated from field: repeated string model_urls = 6;
+   */
+  modelUrls: string[];
+
   constructor(data?: PartialMessage<Deepgram>);
 
   static readonly runtime: typeof proto3;
