@@ -199,4 +199,6 @@ message Deepgram {
   optional string ecr_email = 4;
   // release_tag is the version of the deepgram application
   optional string release_tag = 5;
+  // model_urls is the list of urls to download deepgram models from
+  repeated string model_urls = 6;
 }
