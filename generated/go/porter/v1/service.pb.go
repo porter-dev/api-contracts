@@ -433,7 +433,7 @@ func (x *ComputeResources) GetComputeResources() []*ComputeResource {
 	return nil
 }
 
-// ComputeResource represents a node groups that the service should run on
+// ComputeResource represents a compute resource (e.g. node group) that the service should run on
 type ComputeResource struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

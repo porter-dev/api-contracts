@@ -249,7 +249,7 @@ export declare class ComputeResources extends Message<ComputeResources> {
 }
 
 /**
- * ComputeResource represents a node groups that the service should run on
+ * ComputeResource represents a compute resource (e.g. node group) that the service should run on
  *
  * @generated from message porter.v1.ComputeResource
  */

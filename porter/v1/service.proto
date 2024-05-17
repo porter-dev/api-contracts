@@ -71,7 +71,7 @@ message ComputeResources {
   repeated ComputeResource compute_resources = 1;
 }
 
-// ComputeResource represents a node groups that the service should run on
+// ComputeResource represents a compute resource (e.g. node group) that the service should run on
 message ComputeResource {
   // id is the id of the compute resource
   string id = 1;
