@@ -71,12 +71,10 @@ message ComputeResources {
   repeated ComputeResource compute_resources = 1;
 }
 
-// ComputeResource represents a workload that the service should run on
+// ComputeResource represents a node groups that the service should run on
 message ComputeResource {
   // id is the id of the compute resource
   string id = 1;
-  // name is the vanity name of the compute resource
-  string name = 2;
 }
 
 // WebServiceConfig is the configuration for a web service

@@ -249,7 +249,7 @@ export declare class ComputeResources extends Message<ComputeResources> {
 }
 
 /**
- * ComputeResource represents a workload that the service should run on
+ * ComputeResource represents a node groups that the service should run on
  *
  * @generated from message porter.v1.ComputeResource
  */
@@ -260,13 +260,6 @@ export declare class ComputeResource extends Message<ComputeResource> {
    * @generated from field: string id = 1;
    */
   id: string;
-
-  /**
-   * name is the vanity name of the compute resource
-   *
-   * @generated from field: string name = 2;
-   */
-  name: string;
 
   constructor(data?: PartialMessage<ComputeResource>);
 

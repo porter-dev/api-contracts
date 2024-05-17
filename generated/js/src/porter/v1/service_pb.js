@@ -75,7 +75,7 @@ export const ComputeResources = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
- * ComputeResource represents a workload that the service should run on
+ * ComputeResource represents a node groups that the service should run on
  *
  * @generated from message porter.v1.ComputeResource
  */
@@ -83,7 +83,6 @@ export const ComputeResource = /*@__PURE__*/ proto3.makeMessageType(
   "porter.v1.ComputeResource",
   () => [
     { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
-    { no: 2, name: "name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
