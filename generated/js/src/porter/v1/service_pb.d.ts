@@ -198,6 +198,13 @@ export declare class Service extends Message<Service> {
    */
   sleep?: boolean;
 
+  /**
+   * ComputeResources represents the compute resources that the service should run on.
+   *
+   * @generated from field: porter.v1.ComputeResources compute_resources = 20;
+   */
+  computeResources?: ComputeResources;
+
   constructor(data?: PartialMessage<Service>);
 
   static readonly runtime: typeof proto3;
@@ -211,6 +218,62 @@ export declare class Service extends Message<Service> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Service;
 
   static equals(a: Service | PlainMessage<Service> | undefined, b: Service | PlainMessage<Service> | undefined): boolean;
+}
+
+/**
+ * ComputeResources represents a list of compute resources. This allows us to distinguish between a nil list and an empty list.
+ *
+ * @generated from message porter.v1.ComputeResources
+ */
+export declare class ComputeResources extends Message<ComputeResources> {
+  /**
+   * compute_resources is the list of compute resources
+   *
+   * @generated from field: repeated porter.v1.ComputeResource compute_resources = 1;
+   */
+  computeResources: ComputeResource[];
+
+  constructor(data?: PartialMessage<ComputeResources>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ComputeResources";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ComputeResources;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ComputeResources;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ComputeResources;
+
+  static equals(a: ComputeResources | PlainMessage<ComputeResources> | undefined, b: ComputeResources | PlainMessage<ComputeResources> | undefined): boolean;
+}
+
+/**
+ * ComputeResource represents a compute resource (e.g. node group) that the service should run on
+ *
+ * @generated from message porter.v1.ComputeResource
+ */
+export declare class ComputeResource extends Message<ComputeResource> {
+  /**
+   * id is the id of the compute resource
+   *
+   * @generated from field: string id = 1;
+   */
+  id: string;
+
+  constructor(data?: PartialMessage<ComputeResource>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ComputeResource";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ComputeResource;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ComputeResource;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ComputeResource;
+
+  static equals(a: ComputeResource | PlainMessage<ComputeResource> | undefined, b: ComputeResource | PlainMessage<ComputeResource> | undefined): boolean;
 }
 
 /**

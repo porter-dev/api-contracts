@@ -58,6 +58,31 @@ export const Service = /*@__PURE__*/ proto3.makeMessageType(
     { no: 17, name: "gpu", kind: "message", T: GPU },
     { no: 18, name: "termination_grace_period_seconds", kind: "scalar", T: 5 /* ScalarType.INT32 */, opt: true },
     { no: 19, name: "sleep", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
+    { no: 20, name: "compute_resources", kind: "message", T: ComputeResources },
+  ],
+);
+
+/**
+ * ComputeResources represents a list of compute resources. This allows us to distinguish between a nil list and an empty list.
+ *
+ * @generated from message porter.v1.ComputeResources
+ */
+export const ComputeResources = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.ComputeResources",
+  () => [
+    { no: 1, name: "compute_resources", kind: "message", T: ComputeResource, repeated: true },
+  ],
+);
+
+/**
+ * ComputeResource represents a compute resource (e.g. node group) that the service should run on
+ *
+ * @generated from message porter.v1.ComputeResource
+ */
+export const ComputeResource = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.ComputeResource",
+  () => [
+    { no: 1, name: "id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
