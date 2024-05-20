@@ -195,6 +195,16 @@ message ClusterStatusResponse {
   bool control_plane_status = 5;
 }
 
+message DeletePorterCloudClusterRequest {
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+}
+
+message DeletePorterCloudClusterResponse {
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+}
+
 message DeleteClusterRequest {
   ContractRevision contract_revision = 1;
 }
@@ -1534,6 +1544,9 @@ service ClusterControlPlaneService {
   // DeleteCluster uninstalls system components from a given workload cluster before deleting it.
   // This should ultimately be wrapped into UpdateContract
   rpc DeleteCluster(DeleteClusterRequest) returns (DeleteClusterResponse) {}
+
+  // DeletePorterCloudCluster deletes the cluster object and namespaces associated with the Porter Cloud project.
+  rpc DeletePorterCloudCluster(DeletePorterCloudClusterRequest) returns (DeletePorterCloudClusterResponse) {}
 
   // TokenForRegistry returns a token for accessing a given registry
   rpc TokenForRegistry(TokenForRegistryRequest) returns (TokenForRegistryResponse) {}
