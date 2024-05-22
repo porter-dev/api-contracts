@@ -410,6 +410,28 @@ export const ClusterStatusResponse = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * @generated from message porter.v1.DeletePorterCloudClusterRequest
+ */
+export const DeletePorterCloudClusterRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.DeletePorterCloudClusterRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.DeletePorterCloudClusterResponse
+ */
+export const DeletePorterCloudClusterResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.DeletePorterCloudClusterResponse",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
  * @generated from message porter.v1.DeleteClusterRequest
  */
 export const DeleteClusterRequest = /*@__PURE__*/ proto3.makeMessageType(

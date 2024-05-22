@@ -73,6 +73,9 @@ const (
 	// ClusterControlPlaneServiceDeleteClusterProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DeleteCluster RPC.
 	ClusterControlPlaneServiceDeleteClusterProcedure = "/porter.v1.ClusterControlPlaneService/DeleteCluster"
+	// ClusterControlPlaneServiceDeletePorterCloudClusterProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's DeletePorterCloudCluster RPC.
+	ClusterControlPlaneServiceDeletePorterCloudClusterProcedure = "/porter.v1.ClusterControlPlaneService/DeletePorterCloudCluster"
 	// ClusterControlPlaneServiceTokenForRegistryProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's TokenForRegistry RPC.
 	ClusterControlPlaneServiceTokenForRegistryProcedure = "/porter.v1.ClusterControlPlaneService/TokenForRegistry"
@@ -334,6 +337,7 @@ var (
 	clusterControlPlaneServiceReadContractMethodDescriptor                        = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ReadContract")
 	clusterControlPlaneServiceClusterStatusMethodDescriptor                       = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ClusterStatus")
 	clusterControlPlaneServiceDeleteClusterMethodDescriptor                       = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("DeleteCluster")
+	clusterControlPlaneServiceDeletePorterCloudClusterMethodDescriptor            = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("DeletePorterCloudCluster")
 	clusterControlPlaneServiceTokenForRegistryMethodDescriptor                    = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("TokenForRegistry")
 	clusterControlPlaneServiceContractComplianceChecksMethodDescriptor            = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ContractComplianceChecks")
 	clusterControlPlaneServiceValidatePorterAppMethodDescriptor                   = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ValidatePorterApp")
@@ -456,6 +460,8 @@ type ClusterControlPlaneServiceClient interface {
 	// DeleteCluster uninstalls system components from a given workload cluster before deleting it.
 	// This should ultimately be wrapped into UpdateContract
 	DeleteCluster(context.Context, *connect.Request[v1.DeleteClusterRequest]) (*connect.Response[v1.DeleteClusterResponse], error)
+	// DeletePorterCloudCluster deletes the cluster object and namespaces associated with the Porter Cloud project.
+	DeletePorterCloudCluster(context.Context, *connect.Request[v1.DeletePorterCloudClusterRequest]) (*connect.Response[v1.DeletePorterCloudClusterResponse], error)
 	// TokenForRegistry returns a token for accessing a given registry
 	TokenForRegistry(context.Context, *connect.Request[v1.TokenForRegistryRequest]) (*connect.Response[v1.TokenForRegistryResponse], error)
 	// ContractComplianceChecks returns the current status of the compliance checks for a given cluster and project
@@ -745,6 +751,12 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			httpClient,
 			baseURL+ClusterControlPlaneServiceDeleteClusterProcedure,
 			connect.WithSchema(clusterControlPlaneServiceDeleteClusterMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		deletePorterCloudCluster: connect.NewClient[v1.DeletePorterCloudClusterRequest, v1.DeletePorterCloudClusterResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceDeletePorterCloudClusterProcedure,
+			connect.WithSchema(clusterControlPlaneServiceDeletePorterCloudClusterMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		tokenForRegistry: connect.NewClient[v1.TokenForRegistryRequest, v1.TokenForRegistryResponse](
@@ -1251,6 +1263,7 @@ type clusterControlPlaneServiceClient struct {
 	readContract                        *connect.Client[v1.ReadContractRequest, v1.ReadContractResponse]
 	clusterStatus                       *connect.Client[v1.ClusterStatusRequest, v1.ClusterStatusResponse]
 	deleteCluster                       *connect.Client[v1.DeleteClusterRequest, v1.DeleteClusterResponse]
+	deletePorterCloudCluster            *connect.Client[v1.DeletePorterCloudClusterRequest, v1.DeletePorterCloudClusterResponse]
 	tokenForRegistry                    *connect.Client[v1.TokenForRegistryRequest, v1.TokenForRegistryResponse]
 	contractComplianceChecks            *connect.Client[v1.ContractComplianceChecksRequest, v1.ContractComplianceChecksResponse]
 	validatePorterApp                   *connect.Client[v1.ValidatePorterAppRequest, v1.ValidatePorterAppResponse]
@@ -1407,6 +1420,11 @@ func (c *clusterControlPlaneServiceClient) ClusterStatus(ctx context.Context, re
 // DeleteCluster calls porter.v1.ClusterControlPlaneService.DeleteCluster.
 func (c *clusterControlPlaneServiceClient) DeleteCluster(ctx context.Context, req *connect.Request[v1.DeleteClusterRequest]) (*connect.Response[v1.DeleteClusterResponse], error) {
 	return c.deleteCluster.CallUnary(ctx, req)
+}
+
+// DeletePorterCloudCluster calls porter.v1.ClusterControlPlaneService.DeletePorterCloudCluster.
+func (c *clusterControlPlaneServiceClient) DeletePorterCloudCluster(ctx context.Context, req *connect.Request[v1.DeletePorterCloudClusterRequest]) (*connect.Response[v1.DeletePorterCloudClusterResponse], error) {
+	return c.deletePorterCloudCluster.CallUnary(ctx, req)
 }
 
 // TokenForRegistry calls porter.v1.ClusterControlPlaneService.TokenForRegistry.
@@ -1882,6 +1900,8 @@ type ClusterControlPlaneServiceHandler interface {
 	// DeleteCluster uninstalls system components from a given workload cluster before deleting it.
 	// This should ultimately be wrapped into UpdateContract
 	DeleteCluster(context.Context, *connect.Request[v1.DeleteClusterRequest]) (*connect.Response[v1.DeleteClusterResponse], error)
+	// DeletePorterCloudCluster deletes the cluster object and namespaces associated with the Porter Cloud project.
+	DeletePorterCloudCluster(context.Context, *connect.Request[v1.DeletePorterCloudClusterRequest]) (*connect.Response[v1.DeletePorterCloudClusterResponse], error)
 	// TokenForRegistry returns a token for accessing a given registry
 	TokenForRegistry(context.Context, *connect.Request[v1.TokenForRegistryRequest]) (*connect.Response[v1.TokenForRegistryResponse], error)
 	// ContractComplianceChecks returns the current status of the compliance checks for a given cluster and project
@@ -2167,6 +2187,12 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		ClusterControlPlaneServiceDeleteClusterProcedure,
 		svc.DeleteCluster,
 		connect.WithSchema(clusterControlPlaneServiceDeleteClusterMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	clusterControlPlaneServiceDeletePorterCloudClusterHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceDeletePorterCloudClusterProcedure,
+		svc.DeletePorterCloudCluster,
+		connect.WithSchema(clusterControlPlaneServiceDeletePorterCloudClusterMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceTokenForRegistryHandler := connect.NewUnaryHandler(
@@ -2683,6 +2709,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceClusterStatusHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDeleteClusterProcedure:
 			clusterControlPlaneServiceDeleteClusterHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceDeletePorterCloudClusterProcedure:
+			clusterControlPlaneServiceDeletePorterCloudClusterHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceTokenForRegistryProcedure:
 			clusterControlPlaneServiceTokenForRegistryHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceContractComplianceChecksProcedure:
@@ -2904,6 +2932,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) ClusterStatus(context.Cont
 
 func (UnimplementedClusterControlPlaneServiceHandler) DeleteCluster(context.Context, *connect.Request[v1.DeleteClusterRequest]) (*connect.Response[v1.DeleteClusterResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.DeleteCluster is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) DeletePorterCloudCluster(context.Context, *connect.Request[v1.DeletePorterCloudClusterRequest]) (*connect.Response[v1.DeletePorterCloudClusterResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.DeletePorterCloudCluster is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) TokenForRegistry(context.Context, *connect.Request[v1.TokenForRegistryRequest]) (*connect.Response[v1.TokenForRegistryResponse], error) {

@@ -1073,6 +1073,64 @@ export declare class ClusterStatusResponse extends Message<ClusterStatusResponse
 }
 
 /**
+ * @generated from message porter.v1.DeletePorterCloudClusterRequest
+ */
+export declare class DeletePorterCloudClusterRequest extends Message<DeletePorterCloudClusterRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  constructor(data?: PartialMessage<DeletePorterCloudClusterRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeletePorterCloudClusterRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeletePorterCloudClusterRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeletePorterCloudClusterRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeletePorterCloudClusterRequest;
+
+  static equals(a: DeletePorterCloudClusterRequest | PlainMessage<DeletePorterCloudClusterRequest> | undefined, b: DeletePorterCloudClusterRequest | PlainMessage<DeletePorterCloudClusterRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.DeletePorterCloudClusterResponse
+ */
+export declare class DeletePorterCloudClusterResponse extends Message<DeletePorterCloudClusterResponse> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  constructor(data?: PartialMessage<DeletePorterCloudClusterResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeletePorterCloudClusterResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeletePorterCloudClusterResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeletePorterCloudClusterResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeletePorterCloudClusterResponse;
+
+  static equals(a: DeletePorterCloudClusterResponse | PlainMessage<DeletePorterCloudClusterResponse> | undefined, b: DeletePorterCloudClusterResponse | PlainMessage<DeletePorterCloudClusterResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.DeleteClusterRequest
  */
 export declare class DeleteClusterRequest extends Message<DeleteClusterRequest> {
