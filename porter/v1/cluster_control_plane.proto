@@ -130,6 +130,14 @@ message QuotaPreflightCheckResponse {
   option deprecated = true;
 }
 
+// EnsureQuotasRequest is the request object for ensuring the quotas implied by a cluster contract
+message EnsureQuotasRequest {
+  Contract contract = 1;
+}
+
+// EnsureQuotasResponse is the response from ensuring quotas
+message EnsureQuotasResponse {}
+
 message CreateAssumeRoleChainRequest {
   option deprecated = true;
 
@@ -1518,6 +1526,8 @@ service ClusterControlPlaneService {
   // CloudContractPreflightCheck runs preflight checks on the target account to ensure it is able to provision the resources defined in the contract.
   // It returns a list of failing checks that must be resolved before  can be provisioned.
   rpc CloudContractPreflightCheck(CloudContractPreflightCheckRequest) returns (CloudContractPreflightCheckResponse) {}
+
+  rpc EnsureQuotas(EnsureQuotasRequest) returns (EnsureQuotasResponse) {}
 
   // CreateAssumeRoleChain creates a new assume role chain for a given project and checks if the target assumed role has sufficient permissions. Use UpdateCloudProviderCredentials instead.
   rpc CreateAssumeRoleChain(CreateAssumeRoleChainRequest) returns (CreateAssumeRoleChainResponse) {

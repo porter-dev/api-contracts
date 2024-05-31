@@ -52,6 +52,9 @@ const (
 	// ClusterControlPlaneServiceCloudContractPreflightCheckProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's CloudContractPreflightCheck RPC.
 	ClusterControlPlaneServiceCloudContractPreflightCheckProcedure = "/porter.v1.ClusterControlPlaneService/CloudContractPreflightCheck"
+	// ClusterControlPlaneServiceEnsureQuotasProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's EnsureQuotas RPC.
+	ClusterControlPlaneServiceEnsureQuotasProcedure = "/porter.v1.ClusterControlPlaneService/EnsureQuotas"
 	// ClusterControlPlaneServiceCreateAssumeRoleChainProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's CreateAssumeRoleChain RPC.
 	ClusterControlPlaneServiceCreateAssumeRoleChainProcedure = "/porter.v1.ClusterControlPlaneService/CreateAssumeRoleChain"
@@ -330,6 +333,7 @@ var (
 	clusterControlPlaneServiceQuotaPreflightCheckMethodDescriptor                 = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("QuotaPreflightCheck")
 	clusterControlPlaneServicePreflightCheckMethodDescriptor                      = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("PreflightCheck")
 	clusterControlPlaneServiceCloudContractPreflightCheckMethodDescriptor         = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("CloudContractPreflightCheck")
+	clusterControlPlaneServiceEnsureQuotasMethodDescriptor                        = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("EnsureQuotas")
 	clusterControlPlaneServiceCreateAssumeRoleChainMethodDescriptor               = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("CreateAssumeRoleChain")
 	clusterControlPlaneServiceSaveAzureCredentialsMethodDescriptor                = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("SaveAzureCredentials")
 	clusterControlPlaneServiceKubeConfigForClusterMethodDescriptor                = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("KubeConfigForCluster")
@@ -441,6 +445,7 @@ type ClusterControlPlaneServiceClient interface {
 	// CloudContractPreflightCheck runs preflight checks on the target account to ensure it is able to provision the resources defined in the contract.
 	// It returns a list of failing checks that must be resolved before  can be provisioned.
 	CloudContractPreflightCheck(context.Context, *connect.Request[v1.CloudContractPreflightCheckRequest]) (*connect.Response[v1.CloudContractPreflightCheckResponse], error)
+	EnsureQuotas(context.Context, *connect.Request[v1.EnsureQuotasRequest]) (*connect.Response[v1.EnsureQuotasResponse], error)
 	// CreateAssumeRoleChain creates a new assume role chain for a given project and checks if the target assumed role has sufficient permissions. Use UpdateCloudProviderCredentials instead.
 	//
 	// Deprecated: do not use.
@@ -709,6 +714,12 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			httpClient,
 			baseURL+ClusterControlPlaneServiceCloudContractPreflightCheckProcedure,
 			connect.WithSchema(clusterControlPlaneServiceCloudContractPreflightCheckMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		ensureQuotas: connect.NewClient[v1.EnsureQuotasRequest, v1.EnsureQuotasResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceEnsureQuotasProcedure,
+			connect.WithSchema(clusterControlPlaneServiceEnsureQuotasMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		createAssumeRoleChain: connect.NewClient[v1.CreateAssumeRoleChainRequest, v1.CreateAssumeRoleChainResponse](
@@ -1256,6 +1267,7 @@ type clusterControlPlaneServiceClient struct {
 	quotaPreflightCheck                 *connect.Client[v1.QuotaPreflightCheckRequest, v1.QuotaPreflightCheckResponse]
 	preflightCheck                      *connect.Client[v1.PreflightCheckRequest, v1.PreflightCheckResponse]
 	cloudContractPreflightCheck         *connect.Client[v1.CloudContractPreflightCheckRequest, v1.CloudContractPreflightCheckResponse]
+	ensureQuotas                        *connect.Client[v1.EnsureQuotasRequest, v1.EnsureQuotasResponse]
 	createAssumeRoleChain               *connect.Client[v1.CreateAssumeRoleChainRequest, v1.CreateAssumeRoleChainResponse]
 	saveAzureCredentials                *connect.Client[v1.SaveAzureCredentialsRequest, v1.SaveAzureCredentialsResponse]
 	kubeConfigForCluster                *connect.Client[v1.KubeConfigForClusterRequest, v1.KubeConfigForClusterResponse]
@@ -1381,6 +1393,11 @@ func (c *clusterControlPlaneServiceClient) PreflightCheck(ctx context.Context, r
 // porter.v1.ClusterControlPlaneService.CloudContractPreflightCheck.
 func (c *clusterControlPlaneServiceClient) CloudContractPreflightCheck(ctx context.Context, req *connect.Request[v1.CloudContractPreflightCheckRequest]) (*connect.Response[v1.CloudContractPreflightCheckResponse], error) {
 	return c.cloudContractPreflightCheck.CallUnary(ctx, req)
+}
+
+// EnsureQuotas calls porter.v1.ClusterControlPlaneService.EnsureQuotas.
+func (c *clusterControlPlaneServiceClient) EnsureQuotas(ctx context.Context, req *connect.Request[v1.EnsureQuotasRequest]) (*connect.Response[v1.EnsureQuotasResponse], error) {
+	return c.ensureQuotas.CallUnary(ctx, req)
 }
 
 // CreateAssumeRoleChain calls porter.v1.ClusterControlPlaneService.CreateAssumeRoleChain.
@@ -1881,6 +1898,7 @@ type ClusterControlPlaneServiceHandler interface {
 	// CloudContractPreflightCheck runs preflight checks on the target account to ensure it is able to provision the resources defined in the contract.
 	// It returns a list of failing checks that must be resolved before  can be provisioned.
 	CloudContractPreflightCheck(context.Context, *connect.Request[v1.CloudContractPreflightCheckRequest]) (*connect.Response[v1.CloudContractPreflightCheckResponse], error)
+	EnsureQuotas(context.Context, *connect.Request[v1.EnsureQuotasRequest]) (*connect.Response[v1.EnsureQuotasResponse], error)
 	// CreateAssumeRoleChain creates a new assume role chain for a given project and checks if the target assumed role has sufficient permissions. Use UpdateCloudProviderCredentials instead.
 	//
 	// Deprecated: do not use.
@@ -2145,6 +2163,12 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		ClusterControlPlaneServiceCloudContractPreflightCheckProcedure,
 		svc.CloudContractPreflightCheck,
 		connect.WithSchema(clusterControlPlaneServiceCloudContractPreflightCheckMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	clusterControlPlaneServiceEnsureQuotasHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceEnsureQuotasProcedure,
+		svc.EnsureQuotas,
+		connect.WithSchema(clusterControlPlaneServiceEnsureQuotasMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceCreateAssumeRoleChainHandler := connect.NewUnaryHandler(
@@ -2695,6 +2719,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServicePreflightCheckHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceCloudContractPreflightCheckProcedure:
 			clusterControlPlaneServiceCloudContractPreflightCheckHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceEnsureQuotasProcedure:
+			clusterControlPlaneServiceEnsureQuotasHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceCreateAssumeRoleChainProcedure:
 			clusterControlPlaneServiceCreateAssumeRoleChainHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceSaveAzureCredentialsProcedure:
@@ -2904,6 +2930,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) PreflightCheck(context.Con
 
 func (UnimplementedClusterControlPlaneServiceHandler) CloudContractPreflightCheck(context.Context, *connect.Request[v1.CloudContractPreflightCheckRequest]) (*connect.Response[v1.CloudContractPreflightCheckResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.CloudContractPreflightCheck is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) EnsureQuotas(context.Context, *connect.Request[v1.EnsureQuotasRequest]) (*connect.Response[v1.EnsureQuotasResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.EnsureQuotas is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) CreateAssumeRoleChain(context.Context, *connect.Request[v1.CreateAssumeRoleChainRequest]) (*connect.Response[v1.CreateAssumeRoleChainResponse], error) {

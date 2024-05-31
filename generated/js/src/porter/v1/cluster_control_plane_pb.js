@@ -288,6 +288,28 @@ export const QuotaPreflightCheckResponse = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * EnsureQuotasRequest is the request object for ensuring the quotas implied by a cluster contract
+ *
+ * @generated from message porter.v1.EnsureQuotasRequest
+ */
+export const EnsureQuotasRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.EnsureQuotasRequest",
+  () => [
+    { no: 1, name: "contract", kind: "message", T: Contract },
+  ],
+);
+
+/**
+ * EnsureQuotasResponse is the response from ensuring quotas
+ *
+ * @generated from message porter.v1.EnsureQuotasResponse
+ */
+export const EnsureQuotasResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.EnsureQuotasResponse",
+  [],
+);
+
+/**
  * @generated from message porter.v1.CreateAssumeRoleChainRequest
  * @deprecated
  */

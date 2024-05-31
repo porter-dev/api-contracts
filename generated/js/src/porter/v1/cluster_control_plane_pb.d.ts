@@ -739,6 +739,53 @@ export declare class QuotaPreflightCheckResponse extends Message<QuotaPreflightC
 }
 
 /**
+ * EnsureQuotasRequest is the request object for ensuring the quotas implied by a cluster contract
+ *
+ * @generated from message porter.v1.EnsureQuotasRequest
+ */
+export declare class EnsureQuotasRequest extends Message<EnsureQuotasRequest> {
+  /**
+   * @generated from field: porter.v1.Contract contract = 1;
+   */
+  contract?: Contract;
+
+  constructor(data?: PartialMessage<EnsureQuotasRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.EnsureQuotasRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EnsureQuotasRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): EnsureQuotasRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EnsureQuotasRequest;
+
+  static equals(a: EnsureQuotasRequest | PlainMessage<EnsureQuotasRequest> | undefined, b: EnsureQuotasRequest | PlainMessage<EnsureQuotasRequest> | undefined): boolean;
+}
+
+/**
+ * EnsureQuotasResponse is the response from ensuring quotas
+ *
+ * @generated from message porter.v1.EnsureQuotasResponse
+ */
+export declare class EnsureQuotasResponse extends Message<EnsureQuotasResponse> {
+  constructor(data?: PartialMessage<EnsureQuotasResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.EnsureQuotasResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): EnsureQuotasResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): EnsureQuotasResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): EnsureQuotasResponse;
+
+  static equals(a: EnsureQuotasResponse | PlainMessage<EnsureQuotasResponse> | undefined, b: EnsureQuotasResponse | PlainMessage<EnsureQuotasResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.CreateAssumeRoleChainRequest
  * @deprecated
  */
