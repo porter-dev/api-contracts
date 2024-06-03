@@ -185,6 +185,7 @@ message Quivr {
   optional string cohere_api_key = 8;
   optional string anthropic_api_key = 9;
   optional string quivr_domain = 10;
+  optional string brave_search_api_key = 11;
 }
 
 // Deepgram is the configuration for Deepgram
