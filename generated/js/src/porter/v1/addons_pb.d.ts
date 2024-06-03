@@ -84,6 +84,56 @@ export declare enum AddonType {
 }
 
 /**
+ * AddonStatus specifies the status of an addon installation
+ * this is currently used to track the installation status for complex addons like deepgram and other LLM addons
+ *
+ * @generated from enum porter.v1.AddonStatus
+ */
+export declare enum AddonStatus {
+  /**
+   * ADDON_STATUS_UNSPECIFIED is the default value
+   *
+   * @generated from enum value: ADDON_STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * ADDON_STATUS_QUOTA_PENDING is the status when an addon installation is waiting for a quota upgrade
+   *
+   * @generated from enum value: ADDON_STATUS_QUOTA_PENDING = 1;
+   */
+  QUOTA_PENDING = 1,
+
+  /**
+   * ADDON_STATUS_QUOTA_FAILED is the status when an addon can't be installed due to a failed quota upgrade
+   *
+   * @generated from enum value: ADDON_STATUS_QUOTA_FAILED = 2;
+   */
+  QUOTA_FAILED = 2,
+
+  /**
+   * ADDON_STATUS_INFRA_PROVISIONING is the status when an addon installation is waiting for infrastructure reprovisioning
+   *
+   * @generated from enum value: ADDON_STATUS_INFRA_PROVISIONING = 3;
+   */
+  INFRA_PROVISIONING = 3,
+
+  /**
+   * ADDON_STATUS_INFRA_PROVISIONING_FAILED is the status when an addon can't be installed due to a failed infrastructure reprovisioning
+   *
+   * @generated from enum value: ADDON_STATUS_INFRA_PROVISIONING_FAILED = 4;
+   */
+  INFRA_PROVISIONING_FAILED = 4,
+
+  /**
+   * ADDON_STATUS_DEPLOYING is the status when an addon is being deployed
+   *
+   * @generated from enum value: ADDON_STATUS_DEPLOYING = 5;
+   */
+  DEPLOYING = 5,
+}
+
+/**
  * PrerequisiteAddon specifies an addon that must be installed before any apps can be installed
  * the addon should be installed with the specified config
  *
@@ -798,6 +848,14 @@ export declare class Deepgram extends Message<Deepgram> {
    * @generated from field: repeated string model_urls = 6;
    */
   modelUrls: string[];
+
+  /**
+   * manage_quota is a boolean that tells the backend if it should go ahead and modify quotas before installing the addon
+   * if this field is not set to true, the endpoint will not be able to install the addon if the required quotas are not high enough
+   *
+   * @generated from field: optional bool manage_quota = 7;
+   */
+  manageQuota?: boolean;
 
   constructor(data?: PartialMessage<Deepgram>);
 

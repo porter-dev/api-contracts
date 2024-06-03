@@ -14,7 +14,7 @@ import type { Contract, ContractRevision } from "./contract_pb.js";
 import type { ContractComplianceCheckGroup, EnumComplianceProfile, EnumComplianceVendor, VendorComplianceCheck } from "./compliance_pb.js";
 import type { AppImage, Build, Deletions, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, EnvVariableDeletions, JobRun, PorterApp } from "./porter_app_pb.js";
 import type { DeploymentTarget, DeploymentTargetIdentifier, DeploymentTargetMeta } from "./deployment_target_pb.js";
-import type { Addon, PrerequisiteAddon } from "./addons_pb.js";
+import type { Addon, AddonStatus, PrerequisiteAddon } from "./addons_pb.js";
 import type { Environment } from "./environment_pb.js";
 import type { AppEventType } from "./agent_app_event_types_pb.js";
 import type { Alert } from "./prometheus_alerts_pb.js";
@@ -3614,6 +3614,74 @@ export declare class LatestAddonsResponse extends Message<LatestAddonsResponse> 
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): LatestAddonsResponse;
 
   static equals(a: LatestAddonsResponse | PlainMessage<LatestAddonsResponse> | undefined, b: LatestAddonsResponse | PlainMessage<LatestAddonsResponse> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.AddonStatusRequest
+ */
+export declare class AddonStatusRequest extends Message<AddonStatusRequest> {
+  /**
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  /**
+   * deployment_target_identifier is the object that identifies the deployment target for the addon.
+   * If cluster_id is specified and deployment_target_identifier is not, then the default deployment target for the provided cluster will be used
+   *
+   * @generated from field: porter.v1.DeploymentTargetIdentifier deployment_target_identifier = 3;
+   */
+  deploymentTargetIdentifier?: DeploymentTargetIdentifier;
+
+  /**
+   * name specifies the name of the addon
+   *
+   * @generated from field: string name = 4;
+   */
+  name: string;
+
+  constructor(data?: PartialMessage<AddonStatusRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AddonStatusRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AddonStatusRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AddonStatusRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AddonStatusRequest;
+
+  static equals(a: AddonStatusRequest | PlainMessage<AddonStatusRequest> | undefined, b: AddonStatusRequest | PlainMessage<AddonStatusRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.AddonStatusResponse
+ */
+export declare class AddonStatusResponse extends Message<AddonStatusResponse> {
+  /**
+   * @generated from field: porter.v1.AddonStatus addon_status = 1;
+   */
+  addonStatus: AddonStatus;
+
+  constructor(data?: PartialMessage<AddonStatusResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AddonStatusResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AddonStatusResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AddonStatusResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AddonStatusResponse;
+
+  static equals(a: AddonStatusResponse | PlainMessage<AddonStatusResponse> | undefined, b: AddonStatusResponse | PlainMessage<AddonStatusResponse> | undefined): boolean;
 }
 
 /**
