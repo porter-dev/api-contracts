@@ -4,7 +4,7 @@
 // @ts-nocheck
 
 import { proto3 } from "@bufbuild/protobuf";
-import { EnvGroup } from "./porter_app_pb.js";
+import { EnvGroup, HelmOverrides } from "./porter_app_pb.js";
 import { Domain } from "./service_pb.js";
 
 /**
@@ -59,6 +59,7 @@ export const Addon = /*@__PURE__*/ proto3.makeMessageType(
     { no: 10, name: "tailscale", kind: "message", T: Tailscale, oneof: "config" },
     { no: 11, name: "quivr", kind: "message", T: Quivr, oneof: "config" },
     { no: 12, name: "deepgram", kind: "message", T: Deepgram, oneof: "config" },
+    { no: 13, name: "helm_overrides", kind: "message", T: HelmOverrides },
   ],
 );
 
