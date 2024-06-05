@@ -13,7 +13,7 @@ import { Contract, ContractRevision } from "./contract_pb.js";
 import { ContractComplianceCheckGroup, EnumComplianceProfile, EnumComplianceVendor, VendorComplianceCheck } from "./compliance_pb.js";
 import { AppImage, Build, Deletions, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, EnvVariableDeletions, JobRun, PorterApp } from "./porter_app_pb.js";
 import { DeploymentTarget, DeploymentTargetIdentifier, DeploymentTargetMeta } from "./deployment_target_pb.js";
-import { Addon, AddonStatus, AddonType, PrerequisiteAddon } from "./addons_pb.js";
+import { Addon, AddonStatus, PrerequisiteAddon } from "./addons_pb.js";
 import { Environment } from "./environment_pb.js";
 import { AppEventType } from "./agent_app_event_types_pb.js";
 import { Alert } from "./prometheus_alerts_pb.js";
@@ -801,7 +801,7 @@ export const AddonPreflightCheckRequest = /*@__PURE__*/ proto3.makeMessageType(
     { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 3, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
-    { no: 4, name: "addon_type", kind: "enum", T: proto3.getEnumType(AddonType) },
+    { no: 4, name: "addon", kind: "message", T: Addon },
   ],
 );
 

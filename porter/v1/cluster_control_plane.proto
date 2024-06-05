@@ -444,7 +444,7 @@ message AddonPreflightCheckRequest {
   // deployment_target_identifier is the object that identifies the deployment target for the addon
   // If cluster_id is specified and deployment_target_identifier is not, then the default deployment target for the provided cluster will be used
   DeploymentTargetIdentifier deployment_target_identifier = 3;
-  AddonType addon_type = 4;
+  Addon addon = 4;
 }
 
 message AddonPreflightCheckResponse {

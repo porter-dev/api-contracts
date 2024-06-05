@@ -14,7 +14,7 @@ import type { Contract, ContractRevision } from "./contract_pb.js";
 import type { ContractComplianceCheckGroup, EnumComplianceProfile, EnumComplianceVendor, VendorComplianceCheck } from "./compliance_pb.js";
 import type { AppImage, Build, Deletions, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, EnvVariableDeletions, JobRun, PorterApp } from "./porter_app_pb.js";
 import type { DeploymentTarget, DeploymentTargetIdentifier, DeploymentTargetMeta } from "./deployment_target_pb.js";
-import type { Addon, AddonStatus, AddonType, PrerequisiteAddon } from "./addons_pb.js";
+import type { Addon, AddonStatus, PrerequisiteAddon } from "./addons_pb.js";
 import type { Environment } from "./environment_pb.js";
 import type { AppEventType } from "./agent_app_event_types_pb.js";
 import type { Alert } from "./prometheus_alerts_pb.js";
@@ -2272,9 +2272,9 @@ export declare class AddonPreflightCheckRequest extends Message<AddonPreflightCh
   deploymentTargetIdentifier?: DeploymentTargetIdentifier;
 
   /**
-   * @generated from field: porter.v1.AddonType addon_type = 4;
+   * @generated from field: porter.v1.Addon addon = 4;
    */
-  addonType: AddonType;
+  addon?: Addon;
 
   constructor(data?: PartialMessage<AddonPreflightCheckRequest>);
 
