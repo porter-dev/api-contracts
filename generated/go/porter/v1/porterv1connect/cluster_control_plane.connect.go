@@ -103,6 +103,9 @@ const (
 	// ClusterControlPlaneServiceAddonStatusProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's AddonStatus RPC.
 	ClusterControlPlaneServiceAddonStatusProcedure = "/porter.v1.ClusterControlPlaneService/AddonStatus"
+	// ClusterControlPlaneServiceAddonPreflightCheckProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's AddonPreflightCheck RPC.
+	ClusterControlPlaneServiceAddonPreflightCheckProcedure = "/porter.v1.ClusterControlPlaneService/AddonPreflightCheck"
 	// ClusterControlPlaneServiceRollbackRevisionProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's RollbackRevision RPC.
 	ClusterControlPlaneServiceRollbackRevisionProcedure = "/porter.v1.ClusterControlPlaneService/RollbackRevision"
@@ -353,6 +356,7 @@ var (
 	clusterControlPlaneServiceUpdateAddonMethodDescriptor                         = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateAddon")
 	clusterControlPlaneServiceDeleteAddonMethodDescriptor                         = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("DeleteAddon")
 	clusterControlPlaneServiceAddonStatusMethodDescriptor                         = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("AddonStatus")
+	clusterControlPlaneServiceAddonPreflightCheckMethodDescriptor                 = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("AddonPreflightCheck")
 	clusterControlPlaneServiceRollbackRevisionMethodDescriptor                    = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("RollbackRevision")
 	clusterControlPlaneServiceUpdateRevisionStatusMethodDescriptor                = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateRevisionStatus")
 	clusterControlPlaneServiceAppRevisionStatusMethodDescriptor                   = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("AppRevisionStatus")
@@ -492,6 +496,7 @@ type ClusterControlPlaneServiceClient interface {
 	// DeleteAddon deletes a porter-addon
 	DeleteAddon(context.Context, *connect.Request[v1.DeleteAddonRequest]) (*connect.Response[v1.DeleteAddonResponse], error)
 	AddonStatus(context.Context, *connect.Request[v1.AddonStatusRequest]) (*connect.Response[v1.AddonStatusResponse], error)
+	AddonPreflightCheck(context.Context, *connect.Request[v1.AddonPreflightCheckRequest]) (*connect.Response[v1.AddonPreflightCheckResponse], error)
 	// RollbackRevision reverts an app to the previous revision, or optionally to the revision specified
 	RollbackRevision(context.Context, *connect.Request[v1.RollbackRevisionRequest]) (*connect.Response[v1.RollbackRevisionResponse], error)
 	// UpdateRevisionStatus updates the status of a revision
@@ -821,6 +826,12 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			httpClient,
 			baseURL+ClusterControlPlaneServiceAddonStatusProcedure,
 			connect.WithSchema(clusterControlPlaneServiceAddonStatusMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
+		addonPreflightCheck: connect.NewClient[v1.AddonPreflightCheckRequest, v1.AddonPreflightCheckResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceAddonPreflightCheckProcedure,
+			connect.WithSchema(clusterControlPlaneServiceAddonPreflightCheckMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
 		rollbackRevision: connect.NewClient[v1.RollbackRevisionRequest, v1.RollbackRevisionResponse](
@@ -1295,6 +1306,7 @@ type clusterControlPlaneServiceClient struct {
 	updateAddon                         *connect.Client[v1.UpdateAddonRequest, v1.UpdateAddonResponse]
 	deleteAddon                         *connect.Client[v1.DeleteAddonRequest, v1.DeleteAddonResponse]
 	addonStatus                         *connect.Client[v1.AddonStatusRequest, v1.AddonStatusResponse]
+	addonPreflightCheck                 *connect.Client[v1.AddonPreflightCheckRequest, v1.AddonPreflightCheckResponse]
 	rollbackRevision                    *connect.Client[v1.RollbackRevisionRequest, v1.RollbackRevisionResponse]
 	updateRevisionStatus                *connect.Client[v1.UpdateRevisionStatusRequest, v1.UpdateRevisionStatusResponse]
 	appRevisionStatus                   *connect.Client[v1.AppRevisionStatusRequest, v1.AppRevisionStatusResponse]
@@ -1498,6 +1510,11 @@ func (c *clusterControlPlaneServiceClient) DeleteAddon(ctx context.Context, req 
 // AddonStatus calls porter.v1.ClusterControlPlaneService.AddonStatus.
 func (c *clusterControlPlaneServiceClient) AddonStatus(ctx context.Context, req *connect.Request[v1.AddonStatusRequest]) (*connect.Response[v1.AddonStatusResponse], error) {
 	return c.addonStatus.CallUnary(ctx, req)
+}
+
+// AddonPreflightCheck calls porter.v1.ClusterControlPlaneService.AddonPreflightCheck.
+func (c *clusterControlPlaneServiceClient) AddonPreflightCheck(ctx context.Context, req *connect.Request[v1.AddonPreflightCheckRequest]) (*connect.Response[v1.AddonPreflightCheckResponse], error) {
+	return c.addonPreflightCheck.CallUnary(ctx, req)
 }
 
 // RollbackRevision calls porter.v1.ClusterControlPlaneService.RollbackRevision.
@@ -1958,6 +1975,7 @@ type ClusterControlPlaneServiceHandler interface {
 	// DeleteAddon deletes a porter-addon
 	DeleteAddon(context.Context, *connect.Request[v1.DeleteAddonRequest]) (*connect.Response[v1.DeleteAddonResponse], error)
 	AddonStatus(context.Context, *connect.Request[v1.AddonStatusRequest]) (*connect.Response[v1.AddonStatusResponse], error)
+	AddonPreflightCheck(context.Context, *connect.Request[v1.AddonPreflightCheckRequest]) (*connect.Response[v1.AddonPreflightCheckResponse], error)
 	// RollbackRevision reverts an app to the previous revision, or optionally to the revision specified
 	RollbackRevision(context.Context, *connect.Request[v1.RollbackRevisionRequest]) (*connect.Response[v1.RollbackRevisionResponse], error)
 	// UpdateRevisionStatus updates the status of a revision
@@ -2283,6 +2301,12 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		ClusterControlPlaneServiceAddonStatusProcedure,
 		svc.AddonStatus,
 		connect.WithSchema(clusterControlPlaneServiceAddonStatusMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
+	clusterControlPlaneServiceAddonPreflightCheckHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceAddonPreflightCheckProcedure,
+		svc.AddonPreflightCheck,
+		connect.WithSchema(clusterControlPlaneServiceAddonPreflightCheckMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
 	clusterControlPlaneServiceRollbackRevisionHandler := connect.NewUnaryHandler(
@@ -2777,6 +2801,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceDeleteAddonHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceAddonStatusProcedure:
 			clusterControlPlaneServiceAddonStatusHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceAddonPreflightCheckProcedure:
+			clusterControlPlaneServiceAddonPreflightCheckHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceRollbackRevisionProcedure:
 			clusterControlPlaneServiceRollbackRevisionHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceUpdateRevisionStatusProcedure:
@@ -3024,6 +3050,10 @@ func (UnimplementedClusterControlPlaneServiceHandler) DeleteAddon(context.Contex
 
 func (UnimplementedClusterControlPlaneServiceHandler) AddonStatus(context.Context, *connect.Request[v1.AddonStatusRequest]) (*connect.Response[v1.AddonStatusResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.AddonStatus is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) AddonPreflightCheck(context.Context, *connect.Request[v1.AddonPreflightCheckRequest]) (*connect.Response[v1.AddonPreflightCheckResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.AddonPreflightCheck is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) RollbackRevision(context.Context, *connect.Request[v1.RollbackRevisionRequest]) (*connect.Response[v1.RollbackRevisionResponse], error) {

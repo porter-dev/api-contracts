@@ -438,6 +438,20 @@ message DeleteAddonRequest {
 
 message DeleteAddonResponse {}
 
+message AddonPreflightCheckRequest {
+  int64 project_id = 1;
+  int64 cluster_id = 2;
+  // deployment_target_identifier is the object that identifies the deployment target for the addon
+  // If cluster_id is specified and deployment_target_identifier is not, then the default deployment target for the provided cluster will be used
+  DeploymentTargetIdentifier deployment_target_identifier = 3;
+  AddonType addon_type = 4;
+}
+
+message AddonPreflightCheckResponse {
+  bool reprovision_required = 1;
+  bool quota_increase_required = 2;
+}
+
 message UpdateRevisionStatusRequest {
   int64 project_id = 1;
   // app_revision_id is the id of the PorterAppRevision
@@ -1605,6 +1619,8 @@ service ClusterControlPlaneService {
   rpc DeleteAddon(DeleteAddonRequest) returns (DeleteAddonResponse) {}
 
   rpc AddonStatus(AddonStatusRequest) returns (AddonStatusResponse) {}
+
+  rpc AddonPreflightCheck(AddonPreflightCheckRequest) returns (AddonPreflightCheckResponse) {}
 
   // RollbackRevision reverts an app to the previous revision, or optionally to the revision specified
   rpc RollbackRevision(RollbackRevisionRequest) returns (RollbackRevisionResponse) {}

@@ -244,7 +244,6 @@ export const Deepgram = /*@__PURE__*/ proto3.makeMessageType(
     { no: 4, name: "ecr_email", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 5, name: "release_tag", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 6, name: "model_urls", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
-    { no: 7, name: "manage_quota", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
   ],
 );
 

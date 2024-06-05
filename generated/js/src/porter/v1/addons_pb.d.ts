@@ -849,14 +849,6 @@ export declare class Deepgram extends Message<Deepgram> {
    */
   modelUrls: string[];
 
-  /**
-   * manage_quota is a boolean that tells the backend if it should go ahead and modify quotas before installing the addon
-   * if this field is not set to true, the endpoint will not be able to install the addon if the required quotas are not high enough
-   *
-   * @generated from field: optional bool manage_quota = 7;
-   */
-  manageQuota?: boolean;
-
   constructor(data?: PartialMessage<Deepgram>);
 
   static readonly runtime: typeof proto3;
