@@ -26,6 +26,8 @@ enum EnumComplianceCheckStatus {
   ENUM_COMPLIANCE_CHECK_STATUS_FAILED = 2;
   // ENUM_COMPLIANCE_CHECK_STATUS_NOT_APPLICABLE signifies the compliance check was not applicable.
   ENUM_COMPLIANCE_CHECK_STATUS_NOT_APPLICABLE = 3;
+  // ENUM_COMPLIANCE_CHECK_STATUS_PENDING signifies the compliance check is pending (e.g. because the resource is updating).
+  ENUM_COMPLIANCE_CHECK_STATUS_PENDING = 4;
 }
 
 // ContractComplianceCheckGroup representes a porter internal concept that represents some infrastructure level configuration
@@ -34,8 +36,20 @@ message ContractComplianceCheckGroup {
   // name is the name of the compliance check group.
   string name = 1;
   // status is the current status of the compliance check group.
-  EnumComplianceCheckStatus status = 2;
+  EnumComplianceCheckStatus status = 2 [deprecated = true];
   // message is an optional message indicating why the compliance check group is in the current state.
+  string message = 3 [deprecated = true];
+  // resources_statuses is a list of resources and their statuses
+  repeated ResourceComplianceStatus resource_statuses = 4;
+}
+
+// ResourceComplianceCheck represents the status of a single resource for a particular compliance check
+message ResourceComplianceStatus {
+  // name is the name of the resource.
+  string resource_name = 1;
+  // status is the current status of the resource.
+  EnumComplianceCheckStatus status = 2;
+  // message is an optional message indicating why the resource is in the current state.
   string message = 3;
 }
 
@@ -46,9 +60,13 @@ message VendorComplianceCheck {
   // check_group is the name of the compliance check group that this check belongs to.
   string check_group = 2;
   // status is the status of the compliance check.
-  EnumComplianceCheckStatus status = 3;
+  // Deprecated: if cloud account id is set in the request, the statuses will be returned in the resource_statuses field.
+  EnumComplianceCheckStatus status = 3 [deprecated = true];
   // reason is an optional message indicating why the compliance check is in the current state.
-  string reason = 4;
+  // Deprecated: if cloud account id is set in the request, the statuses will be returned in the resource_statuses field.
+  string reason = 4 [deprecated = true];
   // vendor_check_id is the unique identifier for the compliance check in the vendor's system.
   string vendor_check_id = 5;
+  // resource_statuses is a list of resources and their statuses
+  repeated ResourceComplianceStatus resource_statuses = 6;
 }

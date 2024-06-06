@@ -11,6 +11,24 @@ message CloudContract {
   repeated ManagedDatastore datastores = 1;
   // addons is the list of addons associated with the project
   repeated CloudContractAddon addons = 2;
+  // compliance contains the cloud accounts in a project that have compliance enabled
+  repeated CloudAccount cloud_accounts = 3;
+}
+
+// CloudAccount represents a single account in a cloud provider that is managed by Porter
+message CloudAccount {
+  // id is the id of the cloud account
+  string id = 1;
+  // compliance_enabled is true if compliance is enabled for this cloud account
+  CloudAccountComplianceProfile compliance_profile = 2;
+}
+
+// ComplianceProfiles are the different compliance profiles that can be enforced on a contract
+message CloudAccountComplianceProfile {
+  // soc2 indicates that the contract should be compliant with SOC2
+  bool soc2 = 1;
+  // hipaa indicates that the contract should be compliant with HIPAA
+  bool hipaa = 2;
 }
 
 // CloudContractAddon is a contract for an addon managed by the cloud contract
