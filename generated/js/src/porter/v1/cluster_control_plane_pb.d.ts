@@ -3710,11 +3710,9 @@ export declare class AddonStatusRequest extends Message<AddonStatusRequest> {
   deploymentTargetIdentifier?: DeploymentTargetIdentifier;
 
   /**
-   * name specifies the name of the addon
-   *
-   * @generated from field: string name = 4;
+   * @generated from field: porter.v1.Addon addon = 4;
    */
-  name: string;
+  addon?: Addon;
 
   constructor(data?: PartialMessage<AddonStatusRequest>);
 

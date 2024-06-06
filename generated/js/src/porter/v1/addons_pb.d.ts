@@ -126,11 +126,11 @@ export declare enum AddonStatus {
   INFRA_PROVISIONING_FAILED = 4,
 
   /**
-   * ADDON_STATUS_INFRA_READY is the status when the infra to support an addon is provisioned successfully
+   * ADDON_STATUS_INSTALLING is the status when an addon is getting installed
    *
-   * @generated from enum value: ADDON_STATUS_INFRA_READY = 5;
+   * @generated from enum value: ADDON_STATUS_INSTALLING = 5;
    */
-  INFRA_READY = 5,
+  INSTALLING = 5,
 
   /**
    * ADDON_STATUS_INSTALLED is the status when an addon is installed
