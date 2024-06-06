@@ -6,7 +6,7 @@
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage, Timestamp } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 import type { EnumCloudProvider, UserNodeGroup } from "./cluster_pb.js";
-import type { CloudContract, MachineType } from "./cloud_contract_pb.js";
+import type { CloudAccount, CloudContract, MachineType } from "./cloud_contract_pb.js";
 import type { GKEPreflightValues } from "./gke_pb.js";
 import type { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import type { Error } from "./errors_pb.js";
@@ -254,6 +254,11 @@ export declare enum EnumPatchCloudContractType {
    * @generated from enum value: ENUM_PATCH_CLOUD_CONTRACT_TYPE_DATASTORE = 1;
    */
   DATASTORE = 1,
+
+  /**
+   * @generated from enum value: ENUM_PATCH_CLOUD_CONTRACT_TYPE_CLOUD_ACCOUNT = 2;
+   */
+  CLOUD_ACCOUNT = 2,
 }
 
 /**
@@ -1601,7 +1606,10 @@ export declare class ContractComplianceChecksRequest extends Message<ContractCom
   projectId: bigint;
 
   /**
-   * @generated from field: int64 cluster_id = 2;
+   * cluster_id is the id of the cluster to run compliance checks for. Deprecated: use cloud_account_id instead.
+   *
+   * @generated from field: int64 cluster_id = 2 [deprecated = true];
+   * @deprecated
    */
   clusterId: bigint;
 
@@ -1618,6 +1626,13 @@ export declare class ContractComplianceChecksRequest extends Message<ContractCom
    * @generated from field: porter.v1.EnumComplianceProfile profile = 4;
    */
   profile: EnumComplianceProfile;
+
+  /**
+   * cloud_account_id is the id of the cloud account to run compliance checks for
+   *
+   * @generated from field: string cloud_account_id = 5;
+   */
+  cloudAccountId: string;
 
   constructor(data?: PartialMessage<ContractComplianceChecksRequest>);
 
@@ -6526,6 +6541,12 @@ export declare class PatchCloudContractRequest extends Message<PatchCloudContrac
      */
     value: ManagedDatastore;
     case: "datastore";
+  } | {
+    /**
+     * @generated from field: porter.v1.CloudAccount cloud_account = 6;
+     */
+    value: CloudAccount;
+    case: "cloudAccount";
   } | { case: undefined; value?: undefined };
 
   constructor(data?: PartialMessage<PatchCloudContractRequest>);

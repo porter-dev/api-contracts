@@ -5,7 +5,7 @@
 
 import { proto3, Timestamp } from "@bufbuild/protobuf";
 import { EnumCloudProvider, UserNodeGroup } from "./cluster_pb.js";
-import { CloudContract, MachineType } from "./cloud_contract_pb.js";
+import { CloudAccount, CloudContract, MachineType } from "./cloud_contract_pb.js";
 import { GKEPreflightValues } from "./gke_pb.js";
 import { AWSVpc, EKSPreflightValues } from "./eks_pb.js";
 import { Error } from "./errors_pb.js";
@@ -126,6 +126,7 @@ export const EnumPatchCloudContractType = /*@__PURE__*/ proto3.makeEnum(
   [
     {no: 0, name: "ENUM_PATCH_CLOUD_CONTRACT_TYPE_UNSPECIFIED", localName: "UNSPECIFIED"},
     {no: 1, name: "ENUM_PATCH_CLOUD_CONTRACT_TYPE_DATASTORE", localName: "DATASTORE"},
+    {no: 2, name: "ENUM_PATCH_CLOUD_CONTRACT_TYPE_CLOUD_ACCOUNT", localName: "CLOUD_ACCOUNT"},
   ],
 );
 
@@ -619,6 +620,7 @@ export const ContractComplianceChecksRequest = /*@__PURE__*/ proto3.makeMessageT
     { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 3, name: "vendor", kind: "enum", T: proto3.getEnumType(EnumComplianceVendor) },
     { no: 4, name: "profile", kind: "enum", T: proto3.getEnumType(EnumComplianceProfile) },
+    { no: 5, name: "cloud_account_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 
@@ -2244,6 +2246,7 @@ export const PatchCloudContractRequest = /*@__PURE__*/ proto3.makeMessageType(
     { no: 3, name: "resource_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "resource_type", kind: "enum", T: proto3.getEnumType(EnumPatchCloudContractType) },
     { no: 5, name: "datastore", kind: "message", T: ManagedDatastore, oneof: "resource_values" },
+    { no: 6, name: "cloud_account", kind: "message", T: CloudAccount, oneof: "resource_values" },
   ],
 );
 
