@@ -27,6 +27,26 @@ export const AddonType = /*@__PURE__*/ proto3.makeEnum(
 );
 
 /**
+ * AddonStatus specifies the status of an addon installation
+ * this is currently used to track the installation status for complex addons like deepgram and other LLM addons
+ *
+ * @generated from enum porter.v1.AddonStatus
+ */
+export const AddonStatus = /*@__PURE__*/ proto3.makeEnum(
+  "porter.v1.AddonStatus",
+  [
+    {no: 0, name: "ADDON_STATUS_UNSPECIFIED", localName: "UNSPECIFIED"},
+    {no: 1, name: "ADDON_STATUS_QUOTA_PENDING", localName: "QUOTA_PENDING"},
+    {no: 2, name: "ADDON_STATUS_QUOTA_FAILED", localName: "QUOTA_FAILED"},
+    {no: 3, name: "ADDON_STATUS_INFRA_PROVISIONING", localName: "INFRA_PROVISIONING"},
+    {no: 4, name: "ADDON_STATUS_INFRA_PROVISIONING_FAILED", localName: "INFRA_PROVISIONING_FAILED"},
+    {no: 5, name: "ADDON_STATUS_INSTALLING", localName: "INSTALLING"},
+    {no: 6, name: "ADDON_STATUS_INSTALLED", localName: "INSTALLED"},
+    {no: 7, name: "ADDON_STATUS_INSTALL_FAILED", localName: "INSTALL_FAILED"},
+  ],
+);
+
+/**
  * PrerequisiteAddon specifies an addon that must be installed before any apps can be installed
  * the addon should be installed with the specified config
  *

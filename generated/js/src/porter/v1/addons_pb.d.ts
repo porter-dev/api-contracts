@@ -84,6 +84,70 @@ export declare enum AddonType {
 }
 
 /**
+ * AddonStatus specifies the status of an addon installation
+ * this is currently used to track the installation status for complex addons like deepgram and other LLM addons
+ *
+ * @generated from enum porter.v1.AddonStatus
+ */
+export declare enum AddonStatus {
+  /**
+   * ADDON_STATUS_UNSPECIFIED is the default value
+   *
+   * @generated from enum value: ADDON_STATUS_UNSPECIFIED = 0;
+   */
+  UNSPECIFIED = 0,
+
+  /**
+   * ADDON_STATUS_QUOTA_PENDING is the status when an addon installation is waiting for a quota upgrade
+   *
+   * @generated from enum value: ADDON_STATUS_QUOTA_PENDING = 1;
+   */
+  QUOTA_PENDING = 1,
+
+  /**
+   * ADDON_STATUS_QUOTA_FAILED is the status when an addon can't be installed due to a failed quota upgrade
+   *
+   * @generated from enum value: ADDON_STATUS_QUOTA_FAILED = 2;
+   */
+  QUOTA_FAILED = 2,
+
+  /**
+   * ADDON_STATUS_INFRA_PROVISIONING is the status when an addon installation is waiting for infrastructure reprovisioning
+   *
+   * @generated from enum value: ADDON_STATUS_INFRA_PROVISIONING = 3;
+   */
+  INFRA_PROVISIONING = 3,
+
+  /**
+   * ADDON_STATUS_INFRA_PROVISIONING_FAILED is the status when an addon can't be installed due to a failed infrastructure reprovisioning
+   *
+   * @generated from enum value: ADDON_STATUS_INFRA_PROVISIONING_FAILED = 4;
+   */
+  INFRA_PROVISIONING_FAILED = 4,
+
+  /**
+   * ADDON_STATUS_INSTALLING is the status when an addon is getting installed
+   *
+   * @generated from enum value: ADDON_STATUS_INSTALLING = 5;
+   */
+  INSTALLING = 5,
+
+  /**
+   * ADDON_STATUS_INSTALLED is the status when an addon is installed
+   *
+   * @generated from enum value: ADDON_STATUS_INSTALLED = 6;
+   */
+  INSTALLED = 6,
+
+  /**
+   * ADDON_STATUS_INSTALL_FAILED is the status when an addon installation fails
+   *
+   * @generated from enum value: ADDON_STATUS_INSTALL_FAILED = 7;
+   */
+  INSTALL_FAILED = 7,
+}
+
+/**
  * PrerequisiteAddon specifies an addon that must be installed before any apps can be installed
  * the addon should be installed with the specified config
  *

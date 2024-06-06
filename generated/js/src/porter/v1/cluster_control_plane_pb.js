@@ -13,7 +13,7 @@ import { Contract, ContractRevision } from "./contract_pb.js";
 import { ContractComplianceCheckGroup, EnumComplianceProfile, EnumComplianceVendor, VendorComplianceCheck } from "./compliance_pb.js";
 import { AppImage, Build, Deletions, EnumAppRevisionStatus, EnvGroup, EnvGroupVariables, EnvVariableDeletions, JobRun, PorterApp } from "./porter_app_pb.js";
 import { DeploymentTarget, DeploymentTargetIdentifier, DeploymentTargetMeta } from "./deployment_target_pb.js";
-import { Addon, PrerequisiteAddon } from "./addons_pb.js";
+import { Addon, AddonStatus, PrerequisiteAddon } from "./addons_pb.js";
 import { Environment } from "./environment_pb.js";
 import { AppEventType } from "./agent_app_event_types_pb.js";
 import { Alert } from "./prometheus_alerts_pb.js";
@@ -793,6 +793,30 @@ export const DeleteAddonResponse = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * @generated from message porter.v1.AddonPreflightCheckRequest
+ */
+export const AddonPreflightCheckRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.AddonPreflightCheckRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+    { no: 4, name: "addon", kind: "message", T: Addon },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.AddonPreflightCheckResponse
+ */
+export const AddonPreflightCheckResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.AddonPreflightCheckResponse",
+  () => [
+    { no: 1, name: "reprovision_required", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+    { no: 2, name: "quota_increase_required", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
+  ],
+);
+
+/**
  * @generated from message porter.v1.UpdateRevisionStatusRequest
  */
 export const UpdateRevisionStatusRequest = /*@__PURE__*/ proto3.makeMessageType(
@@ -1215,6 +1239,29 @@ export const LatestAddonsResponse = /*@__PURE__*/ proto3.makeMessageType(
   () => [
     { no: 1, name: "addons", kind: "message", T: Addon, repeated: true },
     { no: 2, name: "addons_with_env", kind: "message", T: AddonWithEnvVars, repeated: true },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.AddonStatusRequest
+ */
+export const AddonStatusRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.AddonStatusRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
+    { no: 4, name: "addon", kind: "message", T: Addon },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.AddonStatusResponse
+ */
+export const AddonStatusResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.AddonStatusResponse",
+  () => [
+    { no: 1, name: "addon_status", kind: "enum", T: proto3.getEnumType(AddonStatus) },
   ],
 );
 
