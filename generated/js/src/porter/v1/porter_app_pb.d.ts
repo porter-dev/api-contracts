@@ -524,9 +524,10 @@ export declare class EnvVariableDeletions extends Message<EnvVariableDeletions> 
  */
 export declare class Deletions extends Message<Deletions> {
   /**
-   * service_names is a list of service names to delete
+   * service_names is a list of service names to delete. Deprecated, use services instead
    *
-   * @generated from field: repeated string service_names = 1;
+   * @generated from field: repeated string service_names = 1 [deprecated = true];
+   * @deprecated
    */
   serviceNames: string[];
 
@@ -573,6 +574,13 @@ export declare class Deletions extends Message<Deletions> {
    * @generated from field: porter.v1.EnvVariableDeletions env_variable_deletions = 7;
    */
   envVariableDeletions?: EnvVariableDeletions;
+
+  /**
+   * services contains the name and type of services to fully delete.
+   *
+   * @generated from field: repeated porter.v1.Service services = 8;
+   */
+  services: Service[];
 
   constructor(data?: PartialMessage<Deletions>);
 

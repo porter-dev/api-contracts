@@ -205,6 +205,7 @@ export const Deletions = /*@__PURE__*/ proto3.makeMessageType(
     { no: 5, name: "service_domains", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: DomainNameList} },
     { no: 6, name: "service_deletions", kind: "map", K: 9 /* ScalarType.STRING */, V: {kind: "message", T: ServiceDeletions} },
     { no: 7, name: "env_variable_deletions", kind: "message", T: EnvVariableDeletions },
+    { no: 8, name: "services", kind: "message", T: Service, repeated: true },
   ],
 );
 
