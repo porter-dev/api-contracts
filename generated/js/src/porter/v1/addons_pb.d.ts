@@ -88,6 +88,13 @@ export declare enum AddonType {
    * @generated from enum value: ADDON_TYPE_N8N = 10;
    */
   N8N = 10,
+
+  /**
+   * ADDON_TYPE_MISTRAL_7B is the mistral 7b model addon type
+   *
+   * @generated from enum value: ADDON_TYPE_MISTRAL_7B = 11;
+   */
+  MISTRAL_7B = 11,
 }
 
 /**
@@ -295,6 +302,14 @@ export declare class Addon extends Message<Addon> {
      */
     value: N8n;
     case: "n8n";
+  } | {
+    /**
+     * mistral7b is the configuration for the mistral 7b model addon
+     *
+     * @generated from field: porter.v1.Mistral7B mistral7b = 15;
+     */
+    value: Mistral7B;
+    case: "mistral7b";
   } | { case: undefined; value?: undefined };
 
   /**
@@ -1017,5 +1032,31 @@ export declare class N8n extends Message<N8n> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): N8n;
 
   static equals(a: N8n | PlainMessage<N8n> | undefined, b: N8n | PlainMessage<N8n> | undefined): boolean;
+}
+
+/**
+ * Mistral7B is the configuration for the Mistral 7B LLM addon
+ *
+ * @generated from message porter.v1.Mistral7B
+ */
+export declare class Mistral7B extends Message<Mistral7B> {
+  /**
+   * @generated from field: optional string hf_token = 1;
+   */
+  hfToken?: string;
+
+  constructor(data?: PartialMessage<Mistral7B>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.Mistral7B";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Mistral7B;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Mistral7B;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Mistral7B;
+
+  static equals(a: Mistral7B | PlainMessage<Mistral7B> | undefined, b: Mistral7B | PlainMessage<Mistral7B> | undefined): boolean;
 }
 

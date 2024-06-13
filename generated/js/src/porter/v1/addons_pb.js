@@ -24,6 +24,7 @@ export const AddonType = /*@__PURE__*/ proto3.makeEnum(
     {no: 8, name: "ADDON_TYPE_QUIVR", localName: "QUIVR"},
     {no: 9, name: "ADDON_TYPE_DEEPGRAM", localName: "DEEPGRAM"},
     {no: 10, name: "ADDON_TYPE_N8N", localName: "N8N"},
+    {no: 11, name: "ADDON_TYPE_MISTRAL_7B", localName: "MISTRAL_7B"},
   ],
 );
 
@@ -81,6 +82,7 @@ export const Addon = /*@__PURE__*/ proto3.makeMessageType(
     { no: 11, name: "quivr", kind: "message", T: Quivr, oneof: "config" },
     { no: 12, name: "deepgram", kind: "message", T: Deepgram, oneof: "config" },
     { no: 14, name: "n8n", kind: "message", T: N8n, oneof: "config" },
+    { no: 15, name: "mistral7b", kind: "message", T: Mistral7B, oneof: "config" },
     { no: 13, name: "helm_overrides", kind: "message", T: HelmOverrides },
   ],
 );
@@ -292,6 +294,18 @@ export const N8n = /*@__PURE__*/ proto3.makeMessageType(
     { no: 2, name: "ingress_enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
     { no: 3, name: "datastore", kind: "message", T: AddonDatastoreConnectionInfo, opt: true },
     { no: 4, name: "env_variables", kind: "message", T: AddonEnvVariable, repeated: true },
+  ],
+);
+
+/**
+ * Mistral7B is the configuration for the Mistral 7B LLM addon
+ *
+ * @generated from message porter.v1.Mistral7B
+ */
+export const Mistral7B = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.Mistral7B",
+  () => [
+    { no: 1, name: "hf_token", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
   ],
 );
 
