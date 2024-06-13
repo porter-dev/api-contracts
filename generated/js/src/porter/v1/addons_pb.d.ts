@@ -81,6 +81,13 @@ export declare enum AddonType {
    * @generated from enum value: ADDON_TYPE_DEEPGRAM = 9;
    */
   DEEPGRAM = 9,
+
+  /**
+   * ADDON_TYPE_N8N is the n8n addon type
+   *
+   * @generated from enum value: ADDON_TYPE_N8N = 10;
+   */
+  N8N = 10,
 }
 
 /**
@@ -280,6 +287,14 @@ export declare class Addon extends Message<Addon> {
      */
     value: Deepgram;
     case: "deepgram";
+  } | {
+    /**
+     * N8n is the configuration for the n8n addon
+     *
+     * @generated from field: porter.v1.N8n n8n = 14;
+     */
+    value: N8n;
+    case: "n8n";
   } | { case: undefined; value?: undefined };
 
   /**
@@ -876,5 +891,131 @@ export declare class Deepgram extends Message<Deepgram> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Deepgram;
 
   static equals(a: Deepgram | PlainMessage<Deepgram> | undefined, b: Deepgram | PlainMessage<Deepgram> | undefined): boolean;
+}
+
+/**
+ * AddonDatastoreConnectionInfo is the connection info for a datastore linked with an addon
+ *
+ * @generated from message porter.v1.AddonDatastoreConnectionInfo
+ */
+export declare class AddonDatastoreConnectionInfo extends Message<AddonDatastoreConnectionInfo> {
+  /**
+   * @generated from field: string host = 1;
+   */
+  host: string;
+
+  /**
+   * @generated from field: int64 port = 2;
+   */
+  port: bigint;
+
+  /**
+   * @generated from field: string database_name = 3;
+   */
+  databaseName: string;
+
+  /**
+   * @generated from field: string master_username = 4;
+   */
+  masterUsername: string;
+
+  /**
+   * @generated from field: string master_user_password_literal = 5;
+   */
+  masterUserPasswordLiteral: string;
+
+  constructor(data?: PartialMessage<AddonDatastoreConnectionInfo>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AddonDatastoreConnectionInfo";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AddonDatastoreConnectionInfo;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AddonDatastoreConnectionInfo;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AddonDatastoreConnectionInfo;
+
+  static equals(a: AddonDatastoreConnectionInfo | PlainMessage<AddonDatastoreConnectionInfo> | undefined, b: AddonDatastoreConnectionInfo | PlainMessage<AddonDatastoreConnectionInfo> | undefined): boolean;
+}
+
+/**
+ * AddonEnvVariable represents an env variable for an addon
+ *
+ * @generated from message porter.v1.AddonEnvVariable
+ */
+export declare class AddonEnvVariable extends Message<AddonEnvVariable> {
+  /**
+   * @generated from field: string key = 1;
+   */
+  key: string;
+
+  /**
+   * @generated from field: string value = 2;
+   */
+  value: string;
+
+  constructor(data?: PartialMessage<AddonEnvVariable>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.AddonEnvVariable";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): AddonEnvVariable;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): AddonEnvVariable;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): AddonEnvVariable;
+
+  static equals(a: AddonEnvVariable | PlainMessage<AddonEnvVariable> | undefined, b: AddonEnvVariable | PlainMessage<AddonEnvVariable> | undefined): boolean;
+}
+
+/**
+ * N8n is the configuration for n8n
+ *
+ * @generated from message porter.v1.N8n
+ */
+export declare class N8n extends Message<N8n> {
+  /**
+   * domains is the list of domains for the service
+   *
+   * @generated from field: repeated porter.v1.Domain domains = 1;
+   */
+  domains: Domain[];
+
+  /**
+   * ingress_enabled describes whether the n8n instance has external ingress enabled
+   *
+   * @generated from field: optional bool ingress_enabled = 2;
+   */
+  ingressEnabled?: boolean;
+
+  /**
+   * datastore is the configuration of the datastore that the n8n is connected to
+   *
+   * @generated from field: optional porter.v1.AddonDatastoreConnectionInfo datastore = 3;
+   */
+  datastore?: AddonDatastoreConnectionInfo;
+
+  /**
+   * env_variables is a map of env variables
+   *
+   * @generated from field: repeated porter.v1.AddonEnvVariable env_variables = 4;
+   */
+  envVariables: AddonEnvVariable[];
+
+  constructor(data?: PartialMessage<N8n>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.N8n";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): N8n;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): N8n;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): N8n;
+
+  static equals(a: N8n | PlainMessage<N8n> | undefined, b: N8n | PlainMessage<N8n> | undefined): boolean;
 }
 

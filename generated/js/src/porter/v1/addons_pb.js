@@ -23,6 +23,7 @@ export const AddonType = /*@__PURE__*/ proto3.makeEnum(
     {no: 7, name: "ADDON_TYPE_TAILSCALE", localName: "TAILSCALE"},
     {no: 8, name: "ADDON_TYPE_QUIVR", localName: "QUIVR"},
     {no: 9, name: "ADDON_TYPE_DEEPGRAM", localName: "DEEPGRAM"},
+    {no: 10, name: "ADDON_TYPE_N8N", localName: "N8N"},
   ],
 );
 
@@ -79,6 +80,7 @@ export const Addon = /*@__PURE__*/ proto3.makeMessageType(
     { no: 10, name: "tailscale", kind: "message", T: Tailscale, oneof: "config" },
     { no: 11, name: "quivr", kind: "message", T: Quivr, oneof: "config" },
     { no: 12, name: "deepgram", kind: "message", T: Deepgram, oneof: "config" },
+    { no: 14, name: "n8n", kind: "message", T: N8n, oneof: "config" },
     { no: 13, name: "helm_overrides", kind: "message", T: HelmOverrides },
   ],
 );
@@ -246,6 +248,50 @@ export const Deepgram = /*@__PURE__*/ proto3.makeMessageType(
     { no: 4, name: "ecr_email", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 5, name: "release_tag", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 6, name: "model_urls", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+  ],
+);
+
+/**
+ * AddonDatastoreConnectionInfo is the connection info for a datastore linked with an addon
+ *
+ * @generated from message porter.v1.AddonDatastoreConnectionInfo
+ */
+export const AddonDatastoreConnectionInfo = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.AddonDatastoreConnectionInfo",
+  () => [
+    { no: 1, name: "host", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "port", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 3, name: "database_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 4, name: "master_username", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "master_user_password_literal", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * AddonEnvVariable represents an env variable for an addon
+ *
+ * @generated from message porter.v1.AddonEnvVariable
+ */
+export const AddonEnvVariable = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.AddonEnvVariable",
+  () => [
+    { no: 1, name: "key", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "value", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * N8n is the configuration for n8n
+ *
+ * @generated from message porter.v1.N8n
+ */
+export const N8n = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.N8n",
+  () => [
+    { no: 1, name: "domains", kind: "message", T: Domain, repeated: true },
+    { no: 2, name: "ingress_enabled", kind: "scalar", T: 8 /* ScalarType.BOOL */, opt: true },
+    { no: 3, name: "datastore", kind: "message", T: AddonDatastoreConnectionInfo, opt: true },
+    { no: 4, name: "env_variables", kind: "message", T: AddonEnvVariable, repeated: true },
   ],
 );
 
