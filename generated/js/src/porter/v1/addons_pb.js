@@ -81,8 +81,12 @@ export const Addon = /*@__PURE__*/ proto3.makeMessageType(
     { no: 10, name: "tailscale", kind: "message", T: Tailscale, oneof: "config" },
     { no: 11, name: "quivr", kind: "message", T: Quivr, oneof: "config" },
     { no: 12, name: "deepgram", kind: "message", T: Deepgram, oneof: "config" },
+<<<<<<< HEAD
     { no: 14, name: "n8n", kind: "message", T: N8n, oneof: "config" },
     { no: 15, name: "mistral_7b", kind: "message", T: Mistral7B, oneof: "config" },
+=======
+    { no: 13, name: "mistral7b", kind: "message", T: Mistral7B, oneof: "config" },
+>>>>>>> a352529 (naming)
     { no: 20, name: "helm_overrides", kind: "message", T: HelmOverrides },
   ],
 );

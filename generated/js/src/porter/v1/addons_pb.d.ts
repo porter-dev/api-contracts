@@ -296,6 +296,7 @@ export declare class Addon extends Message<Addon> {
     case: "deepgram";
   } | {
     /**
+<<<<<<< HEAD
      * N8n is the configuration for the n8n addon
      *
      * @generated from field: porter.v1.N8n n8n = 14;
@@ -307,6 +308,11 @@ export declare class Addon extends Message<Addon> {
      * Mistral7B is the configuration for the mistral 7b model addon
      *
      * @generated from field: porter.v1.Mistral7B mistral_7b = 15;
+=======
+     * mistral7b is the configuration for the mistral 7b model addon
+     *
+     * @generated from field: porter.v1.Mistral7B mistral7b = 13;
+>>>>>>> a352529 (naming)
      */
     value: Mistral7B;
     case: "mistral7b";
