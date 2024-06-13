@@ -83,7 +83,7 @@ export const Addon = /*@__PURE__*/ proto3.makeMessageType(
     { no: 12, name: "deepgram", kind: "message", T: Deepgram, oneof: "config" },
     { no: 14, name: "n8n", kind: "message", T: N8n, oneof: "config" },
     { no: 15, name: "mistral7b", kind: "message", T: Mistral7B, oneof: "config" },
-    { no: 20, name: "helm_overrides", kind: "message", T: HelmOverrides },
+    { no: 13, name: "helm_overrides", kind: "message", T: HelmOverrides },
   ],
 );
 
