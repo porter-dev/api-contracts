@@ -95,6 +95,13 @@ export declare enum AddonType {
    * @generated from enum value: ADDON_TYPE_MISTRAL_7B = 11;
    */
   MISTRAL_7B = 11,
+
+  /**
+   * ADDON_TYPE_LLAMA_3_8B is the llama-3-8b-instruct model addon type
+   *
+   * @generated from enum value: ADDON_TYPE_LLAMA_3_8B = 12;
+   */
+  LLAMA_3_8B = 12,
 }
 
 /**
@@ -310,6 +317,14 @@ export declare class Addon extends Message<Addon> {
      */
     value: Mistral7B;
     case: "mistral7b";
+  } | {
+    /**
+     * llama38b is the configurations for the llama-3-8B-instruct model addon
+     *
+     * @generated from field: porter.v1.Llama38B llama38b = 16;
+     */
+    value: Llama38B;
+    case: "llama38b";
   } | { case: undefined; value?: undefined };
 
   /**
@@ -1058,5 +1073,31 @@ export declare class Mistral7B extends Message<Mistral7B> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Mistral7B;
 
   static equals(a: Mistral7B | PlainMessage<Mistral7B> | undefined, b: Mistral7B | PlainMessage<Mistral7B> | undefined): boolean;
+}
+
+/**
+ * Llama38B is the configuration for the Mistral 7B LLM addon
+ *
+ * @generated from message porter.v1.Llama38B
+ */
+export declare class Llama38B extends Message<Llama38B> {
+  /**
+   * @generated from field: optional string hf_token = 1;
+   */
+  hfToken?: string;
+
+  constructor(data?: PartialMessage<Llama38B>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.Llama38B";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): Llama38B;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): Llama38B;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): Llama38B;
+
+  static equals(a: Llama38B | PlainMessage<Llama38B> | undefined, b: Llama38B | PlainMessage<Llama38B> | undefined): boolean;
 }
 
