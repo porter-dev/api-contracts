@@ -190,6 +190,13 @@ export declare class ManagedDatastore extends Message<ManagedDatastore> {
    */
   connectedClusters?: ConnectedClusters;
 
+  /**
+   * public_networking describes the public connectivity of the datastore
+   *
+   * @generated from field: porter.v1.PublicNetworking public_networking = 14;
+   */
+  publicNetworking?: PublicNetworking;
+
   constructor(data?: PartialMessage<ManagedDatastore>);
 
   static readonly runtime: typeof proto3;
@@ -229,6 +236,32 @@ export declare class ConnectedClusters extends Message<ConnectedClusters> {
   static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ConnectedClusters;
 
   static equals(a: ConnectedClusters | PlainMessage<ConnectedClusters> | undefined, b: ConnectedClusters | PlainMessage<ConnectedClusters> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.PublicNetworking
+ */
+export declare class PublicNetworking extends Message<PublicNetworking> {
+  /**
+   * cidr_allowlist is a list of comma-separated CIDRS, which are supplemental ranges that are allowed access to the datastore
+   *
+   * @generated from field: repeated string cidr_allowlist = 1;
+   */
+  cidrAllowlist: string[];
+
+  constructor(data?: PartialMessage<PublicNetworking>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.PublicNetworking";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): PublicNetworking;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): PublicNetworking;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): PublicNetworking;
+
+  static equals(a: PublicNetworking | PlainMessage<PublicNetworking> | undefined, b: PublicNetworking | PlainMessage<PublicNetworking> | undefined): boolean;
 }
 
 /**

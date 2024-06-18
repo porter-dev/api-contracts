@@ -68,6 +68,7 @@ export const ManagedDatastore = /*@__PURE__*/ proto3.makeMessageType(
     { no: 12, name: "neon_kind", kind: "message", T: Neon, oneof: "kind_values" },
     { no: 13, name: "upstash_kind", kind: "message", T: Upstash, oneof: "kind_values" },
     { no: 8, name: "connected_clusters", kind: "message", T: ConnectedClusters },
+    { no: 14, name: "public_networking", kind: "message", T: PublicNetworking },
   ],
 );
 
@@ -78,6 +79,16 @@ export const ConnectedClusters = /*@__PURE__*/ proto3.makeMessageType(
   "porter.v1.ConnectedClusters",
   () => [
     { no: 1, name: "connected_cluster_ids", kind: "scalar", T: 3 /* ScalarType.INT64 */, repeated: true },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.PublicNetworking
+ */
+export const PublicNetworking = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.PublicNetworking",
+  () => [
+    { no: 1, name: "cidr_allowlist", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
   ],
 );
 
