@@ -190,6 +190,13 @@ export declare class ManagedDatastore extends Message<ManagedDatastore> {
    */
   connectedClusters?: ConnectedClusters;
 
+  /**
+   * cidr_allowlist is a list of comma-separated CIDRS, which are supplemental ranges that are allowed access to the datastore
+   *
+   * @generated from field: string cidr_allowlist = 14;
+   */
+  cidrAllowlist: string;
+
   constructor(data?: PartialMessage<ManagedDatastore>);
 
   static readonly runtime: typeof proto3;
