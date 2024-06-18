@@ -30,13 +30,18 @@ message ManagedDatastore {
   }
   // connected_clusters describes the connection of this datastore to clusters
   ConnectedClusters connected_clusters = 8;
-  // cidr_allowlist is a list of comma-separated CIDRS, which are supplemental ranges that are allowed access to the datastore
-  repeated string cidr_allowlist = 14;
+  // public_networking describes the public connectivity of the datastore
+  PublicNetworking public_networking = 14;
 }
 
 message ConnectedClusters {
   // connected_cluster_ids is a list of cluster ids that this datastore is connected to
   repeated int64 connected_cluster_ids = 1;
+}
+
+message PublicNetworking {
+  // cidr_allowlist is a list of comma-separated CIDRS, which are supplemental ranges that are allowed access to the datastore
+  repeated string cidr_allowlist = 1;
 }
 
 enum EnumDatastoreKind {
