@@ -68,7 +68,7 @@ export const ManagedDatastore = /*@__PURE__*/ proto3.makeMessageType(
     { no: 12, name: "neon_kind", kind: "message", T: Neon, oneof: "kind_values" },
     { no: 13, name: "upstash_kind", kind: "message", T: Upstash, oneof: "kind_values" },
     { no: 8, name: "connected_clusters", kind: "message", T: ConnectedClusters },
-    { no: 14, name: "cidr_allowlist", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 14, name: "cidr_allowlist", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
   ],
 );
 

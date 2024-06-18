@@ -31,7 +31,7 @@ message ManagedDatastore {
   // connected_clusters describes the connection of this datastore to clusters
   ConnectedClusters connected_clusters = 8;
   // cidr_allowlist is a list of comma-separated CIDRS, which are supplemental ranges that are allowed access to the datastore
-  string cidr_allowlist = 14;
+  repeated string cidr_allowlist = 14;
 }
 
 message ConnectedClusters {

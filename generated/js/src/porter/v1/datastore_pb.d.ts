@@ -193,9 +193,9 @@ export declare class ManagedDatastore extends Message<ManagedDatastore> {
   /**
    * cidr_allowlist is a list of comma-separated CIDRS, which are supplemental ranges that are allowed access to the datastore
    *
-   * @generated from field: string cidr_allowlist = 14;
+   * @generated from field: repeated string cidr_allowlist = 14;
    */
-  cidrAllowlist: string;
+  cidrAllowlist: string[];
 
   constructor(data?: PartialMessage<ManagedDatastore>);
 
