@@ -4,6 +4,7 @@ package porter.v1;
 
 import "porter/v1/addons.proto";
 import "porter/v1/datastore.proto";
+import "porter/v1/storage.proto";
 
 // CloudContract is a contract for all Porter-managed infrastructure within a project
 message CloudContract {
@@ -13,6 +14,8 @@ message CloudContract {
   repeated CloudContractAddon addons = 2;
   // compliance contains the cloud accounts in a project that have compliance enabled
   repeated CloudAccount cloud_accounts = 3;
+  // storage is the list of storage resources associated with the project
+  repeated Storage storage = 4;
 }
 
 // CloudAccount represents a single account in a cloud provider that is managed by Porter

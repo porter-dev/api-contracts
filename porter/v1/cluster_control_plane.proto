@@ -22,6 +22,7 @@ import "porter/v1/gke.proto";
 import "porter/v1/notification.proto";
 import "porter/v1/porter_app.proto";
 import "porter/v1/prometheus_alerts.proto";
+import "porter/v1/storage.proto";
 import "porter/v1/system_service.proto";
 
 message MachineTypesRequest {
@@ -1470,6 +1471,28 @@ message DatastoreCredentialResponse {
   DatastoreCredential credential = 1;
 }
 
+// UpdateStorageRequest is the request object for creating or updating a storage resource
+message UpdateStorageRequest {
+  // project_id is the project id that the datastore is provisioned in
+  int64 project_id = 1;
+  // storage is the resource to create or update. If the resource that is submitted does not have an ID, then it will be created; otherwise, the resource matching the ID will be updated
+  Storage storage = 2;
+}
+
+// UpdateStorageResponse is the response object for updating a storage object
+message UpdateStorageResponse {}
+
+// DeleteStorageRequest is the request object for deleting a storage resource
+message DeleteStorageRequest {
+  // project_id is the project id that the datastore is provisioned in
+  int64 project_id = 1;
+  // storage_id is the id of the storage resource
+  string storage_id = 2;
+}
+
+// DeleteStorageResponse is the response object for deleting a storage resource
+message DeleteStorageResponse {}
+
 // PatchCloudContractRequest is the request object for patching a cloud contract by updating a resource
 message PatchCloudContractRequest {
   int64 project_id = 1;
@@ -1773,6 +1796,12 @@ service ClusterControlPlaneService {
 
   // DatastoreCredential returns the set of credentials for connecting to a datastore
   rpc DatastoreCredential(DatastoreCredentialRequest) returns (DatastoreCredentialResponse) {}
+
+  // UpdateStorage updates a porter-managed storage resource
+  rpc UpdateStorage(UpdateStorageRequest) returns (UpdateStorageResponse) {}
+
+  // DeleteStorage deletes a porter-managed storage resource
+  rpc DeleteStorage(DeleteStorageRequest) returns (DeleteStorageResponse) {}
 
   // CloudProviderPermissionsStatus returns the status to poll after a user grants cloud provider permissions to Porter
   rpc CloudProviderPermissionsStatus(CloudProviderPermissionsStatusRequest) returns (CloudProviderPermissionsStatusResponse) {}
