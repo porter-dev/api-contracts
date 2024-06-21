@@ -21,6 +21,7 @@ import type { Alert } from "./prometheus_alerts_pb.js";
 import type { EnumEnvGroupProviderType, ExternalEnvGroupProviderEnabledStatus, InfisicalEnv } from "./env_group_pb.js";
 import type { NotificationConfig } from "./notification_pb.js";
 import type { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
+import type { Storage } from "./storage_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 import type { ClusterStatusHistory, SystemServiceStatusHistory } from "./system_service_pb.js";
 import type { AppEventWebhook } from "./app_event_webhook_pb.js";
@@ -259,6 +260,11 @@ export declare enum EnumPatchCloudContractType {
    * @generated from enum value: ENUM_PATCH_CLOUD_CONTRACT_TYPE_CLOUD_ACCOUNT = 2;
    */
   CLOUD_ACCOUNT = 2,
+
+  /**
+   * @generated from enum value: ENUM_PATCH_CLOUD_CONTRACT_TYPE_STORAGE = 3;
+   */
+  STORAGE = 3,
 }
 
 /**
@@ -6661,6 +6667,118 @@ export declare class DatastoreCredentialResponse extends Message<DatastoreCreden
 }
 
 /**
+ * UpdateStorageRequest is the request object for creating or updating a storage resource
+ *
+ * @generated from message porter.v1.UpdateStorageRequest
+ */
+export declare class UpdateStorageRequest extends Message<UpdateStorageRequest> {
+  /**
+   * project_id is the project id that the datastore is provisioned in
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * storage is the resource to create or update. If the resource that is submitted does not have an ID, then it will be created; otherwise, the resource matching the ID will be updated
+   *
+   * @generated from field: porter.v1.Storage storage = 2;
+   */
+  storage?: Storage;
+
+  constructor(data?: PartialMessage<UpdateStorageRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateStorageRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateStorageRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateStorageRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateStorageRequest;
+
+  static equals(a: UpdateStorageRequest | PlainMessage<UpdateStorageRequest> | undefined, b: UpdateStorageRequest | PlainMessage<UpdateStorageRequest> | undefined): boolean;
+}
+
+/**
+ * UpdateStorageResponse is the response object for updating a storage object
+ *
+ * @generated from message porter.v1.UpdateStorageResponse
+ */
+export declare class UpdateStorageResponse extends Message<UpdateStorageResponse> {
+  constructor(data?: PartialMessage<UpdateStorageResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.UpdateStorageResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): UpdateStorageResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): UpdateStorageResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): UpdateStorageResponse;
+
+  static equals(a: UpdateStorageResponse | PlainMessage<UpdateStorageResponse> | undefined, b: UpdateStorageResponse | PlainMessage<UpdateStorageResponse> | undefined): boolean;
+}
+
+/**
+ * DeleteStorageRequest is the request object for deleting a storage resource
+ *
+ * @generated from message porter.v1.DeleteStorageRequest
+ */
+export declare class DeleteStorageRequest extends Message<DeleteStorageRequest> {
+  /**
+   * project_id is the project id that the datastore is provisioned in
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * storage_id is the id of the storage resource
+   *
+   * @generated from field: string storage_id = 2;
+   */
+  storageId: string;
+
+  constructor(data?: PartialMessage<DeleteStorageRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeleteStorageRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteStorageRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteStorageRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteStorageRequest;
+
+  static equals(a: DeleteStorageRequest | PlainMessage<DeleteStorageRequest> | undefined, b: DeleteStorageRequest | PlainMessage<DeleteStorageRequest> | undefined): boolean;
+}
+
+/**
+ * DeleteStorageResponse is the response object for deleting a storage resource
+ *
+ * @generated from message porter.v1.DeleteStorageResponse
+ */
+export declare class DeleteStorageResponse extends Message<DeleteStorageResponse> {
+  constructor(data?: PartialMessage<DeleteStorageResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.DeleteStorageResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): DeleteStorageResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): DeleteStorageResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): DeleteStorageResponse;
+
+  static equals(a: DeleteStorageResponse | PlainMessage<DeleteStorageResponse> | undefined, b: DeleteStorageResponse | PlainMessage<DeleteStorageResponse> | undefined): boolean;
+}
+
+/**
  * PatchCloudContractRequest is the request object for patching a cloud contract by updating a resource
  *
  * @generated from message porter.v1.PatchCloudContractRequest
@@ -6709,6 +6827,12 @@ export declare class PatchCloudContractRequest extends Message<PatchCloudContrac
      */
     value: CloudAccount;
     case: "cloudAccount";
+  } | {
+    /**
+     * @generated from field: porter.v1.Storage storage = 7;
+     */
+    value: Storage;
+    case: "storage";
   } | { case: undefined; value?: undefined };
 
   constructor(data?: PartialMessage<PatchCloudContractRequest>);

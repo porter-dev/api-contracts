@@ -20,6 +20,7 @@ import { Alert } from "./prometheus_alerts_pb.js";
 import { EnumEnvGroupProviderType, ExternalEnvGroupProviderEnabledStatus, InfisicalEnv } from "./env_group_pb.js";
 import { NotificationConfig } from "./notification_pb.js";
 import { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
+import { Storage } from "./storage_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 import { ClusterStatusHistory, SystemServiceStatusHistory } from "./system_service_pb.js";
 import { AppEventWebhook } from "./app_event_webhook_pb.js";
@@ -127,6 +128,7 @@ export const EnumPatchCloudContractType = /*@__PURE__*/ proto3.makeEnum(
     {no: 0, name: "ENUM_PATCH_CLOUD_CONTRACT_TYPE_UNSPECIFIED", localName: "UNSPECIFIED"},
     {no: 1, name: "ENUM_PATCH_CLOUD_CONTRACT_TYPE_DATASTORE", localName: "DATASTORE"},
     {no: 2, name: "ENUM_PATCH_CLOUD_CONTRACT_TYPE_CLOUD_ACCOUNT", localName: "CLOUD_ACCOUNT"},
+    {no: 3, name: "ENUM_PATCH_CLOUD_CONTRACT_TYPE_STORAGE", localName: "STORAGE"},
   ],
 );
 
@@ -2284,6 +2286,52 @@ export const DatastoreCredentialResponse = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * UpdateStorageRequest is the request object for creating or updating a storage resource
+ *
+ * @generated from message porter.v1.UpdateStorageRequest
+ */
+export const UpdateStorageRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.UpdateStorageRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "storage", kind: "message", T: Storage },
+  ],
+);
+
+/**
+ * UpdateStorageResponse is the response object for updating a storage object
+ *
+ * @generated from message porter.v1.UpdateStorageResponse
+ */
+export const UpdateStorageResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.UpdateStorageResponse",
+  [],
+);
+
+/**
+ * DeleteStorageRequest is the request object for deleting a storage resource
+ *
+ * @generated from message porter.v1.DeleteStorageRequest
+ */
+export const DeleteStorageRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.DeleteStorageRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "storage_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+  ],
+);
+
+/**
+ * DeleteStorageResponse is the response object for deleting a storage resource
+ *
+ * @generated from message porter.v1.DeleteStorageResponse
+ */
+export const DeleteStorageResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.DeleteStorageResponse",
+  [],
+);
+
+/**
  * PatchCloudContractRequest is the request object for patching a cloud contract by updating a resource
  *
  * @generated from message porter.v1.PatchCloudContractRequest
@@ -2297,6 +2345,7 @@ export const PatchCloudContractRequest = /*@__PURE__*/ proto3.makeMessageType(
     { no: 4, name: "resource_type", kind: "enum", T: proto3.getEnumType(EnumPatchCloudContractType) },
     { no: 5, name: "datastore", kind: "message", T: ManagedDatastore, oneof: "resource_values" },
     { no: 6, name: "cloud_account", kind: "message", T: CloudAccount, oneof: "resource_values" },
+    { no: 7, name: "storage", kind: "message", T: Storage, oneof: "resource_values" },
   ],
 );
 

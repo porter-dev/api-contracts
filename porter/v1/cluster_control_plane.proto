@@ -1506,6 +1506,7 @@ message PatchCloudContractRequest {
   oneof resource_values {
     ManagedDatastore datastore = 5;
     CloudAccount cloud_account = 6;
+    Storage storage = 7;
   }
 }
 
@@ -1525,6 +1526,7 @@ enum EnumPatchCloudContractType {
   ENUM_PATCH_CLOUD_CONTRACT_TYPE_UNSPECIFIED = 0;
   ENUM_PATCH_CLOUD_CONTRACT_TYPE_DATASTORE = 1;
   ENUM_PATCH_CLOUD_CONTRACT_TYPE_CLOUD_ACCOUNT = 2;
+  ENUM_PATCH_CLOUD_CONTRACT_TYPE_STORAGE = 3;
 }
 
 // ReadCloudContractRequest is the request object for fetching a cloud contract

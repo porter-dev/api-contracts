@@ -6,6 +6,7 @@
 import type { BinaryReadOptions, FieldList, JsonReadOptions, JsonValue, PartialMessage, PlainMessage } from "@bufbuild/protobuf";
 import { Message, proto3 } from "@bufbuild/protobuf";
 import type { ManagedDatastore } from "./datastore_pb.js";
+import type { Storage } from "./storage_pb.js";
 import type { Addon } from "./addons_pb.js";
 
 /**
@@ -34,6 +35,13 @@ export declare class CloudContract extends Message<CloudContract> {
    * @generated from field: repeated porter.v1.CloudAccount cloud_accounts = 3;
    */
   cloudAccounts: CloudAccount[];
+
+  /**
+   * storage is the list of storage resources associated with the project
+   *
+   * @generated from field: repeated porter.v1.Storage storage = 4;
+   */
+  storage: Storage[];
 
   constructor(data?: PartialMessage<CloudContract>);
 
