@@ -1354,6 +1354,8 @@ message ListEnvGroupsRequest {
   int64 cluster_id = 2;
   // include_secrets indicates whether to include secret values in the response. If false, the values will be replaced with a placeholder.
   bool include_secrets = 3;
+  // app_instance_id specifies the app instance id to filter the env groups by. If provided, only env groups linked to the app instance will be returned.
+  string app_instance_id = 4;
 }
 
 // ListEnvGroupsResponse is the response object for ListEnvGroups
