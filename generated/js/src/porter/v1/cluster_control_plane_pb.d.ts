@@ -6133,6 +6133,13 @@ export declare class ListEnvGroupsRequest extends Message<ListEnvGroupsRequest> 
    */
   includeSecrets: boolean;
 
+  /**
+   * app_instance_id specifies the app instance id to filter the env groups by. If provided, only env groups linked to the app instance will be returned.
+   *
+   * @generated from field: string app_instance_id = 4;
+   */
+  appInstanceId: string;
+
   constructor(data?: PartialMessage<ListEnvGroupsRequest>);
 
   static readonly runtime: typeof proto3;
