@@ -973,16 +973,18 @@ message AppEnvVariablesRequest {
   DeploymentTargetIdentifier deployment_target_identifier = 3;
   // app_name is the name of the app to retrieve the env variables for
   string app_name = 4;
+  // include_secrets is a flag that indicates whether to include actual secret values in the response or to obfuscate them
+  bool include_secrets = 5;
 }
 
 // AppEnvVariablesResponse is the response object for retrieving all of the latest env variables attached to an app
-// Note: Secrets returned in this response will not be obfuscated in any way
+// Note: Secrets returned in this response will not be obfuscated in any way if include_secrets is set to true
 message AppEnvVariablesResponse {
-  EnvGroupVariables env_variables = 1;
-  // env_group_name is the name of the env group that the default app env is stored in.
-  // This is a leaky abstraction necessary to filter out the default env group from other env groups attached
-  // to an app. This should be removed once we no longer include the default app environment with other environment groups.
-  string env_group_name = 2;
+  // EnvGroupVariables is the set of environment variables for the app.
+  // Deprecated: use env_group instead
+  EnvGroupVariables env_variables = 1 [deprecated = true];
+  // env_group is the env group that stores the default environment for an app
+  EnvGroup env_group = 2;
 }
 
 message UpdateAppImageRequest {

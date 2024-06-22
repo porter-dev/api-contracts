@@ -1489,12 +1489,13 @@ export const AppEnvVariablesRequest = /*@__PURE__*/ proto3.makeMessageType(
     { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
     { no: 3, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
     { no: 4, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 5, name: "include_secrets", kind: "scalar", T: 8 /* ScalarType.BOOL */ },
   ],
 );
 
 /**
  * AppEnvVariablesResponse is the response object for retrieving all of the latest env variables attached to an app
- * Note: Secrets returned in this response will not be obfuscated in any way
+ * Note: Secrets returned in this response will not be obfuscated in any way if include_secrets is set to true
  *
  * @generated from message porter.v1.AppEnvVariablesResponse
  */
@@ -1502,7 +1503,7 @@ export const AppEnvVariablesResponse = /*@__PURE__*/ proto3.makeMessageType(
   "porter.v1.AppEnvVariablesResponse",
   () => [
     { no: 1, name: "env_variables", kind: "message", T: EnvGroupVariables },
-    { no: 2, name: "env_group_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 2, name: "env_group", kind: "message", T: EnvGroup },
   ],
 );
 
