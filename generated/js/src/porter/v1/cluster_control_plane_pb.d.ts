@@ -4415,6 +4415,13 @@ export declare class AppEnvVariablesRequest extends Message<AppEnvVariablesReque
    */
   appName: string;
 
+  /**
+   * include_secrets is a flag that indicates whether to include actual secret values in the response or to obfuscate them
+   *
+   * @generated from field: bool include_secrets = 5;
+   */
+  includeSecrets: boolean;
+
   constructor(data?: PartialMessage<AppEnvVariablesRequest>);
 
   static readonly runtime: typeof proto3;
@@ -4432,24 +4439,26 @@ export declare class AppEnvVariablesRequest extends Message<AppEnvVariablesReque
 
 /**
  * AppEnvVariablesResponse is the response object for retrieving all of the latest env variables attached to an app
- * Note: Secrets returned in this response will not be obfuscated in any way
+ * Note: Secrets returned in this response will not be obfuscated in any way if include_secrets is set to true
  *
  * @generated from message porter.v1.AppEnvVariablesResponse
  */
 export declare class AppEnvVariablesResponse extends Message<AppEnvVariablesResponse> {
   /**
-   * @generated from field: porter.v1.EnvGroupVariables env_variables = 1;
+   * EnvGroupVariables is the set of environment variables for the app.
+   * Deprecated: use env_group instead
+   *
+   * @generated from field: porter.v1.EnvGroupVariables env_variables = 1 [deprecated = true];
+   * @deprecated
    */
   envVariables?: EnvGroupVariables;
 
   /**
-   * env_group_name is the name of the env group that the default app env is stored in.
-   * This is a leaky abstraction necessary to filter out the default env group from other env groups attached
-   * to an app. This should be removed once we no longer include the default app environment with other environment groups.
+   * env_group is the env group that stores the default environment for an app
    *
-   * @generated from field: string env_group_name = 2;
+   * @generated from field: porter.v1.EnvGroup env_group = 2;
    */
-  envGroupName: string;
+  envGroup?: EnvGroup;
 
   constructor(data?: PartialMessage<AppEnvVariablesResponse>);
 
