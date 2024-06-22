@@ -1502,6 +1502,7 @@ export const AppEnvVariablesResponse = /*@__PURE__*/ proto3.makeMessageType(
   "porter.v1.AppEnvVariablesResponse",
   () => [
     { no: 1, name: "env_variables", kind: "message", T: EnvGroupVariables },
+    { no: 2, name: "env_group_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
   ],
 );
 

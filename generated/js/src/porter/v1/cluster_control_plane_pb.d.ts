@@ -4442,6 +4442,15 @@ export declare class AppEnvVariablesResponse extends Message<AppEnvVariablesResp
    */
   envVariables?: EnvGroupVariables;
 
+  /**
+   * env_group_name is the name of the env group that the default app env is stored in.
+   * This is a leaky abstraction necessary to filter out the default env group from other env groups attached
+   * to an app. This should be removed once we no longer include the default app environment with other environment groups.
+   *
+   * @generated from field: string env_group_name = 2;
+   */
+  envGroupName: string;
+
   constructor(data?: PartialMessage<AppEnvVariablesResponse>);
 
   static readonly runtime: typeof proto3;
