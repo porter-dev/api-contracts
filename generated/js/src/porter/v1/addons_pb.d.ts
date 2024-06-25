@@ -908,6 +908,11 @@ export declare class Deepgram extends Message<Deepgram> {
    */
   modelUrls: string[];
 
+  /**
+   * @generated from field: repeated porter.v1.Domain domains = 7;
+   */
+  domains: Domain[];
+
   constructor(data?: PartialMessage<Deepgram>);
 
   static readonly runtime: typeof proto3;
@@ -1060,6 +1065,11 @@ export declare class Mistral7B extends Message<Mistral7B> {
    */
   hfToken?: string;
 
+  /**
+   * @generated from field: repeated porter.v1.Domain domains = 2;
+   */
+  domains: Domain[];
+
   constructor(data?: PartialMessage<Mistral7B>);
 
   static readonly runtime: typeof proto3;
@@ -1085,6 +1095,11 @@ export declare class Llama38B extends Message<Llama38B> {
    * @generated from field: optional string hf_token = 1;
    */
   hfToken?: string;
+
+  /**
+   * @generated from field: repeated porter.v1.Domain domains = 2;
+   */
+  domains: Domain[];
 
   constructor(data?: PartialMessage<Llama38B>);
 

@@ -237,6 +237,7 @@ message Deepgram {
   optional string release_tag = 5;
   // model_urls is the list of urls to download deepgram models from
   repeated string model_urls = 6;
+  repeated Domain domains = 7;
 }
 
 // AddonDatastoreConnectionInfo is the connection info for a datastore linked with an addon
@@ -269,9 +270,11 @@ message N8n {
 // Mistral7B is the configuration for the Mistral 7B LLM addon
 message Mistral7B {
   optional string hf_token = 1;
+  repeated Domain domains = 2;
 }
 
 // Llama38B is the configuration for the Mistral 7B LLM addon
 message Llama38B {
   optional string hf_token = 1;
+  repeated Domain domains = 2;
 }
