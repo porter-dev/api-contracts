@@ -252,6 +252,7 @@ export const Deepgram = /*@__PURE__*/ proto3.makeMessageType(
     { no: 4, name: "ecr_email", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 5, name: "release_tag", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
     { no: 6, name: "model_urls", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+    { no: 7, name: "domains", kind: "message", T: Domain, repeated: true },
   ],
 );
 
@@ -308,6 +309,7 @@ export const Mistral7B = /*@__PURE__*/ proto3.makeMessageType(
   "porter.v1.Mistral7B",
   () => [
     { no: 1, name: "hf_token", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 2, name: "domains", kind: "message", T: Domain, repeated: true },
   ],
 );
 
@@ -320,6 +322,7 @@ export const Llama38B = /*@__PURE__*/ proto3.makeMessageType(
   "porter.v1.Llama38B",
   () => [
     { no: 1, name: "hf_token", kind: "scalar", T: 9 /* ScalarType.STRING */, opt: true },
+    { no: 2, name: "domains", kind: "message", T: Domain, repeated: true },
   ],
 );
 
