@@ -178,7 +178,7 @@ type Storage struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// id represents the id of the datastore. This is required for update operations, but should be left blank when creating a storage resource
+	// id represents the id of the storage resource. This is required for update operations, but should be left blank when creating a storage resource
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// cloud_provider represents the provider that the storage resource is provisioned in
 	CloudProvider EnumCloudProvider `protobuf:"varint,2,opt,name=cloud_provider,json=cloudProvider,proto3,enum=porter.v1.EnumCloudProvider" json:"cloud_provider,omitempty"`

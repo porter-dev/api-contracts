@@ -6,7 +6,7 @@ import "porter/v1/cluster.proto";
 import "porter/v1/datastore.proto";
 
 message Storage {
-  // id represents the id of the datastore. This is required for update operations, but should be left blank when creating a storage resource
+  // id represents the id of the storage resource. This is required for update operations, but should be left blank when creating a storage resource
   string id = 1;
   // cloud_provider represents the provider that the storage resource is provisioned in
   EnumCloudProvider cloud_provider = 2;

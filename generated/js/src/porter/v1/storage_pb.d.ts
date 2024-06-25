@@ -83,7 +83,7 @@ export declare enum EnumObjectStorageEngine {
  */
 export declare class Storage extends Message<Storage> {
   /**
-   * id represents the id of the datastore. This is required for update operations, but should be left blank when creating a storage resource
+   * id represents the id of the storage resource. This is required for update operations, but should be left blank when creating a storage resource
    *
    * @generated from field: string id = 1;
    */

@@ -247,12 +247,6 @@ const (
 	// ClusterControlPlaneServiceDatastoreCredentialProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DatastoreCredential RPC.
 	ClusterControlPlaneServiceDatastoreCredentialProcedure = "/porter.v1.ClusterControlPlaneService/DatastoreCredential"
-	// ClusterControlPlaneServiceUpdateStorageProcedure is the fully-qualified name of the
-	// ClusterControlPlaneService's UpdateStorage RPC.
-	ClusterControlPlaneServiceUpdateStorageProcedure = "/porter.v1.ClusterControlPlaneService/UpdateStorage"
-	// ClusterControlPlaneServiceDeleteStorageProcedure is the fully-qualified name of the
-	// ClusterControlPlaneService's DeleteStorage RPC.
-	ClusterControlPlaneServiceDeleteStorageProcedure = "/porter.v1.ClusterControlPlaneService/DeleteStorage"
 	// ClusterControlPlaneServiceCloudProviderPermissionsStatusProcedure is the fully-qualified name of
 	// the ClusterControlPlaneService's CloudProviderPermissionsStatus RPC.
 	ClusterControlPlaneServiceCloudProviderPermissionsStatusProcedure = "/porter.v1.ClusterControlPlaneService/CloudProviderPermissionsStatus"
@@ -410,8 +404,6 @@ var (
 	clusterControlPlaneServiceDeleteDatastoreMethodDescriptor                     = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("DeleteDatastore")
 	clusterControlPlaneServiceCreateDatastoreProxyMethodDescriptor                = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("CreateDatastoreProxy")
 	clusterControlPlaneServiceDatastoreCredentialMethodDescriptor                 = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("DatastoreCredential")
-	clusterControlPlaneServiceUpdateStorageMethodDescriptor                       = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateStorage")
-	clusterControlPlaneServiceDeleteStorageMethodDescriptor                       = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("DeleteStorage")
 	clusterControlPlaneServiceCloudProviderPermissionsStatusMethodDescriptor      = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("CloudProviderPermissionsStatus")
 	clusterControlPlaneServicePatchCloudContractMethodDescriptor                  = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("PatchCloudContract")
 	clusterControlPlaneServiceReadCloudContractMethodDescriptor                   = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ReadCloudContract")
@@ -603,10 +595,6 @@ type ClusterControlPlaneServiceClient interface {
 	CreateDatastoreProxy(context.Context, *connect.Request[v1.CreateDatastoreProxyRequest]) (*connect.Response[v1.CreateDatastoreProxyResponse], error)
 	// DatastoreCredential returns the set of credentials for connecting to a datastore
 	DatastoreCredential(context.Context, *connect.Request[v1.DatastoreCredentialRequest]) (*connect.Response[v1.DatastoreCredentialResponse], error)
-	// UpdateStorage updates a porter-managed storage resource
-	UpdateStorage(context.Context, *connect.Request[v1.UpdateStorageRequest]) (*connect.Response[v1.UpdateStorageResponse], error)
-	// DeleteStorage deletes a porter-managed storage resource
-	DeleteStorage(context.Context, *connect.Request[v1.DeleteStorageRequest]) (*connect.Response[v1.DeleteStorageResponse], error)
 	// CloudProviderPermissionsStatus returns the status to poll after a user grants cloud provider permissions to Porter
 	CloudProviderPermissionsStatus(context.Context, *connect.Request[v1.CloudProviderPermissionsStatusRequest]) (*connect.Response[v1.CloudProviderPermissionsStatusResponse], error)
 	// PatchCloudContract patches a cloud contract by modifying its resources
@@ -1128,18 +1116,6 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			connect.WithSchema(clusterControlPlaneServiceDatastoreCredentialMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
-		updateStorage: connect.NewClient[v1.UpdateStorageRequest, v1.UpdateStorageResponse](
-			httpClient,
-			baseURL+ClusterControlPlaneServiceUpdateStorageProcedure,
-			connect.WithSchema(clusterControlPlaneServiceUpdateStorageMethodDescriptor),
-			connect.WithClientOptions(opts...),
-		),
-		deleteStorage: connect.NewClient[v1.DeleteStorageRequest, v1.DeleteStorageResponse](
-			httpClient,
-			baseURL+ClusterControlPlaneServiceDeleteStorageProcedure,
-			connect.WithSchema(clusterControlPlaneServiceDeleteStorageMethodDescriptor),
-			connect.WithClientOptions(opts...),
-		),
 		cloudProviderPermissionsStatus: connect.NewClient[v1.CloudProviderPermissionsStatusRequest, v1.CloudProviderPermissionsStatusResponse](
 			httpClient,
 			baseURL+ClusterControlPlaneServiceCloudProviderPermissionsStatusProcedure,
@@ -1378,8 +1354,6 @@ type clusterControlPlaneServiceClient struct {
 	deleteDatastore                     *connect.Client[v1.DeleteDatastoreRequest, v1.DeleteDatastoreResponse]
 	createDatastoreProxy                *connect.Client[v1.CreateDatastoreProxyRequest, v1.CreateDatastoreProxyResponse]
 	datastoreCredential                 *connect.Client[v1.DatastoreCredentialRequest, v1.DatastoreCredentialResponse]
-	updateStorage                       *connect.Client[v1.UpdateStorageRequest, v1.UpdateStorageResponse]
-	deleteStorage                       *connect.Client[v1.DeleteStorageRequest, v1.DeleteStorageResponse]
 	cloudProviderPermissionsStatus      *connect.Client[v1.CloudProviderPermissionsStatusRequest, v1.CloudProviderPermissionsStatusResponse]
 	patchCloudContract                  *connect.Client[v1.PatchCloudContractRequest, v1.PatchCloudContractResponse]
 	readCloudContract                   *connect.Client[v1.ReadCloudContractRequest, v1.ReadCloudContractResponse]
@@ -1780,16 +1754,6 @@ func (c *clusterControlPlaneServiceClient) DatastoreCredential(ctx context.Conte
 	return c.datastoreCredential.CallUnary(ctx, req)
 }
 
-// UpdateStorage calls porter.v1.ClusterControlPlaneService.UpdateStorage.
-func (c *clusterControlPlaneServiceClient) UpdateStorage(ctx context.Context, req *connect.Request[v1.UpdateStorageRequest]) (*connect.Response[v1.UpdateStorageResponse], error) {
-	return c.updateStorage.CallUnary(ctx, req)
-}
-
-// DeleteStorage calls porter.v1.ClusterControlPlaneService.DeleteStorage.
-func (c *clusterControlPlaneServiceClient) DeleteStorage(ctx context.Context, req *connect.Request[v1.DeleteStorageRequest]) (*connect.Response[v1.DeleteStorageResponse], error) {
-	return c.deleteStorage.CallUnary(ctx, req)
-}
-
 // CloudProviderPermissionsStatus calls
 // porter.v1.ClusterControlPlaneService.CloudProviderPermissionsStatus.
 func (c *clusterControlPlaneServiceClient) CloudProviderPermissionsStatus(ctx context.Context, req *connect.Request[v1.CloudProviderPermissionsStatusRequest]) (*connect.Response[v1.CloudProviderPermissionsStatusResponse], error) {
@@ -2110,10 +2074,6 @@ type ClusterControlPlaneServiceHandler interface {
 	CreateDatastoreProxy(context.Context, *connect.Request[v1.CreateDatastoreProxyRequest]) (*connect.Response[v1.CreateDatastoreProxyResponse], error)
 	// DatastoreCredential returns the set of credentials for connecting to a datastore
 	DatastoreCredential(context.Context, *connect.Request[v1.DatastoreCredentialRequest]) (*connect.Response[v1.DatastoreCredentialResponse], error)
-	// UpdateStorage updates a porter-managed storage resource
-	UpdateStorage(context.Context, *connect.Request[v1.UpdateStorageRequest]) (*connect.Response[v1.UpdateStorageResponse], error)
-	// DeleteStorage deletes a porter-managed storage resource
-	DeleteStorage(context.Context, *connect.Request[v1.DeleteStorageRequest]) (*connect.Response[v1.DeleteStorageResponse], error)
 	// CloudProviderPermissionsStatus returns the status to poll after a user grants cloud provider permissions to Porter
 	CloudProviderPermissionsStatus(context.Context, *connect.Request[v1.CloudProviderPermissionsStatusRequest]) (*connect.Response[v1.CloudProviderPermissionsStatusResponse], error)
 	// PatchCloudContract patches a cloud contract by modifying its resources
@@ -2631,18 +2591,6 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		connect.WithSchema(clusterControlPlaneServiceDatastoreCredentialMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
-	clusterControlPlaneServiceUpdateStorageHandler := connect.NewUnaryHandler(
-		ClusterControlPlaneServiceUpdateStorageProcedure,
-		svc.UpdateStorage,
-		connect.WithSchema(clusterControlPlaneServiceUpdateStorageMethodDescriptor),
-		connect.WithHandlerOptions(opts...),
-	)
-	clusterControlPlaneServiceDeleteStorageHandler := connect.NewUnaryHandler(
-		ClusterControlPlaneServiceDeleteStorageProcedure,
-		svc.DeleteStorage,
-		connect.WithSchema(clusterControlPlaneServiceDeleteStorageMethodDescriptor),
-		connect.WithHandlerOptions(opts...),
-	)
 	clusterControlPlaneServiceCloudProviderPermissionsStatusHandler := connect.NewUnaryHandler(
 		ClusterControlPlaneServiceCloudProviderPermissionsStatusProcedure,
 		svc.CloudProviderPermissionsStatus,
@@ -2949,10 +2897,6 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceCreateDatastoreProxyHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDatastoreCredentialProcedure:
 			clusterControlPlaneServiceDatastoreCredentialHandler.ServeHTTP(w, r)
-		case ClusterControlPlaneServiceUpdateStorageProcedure:
-			clusterControlPlaneServiceUpdateStorageHandler.ServeHTTP(w, r)
-		case ClusterControlPlaneServiceDeleteStorageProcedure:
-			clusterControlPlaneServiceDeleteStorageHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceCloudProviderPermissionsStatusProcedure:
 			clusterControlPlaneServiceCloudProviderPermissionsStatusHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServicePatchCloudContractProcedure:
@@ -3298,14 +3242,6 @@ func (UnimplementedClusterControlPlaneServiceHandler) CreateDatastoreProxy(conte
 
 func (UnimplementedClusterControlPlaneServiceHandler) DatastoreCredential(context.Context, *connect.Request[v1.DatastoreCredentialRequest]) (*connect.Response[v1.DatastoreCredentialResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.DatastoreCredential is not implemented"))
-}
-
-func (UnimplementedClusterControlPlaneServiceHandler) UpdateStorage(context.Context, *connect.Request[v1.UpdateStorageRequest]) (*connect.Response[v1.UpdateStorageResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.UpdateStorage is not implemented"))
-}
-
-func (UnimplementedClusterControlPlaneServiceHandler) DeleteStorage(context.Context, *connect.Request[v1.DeleteStorageRequest]) (*connect.Response[v1.DeleteStorageResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.DeleteStorage is not implemented"))
 }
 
 func (UnimplementedClusterControlPlaneServiceHandler) CloudProviderPermissionsStatus(context.Context, *connect.Request[v1.CloudProviderPermissionsStatusRequest]) (*connect.Response[v1.CloudProviderPermissionsStatusResponse], error) {
