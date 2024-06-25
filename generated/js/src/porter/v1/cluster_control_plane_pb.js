@@ -20,6 +20,7 @@ import { Alert } from "./prometheus_alerts_pb.js";
 import { EnumEnvGroupProviderType, ExternalEnvGroupProviderEnabledStatus, InfisicalEnv } from "./env_group_pb.js";
 import { NotificationConfig } from "./notification_pb.js";
 import { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
+import { Storage } from "./storage_pb.js";
 import { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 import { ClusterStatusHistory, SystemServiceStatusHistory } from "./system_service_pb.js";
 import { AppEventWebhook } from "./app_event_webhook_pb.js";
@@ -127,6 +128,7 @@ export const EnumPatchCloudContractType = /*@__PURE__*/ proto3.makeEnum(
     {no: 0, name: "ENUM_PATCH_CLOUD_CONTRACT_TYPE_UNSPECIFIED", localName: "UNSPECIFIED"},
     {no: 1, name: "ENUM_PATCH_CLOUD_CONTRACT_TYPE_DATASTORE", localName: "DATASTORE"},
     {no: 2, name: "ENUM_PATCH_CLOUD_CONTRACT_TYPE_CLOUD_ACCOUNT", localName: "CLOUD_ACCOUNT"},
+    {no: 3, name: "ENUM_PATCH_CLOUD_CONTRACT_TYPE_STORAGE", localName: "STORAGE"},
   ],
 );
 
@@ -2297,6 +2299,7 @@ export const PatchCloudContractRequest = /*@__PURE__*/ proto3.makeMessageType(
     { no: 4, name: "resource_type", kind: "enum", T: proto3.getEnumType(EnumPatchCloudContractType) },
     { no: 5, name: "datastore", kind: "message", T: ManagedDatastore, oneof: "resource_values" },
     { no: 6, name: "cloud_account", kind: "message", T: CloudAccount, oneof: "resource_values" },
+    { no: 7, name: "storage", kind: "message", T: Storage, oneof: "resource_values" },
   ],
 );
 

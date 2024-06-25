@@ -21,6 +21,7 @@ import type { Alert } from "./prometheus_alerts_pb.js";
 import type { EnumEnvGroupProviderType, ExternalEnvGroupProviderEnabledStatus, InfisicalEnv } from "./env_group_pb.js";
 import type { NotificationConfig } from "./notification_pb.js";
 import type { DatastoreCredential, ManagedDatastore } from "./datastore_pb.js";
+import type { Storage } from "./storage_pb.js";
 import type { AssumeRoleChainLink } from "./aws_assume_role_pb.js";
 import type { ClusterStatusHistory, SystemServiceStatusHistory } from "./system_service_pb.js";
 import type { AppEventWebhook } from "./app_event_webhook_pb.js";
@@ -259,6 +260,11 @@ export declare enum EnumPatchCloudContractType {
    * @generated from enum value: ENUM_PATCH_CLOUD_CONTRACT_TYPE_CLOUD_ACCOUNT = 2;
    */
   CLOUD_ACCOUNT = 2,
+
+  /**
+   * @generated from enum value: ENUM_PATCH_CLOUD_CONTRACT_TYPE_STORAGE = 3;
+   */
+  STORAGE = 3,
 }
 
 /**
@@ -6709,6 +6715,12 @@ export declare class PatchCloudContractRequest extends Message<PatchCloudContrac
      */
     value: CloudAccount;
     case: "cloudAccount";
+  } | {
+    /**
+     * @generated from field: porter.v1.Storage storage = 7;
+     */
+    value: Storage;
+    case: "storage";
   } | { case: undefined; value?: undefined };
 
   constructor(data?: PartialMessage<PatchCloudContractRequest>);
