@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package porter.v1;
+
+import "porter/v1/cluster.proto";
+import "porter/v1/datastore.proto";
+
+message Storage {
+  // id represents the id of the storage resource. This is required for update operations, but should be left blank when creating a storage resource
+  string id = 1;
+  // cloud_provider represents the provider that the storage resource is provisioned in
+  EnumCloudProvider cloud_provider = 2;
+  // cloud_provider_credential_identifier is the credential used to provision the storage resource
+  string cloud_provider_credential_identifier = 3;
+  // region is the region the storage resource is provisioned in
+  string region = 4;
+  // name is the name of the storage resource
+  string name = 5;
+  // kind represents the type of the storage resource
+  EnumStorageKind kind = 6;
+  // kind_values are the required values depending on kind
+  oneof kind_values {
+    SharedFileSystem shared_file_system_kind = 14;
+    ObjectStorage object_storage_kind = 15;
+  }
+  // connected_clusters describes the connection of this storage resource to clusters
+  ConnectedClusters connected_clusters = 8;
+}
+
+enum EnumStorageKind {
+  ENUM_STORAGE_KIND_UNSPECIFIED = 0;
+  ENUM_STORAGE_KIND_SHARED_FILE_SYSTEM = 1;
+  ENUM_STORAGE_KIND_OBJECT_STORAGE = 2;
+}
+
+enum EnumSharedFileSystemEngine {
+  ENUM_SHARED_FILE_SYSTEM_ENGINE_UNSPECIFIED = 0;
+  ENUM_SHARED_FILE_SYSTEM_ENGINE_AWS_EFS = 1;
+  ENUM_SHARED_FILE_SYSTEM_ENGINE_AZURE_FILES = 2;
+  ENUM_SHARED_FILE_SYSTEM_ENGINE_GCP_FILESTORE = 3;
+}
+
+message SharedFileSystem {
+  EnumSharedFileSystemEngine engine = 1;
+}
+
+enum EnumObjectStorageEngine {
+  ENUM_OBJECT_STORAGE_ENGINE_UNSPECIFIED = 0;
+  ENUM_OBJECT_STORAGE_ENGINE_AWS_S3 = 1;
+  ENUM_OBJECT_STORAGE_ENGINE_AZURE_BLOB_STORAGE = 2;
+  ENUM_OBJECT_STORAGE_ENGINE_GCP_FILESTORE = 3;
+}
+
+message ObjectStorage {
+  EnumObjectStorageEngine engine = 1;
+}

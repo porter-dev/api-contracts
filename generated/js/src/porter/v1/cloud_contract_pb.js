@@ -5,6 +5,7 @@
 
 import { proto3 } from "@bufbuild/protobuf";
 import { ManagedDatastore } from "./datastore_pb.js";
+import { Storage } from "./storage_pb.js";
 import { Addon } from "./addons_pb.js";
 
 /**
@@ -18,6 +19,7 @@ export const CloudContract = /*@__PURE__*/ proto3.makeMessageType(
     { no: 1, name: "datastores", kind: "message", T: ManagedDatastore, repeated: true },
     { no: 2, name: "addons", kind: "message", T: CloudContractAddon, repeated: true },
     { no: 3, name: "cloud_accounts", kind: "message", T: CloudAccount, repeated: true },
+    { no: 4, name: "storage", kind: "message", T: Storage, repeated: true },
   ],
 );
 
