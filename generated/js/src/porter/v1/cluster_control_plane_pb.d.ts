@@ -6950,6 +6950,65 @@ export declare class DeleteUserNodeGroupResponse extends Message<DeleteUserNodeG
 }
 
 /**
+ * ClusterEgressIpsRequest fetches the egress ips for a cluster
+ *
+ * @generated from message porter.v1.ClusterEgressIpsRequest
+ */
+export declare class ClusterEgressIpsRequest extends Message<ClusterEgressIpsRequest> {
+  /**
+   * project_id is the id of the project that the cluster is associated with
+   *
+   * @generated from field: int64 project_id = 1;
+   */
+  projectId: bigint;
+
+  /**
+   * cluster_id is the id of the cluster
+   *
+   * @generated from field: int64 cluster_id = 2;
+   */
+  clusterId: bigint;
+
+  constructor(data?: PartialMessage<ClusterEgressIpsRequest>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ClusterEgressIpsRequest";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ClusterEgressIpsRequest;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ClusterEgressIpsRequest;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ClusterEgressIpsRequest;
+
+  static equals(a: ClusterEgressIpsRequest | PlainMessage<ClusterEgressIpsRequest> | undefined, b: ClusterEgressIpsRequest | PlainMessage<ClusterEgressIpsRequest> | undefined): boolean;
+}
+
+/**
+ * @generated from message porter.v1.ClusterEgressIpsResponse
+ */
+export declare class ClusterEgressIpsResponse extends Message<ClusterEgressIpsResponse> {
+  /**
+   * @generated from field: repeated string egress_ips = 1;
+   */
+  egressIps: string[];
+
+  constructor(data?: PartialMessage<ClusterEgressIpsResponse>);
+
+  static readonly runtime: typeof proto3;
+  static readonly typeName = "porter.v1.ClusterEgressIpsResponse";
+  static readonly fields: FieldList;
+
+  static fromBinary(bytes: Uint8Array, options?: Partial<BinaryReadOptions>): ClusterEgressIpsResponse;
+
+  static fromJson(jsonValue: JsonValue, options?: Partial<JsonReadOptions>): ClusterEgressIpsResponse;
+
+  static fromJsonString(jsonString: string, options?: Partial<JsonReadOptions>): ClusterEgressIpsResponse;
+
+  static equals(a: ClusterEgressIpsResponse | PlainMessage<ClusterEgressIpsResponse> | undefined, b: ClusterEgressIpsResponse | PlainMessage<ClusterEgressIpsResponse> | undefined): boolean;
+}
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  * @deprecated
  */

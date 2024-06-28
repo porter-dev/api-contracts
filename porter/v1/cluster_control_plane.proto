@@ -1546,6 +1546,18 @@ message DeleteUserNodeGroupResponse {
   string contract_revision_id = 1;
 }
 
+// ClusterEgressIpsRequest fetches the egress ips for a cluster
+message ClusterEgressIpsRequest {
+  // project_id is the id of the project that the cluster is associated with
+  int64 project_id = 1;
+  // cluster_id is the id of the cluster
+  int64 cluster_id = 2;
+}
+
+message ClusterEgressIpsResponse {
+  repeated string egress_ips = 1;
+}
+
 service ClusterControlPlaneService {
   rpc MachineTypes(MachineTypesRequest) returns (MachineTypesResponse) {}
 
@@ -1886,6 +1898,9 @@ service ClusterControlPlaneService {
   // DeleteUserNodeGroup deletes the specified user node group and returns the new contract revision id.
   // This request will fail if there is an ongoing operation on the user node group.
   rpc DeleteUserNodeGroup(DeleteUserNodeGroupRequest) returns (DeleteUserNodeGroupResponse) {}
+
+  // ClusterEgressIps returns the egress ips of a cluster
+  rpc ClusterEgressIps(ClusterEgressIpsRequest) returns (ClusterEgressIpsResponse) {}
 }
 
 message EKSBearerTokenRequest {

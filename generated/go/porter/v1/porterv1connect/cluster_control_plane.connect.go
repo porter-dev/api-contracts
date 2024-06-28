@@ -328,6 +328,9 @@ const (
 	// ClusterControlPlaneServiceDeleteUserNodeGroupProcedure is the fully-qualified name of the
 	// ClusterControlPlaneService's DeleteUserNodeGroup RPC.
 	ClusterControlPlaneServiceDeleteUserNodeGroupProcedure = "/porter.v1.ClusterControlPlaneService/DeleteUserNodeGroup"
+	// ClusterControlPlaneServiceClusterEgressIpsProcedure is the fully-qualified name of the
+	// ClusterControlPlaneService's ClusterEgressIps RPC.
+	ClusterControlPlaneServiceClusterEgressIpsProcedure = "/porter.v1.ClusterControlPlaneService/ClusterEgressIps"
 )
 
 // These variables are the protoreflect.Descriptor objects for the RPCs defined in this package.
@@ -431,6 +434,7 @@ var (
 	clusterControlPlaneServiceUpdateAppEventWebhooksMethodDescriptor              = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UpdateAppEventWebhooks")
 	clusterControlPlaneServiceUserNodeGroupsMethodDescriptor                      = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("UserNodeGroups")
 	clusterControlPlaneServiceDeleteUserNodeGroupMethodDescriptor                 = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("DeleteUserNodeGroup")
+	clusterControlPlaneServiceClusterEgressIpsMethodDescriptor                    = clusterControlPlaneServiceServiceDescriptor.Methods().ByName("ClusterEgressIps")
 )
 
 // ClusterControlPlaneServiceClient is a client for the porter.v1.ClusterControlPlaneService
@@ -678,6 +682,8 @@ type ClusterControlPlaneServiceClient interface {
 	// DeleteUserNodeGroup deletes the specified user node group and returns the new contract revision id.
 	// This request will fail if there is an ongoing operation on the user node group.
 	DeleteUserNodeGroup(context.Context, *connect.Request[v1.DeleteUserNodeGroupRequest]) (*connect.Response[v1.DeleteUserNodeGroupResponse], error)
+	// ClusterEgressIps returns the egress ips of a cluster
+	ClusterEgressIps(context.Context, *connect.Request[v1.ClusterEgressIpsRequest]) (*connect.Response[v1.ClusterEgressIpsResponse], error)
 }
 
 // NewClusterControlPlaneServiceClient constructs a client for the
@@ -1278,6 +1284,12 @@ func NewClusterControlPlaneServiceClient(httpClient connect.HTTPClient, baseURL 
 			connect.WithSchema(clusterControlPlaneServiceDeleteUserNodeGroupMethodDescriptor),
 			connect.WithClientOptions(opts...),
 		),
+		clusterEgressIps: connect.NewClient[v1.ClusterEgressIpsRequest, v1.ClusterEgressIpsResponse](
+			httpClient,
+			baseURL+ClusterControlPlaneServiceClusterEgressIpsProcedure,
+			connect.WithSchema(clusterControlPlaneServiceClusterEgressIpsMethodDescriptor),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
@@ -1381,6 +1393,7 @@ type clusterControlPlaneServiceClient struct {
 	updateAppEventWebhooks              *connect.Client[v1.UpdateAppEventWebhooksRequest, v1.UpdateAppEventWebhooksResponse]
 	userNodeGroups                      *connect.Client[v1.UserNodeGroupsRequest, v1.UserNodeGroupsResponse]
 	deleteUserNodeGroup                 *connect.Client[v1.DeleteUserNodeGroupRequest, v1.DeleteUserNodeGroupResponse]
+	clusterEgressIps                    *connect.Client[v1.ClusterEgressIpsRequest, v1.ClusterEgressIpsResponse]
 }
 
 // MachineTypes calls porter.v1.ClusterControlPlaneService.MachineTypes.
@@ -1912,6 +1925,11 @@ func (c *clusterControlPlaneServiceClient) DeleteUserNodeGroup(ctx context.Conte
 	return c.deleteUserNodeGroup.CallUnary(ctx, req)
 }
 
+// ClusterEgressIps calls porter.v1.ClusterControlPlaneService.ClusterEgressIps.
+func (c *clusterControlPlaneServiceClient) ClusterEgressIps(ctx context.Context, req *connect.Request[v1.ClusterEgressIpsRequest]) (*connect.Response[v1.ClusterEgressIpsResponse], error) {
+	return c.clusterEgressIps.CallUnary(ctx, req)
+}
+
 // ClusterControlPlaneServiceHandler is an implementation of the
 // porter.v1.ClusterControlPlaneService service.
 type ClusterControlPlaneServiceHandler interface {
@@ -2157,6 +2175,8 @@ type ClusterControlPlaneServiceHandler interface {
 	// DeleteUserNodeGroup deletes the specified user node group and returns the new contract revision id.
 	// This request will fail if there is an ongoing operation on the user node group.
 	DeleteUserNodeGroup(context.Context, *connect.Request[v1.DeleteUserNodeGroupRequest]) (*connect.Response[v1.DeleteUserNodeGroupResponse], error)
+	// ClusterEgressIps returns the egress ips of a cluster
+	ClusterEgressIps(context.Context, *connect.Request[v1.ClusterEgressIpsRequest]) (*connect.Response[v1.ClusterEgressIpsResponse], error)
 }
 
 // NewClusterControlPlaneServiceHandler builds an HTTP handler from the service implementation. It
@@ -2753,6 +2773,12 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 		connect.WithSchema(clusterControlPlaneServiceDeleteUserNodeGroupMethodDescriptor),
 		connect.WithHandlerOptions(opts...),
 	)
+	clusterControlPlaneServiceClusterEgressIpsHandler := connect.NewUnaryHandler(
+		ClusterControlPlaneServiceClusterEgressIpsProcedure,
+		svc.ClusterEgressIps,
+		connect.WithSchema(clusterControlPlaneServiceClusterEgressIpsMethodDescriptor),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/porter.v1.ClusterControlPlaneService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case ClusterControlPlaneServiceMachineTypesProcedure:
@@ -2951,6 +2977,8 @@ func NewClusterControlPlaneServiceHandler(svc ClusterControlPlaneServiceHandler,
 			clusterControlPlaneServiceUserNodeGroupsHandler.ServeHTTP(w, r)
 		case ClusterControlPlaneServiceDeleteUserNodeGroupProcedure:
 			clusterControlPlaneServiceDeleteUserNodeGroupHandler.ServeHTTP(w, r)
+		case ClusterControlPlaneServiceClusterEgressIpsProcedure:
+			clusterControlPlaneServiceClusterEgressIpsHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -3350,4 +3378,8 @@ func (UnimplementedClusterControlPlaneServiceHandler) UserNodeGroups(context.Con
 
 func (UnimplementedClusterControlPlaneServiceHandler) DeleteUserNodeGroup(context.Context, *connect.Request[v1.DeleteUserNodeGroupRequest]) (*connect.Response[v1.DeleteUserNodeGroupResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.DeleteUserNodeGroup is not implemented"))
+}
+
+func (UnimplementedClusterControlPlaneServiceHandler) ClusterEgressIps(context.Context, *connect.Request[v1.ClusterEgressIpsRequest]) (*connect.Response[v1.ClusterEgressIpsResponse], error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("porter.v1.ClusterControlPlaneService.ClusterEgressIps is not implemented"))
 }
