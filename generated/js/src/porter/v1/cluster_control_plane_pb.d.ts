@@ -3176,6 +3176,13 @@ export declare class ListAppRevisionsRequest extends Message<ListAppRevisionsReq
    */
   appName: string;
 
+  /**
+   * max_revisions is the maximum number of revisions to return. Defaults to 10.
+   *
+   * @generated from field: int32 max_revisions = 6;
+   */
+  maxRevisions: number;
+
   constructor(data?: PartialMessage<ListAppRevisionsRequest>);
 
   static readonly runtime: typeof proto3;

@@ -1072,6 +1072,7 @@ export const ListAppRevisionsRequest = /*@__PURE__*/ proto3.makeMessageType(
     { no: 3, name: "deployment_target_id", kind: "scalar", T: 9 /* ScalarType.STRING */ },
     { no: 4, name: "deployment_target_identifier", kind: "message", T: DeploymentTargetIdentifier },
     { no: 5, name: "app_name", kind: "scalar", T: 9 /* ScalarType.STRING */ },
+    { no: 6, name: "max_revisions", kind: "scalar", T: 5 /* ScalarType.INT32 */ },
   ],
 );
 
