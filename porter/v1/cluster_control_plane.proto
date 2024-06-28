@@ -660,6 +660,8 @@ message ListAppRevisionsRequest {
   // app_name is the name of the app to retrieve the revisions for
   // used in conjunction with deployment_target_identifier to get the correct app instance
   string app_name = 5;
+  // max_revisions is the maximum number of revisions to return. Defaults to 10.
+  int32 max_revisions = 6;
 }
 
 message ListAppRevisionsResponse {
