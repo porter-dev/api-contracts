@@ -2389,6 +2389,29 @@ export const DeleteUserNodeGroupResponse = /*@__PURE__*/ proto3.makeMessageType(
 );
 
 /**
+ * ClusterEgressIpsRequest fetches the egress ips for a cluster
+ *
+ * @generated from message porter.v1.ClusterEgressIpsRequest
+ */
+export const ClusterEgressIpsRequest = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.ClusterEgressIpsRequest",
+  () => [
+    { no: 1, name: "project_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+    { no: 2, name: "cluster_id", kind: "scalar", T: 3 /* ScalarType.INT64 */ },
+  ],
+);
+
+/**
+ * @generated from message porter.v1.ClusterEgressIpsResponse
+ */
+export const ClusterEgressIpsResponse = /*@__PURE__*/ proto3.makeMessageType(
+  "porter.v1.ClusterEgressIpsResponse",
+  () => [
+    { no: 1, name: "egress_ips", kind: "scalar", T: 9 /* ScalarType.STRING */, repeated: true },
+  ],
+);
+
+/**
  * @generated from message porter.v1.EKSBearerTokenRequest
  * @deprecated
  */
